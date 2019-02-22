@@ -410,11 +410,11 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="available-datasets-and-reading" class="section level1">
 <h1><span class="header-section-number">2</span> Available datasets and reading</h1>
-<p>Methylome datasets of whole-genome bisulfite sequencing (WGBS) are available at Gene Expression Omnibus (GEO DataSets). The data set are downloaded providing the GEO accession numbers for each data set to the function <em>getGEOSuppFiles</em> (for details type ?getGEOSuppFiles in the R console). Then, datasets can be reading using function <em>readCounts2GRangesList</em>. An example on how to load datasets of read count of methylated and unmethylated cytosine into Methyl-IT is given in the Cancer example at <a href="https://git.psu.edu/genomath/MethylIT" class="uri">https://git.psu.edu/genomath/MethylIT</a> (<a href="https://git.psu.edu/genomath/MethylIT_data/blob/master/cancer_example_04-03-18.pdf" class="uri">https://git.psu.edu/genomath/MethylIT_data/blob/master/cancer_example_04-03-18.pdf</a>)</p>
+<p>Methylome datasets of whole-genome bisulfite sequencing (WGBS) are available at Gene Expression Omnibus (GEO DataSets). The data set are downloaded providing the GEO accession numbers for each data set to the function <em>getGEOSuppFiles</em> (for details type ?getGEOSuppFiles in the R console). Then, datasets can be read using function <em>readCounts2GRangesList</em>. An example on how to load datasets of read-counts of methylated and unmethylated cytosine into Methyl-IT is given in the Cancer example at <a href="https://git.psu.edu/genomath/MethylIT" class="uri">https://git.psu.edu/genomath/MethylIT</a> (<a href="https://git.psu.edu/genomath/MethylIT_data/blob/master/cancer_example_04-03-18.pdf" class="uri">https://git.psu.edu/genomath/MethylIT_data/blob/master/cancer_example_04-03-18.pdf</a>)</p>
 </div>
 <div id="data-generation" class="section level1">
 <h1><span class="header-section-number">3</span> Data generation</h1>
-<p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read count matrices of methylated and unmethylated cytosine are generated with Methyl-IT function <em>simulateCounts</em>.</p>
+<p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read-count matrices of methylated and unmethylated cytosine are generated with Methyl-IT function <em>simulateCounts</em>.</p>
 <p>Function <em>simulateCounts</em> randomly generates prior methylation levels using Beta distribution function. The expected mean of methylation levels that we would like to have can be estimated using the auxiliary function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bmean &lt;-<span class="st"> </span><span class="cf">function</span>(alpha, beta) alpha<span class="op">/</span>(alpha <span class="op">+</span><span class="st"> </span>beta)
 alpha.ct &lt;-<span class="st"> </span><span class="fl">0.09</span>
@@ -550,7 +550,7 @@ crit.val.tt &lt;-<span class="st"> </span><span class="kw">min</span>(critical.v
 </div>
 <div id="potential-dmps-detected-with-fishers-exact-test" class="section level2">
 <h2><span class="header-section-number">4.2</span> Potential DMPs detected with Fisher’s exact test</h2>
-<p>In Methyl-IT Fisher’s exact test (FT) is implemented in function <em>FisherTest</em>. In the current case, a pairwise group application of FT to each cytosine site is performed. The differences between the group means of read counts of methylated and unmethylated cytosines at each site are used for testing (<span class="math inline">\(pooling.stat =&quot;mean&quot;\)</span>). Notice that only cytosine sites with critical values <span class="math inline">\(TV&gt;0.926\)</span> are tested (<em>tv.cut = 0.926</em>).</p>
+<p>In Methyl-IT, Fisher’s exact test (FT) is implemented in function <em>FisherTest</em>. In the current case, a pairwise group application of FT to each cytosine site is performed. The differences between the group means of read counts of methylated and unmethylated cytosines at each site are used for testing (<span class="math inline">\(pooling.stat =&quot;mean&quot;\)</span>). Notice that only cytosine sites with critical values <span class="math inline">\(TV_d&gt;0.926\)</span> are tested (<em>tv.cut = 0.926</em>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ft =<span class="st"> </span><span class="kw">FisherTest</span>(<span class="dt">LR =</span> divs, <span class="dt">tv.cut =</span> <span class="fl">0.926</span>,
                      <span class="dt">pAdjustMethod =</span> <span class="st">&quot;BH&quot;</span>,  <span class="dt">pooling.stat =</span> <span class="st">&quot;mean&quot;</span>, 
                      <span class="dt">pvalCutOff =</span> <span class="fl">0.05</span>, <span class="dt">num.cores =</span> 4L,
@@ -558,13 +558,13 @@ crit.val.tt &lt;-<span class="st"> </span><span class="kw">min</span>(critical.v
 </div>
 <div id="potential-dmps-detected-with-fishers-exact-test-and-ecdf-critical-value" class="section level2">
 <h2><span class="header-section-number">4.3</span> Potential DMPs detected with Fisher’s exact test and ECDF critical value</h2>
-<p>There is not a one-to-one mapping between <span class="math inline">\(TV\)</span> and <span class="math inline">\(HD\)</span>. However, at each cytosine site <span class="math inline">\(i\)</span>, these information divergences hold the inequality: <span class="math inline">\(TV(p^{tt}_i,p^{ct}_i)\leq \frac{2}{\sqrt{2w_i}}\sqrt{HD(p^{tt}_i,p^{ct}_i)}\)</span></p>
+<p>There is not a one-to-one mapping between <span class="math inline">\(TV_d\)</span> and <span class="math inline">\(HD\)</span>. However, at each cytosine site <span class="math inline">\(i\)</span>, these information divergences hold the inequality: <span class="math inline">\(TV_d(p^{tt}_i,p^{ct}_i)\leq \frac{2}{\sqrt{2w_i}}\sqrt{HD(p^{tt}_i,p^{ct}_i)}\)</span></p>
 <p>So, potential DMPs detected with FT can be constrained with the critical value <span class="math inline">\(HD^{TT}_{\alpha=0.05}\geq114.5\)</span> <span class="citation">(Steerneman et al. 1983)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ft.hd &lt;-<span class="st"> </span><span class="kw">lapply</span>(ft, <span class="cf">function</span>(x) x[<span class="kw">abs</span>(x<span class="op">$</span>hdiv) <span class="op">&gt;</span><span class="st"> </span><span class="fl">114.45228</span>])</code></pre></div>
 </div>
 <div id="potential-dmps-detected-with-weibull-2-parameters-model" class="section level2">
 <h2><span class="header-section-number">4.4</span> Potential DMPs detected with Weibull 2-parameters model</h2>
-<p>Potential DMPs can be estimated using the critical values derived from the fitted Weibull 2-parameters models, which are obtained after the non-linear fit of the theoretical model on the genome-wide <span class="math inline">\(HD\)</span> values for each individual sample using Methyl-IT function <em>nonlinearFitDist</em> <span class="citation">(Sanchez and Mackenzie 2016)</span>. As before, only cytosine sites with critical values <span class="math inline">\(TV&gt;0.926\)</span> are considered DMPs. Notice that, it is always possible to use any other values of <span class="math inline">\(HD\)</span> and <span class="math inline">\(TV\)</span> as critical values, but whatever could be the value it will affect the final accuracy of the classification performance of DMPs into two groups, DMPs from control and DNPs from treatment (see below). So, it is important to do an good choices of the critical values.</p>
+<p>Potential DMPs can be estimated using the critical values derived from the fitted Weibull 2-parameters models, which are obtained after the non-linear fit of the theoretical model on the genome-wide <span class="math inline">\(HD\)</span> values for each individual sample using Methyl-IT function <em>nonlinearFitDist</em> <span class="citation">(Sanchez and Mackenzie 2016)</span>. As before, only cytosine sites with critical values <span class="math inline">\(TV_d&gt;0.926\)</span> are considered DMPs. Notice that, it is always possible to use any other values of <span class="math inline">\(HD\)</span> and <span class="math inline">\(TV_d\)</span> as critical values, but whatever could be the value it will affect the final accuracy of the classification performance of DMPs into two groups, DMPs from control and DNPs from treatment (see below). So, it is important to do an good choices of the critical values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlms.wb &lt;-<span class="st"> </span><span class="kw">nonlinearFitDist</span>(divs, <span class="dt">column =</span> 9L, <span class="dt">verbose =</span> <span class="ot">FALSE</span>, <span class="dt">num.cores =</span> 6L)
 <span class="co"># Potential DMPs from 'Weibull2P' model</span>
 DMPs.wb &lt;-<span class="st"> </span><span class="kw">getPotentialDIMP</span>(<span class="dt">LR =</span> divs, <span class="dt">nlms =</span> nlms.wb, <span class="dt">div.col =</span> 9L, 
@@ -575,7 +575,7 @@ nlms.wb<span class="op">$</span>T1 </code></pre></div>
 ## shape  0.5413711 0.0003964435 1365.570         0 0.991666592250807
 ## scale 19.4097502 0.0155797315 1245.833         0                  
 ##                     rho       R.Cross.val              DEV
-## shape 0.991666258901162 0.996595609813124 34.7217494756128
+## shape 0.991666258901162 0.996595797504088 34.7217494756128
 ## scale                                                     
 ##                     AIC               BIC     COV.shape     COV.scale
 ## shape -221720.747067787 -221694.287732934  1.571674e-07 -1.165129e-06
@@ -586,7 +586,7 @@ nlms.wb<span class="op">$</span>T1 </code></pre></div>
 </div>
 <div id="potential-dmps-detected-with-gamma-2-parameters-model" class="section level2">
 <h2><span class="header-section-number">4.5</span> Potential DMPs detected with Gamma 2-parameters model</h2>
-<p>As in the case of Weibull 2-parameters model, potential DMPs can be estimated using the critical values derived from the fitted Gamma 2-parameters models and only cytosine sites with critical values <span class="math inline">\(TV&gt;0.926\)</span> are considered DMPs.</p>
+<p>As in the case of Weibull 2-parameters model, potential DMPs can be estimated using the critical values derived from the fitted Gamma 2-parameters models and only cytosine sites with critical values <span class="math inline">\(TV_d&gt;0.926\)</span> are considered DMPs.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlms.g2p &lt;-<span class="st"> </span><span class="kw">nonlinearFitDist</span>(divs, <span class="dt">column =</span> 9L, <span class="dt">verbose =</span> <span class="ot">FALSE</span>, <span class="dt">num.cores =</span> 6L,
                             <span class="dt">dist.name =</span> <span class="st">&quot;Gamma2P&quot;</span>)
 <span class="co"># Potential DMPs from 'Gamma2P' model</span>
@@ -617,7 +617,22 @@ nlms.g2p<span class="op">$</span>T1</code></pre></div>
 ## T1 2504  1554  126     924  1346
 ## T2 2464  1532  124     942  1379
 ## T3 2408  1477  121     979  1354</code></pre>
-<p>The graphics for the empirical (in black) and Gamma (in blue) densities distributions of Hellinger divergence of methylation levels for sample T1 are shown below. The 2-parameter gamma model is build by using the parameters estimated in the non-linear fit of <span class="math inline">\(HD\)</span> values from sample T1. The critical values estimated from the 2-parameter gamma distribution <span class="math inline">\(HD^{\Gamma}_{\alpha=0.05}=124\)</span> is more ‘conservative’ than the critical value based on the empirical distribution <span class="math inline">\(HD^{Emp}_{\alpha=0.05}=114.5\)</span>. That is, in accordance with the empirical distribution, for a methylation change to be considered a signal its <span class="math inline">\(HD\)</span> value must be <span class="math inline">\(HD\geq114.5\)</span>, while according with the 2-parameter gamma model any cytosine carrying a signal must hold <span class="math inline">\(HD\geq124\)</span>.</p>
+</div>
+<div id="critical-values-based-on-fitted-models" class="section level2">
+<h2><span class="header-section-number">4.6</span> Critical values based on fitted models</h2>
+<p>Critical values <span class="math inline">\(HD_{\alpha=0.05}\)</span> can be estimated from each fitted model using <em>predict</em> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">crit.wb =<span class="st"> </span><span class="kw">predict</span>(nlms.wb, <span class="dt">pred =</span> <span class="st">&quot;quant&quot;</span>, <span class="dt">q =</span> <span class="fl">0.95</span>, <span class="dt">dist.name =</span> <span class="st">&quot;Weibull2P&quot;</span>)
+crit.g2p =<span class="st"> </span><span class="kw">predict</span>(nlms.g2p, <span class="dt">pred =</span> <span class="st">&quot;quant&quot;</span>, <span class="dt">q =</span> <span class="fl">0.95</span>, <span class="dt">dist.name =</span> <span class="st">&quot;Gamma2P&quot;</span>)
+
+<span class="kw">data.frame</span>(<span class="dt">wb =</span> <span class="kw">do.call</span>(rbind, crit.wb), <span class="dt">g2p =</span> <span class="kw">do.call</span>(rbind, crit.g2p))</code></pre></div>
+<pre><code>##          wb       g2p
+## C1 117.1289  97.40329
+## C2 117.4248  97.19037
+## C3 116.8375  96.98129
+## T1 147.2984 123.78138
+## T2 147.3413 123.55315
+## T3 142.6252 120.30413</code></pre>
+<p>The graphics for the empirical (in black) and Gamma (in blue) densities distributions of Hellinger divergence of methylation levels for sample T1 are shown below. The 2-parameter gamma model is build by using the parameters estimated in the non-linear fit of <span class="math inline">\(HD\)</span> values from sample T1. The critical values estimated from the 2-parameter gamma distribution <span class="math inline">\(HD^{\Gamma}_{\alpha=0.05}=123.78\)</span> is more ‘conservative’ than the critical value based on the empirical distribution <span class="math inline">\(HD^{Emp}_{\alpha=0.05}=114.5\)</span>. That is, in accordance with the empirical distribution, for a methylation change to be considered a signal its <span class="math inline">\(HD\)</span> value must be <span class="math inline">\(HD\geq114.5\)</span>, while according with the 2-parameter gamma model any cytosine carrying a signal must hold <span class="math inline">\(HD\geq124\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressMessages</span>(<span class="kw">library</span>(ggplot2))
 
 <span class="co"># Some information for graphic</span>
@@ -668,7 +683,7 @@ emp.q95 =<span class="st"> </span><span class="kw">quantile</span>(divs<span cla
 <p>Normally, there is a spontaneous variability in the control group. This is a consequence of the random fluctuations, or noise, inherent to the methylation process. The stochasticity of the the methylation process is derives from the stochasticity inherent in biochemical processes. There are fundamental physical reasons to acknowledge that biochemical processes are subject to noise and fluctuations <span class="citation">(Samoilov, Price, and Arkin 2006; Eldar and Elowitz 2010)</span>. So, regardless constant environment, statistically significant methylation changes can be found in control population with probability greater than zero and proportional to a Boltzmann factor <span class="citation">(Sanchez and Mackenzie 2016)</span>.</p>
 <p>Natural signals and those generated by human technology are not free of noise and, as mentioned above, the methylation signal is no exception. Only signal detection based approaches are designed to filter out the signal from the noise, in natural and in human generated signals.</p>
 <p>The need for the application of (what is now known as) signal detection in cancer research was pointed out by Youden in the midst of the last century <span class="citation">(Youden 1950)</span>. Here, the application of signal detection approach was performed according with the standard practice in current implementations of clinical diagnostic test <span class="citation">(Carter et al. 2016; López-Ratón et al. 2014; Hippenstiel 2001)</span>. That is, optimal cutoff values of the methylation signal were estimated on the receiver operating characteristic curves (ROCs) and applied to identify DMPs. The decision of whether a DMP detected by Fisherâs exact test (or any other statistical test implemented in Methyl-IT) is taken based on the optimal cutoff value.</p>
-<p>In the current example, the column carrying <em>TV</em> (<em>div.col</em> = 7L) will be used to estimate the cutpoint. The column value will be expressed in terms of <span class="math inline">\(TV_d=|p_{tt}-p_{ct}|\)</span> (<em>absolute</em> = TRUE):</p>
+<p>In the current example, the column carrying <em>TV</em> (<em>div.col</em> = 7L) will be used to estimate the cutpoint. The column values will be expressed in terms of <span class="math inline">\(TV_d=|p_{tt}-p_{ct}|\)</span> (<em>absolute</em> = TRUE):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cutpoint estimation for FT approach</span>
 cut.ft =<span class="st"> </span><span class="kw">estimateCutPoint</span>(<span class="dt">LR =</span> ft, <span class="dt">grouping =</span> <span class="ot">TRUE</span>,
                             <span class="dt">control.names =</span> control.nam, 
@@ -708,7 +723,7 @@ cuts</code></pre></div>
 ## auc      0.5074455 0.5032473 0.5191817 0.5382479 0.5298385
 ## accuracy 0.5140162 0.5313134 0.6017857 0.5456674 0.5429858</code></pre>
 <p>For all the cases, the classification performance is very poor. However, the purpose here is to get a first estimation of an estimation of an optimal cutoff (cutpoint) for the difference of methylation levels (<em>TV</em>). It is clear that a classification of DMPs into DMPs from control and DMPs from treatment can not be only based on one variable (<em>TV</em>). An alternative estimation of the optimal cutpoint can be obtained with function Methyl-IT <em>findCutpoint</em> (not covered here).</p>
-<p>Now, with high probability true DMP can be selected with Methyl-IT function <em>selectDIMP</em>.</p>
+<p>Now, with high probability true DMPs can be selected with Methyl-IT function <em>selectDIMP</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ft.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(ft, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>)
 ft.hd.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(ft.hd, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>)
 hd.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(DMPs.hd, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>)
