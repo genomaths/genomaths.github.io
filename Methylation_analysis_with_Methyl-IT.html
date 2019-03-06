@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2019-02-27" />
+<meta name="date" content="2019-03-06" />
 
 <title>Methylation analysis with Methyl-IT</title>
 
@@ -355,7 +355,7 @@ ORCID: orcid.org/0000-0002-5246-1453
 Mackenzie’s lab</div>
 <div style="white-space: pre-line;">Department of Biology and Plant Science.
 Pennsylvania State University, University Park, PA 16802</div></em></h4>
-<h4 class="date"><em>27 February 2019</em></h4>
+<h4 class="date"><em>06 March 2019</em></h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 <p>Methylation analysis with Methyl-IT is illustrated on simulated datasets of methylated and unmethylated read counts with relatively high average of methylation levels: 0.15 and 0.286 for control and treatment groups, respectively. The main Methyl-IT downstream analysis is presented alongside the application of Fisher’s exact test. The importance of a signal detection step is shown.</p>
@@ -406,7 +406,7 @@ pre { /* Code block - determines code spacing between lines */
 </style>
 <div id="background" class="section level1">
 <h1><span class="header-section-number">1</span> Background</h1>
-<p>Methyl-IT R package offers a methylome analysis approach based on information thermodynamics (IT) and signal detection. Methyl-IT approach confront detection of differentially methylated cytosine as a signal detection problem. This approach was designed to discriminate methylation regulatory signal from background noise induced by molecular stochastic fluctuations. Methyl-IT R package is not limited to the IT approach but also includes Fisher’s exact test (FT), Root-mean-square statistic (RMST) or Hellinger divergence (HDT) tests. Herein, we will show that a signal detection step is also required for FT, RMST, and HDT as well.</p>
+<p>Methyl-IT R package offers a methylome analysis approach based on information thermodynamics (IT) and signal detection. Methyl-IT approach confront detection of differentially methylated cytosine as a signal detection problem. This approach was designed to discriminate methylation regulatory signal from background noise induced by molecular stochastic fluctuations. Methyl-IT R package is not limited to the IT approach but also includes Fisher’s exact test (FT), Root-mean-square statistic (RMST) or Hellinger divergence (HDT) tests. Herein, we will show that a signal detection step is also required for FT, RMST, and HDT as well. It is worthy to notice that, as for any standard statistical analysis, any serious robust methylation analysis requires for a descriptive statistical analysis at the beginning or at different downstream steps. This is an ABC principle taught in any undergraduate course on statistics. Methylation analysis is not the exception of the rule. This detail is included in this example.</p>
 </div>
 <div id="available-datasets-and-reading" class="section level1">
 <h1><span class="header-section-number">2</span> Available datasets and reading</h1>
@@ -427,7 +427,7 @@ alpha.tt &lt;-<span class="st"> </span><span class="fl">0.2</span>
 <div id="simulation" class="section level2">
 <h2><span class="header-section-number">3.1</span> Simulation</h2>
 <p>Methyl-IT function <em>simulateCounts</em> will be used to generate the datasets, which will include three group of samples: reference, control, and treatment.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressMessages</span>(<span class="kw">library</span>(MethylIT))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MethylIT)
 
 <span class="co"># The number of cytosine sites to generate</span>
 sites =<span class="st"> </span><span class="dv">50000</span> 
@@ -574,9 +574,9 @@ nlms.wb<span class="op">$</span>T1 </code></pre></div>
 <pre><code>##         Estimate   Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
 ## shape  0.5413711 0.0003964435 1365.570         0 0.991666592250807
 ## scale 19.4097502 0.0155797315 1245.833         0                  
-##                     rho      R.Cross.val              DEV
-## shape 0.991666258901162 0.99659571821963 34.7217494756128
-## scale                                                    
+##                     rho       R.Cross.val              DEV
+## shape 0.991666258901162 0.996595595151687 34.7217494756128
+## scale                                                     
 ##                     AIC               BIC     COV.shape     COV.scale
 ## shape -221720.747067787 -221694.287732934  1.571674e-07 -1.165129e-06
 ## scale                                     -1.165129e-06  2.427280e-04
@@ -724,11 +724,11 @@ cuts</code></pre></div>
 ## accuracy 0.5140162 0.5313134 0.6017857 0.5456674 0.5429858</code></pre>
 <p>For all the cases, the classification performance is very poor. However, the purpose here is to get a first estimation of an estimation of an optimal cutoff (cutpoint) for the difference of methylation levels (<em>TV</em>). It is clear that a classification of DMPs into DMPs from control and DMPs from treatment can not be only based on one variable (<em>TV</em>). An alternative estimation of the optimal cutpoint can be obtained with function Methyl-IT <em>findCutpoint</em> (not covered here).</p>
 <p>Now, with high probability true DMPs can be selected with Methyl-IT function <em>selectDIMP</em>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ft.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(ft, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>)
-ft.hd.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(ft.hd, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>)
-hd.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(DMPs.hd, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>)
-wb.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(DMPs.wb, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>)
-g2p.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(DMPs.g2p, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ft.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(ft, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>, <span class="dt">absolute =</span> <span class="ot">TRUE</span>)
+ft.hd.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(ft.hd, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>, <span class="dt">absolute =</span> <span class="ot">TRUE</span>)
+hd.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(DMPs.hd, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>, <span class="dt">absolute =</span> <span class="ot">TRUE</span>)
+wb.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(DMPs.wb, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>, <span class="dt">absolute =</span> <span class="ot">TRUE</span>)
+g2p.DMPs &lt;-<span class="st"> </span><span class="kw">selectDIMP</span>(DMPs.g2p, <span class="dt">div.col =</span> 7L, <span class="dt">cutpoint =</span> <span class="fl">0.9847716</span>, <span class="dt">absolute =</span> <span class="ot">TRUE</span>)
 
 <span class="kw">data.frame</span>(<span class="dt">ft =</span> <span class="kw">unlist</span>(<span class="kw">lapply</span>(ft.DMPs, length)), <span class="dt">ft.hd =</span> <span class="kw">unlist</span>(<span class="kw">lapply</span>(ft.hd.DMPs, length)),
 <span class="dt">ecdf =</span> <span class="kw">unlist</span>(<span class="kw">lapply</span>(hd.DMPs, length)), <span class="dt">Weibull =</span> <span class="kw">unlist</span>(<span class="kw">lapply</span>(wb.DMPs, length)),
