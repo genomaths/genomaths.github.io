@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Decompress 'gzip' files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for .gunzip"><tr><td>.gunzip</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Decompress 'gzip' files</h2>
+
+<h3>Description</h3>
+
+<p>Decompress 'gzip' files.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+.gunzip(filename, destname = gsub("[.]gz$", "", filename),
+  overwrite = FALSE, remove = TRUE, BFR.SIZE = 1e+07)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>filename</code></td>
+<td>
+<p>Character vector with the files names to be decompressed</p>
+</td></tr>
+<tr valign="top"><td><code>destname</code></td>
+<td>
+<p>The destination file.</p>
+</td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+<p>Logic (FALSE) indicating whether or not to overwrite a
+destfile of the same name.</p>
+</td></tr>
+<tr valign="top"><td><code>remove</code></td>
+<td>
+<p>Logic (TRUE) indicating whether or not to remove the original
+file after completion.</p>
+</td></tr>
+<tr valign="top"><td><code>BFR.SIZE</code></td>
+<td>
+<p>The size of the read buffer.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is originally from the R packages 'R.utils'. Herein,
+the version as given by 'GEOquery' is incorporated.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Invisibly, the number of bytes read.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Original author: Henrik Bengtsson.
+</p>
+
+
+</body></html>

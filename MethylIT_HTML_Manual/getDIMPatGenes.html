@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Count DIMPs at gene-body</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for getDIMPatGenes"><tr><td>getDIMPatGenes</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Count DIMPs at gene-body</h2>
+
+<h3>Description</h3>
+
+<p>The function counts DIMPs overlapping with gene-body. In fact,
+this function also can be used to count DIMPs overlapping with any set of
+regions given in a GRanges object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+getDIMPatGenes(GR, ...)
+
+## Default S3 method:
+getDIMPatGenes(GR, GENES, ignore.strand = TRUE)
+
+## S3 method for class 'pDMP'
+getDIMPatGenes(GR, GENES, ignore.strand = TRUE)
+
+## S3 method for class 'InfDiv'
+getDIMPatGenes(GR, GENES, ignore.strand = TRUE)
+
+## S3 method for class 'list'
+getDIMPatGenes(GR, GENES, ignore.strand = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>GR</code></td>
+<td>
+<p>An obects object from the any of the classes: 'pDMP', 'InfDiv',
+GRangesList, GRanges or a list of GRanges.</p>
+</td></tr>
+<tr valign="top"><td><code>GENES</code></td>
+<td>
+<p>A GRanges object with gene coordinates and gene IDs. A
+meta-column named 'gene_id' carying the gene ids should be included. If
+the meta-column named 'gene_id' is not provided, then gene (region) ids
+will be created using the gene (region) coordinates.</p>
+</td></tr>
+<tr valign="top"><td><code>ignore.strand</code></td>
+<td>
+<p>When set to TRUE, the strand information is ignored in
+the calculations. Default value: TRUE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A GRanges object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+num.points &lt;- 10000 # Number of cytosine position with methylation call
+## Gene annotation
+genes &lt;- GRanges(seqnames = "1",
+                ranges = IRanges(start = c(3631, 6788, 11649),
+                                 end = c(5899, 9130, 13714)),
+                strand = c("+", "-", "-"))
+mcols(genes) &lt;- data.frame(gene_id = c("AT1G01010", "AT1G01020",
+                                       "AT1G01030"))
+
+set.seed(123) ## To set a seed for random number generation
+## GRanges object of the reference with methylation levels in
+## its meta-column
+Ref &lt;- makeGRangesFromDataFrame(
+    data.frame(chr = '1',
+                start = 1:num.points,
+                end = 1:num.points,
+                strand = '*',
+                p2 = rbeta(num.points, shape1 = 1, shape2 = 1.5)),
+    keep.extra.columns = TRUE)
+
+## List of Granges objects of individuals methylation levels
+Indiv &lt;- GRangesList(
+    sample11 = makeGRangesFromDataFrame(
+        data.frame(chr = '1',
+                start = 1:num.points,
+                end = 1:num.points,
+                strand = '*',
+                p2 = rbeta(num.points, shape1 = 1.5, shape2 = 2)),
+        keep.extra.columns = TRUE),
+    sample12 = makeGRangesFromDataFrame(
+        data.frame(chr = '1',
+                start = 1:num.points,
+                end = 1:num.points,
+                strand = '*',
+                p2 = rbeta(num.points, shape1 = 1.6, shape2 = 2.1)),
+        keep.extra.columns = TRUE),
+    sample21 = makeGRangesFromDataFrame(
+        data.frame(chr = '1',
+                start = 1:num.points,
+                end = 1:num.points,
+                strand = '*',
+                p2 = rbeta(num.points, shape1 = 10, shape2 = 4)),
+        keep.extra.columns = TRUE),
+    sample22 = makeGRangesFromDataFrame(
+        data.frame(chr = '1',
+                start = 1:num.points,
+                end = 1:num.points,
+                strand = '*',
+                p2 = rbeta(num.points, shape1 = 11, shape2 = 4)),
+        keep.extra.columns = TRUE))
+## To estimate Hellinger divergence using only the methylation levels.
+HD &lt;- estimateDivergence(ref = Ref, indiv = Indiv, meth.level = TRUE,
+                        columns = 1)
+## To perform the nonlinear regression analysis
+nlms &lt;- nonlinearFitDist(HD, column = 4, verbose = FALSE)
+
+## Next, the potential signal can be estimated
+PS &lt;- getPotentialDIMP(LR = HD, nlms = nlms, div.col = 4, alpha = 0.05)
+
+## The cutpoint estimation used to discriminate the signal from the noise
+cutpoints &lt;- estimateCutPoint(PS, control.names = c("sample11", "sample12"),
+                            treatment.names = c("sample21", "sample22"),
+                            div.col = 4, verbose = TRUE)
+## DIMPs are selected using the cupoints
+DIMPs &lt;- selectDIMP(PS, div.col = 4, cutpoint = min(cutpoints$cutpoint))
+
+## Finally DIMPs found on genes
+DIMR &lt;- getDIMPatGenes(GR = DIMPs$sample21, GENES = genes)
+
+</pre>
+
+
+</body></html>

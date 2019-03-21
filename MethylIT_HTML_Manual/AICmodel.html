@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Akaike's Information Criterion (AIC)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for AICmodel"><tr><td>AICmodel</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Akaike's Information Criterion (AIC)</h2>
+
+<h3>Description</h3>
+
+<p>this function permits the estimation of the AIC for models for
+which the function 'AIC' from the 'stats' package does not work.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+AICmodel(model = NULL, residuals = NULL, np = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>if provided, it is an R object from where the residuals and
+model parameters can be retrieved using resid(model) and coef(model),
+respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>residuals</code></td>
+<td>
+<p>if provided, it is numerical vector with the residuals:
+residuals = observed.values - predicted.values, where predicted values are
+estimated from the model. If the parameter 'model' is not provided, then
+this parameter must be provided.</p>
+</td></tr>
+<tr valign="top"><td><code>np</code></td>
+<td>
+<p>number of model parameters. If the parameter 'model' is not
+provided, then 'np' and 'residuals' must be provided.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>if for a given model 'm' AIC(m) works, then AICmodel(m) = AIC(m).
+</p>
+
+
+<h3>Value</h3>
+
+<p>AIC numerical value
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(77)
+x = runif(100, 1, 5)
+y = 2 * exp(-0.5 * x) + runif(100, 0, 0.1)
+plot(x, y)
+
+nlm &lt;- nls(Y ~ a * exp( b * X), data = data.frame(X=x, Y=y),
+            start=list(a=1.5, b=-0.7),
+            control=nls.control(maxiter=10^4, tol=1e-05),
+            algorithm="port")
+## The estimations of Akaike information criteria given by 'AIC' function
+## from stats' R package and from 'AICmodel' function are equal.
+AICmodel(nlm) == AIC(nlm)
+
+## Now, using residuals from the fitted model:
+res = y - coef(nlm)[1] * exp(coef(nlm)[2] * x)
+
+AICmodel(residuals=res, np=2) == AIC(nlm)
+
+</pre>
+
+
+</body></html>

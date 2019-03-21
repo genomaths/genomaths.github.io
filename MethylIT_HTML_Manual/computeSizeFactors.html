@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate size factors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for .computeSizeFactors"><tr><td>.computeSizeFactors</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimate size factors</h2>
+
+<h3>Description</h3>
+
+<p>Size factor estimation provided by DEseq
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+.computeSizeFactors(dss)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dss</code></td>
+<td>
+<p>DESeqDataSet object</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A comment about size factor estimation by DEseq based on Simon
+Anders (Heidelberg, Germany) work to estimate the library size, simply
+taking the total number of (mapped or unmapped) reads is, in our
+experience, not a good idea. Sometimes, a few very strongly expressed
+genes are differentially expressed, and as they make up a good part of
+the total counts, they skew this number. After you divide by total
+counts, these few strongly expressed genes become equal, and the whole
+rest looks differentially expressed.
+</p>
+<p>The following simple alternative works much better: - Construct a
+&quot;reference sample&quot; by taking, for each gene, the geometric mean of the
+counts in all samples. - To get the sequencing depth of a sample
+relative to the reference, calculate for each gene the quotient of the
+counts in your sample divided by the counts of the reference sample. Now
+you have, for each gene, an estimate of the depth ratio. - Simply take
+the median of all the quotients to get the relative depth of the
+library. This is what the 'estimateSizeFactors' function of our DESeq
+package does.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Estimation of the size factors
+</p>
+
+
+<h3>References</h3>
+
+<p>http://seqanswers.com/forums/showpost.php?p=16468&amp;postcount=13
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+    dds &lt;- makeExampleDESeqDataSet(n = 1000, m = 4)
+    MethylIT:::.computeSizeFactors(dds)
+</pre>
+
+
+</body></html>

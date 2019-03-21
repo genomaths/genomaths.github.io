@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict function for logistic regression model from...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predict.LogisticR"><tr><td>predict.LogisticR</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Predict function for logistic regression model from 'LogisticR' class</h2>
+
+<h3>Description</h3>
+
+<p>Predict using a logistic model obtained from the output of
+function <code>evaluateDIMPclass</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'LogisticR'
+predict(object, newdata = NULL, type = c("class",
+  "posteriors", "all"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>To use with function 'predict'. An object from 'LogisticR'
+class. A logistic model given by function
+<code>evaluateDIMPclass</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>To use with function 'predict'. New data for classification
+prediction. Optionally, a data frame in which to look for variables with
+which to predict. If omitted, the fitted linear predictors are used.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>To use with function 'predict'. . The type of prediction
+required. The default is &quot;class&quot;. Possible outputs are:
+'class', 'posterior', and 'scores' (see ?predict.lda).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not in use.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is specific for predictions based on a logistic model
+given by function <code>evaluateDIMPclass</code>. A logistic model is
+obtained with 'glm' regression can be used directly with function
+'predict' from 'stats' package.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A character vector of prediction classes or a numeric vector of
+probabilities or a list containing the two vectors: prediction classes
+and 'posteriors' probabilities.
+</p>
+
+
+</body></html>
