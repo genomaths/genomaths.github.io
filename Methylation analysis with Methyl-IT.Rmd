@@ -98,7 +98,7 @@ knitr::opts_chunk$set(echo = TRUE)
   statistics. Methylation analysis is not the exception of the rule. This detail
   is included in this example. 
   
-  Note: This example was made with the MethylIT version at https://github.com/genomaths/MethylIT
+  Note: This example was made with the MethylIT version at https://github.com/genomaths/MethylIT.  
   It must NOT run with the current version available at https://git.psu.edu/genomath/MethylIT
   
 
@@ -417,6 +417,16 @@ ecdf = unlist(lapply(DMP.ecdf, length)), Weibull = unlist(lapply(DMPs.wb, length
 Gamma = unlist(lapply(DMPs.g2p, length)))
 
 ```
+Notice that there are significant differences between the numbers of DMPs detected by 
+Fisher's exact test  (FT) and other approaches. There at least about 2408 - 1354 = 1054 DMPs
+in the treatment samples that are not induced by the treatment, which can naturally
+occurs in both groups, control and treatment. In other words, the theoretical probabilistic
+models of Weibull and Gamma distributions are used to describe those methylation 
+events resultant of the normal (non-stressful) biological processes. Any information divergence
+of methylation level below the critical value $TV_{\alpha=0.05}$ or $HD_{\alpha=0.05}$ is
+a methylation event that can occur in normal conditions. *It does not matter how much significant* 
+*a test like FT could be, since it is not about the signification of the test, but about* 
+*how big is the probability to observe that methylation event in the control population*. 
 
 ## Critical values based on fitted models
 Critical values $HD_{\alpha=0.05}$ can be estimated from each fitted model using

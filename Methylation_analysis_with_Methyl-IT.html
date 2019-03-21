@@ -325,7 +325,8 @@ pre { /* Code block - determines code spacing between lines */
 <div id="background" class="section level1">
 <h1><span class="header-section-number">1</span> Background</h1>
 <p>Methyl-IT R package offers a methylome analysis approach based on information thermodynamics (IT) and signal detection. Methyl-IT approach confront detection of differentially methylated cytosine as a signal detection problem. This approach was designed to discriminate methylation regulatory signal from background noise induced by molecular stochastic fluctuations. Methyl-IT R package is not limited to the IT approach but also includes Fisher’s exact test (FT), Root-mean-square statistic (RMST) or Hellinger divergence (HDT) tests. Herein, we will show that a signal detection step is also required for FT, RMST, and HDT as well. It is worthy to notice that, as for any standard statistical analysis, any serious robust methylation analysis requires for a descriptive statistical analysis at the beginning or at different downstream steps. This is an ABC principle taught in any undergraduate course on statistics. Methylation analysis is not the exception of the rule. This detail is included in this example.</p>
-<p>Note: This example was made with the MethylIT version at <a href="https://github.com/genomaths/MethylIT" class="uri">https://github.com/genomaths/MethylIT</a> It must NOT run with the current version available at <a href="https://git.psu.edu/genomath/MethylIT" class="uri">https://git.psu.edu/genomath/MethylIT</a></p>
+<p>Note: This example was made with the MethylIT version at <a href="https://github.com/genomaths/MethylIT" class="uri">https://github.com/genomaths/MethylIT</a>.<br />
+It must NOT run with the current version available at <a href="https://git.psu.edu/genomath/MethylIT" class="uri">https://git.psu.edu/genomath/MethylIT</a></p>
 </div>
 <div id="available-datasets-and-reading" class="section level1">
 <h1><span class="header-section-number">2</span> Available datasets and reading</h1>
@@ -493,7 +494,7 @@ nlms.wb<span class="op">$</span>T1 </code></pre></div>
 ## shape  0.5413711 0.0003964435 1365.570         0 0.991666592250838
 ## scale 19.4097502 0.0155797315 1245.833         0                  
 ##                     rho       R.Cross.val              DEV
-## shape 0.991666258901194 0.996595423419871 34.7217494754823
+## shape 0.991666258901194 0.996595652101895 34.7217494754823
 ## scale                                                     
 ##                     AIC               BIC     COV.shape     COV.scale
 ## shape -221720.747067975 -221694.287733122  1.571674e-07 -1.165129e-06
@@ -551,6 +552,7 @@ ft.hd &lt;-<span class="st"> </span><span class="kw">getPotentialDIMP</span>(<sp
 ## T1 2504  1429  126     924  1346
 ## T2 2464  1439  124     942  1379
 ## T3 2408  1354  121     979  1354</code></pre>
+<p>Notice that there are significant differences between the numbers of DMPs detected by Fisher’s exact test (FT) and other approaches. There at least about 2408 - 1354 = 1054 DMPs in the treatment samples that are not induced by the treatment, which can naturally occurs in both groups, control and treatment. In other words, the theoretical probabilistic models of Weibull and Gamma distributions are used to describe those methylation events resultant of the normal (non-stressful) biological processes. Any information divergence of methylation level below the critical value <span class="math inline">\(TV_{\alpha=0.05}\)</span> or <span class="math inline">\(HD_{\alpha=0.05}\)</span> is a methylation event that can occur in normal conditions. <em>It does not matter how much significant</em> <em>a test like FT could be, since it is not about the signification of the test, but about</em> <em>how big is the probability to observe that methylation event in the control population</em>.</p>
 </div>
 <div id="critical-values-based-on-fitted-models" class="section level2">
 <h2><span class="header-section-number">4.6</span> Critical values based on fitted models</h2>
