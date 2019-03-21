@@ -132,8 +132,9 @@ methylation levels about 0.133 between the control and the treatment.
 Methyl-IT function *simulateCounts* will be used to generate the datasets, which 
 will include three group of samples: reference, control, and treatment.
 
-```{r simulation, include = TRUE,message = FALSE}
+```{r simulation, include = TRUE, message = FALSE}
 library(MethylIT)
+library(MethylIT.utils)
 
 # The number of cytosine sites to generate
 sites = 50000 
@@ -486,18 +487,18 @@ to estimate the cutpoint. The column values will be expressed in terms of
 $TV_d=|p_{tt}-p_{ct}|$ (*absolute* = TRUE):
 ```{r cutpoint, include = TRUE}
 # Cutpoint estimation for FT approach
-cut.ft = estimateCutPoint(LR = ft, grouping = TRUE,
+cut.ft = estimateCutPoint(LR = ft, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
                             div.col = 7L,absolute = TRUE, verbose = FALSE)
 
 # Cutpoint estimation for the FT approach using the ECDF critical value
-cut.ft.hd = estimateCutPoint(LR = ft.hd, grouping = TRUE,
+cut.ft.hd = estimateCutPoint(LR = ft.hd, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
                             div.col = 7L,absolute = TRUE, verbose = FALSE)
 
-cut.hd = estimateCutPoint(LR = DMPs.hd, grouping = TRUE,
+cut.hd = estimateCutPoint(LR = DMPs.hd, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
                             div.col = 7L,absolute = TRUE, verbose = FALSE)
