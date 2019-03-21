@@ -58,15 +58,18 @@ h1.title {
 
 h1 { /* Header 1 */
   font-size: 28px;
+  font-family: "Times New Roman", Times, serif;
   color: DarkBlue;
 }
 h2 { /* Header 2 */
     font-size: 22px;
-  color: DarkBlue;
+    color: DarkBlue;
+    font-family: "Times New Roman", Times, serif;
 }
 h3 { /* Header 3 */
-  font-size: 18px;
-  color: DarkBlue;
+   font-size: 18px;
+   color: DarkBlue;
+   font-family: "Times New Roman", Times, serif;
 }
 code.r{ /* Code block */
     font-size: 12px;
@@ -93,7 +96,11 @@ knitr::opts_chunk$set(echo = TRUE)
   descriptive statistical analysis at the beginning or at different downstream
   steps. This is an ABC principle taught in any undergraduate course on
   statistics. Methylation analysis is not the exception of the rule. This detail
-  is included in this example.
+  is included in this example. 
+  
+  Note: This example was made with the MethylIT version at https://github.com/genomaths/MethylIT
+  It must NOT run with the current version available at https://git.psu.edu/genomath/MethylIT
+  
 
 # Available datasets and reading
 Methylome datasets of whole-genome bisulfite sequencing (WGBS) are available at
@@ -218,7 +225,7 @@ levels (*HD*).
 divs = DIVs[order(names(DIVs))]
 
 # To remove hd == 0 to estimate. The methylation signal only is given for  
-divs = lapply(divs, function(div) div[ abs(div$hdiv) > 0 ])
+divs = lapply(divs, function(div) div[ abs(div$hdiv) > 0 ], keep.attr = TRUE)
 names(divs) <- names(DIVs)
 
 # Data frame with the Hellinger divergences from both groups of samples samples 
@@ -310,7 +317,7 @@ empirical cummulative distribution function (ECDF) and the critical value
 $TV_{\alpha=0.05}=0.926$.
 
 ```{r pDMPs, include = TRUE}
-DMPs.hd <- getPotentialDIMP(LR = divs, div.col = 9L, tv.cut = 0.926, tv.col = 7,
+DMP.ecdf <- getPotentialDIMP(LR = divs, div.col = 9L, tv.cut = 0.926, tv.col = 7,
                             alpha = 0.05, dist.name = "ECDF")
 
 ```
@@ -328,19 +335,18 @@ ft = FisherTest(LR = divs, tv.cut = 0.926,
                      pAdjustMethod = "BH",  pooling.stat = "mean", 
                      pvalCutOff = 0.05, num.cores = 4L,
                      verbose = FALSE, saveAll = FALSE) 
+
+ft.tv <- getPotentialDIMP(LR = ft, div.col = 9L, dist.name = "None",
+                          tv.cut = 0.926, tv.col = 7, alpha = 0.05)
+
 ```
 
-## Potential DMPs detected with Fisher's exact test and ECDF critical value
-There is not a one-to-one mapping between $TV_d$ and $HD$. However, at each
-cytosine site $i$, these information divergences hold the inequality:
-$TV_d(p^{tt}_i,p^{ct}_i)\leq \frac{2}{\sqrt{2w_i}}\sqrt{HD(p^{tt}_i,p^{ct}_i)}$
-
-So, potential DMPs detected with FT can be constrained with the critical value
-$HD^{TT}_{\alpha=0.05}\geq114.5$ [@Steerneman1983]:
-
-```{r FT.hd, include = TRUE}
-ft.hd <- lapply(ft, function(x) x[abs(x$hdiv) > 114.45228])
-```
+The above setting would impose additional constrains on the output 
+of DMPs resulting from Fisher's exact test depending on how strong is the
+methylation background noise in the control  population. Basically, methylation 
+variations that can spontaneously occur in the control population with 
+relatively high frequencies are disregarded. The decisions are based on the 
+empirical cumulative distribution function (ECDF).
 
 ## Potential DMPs detected with Weibull 2-parameters model
 Potential DMPs can be estimated using the critical values derived from the
@@ -377,11 +383,37 @@ DMPs.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L,
                              dist.name = "Gamma2P")
 nlms.g2p$T1
 ```
+## Potential DMPs detected with Fisher's exact test and Gamma2P critical value
+There is not a one-to-one mapping between $TV_d$ and $HD$. However, at each
+cytosine site $i$, these information divergences hold the inequality:
+$TV_d(p^{tt}_i,p^{ct}_i)\leq \frac{2}{\sqrt{2w_i}}\sqrt{HD(p^{tt}_i,p^{ct}_i)}$
+
+The critical values for the model Gamma2P can be retrived using:
+
+```{r, g2p}
+unlist(lapply(nlms.g2p, function(model) {
+   shape <- model$Estimate[1]
+   scale <- model$Estimate[2]
+   return(qgamma(0.95, shape = shape, scale = scale))
+}))
+
+```
+
+
+So, potential DMPs detected with FT can be constrained with the critical value
+$HD^{TT}_{\alpha=0.05}\geq120.3$ [@Steerneman1983]:
+
+```{r FT.hd, include = TRUE}
+# Potential DMPs from Fisher's exact test 
+ft.hd <- getPotentialDIMP(LR = ft, div.col = 9L, hdiv.col = 9L, hdiv.cut = 120.3,
+                          tv.cut = 0.926, tv.col = 7, alpha = 0.05, dist.name = "None")
+```
+
 
 Summary table:
 ```{r FT.ecdf, include = TRUE}
-data.frame(ft = unlist(lapply(ft, length)), ft.hd = unlist(lapply(ft.hd, length)),
-ecdf = unlist(lapply(DMPs.hd, length)), Weibull = unlist(lapply(DMPs.wb, length)),
+data.frame(ft = unlist(lapply(ft.tv, length)), ft.hd = unlist(lapply(ft.hd, length)),
+ecdf = unlist(lapply(DMP.ecdf, length)), Weibull = unlist(lapply(DMPs.wb, length)),
 Gamma = unlist(lapply(DMPs.g2p, length)))
 
 ```
@@ -487,38 +519,37 @@ to estimate the cutpoint. The column values will be expressed in terms of
 $TV_d=|p_{tt}-p_{ct}|$ (*absolute* = TRUE):
 ```{r cutpoint, include = TRUE}
 # Cutpoint estimation for FT approach
-cut.ft = estimateCutPoint(LR = ft, simple = TRUE,
+cut.ft = estimateCutPoint(LR = ft.tv, simple = TRUE, 
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 
 # Cutpoint estimation for the FT approach using the ECDF critical value
 cut.ft.hd = estimateCutPoint(LR = ft.hd, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 
-cut.hd = estimateCutPoint(LR = DMPs.hd, simple = TRUE,
+cut.emd = estimateCutPoint(LR = DMP.ecdf, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 
 # Cutpoint estimation for the Weibull 2-parameter distribution approach
-cut.wb = estimateCutPoint(LR = DMPs.wb, grouping = TRUE,
+cut.wb = estimateCutPoint(LR = DMPs.wb, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 # Cutpoint estimation for the Gamma 2-parameter distribution approach
-cut.g2p = estimateCutPoint(LR = DMPs.g2p, grouping = TRUE,
+cut.g2p = estimateCutPoint(LR = DMPs.g2p, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 
 # Control cutpoint to define TRUE negatives and TRUE positives
-cuts <- data.frame(do.call(rbind,cut.ft), do.call(rbind,cut.ft.hd), 
-                   do.call(rbind,cut.hd),
-                   do.call(rbind,cut.wb), do.call(rbind,cut.g2p))
-colnames(cuts) <- c("ft", "ft.hd", "ecdf", "wb", "g2p")
+cuts <- data.frame(cut.ft = cut.ft$cutpoint, cut.ft.hd = cut.ft.hd$cutpoint, 
+                   cut.ecdf = cut.emd$cutpoint, cut.wb = cut.wb$cutpoint,
+                   cut.g2p = cut.g2p$cutpoint)
 cuts
 ```
 
@@ -536,12 +567,12 @@ Now, with high probability true DMPs can be selected with Methyl-IT function
 ```{r DMPs, include = TRUE}
 ft.DMPs <- selectDIMP(ft, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 ft.hd.DMPs <- selectDIMP(ft.hd, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
-hd.DMPs <- selectDIMP(DMPs.hd, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
+emd.DMPs <- selectDIMP(DMP.ecdf, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 wb.DMPs <- selectDIMP(DMPs.wb, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 g2p.DMPs <- selectDIMP(DMPs.g2p, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 
 data.frame(ft = unlist(lapply(ft.DMPs, length)), ft.hd = unlist(lapply(ft.hd.DMPs, length)),
-ecdf = unlist(lapply(hd.DMPs, length)), Weibull = unlist(lapply(wb.DMPs, length)),
+ecdf = unlist(lapply(DMP.ecdf, length)), Weibull = unlist(lapply(wb.DMPs, length)),
 Gamma = unlist(lapply(g2p.DMPs, length)))
 
 ```
@@ -587,17 +618,16 @@ ft.hd.class = evaluateDIMPclass(LR = ft.hd.DMPs, control.names = control.nam,
                            treatment.names = treatment.nam,
                            column = c(hdiv = TRUE, TV = TRUE, 
                                       wprob = TRUE, pos = TRUE),
-                           classifier = "logistic", interaction = "wprob:TV",
-                           n.pc = 4, pval.col = 11L,
-                           center = TRUE, scale = TRUE,
-                           output = "conf.mat", prop = 0.6
+                           classifier = "logistic", interaction = "wprob:TV", 
+                           n.pc = 4, pval.col = 11L, center = TRUE, 
+                           scale = TRUE, output = "conf.mat", prop = 0.6
 )
 ft.hd.class
 ```
 
 ## Evaluation ECDF based DMP classification
 ```{r ecdf.class, include = TRUE}
-hd.class = evaluateDIMPclass(LR = hd.DMPs, control.names = control.nam,
+ecdf.class = evaluateDIMPclass(LR = DMP.ecdf, control.names = control.nam,
                            treatment.names = treatment.nam,
                            column = c(hdiv = TRUE, TV = TRUE, 
                                       wprob = TRUE, pos = TRUE),
@@ -605,7 +635,7 @@ hd.class = evaluateDIMPclass(LR = hd.DMPs, control.names = control.nam,
                            center = TRUE, scale = TRUE,
                            output = "conf.mat", prop = 0.6
 )
-hd.class
+ecdf.class
 ```
 
 
