@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate cutpoints to distinguish the treatment methylation...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
 </head><body>
 
 <table width="100%" summary="page for estimateCutPoint {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>estimateCutPoint {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
@@ -76,8 +76,8 @@ and the corresponding best fitted model will be returned.</p>
 <tr valign="top"><td><code>tv.cut</code></td>
 <td>
 <p>A cutoff for the total variation distance to be applied to each
-site/range. Only sites/ranges *k* with <i>TVD_{k} &gt; tv.cut</i> are
-are used in the analysis. Its value must be a number
+site/range. Only sites/ranges <em>k</em> with <i>TVD_{k} &gt; tv.cut</i> are
+are used in the analysis. Its value must be a number.
 <i>0 &lt; tv.cut &lt; 1</i>. Default is <i>tv.cut = 0.25</i>.</p>
 </td></tr>
 <tr valign="top"><td><code>div.col</code></td>
@@ -94,7 +94,7 @@ Default, FALSE.</p>
 <tr valign="top"><td><code>post.cut</code></td>
 <td>
 <p>If 'simple=FALSE', this is posterior probability to dicide
-whether a DMPs belong to treatment group. Default *post.cut* = 0.5.</p>
+whether a DMPs belong to treatment group. Default <em>post.cut</em> = 0.5.</p>
 </td></tr>
 <tr valign="top"><td><code>prop</code></td>
 <td>
@@ -114,24 +114,62 @@ classify DMPs based on given specifications.</p>
 </td></tr>
 <tr valign="top"><td><code>cut.interval</code></td>
 <td>
-<p>0 &lt; *cut.interval* &lt; 0.1. If *find.cut*= TRUE, the
+<p>0 &lt; <em>cut.interval</em> &lt; 0.1. If <em>find.cut</em> = TRUE, the
 interval of treatment group posterior probabilities where to search for a
-cutpoint. Deafult *cut.interval* = c(0.5, 0.8).</p>
+cutpoint. Deafult <em>cut.interval</em> = c(0.5, 0.8).</p>
 </td></tr>
 <tr valign="top"><td><code>cut.incr</code></td>
 <td>
-<p>0 &lt; *cut.incr* &lt; 0.1. If *find.cut*= TRUE, the sucesive
-increamental values runing on the interval *cut.interval*. Deafult,
-*cut.incr* = 0.01.</p>
+<p>0 &lt; <em>cut.incr</em> &lt; 0.1. If <em>find.cut</em> = TRUE, the sucesive
+increamental values runing on the interval <em>cut.interval</em>. Deafult,
+<em>cut.incr</em> = 0.01.</p>
 </td></tr>
 <tr valign="top"><td><code>stat</code></td>
 <td>
 <p>An integer number indicating the statistic to be used in the
-testing when *find.cut* = TRUE. The mapping for statistic names are:
-0 = &quot;Accuracy&quot;, 1 = &quot;Sensitivity&quot;, 2 = &quot;Specificity&quot;,
-3 = &quot;Pos Pred Value&quot;, 4 = &quot;Neg Pred Value&quot;, 5 = &quot;Precision&quot;,
-6 = &quot;Recall&quot;, 7 = &quot;F1&quot;,  8 = &quot;Prevalence&quot;, 9 = &quot;Detection Rate&quot;,
-10 = &quot;Detection Prevalence&quot;, 11 = &quot;Balanced Accuracy&quot;, 12 = FDR.</p>
+testing when <em>find.cut</em> = TRUE. The mapping for statistic names are:
+</p>
+
+<ul>
+<li><p> 0 = &quot;Accuracy&quot;
+</p>
+</li>
+<li><p> 1 = &quot;Sensitivity&quot;
+</p>
+</li>
+<li><p> 2 = &quot;Specificity&quot;
+</p>
+</li>
+<li><p> 3 = &quot;Pos Pred Value&quot;
+</p>
+</li>
+<li><p> 4 = &quot;Neg Pred Value&quot;
+</p>
+</li>
+<li><p> 5 = &quot;Precision&quot;
+</p>
+</li>
+<li><p> 6 = &quot;Recall&quot;
+</p>
+</li>
+<li><p> 7 = &quot;F1&quot;
+</p>
+</li>
+<li><p> 8 = &quot;Prevalence&quot;
+</p>
+</li>
+<li><p> 9 = &quot;Detection Rate&quot;
+</p>
+</li>
+<li><p> 10 = &quot;Detection Prevalence&quot;
+</p>
+</li>
+<li><p> 11 = &quot;Balanced Accuracy&quot;
+</p>
+</li>
+<li><p> 12 = FDR
+</p>
+</li></ul>
 </td></tr>
 <tr valign="top"><td><code>num.cores, tasks</code></td>
 <td>

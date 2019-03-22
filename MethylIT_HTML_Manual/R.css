@@ -1,0 +1,43 @@
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 28px;
+      font-family: "Times New Roman", Times, serif;
+  }
+td {  /* Table  */
+  font-size: 8px;
+}
+
+h1.title {
+  font-size: 38px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkRed;
+  .subTitle {
+  font-size: 36px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkRed;
+  }
+}
+
+h1 { /* Header 1 */
+  font-size: 34px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 32px;
+    color: DarkBlue;
+    font-family: "Times New Roman", Times, serif;
+}
+h3 { /* Header 3 */
+   font-size: 28px;
+   color: DarkBlue;
+   font-family: "Times New Roman", Times, serif;
+}
+code.r{ /* Code block */
+    font-size: 28px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 28px;
+}
+</style>
