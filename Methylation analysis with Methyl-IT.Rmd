@@ -1,12 +1,11 @@
 ---
 title: "Methylation analysis with Methyl-IT"
-subtitle: <h1> An example with simulated datasets </h>
+subtitle: <h1>An example with simulated datasets. A guide for users</h>
 author: |
  | Robersy Sanchez
  | rus547@psu.edu
- | ORCID: orcid.org/0000-0002-5246-1453
  | Mackenzie's lab
- 
+ | 
  | Department of Biology and Plant Science. 
  | Pennsylvania State University, University Park, PA 16802
 date: "`r format(Sys.time(), '%d %B %Y')`"
@@ -27,12 +26,12 @@ output:
     keep_md: yes
   
 abstract: |
-  Methylation analysis with Methyl-IT is illustrated on simulated datasets of
-  methylated and unmethylated read counts with relatively high average of
-  methylation levels: 0.15 and 0.286 for control and treatment groups,
-  respectively. The main Methyl-IT downstream analysis is presented alongside
-  the application of Fisher's exact test. The importance of a signal detection
-  step is shown. 
+  Methylation analysis with [Methyl-IT](https://github.com/genomaths/MethylIT)
+  is illustrated on simulated datasets of methylated and unmethylated read
+  counts with relatively high average of methylation levels: 0.15 and 0.286 for
+  control and treatment groups, respectively. The main Methyl-IT downstream
+  analysis is presented alongside the application of Fisher's exact test. The
+  importance of a signal detection step is shown.
 ---
 
 <style type="text/css">
@@ -40,6 +39,7 @@ abstract: |
 body{ /* Normal  */
       font-size: 18px;
       font-family: "Times New Roman", Times, serif;
+      text-align: justify
   }
 td {  /* Table  */
   font-size: 8px;
@@ -575,7 +575,7 @@ Now, with high probability true DMPs can be selected with Methyl-IT function
 *selectDIMP*. 
 
 ```{r DMPs, include = TRUE}
-ft.DMPs <- selectDIMP(ft, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
+ft.DMPs <- selectDIMP(ft.tv, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 ft.hd.DMPs <- selectDIMP(ft.hd, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 emd.DMPs <- selectDIMP(DMP.ecdf, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 wb.DMPs <- selectDIMP(DMPs.wb, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
@@ -651,7 +651,7 @@ ecdf.class
 
 ## Evaluation of Weibull based DMP classification
 ```{r ws.class, include = TRUE}
-ws.class = evaluateDIMPclass(LR = DMPs.wb, control.names = control.nam,
+ws.class = evaluateDIMPclass(LR = wb.DMPs, control.names = control.nam,
                            treatment.names = treatment.nam,
                            column = c(hdiv = TRUE, TV = TRUE, 
                                       wprob = TRUE, pos = TRUE),
@@ -664,7 +664,7 @@ ws.class
 
 ## Evaluation of Gamma based DMP classification
 ```{r g2p.class, include = TRUE}
-g2p.class = evaluateDIMPclass(LR = DMPs.g2p, control.names = control.nam,
+g2p.class = evaluateDIMPclass(LR = g2p.DMPs, control.names = control.nam,
                            treatment.names = treatment.nam,
                            column = c(hdiv = TRUE, TV = TRUE, 
                                       wprob = TRUE, pos = TRUE),

@@ -1,15 +1,14 @@
 ---
 title: "Methylation analysis with Methyl-IT"
-subtitle: <h1> An example with simulated datasets </h>
+subtitle: <h1>An example with simulated datasets. A guide for users</h>
 author: |
  | Robersy Sanchez
  | rus547@psu.edu
- | ORCID: orcid.org/0000-0002-5246-1453
  | Mackenzie's lab
- 
+ | 
  | Department of Biology and Plant Science. 
  | Pennsylvania State University, University Park, PA 16802
-date: "06 March 2019"
+date: "28 March 2019"
 fontsize: 11pt
 fontfamily: "serif"
 bibliography: bibliography.bib
@@ -27,12 +26,12 @@ output:
     keep_md: yes
   
 abstract: |
-  Methylation analysis with Methyl-IT is illustrated on simulated datasets of
-  methylated and unmethylated read counts with relatively high average of
-  methylation levels: 0.15 and 0.286 for control and treatment groups,
-  respectively. The main Methyl-IT downstream analysis is presented alongside
-  the application of Fisher's exact test. The importance of a signal detection
-  step is shown. 
+  Methylation analysis with [Methyl-IT](https://github.com/genomaths/MethylIT)
+  is illustrated on simulated datasets of methylated and unmethylated read
+  counts with relatively high average of methylation levels: 0.15 and 0.286 for
+  control and treatment groups, respectively. The main Methyl-IT downstream
+  analysis is presented alongside the application of Fisher's exact test. The
+  importance of a signal detection step is shown.
 ---
 
 <style type="text/css">
@@ -40,6 +39,7 @@ abstract: |
 body{ /* Normal  */
       font-size: 18px;
       font-family: "Times New Roman", Times, serif;
+      text-align: justify
   }
 td {  /* Table  */
   font-size: 8px;
@@ -58,15 +58,18 @@ h1.title {
 
 h1 { /* Header 1 */
   font-size: 28px;
+  font-family: "Times New Roman", Times, serif;
   color: DarkBlue;
 }
 h2 { /* Header 2 */
     font-size: 22px;
-  color: DarkBlue;
+    color: DarkBlue;
+    font-family: "Times New Roman", Times, serif;
 }
 h3 { /* Header 3 */
-  font-size: 18px;
-  color: DarkBlue;
+   font-size: 18px;
+   color: DarkBlue;
+   font-family: "Times New Roman", Times, serif;
 }
 code.r{ /* Code block */
     font-size: 12px;
@@ -91,7 +94,11 @@ pre { /* Code block - determines code spacing between lines */
   descriptive statistical analysis at the beginning or at different downstream
   steps. This is an ABC principle taught in any undergraduate course on
   statistics. Methylation analysis is not the exception of the rule. This detail
-  is included in this example.
+  is included in this example. 
+  
+  Note: This example was made with the MethylIT version at https://github.com/genomaths/MethylIT.  
+  It must NOT run with the current version available at https://git.psu.edu/genomath/MethylIT
+  
 
 # Available datasets and reading
 Methylome datasets of whole-genome bisulfite sequencing (WGBS) are available at
@@ -138,6 +145,7 @@ will include three group of samples: reference, control, and treatment.
 
 ```r
 library(MethylIT)
+library(MethylIT.utils)
 
 # The number of cytosine sites to generate
 sites = 50000 
@@ -230,7 +238,7 @@ levels (*HD*).
 divs = DIVs[order(names(DIVs))]
 
 # To remove hd == 0 to estimate. The methylation signal only is given for  
-divs = lapply(divs, function(div) div[ abs(div$hdiv) > 0 ])
+divs = lapply(divs, function(div) div[ abs(div$hdiv) > 0 ], keep.attr = TRUE)
 names(divs) <- names(DIVs)
 
 # Data frame with the Hellinger divergences from both groups of samples samples 
@@ -334,7 +342,7 @@ $TV_{\alpha=0.05}=0.926$.
 
 
 ```r
-DMPs.hd <- getPotentialDIMP(LR = divs, div.col = 9L, tv.cut = 0.926, tv.col = 7,
+DMP.ecdf <- getPotentialDIMP(LR = divs, div.col = 9L, tv.cut = 0.926, tv.col = 7,
                             alpha = 0.05, dist.name = "ECDF")
 ```
 
@@ -352,20 +360,17 @@ ft = FisherTest(LR = divs, tv.cut = 0.926,
                      pAdjustMethod = "BH",  pooling.stat = "mean", 
                      pvalCutOff = 0.05, num.cores = 4L,
                      verbose = FALSE, saveAll = FALSE) 
+
+ft.tv <- getPotentialDIMP(LR = ft, div.col = 9L, dist.name = "None",
+                          tv.cut = 0.926, tv.col = 7, alpha = 0.05)
 ```
 
-## Potential DMPs detected with Fisher's exact test and ECDF critical value
-There is not a one-to-one mapping between $TV_d$ and $HD$. However, at each
-cytosine site $i$, these information divergences hold the inequality:
-$TV_d(p^{tt}_i,p^{ct}_i)\leq \frac{2}{\sqrt{2w_i}}\sqrt{HD(p^{tt}_i,p^{ct}_i)}$
-
-So, potential DMPs detected with FT can be constrained with the critical value
-$HD^{TT}_{\alpha=0.05}\geq114.5$ [@Steerneman1983]:
-
-
-```r
-ft.hd <- lapply(ft, function(x) x[abs(x$hdiv) > 114.45228])
-```
+The above setting would impose additional constrains on the output 
+of DMPs resulting from Fisher's exact test depending on how strong is the
+methylation background noise in the control  population. Basically, methylation 
+variations that can spontaneously occur in the control population with 
+relatively high frequencies are disregarded. The decisions are based on the 
+empirical cumulative distribution function (ECDF).
 
 ## Potential DMPs detected with Weibull 2-parameters model
 Potential DMPs can be estimated using the critical values derived from the
@@ -391,13 +396,13 @@ nlms.wb$T1
 
 ```
 ##         Estimate   Std. Error  t value Pr(>|t|))      Adj.R.Square
-## shape  0.5413711 0.0003964435 1365.570         0 0.991666592250807
+## shape  0.5413711 0.0003964435 1365.570         0 0.991666592250838
 ## scale 19.4097502 0.0155797315 1245.833         0                  
 ##                     rho       R.Cross.val              DEV
-## shape 0.991666258901162 0.996595595151687 34.7217494756128
+## shape 0.991666258901194 0.996595722235241 34.7217494754823
 ## scale                                                     
 ##                     AIC               BIC     COV.shape     COV.scale
-## shape -221720.747067787 -221694.287732934  1.571674e-07 -1.165129e-06
+## shape -221720.747067975 -221694.287733122  1.571674e-07 -1.165129e-06
 ## scale                                     -1.165129e-06  2.427280e-04
 ##       COV.mu     n
 ## shape     NA 50000
@@ -423,35 +428,77 @@ nlms.g2p$T1
 ```
 ##         Estimate   Std. Error  t value Pr(>|t|))      Adj.R.Square
 ## shape  0.3866249 0.0001480347 2611.717         0 0.999998194156282
-## scale 76.1580083 0.0642929564 1184.547         0                  
-##                     rho       R.Cross.val                DEV
-## shape 0.999998194084045 0.998331895910679 0.0075241791915278
-## scale                                                       
-##                     AIC               BIC     COV.alpha     COV.scale
-## shape -265404.291356671 -265369.012243533  2.191429e-08 -8.581717e-06
-## scale                                     -8.581717e-06  4.133584e-03
+## scale 76.1580083 0.0642929555 1184.547         0                  
+##                     rho       R.Cross.val                 DEV
+## shape 0.999998194084045 0.998331895911125 0.00752417919133131
+## scale                                                        
+##                    AIC               BIC     COV.alpha     COV.scale
+## shape -265404.29138371 -265369.012270572  2.191429e-08 -8.581717e-06
+## scale                                    -8.581717e-06  4.133584e-03
 ##       COV.mu    df
 ## shape     NA 49998
 ## scale     NA 49998
 ```
+## Potential DMPs detected with Fisher's exact test and Gamma2P critical value
+There is not a one-to-one mapping between $TV_d$ and $HD$. However, at each
+cytosine site $i$, these information divergences hold the inequality:
+$TV_d(p^{tt}_i,p^{ct}_i)\leq \frac{2}{\sqrt{2w_i}}\sqrt{HD(p^{tt}_i,p^{ct}_i)}$
+
+The critical values for the model Gamma2P can be retrived using:
+
+
+```r
+unlist(lapply(nlms.g2p, function(model) {
+   shape <- model$Estimate[1]
+   scale <- model$Estimate[2]
+   return(qgamma(0.95, shape = shape, scale = scale))
+}))
+```
+
+```
+##        C1        C2        C3        T1        T2        T3 
+##  97.40329  97.19037  96.98129 123.78138 123.55315 120.30413
+```
+
+
+So, potential DMPs detected with FT can be constrained with the critical value
+$HD^{TT}_{\alpha=0.05}\geq120.3$ [@Steerneman1983]:
+
+
+```r
+# Potential DMPs from Fisher's exact test 
+ft.hd <- getPotentialDIMP(LR = ft, div.col = 9L, hdiv.col = 9L, hdiv.cut = 120.3,
+                          tv.cut = 0.926, tv.col = 7, alpha = 0.05, dist.name = "None")
+```
+
 
 Summary table:
 
 ```r
-data.frame(ft = unlist(lapply(ft, length)), ft.hd = unlist(lapply(ft.hd, length)),
-ecdf = unlist(lapply(DMPs.hd, length)), Weibull = unlist(lapply(DMPs.wb, length)),
+data.frame(ft = unlist(lapply(ft.tv, length)), ft.hd = unlist(lapply(ft.hd, length)),
+ecdf = unlist(lapply(DMP.ecdf, length)), Weibull = unlist(lapply(DMPs.wb, length)),
 Gamma = unlist(lapply(DMPs.g2p, length)))
 ```
 
 ```
 ##      ft ft.hd ecdf Weibull Gamma
-## C1 1253   773   63     756   935
-## C2 1221   776   62     755   925
-## C3 1280   786   64     768   947
-## T1 2504  1554  126     924  1346
-## T2 2464  1532  124     942  1379
-## T3 2408  1477  121     979  1354
+## C1 1253   726   63     756   935
+## C2 1221   724   62     755   925
+## C3 1280   733   64     768   947
+## T1 2504  1429  126     924  1346
+## T2 2464  1439  124     942  1379
+## T3 2408  1354  121     979  1354
 ```
+Notice that there are significant differences between the numbers of DMPs detected by 
+Fisher's exact test  (FT) and other approaches. There at least about 2408 - 1354 = 1054 DMPs
+in the treatment samples that are not induced by the treatment, which can naturally
+occurs in both groups, control and treatment. In other words, the theoretical probabilistic
+models of Weibull and Gamma distributions are used to describe those methylation 
+events resultant of the normal (non-stressful) biological processes. Any information divergence
+of methylation level below the critical value $TV_{\alpha=0.05}$ or $HD_{\alpha=0.05}$ is
+a methylation event that can occur in normal conditions. *It does not matter how much significant* 
+*a test like FT could be, since it is not about the signification of the test, but about* 
+*how big is the probability to observe that methylation event in the control population*. 
 
 ## Critical values based on fitted models
 Critical values $HD_{\alpha=0.05}$ can be estimated from each fitted model using
@@ -567,46 +614,43 @@ $TV_d=|p_{tt}-p_{ct}|$ (*absolute* = TRUE):
 
 ```r
 # Cutpoint estimation for FT approach
-cut.ft = estimateCutPoint(LR = ft, grouping = TRUE,
+cut.ft = estimateCutPoint(LR = ft.tv, simple = TRUE, 
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 
 # Cutpoint estimation for the FT approach using the ECDF critical value
-cut.ft.hd = estimateCutPoint(LR = ft.hd, grouping = TRUE,
+cut.ft.hd = estimateCutPoint(LR = ft.hd, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 
-cut.hd = estimateCutPoint(LR = DMPs.hd, grouping = TRUE,
+cut.emd = estimateCutPoint(LR = DMP.ecdf, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 
 # Cutpoint estimation for the Weibull 2-parameter distribution approach
-cut.wb = estimateCutPoint(LR = DMPs.wb, grouping = TRUE,
+cut.wb = estimateCutPoint(LR = DMPs.wb, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 # Cutpoint estimation for the Gamma 2-parameter distribution approach
-cut.g2p = estimateCutPoint(LR = DMPs.g2p, grouping = TRUE,
+cut.g2p = estimateCutPoint(LR = DMPs.g2p, simple = TRUE,
                             control.names = control.nam, 
                             treatment.names = treatment.nam,
-                            div.col = 7L,absolute = TRUE, verbose = FALSE)
+                            div.col = 7L, verbose = FALSE)
 
 # Control cutpoint to define TRUE negatives and TRUE positives
-cuts <- data.frame(do.call(rbind,cut.ft), do.call(rbind,cut.ft.hd), 
-                   do.call(rbind,cut.hd),
-                   do.call(rbind,cut.wb), do.call(rbind,cut.g2p))
-colnames(cuts) <- c("ft", "ft.hd", "ecdf", "wb", "g2p")
+cuts <- data.frame(cut.ft = cut.ft$cutpoint, cut.ft.hd = cut.ft.hd$cutpoint, 
+                   cut.ecdf = cut.emd$cutpoint, cut.wb = cut.wb$cutpoint,
+                   cut.g2p = cut.g2p$cutpoint)
 cuts
 ```
 
 ```
-##                 ft     ft.hd      ecdf        wb       g2p
-## cutpoint 0.9847716 0.9847716 0.9870130 0.9880240 0.9847716
-## auc      0.5074455 0.5032473 0.5191817 0.5382479 0.5298385
-## accuracy 0.5140162 0.5313134 0.6017857 0.5456674 0.5429858
+##      cut.ft cut.ft.hd cut.ecdf   cut.wb   cut.g2p
+## 1 0.9847716 0.9847716 0.987013 0.988024 0.9847716
 ```
 
 For all the cases, the classification performance is very poor. However, the
@@ -622,25 +666,25 @@ Now, with high probability true DMPs can be selected with Methyl-IT function
 
 
 ```r
-ft.DMPs <- selectDIMP(ft, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
+ft.DMPs <- selectDIMP(ft.tv, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 ft.hd.DMPs <- selectDIMP(ft.hd, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
-hd.DMPs <- selectDIMP(DMPs.hd, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
+emd.DMPs <- selectDIMP(DMP.ecdf, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 wb.DMPs <- selectDIMP(DMPs.wb, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 g2p.DMPs <- selectDIMP(DMPs.g2p, div.col = 7L, cutpoint = 0.9847716, absolute = TRUE)
 
 data.frame(ft = unlist(lapply(ft.DMPs, length)), ft.hd = unlist(lapply(ft.hd.DMPs, length)),
-ecdf = unlist(lapply(hd.DMPs, length)), Weibull = unlist(lapply(wb.DMPs, length)),
+ecdf = unlist(lapply(DMP.ecdf, length)), Weibull = unlist(lapply(wb.DMPs, length)),
 Gamma = unlist(lapply(g2p.DMPs, length)))
 ```
 
 ```
 ##      ft ft.hd ecdf Weibull Gamma
-## C1  622   426   44     416   487
-## C2  616   439   47     430   497
-## C3  644   441   46     432   508
-## T1 1300   890   90     588   803
-## T2 1278   865   89     591   794
-## T3 1271   881  102     633   827
+## C1  622   403   63     416   487
+## C2  616   422   62     430   497
+## C3  644   421   64     432   508
+## T1 1300   842  126     588   803
+## T2 1278   824  124     591   794
+## T3 1271   827  121     633   827
 ```
 
 Nevertheless, we should evaluate the classification performance as given in the
@@ -740,10 +784,9 @@ ft.hd.class = evaluateDIMPclass(LR = ft.hd.DMPs, control.names = control.nam,
                            treatment.names = treatment.nam,
                            column = c(hdiv = TRUE, TV = TRUE, 
                                       wprob = TRUE, pos = TRUE),
-                           classifier = "logistic", interaction = "wprob:TV",
-                           n.pc = 4, pval.col = 11L,
-                           center = TRUE, scale = TRUE,
-                           output = "conf.mat", prop = 0.6
+                           classifier = "logistic", interaction = "wprob:TV", 
+                           n.pc = 4, pval.col = 11L, center = TRUE, 
+                           scale = TRUE, output = "conf.mat", prop = 0.6
 )
 ```
 
@@ -760,32 +803,32 @@ ft.hd.class
 ## Confusion Matrix and Statistics
 ## 
 ##           Reference
-## Prediction   CT   TT
-##         CT  173   13
-##         TT  350 1042
-##                                           
-##                Accuracy : 0.77            
-##                  95% CI : (0.7484, 0.7905)
-##     No Information Rate : 0.6686          
-##     P-Value [Acc > NIR] : < 2.2e-16       
-##                                           
-##                   Kappa : 0.3802          
-##  Mcnemar's Test P-Value : < 2.2e-16       
-##                                           
-##             Sensitivity : 0.9877          
-##             Specificity : 0.3308          
-##          Pos Pred Value : 0.7486          
-##          Neg Pred Value : 0.9301          
-##              Prevalence : 0.6686          
-##          Detection Rate : 0.6603          
-##    Detection Prevalence : 0.8821          
-##       Balanced Accuracy : 0.6592          
-##                                           
-##        'Positive' Class : TT              
-##                                           
+## Prediction  CT  TT
+##         CT 174  18
+##         TT 325 980
+##                                          
+##                Accuracy : 0.7709         
+##                  95% CI : (0.7487, 0.792)
+##     No Information Rate : 0.6667         
+##     P-Value [Acc > NIR] : < 2.2e-16      
+##                                          
+##                   Kappa : 0.3908         
+##  Mcnemar's Test P-Value : < 2.2e-16      
+##                                          
+##             Sensitivity : 0.9820         
+##             Specificity : 0.3487         
+##          Pos Pred Value : 0.7510         
+##          Neg Pred Value : 0.9062         
+##              Prevalence : 0.6667         
+##          Detection Rate : 0.6546         
+##    Detection Prevalence : 0.8717         
+##       Balanced Accuracy : 0.6653         
+##                                          
+##        'Positive' Class : TT             
+##                                          
 ## 
 ## $FDR
-## [1] 0.2514368
+## [1] 0.2490421
 ## 
 ## $model
 ## 
@@ -793,19 +836,19 @@ ft.hd.class
 ## 
 ## Coefficients:
 ## (Intercept)         hdiv           TV         logP          pos  
-##   243.59416     -0.15552   -246.13088      4.45848      0.01479  
+##    229.1917      -0.1727    -232.0026       4.4204       0.1808  
 ##     TV:logP  
-##    -4.95525  
+##     -4.9700  
 ## 
-## Degrees of Freedom: 2363 Total (i.e. Null);  2358 Residual
-## Null Deviance:	    3002 
-## Residual Deviance: 2782 	AIC: 2794
+## Degrees of Freedom: 2241 Total (i.e. Null);  2236 Residual
+## Null Deviance:	    2854 
+## Residual Deviance: 2610 	AIC: 2622
 ```
 
 ## Evaluation ECDF based DMP classification
 
 ```r
-hd.class = evaluateDIMPclass(LR = hd.DMPs, control.names = control.nam,
+ecdf.class = evaluateDIMPclass(LR = DMP.ecdf, control.names = control.nam,
                            treatment.names = treatment.nam,
                            column = c(hdiv = TRUE, TV = TRUE, 
                                       wprob = TRUE, pos = TRUE),
@@ -820,7 +863,7 @@ hd.class = evaluateDIMPclass(LR = hd.DMPs, control.names = control.nam,
 ```
 
 ```r
-hd.class
+ecdf.class
 ```
 
 ```
@@ -829,31 +872,31 @@ hd.class
 ## 
 ##           Reference
 ## Prediction  CT  TT
-##         CT   9   9
-##         TT  46 104
+##         CT  72 145
+##         TT   4   4
 ##                                           
-##                Accuracy : 0.6726          
-##                  95% CI : (0.5961, 0.7429)
-##     No Information Rate : 0.6726          
-##     P-Value [Acc > NIR] : 0.5365          
+##                Accuracy : 0.3378          
+##                  95% CI : (0.2763, 0.4036)
+##     No Information Rate : 0.6622          
+##     P-Value [Acc > NIR] : 1               
 ##                                           
-##                   Kappa : 0.1015          
-##  Mcnemar's Test P-Value : 1.208e-06       
+##                   Kappa : -0.0177         
+##  Mcnemar's Test P-Value : <2e-16          
 ##                                           
-##             Sensitivity : 0.9204          
-##             Specificity : 0.1636          
-##          Pos Pred Value : 0.6933          
-##          Neg Pred Value : 0.5000          
-##              Prevalence : 0.6726          
-##          Detection Rate : 0.6190          
-##    Detection Prevalence : 0.8929          
-##       Balanced Accuracy : 0.5420          
+##             Sensitivity : 0.02685         
+##             Specificity : 0.94737         
+##          Pos Pred Value : 0.50000         
+##          Neg Pred Value : 0.33180         
+##              Prevalence : 0.66222         
+##          Detection Rate : 0.01778         
+##    Detection Prevalence : 0.03556         
+##       Balanced Accuracy : 0.48711         
 ##                                           
 ##        'Positive' Class : TT              
 ##                                           
 ## 
 ## $FDR
-## [1] 0.3066667
+## [1] 0.5
 ## 
 ## $model
 ## $qda
@@ -861,24 +904,24 @@ hd.class
 ## qda(ind.coord, grouping = data[resp][, 1], tol = tol, method = method)
 ## 
 ## Prior probabilities of groups:
-##    CT    TT 
-## 0.328 0.672 
+##        CT        TT 
+## 0.3373134 0.6626866 
 ## 
 ## Group means:
-##            PC1          PC2         PC3         PC4
-## CT -0.12088248 -0.012160796  0.06595582 -0.12528011
-## TT  0.05900216  0.005935627 -0.03219272  0.06114863
+##             PC1         PC2         PC3         PC4
+## CT  0.013261015  0.06134001  0.04739951 -0.09566950
+## TT -0.006749976 -0.03122262 -0.02412678  0.04869664
 ## 
 ## $pca
 ## Standard deviations (1, .., p=4):
-## [1] 1.2106923 1.0046071 0.9873760 0.7416721
+## [1] 1.1635497 1.0098710 0.9744562 0.8226468
 ## 
 ## Rotation (n x k) = (4 x 4):
-##              PC1        PC2         PC3         PC4
-## hdiv -0.69472243  0.1304737  0.01904975 -0.70708872
-## TV   -0.18092017 -0.5476564 -0.81507278  0.05474222
-## logP  0.69125032 -0.1099368 -0.12677368 -0.70286225
-## pos   0.08247203  0.8191233 -0.56499727  0.05489528
+##             PC1        PC2        PC3        PC4
+## hdiv -0.6692087  0.2408009  0.0214317 -0.7026488
+## TV   -0.3430242 -0.4422200  0.8043031  0.1996806
+## logP  0.6439784 -0.1703322  0.3451435 -0.6611768
+## pos  -0.1406627 -0.8470202 -0.4832319 -0.1710485
 ## 
 ## attr(,"class")
 ## [1] "pcaQDA"
@@ -888,7 +931,7 @@ hd.class
 ## Evaluation of Weibull based DMP classification
 
 ```r
-ws.class = evaluateDIMPclass(LR = DMPs.wb, control.names = control.nam,
+ws.class = evaluateDIMPclass(LR = wb.DMPs, control.names = control.nam,
                            treatment.names = treatment.nam,
                            column = c(hdiv = TRUE, TV = TRUE, 
                                       wprob = TRUE, pos = TRUE),
@@ -911,32 +954,32 @@ ws.class
 ## Confusion Matrix and Statistics
 ## 
 ##           Reference
-## Prediction   CT   TT
-##         CT  909    0
-##         TT    3 1138
-##                                           
-##                Accuracy : 0.9985          
-##                  95% CI : (0.9957, 0.9997)
-##     No Information Rate : 0.5551          
-##     P-Value [Acc > NIR] : <2e-16          
-##                                           
-##                   Kappa : 0.997           
-##  Mcnemar's Test P-Value : 0.2482          
-##                                           
-##             Sensitivity : 1.0000          
-##             Specificity : 0.9967          
-##          Pos Pred Value : 0.9974          
-##          Neg Pred Value : 1.0000          
-##              Prevalence : 0.5551          
-##          Detection Rate : 0.5551          
-##    Detection Prevalence : 0.5566          
-##       Balanced Accuracy : 0.9984          
-##                                           
-##        'Positive' Class : TT              
-##                                           
+## Prediction  CT  TT
+##         CT 512   0
+##         TT   0 725
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.997, 1)
+##     No Information Rate : 0.5861    
+##     P-Value [Acc > NIR] : < 2.2e-16 
+##                                     
+##                   Kappa : 1         
+##  Mcnemar's Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.5861    
+##          Detection Rate : 0.5861    
+##    Detection Prevalence : 0.5861    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        'Positive' Class : TT        
+##                                     
 ## 
 ## $FDR
-## [1] 0.002629273
+## [1] 0
 ## 
 ## $model
 ## $qda
@@ -945,23 +988,23 @@ ws.class
 ## 
 ## Prior probabilities of groups:
 ##        CT        TT 
-## 0.4446975 0.5553025 
+## 0.4133837 0.5866163 
 ## 
 ## Group means:
-##            PC1         PC2         PC3        PC4
-## CT -0.04387694 -0.02832340  0.04691677  0.3356064
-## TT  0.03513754  0.02268195 -0.03757190 -0.2687603
+##              PC1         PC2         PC3        PC4
+## CT  0.0006129907  0.02627154  0.01436693 -0.3379167
+## TT -0.0004319696 -0.01851334 -0.01012426  0.2381272
 ## 
 ## $pca
 ## Standard deviations (1, .., p=4):
-## [1] 1.3829444 1.0076007 0.9878677 0.3103597
+## [1] 1.3864692 1.0039443 0.9918014 0.2934775
 ## 
 ## Rotation (n x k) = (4 x 4):
-##                PC1         PC2         PC3          PC4
-## hdiv  0.7041104660 -0.03846997  0.04636334 -0.707530179
-## TV    0.0989956865  0.61937583 -0.77870575  0.013813019
-## logP -0.7031553480  0.04764468 -0.06402787 -0.706542973
-## pos   0.0009285926 -0.78270277 -0.62238913  0.002697189
+##              PC1         PC2         PC3           PC4
+## hdiv -0.70390059 -0.01853114 -0.06487288  0.7070870321
+## TV   -0.08754381  0.61403346  0.78440944  0.0009100769
+## logP  0.70393865  0.01695660  0.06446889  0.7071255955
+## pos  -0.03647491 -0.78888021  0.61346321 -0.0007020890
 ## 
 ## attr(,"class")
 ## [1] "pcaQDA"
@@ -970,7 +1013,7 @@ ws.class
 ## Evaluation of Gamma based DMP classification
 
 ```r
-g2p.class = evaluateDIMPclass(LR = DMPs.g2p, control.names = control.nam,
+g2p.class = evaluateDIMPclass(LR = g2p.DMPs, control.names = control.nam,
                            treatment.names = treatment.nam,
                            column = c(hdiv = TRUE, TV = TRUE, 
                                       wprob = TRUE, pos = TRUE),
@@ -993,29 +1036,29 @@ g2p.class
 ## Confusion Matrix and Statistics
 ## 
 ##           Reference
-## Prediction   CT   TT
-##         CT 1123    1
-##         TT    0 1631
-##                                     
-##                Accuracy : 0.9996    
-##                  95% CI : (0.998, 1)
-##     No Information Rate : 0.5924    
-##     P-Value [Acc > NIR] : <2e-16    
-##                                     
-##                   Kappa : 0.9992    
-##  Mcnemar's Test P-Value : 1         
-##                                     
-##             Sensitivity : 0.9994    
-##             Specificity : 1.0000    
-##          Pos Pred Value : 1.0000    
-##          Neg Pred Value : 0.9991    
-##              Prevalence : 0.5924    
-##          Detection Rate : 0.5920    
-##    Detection Prevalence : 0.5920    
-##       Balanced Accuracy : 0.9997    
-##                                     
-##        'Positive' Class : TT        
-##                                     
+## Prediction  CT  TT
+##         CT 597   0
+##         TT   0 970
+##                                      
+##                Accuracy : 1          
+##                  95% CI : (0.9976, 1)
+##     No Information Rate : 0.619      
+##     P-Value [Acc > NIR] : < 2.2e-16  
+##                                      
+##                   Kappa : 1          
+##  Mcnemar's Test P-Value : NA         
+##                                      
+##             Sensitivity : 1.000      
+##             Specificity : 1.000      
+##          Pos Pred Value : 1.000      
+##          Neg Pred Value : 1.000      
+##              Prevalence : 0.619      
+##          Detection Rate : 0.619      
+##    Detection Prevalence : 0.619      
+##       Balanced Accuracy : 1.000      
+##                                      
+##        'Positive' Class : TT         
+##                                      
 ## 
 ## $FDR
 ## [1] 0
@@ -1027,23 +1070,23 @@ g2p.class
 ## 
 ## Prior probabilities of groups:
 ##        CT        TT 
-## 0.4076495 0.5923505 
+## 0.3810132 0.6189868 
 ## 
 ## Group means:
-##            PC1          PC2         PC3        PC4
-## CT  0.04944467  0.003189233 -0.07416336 -0.3238868
-## TT -0.03402731 -0.002194797  0.05103845  0.2228955
+##            PC1          PC2           PC3        PC4
+## CT -0.09825234  0.009217742 -0.0015298812 -0.3376429
+## TT  0.06047858 -0.005673919  0.0009417082  0.2078338
 ## 
 ## $pca
 ## Standard deviations (1, .., p=4):
-## [1] 1.3905556 1.0000085 0.9944165 0.2783412
+## [1] 1.3934010 1.0005617 0.9910414 0.2741290
 ## 
 ## Rotation (n x k) = (4 x 4):
-##               PC1          PC2         PC3           PC4
-## hdiv  0.703462106 -0.003673427 -0.06600687  0.7076515133
-## TV    0.109632991  0.039907915  0.99303934 -0.0161500956
-## logP -0.702225282  0.004189085  0.08884637  0.7063769736
-## pos   0.001151509  0.999187828 -0.04027750  0.0002851813
+##              PC1         PC2         PC3           PC4
+## hdiv -0.70097482 -0.01600430 -0.09106340  0.7071673216
+## TV   -0.13109213  0.26685824  0.95477779 -0.0009560507
+## logP  0.70085340  0.01201179  0.09357872  0.7070383630
+## pos  -0.01592678 -0.96352803  0.26711394 -0.0031966410
 ## 
 ## attr(,"class")
 ## [1] "pcaQDA"
