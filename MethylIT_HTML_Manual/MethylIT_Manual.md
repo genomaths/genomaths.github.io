@@ -11,7 +11,7 @@ author: |
  | Department of Biology and Plant Science. 
  | Pennsylvania State University, University Park, PA 16802
  | Description: Methylation Analysis based on Information Theory.
-date: "21 March 2019"
+date: "29 March 2019"
 fontsize: 11pt
 fontfamily: "serif"
 output:
@@ -34,7 +34,8 @@ output:
 body{ /* Normal  */
       font-size: 18px;
       font-family: "Times New Roman", Times, serif;
-  }
+      text-align: justify
+}
 td {  /* Table  */
   font-size: 8px;
 }
@@ -82,7 +83,7 @@ pre { /* Code block - determines code spacing between lines */
 ## [countTest2](https://genomaths.github.io/MethylIT_HTML_Manual/countTest2.html)                                
 ## [estimateCutPoint](https://genomaths.github.io/MethylIT_HTML_Manual/estimateCutPoint.html)                    
 ## [estimateDivergence](https://genomaths.github.io/MethylIT_HTML_Manual/estimateDivergence.html)                
-## [estimateECDF](https://genomaths.github.io/MethylIT_HTML_Manual/estimateECDF.html)                                                    
+## [estimateECDF](https://genomaths.github.io/MethylIT_HTML_Manual/estimateECDF.html)          
 ## [estimateHellingerDiv](https://genomaths.github.io/MethylIT_HTML_Manual/estimateHellingerDiv.html)            
 ## [evaluateDIMPclass](https://genomaths.github.io/MethylIT_HTML_Manual/evaluateDIMPclass.html)                  
 ## [filterByCoverage](https://genomaths.github.io/MethylIT_HTML_Manual/filterByCoverage.html)                    
