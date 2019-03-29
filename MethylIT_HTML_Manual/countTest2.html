@@ -33,7 +33,8 @@ countTest2(DS, num.cores = 1, countFilter = TRUE, CountPerBp = NULL,
 <table summary="R argblock">
 <tr valign="top"><td><code>DS</code></td>
 <td>
-<p>DESeqDataSet object</p>
+<p>A 'glmDataSet' object, which is created with function
+<code>link{glmDataSet}</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>num.cores, tasks</code></td>
 <td>
@@ -103,10 +104,14 @@ treatment is differentially expressed in respect to the control</p>
 <td>
 <p>A character string matching one of &quot;Wald&quot; or &quot;LRT&quot;. If test =
 &quot;Wald&quot;, then the p-value of the Wald test for the coefficient of the
-independent variable (<em>treatment group</em>) will be reported p-value. If
-test = &quot;LRT&quot;, then the p-value from a likelihood ratio test given by
-<code>anova</code> function from <em>stats</em> packages will be the
-reported p-value for the group comparison.</p>
+independent variable (<em>treatment group</em>) will be reported.
+If test = &quot;LRT&quot;, then the p-value from a likelihood ratio test given by
+<code>anova</code> function from <em>stats</em> packages will be
+the reported p-value for the group comparison when the best fitted model
+is the negative binomial. As suggested for <code>link[stats]{glm}</code>, if
+best fitted model is Poisson or quasi-Poisson, then the best test is
+'Chi-squared' or 'F-test', respectively. So, for the sake of simplicity,
+the corresponding suitable test will be applied when test = &quot;LRT&quot;.</p>
 </td></tr>
 <tr valign="top"><td><code>scaling</code></td>
 <td>
@@ -126,6 +131,14 @@ if scaling = 1000, then signal density denotes the number of DIMPs in
 </table>
 
 
+<h3>Details</h3>
+
+<p>A pairwise group comparison, control versus treatment, is performed.
+The experimental desing settings must be introduced using function
+<code>link{glmDataSet}</code> to provide dataset (DS) object.
+</p>
+
+
 <h3>Value</h3>
 
 <p>a data frame or GRanges object (if the DS contain the GRanges
@@ -137,19 +150,28 @@ matrix, plus control and treatment signal densities and their variation.
 <h3>Examples</h3>
 
 <pre>
-    countData &lt;- matrix(1:40,ncol = 4)
-    condition &lt;- factor(c("A","A","B","B"))
-    dds &lt;- DESeqDataSetFromMatrix(countData, DataFrame(condition),
-                                ~ condition)
-    countTest2(dds, verbose = FALSE)
+set.seed(133) # Set a seed
+## A GRanges ogbject with the count matrix in the metacolumns is created
+countData &lt;- matrix(sample.int(200, 10000, replace = TRUE), ncol = 4)
+colnames(countData) &lt;- c("A1","A2","B1","B2")
+start &lt;- seq(1, 25e5, 1000)
+end &lt;- start + 2000
+chr &lt;- c(rep("chr1", 1200), rep("chr2", 1300))
+GR &lt;- GRanges(seqnames = chr, IRanges(start = start, end = end))
+mcols(GR) &lt;- countData
+## Gene IDs
+names(GR) &lt;- paste0("gene", 1:length(GR))
 
-    # Parallel computation. Package 'BiocParallel' must be installed
-    # set.seed(133)
-    # countData &lt;- matrix(sample.int(200, 10000, replace = TRUE), ncol = 4)
-    # condition &lt;- factor(c("A","A","B","B"))
-    # dds &lt;- DESeqDataSetFromMatrix(countData, DataFrame(condition),
-                            ~ condition)
-    # countTest2(dds, num.cores = 4L)
+## An experiment design is set We are looking whether
+colData &lt;- data.frame(condition = factor(c("A","A","B","B")),
+                      c("A1","A2","B1","B2"),
+                      row.names = 2)
+## A RangedGlmDataSet is created
+ds &lt;- glmDataSet(GR = GR, colData = colData)
+
+## The gneralized linear model pairwise group comparison, group 'A'
+## ('control') versus 'B' (treatment) is performed.
+countTest2(ds, num.cores = 1L, maxGrpCV = c(0.4, 0.4), verbose = FALSE)
 
 </pre>
 

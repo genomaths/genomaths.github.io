@@ -32,10 +32,14 @@
 <td>
 <p>A character string matching one of &quot;Wald&quot; or &quot;LRT&quot;. If test =
 &quot;Wald&quot;, then the p-value of the Wald test for the coefficient of the
-independent variable (<em>treatment group</em>) will be reported p-value. If
-test = &quot;LRT&quot;, then the p-value from a likelihood ratio test given by
-<code>anova</code> function from <em>stats</em> packages will be the
-reported p-value for the group comparison.</p>
+independent variable (<em>treatment group</em>) will be reported.
+If test = &quot;LRT&quot;, then the p-value from a likelihood ratio test given by
+<code>anova</code> function from <em>stats</em> packages will be
+the reported p-value for the group comparison when the best fitted model
+is the negative binomial. As suggested for <code>link[stats]{glm}</code>, if
+best fitted model is Poisson or quasi-Poisson, then the best test is
+'Chi-squared' or 'F-test', respectively. So, for the sake of simplicity,
+the corresponding suitable test will be applied when test = &quot;LRT&quot;.</p>
 </td></tr>
 </table>
 
