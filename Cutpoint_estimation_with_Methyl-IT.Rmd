@@ -224,6 +224,64 @@ derived from the FT classification.
 ```{r ft_cutpoint3, include = TRUE}
 cut.ft$modelConfMatrix
 ```
+## On Fisher's exact Test (FT) low classification performance
+It seems to be that the poor classification performance from Fisher's exact Test (FT)
+is due to variable $log_{10}(p.value)$, derived from FT, is not a good predictor.
+
+```{r testing ft}
+# Potential DMPs from 'Gamma2P' model
+x <- ft
+class(x) <- class(divs)
+names(x) <- names(divs)
+
+dmp.ft.g2p <- getPotentialDIMP(LR = x, nlms = nlms.g2p,  div.col = 9L,
+                             tv.cut = 0.926, tv.col = 7, alpha = 0.5,
+                             dist.name = "Gamma2P")
+
+# Cutpoint estimation for FT approach
+cutg2p = estimateCutPoint(LR = dmp.ft.g2p, simple = TRUE, 
+                            column = c(hdiv = TRUE, TV = TRUE, 
+                                       wprob = TRUE, pos = TRUE),
+                            classifier1 = "logistic", 
+                            interaction = "hdiv:wprob",
+                            tv.cut = 0.926, 
+                            control.names = control.nam,
+                            treatment.names = treatment.nam,
+                            clas.perf = TRUE, prop = 0.6, div.col = 9L)
+c(cutpoint = cutg2p$cutpoint)
+cutg2p$testSetPerformance
+cutg2p$modelConfMatrix
+```
+Now with QDA classifier:
+```{r testing ft2}
+# Potential DMPs from 'Gamma2P' model
+x <- ft
+class(x) <- class(divs)
+names(x) <- names(divs)
+
+dmp.ft.g2p <- getPotentialDIMP(LR = x, nlms = nlms.g2p,  div.col = 9L,
+                             tv.cut = 0.926, tv.col = 7, alpha = 0.5,
+                             dist.name = "Gamma2P")
+
+# Cutpoint estimation for FT approach
+cutg2p = estimateCutPoint(LR = dmp.ft.g2p, simple = TRUE, 
+                            column = c(hdiv = TRUE, TV = TRUE, 
+                                       wprob = TRUE, pos = TRUE),
+                            classifier1 = "qda", tv.cut = 0.926, 
+                            control.names = control.nam,
+                            treatment.names = treatment.nam,
+                            clas.perf = TRUE, prop = 0.6, div.col = 9L)
+c(cutpoint = cutg2p$cutpoint)
+cutg2p$testSetPerformance
+cutg2p$modelConfMatrix
+```
+
+After filtering the FT results with 2P gamma distribution
+```{r, ft_g2p_filter}
+rbind(ft = unlist(lapply(ft, function(x) length(x))),
+  dmp.ft.g2p = unlist(lapply(dmp.ft.g2p, function(x) length(x))))
+```
+
 
 After the cutpoint application to select DMPs, a Monte Carlo (boostrap) analysis
 reporting several classifier performance indicators can be accomplished by
@@ -231,7 +289,7 @@ using function
 [*evaluateDIMPclass*](https://genomaths.github.io/MethylIT_HTML_Manual/evaluateDIMPclass.html)
 and its settings *output = "mc.val"* and *num.boot*.
 ```{r ft_cutpoint4, include = TRUE}
-ft.DMPs <- selectDIMP(ft.tv, div.col = 7L, cutpoint = 0.98477, absolute = TRUE)
+ft.DMPs <- selectDIMP(dmp.ft.g2p, div.col = 7L, cutpoint = 0.98477, absolute = TRUE)
 ft.class = evaluateDIMPclass(LR = ft.DMPs, 
                             column = c(hdiv = TRUE, TV = TRUE, 
                                        wprob = TRUE, pos = TRUE),
@@ -303,7 +361,7 @@ Herein, the DMP classifiction is modelled with PCA+QDA classifier (*classifier* 
 the original raw matrix of data and the four possible component (*n.pc* = 4) are
 used in a further quadratic discriminant analysis (QDA). A scaling step is
 applied to the raw matrix of data before the application of the mentioned
-procedure (*center* = TRUE, "scale" = TRUE).
+procedure (*center* = TRUE, *scale* = TRUE).
 
 ```{r g2p_cutpoint3, include = TRUE}
 g2p.DMPs <- selectDIMP(DMPs.g2p, div.col = 7L, cutpoint = 0.98477, absolute = TRUE)
@@ -470,7 +528,7 @@ cut.g2p = estimateCutPoint(LR = dmp.g2p, simple = FALSE,
 cut.g2p
 ```
 
-The probabilities $P(HD \le 17.739)$ to observe a cytosine site with $HD \le 17.739$ on each 
+The probabilities $P(HD \le 81.6)$ to observe a cytosine site with $HD \le 81.6$ on each 
 individual is:
 ```{r}
 nams <- names(nlms.g2p)

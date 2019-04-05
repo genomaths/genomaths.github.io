@@ -10,7 +10,7 @@ author: |
  | Department of Biology and Plant Science. 
  | Pennsylvania State University, University Park, PA 16802
  | Maintainer: Robersy Sanchez
-date: "28 March 2019"
+date: "05 April 2019"
 fontsize: 11pt
 fontfamily: "serif"
 bibliography: bibliography.bib
@@ -214,17 +214,18 @@ cut.ft
 ## Cytosine sites from treatment have divergence values >= 0.98477 
 ## 
 ## The accessible objects in the output list are: 
-##                    Length Class           Mode     
-## cutpoint            1     -none-          numeric  
-## testSetPerformance  6     confusionMatrix list     
-## testSetModel.FDR    1     -none-          numeric  
-## model              30     LogisticR       list     
-## modelConfMatrix     6     confusionMatrix list     
-## initModel           1     -none-          character
-## postProbCut         1     -none-          logical  
-## classifier          1     -none-          character
-## statistic           1     -none-          logical  
-## optStatVal          1     -none-          logical
+##                     Length Class           Mode     
+## cutpoint             1     -none-          numeric  
+## testSetPerformance   6     confusionMatrix list     
+## testSetModel.FDR     1     -none-          numeric  
+## model               30     LogisticR       list     
+## modelConfMatrix      6     confusionMatrix list     
+## initModel            1     -none-          character
+## postProbCut          1     -none-          logical  
+## classifier           1     -none-          character
+## statistic            1     -none-          logical  
+## optStatVal           1     -none-          logical  
+## initModelConfMatrix  6     confusionMatrix list
 ```
 
 ```r
@@ -336,6 +337,211 @@ cut.ft$modelConfMatrix
 ##        'Positive' Class : TT              
 ## 
 ```
+## On Fisher's exact Test (FT) low classification performance
+It seems to be that the poor classification performance from Fisher's exact Test (FT)
+is due to variable $log_{10}(p.value)$, derived from FT, is not a good predictor.
+
+
+```r
+# Potential DMPs from 'Gamma2P' model
+x <- ft
+class(x) <- class(divs)
+names(x) <- names(divs)
+
+dmp.ft.g2p <- getPotentialDIMP(LR = x, nlms = nlms.g2p,  div.col = 9L,
+                             tv.cut = 0.926, tv.col = 7, alpha = 0.5,
+                             dist.name = "Gamma2P")
+
+# Cutpoint estimation for FT approach
+cutg2p = estimateCutPoint(LR = dmp.ft.g2p, simple = TRUE, 
+                            column = c(hdiv = TRUE, TV = TRUE, 
+                                       wprob = TRUE, pos = TRUE),
+                            classifier1 = "logistic", 
+                            interaction = "hdiv:wprob",
+                            tv.cut = 0.926, 
+                            control.names = control.nam,
+                            treatment.names = treatment.nam,
+                            clas.perf = TRUE, prop = 0.6, div.col = 9L)
+c(cutpoint = cutg2p$cutpoint)
+```
+
+```
+## cutpoint 
+## 50.48789
+```
+
+```r
+cutg2p$testSetPerformance
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   CT   TT
+##         CT 1450    0
+##         TT    0 2859
+##                                      
+##                Accuracy : 1          
+##                  95% CI : (0.9991, 1)
+##     No Information Rate : 0.6635     
+##     P-Value [Acc > NIR] : < 2.2e-16  
+##                                      
+##                   Kappa : 1          
+##  Mcnemar's Test P-Value : NA         
+##                                      
+##             Sensitivity : 1.0000     
+##             Specificity : 1.0000     
+##          Pos Pred Value : 1.0000     
+##          Neg Pred Value : 1.0000     
+##              Prevalence : 0.6635     
+##          Detection Rate : 0.6635     
+##    Detection Prevalence : 0.6635     
+##       Balanced Accuracy : 1.0000     
+##                                      
+##        'Positive' Class : TT         
+## 
+```
+
+```r
+cutg2p$modelConfMatrix
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   CT   TT
+##         CT 3625    0
+##         TT    0 7146
+##                                      
+##                Accuracy : 1          
+##                  95% CI : (0.9997, 1)
+##     No Information Rate : 0.6634     
+##     P-Value [Acc > NIR] : < 2.2e-16  
+##                                      
+##                   Kappa : 1          
+##  Mcnemar's Test P-Value : NA         
+##                                      
+##             Sensitivity : 1.0000     
+##             Specificity : 1.0000     
+##          Pos Pred Value : 1.0000     
+##          Neg Pred Value : 1.0000     
+##              Prevalence : 0.6634     
+##          Detection Rate : 0.6634     
+##    Detection Prevalence : 0.6634     
+##       Balanced Accuracy : 1.0000     
+##                                      
+##        'Positive' Class : TT         
+## 
+```
+Now with QDA classifier:
+
+```r
+# Potential DMPs from 'Gamma2P' model
+x <- ft
+class(x) <- class(divs)
+names(x) <- names(divs)
+
+dmp.ft.g2p <- getPotentialDIMP(LR = x, nlms = nlms.g2p,  div.col = 9L,
+                             tv.cut = 0.926, tv.col = 7, alpha = 0.5,
+                             dist.name = "Gamma2P")
+
+# Cutpoint estimation for FT approach
+cutg2p = estimateCutPoint(LR = dmp.ft.g2p, simple = TRUE, 
+                            column = c(hdiv = TRUE, TV = TRUE, 
+                                       wprob = TRUE, pos = TRUE),
+                            classifier1 = "qda", tv.cut = 0.926, 
+                            control.names = control.nam,
+                            treatment.names = treatment.nam,
+                            clas.perf = TRUE, prop = 0.6, div.col = 9L)
+c(cutpoint = cutg2p$cutpoint)
+```
+
+```
+## cutpoint 
+## 50.48789
+```
+
+```r
+cutg2p$testSetPerformance
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   CT   TT
+##         CT 1450    2
+##         TT    0 2857
+##                                           
+##                Accuracy : 0.9995          
+##                  95% CI : (0.9983, 0.9999)
+##     No Information Rate : 0.6635          
+##     P-Value [Acc > NIR] : <2e-16          
+##                                           
+##                   Kappa : 0.999           
+##  Mcnemar's Test P-Value : 0.4795          
+##                                           
+##             Sensitivity : 0.9993          
+##             Specificity : 1.0000          
+##          Pos Pred Value : 1.0000          
+##          Neg Pred Value : 0.9986          
+##              Prevalence : 0.6635          
+##          Detection Rate : 0.6630          
+##    Detection Prevalence : 0.6630          
+##       Balanced Accuracy : 0.9997          
+##                                           
+##        'Positive' Class : TT              
+## 
+```
+
+```r
+cutg2p$modelConfMatrix
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   CT   TT
+##         CT 3625    5
+##         TT    0 7141
+##                                           
+##                Accuracy : 0.9995          
+##                  95% CI : (0.9989, 0.9998)
+##     No Information Rate : 0.6634          
+##     P-Value [Acc > NIR] : < 2e-16         
+##                                           
+##                   Kappa : 0.999           
+##  Mcnemar's Test P-Value : 0.07364         
+##                                           
+##             Sensitivity : 0.9993          
+##             Specificity : 1.0000          
+##          Pos Pred Value : 1.0000          
+##          Neg Pred Value : 0.9986          
+##              Prevalence : 0.6634          
+##          Detection Rate : 0.6630          
+##    Detection Prevalence : 0.6630          
+##       Balanced Accuracy : 0.9997          
+##                                           
+##        'Positive' Class : TT              
+## 
+```
+
+After filtering the FT results with 2P gamma distribution
+
+```r
+rbind(ft = unlist(lapply(ft, function(x) length(x))),
+  dmp.ft.g2p = unlist(lapply(dmp.ft.g2p, function(x) length(x))))
+```
+
+```
+##              C1   C2   C3   T1   T2   T3
+## ft         1253 1221 1280 2504 2464 2408
+## dmp.ft.g2p 1253 1221 1280 2504 2464 2408
+```
+
 
 After the cutpoint application to select DMPs, a Monte Carlo (boostrap) analysis
 reporting several classifier performance indicators can be accomplished by
@@ -344,7 +550,7 @@ using function
 and its settings *output = "mc.val"* and *num.boot*.
 
 ```r
-ft.DMPs <- selectDIMP(ft.tv, div.col = 7L, cutpoint = 0.98477, absolute = TRUE)
+ft.DMPs <- selectDIMP(dmp.ft.g2p, div.col = 7L, cutpoint = 0.98477, absolute = TRUE)
 ft.class = evaluateDIMPclass(LR = ft.DMPs, 
                             column = c(hdiv = TRUE, TV = TRUE, 
                                        wprob = TRUE, pos = TRUE),
@@ -354,52 +560,51 @@ ft.class = evaluateDIMPclass(LR = ft.DMPs,
                             treatment.names = treatment.nam, 
                             output = "mc.val", num.boot = 300, 
                             prop = 0.6)
-```
 
-```
-## Model: treat ~ hdiv + TV + logP + pos + logP:hdiv
-```
-
-```r
 ft.class
 ```
 
 ```
-##     Accuracy          Kappa         AccuracyLower    AccuracyUpper   
-##  Min.   :0.6861   Min.   :0.05962   Min.   :0.6667   Min.   :0.7051  
-##  1st Qu.:0.7027   1st Qu.:0.13089   1st Qu.:0.6835   1st Qu.:0.7214  
-##  Median :0.7105   Median :0.16129   Median :0.6915   Median :0.7290  
-##  Mean   :0.7118   Mean   :0.16555   Mean   :0.6928   Mean   :0.7302  
-##  3rd Qu.:0.7201   3rd Qu.:0.19589   3rd Qu.:0.7013   3rd Qu.:0.7384  
-##  Max.   :0.7572   Max.   :0.32758   Max.   :0.7391   Max.   :0.7746  
-##   AccuracyNull    AccuracyPValue      McnemarPValue       
-##  Min.   :0.6713   Min.   :0.000e+00   Min.   : 0.000e+00  
-##  1st Qu.:0.6713   1st Qu.:2.600e-07   1st Qu.: 0.000e+00  
-##  Median :0.6713   Median :2.922e-05   Median : 0.000e+00  
-##  Mean   :0.6713   Mean   :2.342e-03   Mean   :3.749e-110  
-##  3rd Qu.:0.6713   3rd Qu.:6.806e-04   3rd Qu.: 0.000e+00  
-##  Max.   :0.6713   Max.   :6.782e-02   Max.   :9.963e-108  
-##   Sensitivity      Specificity      Pos Pred Value   Neg Pred Value  
-##  Min.   :0.9708   Min.   :0.04509   Min.   :0.6814   Min.   :0.7196  
-##  1st Qu.:0.9909   1st Qu.:0.10610   1st Qu.:0.6946   1st Qu.:0.8759  
-##  Median :0.9942   Median :0.13263   Median :0.7005   Median :0.9183  
-##  Mean   :0.9932   Mean   :0.13695   Mean   :0.7017   Mean   :0.9104  
-##  3rd Qu.:0.9968   3rd Qu.:0.16180   3rd Qu.:0.7075   3rd Qu.:0.9514  
-##  Max.   :1.0000   Max.   :0.27454   Max.   :0.7366   Max.   :1.0000  
-##    Precision          Recall             F1           Prevalence    
-##  Min.   :0.6814   Min.   :0.9708   Min.   :0.8097   Min.   :0.6713  
-##  1st Qu.:0.6946   1st Qu.:0.9909   1st Qu.:0.8179   1st Qu.:0.6713  
-##  Median :0.7005   Median :0.9942   Median :0.8217   Median :0.6713  
-##  Mean   :0.7017   Mean   :0.9932   Mean   :0.8223   Mean   :0.6713  
-##  3rd Qu.:0.7075   3rd Qu.:0.9968   3rd Qu.:0.8264   3rd Qu.:0.6713  
-##  Max.   :0.7366   Max.   :1.0000   Max.   :0.8460   Max.   :0.6713  
-##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.6517   Min.   :0.9028       Min.   :0.5225   
-##  1st Qu.:0.6652   1st Qu.:0.9410       1st Qu.:0.5508   
-##  Median :0.6674   Median :0.9518       Median :0.5630   
-##  Mean   :0.6668   Mean   :0.9504       Mean   :0.5651   
-##  3rd Qu.:0.6691   3rd Qu.:0.9612       3rd Qu.:0.5771   
-##  Max.   :0.6713   Max.   :0.9852       Max.   :0.6340
+##     Accuracy          Kappa        AccuracyLower    AccuracyUpper   
+##  Min.   :0.9991   Min.   :0.9980   Min.   :0.9969   Min.   :0.9999  
+##  1st Qu.:1.0000   1st Qu.:1.0000   1st Qu.:0.9984   1st Qu.:1.0000  
+##  Median :1.0000   Median :1.0000   Median :0.9984   Median :1.0000  
+##  Mean   :0.9999   Mean   :0.9997   Mean   :0.9981   Mean   :1.0000  
+##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.9984   3rd Qu.:1.0000  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :0.9984   Max.   :1.0000  
+##                                                                     
+##   AccuracyNull    AccuracyPValue McnemarPValue     Sensitivity    
+##  Min.   :0.6713   Min.   :0      Min.   :0.4795   Min.   :0.9987  
+##  1st Qu.:0.6713   1st Qu.:0      1st Qu.:0.4795   1st Qu.:1.0000  
+##  Median :0.6713   Median :0      Median :0.4795   Median :1.0000  
+##  Mean   :0.6713   Mean   :0      Mean   :0.4901   Mean   :0.9998  
+##  3rd Qu.:0.6713   3rd Qu.:0      3rd Qu.:0.4795   3rd Qu.:1.0000  
+##  Max.   :0.6713   Max.   :0      Max.   :1.0000   Max.   :1.0000  
+##                                  NA's   :251                      
+##   Specificity Pos Pred Value Neg Pred Value     Precision     Recall      
+##  Min.   :1    Min.   :1      Min.   :0.9974   Min.   :1   Min.   :0.9987  
+##  1st Qu.:1    1st Qu.:1      1st Qu.:1.0000   1st Qu.:1   1st Qu.:1.0000  
+##  Median :1    Median :1      Median :1.0000   Median :1   Median :1.0000  
+##  Mean   :1    Mean   :1      Mean   :0.9996   Mean   :1   Mean   :0.9998  
+##  3rd Qu.:1    3rd Qu.:1      3rd Qu.:1.0000   3rd Qu.:1   3rd Qu.:1.0000  
+##  Max.   :1    Max.   :1      Max.   :1.0000   Max.   :1   Max.   :1.0000  
+##                                                                           
+##        F1           Prevalence     Detection Rate   Detection Prevalence
+##  Min.   :0.9994   Min.   :0.6713   Min.   :0.6704   Min.   :0.6704      
+##  1st Qu.:1.0000   1st Qu.:0.6713   1st Qu.:0.6713   1st Qu.:0.6713      
+##  Median :1.0000   Median :0.6713   Median :0.6713   Median :0.6713      
+##  Mean   :0.9999   Mean   :0.6713   Mean   :0.6712   Mean   :0.6712      
+##  3rd Qu.:1.0000   3rd Qu.:0.6713   3rd Qu.:0.6713   3rd Qu.:0.6713      
+##  Max.   :1.0000   Max.   :0.6713   Max.   :0.6713   Max.   :0.6713      
+##                                                                         
+##  Balanced Accuracy
+##  Min.   :0.9994   
+##  1st Qu.:1.0000   
+##  Median :1.0000   
+##  Mean   :0.9999   
+##  3rd Qu.:1.0000   
+##  Max.   :1.0000   
+## 
 ```
 Notice that function *evaluateDIMPclass* uses function *estimateCutPoint* to estimate the cutpoint.
 So, all the classification performance evaluation made by calling function *estimateCutPoint*
@@ -458,17 +663,18 @@ cut.g2p
 ## Cytosine sites from treatment have divergence values >= 0.98477 
 ## 
 ## The accessible objects in the output list are: 
-##                    Length Class           Mode     
-## cutpoint           1      -none-          numeric  
-## testSetPerformance 6      confusionMatrix list     
-## testSetModel.FDR   1      -none-          numeric  
-## model              2      pcaLDA          list     
-## modelConfMatrix    6      confusionMatrix list     
-## initModel          1      -none-          character
-## postProbCut        1      -none-          logical  
-## classifier         1      -none-          character
-## statistic          1      -none-          logical  
-## optStatVal         1      -none-          logical
+##                     Length Class           Mode     
+## cutpoint            1      -none-          numeric  
+## testSetPerformance  6      confusionMatrix list     
+## testSetModel.FDR    1      -none-          numeric  
+## model               2      pcaLDA          list     
+## modelConfMatrix     6      confusionMatrix list     
+## initModel           1      -none-          character
+## postProbCut         1      -none-          logical  
+## classifier          1      -none-          character
+## statistic           1      -none-          logical  
+## optStatVal          1      -none-          logical  
+## initModelConfMatrix 6      confusionMatrix list
 ```
 
 As indicated above, the model classifier perfromance and its corresponding false
@@ -537,13 +743,6 @@ g2p.class = evaluateDIMPclass(LR = g2p.DMPs, control.names = control.nam,
                            center = TRUE, scale = TRUE,
                            output = "conf.mat", prop = 0.6
 )
-```
-
-```
-## Model: treat ~ hdiv + TV + logP + pos
-```
-
-```r
 g2p.class
 ```
 
@@ -677,13 +876,6 @@ g2p.class = evaluateDIMPclass(LR = DMPs.g2p, control.names = control.nam,
                            center = TRUE, scale = TRUE,
                            output = "conf.mat", prop = 0.6
 )
-```
-
-```
-## Model: treat ~ hdiv + TV + logP + pos
-```
-
-```r
 g2p.class
 ```
 
@@ -760,13 +952,6 @@ g2p.class = evaluateDIMPclass(LR = DMPs.g2p, control.names = control.nam,
                            center = TRUE, scale = TRUE, num.boot = 300,
                            output = "mc.val", prop = 0.6
 )
-```
-
-```
-## Model: treat ~ hdiv + TV + logP + pos
-```
-
-```r
 g2p.class
 ```
 
@@ -1073,7 +1258,7 @@ cut.g2p
 ## optStatVal         1      -none-          numeric
 ```
 
-The probabilities $P(HD \le 17.739)$ to observe a cytosine site with $HD \le 17.739$ on each 
+The probabilities $P(HD \le 81.6)$ to observe a cytosine site with $HD \le 81.6$ on each 
 individual is:
 
 ```r
