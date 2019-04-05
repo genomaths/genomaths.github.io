@@ -138,8 +138,9 @@ Methylome datasets of whole-genome bisulfite sequencing (WGBS) are available
 at Gene Expression Omnibus (GEO DataSets). For the current example, datasets
 from breast tissues (normal and cancer) and embryonic stem cells will be
 downloaded from GEO. The data set are downloaded providing the GEO accession
-numbers for each data set to the function 'getGEOSuppFiles' (for details type
-?getGEOSuppFiles in the R console).
+numbers for each data set to the function 'getGEOSuppFiles' (see the function
+[getGEOSuppFiles](https://genomaths.github.io/MethylIT_HTML_Manual/getGEOSuppFiles.html) 
+help).
 
 
 ```r
@@ -431,8 +432,8 @@ the maximum estimated from both samples: reference and individual.
 For some GEO datasets only the methylation levels for each cytosine site are
 provided. In this case, Hellinger divergence can be estimated as given in
 reference [@Sanchez2016]:
-$$H(\hat p_{ij},\hat p_{ir}) = (\sqrt{\hat p_{ij}} - \sqrt{\hat
-p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2$$
+$$H(\hat p_{ij},\hat p_{ir}) = 2 \Big[(\sqrt{\hat p_{ij}} - \sqrt{\hat
+p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]$$
 
 ## _Histogram and boxplots of divergences estimated in each sample_
 First, the data of interest (Hellinger divergences, "hdiv") are selected from
@@ -605,7 +606,7 @@ nlms # this returns:
 ## shape 0.5543145 0.0002139500 2590.861         0 0.948873244359916
 ## scale 1.3468977 0.0005372617 2506.968         0                  
 ##                     rho       R.Cross.val              DEV               AIC
-## shape 0.948873142978588 0.975345096178345 4099.05484372979 -2690639.45164462
+## shape 0.948873142978588 0.975345142364964 4099.05484372979 -2690639.45164462
 ## scale                                                                       
 ##                     BIC     COV.shape     COV.scale COV.mu       n
 ## shape -2690603.97940838  4.577459e-08 -5.917927e-09     NA 1008605
@@ -616,10 +617,10 @@ nlms # this returns:
 ## shape 5.391149e-01 1.506168e-04 3579.381429 0.000000e+00 0.96941589951915
 ## scale 1.134588e+00 3.739751e-04 3033.860064 0.000000e+00                 
 ## mu    7.607881e-05 1.356645e-05    5.607863 2.048944e-08                 
-##                     rho       R.Cross.val              DEV              AIC
-## shape 0.969415837601309 0.984822842841821 2409.03055126017 -3139991.5054956
-## scale                                                                      
-## mu                                                                         
+##                     rho      R.Cross.val              DEV              AIC
+## shape 0.969415837601309 0.98482281752198 2409.03055126017 -3139991.5054956
+## scale                                                                     
+## mu                                                                        
 ##                     BIC     COV.shape     COV.scale        COV.mu      n
 ## shape -3139944.29216882  2.268541e-08 -5.369580e-09 -4.699170e-10 987895
 ## scale                   -5.369580e-09  1.398574e-07 -4.640279e-10 987895
@@ -630,10 +631,10 @@ nlms # this returns:
 ## shape 0.55596350 1.506398e-04 3690.6809         0 0.977972027557549
 ## scale 0.92855327 2.711461e-04 3424.5502         0                  
 ## mu    0.01631553 3.409143e-05  478.5817         0                  
-##                     rho      R.Cross.val              DEV               AIC
-## shape 0.977971980615213 0.98906419020184 1647.99283323508 -3291231.66890221
-## scale                                                                      
-## mu                                                                         
+##                     rho       R.Cross.val              DEV               AIC
+## shape 0.977971980615213 0.989064167000064 1647.99283323508 -3291231.66890221
+## scale                                                                       
+## mu                                                                          
 ##                  BIC     COV.shape     COV.scale        COV.mu      n
 ## shape -3291184.66069  2.269235e-08 -1.522434e-10 -2.562546e-09 938514
 ## scale                -1.522434e-10  7.352018e-08 -2.497534e-09 938514
@@ -659,9 +660,9 @@ nlms0
 ##        Estimate   Std. Error   t value Pr(>|t|))      Adj.R.Square
 ## shape 0.8294116 0.0001082846  7659.556         0 0.995937143067973
 ## scale 0.3103328 0.0000296877 10453.243         0                  
-##                     rho      R.Cross.val              DEV               AIC
-## shape 0.995937132223697 0.99830522736976 253.748299340483 -3860960.92341557
-## scale                                                                      
+##                     rho       R.Cross.val              DEV               AIC
+## shape 0.995937132223697 0.998305234767589 253.748299340483 -3860960.92341557
+## scale                                                                       
 ##                     BIC     COV.shape     COV.scale COV.mu      n
 ## shape -3860926.34268738  1.172554e-08 -7.197877e-10     NA 749311
 ## scale                   -7.197877e-10  8.813597e-10     NA 749311
@@ -672,7 +673,7 @@ nlms0
 ## scale 0.71350113 1.551868e-04 4597.693         0                  
 ## mu    0.01231425 3.325003e-05  370.353         0                  
 ##                     rho       R.Cross.val              DEV               AIC
-## shape 0.990007395583978 0.995153440585066 587.148032395742 -2998041.98350013
+## shape 0.990007395583978 0.995153317476355 587.148032395742 -2998041.98350013
 ## scale                                                                       
 ## mu                                                                          
 ##                     BIC     COV.shape     COV.scale        COV.mu      n
@@ -686,7 +687,7 @@ nlms0
 ## scale 1.103193068 2.464984e-04 4475.4572         0                 
 ## mu    0.006755526 2.520266e-05  268.0482         0                 
 ##                     rho       R.Cross.val              DEV               AIC
-## shape 0.991309259423371 0.995659555706653 447.581035974421 -2711720.97325685
+## shape 0.991309259423371 0.995659521855699 447.581035974421 -2711720.97325685
 ## scale                                                                       
 ## mu                                                                          
 ##                     BIC     COV.shape     COV.scale        COV.mu      n
@@ -810,17 +811,26 @@ ps = uniqueGRanges(PS, missing = NA, verbose = FALSE, num.cores = 12L)
 dat = data.frame(normal = ps$hdiv, cancer = ps$hdiv.1, metastasis = ps$hdiv.2)
 dat = suppressMessages(melt(dat))
 colnames(dat) <- c("Breast.tissue", "HD")
-head(dat)
+idx <- which(is.na(dat$HD))
+dat <- dat[-idx, ] # To remove missing data
+DataFrame(dat)
 ```
 
 ```
-##   Breast.tissue HD
-## 1        normal NA
-## 2        normal NA
-## 3        normal NA
-## 4        normal NA
-## 5        normal NA
-## 6        normal NA
+## DataFrame with 5320 rows and 2 columns
+##      Breast.tissue        HD
+##           <factor> <numeric>
+## 1           normal 12.409044
+## 2           normal 10.338476
+## 3           normal 11.985884
+## 4           normal  9.765537
+## 5           normal 12.059939
+## ...            ...       ...
+## 5316    metastasis  7.424515
+## 5317    metastasis  8.242846
+## 5318    metastasis  6.944346
+## 5319    metastasis  6.922380
+## 5320    metastasis  7.625579
 ```
 
 ```r
@@ -1727,44 +1737,44 @@ performance
 
 ```
 ##     Accuracy          Kappa        AccuracyLower    AccuracyUpper   
-##  Min.   :0.9939   Min.   :0.8571   Min.   :0.9896   Min.   :0.9967  
+##  Min.   :0.9944   Min.   :0.8721   Min.   :0.9902   Min.   :0.9971  
 ##  1st Qu.:0.9977   1st Qu.:0.9493   1st Qu.:0.9945   1st Qu.:0.9992  
 ##  Median :0.9981   Median :0.9606   Median :0.9952   Median :0.9995  
-##  Mean   :0.9981   Mean   :0.9595   Mean   :0.9952   Mean   :0.9994  
+##  Mean   :0.9982   Mean   :0.9601   Mean   :0.9953   Mean   :0.9994  
 ##  3rd Qu.:0.9991   3rd Qu.:0.9799   3rd Qu.:0.9966   3rd Qu.:0.9999  
 ##  Max.   :1.0000   Max.   :1.0000   Max.   :0.9983   Max.   :1.0000  
 ##                                                                     
 ##   AccuracyNull    AccuracyPValue      McnemarPValue       Sensitivity    
 ##  Min.   :0.9756   Min.   :0.000e+00   Min.   :0.004426   Min.   :0.9986  
-##  1st Qu.:0.9756   1st Qu.:0.000e+00   1st Qu.:0.248213   1st Qu.:0.9995  
-##  Median :0.9756   Median :0.000e+00   Median :0.479500   Median :0.9995  
-##  Mean   :0.9756   Mean   :3.429e-13   Mean   :0.582516   Mean   :0.9996  
-##  3rd Qu.:0.9756   3rd Qu.:5.000e-17   3rd Qu.:1.000000   3rd Qu.:1.0000  
-##  Max.   :0.9756   Max.   :7.808e-11   Max.   :1.000000   Max.   :1.0000  
-##                                       NA's   :1                          
+##  1st Qu.:0.9756   1st Qu.:0.000e+00   1st Qu.:0.248213   1st Qu.:0.9990  
+##  Median :0.9756   Median :5.000e-18   Median :0.479500   Median :0.9995  
+##  Mean   :0.9756   Mean   :7.677e-14   Mean   :0.571892   Mean   :0.9996  
+##  3rd Qu.:0.9756   3rd Qu.:5.400e-17   3rd Qu.:1.000000   3rd Qu.:1.0000  
+##  Max.   :0.9756   Max.   :1.870e-11   Max.   :1.000000   Max.   :1.0000  
+##                                       NA's   :3                          
 ##   Specificity     Pos Pred Value   Neg Pred Value     Precision     
-##  Min.   :0.7692   Min.   :0.9943   Min.   :0.9348   Min.   :0.9943  
-##  1st Qu.:0.9231   1st Qu.:0.9981   1st Qu.:0.9775   1st Qu.:0.9981  
+##  Min.   :0.8077   Min.   :0.9952   Min.   :0.9388   Min.   :0.9952  
+##  1st Qu.:0.9231   1st Qu.:0.9981   1st Qu.:0.9630   1st Qu.:0.9981  
 ##  Median :0.9423   Median :0.9986   Median :0.9804   Median :0.9986  
-##  Mean   :0.9410   Mean   :0.9985   Mean   :0.9816   Mean   :0.9985  
+##  Mean   :0.9422   Mean   :0.9986   Mean   :0.9817   Mean   :0.9986  
 ##  3rd Qu.:0.9615   3rd Qu.:0.9990   3rd Qu.:1.0000   3rd Qu.:0.9990  
 ##  Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
 ##                                                                     
 ##      Recall             F1           Prevalence     Detection Rate  
-##  Min.   :0.9986   Min.   :0.9969   Min.   :0.9756   Min.   :0.9742  
-##  1st Qu.:0.9995   1st Qu.:0.9988   1st Qu.:0.9756   1st Qu.:0.9751  
+##  Min.   :0.9986   Min.   :0.9971   Min.   :0.9756   Min.   :0.9742  
+##  1st Qu.:0.9990   1st Qu.:0.9988   1st Qu.:0.9756   1st Qu.:0.9746  
 ##  Median :0.9995   Median :0.9990   Median :0.9756   Median :0.9751  
-##  Mean   :0.9996   Mean   :0.9990   Mean   :0.9756   Mean   :0.9751  
+##  Mean   :0.9996   Mean   :0.9991   Mean   :0.9756   Mean   :0.9751  
 ##  3rd Qu.:1.0000   3rd Qu.:0.9995   3rd Qu.:0.9756   3rd Qu.:0.9756  
 ##  Max.   :1.0000   Max.   :1.0000   Max.   :0.9756   Max.   :0.9756  
 ##                                                                     
 ##  Detection Prevalence Balanced Accuracy
-##  Min.   :0.9746       Min.   :0.8844   
-##  1st Qu.:0.9760       1st Qu.:0.9613   
+##  Min.   :0.9742       Min.   :0.9034   
+##  1st Qu.:0.9759       1st Qu.:0.9613   
 ##  Median :0.9765       Median :0.9712   
-##  Mean   :0.9766       Mean   :0.9703   
+##  Mean   :0.9765       Mean   :0.9709   
 ##  3rd Qu.:0.9770       3rd Qu.:0.9808   
-##  Max.   :0.9807       Max.   :1.0000   
+##  Max.   :0.9803       Max.   :1.0000   
 ## 
 ```
 

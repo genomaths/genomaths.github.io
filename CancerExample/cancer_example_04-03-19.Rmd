@@ -143,8 +143,9 @@ Methylome datasets of whole-genome bisulfite sequencing (WGBS) are available
 at Gene Expression Omnibus (GEO DataSets). For the current example, datasets
 from breast tissues (normal and cancer) and embryonic stem cells will be
 downloaded from GEO. The data set are downloaded providing the GEO accession
-numbers for each data set to the function 'getGEOSuppFiles' (for details type
-?getGEOSuppFiles in the R console).
+numbers for each data set to the function 'getGEOSuppFiles' (see the function
+[getGEOSuppFiles](https://genomaths.github.io/MethylIT_HTML_Manual/getGEOSuppFiles.html) 
+help).
 
 ```{r GEO, include = TRUE, message=FALSE}
 
@@ -569,7 +570,9 @@ ps = uniqueGRanges(PS, missing = NA, verbose = FALSE, num.cores = 12L)
 dat = data.frame(normal = ps$hdiv, cancer = ps$hdiv.1, metastasis = ps$hdiv.2)
 dat = suppressMessages(melt(dat))
 colnames(dat) <- c("Breast.tissue", "HD")
-head(dat)
+idx <- which(is.na(dat$HD))
+dat <- dat[-idx, ] # To remove missing data
+DataFrame(dat)
 
 p1 = ggplot(dat, aes(x = HD, fill = Breast.tissue, colour = Breast.tissue)) + 
   geom_histogram(alpha = 0.5, bins = 50, position = "identity", na.rm = TRUE,
