@@ -48,6 +48,26 @@ abstract: |
 
 <style type="text/css">
 
+.list-group-item.active, .list-group-item.active:focus, 
+.list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.80em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify-header .tocify-item {
+  font-size: 0.85em;
+  padding-left: 20px;
+  text-indent: 0;
+}
+
 body{ /* Normal  */
       font-size: 18px;
       font-family: "Times New Roman", Times, serif;
@@ -90,6 +110,7 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 14px;
 }
 </style>
+
 ```{r, echo = FALSE}
 library(knitr)
 opts_chunk$set(options(width = 80))
