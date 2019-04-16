@@ -8,7 +8,7 @@ author: |
  | 
  | Department of Biology and Plant Science. 
  | Pennsylvania State University, University Park, PA 16802
-date: "28 March 2019"
+date: "16 April 2019"
 fontsize: 11pt
 fontfamily: "serif"
 bibliography: bibliography.bib
@@ -22,7 +22,7 @@ output:
     number_sections: true
     highlight: tango
     theme: united
-    geometry: margin=1in
+    geometry: margin=0.8in
     keep_md: yes
   
 abstract: |
@@ -35,6 +35,26 @@ abstract: |
 ---
 
 <style type="text/css">
+
+.list-group-item.active, .list-group-item.active:focus, 
+.list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.80em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify-header .tocify-item {
+  font-size: 0.85em;
+  padding-left: 20px;
+  text-indent: 0;
+}
 
 body{ /* Normal  */
       font-size: 18px;
@@ -78,6 +98,7 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 14px;
 }
 </style>
+
 
 
 # Background
@@ -139,8 +160,9 @@ methylation levels. In the current case, we expect to have a difference of
 methylation levels about 0.133 between the control and the treatment.
 
 ## Simulation
-Methyl-IT function *simulateCounts* will be used to generate the datasets, which 
-will include three group of samples: reference, control, and treatment.
+Function *simulateCounts* from [MethylIT.utils](https://github.com/genomaths/MethylIT.utils) 
+R package will be used to generate the datasets, which will include three group 
+of samples: reference, control, and treatment.
 
 
 ```r
@@ -185,13 +207,11 @@ Bayesian framework, which accounts for the biological and sampling variations
 reference [@Baldi2001] (Chapter 3).
 
 Two types of information divergences are estimated: *TV*, total variation (*TV*,
-absolute value of methylation levels) and Hellinger divergence (*HD*). *TV*
-is computed according to the formula: $TV_d=|p_{tt}-p_{ct}|$ and *HD*:
+absolute value of methylation levels) and Hellinger divergence (*H*). *TV*
+is computed according to the formula: $TV_d=|p_{tt}-p_{ct}|$ and *H*:
 
-$$H(\hat p_{ij},\hat p_{ir}) = w_i[(\sqrt{\hat p_{ij}} - \sqrt{\hat
-p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2]$$ 
-
-
+$$H(\hat p_{ij},\hat p_{ir}) = w_i\Big[(\sqrt{\hat p_{ij}} - \sqrt{\hat
+p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]$$ 
 where $w_i = 2 \frac{m_{ij} m_{ir}}{m_{ij} + m_{ir}}$, 
 $m_{ij} = {n_i}^{mC_j}+{n_i}^{uC_j}+1$, $m_{ir} = {n_i}^{mC_r}+{n_i}^{uC_r}+1$ 
 and $j \in {\{c,t}\}$
@@ -231,7 +251,7 @@ unlist(lapply(DIVs, function(x) mean(mcols(x[, 7])[,1])))
 Likewise for any other signal in nature, the analysis of methylation signal 
 requires for the knowledge of its probability distribution. In the current case, 
 the signal is represented in terms of the Hellinger divergence of methylation
-levels (*HD*).
+levels (*H*).
 
 
 ```r
@@ -243,20 +263,20 @@ names(divs) <- names(DIVs)
 
 # Data frame with the Hellinger divergences from both groups of samples samples 
 l = c(); for (k in 1:length(divs)) l = c(l, length(divs[[k]]))
-data <- data.frame(HD = c(abs(divs$C1$hdiv), abs(divs$C2$hdiv), abs(divs$C3$hdiv),
+data <- data.frame(H = c(abs(divs$C1$hdiv), abs(divs$C2$hdiv), abs(divs$C3$hdiv),
                            abs(divs$T1$hdiv), abs(divs$T2$hdiv), abs(divs$T3$hdiv)),
                    sample = c(rep("C1", l[1]), rep("C2", l[2]), rep("C3", l[3]),
                               rep("T1", l[4]), rep("T2", l[5]), rep("T3", l[6]))
 )
 ```
 
-Empirical critical values for the probability distribution of $HD$ and $TV$ can
+Empirical critical values for the probability distribution of $H$ and $TV$ can
 be obtained using *quantile* function from the R package *stats*.
 
 ```r
 critical.val <- do.call(rbind, lapply(divs, function(x) {
   hd.95 = quantile(x$hdiv, 0.95)
-  tv.95 = quantile(x$TV, 0.95)
+  tv.95 = quantile(abs(x$TV), 0.95)
   return(c(tv = tv.95, hd = hd.95))
 }))
 
@@ -265,12 +285,12 @@ critical.val
 
 ```
 ##       tv.95%    hd.95%
-## C1 0.7893927  81.47256
-## C2 0.7870469  80.95873
-## C3 0.7950869  81.27145
-## T1 0.9261629 113.73798
-## T2 0.9240506 114.45228
-## T3 0.9212163 111.54258
+## C1 0.7907276  81.47256
+## C2 0.7888943  80.95873
+## C3 0.7972732  81.27145
+## T1 0.9263158 113.73798
+## T2 0.9240569 114.45228
+## T3 0.9213483 111.54258
 ```
 
 The kernel density estimation yields the empirical density shown in the
@@ -285,19 +305,19 @@ crit.val.ct <- max(critical.val[c("C1", "C2", "C3"), 2]) # 81.5
 crit.val.tt <- min(critical.val[c("T1", "T2", "T3"), 2]) # 111.5426
 
 # Density plot with ggplot
-ggplot(data, aes(x = HD, colour = sample, fill = sample)) + 
+ggplot(data, aes(x = H, colour = sample, fill = sample)) + 
   geom_density(alpha = 0.05, bw = 0.2, position = "identity", na.rm = TRUE,
                size = 0.4) + xlim(c(0, 125)) +   
-  xlab(expression(bolditalic("Hellinger divergence (HD)"))) + 
+  xlab(expression(bolditalic("Hellinger divergence (H)"))) + 
   ylab(expression(bolditalic("Density"))) +
   ggtitle("Density distribution for control and treatment") +
   geom_vline(xintercept = crit.val.ct, color = "red", linetype = "dashed", size = 0.4) +
   annotate(geom = "text", x = crit.val.ct-2, y = 0.3, size = 5,
-           label = 'bolditalic(HD[alpha == 0.05]^CT==81.5)',
+           label = 'bolditalic(H[alpha == 0.05]^CT==81.5)',
            family = "serif", color = "red", parse = TRUE) +
   geom_vline(xintercept = crit.val.tt, color = "blue", linetype = "dashed", size = 0.4) +
   annotate(geom = "text", x = crit.val.tt -2, y = 0.2, size = 5,
-           label = 'bolditalic(HD[alpha == 0.05]^TT==114.5)',
+           label = 'bolditalic(H[alpha == 0.05]^TT==114.5)',
            family = "serif", color = "blue", parse = TRUE) +
   theme(
     axis.text.x  = element_text( face = "bold", size = 12, color="black",
@@ -318,7 +338,7 @@ ggplot(data, aes(x = HD, colour = sample, fill = sample)) +
 ![](Methylation_analysis_with_Methyl-IT_files/figure-html/dens.graph-1.png)<!-- -->
 
 The graphic above shows that with high probability the methylation signal 
-induced by the treatment has *HD* values $HD^{TT}_{\alpha=0.05}\geq114.5$. 
+induced by the treatment has *H* values $H^{TT}_{\alpha=0.05}\geq114.5$. 
 According to the critical value estimated for the differences of methylation 
 levels, the methylation signal holds $TV^{TT}_{\alpha=0.05}\geq0.926$. 
 
@@ -334,7 +354,7 @@ family [@Sanchez2016].
 
 ## Potential DMPs from the methylation signal using empirical distribution
 As suggested from the empirical density graphics (above), the critical values
-$HD_{\alpha=0.05}$ and $TV_{\alpha=0.05}$ can be used as cutpoints to select
+$H_{\alpha=0.05}$ and $TV_{\alpha=0.05}$ can be used as cutpoints to select
 potential DMPs. After setting $dist.name = "ECDF"$ and $tv.cut = 0.926$ in
 Methyl-IT function *getPotentialDIMP*, potential DMPs are estimated using the 
 empirical cummulative distribution function (ECDF) and the critical value 
@@ -375,10 +395,10 @@ empirical cumulative distribution function (ECDF).
 ## Potential DMPs detected with Weibull 2-parameters model
 Potential DMPs can be estimated using the critical values derived from the
 fitted Weibull 2-parameters models, which are obtained after the non-linear fit
-of the theoretical model on the genome-wide $HD$ values for each individual
+of the theoretical model on the genome-wide $H$ values for each individual
 sample using Methyl-IT function *nonlinearFitDist* [@Sanchez2016]. As before,
 only cytosine sites with critical values $TV_d>0.926$ are considered DMPs. Notice
-that, it is always possible to use any other values of $HD$ and $TV_d$ as critical
+that, it is always possible to use any other values of $H$ and $TV_d$ as critical
 values, but whatever could be the value it will affect the final accuracy of the
 classification performance of DMPs into two groups, DMPs from control and DNPs 
 from treatment (see below). So, it is important to do an good choices of the 
@@ -399,7 +419,7 @@ nlms.wb$T1
 ## shape  0.5413711 0.0003964435 1365.570         0 0.991666592250838
 ## scale 19.4097502 0.0155797315 1245.833         0                  
 ##                     rho       R.Cross.val              DEV
-## shape 0.991666258901194 0.996595722235241 34.7217494754823
+## shape 0.991666258901194 0.996595356516225 34.7217494754823
 ## scale                                                     
 ##                     AIC               BIC     COV.shape     COV.scale
 ## shape -221720.747067975 -221694.287733122  1.571674e-07 -1.165129e-06
@@ -440,10 +460,12 @@ nlms.g2p$T1
 ## scale     NA 49998
 ```
 ## Potential DMPs detected with Fisher's exact test and Gamma2P critical value
-There is not a one-to-one mapping between $TV_d$ and $HD$. However, at each
+There is not a one-to-one mapping between $TV_d$ and $H$. However, at each
 cytosine site $i$, these information divergences hold the inequality:
-$TV_d(p^{tt}_i,p^{ct}_i)\leq \frac{2}{\sqrt{2w_i}}\sqrt{HD(p^{tt}_i,p^{ct}_i)}$
+$$TV_d(p^{tt}_i,p^{ct}_i)\leq \sqrt{2}H_d(p^{tt}_i,p^{ct}_i)$$
 
+where $H_d(p^{tt}_i,p^{ct}_i)=\sqrt{\frac{H(p^{tt}_i,p^{ct}_i)}w}$ is the Hellinger 
+distance and $H(p^{tt}_i,p^{ct}_i)$ is the Helliger divergence equation given above.
 The critical values for the model Gamma2P can be retrived using:
 
 
@@ -462,7 +484,7 @@ unlist(lapply(nlms.g2p, function(model) {
 
 
 So, potential DMPs detected with FT can be constrained with the critical value
-$HD^{TT}_{\alpha=0.05}\geq120.3$ [@Steerneman1983]:
+$H^{TT}_{\alpha=0.05}\geq120.3$ [@Steerneman1983]:
 
 
 ```r
@@ -495,13 +517,13 @@ in the treatment samples that are not induced by the treatment, which can natura
 occurs in both groups, control and treatment. In other words, the theoretical probabilistic
 models of Weibull and Gamma distributions are used to describe those methylation 
 events resultant of the normal (non-stressful) biological processes. Any information divergence
-of methylation level below the critical value $TV_{\alpha=0.05}$ or $HD_{\alpha=0.05}$ is
+of methylation level below the critical value $TV_{\alpha=0.05}$ or $H_{\alpha=0.05}$ is
 a methylation event that can occur in normal conditions. *It does not matter how much significant* 
 *a test like FT could be, since it is not about the signification of the test, but about* 
 *how big is the probability to observe that methylation event in the control population*. 
 
 ## Critical values based on fitted models
-Critical values $HD_{\alpha=0.05}$ can be estimated from each fitted model using
+Critical values $H_{\alpha=0.05}$ can be estimated from each fitted model using
 *predict* function:
 
 
@@ -525,14 +547,14 @@ data.frame(wb = do.call(rbind, crit.wb), g2p = do.call(rbind, crit.g2p))
 The graphics for the empirical (in black) and Gamma (in blue) densities
 distributions of Hellinger divergence of methylation levels for sample T1 are
 shown below. The 2-parameter gamma model is build by using the parameters
-estimated in the non-linear fit of $HD$ values from sample T1. The critical
+estimated in the non-linear fit of $H$ values from sample T1. The critical
 values estimated from the 2-parameter gamma distribution
-$HD^{\Gamma}_{\alpha=0.05}=123.78$ is more 'conservative' than the critical value
-based on the empirical distribution $HD^{Emp}_{\alpha=0.05}=114.5$. That is, 
+$H^{\Gamma}_{\alpha=0.05}=123.78$ is more 'conservative' than the critical value
+based on the empirical distribution $H^{Emp}_{\alpha=0.05}=114.5$. That is, 
 in accordance with the empirical distribution, for a methylation change to be 
-considered a signal its $HD$ value must be $HD\geq114.5$, while according with
+considered a signal its $H$ value must be $H\geq114.5$, while according with
 the 2-parameter gamma model any cytosine carrying a signal must hold 
-$HD\geq124$. 
+$H\geq124$. 
 
 
 ```r
@@ -549,20 +571,20 @@ q95 <- qgamma2p(0.95) # Gamma model based quantile
 emp.q95 = quantile(divs$T1$hdiv, 0.95) # Empirical quantile
 
 # Density plot with ggplot
-ggplot(dt, aes(x = HD)) + 
+ggplot(dt, aes(x = H)) + 
   geom_density(alpha = 0.05, bw = 0.2, position = "identity", na.rm = TRUE,
                size = 0.4) + xlim(c(0, 150)) +
   stat_function(fun = dgamma2p, colour = "blue") +
-  xlab(expression(bolditalic("Hellinger divergence (HD)"))) + 
+  xlab(expression(bolditalic("Hellinger divergence (H)"))) + 
   ylab(expression(bolditalic("Density"))) +
   ggtitle("Empirical and Gamma densities distributions of Hellinger divergence (T1)") +
   geom_vline(xintercept = emp.q95, color = "black", linetype = "dashed", size = 0.4) +
   annotate(geom = "text", x = emp.q95 - 20, y = 0.16, size = 5,
-           label = 'bolditalic(HD[alpha == 0.05]^Emp==114.5)',
+           label = 'bolditalic(H[alpha == 0.05]^Emp==114.5)',
            family = "serif", color = "black", parse = TRUE) +
   geom_vline(xintercept = q95, color = "blue", linetype = "dashed", size = 0.4) +
-  annotate(geom = "text", x = q95 + 9, y = 0.14, size = 5,
-           label = 'bolditalic(HD[alpha == 0.05]^Gamma==124)',
+  annotate(geom = "text", x = q95 + 10, y = 0.14, size = 5,
+           label = 'bolditalic(H[alpha == 0.05]^Gamma==124)',
            family = "serif", color = "blue", parse = TRUE) +
   theme(
     axis.text.x  = element_text( face = "bold", size = 12, color="black",
@@ -719,13 +741,6 @@ ft.class = evaluateDIMPclass(LR = ft.DMPs, control.names = control.nam,
                            n.pc = 4, pval.col = 11L, center = TRUE, 
                            scale = TRUE, output = "conf.mat", prop = 0.6
 )
-```
-
-```
-## Model: treat ~ hdiv + TV + logP + pos + TV:logP
-```
-
-```r
 ft.class
 ```
 
@@ -788,13 +803,6 @@ ft.hd.class = evaluateDIMPclass(LR = ft.hd.DMPs, control.names = control.nam,
                            n.pc = 4, pval.col = 11L, center = TRUE, 
                            scale = TRUE, output = "conf.mat", prop = 0.6
 )
-```
-
-```
-## Model: treat ~ hdiv + TV + logP + pos + TV:logP
-```
-
-```r
 ft.hd.class
 ```
 
@@ -856,13 +864,6 @@ ecdf.class = evaluateDIMPclass(LR = DMP.ecdf, control.names = control.nam,
                            center = TRUE, scale = TRUE,
                            output = "conf.mat", prop = 0.6
 )
-```
-
-```
-## Model: treat ~ hdiv + TV + logP + pos
-```
-
-```r
 ecdf.class
 ```
 
@@ -939,13 +940,6 @@ ws.class = evaluateDIMPclass(LR = wb.DMPs, control.names = control.nam,
                            center = TRUE, scale = TRUE,
                            output = "conf.mat", prop = 0.6
 )
-```
-
-```
-## Model: treat ~ hdiv + TV + logP + pos
-```
-
-```r
 ws.class
 ```
 
@@ -1021,13 +1015,6 @@ g2p.class = evaluateDIMPclass(LR = g2p.DMPs, control.names = control.nam,
                            center = TRUE, scale = TRUE,
                            output = "conf.mat", prop = 0.6
 )
-```
-
-```
-## Model: treat ~ hdiv + TV + logP + pos
-```
-
-```r
 g2p.class
 ```
 
