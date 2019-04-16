@@ -10,7 +10,7 @@ author: |
  | Department of Biology and Plant Science. 
  | Pennsylvania State University, University Park, PA 16802
  | Maintainer: Robersy Sanchez
-date: "05 April 2019"
+date: "16 April 2019"
 fontsize: 11pt
 fontfamily: "serif"
 bibliography: bibliography.bib
@@ -24,7 +24,7 @@ output:
     number_sections: true
     highlight: tango
     theme: united
-    geometry: margin=1in
+    geometry: margin=0.8in
     keep_md: yes
   
 abstract: |
@@ -39,6 +39,26 @@ abstract: |
 ---
 
 <style type="text/css">
+
+.list-group-item.active, .list-group-item.active:focus, 
+.list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.80em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify-header .tocify-item {
+  font-size: 0.85em;
+  padding-left: 20px;
+  text-indent: 0;
+}
 
 body{ /* Normal  */
       font-size: 18px;
@@ -730,7 +750,7 @@ Herein, the DMP classifiction is modelled with PCA+QDA classifier (*classifier* 
 the original raw matrix of data and the four possible component (*n.pc* = 4) are
 used in a further quadratic discriminant analysis (QDA). A scaling step is
 applied to the raw matrix of data before the application of the mentioned
-procedure (*center* = TRUE, "scale" = TRUE).
+procedure (*center* = TRUE, *scale* = TRUE).
 
 
 ```r
