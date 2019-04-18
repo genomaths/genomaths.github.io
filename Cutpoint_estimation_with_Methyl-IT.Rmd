@@ -476,13 +476,13 @@ from, say, 0.5 to 0.8. Next, a *classifier2* will be used to evaluate the
 classification performance. In this case, the search for an optimal cutpoin is
 accomplished maximinzing the accuracy (*stat* = 0) of *classifier2*.
 
-Below potential DMPs will be selected with probability alpha = 1 and then check whether 
-the combination of model classifiers PCA+LDA is able to distinguish 
-control DMPs from treataments. Notice that by setting alpha = 1 we are not 
-using filtering the sample based on *p*-value and leaving the classifier to take
-the decision on whether treatmetn DMPs can be distinguish from those detect in the
-control sample. Here, we fundamentally rely on the strong *tv.cut*= 0.926 and on
-the model probabilities:
+Below potential DMPs will be selected with probability alpha = 1 and then check
+whether the model classifiers PCA+LDA is able to distinguish control DMPs from
+treataments. Notice that by setting alpha = 1 we are not using filtering the
+sample based on *p*-value and letting the classifier to take the decision on
+whether treatmetn DMPs can be distinguish from those detect in the control
+sample. Here, we fundamentally rely on the strong *tv.cut*= 0.926 and on the
+the model for the signal probability distribution (*nlms.g2p*).
 ```{r cutpoint_search, include = TRUE}
 dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L, 
                              tv.cut = 0.926, tv.col = 7, alpha = 1, 
@@ -516,7 +516,7 @@ cut.g2p$testSetModel.FDR
 ```
 The model classifier *PCA+LDA* has enough discriminatory power to discriminate
 control DMP from those induced by the treament for *HD* values
-$55.064 < HD_{\alpha = 0.05}^{CT_{Emp}}=80.96 \le HD \le HD_{\alpha = 0.05}^{TT_{Emp}}=111.54$.
+$55.064 \le HD$.
 
 
 For the current dataset, we can try a more conservative cutpoint by alpha = 0.1 
