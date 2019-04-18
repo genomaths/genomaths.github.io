@@ -10,7 +10,7 @@ author: |
  | Department of Biology and Plant Science. 
  | Pennsylvania State University, University Park, PA 16802
  | Maintainer: Robersy Sanchez
-date: "16 April 2019"
+date: "18 April 2019"
 fontsize: 11pt
 fontfamily: "serif"
 bibliography: bibliography.bib
@@ -124,8 +124,8 @@ The need for the application of (what is now known as) signal detection in
 cancer research was pointed out by Youden in the midst of the last century
 [@Youden1950].
   
-Note: This example was made with the MethylIT version at https://github.com/genomaths/MethylIT.  
-It must NOT run with the current version available at https://git.psu.edu/genomath/MethylIT
+Note: This example was made with the MethylIT version 0.3.2 available at https://github.com/genomaths/MethylIT.  
+It must NOT run with the current version 0.3.1 available at https://git.psu.edu/genomath/MethylIT
   
 
 # Data generation
@@ -136,8 +136,8 @@ dataset is given in the web page: [Methylation analysis with Methyl-IT](https://
 
 
 ```r
-library(MethylIT.utils)
 library(MethylIT)
+library(MethylIT.utils)
 
 bmean <- function(alpha, beta) alpha/(alpha + beta)
 alpha.ct <- 0.09
@@ -187,6 +187,30 @@ nlms.g2p <- nonlinearFitDist(divs, column = 9L, verbose = FALSE, num.cores = 6L,
 DMPs.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L, 
                              tv.cut = 0.926, tv.col = 7, alpha = 0.05, 
                              dist.name = "Gamma2P")
+```
+
+To get some statistical description about the sample is useful. Here, empirical
+critical values for the probability distribution of $H$ and $TV$ can is obtained
+using *quantile* function from the R package *stats*.
+
+```r
+critical.val <- do.call(rbind, lapply(divs, function(x) {
+  x <- x[x$hdiv > 0]
+  hd.95 = quantile(x$hdiv, 0.95)
+  tv.95 = quantile(abs(x$TV), 0.95)
+  return(c(tv = tv.95, hd = hd.95))
+}))
+critical.val
+```
+
+```
+##       tv.95%    hd.95%
+## C1 0.7907276  81.47256
+## C2 0.7888943  80.95873
+## C3 0.7972732  81.27145
+## T1 0.9263158 113.73798
+## T2 0.9240569 114.45228
+## T3 0.9213483 111.54258
 ```
 
 # Cutpoint for the spontaneous variability in the control group 
@@ -242,6 +266,7 @@ cut.ft
 ## modelConfMatrix      6     confusionMatrix list     
 ## initModel            1     -none-          character
 ## postProbCut          1     -none-          logical  
+## postCut              1     -none-          logical  
 ## classifier           1     -none-          character
 ## statistic            1     -none-          logical  
 ## optStatVal           1     -none-          logical  
@@ -691,6 +716,7 @@ cut.g2p
 ## modelConfMatrix     6      confusionMatrix list     
 ## initModel           1      -none-          character
 ## postProbCut         1      -none-          logical  
+## postCut             1      -none-          logical  
 ## classifier          1      -none-          character
 ## statistic           1      -none-          logical  
 ## optStatVal          1      -none-          logical  
@@ -1029,23 +1055,27 @@ from, say, 0.5 to 0.8. Next, a *classifier2* will be used to evaluate the
 classification performance. In this case, the search for an optimal cutpoin is
 accomplished maximinzing the accuracy (*stat* = 0) of *classifier2*.
 
-Below potential DMPs will be selected with probability alpha = 0.5 and then check whether 
-the combination of model classifiers PCA+QDA and PCA+LDA is able to distinguish 
-control DMPs from treataments:
+Below potential DMPs will be selected with probability alpha = 1 and then check whether 
+the combination of model classifiers PCA+LDA is able to distinguish 
+control DMPs from treataments. Notice that by setting alpha = 1 we are not 
+using filtering the sample based on *p*-value and leaving the classifier to take
+the decision on whether treatmetn DMPs can be distinguish from those detect in the
+control sample. Here, we fundamentally rely on the strong *tv.cut*= 0.926 and on
+the model probabilities:
 
 ```r
 dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L, 
-                             tv.cut = 0.926, tv.col = 7, alpha = 0.5, 
+                             tv.cut = 0.926, tv.col = 7, alpha = 1, 
                              dist.name = "Gamma2P")
 
 cut.g2p = estimateCutPoint(LR = dmp.g2p, simple = FALSE,
                             column = c(hdiv = TRUE, TV = TRUE, 
                                        wprob = TRUE, pos = TRUE),
-                            classifier1 = "pca.lda", tv.cut = 0.92,
-                            classifier2 = "pca.qda", stat = 0,
+                            classifier1 = "pca.lda", 
+                            tv.cut = 0.92, stat = 0,
                             control.names = control.nam, 
-                            treatment.names = treatment.nam, find.cut = TRUE,
-                            cut.interval = c(0.5, 0.8), post.cut = 0.5,
+                            treatment.names = treatment.nam, 
+                            cut.values = seq(45, 114, 1), post.cut = 0.5,
                             clas.perf = TRUE, prop = 0.6,
                             center = TRUE, scale = TRUE,
                             n.pc = 4, div.col = 9L)
@@ -1057,30 +1087,33 @@ cut.g2p
 ## Cutpoint search performed using model posterior probabilities 
 ## 
 ## Posterior probability used to get the cutpoint = 0.5 
-## Optimized statistic: Accuracy = 0.99281 
-## Cutpoint = 17.739 
-## 
 ## Cytosine sites with treatment PostProbCut >= 0.5 have a 
-## divergence value >= 17.739 
+## divergence value >= 17.73865 
 ## 
-## Model classifier 'pca.qda' 
+## Optimized statistic: Accuracy = 1 
+## Cutpoint = 55.064 
+## 
+## Model classifier 'pca.lda' 
 ## 
 ## The accessible objects in the output list are: 
 ##                    Length Class           Mode     
 ## cutpoint           1      -none-          numeric  
 ## testSetPerformance 6      confusionMatrix list     
 ## testSetModel.FDR   1      -none-          numeric  
-## model              2      pcaQDA          list     
+## model              2      pcaLDA          list     
 ## modelConfMatrix    6      confusionMatrix list     
 ## initModel          1      -none-          character
 ## postProbCut        1      -none-          numeric  
+## postCut            1      -none-          numeric  
 ## classifier         1      -none-          character
 ## statistic          1      -none-          character
 ## optStatVal         1      -none-          numeric
 ```
 
+The model classificaiton performance can be found as:
 
 ```r
+# Model performance in in the test dataset
 cut.g2p$testSetPerformance
 ```
 
@@ -1089,107 +1122,33 @@ cut.g2p$testSetPerformance
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT 1470    0
-##         TT   32 2950
-##                                           
-##                Accuracy : 0.9928          
-##                  95% CI : (0.9899, 0.9951)
-##     No Information Rate : 0.6626          
-##     P-Value [Acc > NIR] : < 2.2e-16       
-##                                           
-##                   Kappa : 0.9838          
-##  Mcnemar's Test P-Value : 4.251e-08       
-##                                           
-##             Sensitivity : 1.0000          
-##             Specificity : 0.9787          
-##          Pos Pred Value : 0.9893          
-##          Neg Pred Value : 1.0000          
-##              Prevalence : 0.6626          
-##          Detection Rate : 0.6626          
-##    Detection Prevalence : 0.6698          
-##       Balanced Accuracy : 0.9893          
-##                                           
-##        'Positive' Class : TT              
+##         CT 1438    0
+##         TT    0 2819
+##                                      
+##                Accuracy : 1          
+##                  95% CI : (0.9991, 1)
+##     No Information Rate : 0.6622     
+##     P-Value [Acc > NIR] : < 2.2e-16  
+##                                      
+##                   Kappa : 1          
+##  Mcnemar's Test P-Value : NA         
+##                                      
+##             Sensitivity : 1.0000     
+##             Specificity : 1.0000     
+##          Pos Pred Value : 1.0000     
+##          Neg Pred Value : 1.0000     
+##              Prevalence : 0.6622     
+##          Detection Rate : 0.6622     
+##    Detection Prevalence : 0.6622     
+##       Balanced Accuracy : 1.0000     
+##                                      
+##        'Positive' Class : TT         
 ## 
 ```
 
 ```r
-cut.g2p$testSetModel.FDR
-```
-
-```
-## [1] 0.01073105
-```
-
-```r
-dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L,
-                             tv.cut = 0.926, tv.col = 7, alpha = 0.98,
-                             dist.name = "Gamma2P")
-
-cut.g2p = estimateCutPoint(LR = dmp.g2p, simple = FALSE,
-                            column = c(hdiv = TRUE, TV = TRUE, 
-                                       wprob = TRUE, pos = TRUE),
-                            classifier1 = "pca.lda", tv.cut = 0.92,
-                            classifier2 = "pca.qda", stat = 0,
-                            control.names = control.nam, 
-                            treatment.names = treatment.nam, find.cut = TRUE,
-                            cut.interval = c(0.5, 0.8), post.cut = 0.5,
-                            clas.perf = TRUE, prop = 0.6,
-                            center = TRUE, scale = TRUE,
-                            n.pc = 4, div.col = 9L)
-cut.g2p
-```
-
-```
-## Cutpoint estimation with 'pca.lda' classifier 
-## Cutpoint search performed using model posterior probabilities 
-## 
-## Posterior probability used to get the cutpoint = 0.5 
-## Optimized statistic: Accuracy = 0.99281 
-## Cutpoint = 17.739 
-## 
-## Cytosine sites with treatment PostProbCut >= 0.5 have a 
-## divergence value >= 17.739 
-## 
-## Model classifier 'pca.qda' 
-## 
-## The accessible objects in the output list are: 
-##                    Length Class           Mode     
-## cutpoint           1      -none-          numeric  
-## testSetPerformance 6      confusionMatrix list     
-## testSetModel.FDR   1      -none-          numeric  
-## model              2      pcaQDA          list     
-## modelConfMatrix    6      confusionMatrix list     
-## initModel          1      -none-          character
-## postProbCut        1      -none-          numeric  
-## classifier         1      -none-          character
-## statistic          1      -none-          character
-## optStatVal         1      -none-          numeric
-```
-
-The probabilities $P(HD \le 17.739)$ to observe a cytosine site with $HD \le 17.739$ on each 
-individual is:
-
-```r
-nams <- names(nlms.g2p)
-crit <- unlist(lapply(nlms.g2p, function(x) pgamma(cut.g2p$cutpoint, shape = x$Estimate[1],
-                                                   scale = x$Estimate[2])))
-names(crit) <- nams
-crit
-```
-
-```
-##        C1        C2        C3        T1        T2        T3 
-## 0.6607198 0.6615046 0.6612050 0.6020936 0.6022784 0.6057928
-```
-
-That is, the probility to observe a cytosine site with $HD \le 17.739$ is greater in
-the control than in the treatmetn group. This basic information is cashed by the
-model classifier and quantitatively manifest on its performance:
-
-
-```r
-cut.g2p$testSetPerformance
+# Model performance in in the whole dataset
+cut.g2p$modelConfMatrix
 ```
 
 ```
@@ -1197,41 +1156,45 @@ cut.g2p$testSetPerformance
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT 1470    0
-##         TT   32 2950
-##                                           
-##                Accuracy : 0.9928          
-##                  95% CI : (0.9899, 0.9951)
-##     No Information Rate : 0.6626          
-##     P-Value [Acc > NIR] : < 2.2e-16       
-##                                           
-##                   Kappa : 0.9838          
-##  Mcnemar's Test P-Value : 4.251e-08       
-##                                           
-##             Sensitivity : 1.0000          
-##             Specificity : 0.9787          
-##          Pos Pred Value : 0.9893          
-##          Neg Pred Value : 1.0000          
-##              Prevalence : 0.6626          
-##          Detection Rate : 0.6626          
-##    Detection Prevalence : 0.6698          
-##       Balanced Accuracy : 0.9893          
-##                                           
-##        'Positive' Class : TT              
+##         CT 3589    0
+##         TT    4 7046
+##                                          
+##                Accuracy : 0.9996         
+##                  95% CI : (0.999, 0.9999)
+##     No Information Rate : 0.6623         
+##     P-Value [Acc > NIR] : <2e-16         
+##                                          
+##                   Kappa : 0.9992         
+##  Mcnemar's Test P-Value : 0.1336         
+##                                          
+##             Sensitivity : 1.0000         
+##             Specificity : 0.9989         
+##          Pos Pred Value : 0.9994         
+##          Neg Pred Value : 1.0000         
+##              Prevalence : 0.6623         
+##          Detection Rate : 0.6623         
+##    Detection Prevalence : 0.6627         
+##       Balanced Accuracy : 0.9994         
+##                                          
+##        'Positive' Class : TT             
 ## 
 ```
 
 ```r
+# The False discovery rate
 cut.g2p$testSetModel.FDR
 ```
 
 ```
-## [1] 0.01073105
+## [1] 0
 ```
+The model classifier *PCA+LDA* has enough discriminatory power to discriminate
+control DMP from those induced by the treament for *HD* values
+$55.064 < HD_{\alpha = 0.05}^{CT_{Emp}}=80.96 \le HD \le HD_{\alpha = 0.05}^{TT_{Emp}}=111.54$.
 
 
-For the current dataset, a more conservative and interesting ctupoint can be
-scrutinized by setting alpha = 0.1 when in the function *getPotentialDIMP*:
+For the current dataset, we can try a more conservative cutpoint by alpha = 0.1 
+when in the function *getPotentialDIMP*:
 
 ```r
 dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L,
@@ -1241,10 +1204,11 @@ dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L,
 cut.g2p = estimateCutPoint(LR = dmp.g2p, simple = FALSE,
                             column = c(hdiv = TRUE, TV = TRUE, 
                                        wprob = TRUE, pos = TRUE),
-                            classifier1 = "pca.qda", tv.cut = 0.92, 
-                            control.names = control.nam, stat = 0,
-                            treatment.names = treatment.nam, find.cut = TRUE,
-                            cut.interval = c(0.5, 0.8), post.cut = 0.5,
+                            classifier1 = "pca.lda", 
+                            tv.cut = 0.926, stat = 0, post.cut = 0.5,
+                            control.names = control.nam, 
+                            treatment.names = treatment.nam, 
+                            cut.values = seq(75, 114, 1), 
                             clas.perf = TRUE, prop = 0.6,
                             center = TRUE, scale = TRUE,
                             n.pc = 4, div.col = 9L)
@@ -1252,27 +1216,28 @@ cut.g2p
 ```
 
 ```
-## Cutpoint estimation with 'pca.qda' classifier 
+## Cutpoint estimation with 'pca.lda' classifier 
 ## Cutpoint search performed using model posterior probabilities 
 ## 
 ## Posterior probability used to get the cutpoint = 0.5 
-## Optimized statistic: Accuracy = 0.99919 
+## Cytosine sites with treatment PostProbCut >= 0.5 have a 
+## divergence value >= 81.59416 
+## 
+## Optimized statistic: Accuracy = 1 
 ## Cutpoint = 81.594 
 ## 
-## Cytosine sites with treatment PostProbCut >= 0.5 have a 
-## divergence value >= 81.594 
-## 
-## Model classifier 'pca.qda' 
+## Model classifier 'pca.lda' 
 ## 
 ## The accessible objects in the output list are: 
 ##                    Length Class           Mode     
 ## cutpoint           1      -none-          numeric  
 ## testSetPerformance 6      confusionMatrix list     
 ## testSetModel.FDR   1      -none-          numeric  
-## model              2      pcaQDA          list     
+## model              2      pcaLDA          list     
 ## modelConfMatrix    6      confusionMatrix list     
 ## initModel          1      -none-          character
 ## postProbCut        1      -none-          numeric  
+## postCut            1      -none-          numeric  
 ## classifier         1      -none-          character
 ## statistic          1      -none-          character
 ## optStatVal         1      -none-          numeric
@@ -1293,12 +1258,10 @@ crit
 ##        C1        C2        C3        T1        T2        T3 
 ## 0.9302251 0.9305094 0.9307369 0.8961976 0.8964575 0.9002940
 ```
-The cutpoint for *HD* = 81.6 is lower than the critical values $HD_{\alpha = 0.05}^{Emp}=114.5$
-estimated based on the empirical cumulative function, as shown in the previous
-example: [Methylation analysis with Methyl-IT](https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html).
-That is, in this case, the model classifier *PCA+QDA* has enough discriminatory 
-power to discriminate control DMP from those induced by the treament for *HD* values
-$HD_{\alpha = 0.05}^{CT_{Emp}}=81.5 < 81.6 \le HD \le HD_{\alpha = 0.05}^{TT_{Emp}}=114.5$.
+The cutpoint for *HD* = 81.6 is lower than the lower critical values $HD_{\alpha = 0.05}^{Emp}=111.54$
+estimated for treatment samples based on the empirical cumulative function, as shown above and in the previous
+example: [Methylation analysis with Methyl-IT](https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html). 
+But it is higher than the previous cutpoint with value 55.064 and there is not gain in classification performance. 
 
 Notice that although the same *HD* value could be found in the same differentially
 methylated cytosine site in control and treatment, if the probabilities
@@ -1315,27 +1278,27 @@ cut.g2p$testSetPerformance
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT 1276    3
-##         TT    0 2442
-##                                           
-##                Accuracy : 0.9992          
-##                  95% CI : (0.9976, 0.9998)
-##     No Information Rate : 0.6571          
-##     P-Value [Acc > NIR] : <2e-16          
-##                                           
-##                   Kappa : 0.9982          
-##  Mcnemar's Test P-Value : 0.2482          
-##                                           
-##             Sensitivity : 0.9988          
-##             Specificity : 1.0000          
-##          Pos Pred Value : 1.0000          
-##          Neg Pred Value : 0.9977          
-##              Prevalence : 0.6571          
-##          Detection Rate : 0.6563          
-##    Detection Prevalence : 0.6563          
-##       Balanced Accuracy : 0.9994          
-##                                           
-##        'Positive' Class : TT              
+##         CT 1324    0
+##         TT    0 2445
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.999, 1)
+##     No Information Rate : 0.6487    
+##     P-Value [Acc > NIR] : < 2.2e-16 
+##                                     
+##                   Kappa : 1         
+##  Mcnemar's Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.6487    
+##          Detection Rate : 0.6487    
+##    Detection Prevalence : 0.6487    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        'Positive' Class : TT        
 ## 
 ```
 

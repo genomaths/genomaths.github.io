@@ -126,8 +126,8 @@ The need for the application of (what is now known as) signal detection in
 cancer research was pointed out by Youden in the midst of the last century
 [@Youden1950].
   
-Note: This example was made with the MethylIT version at https://github.com/genomaths/MethylIT.  
-It must NOT run with the current version available at https://git.psu.edu/genomath/MethylIT
+Note: This example was made with the MethylIT version 0.3.2 available at https://github.com/genomaths/MethylIT.  
+It must NOT run with the current version 0.3.1 available at https://git.psu.edu/genomath/MethylIT
   
 
 # Data generation
@@ -137,8 +137,8 @@ generated with MethylIT.utils function *simulateCounts*. A standard analysis of 
 dataset is given in the web page: [Methylation analysis with Methyl-IT](https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html)
 
 ```{r Exp-methlevel, include = TRUE, message = FALSE}
-library(MethylIT.utils)
 library(MethylIT)
+library(MethylIT.utils)
 
 bmean <- function(alpha, beta) alpha/(alpha + beta)
 alpha.ct <- 0.09
@@ -188,6 +188,20 @@ nlms.g2p <- nonlinearFitDist(divs, column = 9L, verbose = FALSE, num.cores = 6L,
 DMPs.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L, 
                              tv.cut = 0.926, tv.col = 7, alpha = 0.05, 
                              dist.name = "Gamma2P")
+
+```
+
+To get some statistical description about the sample is useful. Here, empirical
+critical values for the probability distribution of $H$ and $TV$ can is obtained
+using *quantile* function from the R package *stats*.
+```{r critical.val, include = TRUE}
+critical.val <- do.call(rbind, lapply(divs, function(x) {
+  x <- x[x$hdiv > 0]
+  hd.95 = quantile(x$hdiv, 0.95)
+  tv.95 = quantile(abs(x$TV), 0.95)
+  return(c(tv = tv.95, hd = hd.95))
+}))
+critical.val
 
 ```
 
@@ -462,74 +476,51 @@ from, say, 0.5 to 0.8. Next, a *classifier2* will be used to evaluate the
 classification performance. In this case, the search for an optimal cutpoin is
 accomplished maximinzing the accuracy (*stat* = 0) of *classifier2*.
 
-Below potential DMPs will be selected with probability alpha = 0.5 and then check whether 
-the combination of model classifiers PCA+QDA and PCA+LDA is able to distinguish 
-control DMPs from treataments:
+Below potential DMPs will be selected with probability alpha = 1 and then check whether 
+the combination of model classifiers PCA+LDA is able to distinguish 
+control DMPs from treataments. Notice that by setting alpha = 1 we are not 
+using filtering the sample based on *p*-value and leaving the classifier to take
+the decision on whether treatmetn DMPs can be distinguish from those detect in the
+control sample. Here, we fundamentally rely on the strong *tv.cut*= 0.926 and on
+the model probabilities:
 ```{r cutpoint_search, include = TRUE}
 dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L, 
-                             tv.cut = 0.926, tv.col = 7, alpha = 0.5, 
+                             tv.cut = 0.926, tv.col = 7, alpha = 1, 
                              dist.name = "Gamma2P")
 
 cut.g2p = estimateCutPoint(LR = dmp.g2p, simple = FALSE,
                             column = c(hdiv = TRUE, TV = TRUE, 
                                        wprob = TRUE, pos = TRUE),
-                            classifier1 = "pca.lda", tv.cut = 0.92,
-                            classifier2 = "pca.qda", stat = 0,
+                            classifier1 = "pca.lda", 
+                            tv.cut = 0.92, stat = 0,
                             control.names = control.nam, 
-                            treatment.names = treatment.nam, find.cut = TRUE,
-                            cut.interval = c(0.5, 0.8), post.cut = 0.5,
+                            treatment.names = treatment.nam, 
+                            cut.values = seq(45, 114, 1), post.cut = 0.5,
                             clas.perf = TRUE, prop = 0.6,
                             center = TRUE, scale = TRUE,
                             n.pc = 4, div.col = 9L)
 cut.g2p
 ```
 
-```{r res3}
+The model classificaiton performance can be found as:
+```{r cuts}
+# Model performance in in the test dataset
 cut.g2p$testSetPerformance
+
+# Model performance in in the whole dataset
+cut.g2p$modelConfMatrix
+
+# The False discovery rate
 cut.g2p$testSetModel.FDR
-```
-```{r cutpoint_search2, include = TRUE}
-dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L,
-                             tv.cut = 0.926, tv.col = 7, alpha = 0.98,
-                             dist.name = "Gamma2P")
-
-cut.g2p = estimateCutPoint(LR = dmp.g2p, simple = FALSE,
-                            column = c(hdiv = TRUE, TV = TRUE, 
-                                       wprob = TRUE, pos = TRUE),
-                            classifier1 = "pca.lda", tv.cut = 0.92,
-                            classifier2 = "pca.qda", stat = 0,
-                            control.names = control.nam, 
-                            treatment.names = treatment.nam, find.cut = TRUE,
-                            cut.interval = c(0.5, 0.8), post.cut = 0.5,
-                            clas.perf = TRUE, prop = 0.6,
-                            center = TRUE, scale = TRUE,
-                            n.pc = 4, div.col = 9L)
-cut.g2p
-```
-
-The probabilities $P(HD \le 17.739)$ to observe a cytosine site with $HD \le 17.739$ on each 
-individual is:
-```{r}
-nams <- names(nlms.g2p)
-crit <- unlist(lapply(nlms.g2p, function(x) pgamma(cut.g2p$cutpoint, shape = x$Estimate[1],
-                                                   scale = x$Estimate[2])))
-names(crit) <- nams
-crit
 
 ```
-
-That is, the probility to observe a cytosine site with $HD \le 17.739$ is greater in
-the control than in the treatmetn group. This basic information is cashed by the
-model classifier and quantitatively manifest on its performance:
-
-```{r res4}
-cut.g2p$testSetPerformance
-cut.g2p$testSetModel.FDR
-```
+The model classifier *PCA+LDA* has enough discriminatory power to discriminate
+control DMP from those induced by the treament for *HD* values
+$55.064 < HD_{\alpha = 0.05}^{CT_{Emp}}=80.96 \le HD \le HD_{\alpha = 0.05}^{TT_{Emp}}=111.54$.
 
 
-For the current dataset, a more conservative and interesting ctupoint can be
-scrutinized by setting alpha = 0.1 when in the function *getPotentialDIMP*:
+For the current dataset, we can try a more conservative cutpoint by alpha = 0.1 
+when in the function *getPotentialDIMP*:
 ```{r cutpoint_search3, include = TRUE}
 dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L,
                              tv.cut = 0.926, tv.col = 7, alpha = 0.1,
@@ -538,10 +529,11 @@ dmp.g2p <- getPotentialDIMP(LR = divs, nlms = nlms.g2p,  div.col = 9L,
 cut.g2p = estimateCutPoint(LR = dmp.g2p, simple = FALSE,
                             column = c(hdiv = TRUE, TV = TRUE, 
                                        wprob = TRUE, pos = TRUE),
-                            classifier1 = "pca.qda", tv.cut = 0.92, 
-                            control.names = control.nam, stat = 0,
-                            treatment.names = treatment.nam, find.cut = TRUE,
-                            cut.interval = c(0.5, 0.8), post.cut = 0.5,
+                            classifier1 = "pca.lda", 
+                            tv.cut = 0.926, stat = 0, post.cut = 0.5,
+                            control.names = control.nam, 
+                            treatment.names = treatment.nam, 
+                            cut.values = seq(75, 114, 1), 
                             clas.perf = TRUE, prop = 0.6,
                             center = TRUE, scale = TRUE,
                             n.pc = 4, div.col = 9L)
@@ -557,12 +549,10 @@ crit <- unlist(lapply(nlms.g2p, function(x) pgamma(cut.g2p$cutpoint, shape = x$E
 names(crit) <- nams
 crit
 ```
-The cutpoint for *HD* = 81.6 is lower than the critical values $HD_{\alpha = 0.05}^{Emp}=114.5$
-estimated based on the empirical cumulative function, as shown in the previous
-example: [Methylation analysis with Methyl-IT](https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html).
-That is, in this case, the model classifier *PCA+QDA* has enough discriminatory 
-power to discriminate control DMP from those induced by the treament for *HD* values
-$HD_{\alpha = 0.05}^{CT_{Emp}}=81.5 < 81.6 \le HD \le HD_{\alpha = 0.05}^{TT_{Emp}}=114.5$.
+The cutpoint for *HD* = 81.6 is lower than the lower critical values $HD_{\alpha = 0.05}^{Emp}=111.54$
+estimated for treatment samples based on the empirical cumulative function, as shown above and in the previous
+example: [Methylation analysis with Methyl-IT](https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html). 
+But it is higher than the previous cutpoint with value 55.064 and there is not gain in classification performance. 
 
 Notice that although the same *HD* value could be found in the same differentially
 methylated cytosine site in control and treatment, if the probabilities
