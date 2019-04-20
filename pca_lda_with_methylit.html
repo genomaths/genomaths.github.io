@@ -273,7 +273,7 @@ Maintainer: Robersy Sanchez</div></em></h4>
 <h4 class="date"><em>20 April 2019</em></h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>When methylation analysis is intended for diagnostic/prognostic purposes, for example, in clinical application of patient diagnostics, to know whether the patient would be in healthy or disease stage, we would like to have a good predictor tool in our side. It turns out that classical machine learning (ML) tools like hierarchical clustering, principal components and linear discriminant analysis can help us to reach such a goal. The current Methyl-IT downstream analysis is equipped with the mentioned ML tools.</p>
+<p>When methylation analysis is intended for diagnostic/prognostic purposes, for example, in clinical applications for patient diagnostics, to know whether the patient would be in healthy or disease stage, we would like to have a good predictor tool in our side. It turns out that classical machine learning (ML) tools like hierarchical clustering, principal components and linear discriminant analysis can help us to reach such a goal. The current Methyl-IT downstream analysis is equipped with the mentioned ML tools.</p>
 </div>
 
 </div>
@@ -346,7 +346,7 @@ pre { /* Code block - determines code spacing between lines */
 <div id="background" class="section level1">
 <h1><span class="header-section-number">1</span> Background</h1>
 <p>The discrimination of the methylation signal from the stochastic methylation background resultant from the standard (non-stressful) biological processes is a critical step for the genome-wide methylation analysis. Such a discrimination requires for the knowledge of the probability distribution of the information divergence of methylation levels and a proper evaluation of the classification performance of differentially methylated positions (DMPs) into two classes: DMPs from control and DMPs from treatment.</p>
-<p>Once a methylation analysis is performed to detect the genome-wide differentially methylated positions (DMP), a natural next step is to investigate whether the detected DMPs carries enough discriminatory power to discern between individual groups. Then, we must move from the methylation analysis to statistical/machine learning field (multivariate statistics). To reach our goal, each individual can be represented as a vector from the <span class="math inline">\(N\)</span>-dimensional space of DMPs, where DMPs can be expressed in terms of some suitable measurement as function of the methylation levels. These suitable measurement are information divergences, such as total variation distance (<span class="math inline">\(TV_d\)</span>, the absolute value of methylation level) and Hellinger divergence (<span class="math inline">\(H\)</span>). It is worthy to observe that methylation levels are uncertainty measurements and, therefore, they do not carry information per se. Information is only carried on measurements expressing uncertainty variations like <span class="math inline">\(TV_d\)</span>, <span class="math inline">\(H\)</span>, Jensen-Shannon Divergence, and in general, the so called theoretical information divergences.</p>
+<p>Once a methylation analysis is performed to detect the genome-wide DMPs, a natural next step is to investigate whether the detected DMPs carries enough discriminatory power to discern between individual groups. Then, we must move from the methylation analysis to statistical/machine learning field (multivariate statistics). To reach our goal, each individual can be represented as a vector from the <span class="math inline">\(N\)</span>-dimensional space of DMPs, where DMPs can be expressed in terms of some suitable measurement as function of the methylation levels. These suitable measurement are information divergences, such as total variation distance (<span class="math inline">\(TV_d\)</span>, the absolute value of methylation levels) and Hellinger divergence (<span class="math inline">\(H\)</span>). It is worthy to observe that methylation levels are uncertainty measurements and, therefore, they do not carry information per se. Information is only carried on measurements expressing uncertainty variations like <span class="math inline">\(TV_d\)</span>, <span class="math inline">\(H\)</span>, Jensen-Shannon Divergence, and in general, the so called information theoretical divergences <span class="citation">(Liese and Vajda 2006)</span>.</p>
 <p>The <span class="math inline">\(N\)</span>-dimensional space of DMPs is, usually, too big. So, a first dimension reduction is required. This can be done by splitting the chromosomes into non-overlapping genomic region and next computing some statistic like the <em>sum</em> or <em>mean</em> of some information divergences of methylation levels at DMPs inside of each region. Still we will have to deal with a multidimensional space, but acceptable for a meaningful application of hierarchical clustering (HC), principal component analysis (PCA) and linear discriminant analysis (LDA). In the current examples, Methyl-IT methylation analysis will be applied to a dataset of simulated samples to detect DMPs on then. Next, after space dimension reduction, the mentioned machine learning approached will be applied.</p>
 <p>Note: This example was made with the MethylIT version 0.3.2</p>
 </div>
@@ -433,7 +433,7 @@ nlms.wb<span class="op">$</span>T1</code></pre></div>
 ## shape 0.51716858 8.119734e-04 636.9280         0 0.970656620966604
 ## scale 0.03409413 6.695789e-05 509.1876         0                  
 ##                    rho       R.Cross.val              DEV
-## shape 0.97065544718449 0.991728733238243 122.254748252602
+## shape 0.97065544718449 0.991728025970871 122.254748252602
 ## scale                                                    
 ##                     AIC               BIC     COV.shape     COV.scale
 ## shape -158783.712494407 -158757.253159554  6.593008e-07 -2.791813e-08
@@ -713,6 +713,9 @@ p0 &lt;-<span class="st"> </span><span class="kw">theme</span>(
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 <div id="refs" class="references">
+<div id="ref-Liese2006">
+<p>Liese, Friedrich, and Igor Vajda. 2006. “On divergences and informations in statistics and information theory.” <em>IEEE Transactions on Information Theory</em> 52 (10): 4394–4412. doi:<a href="https://doi.org/10.1109/TIT.2006.881731">10.1109/TIT.2006.881731</a>.</p>
+</div>
 <div id="ref-Stevens2009">
 <p>Stevens, James P. 2009. <em>Applied Multivariate Statistics for the Social Sciences</em>. Fifth Edit. Routledge Academic.</p>
 </div>
