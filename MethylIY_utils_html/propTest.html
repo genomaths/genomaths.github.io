@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Beta Regression for methylation levels and rates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIY_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for propTest {<a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a>}"><tr><td>propTest {<a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Beta Regression for methylation levels and rates</h2>
+
+<h3>Description</h3>
+
+<p>Beta Regression analysis for treatment versus control group
+comparison of methylation levels, appends three new metacolumns &quot;beta&quot;,
+&quot;log2FC&quot;, &quot;pvalue&quot; to the provided GRanges argument
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+propTest(GR, control.names, treatment.names, link = "logit",
+  type = "ML", tv.cut = NULL, indvPerGrp = 0, FilterLog2FC = TRUE,
+  pAdjustMethod = "BH", pvalCutOff = 0.05, Minlog2FC = 0.5,
+  saveAll = FALSE, num.cores = 1, tasks = 0L, verbose = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>GR</code></td>
+<td>
+<p>GRanges objects including control and treatment samples containing
+the methylation levels. The name for each column must coincide with the
+names given for parameters: 'control.names' and 'treatment.names'.</p>
+</td></tr>
+<tr valign="top"><td><code>control.names</code></td>
+<td>
+<p>Names/IDs of the control samples, which must be include
+in the variable GR at the metacolumn.</p>
+</td></tr>
+<tr valign="top"><td><code>treatment.names</code></td>
+<td>
+<p>Names/IDs of the treatment samples, which must be
+included in the variable GR at the metacolumn.</p>
+</td></tr>
+<tr valign="top"><td><code>link</code></td>
+<td>
+<p>Parameter to be passed to function 'betareg' from package
+'betareg'. character specification of the link function in the mean model
+(mu). Currently, &quot;logit&quot;, &quot;probit&quot;, &quot;cloglog&quot;, &quot;cauchit&quot;, &quot;log&quot;,
+&quot;loglog&quot; are supported. Alternatively, an object of class &quot;link-glm&quot;
+can be supplied (see <code>betareg</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Parameter to be passed to function 'betareg' from package
+'betareg'. A character specification of the type of estimator. Currently,
+maximum likelihood (&quot;ML&quot;), ML with bias correction (&quot;BC&quot;), and ML with
+bias reduction (&quot;BR&quot;) are supported.</p>
+</td></tr>
+<tr valign="top"><td><code>tv.cut</code></td>
+<td>
+<p>A cutoff for the total variation distance (TVD; absolute value
+of methylation levels differences) estimated at each site/range as the
+difference of the group means of methylation levels. If tv.cut is
+provided, then sites/ranges k with abs(TV_k) &lt; tv.cut are removed before
+to perform the regression analysis. Its value must be NULL or a number
+0 &lt; tv.cut &lt; 1.</p>
+</td></tr>
+<tr valign="top"><td><code>indvPerGrp</code></td>
+<td>
+<p>An integer number giving the minimum number of individuals
+per group at each site/region. Default 2.</p>
+</td></tr>
+<tr valign="top"><td><code>FilterLog2FC</code></td>
+<td>
+<p>if TRUE, the results are filtered using the minimun
+absolute value of log2FoldChanges observed to accept that a gene in the
+treatment is differentially expressed in respect to the control.</p>
+</td></tr>
+<tr valign="top"><td><code>pAdjustMethod</code></td>
+<td>
+<p>method used to adjust the results; default: BH</p>
+</td></tr>
+<tr valign="top"><td><code>pvalCutOff</code></td>
+<td>
+<p>cutoff used, then a p-value adjustment is performed. If
+NULL all the reported p-values are for testing.</p>
+</td></tr>
+<tr valign="top"><td><code>Minlog2FC</code></td>
+<td>
+<p>minimum logarithm base 2 of fold changes.</p>
+</td></tr>
+<tr valign="top"><td><code>saveAll</code></td>
+<td>
+<p>if TRUE all the temporal results are returned.</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores</code></td>
+<td>
+<p>The number of cores to use, i.e. at most how many child
+processes will be run simultaneously (see bpapply function from
+BiocParallel).</p>
+</td></tr>
+<tr valign="top"><td><code>tasks</code></td>
+<td>
+<p>integer(1). The number of tasks per job. value must be a scalar
+integer &gt;= 0L. In this documentation a job is defined as a single call
+to a function, such as bplapply, bpmapply etc. A task is the division of
+the X argument into chunks. When tasks == 0 (default), X is divided as
+evenly as possible over the number of workers (see MulticoreParam from
+BiocParallel package).</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>if TRUE, prints the function log to stdout</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Beta Regression analysis for group comparison of methylation levels
+is performed using the function <code>betareg</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The original GRanges object with the columns &quot;beta&quot;, &quot;log2FC&quot;,
+&quot;pvalue&quot;, and TV added.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+num.cyt &lt;- 11001 # Number of cytosine position with methylation call
+max.cyt = 14000
+## Gene annotation
+genes &lt;- GRanges(seqnames = "1",
+                 ranges = IRanges(start = c(3631, 6788, 11649),
+                                  end = c(5899, 9130, 13714)),
+                 strand = c("+", "-", "-"))
+mcols(genes) &lt;- data.frame(gene_id = c("AT1G01010", "AT1G01020",
+                                       "AT1G01030"))
+
+set.seed(123) #'#' To set a seed for random number generation
+## GRanges object of the reference with methylation levels in
+## its meta-column
+Ref &lt;- makeGRangesFromDataFrame(
+  data.frame(chr = '1',
+             start = 3000:max.cyt,
+             end = 3000:max.cyt,
+             strand = '*',
+             p1 = rbeta(num.cyt, shape1 = 1, shape2 = 1.5)),
+  keep.extra.columns = TRUE)
+
+## List of Granges objects of individuals methylation levels
+Indiv &lt;- GRangesList(
+  sample11 = makeGRangesFromDataFrame(
+    data.frame(chr = '1',
+               start = 3000:max.cyt,
+               end = 3000:max.cyt,
+               strand = '*',
+               p2 = rbeta(num.cyt, shape1 = 1.5, shape2 = 2)),
+    keep.extra.columns = TRUE),
+  sample12 = makeGRangesFromDataFrame(
+    data.frame(chr = '1',
+               start = 3000:max.cyt,
+               end = 3000:max.cyt,
+               strand = '*',
+               p2 = rbeta(num.cyt, shape1 = 1.6, shape2 = 2.1)),
+    keep.extra.columns = TRUE),
+  sample21 = makeGRangesFromDataFrame(
+    data.frame(chr = '1',
+               start = 3000:max.cyt,
+               end = 3000:max.cyt,
+               strand = '*',
+               p2 = rbeta(num.cyt, shape1 = 10, shape2 = 4)),
+    keep.extra.columns = TRUE),
+  sample22 = makeGRangesFromDataFrame(
+    data.frame(chr = '1',
+               start = 3000:max.cyt,
+               end = 3000:max.cyt,
+               strand = '*',
+               p2 = rbeta(num.cyt, shape1 = 11, shape2 = 4)),
+    keep.extra.columns = TRUE))
+## To estimate Hellinger divergence using only the methylation levels.
+HD &lt;- estimateDivergence(ref = Ref, indiv = Indiv, meth.level = TRUE,
+                         columns = 1)
+## To perform the nonlinear regression analysis
+nlms &lt;- nonlinearFitDist(HD, column = 4, verbose = FALSE)
+
+## Next, the potential signal can be estimated
+PS &lt;- getPotentialDIMP(LR = HD, nlms = nlms, div.col = 4, alpha = 0.05)
+
+## The cutpoint estimation used to discriminate the signal from the noise
+cutpoints &lt;- estimateCutPoint(PS, control.names = c("sample11", "sample12"),
+                              treatment.names = c("sample21", "sample22"),
+                              div.col = 4, verbose = TRUE)
+## DIMPs are selected using the cupoints
+DIMPs &lt;- selectDIMP(PS, div.col = 4, cutpoint = min(cutpoints$cutpoint))
+
+## Finally DIMPs statistics genes
+p_DIMPs = getGRegionsStat(GR = DIMPs, grfeatures = genes, stat = "mean",
+                          prob = TRUE, column = 2L)
+
+GR_p_DIMP = uniqueGRanges(p_DIMPs, type = "equal", chromosomes = "1")
+colnames(mcols(GR_p_DIMP)) &lt;-  c("sample11", "sample12", "sample21",
+                                "sample22")
+names(GR_p_DIMP) &lt;- genes$gene_id
+
+## Group differences between methylation levels
+propTest(GR = GR_p_DIMP, control.names = c("sample11", "sample12"),
+         treatment.names = c("sample21", "sample22"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a></em> version 0.3.2 ]</div>
+</body></html>

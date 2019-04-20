@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict function for probability distributions in Methyl-IT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIY_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for predict.ProbDistr {<a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a>}"><tr><td>predict.ProbDistr {<a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Predict function for probability distributions in Methyl-IT</h2>
+
+<h3>Description</h3>
+
+<p>This is an utility function to get predictions from the
+probability distributions models used in Methyl-IT: Weibull, Gamma, and
+generalized Gamma. Some times, after the nonlinear fit of any of the
+mentioned modelsm we would like to evaluate the model output.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'ProbDistr'
+predict(nlm, pred = "quant", q = 0.95, dist.name)
+
+## S3 method for class 'ProbDistrList'
+predict(nlm, pred = "quant", q = 0.95,
+  dist.name, num.cores = 1L, tasks = 0L)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>nlm</code></td>
+<td>
+<p>An object carrying the best nonlinear fit for a distribution model
+obtained with function <code>nonlinearFitDist</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>pred</code></td>
+<td>
+<p>Type of prediction resquested: *density* (&quot;dens&quot;),*quantiles*
+(&quot;quant&quot;), *random number* (&quot;rnum&quot;) or *probabilities* (&quot;prob&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>numeric vector of quantiles, probabilities or an interger if
+pred = &quot;rnum&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>dist.name</code></td>
+<td>
+<p>name of the distribution to fit: Weibull2P (default:
+&quot;Weibull2P&quot;), Weibull three-parameters (Weibull3P), gamma with
+three-parameter (Gamma3P), gamma with two-parameter (Gamma2P),
+generalized gamma with three-parameter (&quot;GGamma3P&quot;) or four-parameter
+(&quot;GGamma4P&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores, tasks</code></td>
+<td>
+<p>Paramaters for parallele computation using package
+<code>BiocParallel-package</code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously
+(see <code>bplapply</code> and the number of tasks per job
+(only for Linux OS).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Predictions are based on the best model fit returned by function
+<code>nonlinearFitDist</code>. The possible prediction are: *density*,
+*quantiles*, *random number* or *probabilities*.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(1)
+num.points &lt;- 1000
+HD &lt;- makeGRangesFromDataFrame(
+  data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
+            strand = '*',
+            hdiv = rweibull(1:num.points, shape = 0.75, scale = 1)),
+  keep.extra.columns = TRUE)
+nlms &lt;- nonlinearFitDist(list(HD), column = 1, verbose = FALSE)
+
+x=seq(0.1, 10, 0.05)
+y &lt;- predict(nlms[[1]], pred="dens", q = x,
+                dist.name="Weibull2P")
+y1 &lt;- dweibull(x, shape = 0.75, scale = 1)
+# The maximum difference between the "theoretical" and estimated densities
+max(abs(round(y, 2) - round(y1, 2)))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a></em> version 0.3.2 ]</div>
+</body></html>

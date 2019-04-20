@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Statistic of Genomic Regions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIY_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for getGRegionsStat-methods {<a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a>}"><tr><td>getGRegionsStat-methods {<a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Statistic of Genomic Regions</h2>
+
+<h3>Description</h3>
+
+<p>A function to estimate the centrality measures of a specified
+variable given in GRanges object (a column from the metacolums of the
+GRanges object) after split the GRanges object into intervals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+getGRegionsStat(GR, win.size = 350, step.size = 350,
+  grfeatures = NULL, stat = c("sum", "mean", "gmaean", "median",
+  "density"), absolute = FALSE, select.strand = NULL, column = 1L,
+  prob = FALSE, entropy = FALSE, maxgap = -1L, minoverlap = 0L,
+  scaling = 1000L, logbase = 2, type = c("any", "start", "end",
+  "within", "equal"), ignore.strand = FALSE, na.rm = TRUE,
+  num.cores = 1L, tasks = 0, ...)
+
+## S4 method for signature 'GRanges'
+getGRegionsStat(GR, win.size, step.size, grfeatures,
+  stat, absolute, select.strand, column, prob, entropy, maxgap, minoverlap,
+  scaling, logbase, type, ignore.strand, na.rm)
+
+## S4 method for signature 'list'
+getGRegionsStat(GR, win.size = 350, step.size = 350,
+  grfeatures = NULL, stat = c("sum", "mean", "gmaean", "median",
+  "density"), absolute = FALSE, select.strand = NULL, column = 1L,
+  prob = FALSE, entropy = FALSE, maxgap = -1L, minoverlap = 0L,
+  scaling = 1000L, logbase = 2, type = c("any", "start", "end",
+  "within", "equal"), ignore.strand = FALSE, na.rm = TRUE,
+  num.cores = 1L, tasks = 0, ...)
+
+## S4 method for signature 'InfDiv'
+getGRegionsStat(GR, win.size = 350, step.size = 350,
+  grfeatures = NULL, stat = c("sum", "mean", "gmaean", "median",
+  "density"), absolute = FALSE, select.strand = NULL, column = 1L,
+  prob = FALSE, entropy = FALSE, maxgap = -1L, minoverlap = 0L,
+  scaling = 1000L, logbase = 2, type = c("any", "start", "end",
+  "within", "equal"), ignore.strand = FALSE, na.rm = TRUE,
+  num.cores = 1L, tasks = 0, ...)
+
+## S4 method for signature 'pDMP'
+getGRegionsStat(GR, win.size = 350, step.size = 350,
+  grfeatures = NULL, stat = c("sum", "mean", "gmaean", "median",
+  "density"), absolute = FALSE, select.strand = NULL, column = 1L,
+  prob = FALSE, entropy = FALSE, maxgap = -1L, minoverlap = 0L,
+  scaling = 1000L, logbase = 2, type = c("any", "start", "end",
+  "within", "equal"), ignore.strand = FALSE, na.rm = TRUE,
+  num.cores = 1L, tasks = 0, ...)
+
+## S4 method for signature 'GRangesList'
+getGRegionsStat(GR, win.size = 350,
+  step.size = 350, grfeatures = NULL, stat = c("sum", "mean",
+  "gmaean", "median", "density"), absolute = FALSE,
+  select.strand = NULL, column = 1L, prob = FALSE, entropy = FALSE,
+  maxgap = -1L, minoverlap = 0L, scaling = 1000L, logbase = 2,
+  type = c("any", "start", "end", "within", "equal"),
+  ignore.strand = FALSE, na.rm = TRUE, num.cores = 1L, tasks = 0,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>GR</code></td>
+<td>
+<p>A Grange object with the variable of interest in its metacolumn.</p>
+</td></tr>
+<tr valign="top"><td><code>win.size</code></td>
+<td>
+<p>An integer for the size of the windows/regions size of the
+intervals of genomics regions.</p>
+</td></tr>
+<tr valign="top"><td><code>step.size</code></td>
+<td>
+<p>Interval at which the regions/windows must be defined</p>
+</td></tr>
+<tr valign="top"><td><code>grfeatures</code></td>
+<td>
+<p>A GRanges object corresponding to an annotated genomic
+feature. For example, gene region, transposable elements, exons,
+intergenic region, etc. If provided, then parameters 'win.size' and
+step.size are ignored and the statistics are estimated for 'grfeatures'.</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>Statistic used to estimate the summarized value of the variable
+of interest in each interval/window. Posible options are: &quot;mean&quot;,
+geometric mean (&quot;gmean&quot;), &quot;median&quot;, &quot;density&quot;, and &quot;sum&quot; (default). Here,
+we define &quot;density&quot; as the sum of values from the variable of interest
+in the given region devided by the length of the region.</p>
+</td></tr>
+<tr valign="top"><td><code>absolute</code></td>
+<td>
+<p>Optional. Logic (default: FALSE). Whether to use the absolute
+values of the variable provided</p>
+</td></tr>
+<tr valign="top"><td><code>select.strand</code></td>
+<td>
+<p>Optional. If provided,&quot;+&quot; or &quot;-&quot;, then the summarized
+statistic is computed only for the specified DNA chain.</p>
+</td></tr>
+<tr valign="top"><td><code>column</code></td>
+<td>
+<p>Integer number denoting the column where the variable of
+interest is located in the metacolumn of the GRanges object or an integer
+vector of two elements (only if prob = TRUE).</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>Logic. If TRUE and the variable of interest has values between
+zero and 1, then the summarized statistic is comuputed using Fisher's
+transformation. If length(column) == 2, say with colums x1 and x2, then
+the variable of interest will be p = x1/(x1 + x2). For example, if x1
+and x2 are methylated and unmethylated read counts, respectively, then p
+is the methylation level.</p>
+</td></tr>
+<tr valign="top"><td><code>entropy</code></td>
+<td>
+<p>Logic. Whether to compute the entropy when prob == TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>maxgap, minoverlap, type</code></td>
+<td>
+<p>See ?findOverlaps in the IRanges package for a
+description of these arguments.</p>
+</td></tr>
+<tr valign="top"><td><code>scaling</code></td>
+<td>
+<p>integer (default 1). Scaling factor to be used when
+stat = &quot;density&quot;. For example, if scaling = 1000, then density * scaling
+denotes the sum of values in 1000 bp.</p>
+</td></tr>
+<tr valign="top"><td><code>logbase</code></td>
+<td>
+<p>A positive number: the base with respect to which logarithms</p>
+</td></tr>
+<tr valign="top"><td><code>ignore.strand</code></td>
+<td>
+<p>When set to TRUE, the strand information is ignored in
+the overlap calculations.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>Logical value. If TRUE, the NA values will be removed</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores, tasks</code></td>
+<td>
+<p>Paramaters for parallele computation using package
+<code>BiocParallel-package</code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously
+(see <code>bplapply</code> and the number of tasks per job
+(only for Linux OS).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function split a Grange object into intervals genomic regions
+(GR) of fixed size (as given in function &quot;tileMethylCounts2&quot; R package
+methylKit, with small changes). A summarized statistic (mean, median,
+geometric mean or sum) is calculated for the specified variable values
+from each region. Notice that if win.size == step.size, then
+non-overlapping windows are obtained.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A GRanges object with the new genomic regions and their corresponding
+summarized statistic.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robersy Sanchez
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+gr &lt;- GRanges(seqnames = Rle( c("chr1", "chr2", "chr3", "chr4"),
+            c(5, 5, 5, 5)),
+            ranges = IRanges(start = 1:20, end = 1:20),
+            strand = rep(c("+", "-"), 10),
+            GC = seq(1, 0, length = 20))
+grs &lt;- getGRegionsStat(gr, win.size = 4, step.size = 4)
+grs
+
+## Selecting the positive strand
+grs &lt;- getGRegionsStat(gr, win.size = 4, step.size = 4, select.strand = "+")
+grs
+
+## Selecting the negative strand
+grs &lt;- getGRegionsStat(gr, win.size = 4, step.size = 4, select.strand = "-")
+grs
+
+## Operating over a list of GRanges objects
+gr2 &lt;- GRanges(seqnames = Rle( c("chr1", "chr2", "chr3", "chr4"),
+                            c(5, 5, 5, 5)),
+                ranges = IRanges(start = 1:20, end = 1:20),
+                strand = rep(c("+", "-"), 10),
+                GC = runif(20))
+
+grs &lt;- getGRegionsStat(list(gr1 = gr, gr2 = gr2), win.size = 4, step.size=4)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a></em> version 0.3.2 ]</div>
+</body></html>

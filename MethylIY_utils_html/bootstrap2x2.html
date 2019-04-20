@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: bootstrap2x2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIY_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for bootstrap2x2 {<a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a>}"><tr><td>bootstrap2x2 {<a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>bootstrap2x2</h2>
+
+<h3>Description</h3>
+
+<p>Parametric Bootstrap of 2x2 Contingence independence test. The
+goodness of fit statistic is the root-mean-square statistic (RMST) or
+Hellinger divergence, as proposed by Perkins et al. [1, 2]. Hellinger
+divergence (HD) is computed as proposed in [3].
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bootstrap2x2(x, stat = "rmst", num.permut = 100)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numerical matrix corresponding to cross tabulation (2x2) table
+(contingency table).</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>Statistic to be used in the testing: 'rmst','hdiv', or &quot;all&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>num.permut</code></td>
+<td>
+<p>Number of permutations.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For goodness-of-fit the following null hypothesis is tested
+<i>H_&theta;: p = p(&theta;)</i>
+To conduct a single simulation, we perform the following three-step
+procedure [1,2]:
+</p>
+
+<ol>
+<li><p> To generate m i.i.d. draws according to the model distribution
+<i>p(&theta;)</i>, where <i>&theta;'</i> is the estimate calculated
+from the experimental data,
+</p>
+</li>
+<li><p> To estimate the parameter <i>&theta;</i> from the data generated in
+Step 1, obtaining a new estimate <i>&theta;</i>est.
+</p>
+</li>
+<li><p> To calculate the statistic under consideration (HD,
+RMST), using the data generated in Step 1 and taking the model
+distribution to be <i>&theta;</i>est, where <i>&theta;</i>est is the
+estimate calculated in Step 2 from the data generated in Step 1.
+</p>
+</li></ol>
+
+<p>After conducting many such simulations, the confidence level for
+rejecting the null hypothesis is the fraction of the statistics
+calculated in step 3 that are less than the statistic calculated from
+the empirical data. The significance level α is the same as a confidence
+level of <i>1-&alpha;</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A p-value probability
+</p>
+
+
+<h3>References</h3>
+
+
+<ol>
+<li><p> Perkins W, Tygert M, Ward R. Chi^2 and Classical Exact Tests
+Often Wildly Misreport Significance; the Remedy Lies in Computers
+[Internet]. Uploaded to ArXiv. 2011. Report No.:
+arXiv:1108.4126v2.
+</p>
+</li>
+<li><p> Perkins, W., Tygert, M. &amp; Ward, R. Computing the confidence
+levels or a root-mean square test of goodness-of-fit. 217,
+9072-9084 (2011).
+</p>
+</li>
+<li><p> Basu, A., Mandal, A. &amp; Pardo, L. Hypothesis testing for two
+discrete populations based on the Hellinger distance. Stat.
+Probab. Lett. 80, 206-214 (2010).
+</p>
+</li></ol>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+    set.seed(123)
+    TeaTasting = matrix(c(8, 350, 2, 20), nrow = 2,
+                        dimnames = list(Guess = c("Milk", "Tea"),
+                        Truth = c("Milk", "Tea")))
+    ## Small num.permut for test's speed sake
+    bootstrap2x2( TeaTasting, stat = "all", num.permut = 100 )
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_utils_HTML_Manual/MethylIT_Manual.html'>MethylIT.utils</a></em> version 0.3.2 ]</div>
+</body></html>
