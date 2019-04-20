@@ -353,8 +353,10 @@ pre { /* Code block - determines code spacing between lines */
 <div id="data-generation" class="section level1">
 <h1><span class="header-section-number">2</span> Data generation</h1>
 <p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read-count matrices of methylated and unmethylated cytosine are generated with MethylIT.utils function <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/simulateCounts.html">simulateCounts</a>. A standard analysis of this dataset is given in the web page: <a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MethylIT.utils)
-<span class="kw">library</span>(MethylIT)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MethylIT.utils)</code></pre></div>
+<pre><code>## Warning in read.dcf(con): URL 'http://bioconductor.org/BiocInstaller.dcf':
+## status was 'Couldn't resolve host name'</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MethylIT)
 <span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(ape)
 
@@ -433,7 +435,7 @@ nlms.wb<span class="op">$</span>T1</code></pre></div>
 ## shape 0.51716858 8.119734e-04 636.9280         0 0.970656620966604
 ## scale 0.03409413 6.695789e-05 509.1876         0                  
 ##                    rho       R.Cross.val              DEV
-## shape 0.97065544718449 0.991728025970871 122.254748252602
+## shape 0.97065544718449 0.991729191613116 122.254748252602
 ## scale                                                    
 ##                     AIC               BIC     COV.shape     COV.scale
 ## shape -158783.712494407 -158757.253159554  6.593008e-07 -2.791813e-08
@@ -614,7 +616,7 @@ ld &lt;-<span class="st"> </span><span class="kw">pcaLDA</span>(<span class="dt"
 <p>We may retain enough components so that the cumulative percent of variance accounted for at least 70 to 80%.</p>
 <div id="pca-graphic" class="section level2">
 <h2><span class="header-section-number">7.1</span> PCA Graphic</h2>
-<p>The individual coordinates in the principal components (PCs)</p>
+<p>The individual coordinates in the principal components (PCs) are returned by function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/pcaLDA.html">pcaLDA</a>. In the current case, based on the cumulative proportion of variance, the two firsts PCs carried about the 84% of the total sample variance and could split the sample into meaningful groups.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca.coord &lt;-<span class="st"> </span>ld<span class="op">$</span>pca<span class="op">$</span>x
 pca.coord</code></pre></div>
 <pre><code>##           PC1        PC2           PC3
@@ -636,7 +638,7 @@ pca.coord</code></pre></div>
 </div>
 <div id="graphic-pc1-vs-pc2" class="section level2">
 <h2><span class="header-section-number">7.2</span> Graphic PC1 vs PC2</h2>
-<p>The graphic for individual coordinates in the first two principal components can be easely visualized</p>
+<p>Next, the graphic for individual coordinates in the two firsts PCs can be easely visualized now:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">data.frame</span>(pca.coord[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">subgrp =</span> grps)
 
 p0 &lt;-<span class="st"> </span><span class="kw">theme</span>(
@@ -673,7 +675,7 @@ p0 &lt;-<span class="st"> </span><span class="kw">theme</span>(
 </div>
 <div id="graphic-ld1-vs-ld2" class="section level2">
 <h2><span class="header-section-number">7.3</span> Graphic LD1 vs LD2</h2>
-<p>In the current case, better resolution is obtained with the linear discriminant function, which is based on the three firsts PCs. Notice that the number principal components used the LDA step must be lower than the number of individuals (N) divided by 3: N/3.</p>
+<p>In the current case, better resolution is obtained with the linear discriminant functions, which is based on the three firsts PCs. Notice that the number principal components used the LDA step must be lower than the number of individuals (<span class="math inline">\(N\)</span>) divided by 3: <span class="math inline">\(N/3\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind.coord &lt;-<span class="st"> </span><span class="kw">predict</span>(ld, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(dmgm), <span class="dt">type =</span> <span class="st">&quot;scores&quot;</span>)
 dt &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ind.coord, <span class="dt">subgrp =</span> grps)
 
