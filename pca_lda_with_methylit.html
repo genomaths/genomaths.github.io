@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2019-04-20" />
+<meta name="date" content="2019-04-21" />
 
 <title>Principal Components and Linear Discriminant Analyses with Methyl-IT</title>
 
@@ -270,10 +270,10 @@ Mackenzie’s lab</div>
 <div style="white-space: pre-line;">Department of Biology and Plant Science.
 Pennsylvania State University, University Park, PA 16802
 Maintainer: Robersy Sanchez</div></em></h4>
-<h4 class="date"><em>20 April 2019</em></h4>
+<h4 class="date"><em>21 April 2019</em></h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>When methylation analysis is intended for diagnostic/prognostic purposes, for example, in clinical applications for patient diagnostics, to know whether the patient would be in healthy or disease stage, we would like to have a good predictor tool in our side. It turns out that classical machine learning (ML) tools like hierarchical clustering, principal components and linear discriminant analysis can help us to reach such a goal. The current Methyl-IT downstream analysis is equipped with the mentioned ML tools.</p>
+<p>When methylation analysis is intended for diagnostic/prognostic purposes, for example, in clinical applications for patient diagnostics, to know whether the patient would be in healthy or disease stage we would like to have a good predictor tool in our side. It turns out that classical machine learning (ML) tools like hierarchical clustering, principal components and linear discriminant analysis can help us to reach such a goal. The current Methyl-IT downstream analysis is equipped with the mentioned ML tools.</p>
 </div>
 
 </div>
@@ -352,15 +352,12 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="data-generation" class="section level1">
 <h1><span class="header-section-number">2</span> Data generation</h1>
-<p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read-count matrices of methylated and unmethylated cytosine are generated with MethylIT.utils function <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/simulateCounts.html">simulateCounts</a>. A standard analysis of this dataset is given in the web page: <a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MethylIT.utils)</code></pre></div>
-<pre><code>## Warning in read.dcf(con): URL 'http://bioconductor.org/BiocInstaller.dcf':
-## status was 'Couldn't resolve host name'</code></pre>
+<p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read-count matrices of methylated and unmethylated cytosine are generated with MethylIT.utils function <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/simulateCounts.html">simulateCounts</a>. A basic example generating datasets is given in the web page: <a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MethylIT)
+<span class="kw">library</span>(MethylIT.utils)
 <span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(ape)
 
-bmean &lt;-<span class="st"> </span><span class="cf">function</span>(alpha, beta) alpha<span class="op">/</span>(alpha <span class="op">+</span><span class="st"> </span>beta)
 alpha.ct &lt;-<span class="st"> </span><span class="fl">0.01</span>
 alpha.g1 &lt;-<span class="st"> </span><span class="fl">0.021</span>
 alpha.g2 &lt;-<span class="st"> </span><span class="fl">0.025</span>
@@ -435,7 +432,7 @@ nlms.wb<span class="op">$</span>T1</code></pre></div>
 ## shape 0.51716858 8.119734e-04 636.9280         0 0.970656620966604
 ## scale 0.03409413 6.695789e-05 509.1876         0                  
 ##                    rho       R.Cross.val              DEV
-## shape 0.97065544718449 0.991729191613116 122.254748252602
+## shape 0.97065544718449 0.991728694533984 122.254748252602
 ## scale                                                    
 ##                     AIC               BIC     COV.shape     COV.scale
 ## shape -158783.712494407 -158757.253159554  6.593008e-07 -2.791813e-08
@@ -489,7 +486,7 @@ cut.wb</code></pre></div>
 ## classifier         1      -none-          character
 ## statistic          1      -none-          character
 ## optStatVal         1      -none-          numeric</code></pre>
-<p>The cutpoint is higher from what is expected from the higher treatment empirical critical value: <span class="math inline">\(HD_{\alpha = 0.05}^{TT_{Emp}}=33.98 &lt; 37 \le HD\)</span>.</p>
+<p>The cutpoint is higher from what is expected from the higher treatment empirical critical value: <span class="math inline">\(H_{\alpha = 0.05}^{TT_{Emp}}=33.98 &lt; 37 \le H\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Model performance in in the test dataset</span>
 cut.wb<span class="op">$</span>testSetPerformance</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
@@ -614,8 +611,8 @@ ld &lt;-<span class="st"> </span><span class="kw">pcaLDA</span>(<span class="dt"
 ## Proportion of Variance   0.7823   0.05635   0.04116
 ## Cumulative Proportion    0.7823   0.83860   0.87976</code></pre>
 <p>We may retain enough components so that the cumulative percent of variance accounted for at least 70 to 80%.</p>
-<div id="pca-graphic" class="section level2">
-<h2><span class="header-section-number">7.1</span> PCA Graphic</h2>
+<div id="pca" class="section level2">
+<h2><span class="header-section-number">7.1</span> PCA</h2>
 <p>The individual coordinates in the principal components (PCs) are returned by function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/pcaLDA.html">pcaLDA</a>. In the current case, based on the cumulative proportion of variance, the two firsts PCs carried about the 84% of the total sample variance and could split the sample into meaningful groups.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca.coord &lt;-<span class="st"> </span>ld<span class="op">$</span>pca<span class="op">$</span>x
 pca.coord</code></pre></div>
