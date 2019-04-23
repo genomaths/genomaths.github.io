@@ -9,7 +9,7 @@ author: |
  | Department of Biology and Plant Science. 
  | Pennsylvania State University, University Park, PA 16802
  | Maintainer: Robersy Sanchez
-date: "21 April 2019"
+date: "22 April 2019"
 fontsize: 11pt
 fontfamily: "serif"
 bibliography: bibliography.bib
@@ -268,7 +268,7 @@ nlms.wb$T1
 ## shape 0.51716858 8.119734e-04 636.9280         0 0.970656620966604
 ## scale 0.03409413 6.695789e-05 509.1876         0                  
 ##                    rho       R.Cross.val              DEV
-## shape 0.97065544718449 0.991728694533984 122.254748252602
+## shape 0.97065544718449 0.991729532333026 122.254748252602
 ## scale                                                    
 ##                     AIC               BIC     COV.shape     COV.scale
 ## shape -158783.712494407 -158757.253159554  6.593008e-07 -2.791813e-08
@@ -451,14 +451,14 @@ dmps.wb <- selectDIMP(LR = divs, div.col = 9L, cutpoint = 37, tv.cut = 0.34, tv.
 Next, to represent individual samples as vectors from the *N*-dimensional space,
 we can use [getGRegionsStat](https://genomaths.github.io/MethylIT_utils_HTML_Manual/getGRegionsStat-methods.html)
 function from [MethylIT.utils](https://github.com/genomaths/MethylIT.utils)
-R package. Here, the simulated "chromosome" is split into regions of 100bp non-overlapping windows.
-and the *mean* of Hellinger divergences values is taken for each windows.
+R package. Here, the simulated "chromosome" is split into regions of 450bp non-overlapping windows.
+and the *density* of Hellinger divergences values is taken for each windows. 
 
 
 ```r
 ns <- names(dmps.wb)
-DMRs <- getGRegionsStat(GR = dmps.wb, win.size = 100, step.size = 100, stat = "mean",
-                        column = 9L)
+DMRs <- getGRegionsStat(GR = dmps.wb, win.size = 450, step.size = 450,
+                        stat = "density", column = 9L, scaling = 1)
 names(DMRs) <- ns
 ```
 
@@ -503,7 +503,7 @@ plot(as.phylo(hc.rsq), tip.color = colors, label.offset = 0.5, font = 2, cex = 0
      align.tip.label = TRUE, adj = 0)
 axisPhylo( 2, las = 1, lwd = 0.4, cex.axis = 1.4, hadj = 0.8, tck = -0.01 )
 hclust_rect(hc.rsq, k = 3L, border = c("green4", "blue", "red"), 
-            color = clusters.color, cuts = c(0.56, 15, 0.41, 300))
+            color = clusters.color, cuts = c(0.56, 1.4, 0.41, 6.3))
 ```
 
 ![](pca_lda_with_methylit_files/figure-html/dendrogram-1.png)<!-- -->
@@ -548,13 +548,17 @@ summary(ld$pca)
 
 ```
 ## Importance of first k=3 (out of 15) components:
-##                             PC1       PC2       PC3
-## Standard deviation     562.0441 150.85031 128.92293
-## Proportion of Variance   0.7823   0.05635   0.04116
-## Cumulative Proportion    0.7823   0.83860   0.87976
+##                            PC1     PC2     PC3
+## Standard deviation     41.5183 4.02302 3.73302
+## Proportion of Variance  0.9367 0.00879 0.00757
+## Cumulative Proportion   0.9367 0.94546 0.95303
 ```
-We may retain enough components so that the cumulative percent of
-variance accounted for at least 70 to 80%. 
+We may retain enough components so that the cumulative percent of variance
+accounted for at least 70 to 80%. By setting $scale=TRUE$ and $center=TRUE$, we
+could have different results and would improve or not our results. In
+particular, these settings are essentials if the *N*-dimensional space is
+integrated by variables from different measurement scales/units, for example, Kg
+and g, or Kg and Km.
 
 ## PCA 
 
@@ -571,22 +575,22 @@ pca.coord
 ```
 
 ```
-##           PC1        PC2           PC3
-## C1  -467.4777 -155.44418  133.36673973
-## C2  -485.2708 -158.66368  135.80703855
-## C3  -452.6720 -154.51060  138.78052335
-## C4  -440.9002 -188.78318  111.63772303
-## C5  -433.9299 -148.09296  105.20513496
-## T1  -527.1712  209.96002   91.19372454
-## T2  -535.8078  218.22894   98.87993022
-## T3  -556.5780  171.30942    0.07492895
-## T4  -526.4649  177.19046  105.64662733
-## T5  -553.6787  148.44807   64.67522447
-## T6  -649.7650  -60.99579 -145.52704599
-## T7  -606.9274   16.09337 -165.93261637
-## T8  -620.6386  -61.75814 -161.09813539
-## T9  -579.1574  -39.03569 -160.47889217
-## T10 -641.2574  -63.21083 -140.77946729
+##           PC1         PC2        PC3
+## C1  -21.74024   0.9897934 -1.1708548
+## C2  -20.39219  -0.1583025  0.3167283
+## C3  -21.19112   0.5833411 -1.1067609
+## C4  -21.45676  -1.4534412  0.3025241
+## C5  -21.28939   0.4152275  1.0021932
+## T1  -42.81810   1.1155640  8.9577860
+## T2  -43.57967   1.1712155  2.5135643
+## T3  -42.29490   2.5326690 -0.3136530
+## T4  -40.51779   0.2819725 -1.1850555
+## T5  -44.07040  -2.6172732 -4.2384395
+## T6  -50.03354   7.5276969 -3.7333568
+## T7  -50.08428 -10.1115700  3.4624095
+## T8  -51.07915  -5.4812595 -6.7778593
+## T9  -50.27508   2.3463125  3.5371351
+## T10 -51.26195   3.5405915 -0.9489265
 ```
 ## Graphic PC1 vs PC2
 
