@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: P-P plot of Two-dimensional Copulas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ppCplot {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}"><tr><td>ppCplot {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>P-P plot of Two-dimensional Copulas</h2>
+
+<h3>Description</h3>
+
+<p>The function build the P-P plot of Two-dimensional Copulas upon
+the knowledge of the margin distribution provided by the user.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ppCplot(X, Y, copula = NULL, margins = NULL, paramMargins = NULL,
+  npoints = 100, method = "ml", xlab = "Empirical probabilities",
+  ylab = "Theoretical probabilities", glwd = 1.2, bgcol = "grey94",
+  gcol = "white", dcol = "red", dlwd = 0.8, tck = NA, tcl = -0.3,
+  xlwd = 0.8, ylwd = 0.8, xcol = "black", ycol = "black",
+  padj = -1, hadj = 0.7, cex.xtitle = 1.3, cex.ytitle = 1.3,
+  xline = 1.6, yline = 2.1, xfont = 3, yfont = 3,
+  family = "serif", lty = 1, bty = "n", col = "black",
+  xlim = c(0, 1), ylim = c(0, 1), pch = 20, las = 1, mar = c(4,
+  4, 2, 1), font = 3, cex = 1, seed = 132, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>Numerical vector with the observations from the first margin
+distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>Y</code></td>
+<td>
+<p>Numerical vector with the observations from the second margin
+distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>copula</code></td>
+<td>
+<p>A copula object from class <code>Mvdc</code> or
+string specifying all the name for a copula from package
+<code>copula-package</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>margins</code></td>
+<td>
+<p>A character vector specifying all the parametric marginal
+distributions. See details below.</p>
+</td></tr>
+<tr valign="top"><td><code>paramMargins</code></td>
+<td>
+<p>A list whose each component is a list (or numeric
+vectors) of named components, giving the parameter values of the marginal
+distributions. See details below.</p>
+</td></tr>
+<tr valign="top"><td><code>npoints</code></td>
+<td>
+<p>Number of points used to build the P-P plot. The</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>A character string specifying the estimation method to be used
+to estimate the dependence parameter(s); see
+<code>fitCopula</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>A label for the x axis, defaults to a description of x.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>A label for the y axis, defaults to a description of y.</p>
+</td></tr>
+<tr valign="top"><td><code>glwd</code></td>
+<td>
+<p>Grid line width.</p>
+</td></tr>
+<tr valign="top"><td><code>bgcol</code></td>
+<td>
+<p>Grid background color.</p>
+</td></tr>
+<tr valign="top"><td><code>gcol</code></td>
+<td>
+<p>Grid line color</p>
+</td></tr>
+<tr valign="top"><td><code>dcol</code></td>
+<td>
+<p>Diagonal line color.</p>
+</td></tr>
+<tr valign="top"><td><code>dlwd</code></td>
+<td>
+<p>Diagonal line color.</p>
+</td></tr>
+<tr valign="top"><td><code>tck</code></td>
+<td>
+<p>The length of tick marks as a fraction of the smaller of the width
+or height of the plotting region. If tck &gt;= 0.5 it is interpreted as a
+fraction of the relevant side, so if tck = 1 grid lines are drawn. The
+default setting (tck = NA) is to use tcl = -0.5.</p>
+</td></tr>
+<tr valign="top"><td><code>tcl</code></td>
+<td>
+<p>The length of tick marks as a fraction of the height of a line of
+text. The default value is -0.5; setting tcl = NA sets tck = -0.01 which
+is S' default.</p>
+</td></tr>
+<tr valign="top"><td><code>xlwd</code></td>
+<td>
+<p>X-axis line width.</p>
+</td></tr>
+<tr valign="top"><td><code>ylwd</code></td>
+<td>
+<p>Y-axis line width.</p>
+</td></tr>
+<tr valign="top"><td><code>xcol</code></td>
+<td>
+<p>X-axis line color.</p>
+</td></tr>
+<tr valign="top"><td><code>ycol</code></td>
+<td>
+<p>Y-axis line color.</p>
+</td></tr>
+<tr valign="top"><td><code>padj</code></td>
+<td>
+<p>adjustment for each tick label perpendicular to the reading
+direction. For labels parallel to the axes, padj = 0 means right or top
+alignment, and padj = 1 means left or bottom alignment. This can be a
+vector given a value for each string, and will be recycled as necessary.</p>
+</td></tr>
+<tr valign="top"><td><code>hadj</code></td>
+<td>
+<p>adjustment (see par(&quot;adj&quot;)) for all labels parallel
+(‘horizontal’) to the reading direction. If this is not a finite value,
+the default is used (centring for strings parallel to the axis,
+justification of the end nearest the axis otherwise).</p>
+</td></tr>
+<tr valign="top"><td><code>cex.xtitle</code></td>
+<td>
+<p>Cex for x-axis title.</p>
+</td></tr>
+<tr valign="top"><td><code>cex.ytitle</code></td>
+<td>
+<p>Cex for y-axis title.</p>
+</td></tr>
+<tr valign="top"><td><code>xline, yline</code></td>
+<td>
+<p>On which margin line of the plot the x &amp; y labels must be
+placed, starting at 0 counting outwards
+(see <code>mtext</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>xfont, yfont</code></td>
+<td>
+<p>An integer which specifies which font to use for x &amp; y
+axes titles (see <code>par</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>family, lty, bty, col, xlim, ylim, pch, las, mar, font</code></td>
+<td>
+<p>Graphical parameters
+(see <code>par</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>A numerical value giving the amount by which plotting text and
+symbols should be magnified relative to the default. This starts as 1
+when a device is opened, and is reset when the layout is changed, e.g.
+by setting mfrow.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>An integer used to set a 'seed' for random number generation.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other graphical parameters to pass to functions:
+<code>abline</code>, <code>mtext</code> and
+<code>axis</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Empirical and theoretical probabilities are estimated using the
+quantiles generated with the margin quantile functions. Nonlinear fit of
+margin distributions can be previously accomplished using any of the
+functions <code>fitCDF</code>, <code>fitdistr</code>, or function
+<code>fitMixDist</code> for the case where the margins are mixture of
+distributions. <em>npoints</em> random uniform and iid numbers from the
+interval [0, 1] are generated and used to evaluate the quantile margin
+distribution functions. Next, the quantiles are used to compute the
+empirical and theoretical copulas, which will be used to estimated the
+corresponding probabilities.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The P-P plot and invisible temporary object with the
+information to build the graphic which can be assigned to a variable
+to use in further plots or analyses.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>fitCDF</code>, <code>fitdistr</code>,
+<code>fitMixDist</code>, and <code>bicopulaGOF</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(12)
+margins = c("norm", "norm")
+## Random variates from normal distributions
+X &lt;- rlnorm(200, meanlog =- 0.5, sdlog = 3.1)
+Y &lt;- rnorm(200, mean = 0, sd = 6)
+cor(X,Y) ## Correlation between X and Y
+
+parMargins = list( list(mean = 0, sd = 10),
+                   list(mean = 0, sd = 10))
+
+copula = "normalCopula"
+npoints = 100
+
+## The information to build the graphic is stored in object 'g'.
+g &lt;- ppCplot(X = X, Y = Y, copula = "normalCopula", margins = margins,
+             paramMargins = parMargins, npoints = 20)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a></em> version 0.1.0 ]</div>
+</body></html>

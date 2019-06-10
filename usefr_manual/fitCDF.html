@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Nonlinear fit of a commulative distribution function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fitCDF {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}"><tr><td>fitCDF {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Nonlinear fit of a commulative distribution function</h2>
+
+<h3>Description</h3>
+
+<p>Usually the parameter estimation of a cummulative distribution
+function (*CDF*) are accomplished using the corresponding probability
+density function (*PDF*). DIfferent optimization algorithms can be used
+to accomplished this task and different algorithms can yield different
+esitmated parameters. Hence, why not try to fit the CDF directly?
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fitCDF(varobj, distNames, plot = TRUE, plot.num = 1,
+  only.info = FALSE, maxiter = 10^4, maxfev = 1e+05, ptol = 1e-12,
+  verbose = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>varobj</code></td>
+<td>
+<p>A a vector containing observations, the variable for which the
+CDF parameters will be estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>distNames</code></td>
+<td>
+<p>a vector of distribution numbers to select from the listed
+below in details section, e.g. c(1:10, 15)</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>Logic. Default TRUE. Whether to produce the plots for the best
+fitted CDF.</p>
+</td></tr>
+<tr valign="top"><td><code>plot.num</code></td>
+<td>
+<p>The number of distributions to be plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>only.info</code></td>
+<td>
+<p>Logic. Default TRUE. If true, only information about the
+parameter estimation is returned.</p>
+</td></tr>
+<tr valign="top"><td><code>maxiter, maxfev, ptol</code></td>
+<td>
+<p>Parameters to ontrol of various aspects of the
+Levenberg-Marquardt algorithm through function
+<code>nls.lm.control</code> from *minpack.lm* package.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Logic. If TRUE, prints the function log to stdout</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The nonlinear fit (NLF) problem for CDFs is addressed with
+Levenberg-Marquardt algorithm implemented in function
+<code>nls.lm</code> from package *minpack.lm*. This function
+is inspired in a script for the function
+<code>fitDistr</code> from the package propagate [1]. Some
+parts or script ideas from function <code>fitDistr</code>
+are used, but here we to estimate CDF and not the PDF as in the case of
+&quot;<code>fitDistr</code>. A more informative are also
+incorporated. The studentized residuals are provided as well.
+The list (so far) of possible CDFs is:
+</p>
+
+<ol>
+<li><p> Normal <a href="https://goo.gl/xaEAdT">(Wikipedia)</a>
+</p>
+</li>
+<li><p> Log-normal <a href="https://goo.gl/a7MtYq">(Wikipedia)</a>
+</p>
+</li>
+<li><p> Half-normal <a href="https://goo.gl/yxMF6T">(Wikipedia)</a>. An
+Alternatively using a scaled precision (inverse of the variance)
+parametrization (to avoid issues if <i>&sigma;</i> is near zero),
+obtained by setting <i>&theta;=sqrt(&pi;)/&sigma;*sqrt(2)</i>.
+</p>
+</li>
+<li><p> Generalized Normal <a href="https://goo.gl/EPk8mH">(Wikipedia)</a>
+</p>
+</li>
+<li><p> T-Generalized Normal [2].
+</p>
+</li>
+<li><p> Laplace <a href="https://goo.gl/fCykV9">(Wikipedia)</a>
+</p>
+</li>
+<li><p> Gamma <a href="https://goo.gl/cYkvar">(Wikipedia)</a>
+</p>
+</li>
+<li><p> 3P Gamma [3].
+</p>
+</li>
+<li><p> Generalized 4P Gamma [3]
+<a href="https://goo.gl/1n4kpW.">(Wikipedia)</a>
+</p>
+</li>
+<li><p> Generalized 3P Gamma [3].
+</p>
+</li>
+<li><p> Weibull <a href="https://goo.gl/WMXmQP">(Wikipedia)</a>
+</p>
+</li>
+<li><p> 3P Weibull <a href="https://goo.gl/WMXmQP">(Wikipedia)</a>
+</p>
+</li>
+<li><p> Beta <a href="https://goo.gl/893wzR">(Wikipedia)</a>
+</p>
+</li>
+<li><p> 3P Beta <a href="https://goo.gl/893wzR">(Wikipedia)</a>
+</p>
+</li>
+<li><p> 4P Beta <a href="https://goo.gl/893wzR">(Wikipedia)</a>
+</p>
+</li>
+<li><p> Beta-Weibull <a href="https://goo.gl/dpaG8h">ReliaWiki</a>
+</p>
+</li>
+<li><p> Generalized Beta <a href="https://goo.gl/UcVsct">(Wikipedia)</a>
+</p>
+</li>
+<li><p> Rayleigh <a href="https://goo.gl/d9b3zv">(Wikipedia)</a>
+</p>
+</li>
+<li><p> Exponential <a href="https://goo.gl/stVsi7">(Wikipedia)</a>
+</p>
+</li>
+<li><p> 2P Exponential <a href="https://goo.gl/stVsi7">(Wikipedia)</a>
+</p>
+</li></ol>
+
+
+
+<h3>Value</h3>
+
+<p>After return the plots, a list with following values is provided:
+</p>
+
+<ul>
+<li><p> aic: Akaike information creterion
+</p>
+</li>
+<li><p> fit: list of results of fitted distribution, with parameter
+values
+</p>
+</li>
+<li><p> bestfit: the best fitted distribution according to AIC
+</p>
+</li>
+<li><p> fitted: fitted values from the best fit
+</p>
+</li>
+<li><p> rstudent: studentized residuals
+</p>
+</li>
+<li><p> residuals: residuals
+</p>
+</li></ul>
+
+<p>After x = fitCDF( varobj, ...), attributes( x$bestfit ) yields:
+$names
+[1] &quot;par&quot; &quot;hessian&quot; &quot;fvec&quot; &quot;info&quot; &quot;message&quot; &quot;diag&quot; &quot;niter&quot; &quot;rsstrace&quot;
+&quot;deviance&quot;
+$class
+[1] &quot;nls.lm&quot;
+And fitting details can be retrived with summary(x$bestfit)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robersy Sanchez (https://genomaths.com)
+</p>
+
+
+<h3>References</h3>
+
+
+<ol>
+<li><p> Andrej-Nikolai Spiess (2014). propagate: Propagation of
+Uncertainty. R package version 1.0-4.
+http://CRAN.R-project.org/package=propagate
+</p>
+</li>
+<li><p> Abramowitz, M. and Stegun, I. A. (1972) Handbook of Mathematical
+Functions. New York: Dover. Chapter 6: Gamma and Related Functions.
+</p>
+</li>
+<li><p> Hand-book on STATISTICAL DISTRIBUTIONS for experimentalists
+(pag 73) by Christian Walck. Particle Physics Group Fysikum.
+University of Stockholm (e-mail: walck@physto.se).
+</p>
+</li></ol>
+
+
+
+<h3>See Also</h3>
+
+<p><code>fitdistr</code> and <code>fitMixDist</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(1230)
+x1 &lt;- rnorm(10000, mean = 0.5, sd = 1)
+cdfp &lt;- fitCDF(x1, distNames = "Normal", plot = FALSE)
+summary(cdfp$bestfit)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a></em> version 0.1.0 ]</div>
+</body></html>

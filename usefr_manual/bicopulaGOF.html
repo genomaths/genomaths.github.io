@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Goodness of fit for Bidimensional Copula with Known Margins</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bicopulaGOF {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}"><tr><td>bicopulaGOF {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Goodness of fit for Bidimensional Copula with Known Margins</h2>
+
+<h3>Description</h3>
+
+<p>Goodness-of-fit (GOF) tests for a two-dimensional copula based,
+by default, on the knowledge of the marginal probability distributions.
+Several functionalities/tools from <code>copula-package</code>
+are integrated to perform the GOF of copulas that includes specific
+margin parameter settings. In terms of
+<code>copula-package</code> vocabulary, these are GOF for copula
+objects from class <code>Mvdc</code> (also called non-free
+copulas).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bicopulaGOF(x, y, copula = NULL, margins = NULL, paramMargins = NULL,
+  sample.size = NULL, nboots = 10, approach = c("adchisq", "adgamma",
+  "chisq", "Sn", "SnB", "SnC"), Rosenblatt = FALSE, breaks = 12,
+  method = "ml", num.cores = 1L, tasks = 0, seed = 123, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Numerical vector with the observations from the first margin
+distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Numerical vector with the observations from the second margin
+distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>copula</code></td>
+<td>
+<p>A copula object from class <code>Mvdc</code> or
+string specifying all the name for a copula from package
+<code>copula-package</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>margins</code></td>
+<td>
+<p>A character vector specifying all the parametric marginal
+distributions. See details below.</p>
+</td></tr>
+<tr valign="top"><td><code>paramMargins</code></td>
+<td>
+<p>A list whose each component is a list (or numeric
+vectors) of named components, giving the parameter values of the marginal
+distributions. See details below.</p>
+</td></tr>
+<tr valign="top"><td><code>sample.size</code></td>
+<td>
+<p>The size of the samples used for each sampling. It is not
+required for the approaches: &quot;Sn&quot;, &quot;SnB&quot;, and &quot;SnC&quot;; see below.</p>
+</td></tr>
+<tr valign="top"><td><code>nboots</code></td>
+<td>
+<p>The number of booststrap resampling to perform.</p>
+</td></tr>
+<tr valign="top"><td><code>approach</code></td>
+<td>
+<p>a character string specifying the goodness-of-fit test
+statistic to be used, which has to be one (or a unique abbreviation) of
+following: &quot;adchisq&quot;, &quot;adgamma&quot;, &quot;Sn&quot;, &quot;SnB&quot;, &quot;SnC&quot;, &quot;chisq&quot;. With the
+exception of <em>chisq</em>, all the other statistics are the same as in
+functions <code>gofTstat</code> and
+<code>gofCopula</code>. The test using <em>chisq</em> implement
+the approach described in reference [1].</p>
+</td></tr>
+<tr valign="top"><td><code>Rosenblatt</code></td>
+<td>
+<p>The  Anderson–Darling statistic approach using Rosenblatt
+transformation is normally used for the GOF in function
+<code>gofCopula</code> from <code>copula-package</code>
+package. since, the current function applies a parametric bootstrap
+approach generating random variates from the analytical expression for
+the margin CDFs, the test does not depend on the theoretical distribution
+of the Anderson–Darling statistic. Simulations suggest, so far, that the
+application of Rosenblatt transformation may not be needed in this case.
+SO, the desicion on whether to apply the Rosenblatt transformation
+(computational expensive for big datasets) is left to the users.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>A single number giving the number of bins for the computation
+of the Pearson's Chi-squared statistic as suggested in reference [1].
+Bascally, it is used to split the unit square [0, 1]^2 into bins/regions.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>A character string specifying the estimation method to be used
+to estimate the dependence parameter(s); see
+<code>fitCopula</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores, tasks</code></td>
+<td>
+<p>Paramaters for parallele computation using package
+<code>BiocParallel-package</code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously
+(see <code>bplapply</code> and the number of tasks per job
+(only for Linux OS).</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>An integer used to set a 'seed' for random number generation.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Notice that <code>copula-package</code> already have
+function <code>gofCopula</code> to perform GOF. However,
+its use can be computational expensive for big datasets.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The statistic value estimated for the observations, and the estimated
+bootstrap p.value.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ppCplot</code>, <code>gofCopula</code>,
+<code>fitCDF</code>, <code>fitdistr</code>, and
+<code>fitMixDist</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+require(stats)
+
+set.seed(12)
+margins = c("norm", "norm")
+## Random variates from normal distributions
+X &lt;- rnorm(2*1e3, mean = 0, sd = 10)
+Y &lt;- rnorm(2*1e3, mean = 0, sd = 10)
+
+parMargins = list( list(mean = 0, sd = 10),
+                   list(mean = 0, sd = 10))
+
+bicopulaGOF(x = X, y = Y, copula = "normalCopula", sample.size = 1e2,
+            margins = margins, paramMargins = parMargins, nboots = 999,
+            Rosenblatt = TRUE, approach = "adgamma", breaks = 10,
+            num.cores = 1L)
+
+bicopulaGOF(x = X, y = Y, copula = "normalCopula", sample.size = 1e2,
+            margins = margins, paramMargins = parMargins, nboots = 999,
+            Rosenblatt = FALSE, approach = "adgamma", breaks = 10,
+            num.cores = 1L)
+
+## --- Non-parallel expensive computation ---- -
+# require(copula)
+#
+# U &lt;- pobs(cbind(X, Y)) #' # Compute the pseudo-observations
+# fit &lt;- fitCopula(normalCopula(), U, method = 'ml')
+# U &lt;- cCopula(u = U, copula = fit@copula) #' # Rosenblatt transformation
+#
+# set.seed(123)
+# system.time(
+#   gofCopula(copula = fit@copula, x = U, N = 99, method = "Sn",
+#             simulation = "pb")
+# )
+#
+## About
+##    user  system elapsed
+## 103.370   0.613 105.022
+#
+## --- Parallel computation with 2 cores ---- -
+## Same algorithm as in 'gofCopula' adapted for parallel computation
+# system.time(
+#   bicopulaGOF(x = X, y = Y, copula = "normalCopula",
+#               margins = margins, paramMargins = parMargins, nboots = 99,
+#               Rosenblatt = TRUE, approach = "Sn", breaks = 10, seed = 123,
+#               num.cores = 2L)
+# )
+## About
+##  user  system elapsed
+## 2.491   0.100  51.185
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a></em> version 0.1.0 ]</div>
+</body></html>

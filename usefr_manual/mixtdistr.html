@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Mixture of Distribution Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for mixtdistr {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}"><tr><td>mixtdistr {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Mixture of Distribution Functions</h2>
+
+<h3>Description</h3>
+
+<p>Density, distribution function, quantile function and random
+generation for mixture of distributions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dmixtdistr(x, phi, arg, log = FALSE, lower.tail = TRUE,
+  log.p = FALSE)
+
+pmixtdistr(q, phi, arg, lower.tail = TRUE, log.p = FALSE)
+
+qmixtdistr(p, interval = c(0, 1000), phi, arg, lower.tail = TRUE,
+  log.p = FALSE)
+
+rmixtdistr(n, phi, arg)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, </code></td>
+<td>
+<p>q vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+<p>Numerical vector with mixture proportions, where <i>sum(phi) = 1</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>arg</code></td>
+<td>
+<p>A list of named vectors with the corresponding named distribution
+parameters values. The names of the vector of parameters and the
+parameter names must correspond to defined functions. For example, if
+one of the involved distributions is the gamma density (see
+<code>GammaDist</code>), then the corresponding vector of
+parameters must be gamma = c(shape = 'some value', scale = 'some value').
+See examples for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are <i>P[X &lt;= x]</i>,
+otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If length(n) &gt; 1, the length is taken to be
+the number required.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(123) # set a seed for random generation
+# A mixture of three distributions
+phi = c(5/10, 3/10, 2/10) # Mixture proportions
+
+# Named vector of the corresponding distribution function parameters
+# must be provided
+args &lt;- list(gamma = c(shape = 20, scale = 1/10),
+            weibull = c(shape =  4, scale = 0.8),
+            lnorm = c(meanlog = 1.2, sdlog = 0.08))
+
+#  Sampling from the specified mixture distribution
+x &lt;- rmixtdistr(n = 1e5, phi = phi , arg = args)
+
+# The graphics for the simulated dataset and the corresponding theoretical
+# mixture distribution
+hist(x, 100, freq = FALSE)
+x1 &lt;- seq(0, 10, by = 0.001)
+lines(x1, dmixtdistr(x1, phi = phi, arg = args), col = "red")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a></em> version 0.1.0 ]</div>
+</body></html>

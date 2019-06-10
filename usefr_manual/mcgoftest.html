@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Permutation test for Goodness of fit (GoF)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for mcgoftest {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}"><tr><td>mcgoftest {<a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Permutation test for Goodness of fit (GoF)</h2>
+
+<h3>Description</h3>
+
+<p>To accomplish the nonlinear fit of a probability distribution
+function (*PDF*), dIfferent optimization algorithms can be used. Each
+algorithm will return a different set of estimated parameter values. AIC
+and BIC are not useful (in this case) to decide which parameter set of
+values is the best. The goodness-of-fit tests (GOF) can help in this
+case.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mcgoftest(varobj, distr, pars, num.sampl = 999, sample.size,
+  stat = c("ks", "ad", "rmst", "chisq"), breaks = NULL,
+  parametric = TRUE, seed = 1, num.cores = 1, tasks = 0)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>varobj</code></td>
+<td>
+<p>A a vector containing observations, the variable for which the
+CDF parameters was estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>distr</code></td>
+<td>
+<p>The name of the cummulative distribution function (CDF) or a
+concrete CDF from where estimate the cummulative probabilities.
+Distribution <em>distr</em> must be defined in environment-namespace from
+any package or environment defined by user.</p>
+</td></tr>
+<tr valign="top"><td><code>pars</code></td>
+<td>
+<p>CDF model parameters. A list of parameters to evaluate the CDF.</p>
+</td></tr>
+<tr valign="top"><td><code>num.sampl</code></td>
+<td>
+<p>Number of samplings/permutations. If sample.size &lt; length(x)
+, then the test becomes a Monte Carlo test.</p>
+</td></tr>
+<tr valign="top"><td><code>sample.size</code></td>
+<td>
+<p>Size of the samples used for each sampling.</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>One string denoting the statistic to used in the testing: &quot;ks&quot;:
+Kolmogorov–Smirnov, &quot;ad&quot;: Anderson–Darling statistic, &quot;chisq: Pearson's
+Chi-squared, and &quot;rmst&quot;: Root Mean Square statistic.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>Default is NULL. Basically, the it is same as in function
+<code>hist</code>. If <em>breaks</em> = NULL, then function
+'nclass.FD' (see <code>nclass</code> is applied to estimate
+the breaks.</p>
+</td></tr>
+<tr valign="top"><td><code>parametric</code></td>
+<td>
+<p>Logical object. If TRUE, then samples are drawn from the
+theoretical population described by <em>distr</em>. Default: TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>An integer used to set a 'seed' for random number generation.</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores, tasks</code></td>
+<td>
+<p>Paramaters for parallele computation using package
+<code>BiocParallel-package</code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously
+(see <code>bplapply</code> and the number of tasks per job
+(only for Linux OS).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The test is intended for continuos distributions. If sampling size
+is lesser the size of the sample, then the test becomes a Monte Carlo
+test. The thes is based on the use of measures of goodness of fit,
+statistics. The following statistics are availible:
+</p>
+
+<ul>
+<li><p> Kolmogorov- Smirnov statistic (ks). Limitations: sensitive to
+ties [1]. Only the parametric Monte Carlo resampling or
+permutation (provided that there is not ties in the data) can
+be used.
+</p>
+</li>
+<li><p> Anderson–Darling statistic (ad) [2]. Limitation: by
+construction, it depends on the sample size. So, the size of
+the sampling must be close to the sample size if Monte Carlo
+resampling is used, which could be a limitation if the sample
+size is too large [2]. In particular, could be an issue in some
+genomic applications. It is worth highlighting that, for the
+current application, the Anderson–Darling statistic is not
+standardized as typically done in testing GoF for normal
+distribution with Anderson–Darling test. It is not required
+since, the statistic is not compared with a corresponding
+theoretical value. In addition, since the computation of this
+statistic requires for the data to be put in order [2], it does
+not make sense to perform a permutation test. That is, the
+maximum sampling size is the sample size less 1.
+</p>
+</li>
+<li><p> Pearson's Chi-squared statistic (chisq). Limitation: the sample
+must be discretized (partitioned into bins), which is could be
+a source of bias that leads to the rejection of the null
+hypothesis. Here, the discretization is done using function
+the resources from function <code>hist</code>.
+</p>
+</li>
+<li><p> Root Mean Square statistic (rmst). Limitation: the same
+as 'chisq'.
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>A numeric vector with the following data:
+</p>
+
+<ol>
+<li><p> Statistic value.
+</p>
+</li>
+<li><p> mc_p.value: the probability of finding the observed, or more
+extreme, results when the null hypothesis <i>H_0</i> of a study
+question is true obtained Monte Carlo/permutation approach.
+</p>
+</li></ol>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Original permutation script idea from
+<a href="https://goo.gl/hfnNy8">Alastair Sanderson</a>. Modified and adapted by
+Robersy Sanchez (https://genomaths.com).
+</p>
+
+
+<h3>References</h3>
+
+
+<ol>
+<li><p> Feller, W. On the Kolmogorov-Smirnov Limit Theorems for
+Empirical Distributions. Ann. Math. Stat. 19, 177–189 (1948).
+</p>
+</li>
+<li><p> Anderson, T. . &amp; Darling, D. A. A Test Of Goodness Of Fit. J.
+Am. Stat. Assoc. 49, 765–769 (1954).
+</p>
+</li>
+<li><p> Watson, G. S. On Chi-Square Goodness-Of-Fit Tests for
+Continuous Distributions. J. R. Stat. Soc. Ser. B Stat.
+Methodol. 20, 44–72 (1958).
+</p>
+</li></ol>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+# Example 1
+# Let us generate a random sample a from a specified Weibull distribution:
+# Set a seed
+set.seed( 1 )
+# Random sample from Weibull( x | shape = 0.5, scale = 1.2 )
+x = rweibull(10000, shape = 0.5, scale = 1.2)
+
+# MC KS test accept the null hypothesis that variable x comes
+# from Weibull(x | shape = 0.5, scale = 1.2), while the standard
+# Kolmogorov-Smirnov test reject the Null Hypothesis.
+mcgoftest(x, distr = pweibull, pars = c( 0.5, 1.2 ), num.sampl = 500,
+        sample.size = 1000, num.cores = 4)
+
+# Example 2
+# Let us generate a random sample a random sample from a specified Normal
+# distribution:
+# Set a seed
+set.seed( 1 )
+x = rnorm(10000, mean = 1.5, sd = 2)
+
+# MC KS test accept the null hypothesis that variable x comes
+# from N(x | mean = 0.5, sd = 1.2), while the standard
+# Kolmogorov-Smirnov test reject the Null Hypothesis.
+mcgoftest(x, distr = pnorm, pars = c(1.5, 2), num.sampl = 500,
+          sample.size = 1000, num.cores = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/usefr_html_manual/usefr_html_manual.html'>usefr</a></em> version 0.1.0 ]</div>
+</body></html>
