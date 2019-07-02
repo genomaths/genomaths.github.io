@@ -106,7 +106,7 @@ is FALSE.</p>
 </td></tr>
 <tr valign="top"><td><code>verbose</code></td>
 <td>
-<p>if TRUE, prints the function log to stdout</p>
+<p>if TRUE, prints the function log to stdout and a progress bar</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -169,7 +169,9 @@ modification of Levenberg-Marquardt algorithm implemented in function
 used to perform the nonlinear fit. Cross-validations for the nonlinear
 regressions (R.Cross.val) are performed as described in reference [1]. In
 addition, Stein's formula for adjusted R squared (rho) was used as an
-estimator of the average cross-validation predictive power [1].
+estimator of the average cross-validation predictive power [1]. Notice
+that the parameter values must be given in way <em>understandable</em>
+by the set of functions <code>mixtdistr</code> (see the example below)
 </p>
 
 
@@ -183,7 +185,7 @@ results, the fitted model returned by function
 
 <h3>Author(s)</h3>
 
-<p>Robersy Sanchez - 05/13/2019
+<p>Robersy Sanchez (<a href="https://genomaths.com">https://genomaths.com</a>).
 </p>
 
 
@@ -196,7 +198,8 @@ Sciences. Fifth Edit. Routledge Academic; 2009.
 
 <h3>See Also</h3>
 
-<p><code>fitdistr</code> and <code>fitCDF</code>
+<p><code>fitdistr</code>, <code>fitCDF</code>,
+<code>mixtdistr</code>, and <code>mcgoftest</code>.
 </p>
 
 

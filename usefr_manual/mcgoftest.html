@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Permutation test for Goodness of fit (GoF)</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Bootstrap test for Goodness of fit (GoF)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for mcgoftest {<a href='https://genomaths.github.io/usefr_manual/usefr_manual.html'>usefr</a>}"><tr><td>mcgoftest {<a href='https://genomaths.github.io/usefr_manual/usefr_manual.html'>usefr</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Permutation test for Goodness of fit (GoF)</h2>
+<h2>Bootstrap test for Goodness of fit (GoF)</h2>
 
 <h3>Description</h3>
 
@@ -48,8 +48,7 @@ any package or environment defined by user.</p>
 </td></tr>
 <tr valign="top"><td><code>num.sampl</code></td>
 <td>
-<p>Number of samplings/permutations. If sample.size &lt; length(x)
-, then the test becomes a Monte Carlo test.</p>
+<p>Number of resamplings.</p>
 </td></tr>
 <tr valign="top"><td><code>sample.size</code></td>
 <td>
@@ -98,9 +97,8 @@ statistics. The following statistics are availible:
 
 <ul>
 <li><p> Kolmogorov- Smirnov statistic (ks). Limitations: sensitive to
-ties [1]. Only the parametric Monte Carlo resampling or
-permutation (provided that there is not ties in the data) can
-be used.
+ties [1]. Only the parametric Monte Carlo resampling
+(provided that there is not ties in the data) can be used.
 </p>
 </li>
 <li><p> Anderson–Darling statistic (ad) [2]. Limitation: by
@@ -144,7 +142,7 @@ as 'chisq'.
 </li>
 <li><p> mc_p.value: the probability of finding the observed, or more
 extreme, results when the null hypothesis <i>H_0</i> of a study
-question is true obtained Monte Carlo/permutation approach.
+question is true obtained Monte Carlo resampling approach.
 </p>
 </li></ol>
 
@@ -152,9 +150,7 @@ question is true obtained Monte Carlo/permutation approach.
 
 <h3>Author(s)</h3>
 
-<p>Original permutation script idea from
-<a href="https://goo.gl/hfnNy8">Alastair Sanderson</a>. Modified and adapted by
-Robersy Sanchez (https://genomaths.com).
+<p>Robersy Sanchez (<a href="https://genomaths.com">https://genomaths.com</a>).
 </p>
 
 
@@ -176,6 +172,13 @@ Methodol. 20, 44–72 (1958).
 </p>
 </li></ol>
 
+
+
+<h3>See Also</h3>
+
+<p>Distribution fitting: <code>fitMixDist</code>,
+<code>fitdistr</code>, <code>fitCDF</code>.
+</p>
 
 
 <h3>Examples</h3>

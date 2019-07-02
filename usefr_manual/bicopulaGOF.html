@@ -25,8 +25,9 @@ copulas).
 <pre>
 bicopulaGOF(x, y, copula = NULL, margins = NULL, paramMargins = NULL,
   sample.size = NULL, nboots = 10, approach = c("adchisq", "adgamma",
-  "chisq", "Sn", "SnB", "SnC"), Rosenblatt = FALSE, breaks = 12,
-  method = "ml", num.cores = 1L, tasks = 0, seed = 123, ...)
+  "chisq", "rmse", "Sn", "SnB", "SnC"), Rosenblatt = FALSE,
+  breaks = 12, method = "ml", num.cores = 1L, tasks = 0,
+  seed = 123, verbose = TRUE, ...)
 </pre>
 
 
@@ -73,11 +74,11 @@ required for the approaches: &quot;Sn&quot;, &quot;SnB&quot;, and &quot;SnC&quot
 <td>
 <p>a character string specifying the goodness-of-fit test
 statistic to be used, which has to be one (or a unique abbreviation) of
-following: &quot;adchisq&quot;, &quot;adgamma&quot;, &quot;Sn&quot;, &quot;SnB&quot;, &quot;SnC&quot;, &quot;chisq&quot;. With the
-exception of <em>chisq</em>, all the other statistics are the same as in
-functions <code>gofTstat</code> and
-<code>gofCopula</code>. The test using <em>chisq</em> implement
-the approach described in reference [1].</p>
+following: &quot;adchisq&quot;, &quot;adgamma&quot;, &quot;Sn&quot;, &quot;SnB&quot;, &quot;SnC&quot;, &quot;chisq&quot;, and &quot;rmse&quot;.
+With the exception of <em>chisq</em> and <em>rmse</em>, all the other
+statistics are the same as in functions <code>gofTstat</code>
+and <code>gofCopula</code>. The test using <em>chisq</em>
+implement the approach described in reference [1].</p>
 </td></tr>
 <tr valign="top"><td><code>Rosenblatt</code></td>
 <td>
@@ -116,6 +117,10 @@ use, i.e. at most how many child processes will be run simultaneously
 <td>
 <p>An integer used to set a 'seed' for random number generation.</p>
 </td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>if verbose, comments and progress bar will be printed.</p>
+</td></tr>
 </table>
 
 
@@ -132,6 +137,28 @@ its use can be computational expensive for big datasets.
 <p>The statistic value estimated for the observations, and the estimated
 bootstrap p.value.
 </p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robersy Sanchez (<a href="https://genomaths.com">https://genomaths.com</a>).
+</p>
+
+
+<h3>References</h3>
+
+
+<ol>
+<li><p> Jaworski, P. Copulae in Mathematical and Quantitative Finance. 213,
+d (2013).
+</p>
+</li>
+<li><p> Wang, Y. et al. Multivariate analysis of joint probability of
+different rainfall frequencies based on copulas. Water (Switzerland)
+9, (2017).
+</p>
+</li></ol>
+
 
 
 <h3>See Also</h3>
@@ -158,13 +185,11 @@ parMargins = list( list(mean = 0, sd = 10),
 
 bicopulaGOF(x = X, y = Y, copula = "normalCopula", sample.size = 1e2,
             margins = margins, paramMargins = parMargins, nboots = 999,
-            Rosenblatt = TRUE, approach = "adgamma", breaks = 10,
-            num.cores = 1L)
+            Rosenblatt = TRUE, approach = "adgamma", num.cores = 1L)
 
 bicopulaGOF(x = X, y = Y, copula = "normalCopula", sample.size = 1e2,
             margins = margins, paramMargins = parMargins, nboots = 999,
-            Rosenblatt = FALSE, approach = "adgamma", breaks = 10,
-            num.cores = 1L)
+            Rosenblatt = FALSE, approach = "adgamma", num.cores = 1L)
 
 ## --- Non-parallel expensive computation ---- -
 # require(copula)
@@ -175,10 +200,10 @@ bicopulaGOF(x = X, y = Y, copula = "normalCopula", sample.size = 1e2,
 #
 # set.seed(123)
 # system.time(
-#   gofCopula(copula = fit@copula, x = U, N = 99, method = "Sn",
+#   gof &lt;- gofCopula(copula = fit@copula, x = U, N = 99, method = "Sn",
 #             simulation = "pb")
 # )
-#
+# gof
 ## About
 ##    user  system elapsed
 ## 103.370   0.613 105.022
@@ -186,14 +211,25 @@ bicopulaGOF(x = X, y = Y, copula = "normalCopula", sample.size = 1e2,
 ## --- Parallel computation with 2 cores ---- -
 ## Same algorithm as in 'gofCopula' adapted for parallel computation
 # system.time(
-#   bicopulaGOF(x = X, y = Y, copula = "normalCopula",
+#   gof &lt;- bicopulaGOF(x = X, y = Y, copula = "normalCopula",
 #               margins = margins, paramMargins = parMargins, nboots = 99,
-#               Rosenblatt = TRUE, approach = "Sn", breaks = 10, seed = 123,
+#               Rosenblatt = TRUE, approach = "Sn", seed = 123,
 #               num.cores = 2L)
 # )
+# gof
 ## About
 ##  user  system elapsed
 ## 2.491   0.100  51.185
+##
+## Same algorithm as in 'gofCopula' adapted for parallel computation and
+## Rosenblatt = FALSE
+# system.time(
+#   gof &lt;- bicopulaGOF(x = X, y = Y, copula = "normalCopula",
+#               margins = margins, paramMargins = parMargins, nboots = 99,
+#               Rosenblatt = FALSE, approach = "Sn", seed = 123,
+#               num.cores = 2L)
+# )
+# gof
 </pre>
 
 <hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/usefr_manual/usefr_manual.html'>usefr</a></em> version 0.1.0 ]</div>
