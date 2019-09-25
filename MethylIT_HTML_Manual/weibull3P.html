@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Nonlinear fit of Weibull CDF</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for weibull3P {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>weibull3P {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for weibull3P {MethylIT}"><tr><td>weibull3P {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Nonlinear fit of Weibull CDF</h2>
 
@@ -17,9 +17,10 @@ variable x
 <h3>Usage</h3>
 
 <pre>
-weibull3P(X, sample.size = 20, npoints = NULL, npoints0 = NULL,
-  maxiter = 1024, tol = 1e-12, ftol = 1e-12, ptol = 1e-12,
-  minFactor = 10^-6, verbose = TRUE, ...)
+weibull3P(X, sample.size = 20, model = c("all", "2P", "3P"),
+  npoints = NULL, maxiter = 1024, tol = 1e-12, ftol = 1e-12,
+  ptol = 1e-12, minFactor = 10^-6, nlms = FALSE, verbose = TRUE,
+  ...)
 </pre>
 
 
@@ -34,14 +35,15 @@ weibull3P(X, sample.size = 20, npoints = NULL, npoints0 = NULL,
 <td>
 <p>size of the sample</p>
 </td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>Distribution model to fit, two-parameters and three-parameters
+Weibull model (&quot;2P&quot; and &quot;3P). Default is &quot;all&quot; and the model with the
+best AIC criterion is reported.</p>
+</td></tr>
 <tr valign="top"><td><code>npoints</code></td>
 <td>
 <p>number of points used in the fit</p>
-</td></tr>
-<tr valign="top"><td><code>npoints0</code></td>
-<td>
-<p>subset of points where to estimate the estimateECDF (used
-only to reduce computational time)</p>
 </td></tr>
 <tr valign="top"><td><code>maxiter</code></td>
 <td>
@@ -74,6 +76,11 @@ factor allowed on any step in the iteration. The increment is calculated
 with a Gauss-Newton algorithm and successively halved until the residual
 sum of squares has been decreased or until the step-size factor has been
 reduced below this limit. Default value: 10^-6</p>
+</td></tr>
+<tr valign="top"><td><code>nlms</code></td>
+<td>
+<p>Logical. Whether to return the nonlinear model object
+<code>nls.lm</code>. Default is FALSE.</p>
 </td></tr>
 <tr valign="top"><td><code>verbose</code></td>
 <td>
@@ -128,5 +135,5 @@ weibull3P(x, sample.size = 100)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

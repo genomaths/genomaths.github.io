@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Potential methylation signal</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for getPotentialDIMP {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>getPotentialDIMP {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for getPotentialDIMP {MethylIT}"><tr><td>getPotentialDIMP {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Potential methylation signal</h2>
 
@@ -20,8 +20,9 @@ of signal detection.
 
 <pre>
 getPotentialDIMP(LR, nlms = NULL, div.col, dist.name = "Weibull2P",
-  absolute = FALSE, alpha = 0.05, tv.col = NULL, tv.cut = NULL,
-  min.coverage = NULL, hdiv.col = NULL, hdiv.cut = NULL)
+  absolute = FALSE, alpha = 0.05, pval.col = NULL, tv.col = NULL,
+  tv.cut = NULL, min.coverage = NULL, hdiv.col = NULL,
+  hdiv.cut = NULL, pAdjustMethod = NULL)
 </pre>
 
 
@@ -30,14 +31,15 @@ getPotentialDIMP(LR, nlms = NULL, div.col, dist.name = "Weibull2P",
 <table summary="R argblock">
 <tr valign="top"><td><code>LR</code></td>
 <td>
-<p>An object from 'InfDiv' class. This obejct is previously obtained
-with function <code>estimateDivergence</code>.</p>
+<p>An object from 'InfDiv' or &quot;testDMP&quot; class. These objects are
+previously obtained with function <code>estimateDivergence</code> or
+<code>FisherTest</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>nlms</code></td>
 <td>
 <p>A list of distribution fitted models (output of
 'fitNonlinearWeibullDist' function) or NULL. If NULL, then empirical
-cumulative distribution function is used to get the potential DIMPs.</p>
+cumulative distribution function is used to get the potential DMPs.</p>
 </td></tr>
 <tr valign="top"><td><code>div.col</code></td>
 <td>
@@ -51,12 +53,14 @@ meta-column.</p>
 three-parameter (Gamma3P), gamma with two-parameter (Gamma2P),
 generalized gamma with three-parameter (&quot;GGamma3P&quot;) or four-parameter
 (&quot;GGamma4P&quot;), the empirical cumulative distribution function (ECDF) or
-&quot;None&quot;.</p>
+&quot;None&quot;. If <strong>dist.name != &quot;None&quot;</strong>, and <strong>nlms != NULL</strong>, then
+a column named &quot;wprob&quot; with a probability vector derived from the
+application of model &quot;nlms&quot; will be returned.</p>
 </td></tr>
 <tr valign="top"><td><code>absolute</code></td>
 <td>
 <p>Logic (default, FALSE). Total variation (TV, the difference
-of methylation levels) is normally an output in the downstream <a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>
+of methylation levels) is normally an output in the downstream MethylIT
 analysis. If 'absolute = TRUE', then TV is transformed into |TV|, which
 is an information divergence that can be fitted to Weibull or to
 Generalized Gamma distribution. So, if the nonlinear fit was performed
@@ -67,6 +71,14 @@ for |TV|, then absolute must be set to TRUE.</p>
 <p>A numerical value (usually alpha &lt; 0.05) used to select
 cytosine sites k with information divergence (DIV_k) for which Weibull
 probability P[DIV_k &gt; DIV(alpha)].</p>
+</td></tr>
+<tr valign="top"><td><code>pval.col</code></td>
+<td>
+<p>An integer denoting a column from each GRanges object from
+LR where p-values are provided when <strong>dist.name == &quot;None&quot;</strong> and
+<strong>nlms == NULL</strong>. Default is NULL. If NUll and
+<strong>dist.name == &quot;None&quot;</strong> and <strong>nlms == NULL</strong>, then a column
+named <strong>adj.pval</strong> will used to select the potential DMPs.</p>
 </td></tr>
 <tr valign="top"><td><code>tv.col</code></td>
 <td>
@@ -86,12 +98,19 @@ discarded. Default: 0</p>
 <tr valign="top"><td><code>hdiv.col</code></td>
 <td>
 <p>Optional. A column number for the Hellinger distance to be
-used for filtering cytosine positions. Fedault is NULL.</p>
+used for filtering cytosine positions. Default is NULL.</p>
 </td></tr>
 <tr valign="top"><td><code>hdiv.cut</code></td>
 <td>
 <p>If hdiv.cut and hdiv.col are provided, then cytosine sites k
 with hdiv &lt; hdiv.cut are removed.</p>
+</td></tr>
+<tr valign="top"><td><code>pAdjustMethod</code></td>
+<td>
+<p>method used to adjust the p-values from other
+approaches like Fisher's exact test, which involve multiple comparisons
+Default is NULL. Do not apply it when a probability distribution model
+is used (<strong>when nlms is given</strong>), since it makes not sense.</p>
 </td></tr>
 </table>
 
@@ -102,7 +121,7 @@ with hdiv &lt; hdiv.cut are removed.</p>
 divergence (DIV_k) values greater than the DIV(alpha = 0.05). The value
 of alpha can be specified. For example, potential signals with
 DIV_k &gt; DIV(alpha = 0.01) can be selected. For each sample, cytosine
-sites are selected based on the corresponding fitted Weilbull
+sites are selected based on the corresponding nonlinear fitted
 distribution model that has been supplied.
 </p>
 
@@ -117,16 +136,12 @@ cytosine sites and and the Weibull probability P[DIV_k &gt; DIV(alpha)].
 <h3>Examples</h3>
 
 <pre>
-num.points &lt;- 1000
-HD &lt;- GRangesList( sample1 = makeGRangesFromDataFrame(
-        data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-            strand = '*',
-            hdiv = rweibull(1:num.points, shape = 0.75, scale = 1)),
-        keep.extra.columns = TRUE))
-nlms &lt;- nonlinearFitDist(HD, column = 1, verbose = FALSE)
-getPotentialDIMP(LR = HD, nlms = nlms, div.col = 1, alpha = 0.05)
+## Get a dataset of Hellinger divergency of methylation levels and their
+## corresponding best nonlinear fit distribution models from the package
+data(HD, nlms)
+PS &lt;- getPotentialDIMP(LR = HD, nlms = nlms, div.col = 9L, alpha = 0.05)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

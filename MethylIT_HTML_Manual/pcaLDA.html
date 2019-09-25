@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Linear Discriminant Analysis (LDA) using Principal Component...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for pcaLDA {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>pcaLDA {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for pcaLDA {MethylIT}"><tr><td>pcaLDA {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Linear Discriminant Analysis (LDA) using Principal Component Analysis
 (PCA)</h2>
@@ -22,8 +22,8 @@ selected PCs are used as predictors in the LDA
 
 <pre>
 pcaLDA(formula = NULL, data = NULL, grouping = NULL, n.pc = 1,
-              scale = FALSE, center = FALSE, tol = 1.0e-4, method = "moment",
-               max.pc = NULL)
+  scale = FALSE, center = FALSE, tol = 1e-04, method = "moment",
+  max.pc = NULL)
 
 ## S3 method for class 'pcaLDA'
 predict(object, newdata, type = c("lda.pred", "class",
@@ -98,7 +98,7 @@ package: 'class', 'posterior', and 'scores' (see ?predict.lda).</p>
 
 <p>The principal components (PCs) are obtained using the function
 'prcomp' from R pacakage 'stats', while the LDA is performed using the
-'lda' function from R package 'MASS'. The current application only use
+'lda' function from R package 'MASS'. The current application only uses
 basic functionalities of mentioned functions. As shown in the example,
 pcaLDA' function can be used in general classification problems.
 </p>
@@ -134,5 +134,5 @@ x &lt;- data.frame(TRUE.class = iris$Species[idx],
 table(x)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

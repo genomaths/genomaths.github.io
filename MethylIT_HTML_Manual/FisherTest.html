@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Fisher's exact test for read counts on GRanges objects</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for FisherTest {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>FisherTest {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for FisherTest {MethylIT}"><tr><td>FisherTest {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Fisher's exact test for read counts on GRanges objects</h2>
 
@@ -127,7 +127,7 @@ BiocParallel package).</p>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>Additional parameters for function
-<code><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></code>.</p>
+<code>uniqueGRanges</code>.</p>
 </td></tr>
 </table>
 
@@ -159,37 +159,18 @@ p-value adjusment.
 <h3>Examples</h3>
 
 <pre>
-#' A list of GRanges
-set.seed(123)
-sites = 15
-data &lt;- list(
-  C1 = data.frame(chr = "chr1", start = 1:sites,
-                  end = 1:sites,strand = '*',
-                  mC = rnbinom(size = 8, mu = 3, n = sites),
-                  uC = rnbinom(size = 50, mu = 10, n = sites)),
-  C2 = data.frame(chr = "chr1", start = 1:sites,
-                  end = 1:sites, strand = '*',
-                  mC = rnbinom(size = 8, mu = 3, n = sites),
-                  uC = rnbinom(size = 50, mu = 10, n = sites)),
-  T1 = data.frame(chr = "chr1", start = 1:sites,
-                  end = 1:sites,strand = '*',
-                  mC = rnbinom(size = 50, mu = 10, n = sites),
-                  uC = rnbinom(size = 10, mu = 10, n = sites)),
-  T2 = data.frame(chr = "chr1", start = 1:sites,
-                  end = 1:sites, strand = '*',
-                  mC = rnbinom(size = 50, mu = 10, n = sites),
-                  uC = rnbinom(size = 5, mu = 10, n = sites)))
-#' Transforming the list of data frames into a list of GRanges objects
-data = lapply(data,
-              function(x)
-                makeGRangesFromDataFrame(x, keep.extra.columns = TRUE))
+## Get a dataset of Hellinger divergency of methylation levels
+## from the package
+data(HD)
+## Only the first four cytosine sites from each sample are tested
+hd &lt;- lapply(HD, function(hd) hd[1:4])
 
-FisherTest(LR = data, control.names = c("C1", "C2"),
-        treatment.names = c("T1", "T2"), tv.cut = 0.25,
+FisherTest(LR = hd, pooling.stat = "sum",
+        treatment.names = c("T1", "T2"), tv.cut = NULL,
         pAdjustMethod="BH", pvalCutOff = 0.05, num.cores = 1L,
-        verbose=TRUE)
+        verbose=FALSE)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

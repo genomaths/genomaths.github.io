@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Nonlinear fit of Generalized Gamma CDF (GGamma)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for fitGGammaDist {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>fitGGammaDist {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for fitGGammaDist {MethylIT}"><tr><td>fitGGammaDist {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Nonlinear fit of Generalized Gamma CDF (GGamma)</h2>
 
@@ -17,10 +17,9 @@ variable x
 <h3>Usage</h3>
 
 <pre>
-fitGGammaDist(x, probability.x, parameter.values, location.par = FALSE,
-  summarized.data = FALSE, sample.size = 20, npoints = NULL,
-  maxiter = 1024, ftol = 1e-12, ptol = 1e-12, maxfev = 1e+05,
-  verbose = TRUE)
+fitGGammaDist(x, parameter.values, location.par = FALSE,
+  sample.size = 20, npoints = NULL, maxiter = 1024, ftol = 1e-12,
+  ptol = 1e-12, maxfev = 1e+05, nlms = FALSE, verbose = TRUE, ...)
 </pre>
 
 
@@ -31,20 +30,14 @@ fitGGammaDist(x, probability.x, parameter.values, location.par = FALSE,
 <td>
 <p>numerical vector</p>
 </td></tr>
-<tr valign="top"><td><code>probability.x</code></td>
-<td>
-<p>probability vector of x. If not provided, the values
-are estimated using the empirical cumulative distribution function
-('ecdf') from 'stats' R package.</p>
-</td></tr>
 <tr valign="top"><td><code>parameter.values</code></td>
 <td>
 <p>initial parameter values for the nonlinear fit. If
 the locator paramter is included (mu != 0), this must be given as
-parameter.values = list(alpha = 'value', scale = 'value', mu = 'value', psi
-= 'value') or if mu = 0, as: parameter.values =list(alpha = 'value', scale
-= 'value', psi = 'value'). If not provided, then an initial guess is
-provided.</p>
+parameter.values = list(alpha = 'value', scale = 'value', mu = 'value',
+psi = 'value') or if mu = 0, as: parameter.values =list(alpha = 'value',
+scale = 'value', psi = 'value'). If not provided, then an initial guess
+is provided.</p>
 </td></tr>
 <tr valign="top"><td><code>location.par</code></td>
 <td>
@@ -52,18 +45,16 @@ provided.</p>
 distribution (GGamma) including the location parameter, i.e., a GGamma
 with four parameters (GGamam4P).</p>
 </td></tr>
-<tr valign="top"><td><code>summarized.data</code></td>
-<td>
-<p>Logic value. If TRUE (default: FALSE), summarized
-data based on 'npoints' are used to perform the nonlinear fit.</p>
-</td></tr>
 <tr valign="top"><td><code>sample.size</code></td>
 <td>
 <p>size of the sample.</p>
 </td></tr>
 <tr valign="top"><td><code>npoints</code></td>
 <td>
-<p>number of points used in the fit.</p>
+<p>number of points used in the fit. If the number of points if
+greater than 10^6, then the fit is automatically set to npoints = 999999.
+However, the reported values for R.Cross.val, AIC, and BIC are
+computed taking into account the whole set of points.</p>
 </td></tr>
 <tr valign="top"><td><code>maxiter</code></td>
 <td>
@@ -91,9 +82,18 @@ reached maxfev. Note that nls.lm sets the value of maxfev to
 100*(length(par) + 1) if maxfev = integer(), where par is the list or
 vector of parameters to be optimized.</p>
 </td></tr>
+<tr valign="top"><td><code>nlms</code></td>
+<td>
+<p>Logical. Whether to return the nonlinear model object
+<code>nls.lm</code>. Default is FALSE.</p>
+</td></tr>
 <tr valign="top"><td><code>verbose</code></td>
 <td>
 <p>if TRUE, prints the function log to stdout</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to or from other methods.</p>
 </td></tr>
 </table>
 
@@ -111,7 +111,7 @@ the average cross-validation predictive power [1].
 </p>
 <p>If the number of values to fit is &gt;10^6, the fitting to a GGamma CDF
 would be a time consuming task. To reduce the computational time, the
-option summarized.data' can be set 'TRUE'. If summarized.data = TRUE, the
+option summarized.data' can be set 'TRUE'. If npoint != NULL, the
 original variable values are summarized into 'npoint' bins and their
 midpoints are used as the new predictors. In this case, only the
 goodness-of-fit indicators AIC and R.Cross.val are estimated based on all
@@ -123,7 +123,8 @@ the original variable x values.
 
 <p>Model table with coefficients and goodness-of-fit results:
 Adj.R.Square, deviance, AIC, R.Cross.val, and rho, as well as, the
-coefficient covariance matrix.
+coefficient covariance matrix. If <strong>nlms = TRUE</strong>, then a list with
+nonlinear model object <code>nls.lm</code> is returned.
 </p>
 
 
@@ -143,11 +144,11 @@ Sciences. Fifth Edit. Routledge Academic; 2009.
 <h3>Examples</h3>
 
 <pre>
-set.seed(126)
-x &lt;- rggamma(1000, alpha = 1.03, psi = 0.75, scale = 2.1)
+set.seed(123)
+x &lt;- rggamma(2000, alpha = 1.03, psi = 0.75, scale = 1.1)
 fitGGammaDist(x)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

@@ -1,18 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Selection of DIMPs</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Selection of DMPs</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for selectDIMP {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>selectDIMP {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for selectDIMP {MethylIT}"><tr><td>selectDIMP {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Selection of DIMPs</h2>
+<h2>Selection of DMPs</h2>
 
 <h3>Description</h3>
 
 <p>For a given cutpoint (previously estimated with the function
 estimateCutPoint), 'selectDIMP' will return the differentially
-informative methyated positions (DIMPs). DIMPs are cytosine positions for
-which the divergence is greater than the cutpoint.
+informative methylated positions (DMPs). DMPs are cytosine positions 
+for which the divergence is greater than the cutpoint.
 </p>
 
 
@@ -29,15 +29,13 @@ selectDIMP(LR, div.col = NULL, pval.col = NULL, absolute = FALSE,
 <table summary="R argblock">
 <tr valign="top"><td><code>LR</code></td>
 <td>
-<p>A list of GRanges objects including control and treatment GRanges.
-Each GRanges object must correspond to a sample. For example, if a
-sample is named 's1', then this sample can be accessed in the list of
-GRanges objects as LR$s1.</p>
+<p>An object from &quot;pDMP&quot; class.</p>
 </td></tr>
 <tr valign="top"><td><code>div.col</code></td>
 <td>
 <p>Number of the column where the divergence variable (i.e.,
-Hellinger divergence) is located in the GRanges meta-columns.</p>
+Hellinger divergence or total variation) is located in the GRanges
+meta-columns.</p>
 </td></tr>
 <tr valign="top"><td><code>pval.col</code></td>
 <td>
@@ -48,7 +46,7 @@ parameter values div.col or pval.col must be given.</p>
 <tr valign="top"><td><code>absolute</code></td>
 <td>
 <p>Logic (default, FALSE). Total variation (TV, the difference
-of methylation levels) is normally an output in the downstream <a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>
+of methylation levels) is normally an output in the downstream MethylIT
 analysis. If 'absolute = TRUE', then TV is tranformed into |TV|, which is
 an information divergence that can be fitted to Weibull or to Generalized
 Gamma distribution. So, if the nonlinear fit was performed for |TV|, then
@@ -56,8 +54,8 @@ here absolute must be set to TRUE.</p>
 </td></tr>
 <tr valign="top"><td><code>cutpoint</code></td>
 <td>
-<p>Cutpoint to select DIMPs. Cytosine positions with divergence
-greater than 'cutpoint' will selected as DIMPs. Cutpoints are estimated
+<p>Cutpoint to select DMPs. Cytosine positions with divergence
+greater than 'cutpoint' will selected as DMPs. Cutpoints are estimated
 with the function 'estimateCutPoint'.</p>
 </td></tr>
 <tr valign="top"><td><code>tv.col</code></td>
@@ -75,9 +73,9 @@ abs(TV_k) &lt; tv.cut are removed.</p>
 
 <h3>Details</h3>
 
-<p>Theoretically a DIMP denotes a cytosine position with high
+<p>Theoretically a DMP denotes a cytosine position with high
 probability to be differentially methylated. That is, in the statistical
-molecular-biophysics context, a DIMP must be considered only in a
+molecular-biophysics context, a DMP must be considered only in a
 probabilistic term and not as an absolute deterministic experimental
 output.
 </p>
@@ -85,7 +83,7 @@ output.
 continuous action of the omnipresent thermal fluctuations, as well as,
 the inherent stochasticity of the biochemical reactions make it
 impossible to ensure whether a specific cytosine position is methylated
-in an absolutely deterministic sense. Notice that the concept of DIMP is
+in an absolutely deterministic sense. Notice that the concept of DMP is
 not applicable to a single cell (if we use an instrumentation/protocol
 to directly measure methylation at the molecular level, and not via PCR),
 since a concrete, single DNA cytosine position in a single cell is
@@ -94,7 +92,7 @@ methylated or not methylated.
 <p>However, when pooling DNA extracted from a tissue, the previous
 reasonings about uncertainty hold plus an additional uncertainty factor:
 cells from the same tissue are not synchronized but are found in
-different stages of their ontogenetic developments. Hence, the DIMP
+different stages of their ontogenetic developments. Hence, the DMP
 concept holds in the mentioned circumstances where the uncertainty of
 methylation is present.
 </p>
@@ -102,36 +100,23 @@ methylation is present.
 
 <h3>Value</h3>
 
-<p>A list of GRanges containing only differentially informative
-position (DIMPs).
+<p>An object from &quot;pDMP&quot; class containing only differentially
+informative position (DMPs).
 </p>
 
 
 <h3>Examples</h3>
 
 <pre>
-num.points &lt;- 1000
-HD &lt;- GRangesList(
-    sample1 = makeGRangesFromDataFrame(
-        data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-                strand = '*',
-                hdiv = rweibull(1:num.points, shape = 0.75, scale = 1)),
-        keep.extra.columns = TRUE),
-    sample2 = makeGRangesFromDataFrame(
-        data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-                strand = '*',
-                hdiv = rweibull(1:num.points, shape = 0.75, scale = 1)),
-        keep.extra.columns = TRUE))
+## Get a dataset of potential signals and the estimated cutpoint from the
+## package
+data(PS, cutpoint)
 
-nlms &lt;- nonlinearFitDist(HD, column = 1, verbose = FALSE)
-
-PS &lt;- getPotentialDIMP(LR = HD, nlms = nlms, div.col = 1, alpha = 0.05)
-cutpoints &lt;- estimateCutPoint(PS, control.names = "sample1",
-                            treatment.names = c("sample2"),
-                            div.col = 1, verbose = FALSE)
-DIMPs &lt;- selectDIMP(PS, div.col = 1, cutpoint = cutpoints$cutpoint$sample1)
+## The estimated cutpoints are used to discriminate signals from the noise.
+## That is, DMPs are selected using the cupoints
+DMPs &lt;- selectDIMP(PS, div.col = 9L, cutpoint = cutpoint$cutpoint)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

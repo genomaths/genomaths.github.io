@@ -1,16 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Count DIMPs at gene-body</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Count DMPs at gene-body</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for getDIMPatGenes {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>getDIMPatGenes {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for getDIMPatGene {MethylIT}"><tr><td>getDIMPatGene {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Count DIMPs at gene-body</h2>
+<h2>Count DMPs at gene-body</h2>
 
 <h3>Description</h3>
 
-<p>The function counts DIMPs overlapping with gene-body. In fact,
-this function also can be used to count DIMPs overlapping with any set of
+<p>The function counts DMPs overlapping with gene-body. In fact,
+this function also can be used to count DMPs overlapping with any set of
 regions given in a GRanges object.
 </p>
 
@@ -18,9 +18,12 @@ regions given in a GRanges object.
 <h3>Usage</h3>
 
 <pre>
-getDIMPatGenes(GR, ...)
+getDIMPatGenes(GR, GENES, ignore.strand = TRUE)
 
 ## Default S3 method:
+getDIMPatGenes(GR, GENES, ignore.strand = TRUE)
+
+## S3 method for class 'GRanges'
 getDIMPatGenes(GR, GENES, ignore.strand = TRUE)
 
 ## S3 method for class 'pDMP'
@@ -54,6 +57,10 @@ will be created using the gene (region) coordinates.</p>
 <p>When set to TRUE, the strand information is ignored in
 the calculations. Default value: TRUE</p>
 </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not in use.</p>
+</td></tr>
 </table>
 
 
@@ -66,7 +73,6 @@ the calculations. Default value: TRUE</p>
 <h3>Examples</h3>
 
 <pre>
-num.points &lt;- 10000 # Number of cytosine position with methylation call
 ## Gene annotation
 genes &lt;- GRanges(seqnames = "1",
                 ranges = IRanges(start = c(3631, 6788, 11649),
@@ -75,67 +81,18 @@ genes &lt;- GRanges(seqnames = "1",
 mcols(genes) &lt;- data.frame(gene_id = c("AT1G01010", "AT1G01020",
                                        "AT1G01030"))
 
-set.seed(123) ## To set a seed for random number generation
-## GRanges object of the reference with methylation levels in
-## its meta-column
-Ref &lt;- makeGRangesFromDataFrame(
-    data.frame(chr = '1',
-                start = 1:num.points,
-                end = 1:num.points,
-                strand = '*',
-                p2 = rbeta(num.points, shape1 = 1, shape2 = 1.5)),
-    keep.extra.columns = TRUE)
+## Get a dataset of potential signals and the estimated cutpoint from the
+## package
+data(PS, cutpoint)
 
-## List of Granges objects of individuals methylation levels
-Indiv &lt;- GRangesList(
-    sample11 = makeGRangesFromDataFrame(
-        data.frame(chr = '1',
-                start = 1:num.points,
-                end = 1:num.points,
-                strand = '*',
-                p2 = rbeta(num.points, shape1 = 1.5, shape2 = 2)),
-        keep.extra.columns = TRUE),
-    sample12 = makeGRangesFromDataFrame(
-        data.frame(chr = '1',
-                start = 1:num.points,
-                end = 1:num.points,
-                strand = '*',
-                p2 = rbeta(num.points, shape1 = 1.6, shape2 = 2.1)),
-        keep.extra.columns = TRUE),
-    sample21 = makeGRangesFromDataFrame(
-        data.frame(chr = '1',
-                start = 1:num.points,
-                end = 1:num.points,
-                strand = '*',
-                p2 = rbeta(num.points, shape1 = 10, shape2 = 4)),
-        keep.extra.columns = TRUE),
-    sample22 = makeGRangesFromDataFrame(
-        data.frame(chr = '1',
-                start = 1:num.points,
-                end = 1:num.points,
-                strand = '*',
-                p2 = rbeta(num.points, shape1 = 11, shape2 = 4)),
-        keep.extra.columns = TRUE))
-## To estimate Hellinger divergence using only the methylation levels.
-HD &lt;- estimateDivergence(ref = Ref, indiv = Indiv, meth.level = TRUE,
-                        columns = 1)
-## To perform the nonlinear regression analysis
-nlms &lt;- nonlinearFitDist(HD, column = 4, verbose = FALSE)
+## The estimated cutpoints are used to discriminate signals from the noise.
+## That is, DMPs are selected using the cupoints
+DIMPs &lt;- selectDIMP(PS, div.col = 9L, cutpoint = cutpoint$cutpoint)
 
-## Next, the potential signal can be estimated
-PS &lt;- getPotentialDIMP(LR = HD, nlms = nlms, div.col = 4, alpha = 0.05)
-
-## The cutpoint estimation used to discriminate the signal from the noise
-cutpoints &lt;- estimateCutPoint(PS, control.names = c("sample11", "sample12"),
-                            treatment.names = c("sample21", "sample22"),
-                            div.col = 4, verbose = TRUE)
-## DIMPs are selected using the cupoints
-DIMPs &lt;- selectDIMP(PS, div.col = 4, cutpoint = min(cutpoints$cutpoint))
-
-## Finally DIMPs found on genes
-DIMR &lt;- getDIMPatGenes(GR = DIMPs$sample21, GENES = genes)
+## Finally DMPs found on genes
+DIMR &lt;- getDIMPatGenes(GR = DIMPs$T1, GENES = genes)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

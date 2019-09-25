@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate cutpoints to distinguish the treatment methylation...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for estimateCutPoint {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>estimateCutPoint {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for estimateCutPoint {MethylIT}"><tr><td>estimateCutPoint {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Estimate cutpoints to distinguish the treatment methylation signal
 from the control</h2>
@@ -13,7 +13,7 @@ from the control</h2>
 <p>Given a list of two GRanges objects, control and treatment,
 carrying the potential signals (prior classification) from controls and
 treatments in terms of an information divergence
-(given the meta-columns), the function estimates the cutpoints of the
+(given the metacolumns), the function estimates the cutpoints of the
 control group versus treatment group.
 </p>
 
@@ -22,12 +22,12 @@ control group versus treatment group.
 
 <pre>
 estimateCutPoint(LR, control.names, treatment.names, simple = TRUE,
-  column = c(hdiv = TRUE, TV = TRUE, wprob = FALSE, pos = FALSE),
-  classifier1 = c("logistic", "pca.logistic", "lda", "qda", "pca.lda",
-  "pca.qda"), classifier2 = NULL, tv.cut = 0.25, div.col = NULL,
-  clas.perf = FALSE, post.cut = 0.5, prop = 0.6, n.pc = 1,
-  find.cut = FALSE, cut.interval = c(0.5, 0.8), cut.incr = 0.01,
-  stat = 1, num.cores = 1L, tasks = 0L, ...)
+  column = c(hdiv = TRUE, TV = TRUE, bay.TV = FALSE, wprob = TRUE, pos =
+  TRUE), classifier1 = c("logistic", "pca.logistic", "lda", "qda",
+  "pca.lda", "pca.qda"), classifier2 = NULL, tv.cut = 0.25,
+  div.col = NULL, clas.perf = FALSE, post.cut = 0.5, prop = 0.6,
+  n.pc = 1, interaction = NULL, cut.values = NULL, stat = 1,
+  num.cores = 1L, tasks = 0L, ...)
 </pre>
 
 
@@ -36,7 +36,7 @@ estimateCutPoint(LR, control.names, treatment.names, simple = TRUE,
 <table summary="R argblock">
 <tr valign="top"><td><code>LR</code></td>
 <td>
-<p>An object from 'pDMP' class. This obejct is previously obtained
+<p>An object from 'pDMP' class. This object is previously obtained
 with function <code>getPotentialDIMP</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>control.names, treatment.names</code></td>
@@ -47,13 +47,17 @@ treatment samples, which must be include in the variable LR.</p>
 <tr valign="top"><td><code>simple</code></td>
 <td>
 <p>Logic (default, TRUE). If TRUE, then Youden Index is used to
-estimate the cutpoint.</p>
+estimate the cutpoint. If FALSE, the minimum information divergence value
+with posterior classification probability greater than <em>post.cut</em>
+(usually <em>post.cut</em> = 0.5) as estimated by <em>classifier1</em> will
+be the reported cutpoint, except if a better cutpoint is found in the set
+of values provided by the user in the parameter <em>cut.values</em>.</p>
 </td></tr>
 <tr valign="top"><td><code>column</code></td>
 <td>
 <p>a logical vector for column names for the predictor variables
 to be used: Hellinger divergence &quot;hdiv&quot;, total variation &quot;TV&quot;,
-probability of potential DIMP &quot;wprob&quot;, and the relative cytosine site
+probability of potential DMP &quot;wprob&quot;, and the relative cytosine site
 position &quot;pos&quot; in respect to the chromosome where it is located. The
 relative position is estimated as (x - x.min)/(x.max - x), where x.min
 and x.max are the maximum and minimum for the corresponding chromosome,
@@ -99,7 +103,7 @@ whether a DMPs belong to treatment group. Default <em>post.cut</em> = 0.5.</p>
 <tr valign="top"><td><code>prop</code></td>
 <td>
 <p>Proportion to split the dataset used in the logistic regression:
-group versus divergence (at DIMPs) into two subsets, training and
+group versus divergence (at DMPs) into two subsets, training and
 testing.</p>
 </td></tr>
 <tr valign="top"><td><code>n.pc</code></td>
@@ -107,27 +111,24 @@ testing.</p>
 <p>Number of principal components (PCs) to use if the classifier is
 not 'logistic'. In the current case, the maximun number of PCs is 4.</p>
 </td></tr>
-<tr valign="top"><td><code>find.cut</code></td>
+<tr valign="top"><td><code>interaction</code></td>
 <td>
-<p>Logic. Wether to search for an optimal cutoff value to
-classify DMPs based on given specifications.</p>
+<p>If a logistic classifier is used. Variable interactions to
+consider in a logistic regression model. Any pairwise combination of the
+variable &quot;hdiv&quot;, &quot;TV&quot;, &quot;wprob&quot;, and &quot;pos&quot; can be provided. For example:
+&quot;hdiv:TV&quot;, &quot;wprob:pos&quot;, &quot;wprob:TV&quot;, etc.</p>
 </td></tr>
-<tr valign="top"><td><code>cut.interval</code></td>
+<tr valign="top"><td><code>cut.values</code></td>
 <td>
-<p>0 &lt; <em>cut.interval</em> &lt; 0.1. If <em>find.cut</em> = TRUE, the
-interval of treatment group posterior probabilities where to search for a
-cutpoint. Deafult <em>cut.interval</em> = c(0.5, 0.8).</p>
-</td></tr>
-<tr valign="top"><td><code>cut.incr</code></td>
-<td>
-<p>0 &lt; <em>cut.incr</em> &lt; 0.1. If <em>find.cut</em> = TRUE, the sucesive
-increamental values runing on the interval <em>cut.interval</em>. Deafult,
-<em>cut.incr</em> = 0.01.</p>
+<p>Cut values of the information divergence (ID) specified  in
+<em>div.col</em> where to check the classification performance
+(0 &lt; <em>cut.interval</em> &lt; max ID). If provided, the search for a
+cutpoint will include these values.</p>
 </td></tr>
 <tr valign="top"><td><code>stat</code></td>
 <td>
 <p>An integer number indicating the statistic to be used in the
-testing when <em>find.cut</em> = TRUE. The mapping for statistic names are:
+testing when <em>simple</em> = FALSE The mapping for statistic names are:
 </p>
 
 <ul>
@@ -179,6 +180,10 @@ use, i.e. at most how many child processes will be run simultaneously
 (see <code>bplapply</code> and the number of tasks per job
 (only for Linux OS).</p>
 </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to or from other methods.</p>
+</td></tr>
 </table>
 
 
@@ -191,20 +196,20 @@ approach to estimate the cutpoint  is based on the application of Youden
 Index. More complexes approach based in several machine learning model
 are provided as well.
 </p>
-<p>Results of the classification perfomance resulting from the estimated
+<p>Results of the classification performance resulting from the estimated
 cutpoint are normally given, with the exception of those extreme
 situations where the statistics to evaluate performance cannot be
 estimated. More than one classifier model can be applied. For example,
-one classifier (logistic model) can be used to esitmate the posterior
+one classifier (logistic model) can be used to estimate the posterior
 classification probabilities of DMP into those from control and those
-from treatment. This probabilities are then used to estimate the cutpoint
-in range of values from, say, 0.5 to 0.8. Next, a different classifier
-can be used to evaluate the classification performance. Different
-classifier models would yield different performances. Models are returned
-and can be used in futher prediction with new datasets from the same
-batch experiment. This is a machine learnig approach to discriminate the
-biological regulatory signal naturally generated in the control from that
-one induced by the treatment.
+from treatment. These probabilities are then used to estimate the
+cutpoint in range of values from, say, 0.5 to 0.8. Next, a different
+classifier can be used to evaluate the classification performance.
+Different classifier models would yield different performances. Models
+are returned and can be used in further prediction with new datasets from
+the same batch experiment. This is a machine learning approach to
+discriminate the biological regulatory signal naturally generated in the
+control from that one induced by the treatment.
 </p>
 
 
@@ -245,7 +250,7 @@ performance evaluation.
 </p>
 </li>
 <li><p> statistic: Name of the performance statistic used to find the
-cutpoint when find.cut =  TRUE.
+cutpoint when <em>simple</em> =  FALSE
 </p>
 </li>
 <li><p> optStatVal: Value of the performance statistic at the cutpoint.
@@ -254,67 +259,27 @@ cutpoint when find.cut =  TRUE.
 
 
 
+<h3>See Also</h3>
+
+<p><code>evaluateDIMPclass</code>
+</p>
+
+
 <h3>Examples</h3>
 
 <pre>
-set.seed(123) ## To set a seed for random number generation
-## GRanges object of the reference with methylation levels in
-## its matacolumn
-num.points &lt;- 5000
-Ref &lt;- makeGRangesFromDataFrame(
-  data.frame(chr = '1',
-             start = 1:num.points,
-             end = 1:num.points,
-             strand = '*',
-             p1 = rbeta(num.points, shape1 = 1, shape2 = 1.5)),
-  keep.extra.columns = TRUE)
-
-## List of Granges objects of individuals methylation levels
-Indiv &lt;- GRangesList(
-  sample11 = makeGRangesFromDataFrame(
-    data.frame(chr = '1',
-               start = 1:num.points,
-               end = 1:num.points,
-               strand = '*',
-               p2 = rbeta(num.points, shape1 = 1.5, shape2 = 2)),
-    keep.extra.columns = TRUE),
-  sample12 = makeGRangesFromDataFrame(
-    data.frame(chr = '1',
-               start = 1:num.points,
-               end = 1:num.points,
-               strand = '*',
-               p2 = rbeta(num.points, shape1 = 1.6, shape2 = 2)),
-    keep.extra.columns = TRUE),
-  sample21 = makeGRangesFromDataFrame(
-    data.frame(chr = '1',
-               start = 1:num.points,
-               end = 1:num.points,
-               strand = '*',
-               p2 = rbeta(num.points, shape1 = 40, shape2 = 4)),
-    keep.extra.columns = TRUE),
-  sample22 = makeGRangesFromDataFrame(
-    data.frame(chr = '1',
-               start = 1:num.points,
-               end = 1:num.points,
-               strand = '*',
-               p2 = rbeta(num.points, shape1 = 41, shape2 = 4)),
-    keep.extra.columns = TRUE))
-## To estimate Hellinger divergence using only the methylation levels.
-HD &lt;- estimateDivergence(ref = Ref, indiv = Indiv, meth.level = TRUE,
-                         columns = 1)
-## To perform the nonlinear regression analysisx
-nlms &lt;- nonlinearFitDist(HD, column = 4, verbose = FALSE)
-
-## Next, the potential signal can be estimated
-PS &lt;- getPotentialDIMP(LR = HD, nlms = nlms, div.col = 4, alpha = 0.05)
-
-cutpoint &lt;- estimateCutPoint(LR = PS, simple = TRUE, find.cut = FALSE,
-                             column = c(hdiv = TRUE, TV = TRUE,
+## Get a dataset of potential signals and the estimated cutpoint from the
+## package and performs cutpoint estimation
+data(PS, package = "MethylIT")
+cutpoint = estimateCutPoint(LR = PS, simple = FALSE,
+                            column = c(hdiv = TRUE, TV = TRUE,
                                         wprob = TRUE, pos = TRUE),
-                             interaction = "hdiv:TV", clas.perf = FALSE,
-                             control.names = c("sample11", "sample12"),
-                             treatment.names = c("sample21", "sample22"))
+                            classifier1 = "qda",
+                            control.names = c("C1", "C2", "C3"),
+                            treatment.names = c("T1", "T2", "T3"),
+                            tv.cut = 0.92, clas.perf = TRUE, prop = 0.6,
+                            div.col = 9L)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

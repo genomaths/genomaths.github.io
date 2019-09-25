@@ -1,25 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Unique GRanges of methylation read counts filtered by...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for uniqueGRfilterByCov {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>uniqueGRfilterByCov {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for uniqueGRfilterByCov {MethylIT}"><tr><td>uniqueGRfilterByCov {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Unique GRanges of methylation read counts filtered by coverages</h2>
 
 <h3>Description</h3>
 
-<p>Given two GRanges objects, this function will filter by coverage
-each cytosine site from each GRanges object.
+<p>Given two GRanges objects, samples '1' and '2', this function
+will filter by coverage each cytosine site from each GRanges object.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-uniqueGRfilterByCov(x, y, min.coverage = 4, percentile = 0.9999,
-  high.coverage = NULL, columns = c(mC = 1, uC = 2), num.cores = 1L,
-  tasks = 0L, verbose = TRUE, ...)
+uniqueGRfilterByCov(x, y = NULL, min.coverage = 4, min.meth = 0,
+  percentile = 0.9999, high.coverage = NULL, columns = c(mC = 1, uC =
+  2), num.cores = 1L, ignore.strand = FALSE, tasks = 0L,
+  verbose = TRUE, ...)
 </pre>
 
 
@@ -28,17 +29,30 @@ uniqueGRfilterByCov(x, y, min.coverage = 4, percentile = 0.9999,
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>A GRanges object with methylated and unmethylated counts in its
-meta-column.</p>
+<p>An object from the classes 'GRanges', 'InfDiv', or 'pDMP' with
+methylated and unmethylated counts in its meta-column. If the argument
+'y' is not given, then it is assumed that the first four columns of the
+GRanges metadata 'x' are counts: methylated and unmethylated counts for
+samples '1' and '2'.</p>
 </td></tr>
 <tr valign="top"><td><code>y</code></td>
 <td>
 <p>A GRanges object with methylated and unmethylated counts in its
-meta-column.</p>
+meta-column. Default is NULL. If x is a 'InfDiv', or 'pDMP', then 'y' is
+not needed, since samples '1' and '2' are the first four columns of these
+objects.</p>
 </td></tr>
 <tr valign="top"><td><code>min.coverage</code></td>
 <td>
-<p>Cytosine sites with coverage less than min.coverage are
+<p>Cytosine sites where the coverage in both samples, 'x'
+and 'y', are less than 'min.coverage' are discarded. The cytosine site is
+preserved, however, if  the coverage is greater than 'min.coverage'in at
+least one sample.</p>
+</td></tr>
+<tr valign="top"><td><code>min.meth</code></td>
+<td>
+<p>Cytosine sites where the numbers of read counts of methylated
+cytosine in both samples, '1' and '2', are less than 'min.meth' are
 discarded.</p>
 </td></tr>
 <tr valign="top"><td><code>percentile</code></td>
@@ -54,9 +68,9 @@ coverage than this are discarded.</p>
 <tr valign="top"><td><code>columns</code></td>
 <td>
 <p>Vector of integer numbers of the columns (from each GRanges
-meta-column) where the methylated and unmethylated counts are provided. If
-not provided, then the methylated and unmethylated counts are assumed to
-be at columns 1 and 2, respectively.</p>
+meta-column) where the methylated and unmethylated counts are provided.
+If not provided, then the methylated and unmethylated counts are assumed
+to be at columns 1 and 2, respectively.</p>
 </td></tr>
 <tr valign="top"><td><code>num.cores</code></td>
 <td>
@@ -64,14 +78,19 @@ be at columns 1 and 2, respectively.</p>
 processes will be run simultaneously (see bplapply function from
 BiocParallel package).</p>
 </td></tr>
+<tr valign="top"><td><code>ignore.strand</code></td>
+<td>
+<p>When set to TRUE, the strand information is ignored in
+the overlap calculations. Default value: TRUE</p>
+</td></tr>
 <tr valign="top"><td><code>tasks</code></td>
 <td>
 <p>integer(1). The number of tasks per job. value must be a scalar
-integer &gt;= 0L. In this documentation a job is defined as a single call to a
-function, such as bplapply, bpmapply etc. A task is the division of the X
-argument into chunks. When tasks == 0 (default), X is divided as evenly as
-possible over the number of workers (see MulticoreParam from BiocParallel
-package).</p>
+integer &gt;= 0L. In this documentation a job is defined as a single call to
+a function, such as bplapply, bpmapply etc. A task is the division of the
+X argument into chunks. When tasks == 0 (default), X is divided as evenly
+as possible over the number of workers (see MulticoreParam from
+BiocParallel package).</p>
 </td></tr>
 <tr valign="top"><td><code>verbose</code></td>
 <td>
@@ -86,10 +105,11 @@ package).</p>
 
 <h3>Details</h3>
 
-<p>Cytosine sites with 'coverage' &gt; 'min.coverage' and 'coverage' &lt;
-'percentile' (e.g., 99.9 percentile) in at least one of the samples are
-preserved. It is expected that the columns of methylated and unmethylated
-counts are given.
+<p>Cytosine sites with 'coverage' &gt; 'min.coverage' in at least one of
+the samples are preserved. Positions with 'coverage' &lt; 'min.coverage' in
+both samples, 'x' and 'y', are removed. Positions with 'coverage' &gt;
+'percentile' (e.g., 99.9 percentile) are removed as well. It is expected
+that the columns of methylated and unmethylated counts are given.
 </p>
 
 
@@ -104,14 +124,14 @@ counts filtered for each cytosine position.
 
 <pre>
 dfChr1 &lt;- data.frame(chr = "chr1", start = 11:15, end = 11:15,
-strand &lt;- c("+","-","+","*","."), mC = 1:5, uC = 1:5)
+                    mC = 1:5, uC = 1:5)
 dfChr2 &lt;- data.frame(chr = "chr1", start = 12:18, end = 12:18,
-strand &lt;- '*', mC = 1:7, uC = 1:7)
+                    mC = 1:7, uC = 1:7)
 gr1 &lt;- makeGRangesFromDataFrame(dfChr1, keep.extra.columns = TRUE)
 gr2 &lt;- makeGRangesFromDataFrame(dfChr2, keep.extra.columns = TRUE)
 r1 &lt;- uniqueGRfilterByCov(gr1, gr2, ignore.strand = TRUE)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

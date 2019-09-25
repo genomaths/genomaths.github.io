@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict function for logistic regression model from...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for predict.LogisticR {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>predict.LogisticR {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for predict.LogisticR {MethylIT}"><tr><td>predict.LogisticR {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Predict function for logistic regression model from 'LogisticR' class</h2>
 
@@ -18,8 +18,8 @@ function <code>evaluateDIMPclass</code>.
 
 <pre>
 ## S3 method for class 'LogisticR'
-predict(object, newdata = NULL, type = c("class",
-  "posterior", "all"), ...)
+predict(object, newdata = NULL, type = c("all",
+  "class", "posterior"), num.cores = 1L, tasks = 0L, ...)
 </pre>
 
 
@@ -35,14 +35,22 @@ class. A logistic model given by function
 <tr valign="top"><td><code>newdata</code></td>
 <td>
 <p>To use with function 'predict'. New data for classification
-prediction. Optionally, a data frame in which to look for variables with
-which to predict. If omitted, the fitted linear predictors are used.</p>
+prediction. Optionally, an object from class &quot;GRanges&quot;, a list of
+GRanges, &quot;pDMP&quot; or &quot;InfDIv&quot;, in which to look for variables with which to
+predict. If omitted, the fitted linear predictors are used.</p>
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
-<p>To use with function 'predict'. . The type of prediction
-required. The default is &quot;class&quot;. Possible outputs are:
-'class', 'posterior', and 'scores' (see ?predict.lda).</p>
+<p>The type of output required. Possible outputs are: 'class',
+&quot;posterior&quot; and &quot;all&quot;. The default is &quot;all&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores, tasks</code></td>
+<td>
+<p>Paramaters for parallele computation using package
+<code>BiocParallel-package</code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously
+(see <code>bplapply</code> and the number of tasks per job
+(only for Linux OS).</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -62,10 +70,14 @@ obtained with 'glm' regression can be used directly with function
 
 <h3>Value</h3>
 
-<p>A character vector of prediction classes or a numeric vector of
-probabilities or a list containing the two vectors: prediction classes
-and 'posterior' probabilities.
+<p>If type is set to 'all', then the original 'newdata' with two columns
+added, predicted classes and 'posterior' probabilities, in the
+meta-columns of each GRange object are given. If 'newdata' is null, then
+the predictions given for the model by function
+<code>predict.glm</code> are returned. if type is set to 'class'
+or to &quot;posterior&quot;, then the unlisted predited classification or
+posterior classification probabilities are returned.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

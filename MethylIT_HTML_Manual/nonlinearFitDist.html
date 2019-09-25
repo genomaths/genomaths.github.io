@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Nonlinear fit of Information divergences distribution</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for nonlinearFitDist {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>nonlinearFitDist {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for nonlinearFitDist {MethylIT}"><tr><td>nonlinearFitDist {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Nonlinear fit of Information divergences distribution</h2>
 
@@ -19,10 +19,9 @@
 <pre>
 nonlinearFitDist(LR, column = 9, dist.name = "Weibull",
   sample.size = 20, location.par = FALSE, absolute = FALSE,
-  npoints = NULL, npoints0 = NULL, summarized.data = FALSE,
-  maxiter = 1024, tol = 1e-12, ftol = 1e-12, ptol = 1e-12,
-  minFactor = 10^-6, num.cores = NULL, tasks = 0L, maxfev = 1e+05,
-  verbose = TRUE)
+  npoints = NULL, model = "all", maxiter = 1024, tol = 1e-12,
+  ftol = 1e-12, ptol = 1e-12, minFactor = 10^-6, num.cores = NULL,
+  tasks = 0L, maxfev = 1e+05, verbose = TRUE, ...)
 </pre>
 
 
@@ -44,7 +43,7 @@ where the information divergence is given. Default column = 1</p>
 <p>name of the distribution to fit: Weibull (default:
 &quot;Weibull&quot;), gamma with three-parameter (Gamma3P), gamma with
 two-parameter (Gamma2P), generalized gamma with three-parameter
-(&quot;GGamma3P&quot;) or four-parameter (&quot;GGamma4P&quot;).</p>
+(&quot;GGamma3P&quot;) or four-parameter (&quot;GGamma4P&quot;), and Log-Normal (LogNorm).</p>
 </td></tr>
 <tr valign="top"><td><code>sample.size</code></td>
 <td>
@@ -59,7 +58,7 @@ with four parameters (GGamam4P).</p>
 <tr valign="top"><td><code>absolute</code></td>
 <td>
 <p>Logic (default, FALSE). Total variation (TV, the difference
-of methylation levels) is normally an output in the downstream <a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>
+of methylation levels) is normally an output in the downstream MethylIT
 analysis. If 'absolute = TRUE', then TV is transformed into |TV|, which is
 an information divergence that can be fitted to Weibull or to Generalized
 Gamma distribution.</p>
@@ -68,16 +67,11 @@ Gamma distribution.</p>
 <td>
 <p>number of points used in the fit</p>
 </td></tr>
-<tr valign="top"><td><code>npoints0</code></td>
+<tr valign="top"><td><code>model</code></td>
 <td>
-<p>subset of points where to estimate the ECDF (used only to
-reduce computational time)</p>
-</td></tr>
-<tr valign="top"><td><code>summarized.data</code></td>
-<td>
-<p>Logic value. If TRUE (default: FALSE), summarized
-data based on 'npoints' are used to perform the nonlinear fit. Only for
-GGamma distribution.</p>
+<p>Distribution model to fit, two-parameters and three-parameters
+Weibull model (&quot;2P&quot; and &quot;3P&quot;). Default is &quot;all&quot; and the model with the
+best AIC criterion is reported.</p>
 </td></tr>
 <tr valign="top"><td><code>maxiter</code></td>
 <td>
@@ -195,39 +189,31 @@ Mar. 2016.
 <h3>Examples</h3>
 
 <pre>
-## The Weilbull distribution is a particular case of GGamma.
-## The goodness-of-fit indicators AIC, BIC and R.Cross.val suggest that the
-## best fit randomly generated values with Weibull distribution is obtained
-## using the Weibull model (in this example).
-set.seed(123)
-num.points &lt;- 1000
-HD &lt;- GRangesList(
-    sample1 &lt;- makeGRangesFromDataFrame(
-        data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-            strand = '*',
-            hdiv = rweibull(1:num.points, shape = 0.75, scale = 1)),
-        keep.extra.columns = TRUE))
-nlms &lt;- nonlinearFitDist(HD, column = 1, verbose = FALSE)
-nlms2 &lt;- nonlinearFitDist(HD, column = 1, dist.name = "GGamma3P",
-        verbose = FALSE)
+## Load a dataset with Hellinger Divergence of methylation levels on it.
+data(HD)
+## The nonlinear fit based on three-parameter GGamma distribution
+nlms2 &lt;- nonlinearFitDist(HD, npoints = 100, dist.name = "GGamma3P",
+                          verbose = FALSE)
+## Weilbull distribution is a particular case of GGamma.
+nlms &lt;- nonlinearFitDist(HD, npoints = 100, verbose = FALSE)
 
-## We used the parameter values estimated for "GGamma3P" in the last
-## example (nlms2) to generate random values with GGamma disitribution. The
-## goodness-of-fit indicators AIC, BIC and R.Cross.val suggest that the
-## best fit is obtained for GGamma model.
-num.points &lt;- 1000
-HD &lt;- GRangesList(
-    sample1 &lt;- makeGRangesFromDataFrame(
-        data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-            strand = '*',
-            hdiv = rggamma(num.points, alpha = 0.75, psi = 1.02,
-                scale = 0.97)),
-        keep.extra.columns = TRUE))
-nlms3 &lt;- nonlinearFitDist(HD, column = 1, verbose = FALSE)
-nlms4 &lt;- nonlinearFitDist(HD, column = 1, dist.name = "GGamma3P",
-        verbose = FALSE)
+## The goodness-of-fit indicators AIC suggests that the best fitted model is
+## obtained with GGamma distribution (in this example).
+res &lt;- mapply(function(m1,m2) {
+  as.numeric(c(Weibull = m1$AIC[1], GGamma = m2$AIC[1]))
+}, nlms, nlms2)
+rownames(res) &lt;-c("Weibull", "GGamma")
+res
+
+## However, the Cross-validations correlation coefficient is saying that
+## the Weibull distribution would be a little better probability predictor.
+res &lt;- mapply(function(m1,m2) {
+  as.numeric(c(Weibull = m1$R.Cross.val[1], GGamma = m2$R.Cross.val[1]))
+}, nlms, nlms2)
+rownames(res) &lt;-c("Weibull", "GGamma")
+res
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>
