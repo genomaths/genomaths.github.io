@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict DIMP class</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for predictDIMPclass {MethylIT}"><tr><td>predictDIMPclass {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for predictDIMPclass {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>predictDIMPclass {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Predict DIMP class</h2>
 
@@ -27,12 +27,12 @@ predictDIMPclass(LR, model, conf.matrix = FALSE, control.names = NULL,
 <table summary="R argblock">
 <tr valign="top"><td><code>LR</code></td>
 <td>
-<p>A list of GRanges objects obtained through the through MethylIT
+<p>A list of GRanges objects obtained through the through <a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>
 downstream analysis. Basically, this object is a list of GRanges containing
 only differentially methylated position (DMPs). The metacolumn of each
 GRanges must contain the columna: Hellinger divergence &quot;hdiv&quot;, total
 variation &quot;TV&quot;, the probability of potential DMP &quot;wprob&quot;, which naturally
-are added in the downstream analysis of MethylIT.</p>
+are added in the downstream analysis of <a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>.</p>
 </td></tr>
 <tr valign="top"><td><code>model</code></td>
 <td>
@@ -78,9 +78,9 @@ overall confusion matrix is returned
 <h3>Examples</h3>
 
 <pre>
-library(MethylIT)
+library(<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>)
 
-data(cutpoint, PS, package = "MethylIT")
+data(cutpoint, PS, package = "<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>")
 
 ## DMPs are selected using the cupoints
 DMPs &lt;- selectDIMP(PS, div.col = 9L, cutpoint = cutpoint$cutpoint,
@@ -105,5 +105,5 @@ pred = predictDIMPclass(LR = DMPs, model = perf$model,
                         treatment.names = c("T1", "T2", "T3"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
 </body></html>
