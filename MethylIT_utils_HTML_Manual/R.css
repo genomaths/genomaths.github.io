@@ -1,0 +1,65 @@
+<style type="text/css">
+
+.list-group-item.active, .list-group-item.active:focus,
+.list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.75em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify-header .tocify-item {
+  font-size: 0.8em;
+  padding-left: 20px;
+  text-indent: 0;
+}
+
+body{ /* Normal  */
+      font-size: 16px;
+      font-family: "Times New Roman", Times, serif;
+      text-align: justify
+  }
+td {  /* Table  */
+  font-size: 8px;
+}
+
+h1.title {
+   font-size: 36px;
+   font-family: "Times New Roman", Times, serif;
+   color: DarkRed;
+   .subTitle {
+       font-size: 24px;
+       font-family: "Times New Roman", Times, serif;
+       color: DarkRed;
+  }
+}
+
+h1 { /* Header 1 */
+  font-size: 24px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+    color: DarkBlue;
+    font-family: "Times New Roman", Times, serif;
+}
+h3 { /* Header 3 */
+   font-size: 18px;
+   color: DarkBlue;
+   font-family: "Times New Roman", Times, serif;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+
+</style>

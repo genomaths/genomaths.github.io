@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Kolmogorov-Smirnov statistics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for ksTest {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}"><tr><td>ksTest {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Kolmogorov-Smirnov statistics</h2>
+
+<h3>Description</h3>
+
+<p>Permutation test for Kolmogorov-Smirnov statistics
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ksTest(x, CDF = "Weibull", pars, num.sampl = 999, sample.size,
+  numcores = 1, verbose = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>numerical vector to perform the goodness of fit</p>
+</td></tr>
+<tr valign="top"><td><code>CDF</code></td>
+<td>
+<p>the name of the cummulative distribution function (CDF)</p>
+</td></tr>
+<tr valign="top"><td><code>pars</code></td>
+<td>
+<p>vector of parameters to evaluate the CDF:
+4P GG distribution: c(shape=value, scale=value, mu=value, psi=value)
+3P GG distribution: c(shape=value, scale=value, psi=value)
+3P Weibull distribution: c(shape=value, scale=value, mu=value)
+2P Weibull distribution: c(shape=value, scale=value)</p>
+</td></tr>
+<tr valign="top"><td><code>num.sampl</code></td>
+<td>
+<p>number of elements to be sampled</p>
+</td></tr>
+<tr valign="top"><td><code>sample.size</code></td>
+<td>
+<p>number of permutations. If sample.size &lt; length(x), then
+the test becomes a Monte Carlo test</p>
+</td></tr>
+<tr valign="top"><td><code>numcores</code></td>
+<td>
+<p>number of cores</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>If TRUE, prints the function log to stdout</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other parameters</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>gamma distribution CDF
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robersy Sanchez - 02/29/2016
+</p>
+
+
+<h3>References</h3>
+
+<p>Alastair Sanderson. Using R to analyse data statistical and
+numerical data analysis with R
+http://www.sr.bham.ac.uk/~ajrs/R/r-analyse_data.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+num.samples &lt;- 1000
+x &lt;- rweibull(num.samples, shape = 1.01, scale = 1.01)
+ksTest(x, pars = c(shape = 1, scale = 1))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a></em> version 0.3.1 ]</div>
+</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Genomic Signals to Summarized Bins</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for signals2bins {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}"><tr><td>signals2bins {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Genomic Signals to Summarized Bins</h2>
+
+<h3>Description</h3>
+
+<p>This function summarizes a genomic signal (variable) split into 
+bins (intervals). The signal must be provided in the metacolumn of a
+<code>GRanges-class</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+signals2bins(signal, regions, stat = "mean", nbins = 20L,
+  nbinsUP = 20L, nbinsDown = 20L, streamUp = NULL,
+  streamDown = NULL, absolute = FALSE, na.rm = TRUE, missings = 0,
+  region.size = 300, scaling = 1000L, verbose = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>signal</code></td>
+<td>
+<p>Preferibly a single GRanges object with genomic signals in
+the meta-columns (each colum carrying a signal) or a list of GRanges
+objects, each GRanges carrying a signal in the meta-column. For example,
+methylation levels, any variable regularly measuring some genomic
+magnitude. This GRanges object can be created by using function
+<code>uniqueGRanges</code> from <em><a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a></em> R package.</p>
+</td></tr>
+<tr valign="top"><td><code>regions</code></td>
+<td>
+<p>A GRanges carrying the genomic region where a summarized 
+statistic can be computed. For example, annotated gene coordinates.</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>Statistic used to estimate the summarized value of the variable
+of interest in each interval/window. Posible options are: &quot;mean&quot;,
+geometric mean (&quot;gmean&quot;), &quot;median&quot;, &quot;density&quot;, &quot;count&quot; and &quot;sum&quot;
+(default). Here, we define &quot;density&quot; as the sum of values from the
+variable of interest in the given region devided by the length/width of
+the region. The option 'count' compute the number/count of positions in
+the specified regions with values greater than zero in the selected
+'column'.</p>
+</td></tr>
+<tr valign="top"><td><code>nbins, nbinsUP, nbinsDown</code></td>
+<td>
+<p>An integer denoting the number of bins used to 
+split the <em>regions</em>, upstream the main regions, and downstream the 
+main <em>regions</em>, respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>streamUp, streamDown</code></td>
+<td>
+<p>An interger denonting how many base-pairs 
+up- and down-stream the provided <em>regions</em> must be include in the
+computation. Default is NULLL.</p>
+</td></tr>
+<tr valign="top"><td><code>absolute</code></td>
+<td>
+<p>Optional. Logic (default: FALSE). Whether to use the absolute
+values of the variable provided. For example, the difference of
+methylation levels could take negative values (TV) and we would be
+interested on the sum of abs(TV), which is sum of the total variation
+distance.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>Logical value. If TRUE, the NA values will be removed</p>
+</td></tr>
+<tr valign="top"><td><code>missings</code></td>
+<td>
+<p>Whether to write '0' or 'NA' on regions where there is not
+data to compute the statistic.</p>
+</td></tr>
+<tr valign="top"><td><code>region.size</code></td>
+<td>
+<p>An integer. The minimun size of a region to be included in
+the computation. Default 300 (bp).</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Logical. Default is TRUE. If TRUE, then the progress of the
+computational tasks is given.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments to pass to 
+<code>findOverlaps-methods</code> function.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is useful, for example, to get the  profile of the 
+metylation signal around genes regions: gene-body plus 2kb upstream of
+the TSS and 2kb downtream of the TES. The intensity of the signal profile
+would vary depending on the sample conditions. If a given treatment has
+an effect on methylation then the intesity of the signal profile for the
+treatment would go over or below the control samples. 
+</p>
+<p>This function does the same as function <code>signal2bins</code>,
+except for that it is significantly faster than
+<code>signal2bins</code> function and small variation on the signal
+profiles. These variations came from the way to split the regions into 
+bins, for which there is not an exact algorithm to perform it. Function
+<code>signal2bins</code> uses <code>cut</code>, while current
+function uses <em>tile</em> function
+(<code>IPosRanges-class</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame object carrying the bin coordinates: <em>binCoord</em> 
+and, for each sample, the signal summarized in the requested statistic:
+<em>statSumary</em>. Notice that the bin coordinates are relative to
+original coordinates given in the <em>GR</em> objeect. For example, if the
+<em>GR</em> object carries genome-wide metylation signals (from several
+samples) and we are interested in to get the methylation signal profile
+around the genes regions, then we must provide the gene annotated
+coordinates in the argument <em>regions</em>, and set up the amount of bp
+upstream of TSS and dowstream of TES, say, <em>streamUp</em> = 2000 and
+<em>streamDown</em> = 2000, repectively. Next, if we set nbins = 20L,
+nbinsUP = 20L, nbinsDown = 20L, then the first and the last 20 bins of
+the returned signal profile represent 2000 bp each of them. Since
+gene-body sizes vary genome-wide, there is not a specific number of bp
+represented by the 20 bins covering the gene-body regions.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robersy Sanchez. <a href="https://genomaths.com">https://genomaths.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>signal2bins</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a></em> version 0.3.1 ]</div>
+</body></html>

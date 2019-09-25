@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Cutpoint estimation based on Mixtures of Gamma Distributions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for gammaMixtCut {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}"><tr><td>gammaMixtCut {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Cutpoint estimation based on Mixtures of Gamma Distributions</h2>
+
+<h3>Description</h3>
+
+<p>This functions estimates cutpoint value to classify DMPs into
+two classes: 1) from treatment and 2) from control, based on Mixtures of
+Gamma Distributions. The cutpoint estimations are limited to the analysis
+of mixture distributions of the form:
+<i>F(x) = &lambda; G(x) + (1 - &lambda;) H(x)</i>, where 
+<i>&lambda; \in [0, 1]</i>, <i>G(x)</i> and <i>F(x)</i> are the gamma
+cummulative distribution functions distributions followed by the
+information divergences estimated for individuals from control and 
+treatment populations, respectively.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gammaMixtCut(LR, post.cut = 0.5, div.col = NULL, tv.col = NULL,
+  tv.cut = 0.25, find.cut = FALSE, control.names = NULL,
+  treatment.names = NULL, column = c(hdiv = FALSE, TV = FALSE, wprob =
+  FALSE, pos = FALSE), classifier = c("logistic", "pca.logistic", "lda",
+  "svm", "qda", "pca.lda", "pca.qda"), prop = 0.6, clas.perf = FALSE,
+  cut.interval = c(0.5, 0.8), cut.incr = 0.01, stat = 1,
+  maximize = TRUE, num.cores = 1L, tasks = 0L,
+  tol = .Machine$double.eps^0.5, maxiter = 1000, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>LR</code></td>
+<td>
+<p>A &quot;pDMP&quot;or &quot;InfDiv&quot; object obtained with functions 
+<code>getPotentialDIMP</code> or
+<code>estimateDivergence</code>. These are list of GRanges
+objects, where each GRanges object from the list must have at least
+two columns: a column containing the total variation of methylation
+level (TV, difference of methylation levels) and a column containing a
+divergence of methylation levels (it could be TV or  Hellinger
+divergence).</p>
+</td></tr>
+<tr valign="top"><td><code>post.cut</code></td>
+<td>
+<p>Posterior probability to dicide whether a DMPs belong to 
+treatment group. Default *post.cut* = 0.5.</p>
+</td></tr>
+<tr valign="top"><td><code>div.col</code></td>
+<td>
+<p>Column number for divergence of methylation levels used in the
+estimation of the cutpoints. Default: 9L (hdiv column from an InfDiv
+object).</p>
+</td></tr>
+<tr valign="top"><td><code>tv.col</code></td>
+<td>
+<p>Column number where the total variation is located in the
+metadata from each GRanges object.</p>
+</td></tr>
+<tr valign="top"><td><code>tv.cut</code></td>
+<td>
+<p>A cutoff for the total variation distance to be applied to each
+site/range. Only sites/ranges *k* with <i>TVD_{k} &gt; tv.cut</i> are 
+are used in the analysis. Its value must be a number 
+<i>0 &lt; tv.cut &lt; 1</i>. Default is <i>tv.cut = 0.25</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>find.cut</code></td>
+<td>
+<p>Logic. Wether to search for an optimal cutoff value to
+classify DMPs based on given specifications.</p>
+</td></tr>
+<tr valign="top"><td><code>control.names, treatment.names</code></td>
+<td>
+<p>Optional. Names/IDs of the control and
+treatment samples, which must be include in the variable LR 
+(default, NULL). However, these are required if any of the parameters
+*find.cut* or *clas.perf* are set TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>treatment.names</code></td>
+<td>
+<p>Optional. Names/IDs of the treatment samples, which
+must be include in the variable LR (default, NULL).</p>
+</td></tr>
+<tr valign="top"><td><code>column</code></td>
+<td>
+<p>a logical vector for column names for the predictor variables
+to be used: Hellinger divergence &quot;hdiv&quot;, total variation &quot;TV&quot;,
+probability of potential DIMP &quot;wprob&quot;, and the relative cytosine site
+position &quot;pos&quot; in respect to the chromosome where it is located. The
+relative position is estimated as (x - x.min)/(x.max - x), where x.min
+and x.max are the maximum and minimum for the corresponding chromosome,
+repectively. If &quot;wprob = TRUE&quot;, then Logarithm base-10 of &quot;wprob&quot; will
+be used as predictor in place of &quot;wprob&quot; ( see
+<code>evaluateDIMPclass</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>classifier</code></td>
+<td>
+<p>Classification model to use. Option &quot;logistic&quot; applies a
+logistic regression model; option &quot;lda&quot; applies a Linear Discriminant
+Analysis (LDA); &quot;qda&quot; applies a Quadratic Discriminant Analysis (QDA),
+&quot;pca.logistic&quot; applies logistic regression model using the Principal
+Component (PCs) estimated with Principal Component Analysis (PCA) as
+predictor variables. pca.lda&quot; applies LDA using PCs as predictor
+variables, and the option &quot;pca.qda&quot; applies a Quadratic Discriminant
+Analysis (QDA) using PCs as predictor variables. 'SVM' applies Support
+Vector Machines classifier from R package e1071.</p>
+</td></tr>
+<tr valign="top"><td><code>prop</code></td>
+<td>
+<p>Proportion to split the dataset used in the logistic regression:
+group versus divergence (at DIMPs) into two subsets, training and
+testing.</p>
+</td></tr>
+<tr valign="top"><td><code>clas.perf</code></td>
+<td>
+<p>Logic. Whether to return the classificaiton performance for 
+the estimated cutpoint. Default, FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>cut.interval</code></td>
+<td>
+<p>0 &lt; *cut.interval* &lt; 0.1. If *find.cut*= TRUE, the 
+interval of treatment group posterior probabilities where to search for a
+cutpoint. Deafult *cut.interval* = c(0.5, 0.8).</p>
+</td></tr>
+<tr valign="top"><td><code>cut.incr</code></td>
+<td>
+<p>0 &lt; *cut.incr* &lt; 0.1. If *find.cut*= TRUE, the sucesive 
+increamental values runing on the interval *cut.interval*. Deafult, 
+*cut.incr* = 0.01.</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>An integer number indicating the statistic to be used in the
+testing when *find.cut* = TRUE. The mapping for statistic names are:
+0 = &quot;Accuracy&quot;, 1 = &quot;Sensitivity&quot;, 2 = &quot;Specificity&quot;,
+3 = &quot;Pos Pred Value&quot;, 4 = &quot;Neg Pred Value&quot;, 5 = &quot;Precision&quot;,
+6 = &quot;Recall&quot;, 7 = &quot;F1&quot;,  8 = &quot;Prevalence&quot;, 9 = &quot;Detection Rate&quot;,
+10 = &quot;Detection Prevalence&quot;, 11 = &quot;Balanced Accuracy&quot;, 12 = FDR.</p>
+</td></tr>
+<tr valign="top"><td><code>maximize</code></td>
+<td>
+<p>Whether to maximize the performance indicator given in
+parameter 'stat'. Default: TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores, tasks</code></td>
+<td>
+<p>Paramaters for parallele computation using package
+<code>BiocParallel-package</code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously
+(see <code>bplapply</code> and the number of tasks per job
+(only for Linux OS).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arameters to pass to functions
+<code>evaluateDIMPclass</code> and <code>gammamixEM</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>After the estimation of potential DMPs, the pool of DMPs from
+control and treatment is assumed that follows mixtures of Gamma
+distributions corresponding to two populations. A posterior probability
+2d-vector is estimated for each DMP. The cutpoint is determined from the 
+intersection of the two gamma probabilities density distributions. That 
+is, <i>f(x) and g(x)</i> are the estimatied densities for control and 
+treatment groups, repectively, then the cutpoint is the values of x for
+which <i>f(x) = g(x)</i>.
+</p>
+<p>The Mixtures of Gamma Distributions (MGD) is estimated by using function
+<code>gammamixEM</code> from package *mixtools*. By default
+function <code>gammamixEM</code> produces returns a long list
+including the posterior probability to belong to the treatment. Here, by
+the sake of brevety only the information on the fitted model is given.
+The posterior model probability can be retrieved by using *predict*
+function. Accordign with MGD model, DMPs with a posterior probability to
+belong to the treatment group greater than *post.cut = 0.5* is classified
+as *DMP from treatment*. The post.cut can be modified. For all the cases
+<i>0 &lt; post.cut &lt; 1</i>. The cutpoint and, hence, the classification
+derived throught MGD model might differ from that provided throught
+<code>evaluateDIMPclass</code> function, which includes more information
+about the DMP and, therefore, reports better performance. The
+classification perfomance reported when *clas.perf* = TRUE or *find.cut*
+= TRUE is created with function <code>evaluateDIMPclass</code> for the
+especified matchin learning model.  
+</p>
+<p>If parameter *find.cut = TRUE*, then a search for the best
+cutpoint in a predifined inteval (*cut.interval*) is performed calling
+function <code>evaluateDIMPclass</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a></em> version 0.3.1 ]</div>
+</body></html>

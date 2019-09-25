@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute Shannon Entropy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for shannonEntr {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}"><tr><td>shannonEntr {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute Shannon Entropy</h2>
+
+<h3>Description</h3>
+
+<p>Compute Shannon Entropy of probability vector p.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+shannonEntr(p, logbase = 2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>A probability vector, sum(p) = 1.</p>
+</td></tr>
+<tr valign="top"><td><code>logbase</code></td>
+<td>
+<p>A positive number: the base with respect to which logarithms</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>By definition, if p_i = 0 for some i, the value of the corresponding
+summ and 0*log(0) is taken to be 0.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+counts = sample.int(10)
+prob = counts/sum(counts)
+shannonEntr(prob)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a></em> version 0.3.1 ]</div>
+</body></html>

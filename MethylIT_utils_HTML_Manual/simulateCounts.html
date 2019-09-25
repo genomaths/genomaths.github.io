@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simulate read counts of methylated and unmethylated cytosines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>_utils_html/R.css" />
+</head><body>
+
+<table width="100%" summary="page for simulateCounts {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}"><tr><td>simulateCounts {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simulate read counts of methylated and unmethylated cytosines</h2>
+
+<h3>Description</h3>
+
+<p>Auxiliary function to simulate read counts of methylated and
+unmethylated cytosines
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+simulateCounts(num.samples, sites, alpha, beta, size, theta,
+  sample.ids = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>num.samples</code></td>
+<td>
+<p>Number of samples to generate.</p>
+</td></tr>
+<tr valign="top"><td><code>sites</code></td>
+<td>
+<p>Number of cytosine sites for each sample.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Alpha parameter of beta distribution. Parameter shape1 from
+<code>Beta</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>beta</code></td>
+<td>
+<p>Beta parameter of beta distribution. Parameter shape2 from
+<code>Beta</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>number of trials (11 or more). Expected cytosine coverage.</p>
+</td></tr>
+<tr valign="top"><td><code>theta</code></td>
+<td>
+<p>Parameter theta from <code>rnegbin</code>
+(overdispersion parameter).</p>
+</td></tr>
+<tr valign="top"><td><code>sample.ids</code></td>
+<td>
+<p>Names for the samples.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Methylation coverages (minimum 10) are generated from a Negative
+Binomial distribution with function <code>rnegbin</code> from R
+package MASS. This function uses the representation of the Negative
+Binomial distribution as a continuous mixture of Poisson distributions
+with Gamma distributed means. Prior methylation levels are randomly
+generated with beta distribution using <code>Beta</code>
+function from R package “stats” and posterior methylation levels are
+generated according Bayes' theorem. The read of methylation counts are
+obtained as the product of coverage by the posterior methylation level.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list of GRanges objects with the methylated and unmethylated counts
+in its metacolumn.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robersy Sanchez
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# *** Simulate samples with expected average of difference of methylation
+# levels equal to 0.0427.
+# === Expected mean of methylation levels ===
+bmean &lt;- function(alpha, beta) alpha/(alpha + beta)
+bmean(0.03, 0.5) - bmean(0.007, 0.5) #' Expected difference = 0.04279707
+
+# === The number of cytosine sitesto generate ===
+sites = 5000
+# == Set a seed for pseudo-random number generation ===
+set.seed(123)
+
+# === Simulate samples ===
+ref = simulateCounts(num.samples = 1, sites = sites, alpha = 0.007,
+                    beta = 0.5, size = 50, theta = 4.5, sample.ids = "C1")
+treat = simulateCounts(num.samples = 2, sites = sites, alpha = 0.03,
+                    beta = 0.5, size = 50, theta = 4.5,
+                    sample.ids = c("T1", "T2"))
+
+#  === Estime Divergences ===
+HD = estimateDivergence(ref = ref$C1, indiv =  treat, Bayesian = TRUE,
+                        num.cores = 1L, percentile = 1)
+
+# === Difference of methylation levels of treatment simulated samples.
+# Treatment versus reference
+data.frame(mean.diff = c(mean(HD$T1$TV), mean(HD$T2$TV)),
+           c("T1", "T2"), row.names = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a></em> version 0.3.1 ]</div>
+</body></html>
