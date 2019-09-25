@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Fisher's exact test for read counts on GRanges objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+</head><body>
+
+<table width="100%" summary="page for FisherTest {MethylIT}"><tr><td>FisherTest {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Fisher's exact test for read counts on GRanges objects</h2>
+
+<h3>Description</h3>
+
+<p>Given a GRanges object with the methylated and unmethylated
+read counts for control and treatment in its metacolumn, Fisher's exact
+test is performed for each cytosine site.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+FisherTest(LR, count.col = 1:2, control.names = NULL,
+  treatment.names = NULL, pooling.stat = "sum", tv.cut = NULL,
+  hdiv.cut = NULL, hdiv.col = NULL, pAdjustMethod = "BH",
+  pvalCutOff = 0.05, saveAll = FALSE, num.cores = 1L, tasks = 0L,
+  verbose = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>LR</code></td>
+<td>
+<p>A list of GRanges, a GRangesList, a CompressedGRangesList object.
+Each GRanges object from the list must have two columns: methylated
+(mC) and unmethylated (uC) counts. The name of each element from the
+list must coincide with a control or a treatment name.</p>
+</td></tr>
+<tr valign="top"><td><code>count.col</code></td>
+<td>
+<p>2d-vector of integers with the indexes of the read count
+columns. If not given, then it is asssumed that the methylated and
+unmethylated read counts are located in columns 1 and 2 of each GRanges
+metacolumns. If object LR is the output of Methyl-IT function
+<code>estimateDivergence</code>, then columns 1:4 are the read
+count columns: columns 1 and 2 are methylated and unmethylated read
+counts from the reference group, while columns 3 and 4 are methylated and
+unmethylated read counts from the treatment group, respectively. In this
+case, if the requested comparison is reference versus treatment, then no
+specification is needed for count.col. The comparison control versus
+treatment can be obtained by setting count.col = 3:4 and providing
+control.names and treatment.names.</p>
+</td></tr>
+<tr valign="top"><td><code>control.names, treatment.names</code></td>
+<td>
+<p>Names/IDs of control and treatment
+samples, which must be included in the variable GR at the metacolumn.
+Default NULL. If provided the Fisher's exact test control versus
+trearment is performed. Default is NULL. If NULL, then it is assumed that
+each GRanges object in LR has four columns of counts. The first two
+columns correspond to the methylated and unmethylated counts from
+control/reference and the other two columns are the methylated and
+unmethylated counts from treatment, respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>pooling.stat</code></td>
+<td>
+<p>statistic used to estimate the methylation pool: row sum,
+row mean or row median of methylated and unmethylated read counts across
+individuals. If the number of control samples is greater than 2 and
+pooling.stat is not NULL, then they will pooled. The same for treatment.
+Otherwise, all the pairwise comparisons will be done.</p>
+</td></tr>
+<tr valign="top"><td><code>tv.cut</code></td>
+<td>
+<p>A cutoff for the total variation distance (TVD; absolute value
+of methylation levels differences) estimated at each site/range as the
+difference of the group means of methylation levels. If tv.cut is
+provided, then sites/ranges k with abs(TV_k) &lt; tv.cut are removed before
+performing the regression analysis. Its value must be NULL or a number
+0 &lt; tv.cut &lt; 1.</p>
+</td></tr>
+<tr valign="top"><td><code>hdiv.cut</code></td>
+<td>
+<p>An optional cutoff for the Hellinger divergence (*hdiv*). If
+the LR object derives from the previous application of function
+<code>estimateDivergence</code>, then a column with the *hdiv* values is
+provided. If combined with tv.cut, this permits a more effective
+filtering of the signal from the noise. Default is NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>hdiv.col</code></td>
+<td>
+<p>Optional. Columns where *hdiv* values are located in each
+GRange object from LR. It must be provided if together with *hdiv.cut*.
+Default is NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>pAdjustMethod</code></td>
+<td>
+<p>method used to adjust the results; default: BH</p>
+</td></tr>
+<tr valign="top"><td><code>pvalCutOff</code></td>
+<td>
+<p>cutoff used then a p-value adjustment is performed</p>
+</td></tr>
+<tr valign="top"><td><code>saveAll</code></td>
+<td>
+<p>if TRUE all the temporal results are returned</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores</code></td>
+<td>
+<p>The number of cores to use, i.e. at most how many child
+processes will be run simultaneously (see bpapply function from
+BiocParallel).</p>
+</td></tr>
+<tr valign="top"><td><code>tasks</code></td>
+<td>
+<p>integer(1). The number of tasks per job. value must be a scalar
+integer &gt;= 0L. In this documentation a job is defined as a single call
+to a function, such as bplapply, bpmapply etc. A task is the division of
+the X argument into chunks. When tasks == 0 (default), X is divided as
+evenly as possible over the number of workers (see MulticoreParam from
+BiocParallel package).</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>if TRUE, prints the function log to stdout</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters for function
+<code>uniqueGRanges</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Samples from each group are pooled according to the statistic
+selected (see parameter pooling.stat) and a unique GRanges object is
+created with the methylated and unmethylated read counts for each group
+(control and treatment) in the metacolumn. So, a contingency table can be
+built for range from GRanges object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The input GRanges object with the columns of Fisher's exact test
+p-value, total variation (difference of methylation levels), and
+p-value adjusment.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>rmstGR</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Get a dataset of Hellinger divergency of methylation levels
+## from the package
+data(HD)
+## Only the first four cytosine sites from each sample are tested
+hd &lt;- lapply(HD, function(hd) hd[1:4])
+
+FisherTest(LR = hd, pooling.stat = "sum",
+        treatment.names = c("T1", "T2"), tv.cut = NULL,
+        pAdjustMethod="BH", pvalCutOff = 0.05, num.cores = 1L,
+        verbose=FALSE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+</body></html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Data set constructor for class glmDataSet</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+</head><body>
+
+<table width="100%" summary="page for glmDataSet {MethylIT}"><tr><td>glmDataSet {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Data set constructor for class glmDataSet</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to build a object suitable to be used
+with Methyl-IT <code>link{countTest2}</code> function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+glmDataSet(GR = NULL, counts = NULL, colData = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>GR</code></td>
+<td>
+<p>A GRanges object with the count matrix of DMPs in the metacolumns
+(see <em>'counts'</em>). If provided, then leave paramater
+<em>'counts = NULL'</em>.</p>
+</td></tr>
+<tr valign="top"><td><code>counts</code></td>
+<td>
+<p>Count matrix of DMPs with minimal dimmensions 1 (row) x 4
+(columns). Column names must corresponds to the rownames from parameter
+'colData'.</p>
+</td></tr>
+<tr valign="top"><td><code>colData</code></td>
+<td>
+<p>A data frame with one columnn named 'condition', which must be
+a factor with exactly two levels. The rownames of <em>colData</em>
+individual samples. The row names of <em>colData</em> must correspond to
+th column names of the count matrix.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Data set constructor for class glmDataSet also validate the object
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+</body></html>

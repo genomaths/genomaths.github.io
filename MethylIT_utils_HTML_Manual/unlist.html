@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Flatten lists extended to any class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+</head><body>
+
+<table width="100%" summary="page for unlist {MethylIT}"><tr><td>unlist {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Flatten lists extended to any class</h2>
+
+<h3>Description</h3>
+
+<p>Given a list 'x' of R objects from the same class and same
+format, unlist simplifies it to produce a new R object which contains all
+the initial components which in 'x' object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+unlist(x, recursive = TRUE, use.names = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Any list R object.</p>
+</td></tr>
+<tr valign="top"><td><code>recursive</code></td>
+<td>
+<p>Logical. Should unlisting be applied to list components of
+x?</p>
+</td></tr>
+<tr valign="top"><td><code>use.names</code></td>
+<td>
+<p>Logical. Should names be preserved?</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This is a method to extend unlist generic function to handle
+any list of objects from the same class.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+gr1 &lt;-GRanges(seqnames = "chr2", ranges = IRanges(3, 6),
+              strand = "+", score = 5L, GC = 0.45)
+gr2 &lt;-
+  GRanges(seqnames = c("chr1", "chr1"),
+          ranges = IRanges(c(7,13), width = 3),
+          strand = c("+", "-"), score = 3:4, GC = c(0.3, 0.5))
+gr3 &lt;-
+  GRanges(seqnames = c("chr1", "chr2"),
+          ranges = IRanges(c(1, 4), c(3, 9)),
+          strand = c("-", "-"), score = c(6L, 2L), GC = c(0.4, 0.1))
+grl &lt;- list("gr1" = gr1, "gr2" = gr2, "gr3" = gr3)
+base::unlist(grl) # The default unlist does not work
+unlist(grl)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+</body></html>

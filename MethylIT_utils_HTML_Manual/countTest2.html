@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Regression Test for Count</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+</head><body>
+
+<table width="100%" summary="page for countTest2 {MethylIT}"><tr><td>countTest2 {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Regression Test for Count</h2>
+
+<h3>Description</h3>
+
+<p>Perform Poisson and Negative Binomial regression analysis to
+compare the counts from different groups, treatment and control. The
+difference between functions 'countTest2' and 'countTest' resides in the
+estimation of the prior weights used in Negative Binomial generalized
+linear model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+countTest2(DS, num.cores = 1, countFilter = TRUE, CountPerBp = NULL,
+  minCountPerIndv = 3, maxGrpCV = NULL, FilterLog2FC = TRUE,
+  pAdjustMethod = "BH", pvalCutOff = 0.05, MVrate = 0.98,
+  Minlog2FC = 0.5, test = c("Wald", "LRT"), scaling = 1L,
+  tasks = 0L, saveAll = FALSE, verbose = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>DS</code></td>
+<td>
+<p>A 'glmDataSet' object, which is created with function
+<code>link{glmDataSet}</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores, tasks</code></td>
+<td>
+<p>Paramaters for parallele computation using package
+<code>BiocParallel-package</code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously
+(see <code>bplapply</code> and the number of tasks per job
+(only for Linux OS).</p>
+</td></tr>
+<tr valign="top"><td><code>countFilter</code></td>
+<td>
+<p>whether or not to filter the counts according to the
+minimum count per region per each individual/sample, which is setting by
+&quot;minCountPerIndv&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>CountPerBp</code></td>
+<td>
+<p>for each group the count per bp must be equal or greater
+than CountPerBp. The filter is applied if 'CountPerBp' is given and if
+'x' DESeqDataSet object has the rowRanges as a GRanges object on it</p>
+</td></tr>
+<tr valign="top"><td><code>minCountPerIndv</code></td>
+<td>
+<p>each gene or region must have more than
+'minCountPerIndv' counts (on average) per individual in at least one
+group.</p>
+</td></tr>
+<tr valign="top"><td><code>maxGrpCV</code></td>
+<td>
+<p>A numerical vector. Maximum coefficient of variance for each
+group. Defaul maxGrpCV = NULL. The numbers maxGrpCV[1] and maxGrpCV[2]
+will be taken as the maximun variances values permitted in control and
+in treatment groups, repectively. If only maxGrpCV[1] is provided, then
+maxGrpCV = c(maxGrpCV[1], maxGrpCV[1]). This parameter is addressed to
+prevent testing regions where intra-group variations are very large,
+e.g.: control = c(1,0,1,1) and traatment = c(1, 0, 1, 40). The
+coefficient of variance for the treatment group is 1.87, very high. The
+generalized linear regression analysis would yield statistical
+significant group differences, but evidently there is something wrong in
+one of the treatment samples. We would try the application of further
+statistical smoothing approach, but we prefer to leave the user decide
+which regions to test.</p>
+</td></tr>
+<tr valign="top"><td><code>FilterLog2FC</code></td>
+<td>
+<p>if TRUE, the results are filtered using the minimun
+absolute value of log2FoldChanges observed to accept that a gene in the
+treatment is differentially expressed in respect to the control</p>
+</td></tr>
+<tr valign="top"><td><code>pAdjustMethod</code></td>
+<td>
+<p>method used to adjust the results; default: BH</p>
+</td></tr>
+<tr valign="top"><td><code>pvalCutOff</code></td>
+<td>
+<p>cutoff used then a p-value adjustment is performed</p>
+</td></tr>
+<tr valign="top"><td><code>MVrate</code></td>
+<td>
+<p>Minimum Mean/Variance rate.</p>
+</td></tr>
+<tr valign="top"><td><code>Minlog2FC</code></td>
+<td>
+<p>minimum logarithm base 2 of fold changes.</p>
+</td></tr>
+<tr valign="top"><td><code>test</code></td>
+<td>
+<p>A character string matching one of &quot;Wald&quot; or &quot;LRT&quot;. If test =
+&quot;Wald&quot;, then the p-value of the Wald test for the coefficient of the
+independent variable (<em>treatment group</em>) will be reported.
+If test = &quot;LRT&quot;, then the p-value from a likelihood ratio test given by
+<code>anova</code> function from <em>stats</em> packages will be
+the reported p-value for the group comparison when the best fitted model
+is the negative binomial. As suggested for <code>glm</code>, if
+best fitted model is Poisson or quasi-Poisson, then the best test is
+'Chi-squared' or 'F-test', respectively. So, for the sake of simplicity,
+the corresponding suitable test will be applied when test = &quot;LRT&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>scaling</code></td>
+<td>
+<p>integer (default 1). Scaling factor estimate the
+signal density as: scaling x &quot;DMP-Count-Per-Bp&quot;. For example,
+if scaling = 1000, then signal density denotes the number of DMPs in
+1000 bp.</p>
+</td></tr>
+<tr valign="top"><td><code>saveAll</code></td>
+<td>
+<p>if TRUE all the temporal results are returned</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>if TRUE, prints the function log to stdout</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A pairwise group comparison, control versus treatment, is performed.
+The experimental design settings must be introduced using function
+<code>link{glmDataSet}</code> to provide dataset (DS) object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a data frame or GRanges object (if the DS contain the GRanges
+information for each gene) with the test results and original count
+matrix, plus control and treatment signal densities and their variation.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(133) # Set a seed
+## A GRanges ogbject with the count matrix in the metacolumns is created
+countData &lt;- matrix(sample.int(200, 500, replace = TRUE), ncol = 4)
+colnames(countData) &lt;- c("A1","A2","B1","B2")
+start &lt;- seq(1, 25e4, 2000)
+end &lt;- start + 1000
+chr &lt;- c(rep("chr1", 70), rep("chr2", 55))
+GR &lt;- GRanges(seqnames = chr, IRanges(start = start, end = end))
+mcols(GR) &lt;- countData
+## Gene IDs
+names(GR) &lt;- paste0("gene", 1:length(GR))
+
+## An experiment design is set.
+colData &lt;- data.frame(condition = factor(c("A","A","B","B")),
+                      c("A1","A2","B1","B2"),
+                      row.names = 2)
+## A RangedGlmDataSet is created
+ds &lt;- glmDataSet(GR = GR, colData = colData)
+
+## The gneralized linear model pairwise group comparison, group 'A'
+## ('control') versus 'B' (treatment) is performed.
+countTest2(ds, num.cores = 1L, maxGrpCV = c(0.4, 0.4), verbose = FALSE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+</body></html>

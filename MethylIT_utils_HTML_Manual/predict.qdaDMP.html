@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict function for 'qdaDMP' method</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+</head><body>
+
+<table width="100%" summary="page for predict.qdaDMP {MethylIT}"><tr><td>predict.qdaDMP {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Predict function for 'qdaDMP' method</h2>
+
+<h3>Description</h3>
+
+<p>Predict using a qda model built with function
+<code>evaluateDIMPclass</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'qdaDMP'
+predict(object, newdata, type = c("class", "posterior"),
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>To use with function 'predict'. An object from class 'qdaDMP'</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>To use with function 'predict'. New data for classification
+prediction</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>To use with function 'predict'. The type of prediction
+required. The default is &quot;all&quot; given by function 'predict.qda' from MASS
+package: 'class', 'posterior', and 'scores' (cases scores on discriminant
+variables, see <code>link[MASS]{qda}</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to or from other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code>link[MethylIT]{estimateCutPoint}</code>, <code>link[MASS]{qda}</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+</body></html>

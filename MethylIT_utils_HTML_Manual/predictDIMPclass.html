@@ -1,16 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict DIMP class</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIY_utils_html/R.css" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
 </head><body>
 
-<table width="100%" summary="page for predictDIMPclass {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}"><tr><td>predictDIMPclass {<a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for predictDIMPclass {MethylIT}"><tr><td>predictDIMPclass {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Predict DIMP class</h2>
 
 <h3>Description</h3>
 
-<p>This function classify each DIMP as a control or a treatment
-DIMP
+<p>This function classify each DMP as a control or a treatment
+DMP
 </p>
 
 
@@ -27,12 +27,12 @@ predictDIMPclass(LR, model, conf.matrix = FALSE, control.names = NULL,
 <table summary="R argblock">
 <tr valign="top"><td><code>LR</code></td>
 <td>
-<p>A list of GRanges objects obtained through the through <a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>
+<p>A list of GRanges objects obtained through the through MethylIT
 downstream analysis. Basically, this object is a list of GRanges containing
-only differentially informative position (DIMPs). The metacolumn of each
+only differentially methylated position (DMPs). The metacolumn of each
 GRanges must contain the columna: Hellinger divergence &quot;hdiv&quot;, total
-variation &quot;TV&quot;, the probability of potential DIMP &quot;wprob&quot;, which naturally
-are added in the downstream analysis of <a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a>.</p>
+variation &quot;TV&quot;, the probability of potential DMP &quot;wprob&quot;, which naturally
+are added in the downstream analysis of MethylIT.</p>
 </td></tr>
 <tr valign="top"><td><code>model</code></td>
 <td>
@@ -59,16 +59,16 @@ must be include in the variable LR (default, NULL).</p>
 
 <h3>Details</h3>
 
-<p>Predictions only makes sense if the query DIMPs belong to same
+<p>Predictions only makes sense if the query DMPs belong to same
 methylation context and derive from an experiment accomplished under the
-same condition set for the DIMPs used to build the model.
+same condition set for the DMPs used to build the model.
 </p>
 
 
 <h3>Value</h3>
 
 <p>The same LR object with a column named &quot;class&quot; added to a GRanges
-object from LR (default). Based on the model prediction each DIMP is
+object from LR (default). Based on the model prediction each DMP is
 labeled as control &quot;CT&quot; or as treatment &quot;TT&quot;. If &quot;conf.matrix&quot; is TRUE and
 the arguments control.names and treatment.names are provided, then the
 overall confusion matrix is returned
@@ -78,53 +78,32 @@ overall confusion matrix is returned
 <h3>Examples</h3>
 
 <pre>
-# Random generation of Hellinger divergence values from a Weibul
-# distribution model and estimating their tail probabilities.
-num.points &lt;- 5000
-set.seed(123)
-hdiv11 = rweibull(1:num.points, shape = 0.45, scale = 1.2)
-wprob11 = pweibull(hdiv11, shape = 0.45, scale = 1.2, lower.tail = FALSE)
-hdiv12 = rweibull(1:num.points, shape = 0.45, scale = 1.2)
-wprob12 = pweibull(hdiv12, shape = 0.45, scale = 1.2, lower.tail = FALSE)
-hdiv21 = rweibull(1:num.points, shape = 0.6, scale = 1.02)
-wprob21 = pweibull(hdiv21, shape = 0.6, scale = 1.02, lower.tail = FALSE)
-hdiv22 = rweibull(1:num.points, shape = 0.61, scale = 1.02)
-wprob22 = pweibull(hdiv22, shape = 0.61, scale = 1.02, lower.tail = FALSE)
-#' Potential signal
-PS &lt;- GRangesList(
-      sample11 = makeGRangesFromDataFrame(
-          data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-                     strand = '*', hdiv = hdiv11, wprob = wprob11),
-          keep.extra.columns = TRUE),
-          sample12 = makeGRangesFromDataFrame(
-          data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-                     strand = '*', hdiv = hdiv12, wprob = wprob12),
-          keep.extra.columns = TRUE),
-      sample21 = makeGRangesFromDataFrame(
-          data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-                     strand = '*', hdiv = hdiv21, wprob = wprob21),
-          keep.extra.columns = TRUE),
-          sample22 = makeGRangesFromDataFrame(
-          data.frame(chr = "chr1", start = 1:num.points, end = 1:num.points,
-                     strand = '*', hdiv = hdiv22, wprob = wprob22),
-          keep.extra.columns = TRUE))
-cutpoint = 5.76
-DIMPs = selectDIMP(PS, div.col = 1, cutpoint = cutpoint)
+library(MethylIT)
 
-#' A classification model can be fitted as follow:
-conf.mat &lt;- evaluateDIMPclass(DIMPs,
-                              column = c(hdiv = TRUE, TV = FALSE,
-                                         wprob = FALSE, pos = FALSE),
-                              interaction = "wprob:hdiv",
-                              control.names = c("sample11", "sample12"),
-                              treatment.names = c("sample21", "sample22"))
-# Now predictions of DIMP for control and treament can be obtained
-pred = predictDIMPclass(LR = DIMPs, model = conf.mat$model,
+data(cutpoint, PS, package = "MethylIT")
+
+## DMPs are selected using the cupoints
+DMPs &lt;- selectDIMP(PS, div.col = 9L, cutpoint = cutpoint$cutpoint,
+                   tv.cut = 0.92)
+
+## Classification of DMPs into two clases: DMPS from control and DMPs from
+## treatment samples and evaluation of the classifier performance (for more
+## details see ?evaluateDIMPclass).
+perf &lt;- evaluateDIMPclass(LR = DMPs,
+                          column = c(hdiv = TRUE, TV = TRUE,
+                                     wprob = TRUE, pos = TRUE),
+                          classifier = "lda", n.pc = 4L,
+                          control.names =  c("C1", "C2", "C3"),
+                          treatment.names = c("T1", "T2", "T3"),
+                          center = TRUE, scale = TRUE,
+                          prop = 0.6)
+
+#' Now predictions of DMP for control and treament can be obtained
+pred = predictDIMPclass(LR = DMPs, model = perf$model,
                         conf.matrix = TRUE,
-                        control.names = c("sample11", "sample12"),
-                        treatment.names = c("sample21", "sample22"))
-pred
+                        control.names = c("C1", "C2", "C3"),
+                        treatment.names = c("T1", "T2", "T3"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io//MethylIT_utils_HTML_Manual/MethylIT_utils_Manual.html'>MethylIT.utils</a></em> version 0.3.2 ]</div>
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
 </body></html>

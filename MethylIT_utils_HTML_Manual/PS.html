@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simulated dataset of potential DMPs used in examples</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+</head><body>
+
+<table width="100%" summary="page for PS {MethylIT}"><tr><td>PS {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simulated dataset of potential DMPs used in examples</h2>
+
+<h3>Description</h3>
+
+<p>Each individuals sample includes 10000 cytosine positions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+PS
+</pre>
+
+
+<h3>Format</h3>
+
+<p>PS is an object from class &quot;pDMP&quot; carrying in the meta-columns the
+following variables:
+</p>
+
+<dl>
+<dt>p1</dt><dd><p>methylation level from the reference sample</p>
+</dd>
+<dt>p2</dt><dd><p>methylation level from the treatment sample</p>
+</dd>
+<dt>TV</dt><dd><p>the total variation distance (difference of
+methylation levels)</p>
+</dd>
+<dt>hdiv</dt><dd><p>Hellinger divergence</p>
+</dd>
+</dl>
+<p>\itemwprobthe probilities: <i>wprob = 1 - Weibull probability</i>
+
+</p>
+<p>'PS' is an object from class &quot;pDMP&quot; carrying the same meta-columns as
+'HD' (dataset) plus the probilities: <i>wprob = 1 - Weibull
+    probability</i>. 'PS' was obtained with function
+<code>getPotentialDIMP</code>.</p>
+
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+</body></html>

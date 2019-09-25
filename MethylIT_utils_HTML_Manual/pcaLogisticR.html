@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Linear Discriminant Analysis (logistic) using Principal...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+</head><body>
+
+<table width="100%" summary="page for pcaLogisticR {MethylIT}"><tr><td>pcaLogisticR {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Linear Discriminant Analysis (logistic) using Principal Component
+Analysis (PCA)</h2>
+
+<h3>Description</h3>
+
+<p>The principal components (PCs) for predictor variables provided
+as input data are estimated and then the individual coordinates in the
+selected PCs are used as predictors in the logistic
+</p>
+<p>Logistic regression using Principal Components from PCA as
+predictor variables
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+pcaLogisticR(formula = NULL, data = NULL, n.pc = 1, scale = FALSE,
+  center = FALSE, tol = 1e-04, max.pc = NULL)
+
+## S3 method for class 'pcaLogisticR'
+predict(object, newdata, type = c("class",
+  "response", "pca.ind.coord", "all"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>Same as in 'glm' from pakage 'stats'.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Same as in 'glm' from pakage 'stats'.</p>
+</td></tr>
+<tr valign="top"><td><code>n.pc</code></td>
+<td>
+<p>Number of principal components to use in the logistic.</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>Same as in 'prcomp' from pakage 'prcomp'.</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>Same as in 'prcomp' from pakage 'prcomp'.</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>Same as in 'prcomp' from pakage 'prcomp'.</p>
+</td></tr>
+<tr valign="top"><td><code>max.pc</code></td>
+<td>
+<p>Same as in paramter 'rank.' from pakage 'prcomp'.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>To use with function 'predict'. A 'pcaLogisticR' object
+containing a list of two objects: 1) an object of class inheriting from
+&quot;glm&quot; and 2) an object of class inheriting from &quot;prcomp&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>To use with function 'predict'. New data for classification
+prediction</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>To use with function 'predict'. The type of prediction required:
+&quot;class&quot;, &quot;response&quot;, &quot;pca.ind.coord&quot;, or &quot;all&quot;. If type = 'all', function
+'predict.pcaLogisticR' ('predict') returns a list with:
+1) 'class': individual classification.
+2) 'response': probabilities for the positive class.
+3) 'pca.ind.coord': PC individual coordinate.
+Each element of this list can be requested independently using parameter
+'type'.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not in use.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The principal components (PCs) are obtained using the function
+'prcomp' from R pacakage 'stats', while the logistic is performed using
+the 'logistic' function from R package 'MASS'. The current application
+only use basic functionalities of mentioned functions. As shown in the
+example, 'pcaLogisticR' function can be used in general classification
+problems.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function 'pcaLogisticR' returns an object ('pcaLogisticR' class)
+containing a list of two objects:
+</p>
+
+<ol>
+<li><p> 'logistic': an object of class 'glm' from package 'stats'.
+</p>
+</li>
+<li><p> 'pca': an object of class 'prcomp' from package 'stats'.
+</p>
+</li>
+<li><p> reference.level: response level used as reference.
+</p>
+</li>
+<li><p> positive.level: response level that corresponds to a &quot;positive&quot;
+result. When type = &quot;response&quot;, the probability vector returned
+correspond to the probabilities of each individual to be a
+result, i.e., the probability to belong to the class of positive
+level.
+</p>
+</li></ol>
+
+<p>For information on how to use these objects see ?glm and ?prcomp.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(iris)
+data &lt;- iris[ iris$Species != "virginica", ]
+data$Species &lt;- droplevels(data$Species)
+formula &lt;- Species ~ Petal.Length + Sepal.Length + Petal.Width
+pca.logistic &lt;- pcaLogisticR(formula = formula,
+                            data = data, n.pc = 2, scale = TRUE,
+                            center = TRUE, max.pc = 2)
+set.seed(123)
+newdata &lt;- iris[sample.int(150, 40), 1:4]
+newdata.prediction &lt;- predict(pca.logistic, newdata, type = "all")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+</body></html>

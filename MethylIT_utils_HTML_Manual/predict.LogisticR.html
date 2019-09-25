@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict function for logistic regression model from...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/media/sf_D/MethylIT_HTML_Manual/R.css" />
+</head><body>
+
+<table width="100%" summary="page for predict.LogisticR {MethylIT}"><tr><td>predict.LogisticR {MethylIT}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Predict function for logistic regression model from 'LogisticR' class</h2>
+
+<h3>Description</h3>
+
+<p>Predict using a logistic model obtained from the output of
+function <code>evaluateDIMPclass</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'LogisticR'
+predict(object, newdata = NULL, type = c("all",
+  "class", "posterior"), num.cores = 1L, tasks = 0L, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>To use with function 'predict'. An object from 'LogisticR'
+class. A logistic model given by function
+<code>evaluateDIMPclass</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>To use with function 'predict'. New data for classification
+prediction. Optionally, an object from class &quot;GRanges&quot;, a list of
+GRanges, &quot;pDMP&quot; or &quot;InfDIv&quot;, in which to look for variables with which to
+predict. If omitted, the fitted linear predictors are used.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>The type of output required. Possible outputs are: 'class',
+&quot;posterior&quot; and &quot;all&quot;. The default is &quot;all&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores, tasks</code></td>
+<td>
+<p>Paramaters for parallele computation using package
+<code>BiocParallel-package</code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously
+(see <code>bplapply</code> and the number of tasks per job
+(only for Linux OS).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not in use.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is specific for predictions based on a logistic model
+given by function <code>evaluateDIMPclass</code>. A logistic model is
+obtained with 'glm' regression can be used directly with function
+'predict' from 'stats' package.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If type is set to 'all', then the original 'newdata' with two columns
+added, predicted classes and 'posterior' probabilities, in the
+meta-columns of each GRange object are given. If 'newdata' is null, then
+the predictions given for the model by function
+<code>predict.glm</code> are returned. if type is set to 'class'
+or to &quot;posterior&quot;, then the unlisted predited classification or
+posterior classification probabilities are returned.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>MethylIT</em> version 0.3.1 ]</div>
+</body></html>
