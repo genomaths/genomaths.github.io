@@ -48,14 +48,16 @@ meta-column.</p>
 </td></tr>
 <tr valign="top"><td><code>dist.name</code></td>
 <td>
-<p>name of the distribution to fit: Weibull2P (default:
-&quot;Weibull2P&quot;), Weibull three-parameters (Weibull3P), gamma with
-three-parameter (Gamma3P), gamma with two-parameter (Gamma2P),
-generalized gamma with three-parameter (&quot;GGamma3P&quot;) or four-parameter
-(&quot;GGamma4P&quot;), the empirical cumulative distribution function (ECDF) or
-&quot;None&quot;. If <strong>dist.name != &quot;None&quot;</strong>, and <strong>nlms != NULL</strong>, then
-a column named &quot;wprob&quot; with a probability vector derived from the
-application of model &quot;nlms&quot; will be returned.</p>
+<p>Name of the fitted distribution. This could be the name of
+one distribution or a characters vector of length(nlms). Default is two
+paramaters Weibull distribution: &quot;Weibull2P&quot;. The available options are
+Weibull three- parameters (&quot;Weibull3P&quot;), gamma with three-parameter
+(&quot;Gamma3P&quot;), gamma with two-parameter (&quot;Gamma2P&quot;), generalized gamma with
+three-parameter (&quot;GGamma3P&quot;) or four-parameter (&quot;GGamma4P&quot;), the
+empirical cumulative distribution function (&quot;ECDF&quot;) or &quot;None&quot;. If
+<strong>dist.name != &quot;None&quot;</strong>, and <strong>nlms != NULL</strong>, then a column
+named &quot;wprob&quot; with a probability vector derived from the application of
+model &quot;nlms&quot; will be returned.</p>
 </td></tr>
 <tr valign="top"><td><code>absolute</code></td>
 <td>

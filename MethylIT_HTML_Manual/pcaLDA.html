@@ -27,7 +27,7 @@ pcaLDA(formula = NULL, data = NULL, grouping = NULL, n.pc = 1,
 
 ## S3 method for class 'pcaLDA'
 predict(object, newdata, type = c("lda.pred", "class",
-  "posterior", "scores", "pca.ind.coord"), ...)
+  "posterior", "scores", "pca.ind.coord", "all"), ...)
 </pre>
 
 
@@ -73,8 +73,8 @@ predict(object, newdata, type = c("lda.pred", "class",
 <tr valign="top"><td><code>object</code></td>
 <td>
 <p>To use with function 'predict'. A 'pcaLDA' object containing a
-list of two objects: 1) an object of class inheriting from &quot;lda&quot; and 2) an
-object of class inheriting from &quot;prcomp&quot;.</p>
+list of two objects: 1) an object of class inheriting from &quot;lda&quot; and 2)
+an object of class inheriting from &quot;prcomp&quot;.</p>
 </td></tr>
 <tr valign="top"><td><code>newdata</code></td>
 <td>
@@ -83,9 +83,12 @@ prediction</p>
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
-<p>To use with function 'predict'. . The type of prediction
-required. The default is &quot;all&quot; given by function 'predict.lda' from MASS
-package: 'class', 'posterior', and 'scores' (see ?predict.lda).</p>
+<p>To use with function 'predict'. The type of prediction
+required.  The default is &quot;all&quot; basic predictions: classes and posterior
+classification probabilities. Option &quot;lda.pred&quot; returns the
+object given by function 'predict.lda' from MASS package: 'class',
+'posterior', 'scores' (cases scores on discriminant variables,
+see <code>lda</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -111,6 +114,13 @@ with two objects:
 1) 'lda': an object of class 'lda' from package 'MASS'.
 2) 'pca': an object of class 'prcomp' from package 'stats'.
 For information on how to use these objects see ?lda and ?prcomp.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pcaQDA</code>, <code>lda</code> and
+<code>predict.lda</code>
 </p>
 
 

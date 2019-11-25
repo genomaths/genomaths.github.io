@@ -7,10 +7,11 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
-<meta name="date" content="2019-09-24" />
+<meta name="date" content="2019-11-25" />
 
 <title>Methyl-IT R Package</title>
 
@@ -1315,7 +1316,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -1389,48 +1389,9 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -1533,7 +1494,7 @@ Mackenzie’s lab<br />
 Department of Biology and Plant Science.<br />
 Pennsylvania State University, University Park, PA 16802<br />
 Description: Methylation Analysis based on Information Theory.</div></h4>
-<h4 class="date">24 September 2019</h4>
+<h4 class="date">25 November 2019</h4>
 
 </div>
 
@@ -1614,17 +1575,11 @@ pre { /* Code block - determines code spacing between lines */
 <div id="counttest2" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/countTest2.html">countTest2</a></h2>
 </div>
-<div id="cutpoint" class="section level2">
-<h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/cutpoint.html">cutpoint</a></h2>
-</div>
 <div id="estimatecutpoint" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateCutPoint.html">estimateCutPoint</a></h2>
 </div>
 <div id="estimatedivergence" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateDivergence.html">estimateDivergence</a></h2>
-</div>
-<div id="estimateecdf" class="section level2">
-<h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateECDF.html">estimateECDF</a></h2>
 </div>
 <div id="estimatehellingerdiv" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateHellingerDiv.html">estimateHellingerDiv</a></h2>
@@ -1650,6 +1605,9 @@ pre { /* Code block - determines code spacing between lines */
 <div id="fitlognormdist" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/fitLogNormDist.html">fitLogNormDist</a></h2>
 </div>
+<div id="getbasemeansandvariances" class="section level2">
+<h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/getBaseMeansAndVariances.html">getBaseMeansAndVariances</a></h2>
+</div>
 <div id="getdimpatgenes" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/getDIMPatGenes.html">getDIMPatGenes</a></h2>
 </div>
@@ -1664,6 +1622,9 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="glmdataset" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/glmDataSet.html">glmDataSet</a></h2>
+</div>
+<div id="gofreport" class="section level2">
+<h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/gofReport.html">gofReport</a></h2>
 </div>
 <div id="hd" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/HD.html">HD</a></h2>
@@ -1707,9 +1668,6 @@ pre { /* Code block - determines code spacing between lines */
 <div id="ps" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/PS.html">PS</a></h2>
 </div>
-<div id="pweibull3p" class="section level2">
-<h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/pweibull3P.html">pweibull3P</a></h2>
-</div>
 <div id="readcounts2grangeslist" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/readCounts2GRangesList.html">readCounts2GRangesList</a></h2>
 </div>
@@ -1727,6 +1685,9 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="unlist" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/unlist.html">unlist</a></h2>
+</div>
+<div id="validateclass" class="section level2">
+<h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/validateClass.html">validateClass</a></h2>
 </div>
 <div id="weibull3p" class="section level2">
 <h2><a href="https://genomaths.github.io/MethylIT_HTML_Manual/weibull3P.html">weibull3P</a></h2>
@@ -1751,6 +1712,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

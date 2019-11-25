@@ -19,7 +19,7 @@
 <pre>
 ## S3 method for class 'ldaDMP'
 predict(object, newdata, type = c("class", "posterior",
-  "scores"), ...)
+  "scores", "lda.pred"), ...)
 </pre>
 
 
@@ -38,9 +38,11 @@ prediction</p>
 <tr valign="top"><td><code>type</code></td>
 <td>
 <p>To use with function 'predict'. The type of prediction
-required. The default is &quot;all&quot; given by function 'predict.lda' from MASS
-package: 'class', 'posterior', and 'scores' (cases scores on discriminant
-variables, see <code>link[MASS]{lda}</code>).</p>
+required.  The default is &quot;all&quot; basic predictions: classes and posterior
+classification probabilities. Option &quot;lda.pred&quot; returns the
+object given by function 'predict.lda' from MASS package: 'class',
+'posterior', 'scores' (cases scores on discriminant variables,
+see <code>link[MASS]{lda}</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>

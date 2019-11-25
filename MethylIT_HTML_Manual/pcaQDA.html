@@ -83,9 +83,12 @@ prediction.</p>
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
-<p>To use with function 'predict'. The type of prediction required.
-The default is &quot;all&quot; given by function 'predict.qda' from MASS package:
-'class', 'posterior', and 'scores' (see ?predict.QDA).</p>
+<p>To use with function 'predict'. The type of prediction
+required. The default is &quot;all&quot; basic predictions: classes and posterior
+classification probabilities. Option &quot;qda.pred&quot; returns the
+object given by function 'predict.qda' from MASS package: 'class',
+'posterior', 'scores' (cases scores on discriminant variables,
+see <code>qda</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -111,6 +114,13 @@ two objects:
 1) 'qda': an object of class 'qda' from package 'MASS'.
 2) 'pca': an object of class 'prcomp' from package 'stats'.
 For information on how to use these objects see ?qda and ?prcomp.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pcaLDA</code>, <code>qda</code> and
+<code>predict.lda</code>
 </p>
 
 

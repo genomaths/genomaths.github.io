@@ -18,9 +18,9 @@ will filter by coverage each cytosine site from each GRanges object.
 
 <pre>
 uniqueGRfilterByCov(x, y = NULL, min.coverage = 4, min.meth = 0,
-  percentile = 0.9999, high.coverage = NULL, columns = c(mC = 1, uC =
-  2), num.cores = 1L, ignore.strand = FALSE, tasks = 0L,
-  verbose = TRUE, ...)
+  min.umeth = 0, percentile = 0.9999, high.coverage = NULL,
+  columns = c(mC = 1, uC = 2), num.cores = 1L, ignore.strand = FALSE,
+  tasks = 0L, verbose = TRUE, ...)
 </pre>
 
 
@@ -44,16 +44,28 @@ objects.</p>
 </td></tr>
 <tr valign="top"><td><code>min.coverage</code></td>
 <td>
-<p>Cytosine sites where the coverage in both samples, 'x'
-and 'y', are less than 'min.coverage' are discarded. The cytosine site is
-preserved, however, if  the coverage is greater than 'min.coverage'in at
-least one sample.</p>
+<p>An integer or an integer vector of length 2. Cytosine
+sites where the coverage in both samples, 'x' and 'y', are less than
+'min.coverage' are discarded. The cytosine site is preserved, however, if
+the coverage is greater than 'min.coverage'in at least one sample. If
+'min.coverage' is an integer vector, then the corresponding min coverage
+is applied to each sample.</p>
 </td></tr>
 <tr valign="top"><td><code>min.meth</code></td>
 <td>
-<p>Cytosine sites where the numbers of read counts of methylated
-cytosine in both samples, '1' and '2', are less than 'min.meth' are
-discarded.</p>
+<p>An integer or an integer vector of length 2. Cytosine sites
+where the numbers of read counts of methylated cytosine in both samples,
+'1' and '2', are less than 'min.meth' are discarded. If 'min.meth' is an
+integer vector, then the corresponding min number of reads is applied to
+each sample.</p>
+</td></tr>
+<tr valign="top"><td><code>min.umeth</code></td>
+<td>
+<p>An integer or an integer vector of length 2. Min number of
+reads to consider cytosine position. Specifically cytosine positions
+where (uC &lt;= min.umeth) &amp; (mC &gt; 0) &amp; (mC &lt; min.meth) hold will be
+removed, where mC and uC stand for the numbers of methylated and
+unmethylated reads. Default is min.umeth = 0.</p>
 </td></tr>
 <tr valign="top"><td><code>percentile</code></td>
 <td>
@@ -85,7 +97,7 @@ the overlap calculations. Default value: TRUE</p>
 </td></tr>
 <tr valign="top"><td><code>tasks</code></td>
 <td>
-<p>integer(1). The number of tasks per job. value must be a scalar
+<p>Integer(1). The number of tasks per job. value must be a scalar
 integer &gt;= 0L. In this documentation a job is defined as a single call to
 a function, such as bplapply, bpmapply etc. A task is the division of the
 X argument into chunks. When tasks == 0 (default), X is divided as evenly
@@ -123,13 +135,24 @@ counts filtered for each cytosine position.
 <h3>Examples</h3>
 
 <pre>
-dfChr1 &lt;- data.frame(chr = "chr1", start = 11:15, end = 11:15,
-                    mC = 1:5, uC = 1:5)
-dfChr2 &lt;- data.frame(chr = "chr1", start = 12:18, end = 12:18,
-                    mC = 1:7, uC = 1:7)
-gr1 &lt;- makeGRangesFromDataFrame(dfChr1, keep.extra.columns = TRUE)
-gr2 &lt;- makeGRangesFromDataFrame(dfChr2, keep.extra.columns = TRUE)
+df1 &lt;- data.frame(chr = "chr1", start = 11:16, end = 11:16,
+                  mC = c(2,10,7,9,1,10), uC = c(30,20,4,8,0,10))
+df2 &lt;- data.frame(chr = "chr1", start = 12:18, end = 12:18,
+                  mC2 = 1:7, uC2 = 0:6)
+gr1 &lt;- makeGRangesFromDataFrame(df1, keep.extra.columns = TRUE)
+gr2 &lt;- makeGRangesFromDataFrame(df2, keep.extra.columns = TRUE)
+
+## Filtering
 r1 &lt;- uniqueGRfilterByCov(gr1, gr2, ignore.strand = TRUE)
+r1
+## Cytosine position with coordinates 12 &amp; 15 (rows #2 &amp; #5) can pass the
+## filtering conditions of min.coverage = 4 and lead to meaningless
+## situations with methylation levels p = 1/(1 + 0) = 1
+r1[c(2,5)]
+
+## The last situation can be prevent, in this case, by setting min.meth = 1:
+r1 &lt;- uniqueGRfilterByCov(gr1, gr2, min.meth = 1, ignore.strand = TRUE)
+r1
 
 </pre>
 

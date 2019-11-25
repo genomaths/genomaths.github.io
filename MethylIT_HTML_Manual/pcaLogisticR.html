@@ -1,18 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Linear Discriminant Analysis (logistic) using Principal...</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Logistic Classification Model using Principal Component...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="/media/sf_D/<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>_HTML_Manual/R.css" />
 </head><body>
 
 <table width="100%" summary="page for pcaLogisticR {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}"><tr><td>pcaLogisticR {<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Linear Discriminant Analysis (logistic) using Principal Component
+<h2>Logistic Classification Model using Principal Component
 Analysis (PCA)</h2>
 
 <h3>Description</h3>
 
-<p>The principal components (PCs) for predictor variables provided
-as input data are estimated and then the individual coordinates in the
-selected PCs are used as predictors in the logistic
+<p>Principal components (PCs) are estimated from the predictor
+variables provided as input data. Next, the individual coordinates in the
+selected PCs are used as predictors in the logistic regresson.
 </p>
 <p>Logistic regression using Principal Components from PCA as
 predictor variables
@@ -27,7 +27,7 @@ pcaLogisticR(formula = NULL, data = NULL, n.pc = 1, scale = FALSE,
 
 ## S3 method for class 'pcaLogisticR'
 predict(object, newdata, type = c("class",
-  "response", "pca.ind.coord", "all"), ...)
+  "posterior", "pca.ind.coord", "all"), ...)
 </pre>
 
 
@@ -76,10 +76,10 @@ prediction</p>
 <tr valign="top"><td><code>type</code></td>
 <td>
 <p>To use with function 'predict'. The type of prediction required:
-&quot;class&quot;, &quot;response&quot;, &quot;pca.ind.coord&quot;, or &quot;all&quot;. If type = 'all', function
+&quot;class&quot;, &quot;posterior&quot;, &quot;pca.ind.coord&quot;, or &quot;all&quot;. If type = 'all', function
 'predict.pcaLogisticR' ('predict') returns a list with:
 1) 'class': individual classification.
-2) 'response': probabilities for the positive class.
+2) 'posterior': probabilities for the positive class.
 3) 'pca.ind.coord': PC individual coordinate.
 Each element of this list can be requested independently using parameter
 'type'.</p>
@@ -94,11 +94,11 @@ Each element of this list can be requested independently using parameter
 <h3>Details</h3>
 
 <p>The principal components (PCs) are obtained using the function
-'prcomp' from R pacakage 'stats', while the logistic is performed using
-the 'logistic' function from R package 'MASS'. The current application
-only use basic functionalities of mentioned functions. As shown in the
-example, 'pcaLogisticR' function can be used in general classification
-problems.
+<code>prcomp</code>, while the logistic regression is performed
+using function <code>glm</code>, both functions from R package
+'stats'. The current application only use basic functionalities from the
+mentioned functions. As shown in the example, 'pcaLogisticR' function can
+be used in general classification problems.
 </p>
 
 

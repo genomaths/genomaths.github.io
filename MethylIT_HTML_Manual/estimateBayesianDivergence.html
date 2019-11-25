@@ -115,12 +115,33 @@ on simple counts
 </p>
 
 
+<h3>Author(s)</h3>
+
+<p>Robersy Sanchez
+</p>
+
+
 <h3>References</h3>
 
 <p>1. Basu  A., Mandal  A., Pardo L (2010) Hypothesis testing for
 two discrete populations based on the Hellinger distance. Stat Probab
 Lett 80: 206-214.
 </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+    x &lt;- data.frame(chr = "chr1", start = 1:10,
+                    end = 1:10,strand = '*',
+                    mC1 = rnbinom(size = 10, mu = 4, n = 500),
+                    uC1 = rnbinom(size = 10, mu = 4, n = 500),
+                    mC2 = rnbinom(size = 10, mu = 4, n = 500),
+                    uC2 = rnbinom(size = 10, mu = 4, n = 500))
+    x &lt;- makeGRangesFromDataFrame(x, keep.extra.columns = TRUE)
+    HD &lt;- estimateBayesianDivergence(x)
+
+</pre>
 
 <hr /><div style="text-align: center;">[Package <em><a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a></em> version 0.3.1 ]</div>
 </body></html>

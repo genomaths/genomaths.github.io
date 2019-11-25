@@ -28,11 +28,11 @@ predictDIMPclass(LR, model, conf.matrix = FALSE, control.names = NULL,
 <tr valign="top"><td><code>LR</code></td>
 <td>
 <p>A list of GRanges objects obtained through the through <a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>
-downstream analysis. Basically, this object is a list of GRanges containing
-only differentially methylated position (DMPs). The metacolumn of each
-GRanges must contain the columna: Hellinger divergence &quot;hdiv&quot;, total
-variation &quot;TV&quot;, the probability of potential DMP &quot;wprob&quot;, which naturally
-are added in the downstream analysis of <a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>.</p>
+downstream analysis. Basically, this object is a list of GRanges
+containing only differentially methylated position (DMPs). The metacolumn
+of each GRanges must contain the columna: Hellinger divergence &quot;hdiv&quot;,
+total variation &quot;TV&quot;, the probability of potential DMP &quot;wprob&quot;, which
+naturally are added in the downstream analysis of <a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>.</p>
 </td></tr>
 <tr valign="top"><td><code>model</code></td>
 <td>
@@ -67,18 +67,28 @@ same condition set for the DMPs used to build the model.
 
 <h3>Value</h3>
 
-<p>The same LR object with a column named &quot;class&quot; added to a GRanges
-object from LR (default). Based on the model prediction each DMP is
-labeled as control &quot;CT&quot; or as treatment &quot;TT&quot;. If &quot;conf.matrix&quot; is TRUE and
-the arguments control.names and treatment.names are provided, then the
-overall confusion matrix is returned
+<p>The same LR object with tow new columns named &quot;class&quot; and &quot;posterior&quot;
+added to each GRanges object from LR (default). Based on the model
+prediction each DMP is labeled as control &quot;CT&quot; or as treatment &quot;TT&quot; in
+column &quot;class&quot;. Column &quot;posterior&quot; provides, for each DMP, the posterior
+probability that the given DMP can be classified as induced by the
+'treatment' (a treatment DMP).
+</p>
+<p>Control DMPs classified as 'treatment' are false positives. However, if
+the same cytosine position is classified as 'treatment DMP' in both
+groups, control and treatment, but with higher posterior probability
+in the treatment group, then this would indicate a reinforcement of the
+methylation status in such a position induced by the treatment.
+</p>
+<p>If &quot;conf.matrix&quot; is TRUE and the arguments control.names and
+treatment.names are provided, then the overall confusion matrix is
+returned.
 </p>
 
 
 <h3>Examples</h3>
 
 <pre>
-library(<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>)
 
 data(cutpoint, PS, package = "<a href='https://genomaths.github.io/MethylIT_HTML_Manual/MethylIT_Manual.html'>MethylIT</a>")
 

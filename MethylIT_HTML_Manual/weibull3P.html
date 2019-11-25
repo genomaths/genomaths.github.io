@@ -17,10 +17,10 @@ variable x
 <h3>Usage</h3>
 
 <pre>
-weibull3P(X, sample.size = 20, model = c("all", "2P", "3P"),
-  npoints = NULL, maxiter = 1024, tol = 1e-12, ftol = 1e-12,
-  ptol = 1e-12, minFactor = 10^-6, nlms = FALSE, verbose = TRUE,
-  ...)
+weibull3P(X, sample.size = 20, model = c("all", "2P", "3P",
+  "Weibull2P", "Weibull3P"), npoints = NULL, maxiter = 1024,
+  tol = 1e-12, ftol = 1e-12, ptol = 1e-12, minFactor = 10^-6,
+  nlms = FALSE, verbose = TRUE, ...)
 </pre>
 
 
@@ -38,8 +38,8 @@ weibull3P(X, sample.size = 20, model = c("all", "2P", "3P"),
 <tr valign="top"><td><code>model</code></td>
 <td>
 <p>Distribution model to fit, two-parameters and three-parameters
-Weibull model (&quot;2P&quot; and &quot;3P). Default is &quot;all&quot; and the model with the
-best AIC criterion is reported.</p>
+Weibull model (&quot;Weibull2P&quot; or simply &quot;2P&quot; and &quot;Weibull3P&quot; or &quot;3P).
+Default is &quot;all&quot; and the model with the best AIC criterion is reported.</p>
 </td></tr>
 <tr valign="top"><td><code>npoints</code></td>
 <td>
@@ -116,7 +116,7 @@ coefficient covarianza matrix.
 
 <h3>Author(s)</h3>
 
-<p>Robersy Sanchez - 06/03/2016
+<p>Robersy Sanchez - 06/03/2016 &lt;https://github.com/genomaths&gt;
 </p>
 
 
