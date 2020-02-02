@@ -18,7 +18,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Get started-with Methyl-IT">
 <meta property="og:description" content="">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -71,6 +71,21 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li>
+  <a href="https://github.com/genomaths/MethylIT">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://twitter.com/robersysr">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/genomaths/MethylIT"></a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -89,9 +104,9 @@
                         <h4 class="author"><div class="line-block">Robersy Sanchez<span class="math inline">\(^1\)</span><br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br><br><span class="math inline">\(^1\)</span>Department of Biology.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 class="date">01 February 2020</h4>
+            <h4 class="date">02 February 2020</h4>
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/MethylIT.Rmd"><code>vignettes/MethylIT.Rmd</code></a></small>
       <div class="hidden name"><code>MethylIT.Rmd</code></div>
 
     </div>
@@ -324,13 +339,13 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; The model with the lowest AIC must have the highest R.Cross.val</span></a>
 <a class="sourceLine" id="cb8-26" data-line-number="26">gof<span class="op">$</span>stats</a>
 <a class="sourceLine" id="cb8-27" data-line-number="27"><span class="co">#&gt;         w2p_AIC w2p_R.Cross.val w3p_AIC w3p_R.Cross.val    g2p_AIC</span></a>
-<a class="sourceLine" id="cb8-28" data-line-number="28"><span class="co">#&gt; W_3_3 -72384.64       0.9987525      NA              NA  -86145.27</span></a>
-<a class="sourceLine" id="cb8-29" data-line-number="29"><span class="co">#&gt; W_3_4 -84646.76       0.9994929      NA              NA -103110.43</span></a>
-<a class="sourceLine" id="cb8-30" data-line-number="30"><span class="co">#&gt; W_3_5 -86901.54       0.9994123      NA              NA -113367.18</span></a>
-<a class="sourceLine" id="cb8-31" data-line-number="31"><span class="co">#&gt; M_3_1 -82852.14       0.9994449      NA              NA -108854.50</span></a>
+<a class="sourceLine" id="cb8-28" data-line-number="28"><span class="co">#&gt; W_3_3 -72384.64       0.9987526      NA              NA  -86145.27</span></a>
+<a class="sourceLine" id="cb8-29" data-line-number="29"><span class="co">#&gt; W_3_4 -84646.76       0.9994930      NA              NA -103110.43</span></a>
+<a class="sourceLine" id="cb8-30" data-line-number="30"><span class="co">#&gt; W_3_5 -86901.54       0.9994122      NA              NA -113367.18</span></a>
+<a class="sourceLine" id="cb8-31" data-line-number="31"><span class="co">#&gt; M_3_1 -82852.14       0.9994448      NA              NA -108854.50</span></a>
 <a class="sourceLine" id="cb8-32" data-line-number="32"><span class="co">#&gt; M_3_2 -90940.95       0.9996507      NA              NA -108955.49</span></a>
 <a class="sourceLine" id="cb8-33" data-line-number="33"><span class="co">#&gt; M_3_3 -90226.60       0.9997026      NA              NA -107175.23</span></a>
-<a class="sourceLine" id="cb8-34" data-line-number="34"><span class="co">#&gt; M_3_4 -94043.35       0.9997254      NA              NA  -98721.35</span></a>
+<a class="sourceLine" id="cb8-34" data-line-number="34"><span class="co">#&gt; M_3_4 -94043.35       0.9997255      NA              NA  -98721.35</span></a>
 <a class="sourceLine" id="cb8-35" data-line-number="35"><span class="co">#&gt;       g2p_R.Cross.val    g3p_AIC g3p_R.Cross.val      bestModel</span></a>
 <a class="sourceLine" id="cb8-36" data-line-number="36"><span class="co">#&gt; W_3_3       0.9995184  -88149.00       0.9995883            g3p</span></a>
 <a class="sourceLine" id="cb8-37" data-line-number="37"><span class="co">#&gt; W_3_4       0.9998527 -109678.36       0.9999118            g3p</span></a>

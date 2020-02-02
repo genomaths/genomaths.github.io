@@ -47,7 +47,7 @@
 estimateCutPoint), 'evaluateDIMPclass' will return the evaluation of the
 classification of DMPs into two clases: DMPS from control and DMPs
 from treatment samples." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,7 +111,22 @@ from treatment samples." />
   </ul>
 </li>
 <li>
-  <a href="../news/">News</a>
+  <a href="../news/index.html">News</a>
+</li>
+<li>
+  <a href="https://github.com/genomaths/MethylIT">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://twitter.com/robersysr">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/genomaths/MethylIT"></a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -130,7 +145,7 @@ from treatment samples." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Evaluate DMPs Classification</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/genomaths/MethylIT/blob/master/R/evaluateDIMPclass.R'><code>R/evaluateDIMPclass.R</code></a></small>
     <div class="hidden name"><code>evaluateDIMPclass.Rd</code></div>
     </div>
 
@@ -271,40 +286,36 @@ use, i.e. at most how many child processes will be run simultaneously
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>output = "conf.mat" will perform a logistic regression group versus
-divergence (at DMPs) to evaluate the discrimination between
-control-DMPs and treatment-DMPs. The evaluation of this classification
-is provided through the function 'confusionMatrix' from R package
-'caret'. "mc.val" will perform a 'num.boot'-times Monte Carlo
-(bootstrap) validation and return a summary. By default function
-'confusionMatrix' from R package caret' randomly splits the sample into
-two subsets, training and testing, according to the supplied proportion
-'prop' (i.e., prop = 0.6). After selecting output = "mc.val", the
-function 'confusionMatrix' will be executed 'num.boot'-times, each time
-performing a different random split of the sample. "boot.all" same as
-"mc.val" plus a matrix with statistcs reported by 'confusionMatrix'.
-"all" return a list with all the mentioned outputs.</p>
+    <p>Setting output = "conf.mat" will perform a logistic regression group
+versus divergence (at DMPs) to evaluate the discrimination between
+control-DMPs and treatment-DMPs. The evaluation of this classification is
+provided through the function 'confusionMatrix' from R package 'caret'.
+"mc.val" will perform a 'num.boot'-times Monte Carlo (bootstrap) validation
+and return a summary. By default function 'confusionMatrix' from R package
+caret' randomly splits the sample into two subsets, training and testing,
+according to the supplied proportion 'prop' (i.e., prop = 0.6). After
+selecting output = "mc.val", the function 'confusionMatrix' will be executed
+'num.boot'-times, each time performing a different random split of the
+sample. "boot.all" same as "mc.val" plus a matrix with statistcs reported by
+'confusionMatrix'. "all" return a list with all the mentioned outputs.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The regulatory methylation signal is also an output from a natural
-process that continuously takes place across the ontogenetic development
-of the organisms. So, we expect to see methylation signal on natural
-ordinary conditions. Here, to distinguish a control methylation signal
-from a treatment, three classification models are provided: 1) logistic,
-2) Linear Discriminant Analysis (LDA) and 3) Quadratic Discriminant
-Analysis (QDA). In particular, four predictor variables can be used:
-Hellinger divergence "hdiv", total variation "TV", probability of
-potential DMP "wprob" and DMP genomic coordinated "pos". Principal
-component analysis (PCA) is used to convert a set of observations of
-possibly correlated predictor variables into a set of values of linearly
-uncorrelated variables (principal components, PCs). The PCs are used as
-new, uncorrelated predictor variables for LDA, QDA, and logistic
-classifiers.</p><pre>A classification result with low accuracy and compromising values from
-other classification performance indicators (see below) suggest that the
-treatment does not induce a significant regulatory signal different
-from control.
-</pre>
-
+process that continuously takes place across the ontogenetic development of
+the organisms. So, we expect to see methylation signal on natural ordinary
+conditions. Here, to distinguish a control methylation signal from a
+treatment, three classification models are provided: 1) logistic, 2) Linear
+Discriminant Analysis (LDA) and 3) Quadratic Discriminant Analysis (QDA). In
+particular, four predictor variables can be used: Hellinger divergence
+"hdiv", total variation "TV", probability of potential DMP "wprob" and DMP
+genomic coordinated "pos". Principal component analysis (PCA) is used to
+convert a set of observations of possibly correlated predictor variables into
+a set of values of linearly uncorrelated variables (principal components,
+PCs). The PCs are used as new, uncorrelated predictor variables for LDA, QDA,
+and logistic classifiers.</p>
+<p>A classification result with low accuracy and compromising values from other
+classification performance indicators (see below) suggest that the treatment
+does not induce a significant regulatory signal different from control.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cutpoint</span>, <span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MethylIT"</span>)

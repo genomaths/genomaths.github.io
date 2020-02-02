@@ -4,4 +4,7 @@ pkgdown_sha: 134033d9d744c548c6fbe297bc0fbd1a2f498e83
 articles:
   MethylIT: MethylIT.html
   cancer_example: cancer_example.html
+urls:
+  reference: https://genomaths.github.io/methylit//reference
+  article: https://genomaths.github.io/methylit//articles
 

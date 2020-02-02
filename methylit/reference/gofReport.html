@@ -48,37 +48,33 @@ knowledge of the probability distribution of the methylation noise, which
 is the null hypothesis used to discriminate the signal from the noise.
 Both, signal and noise, are expressed in terms of an information
 divergence of methylation levels, which (currently in Methyl-IT) could be
-the Hellinger divergence or the total variation distance.As shown in reference [1], on statistical physics basis, the probability
+the Hellinger divergence or the total variation distance.
+As shown in reference (1), on statistical physics basis, the probability
 distribution of the noise is a member of the generalized gamma
 distribution. In particular, if the methylation changes on the DNA
 molecule follow a Poisson process, then the noise follows a Weibull
 probability distribution.
-
-Function 'gofReport' search for the best fitted model betweeen the set
-of models requested by the user. Two goodness-of-fit (GoF) criteria are
-applied to select the best fitted model: Akaike's information criterion
-(AIC) and the correlation coeficient of cross-validations for the
-nonlinear regressions (R.Cross.val) [2]. These criteria evaluate
-different information inferred from the models. AIC deals with the
-trade-off between the goodness of fit of the model and the complexity
-of the model, while R.Cross.val provides information on the prediction
-power/performance of the model when confronted with external dataset.
-
+Function 'gofReport' search for the best fitted model betweeen the set of
+models requested by the user. Two goodness-of-fit (GoF) criteria are applied
+to select the best fitted model: Akaike's information criterion (AIC) and the
+correlation coeficient of cross-validations for the nonlinear regressions
+(R.Cross.val) (2). These criteria evaluate different information inferred
+from the models. AIC deals with the trade-off between the goodness of fit of
+the model and the complexity of the model, while R.Cross.val provides
+information on the prediction power/performance of the model when confronted
+with external dataset.
 Although the numerical algorithms to accomplish the nonlinear fit are not
 perfect, in general, the model with the lowest AIC must have the highest
 R.Cross.val. If the model with the lowest AIC has not the highest
-R.Cross.val, then further analyses are required. These analyses could
-include the visualization of the graphics for the density distribution,
-evaluation of whether the parameter values can be meaningful or not, etc.
-Nevertheless, the best model will, in general, lead to the identification
-of the greater amount of potential DMPs and DMPs, as well as, the highest
-classification accuracy estimated with functions
-\code{\link{estimateCutPoint}} and \code{\link{evaluateDIMPclass}}. In
-the worse scenario, these observations can ultimately lead to a post-hoc
-decision on which the best model is.
-
-" />
-<meta property="og:image" content="/logo.png" />
+R.Cross.val, then further analyses are required. These analyses could include
+the visualization of the graphics for the density distribution, evaluation of
+whether the parameter values can be meaningful or not, etc. Nevertheless, the
+best model will, in general, lead to the identification of the greater amount
+of potential DMPs and DMPs, as well as, the highest classification accuracy
+estimated with functions estimateCutPoint and
+evaluateDIMPclass. In the worse scenario, these observations
+can ultimately lead to a post-hoc decision on which the best model is." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -142,7 +138,22 @@ decision on which the best model is.
   </ul>
 </li>
 <li>
-  <a href="../news/">News</a>
+  <a href="../news/index.html">News</a>
+</li>
+<li>
+  <a href="https://github.com/genomaths/MethylIT">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://twitter.com/robersysr">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/genomaths/MethylIT"></a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -161,7 +172,7 @@ decision on which the best model is.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Report the Best Fitted Probability Distribution Model</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/genomaths/MethylIT/blob/master/R/gofReport.R'><code>R/gofReport.R</code></a></small>
     <div class="hidden name"><code>gofReport.Rd</code></div>
     </div>
 
@@ -171,36 +182,32 @@ knowledge of the probability distribution of the methylation noise, which
 is the null hypothesis used to discriminate the signal from the noise.
 Both, signal and noise, are expressed in terms of an information
 divergence of methylation levels, which (currently in Methyl-IT) could be
-the Hellinger divergence or the total variation distance.</p><pre>As shown in reference [1], on statistical physics basis, the probability
+the Hellinger divergence or the total variation distance.
+As shown in reference (1), on statistical physics basis, the probability
 distribution of the noise is a member of the generalized gamma
 distribution. In particular, if the methylation changes on the DNA
 molecule follow a Poisson process, then the noise follows a Weibull
-probability distribution.
-
-Function 'gofReport' search for the best fitted model betweeen the set
-of models requested by the user. Two goodness-of-fit (GoF) criteria are
-applied to select the best fitted model: Akaike's information criterion
-(AIC) and the correlation coeficient of cross-validations for the
-nonlinear regressions (R.Cross.val) [2]. These criteria evaluate
-different information inferred from the models. AIC deals with the
-trade-off between the goodness of fit of the model and the complexity
-of the model, while R.Cross.val provides information on the prediction
-power/performance of the model when confronted with external dataset.
-
-Although the numerical algorithms to accomplish the nonlinear fit are not
+probability distribution.</p>
+<p>Function 'gofReport' search for the best fitted model betweeen the set of
+models requested by the user. Two goodness-of-fit (GoF) criteria are applied
+to select the best fitted model: Akaike's information criterion (AIC) and the
+correlation coeficient of cross-validations for the nonlinear regressions
+(R.Cross.val) (2). These criteria evaluate different information inferred
+from the models. AIC deals with the trade-off between the goodness of fit of
+the model and the complexity of the model, while R.Cross.val provides
+information on the prediction power/performance of the model when confronted
+with external dataset.</p>
+<p>Although the numerical algorithms to accomplish the nonlinear fit are not
 perfect, in general, the model with the lowest AIC must have the highest
 R.Cross.val. If the model with the lowest AIC has not the highest
-R.Cross.val, then further analyses are required. These analyses could
-include the visualization of the graphics for the density distribution,
-evaluation of whether the parameter values can be meaningful or not, etc.
-Nevertheless, the best model will, in general, lead to the identification
-of the greater amount of potential DMPs and DMPs, as well as, the highest
-classification accuracy estimated with functions
-\code{\link{estimateCutPoint}} and \code{\link{evaluateDIMPclass}}. In
-the worse scenario, these observations can ultimately lead to a post-hoc
-decision on which the best model is.
-</pre>
-
+R.Cross.val, then further analyses are required. These analyses could include
+the visualization of the graphics for the density distribution, evaluation of
+whether the parameter values can be meaningful or not, etc. Nevertheless, the
+best model will, in general, lead to the identification of the greater amount
+of potential DMPs and DMPs, as well as, the highest classification accuracy
+estimated with functions <code><a href='estimateCutPoint.html'>estimateCutPoint</a></code> and
+<code><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></code>. In the worse scenario, these observations
+can ultimately lead to a post-hoc decision on which the best model is.</p>
     </div>
 
     <pre class="usage"><span class='fu'>gofReport</span>(
