@@ -85,7 +85,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="..//pkgdown/favicon/favicon.ico">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
@@ -263,7 +263,7 @@ processes will be run simultaneously (see
     </tr>
     <tr>
       <th>tasks</th>
-      <td><p>integer(1). The number of tasks per job. value must be a scalar
+      <td><p>integer. The number of tasks per job. value must be a scalar
 integer &gt;= 0L. In this documentation a job is defined as a single call to
 a function, such as bplapply, bpmapply etc. A task is the division of the
 X argument into chunks. When tasks == 0 (default), X is divided as evenly
@@ -296,24 +296,23 @@ coefficient covariance matrix.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The algorithm prepares the information divergence variable
-to try fitting Weibull or generalized gamma distribution model to the
-data. If Weibull distribution is selected (default: "Weibull"), function
+to try fitting Weibull or generalized gamma distribution model to the data.
+If Weibull distribution is selected (default: "Weibull"), function
 'Weibull2P' first attempts fitting to the two-parameter Weibull CDF
 (Weibull2P). If Weibull2P did not fit, then the algorithm will try to fit
 Weibull3P. The Levenberg-Marquardt algorithm implemented in R package
-'minpack.lm' is used to perform the nonlinear fit. Cross-validations for
-the nonlinear regressions (R.Cross.val) are performed in each methylome
-as described in reference (1). In addition, Stein's formula for adjusted
-R squared (rho) is used as an estimator of the average cross-validation
-predictive power (1).</p><pre>If "GGamma3P" is selected the call to function 'fitGGammaDist' permits
-the fitting to the three-parameter GGamma CDF ("GGamma3P"). The fit to
-the four-parameter GGamma ("GGamma4P") is also available. GGamma
-distribution are fitted using a modification of Levenberg-Marquardt
-algorithm implemented in function 'nls.lm' from the 'minpack.lm' R
-package. Notice that the fit to GGamma dsitribution is computationally
-time consuming (see ?fitGGammaDist for additional information).
-</pre>
-
+'minpack.lm' is used to perform the nonlinear fit. Cross-validations for the
+nonlinear regressions (R.Cross.val) are performed in each methylome as
+described in reference (1-2). In addition, Stein's formula for adjusted R
+squared (rho) is used as an estimator of the average cross-validation
+predictive power (2).</p>
+<p>If "GGamma3P" is selected the call to function 'fitGGammaDist' permits the
+fitting to the three-parameter GGamma CDF ("GGamma3P"). The fit to the
+four-parameter GGamma ("GGamma4P") is also available. GGamma distribution are
+fitted using a modification of Levenberg-Marquardt algorithm implemented in
+function 'nls.lm' from the 'minpack.lm' R package. Notice that the fit to
+GGamma dsitribution is computationally time consuming (see ?fitGGammaDist for
+additional information).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     

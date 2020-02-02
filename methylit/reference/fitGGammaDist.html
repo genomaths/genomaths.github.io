@@ -85,7 +85,7 @@ variable x" />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="..//pkgdown/favicon/favicon.ico">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
@@ -250,21 +250,19 @@ nonlinear model object <code><a href='https://rdrr.io/pkg/minpack.lm/man/nls.lm.
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The script algorithm tries to fit the three-parameter GGamma CDF
-("GGamma3P") or the four-parameter GGamma ("GGamma4P") using a
-modification of Levenberg-Marquardt algorithm implemented in function
-'nls.lm' from 'minpack.lm' package that is used to perform the nonlinear
-fit. Cross-validations for the nonlinear regressions (R.Cross.val) were
-performed in each methylome as described in reference (1). In addition,
-Stein's formula for adjusted R squared (rho) was used as an estimator of
-the average cross-validation predictive power (1).</p><pre>If the number of values to fit is &gt;10^6, the fitting to a GGamma CDF
-would be a time consuming task. To reduce the computational time, the
-option summarized.data' can be set 'TRUE'. If npoint != NULL, the
-original variable values are summarized into 'npoint' bins and their
-midpoints are used as the new predictors. In this case, only the
-goodness-of-fit indicators AIC and R.Cross.val are estimated based on all
-the original variable x values.
-</pre>
-
+("GGamma3P") or the four-parameter GGamma ("GGamma4P") using a modification
+of Levenberg-Marquardt algorithm implemented in function 'nls.lm' from
+'minpack.lm' package that is used to perform the nonlinear fit.
+Cross-validations for the nonlinear regressions (R.Cross.val) were performed
+in each methylome as described in reference (1). In addition, Stein's formula
+for adjusted R squared (rho) was used as an estimator of the average
+cross-validation predictive power (1).</p>
+<p>If the number of values to fit is &gt;10^6, the fitting to a GGamma CDF would be
+a time consuming task. To reduce the computational time, the option
+summarized.data' can be set 'TRUE'. If npoint != NULL, the original variable
+values are summarized into 'npoint' bins and their midpoints are used as the
+new predictors. In this case, only the goodness-of-fit indicators AIC and
+R.Cross.val are estimated based on all the original variable x values.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
