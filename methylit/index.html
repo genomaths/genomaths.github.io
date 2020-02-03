@@ -16,7 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Methylation Analysis Based on Signal Detection">
+<script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="Methylation Analysis Based on Signal Detection">
 <meta property="og:description" content="Methyl-IT implements methylation analysis based on signal detection
              theory and machine-learning. Methylation process is a stochastic
              process, particularly, a biochemical-biophysical process which must
@@ -52,7 +53,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="/pkgdown/favicon/favicon.ico">
+  <a href="index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
@@ -61,7 +62,7 @@
   <a href="articles/MethylIT.html">Get started</a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -108,13 +109,13 @@
   <div class="contents col-md-9">
 <div id="methyl-it" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#methyl-it" class="anchor"></a>Methyl-IT <img src="reference/figures/logo.png" align="right">
+<a href="#methyl-it" class="anchor"></a>Methyl-IT <a href="https://genomaths.github.io/methylit"><img src="reference/figures/logo.png" align="right"></a>
 </h1></div>
 <p><br></p>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>We have developed a novel methylome analysis procedure, Methyl-IT, based on signal detection and machine learning. Methylation analysis is confronted in Methyl-IT as a signal detection problem, and the method was designed to discriminate methylation regulatory signal from background noise induced by Brownian motion and thermal fluctuations. Our group has proposed an information thermodynamics approach to investigate genome-wide methylation patterning based on the statistical mechanical effect of methylation on DNA molecules (<a href="#1">1</a>-<a href="#3">3</a>). The information thermodynamics-based approach is postulated to provide greater sensitivity for resolving true signal from the thermodynamic background within the methylome (<a href="#1">1</a>). This dtheory provides the knowledge on the family of probability distributions that better fit the methylation signals when expressed in terms of information divergences of methylation levels. Because the biological signal created within the dynamic methylome environment characteristic of organisms is not free from background noise, the approach, designated Methyl-IT, includes an application of signal detection theory.</p>
+<p>We have developed a novel methylome analysis procedure, Methyl-IT, based on signal detection and machine learning. Methylation analysis is confronted in Methyl-IT as a signal detection problem, and the method was designed to discriminate methylation regulatory signal from background noise induced by Brownian motion and thermal fluctuations. Our group has proposed an information thermodynamics approach to investigate genome-wide methylation patterning based on the statistical mechanical effect of methylation on DNA molecules (<a href="#1">1</a>-<a href="#3">3</a>). The information thermodynamics-based approach is postulated to provide greater sensitivity for resolving true signal from the thermodynamic background within the methylome (<a href="#1">1</a>). This theory provides the knowledge on the family of probability distributions that better fit the methylation signals when expressed in terms of information divergences of methylation levels. Because the biological signal created within the dynamic methylome environment characteristic of organisms is not free from background noise, the approach, designated Methyl-IT, includes an application of signal detection theory.</p>
 <p>A basic requirement for the application of signal detection is the knowledge of the background noise probability distribution. A generalized gamma (GG) probability distribution model can be deduced on a statistical mechanical/thermodynamics basis for DNA methylation induced by thermal fluctuations (<a href="#1">1</a>), which leads to the particular cases of members of GG probability distribution family. For example, assuming that this background methylation variation is consistent with a Poisson process, it can be distinguished from variation associated with methylation regulatory machinery, which is non-independent for all genomic regions (<a href="#1">1</a>). An information-theoretic divergence to express the variation in methylation induced by background thermal fluctuations will follow a probability distribution model, member of the GG family, provided that it is proportional to minimum energy dissipated per bit of information from methylation change. The information thermodynamics model was previously verified with more than 150 Arabidopsis and more than 90 human methylome datasets (<a href="#3">3</a>).</p>
 <p>With Methyl-IT R package we are providing the functions from the R scripts used in the manuscript (<a href="#1">1</a>), as well as, additional functions that will be used in further studies. The application of the information thermodynamics of cytosine DNA methylation is not limited to the current methylome analysis, which is only a particular application. The theory permits us the study of plant and animal methylomes in the framework of a communication system (<a href="#3">3</a>), where cytosine DNA methylation has the dual roles of stabilizing the DNA molecule and to carry the regulatory signals.</p>
 </div>
@@ -157,10 +158,15 @@
 <a href="#flow-diagram" class="anchor"></a>Flow diagram</h2>
 <p><img src="reference/figures/workflow.png" align="center"></p>
 </div>
+<div id="get-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get-started" class="anchor"></a>Get Started</h2>
+<p><a href="https://genomaths.github.io/methylit/articles/MethylIT.html">Fast starting here</a></p>
+</div>
 <div id="some-simple-examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#some-simple-examples" class="anchor"></a>Some simple examples</h2>
-<p><a href="https://genomaths.github.io/CancerExample/cancer_example_html_01-23-20.html"><img src="reference/figures/cancer_example.png"></a></p>
+<p><a href="https://genomaths.github.io/methylit/articles/cancer_example.html"><img src="reference/figures/cancer_example.png"></a></p>
 <p><a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html">An example with simulated datasets</a> to illustrate why a signal detection step is needed in methylation analysis.</p>
 <p><a href="https://genomaths.github.io/Cutpoint_estimation_with_Methyl-IT.html">A guide for methylation analysis based on optimal cutpoint with_Methyl-IT</a>.</p>
 <p><a href="https://genomaths.github.io/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a></p>

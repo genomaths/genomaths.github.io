@@ -16,7 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Get started-with Methyl-IT">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Get started-with Methyl-IT">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png">
 <meta name="twitter:card" content="summary">
@@ -54,7 +55,7 @@
   <a href="../articles/MethylIT.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -153,7 +154,7 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <div id="the-reference-sample" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-reference-sample" class="anchor"></a>The reference sample</h2>
-<p>To perform the comparison between the uncertainty of methylation levels from each group of individuals, control <span class="math inline">\((c)\)</span> and treatment <span class="math inline">\((t)\)</span>, we should estimate the uncertainty variation with respect to the same individual reference on the mentioned metric space. The reason to measure the uncertainty variation with respect to the same reference resides in that even sibling individuals follow an independent ontogenetic development and, consequently, their developments follow independent stochastic processes.</p>
+<p>To perform the comparison between the uncertainty of methylation levels from each group of individuals, control <span class="math inline">\((c)\)</span> and treatment <span class="math inline">\((t)\)</span>, we should estimate the uncertainty variation with respect to the same reference individual on the mentioned metric space. The reason to measure the uncertainty variation with respect to the same reference resides in that even sibling individuals follow an independent ontogenetic development and, consequently, their developments follow independent stochastic processes. The reference individual is estimated with function <a href="https://genomaths.github.io/methylit/reference/poolFromGRlist.html">poolFromGRlist</a>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ref &lt;-<span class="st"> </span><span class="kw"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(meth_samples<span class="op">$</span>W_<span class="dv">3</span>_<span class="dv">1</span>, meth_samples<span class="op">$</span>W_<span class="dv">3</span>_<span class="dv">2</span>, meth_samples<span class="op">$</span>W_<span class="dv">3</span>_<span class="dv">3</span>),</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">                      <span class="dt">stat =</span> <span class="st">"mean"</span>, <span class="dt">num.cores =</span> 4L</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">)</a>
@@ -224,7 +225,7 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <a class="sourceLine" id="cb5-52" data-line-number="52"><span class="co">#&gt;   [13112] -0.00400167479183146  0.108181314065562</span></a>
 <a class="sourceLine" id="cb5-53" data-line-number="53"><span class="co">#&gt;   -------</span></a>
 <a class="sourceLine" id="cb5-54" data-line-number="54"><span class="co">#&gt;   seqinfo: 7 sequences from an unspecified genome; no seqlengths</span></a></code></pre></div>
-<p>Function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateDivergence.html">estimateDivergence</a> returns a list of GRanges objects with the four columns of counts, the information divergence, and additional columns:</p>
+<p>Function <a href="https://genomaths.github.io/methylit/reference/estimateDivergence.html">estimateDivergence</a> returns a list of GRanges objects with the four columns of counts, the information divergence, and additional columns:</p>
 <ol style="list-style-type: decimal">
 <li>The original matrix of methylated (<span class="math inline">\(c_i\)</span>) and unmethylated (<span class="math inline">\(t_i\)</span>) read counts from control (<span class="math inline">\(i=1\)</span>) and treatment (<span class="math inline">\(i=2\)</span>) samples.</li>
 <li>“p1” and “p2”: methylation levels for control and treatment, respectively.</li>
@@ -269,7 +270,7 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <div id="quality-checking-of-the-coverage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#quality-checking-of-the-coverage" class="anchor"></a>Quality checking of the coverage</h3>
-<p>After the raw data filtering introduced with <a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateDivergence.html">estimateDivergence</a> function, some coverage issue could be detected.</p>
+<p>After the raw data filtering introduced with <a href="https://genomaths.github.io/methylit/reference/estimateDivergence.html">estimateDivergence</a> function, some coverage issue could be detected.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">covr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/lapply.html">lapply</a></span>(ml_hd, <span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">                cov &lt;-<span class="st"> </span>x<span class="op">$</span>c2 <span class="op">+</span><span class="st"> </span>x<span class="op">$</span>t2</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">                <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(cov)</a>
@@ -342,10 +343,10 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <a class="sourceLine" id="cb8-28" data-line-number="28"><span class="co">#&gt; W_3_3 -72384.64       0.9987527      NA              NA  -86145.27</span></a>
 <a class="sourceLine" id="cb8-29" data-line-number="29"><span class="co">#&gt; W_3_4 -84646.76       0.9994930      NA              NA -103110.43</span></a>
 <a class="sourceLine" id="cb8-30" data-line-number="30"><span class="co">#&gt; W_3_5 -86901.54       0.9994122      NA              NA -113367.18</span></a>
-<a class="sourceLine" id="cb8-31" data-line-number="31"><span class="co">#&gt; M_3_1 -82852.14       0.9994449      NA              NA -108854.50</span></a>
-<a class="sourceLine" id="cb8-32" data-line-number="32"><span class="co">#&gt; M_3_2 -90940.95       0.9996508      NA              NA -108955.49</span></a>
+<a class="sourceLine" id="cb8-31" data-line-number="31"><span class="co">#&gt; M_3_1 -82852.14       0.9994448      NA              NA -108854.50</span></a>
+<a class="sourceLine" id="cb8-32" data-line-number="32"><span class="co">#&gt; M_3_2 -90940.95       0.9996507      NA              NA -108955.49</span></a>
 <a class="sourceLine" id="cb8-33" data-line-number="33"><span class="co">#&gt; M_3_3 -90226.60       0.9997026      NA              NA -107175.23</span></a>
-<a class="sourceLine" id="cb8-34" data-line-number="34"><span class="co">#&gt; M_3_4 -94043.35       0.9997254      NA              NA  -98721.35</span></a>
+<a class="sourceLine" id="cb8-34" data-line-number="34"><span class="co">#&gt; M_3_4 -94043.35       0.9997255      NA              NA  -98721.35</span></a>
 <a class="sourceLine" id="cb8-35" data-line-number="35"><span class="co">#&gt;       g2p_R.Cross.val    g3p_AIC g3p_R.Cross.val      bestModel</span></a>
 <a class="sourceLine" id="cb8-36" data-line-number="36"><span class="co">#&gt; W_3_3       0.9995184  -88149.00       0.9995883            g3p</span></a>
 <a class="sourceLine" id="cb8-37" data-line-number="37"><span class="co">#&gt; W_3_4       0.9998527 -109678.36       0.9999118            g3p</span></a>
@@ -421,7 +422,7 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <h2 class="hasAnchor">
 <a href="#cutpoint-estimation--dmps" class="anchor"></a>Cutpoint estimation. DMPs</h2>
 <p>Laws of statistical physics can account for background methylation, a response to thermal fluctuations that presumably functions in DNA stability <span class="citation">(Sanchez and Mackenzie 2016; Sanchez et al. 2019)</span>. True signal is detected based on the optimal cutpoint <span class="citation">(López-Ratón et al. 2014)</span>.</p>
-<p>The need for the application of (what is now known as) signal detection in cancer research was pointed out by Youden in the midst of the last century <span class="citation">(Youden 1950)</span>. In the next example, the simple cutpoint estimation available in Methyl-IT is based on the application of <a href="https://en.wikipedia.org/wiki/Youden%27s_J_statistic">Youden index</a> <span class="citation">(Youden 1950)</span>. Although cutpoints are estimated for a single variable, the classification performance can be evaluated for several variables and applying different model classifiers. A optimal cutpoint distinguishes disease stages from healthy individual. The performance of this classification is given in the output of function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateCutPoint.html">estimateCutPoint</a>.</p>
+<p>The need for the application of (what is now known as) signal detection in cancer research was pointed out by Youden in the midst of the last century <span class="citation">(Youden 1950)</span>. In the next example, the simple cutpoint estimation available in Methyl-IT is based on the application of <a href="https://en.wikipedia.org/wiki/Youden%27s_J_statistic">Youden index</a> <span class="citation">(Youden 1950)</span>. Although cutpoints are estimated for a single variable, the classification performance can be evaluated for several variables and applying different model classifiers. A optimal cutpoint distinguishes disease stages from healthy individual. The performance of this classification is given in the output of function <a href="https://genomaths.github.io/methylit/reference/estimateCutPoint.html">estimateCutPoint</a>.</p>
 <p>A model classifier can be requested for further predictions and its classification performance is also provided. Below, the selected model classifier is a quadratic discriminant analysis (QDA) (<em>classifier1</em> = “qda”, <em>clas.perf</em> = TRUE). Four predictor variables are available: the Hellinger divergence of methylation levels (<em>hdiv</em>), total variation distance (<em>TV</em>, absolute difference of methylation levels), relative position of cytosine site in the chromosome (<em>pos</em>), and the logarithm base two of the probability to observe a Hellinger divergence value <span class="math inline">\(H\)</span> greater than the critical value <span class="math inline">\(H_{\alpha = 0.05}\)</span> (values given as probabilities in object PS, <em>wprob</em>).</p>
 <p>Notice that the cutpoint can be estimated for any of the two currently available information divergences: <em>Hellinger divergence</em> (<em>div.col</em> = 9) or the <em>total</em> <em>variation distance</em> (with Bayesian correction, <em>div.col</em> = 8).</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">### Cutpoint estimated using a model classifier</span></a>
@@ -472,7 +473,7 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <a class="sourceLine" id="cb10-46" data-line-number="46"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb10-47" data-line-number="47">cutpoint<span class="op">$</span>testSetModel.FDR</a>
 <a class="sourceLine" id="cb10-48" data-line-number="48"><span class="co">#&gt; [1] 0</span></a></code></pre></div>
-<p>Differentially methylated positions (DMPs) can be now identified using <a href="https://rdrr.io/github/genomaths/MethylIT/man/selectDIMP.html">selectDIMP</a> function</p>
+<p>Differentially methylated positions (DMPs) can be now identified using <a href="https://genomaths.github.io/methylit/reference/selectDIMP.html">selectDIMP</a> function</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">dmps &lt;-<span class="st"> </span><span class="kw"><a href="../reference/selectDIMP.html">selectDIMP</a></span>(ps, <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">cutpoint =</span> cutpoint<span class="op">$</span>cutpoint)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">dmps =</span><span class="kw"><a href="../reference/unlist.html">unlist</a></span>(<span class="kw"><a href="../reference/lapply.html">lapply</a></span>(dmps, length)))</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt;       dmps</span></a>
@@ -488,7 +489,7 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <h2 class="hasAnchor">
 <a href="#differentially-methylated-genes-dmgs" class="anchor"></a>Differentially methylated genes (DMGs)</h2>
 <p>Differentially methylated genes (DMGs) are estimated from group comparisons for the number of DMPs on gene-body regions between control and treatment.</p>
-<p>Function <a href="https://rdrr.io/github/genomaths/MethylIT/man/getDIMPatGenes.html">getDIMPatGenes</a> is used to count the number of DMPs at gene-body. Nevertheless, it can be used for any arbitrary specified genomic region as well. The operation of this function is based on the ‘<em>findOverlaps</em>’ function from the ‘<em>GenomicRanges</em>’ Bioconductor R package. The ‘<em>findOverlaps</em>’ function has several critical parameters like, for example, ‘<em>maxgap</em>’, ‘<em>minoverlap</em>’, and ‘<em>ignore.strand</em>’. In our function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/getDIMPatGenes.html">getDIMPatGenes</a>, except for setting ignore.strand = TRUE and <em>type = “within”</em>, we preserve the rest of default ‘findOverlaps’ parameters. In this case, these are important parameter settings because the local mechanical effect of methylation changes on a DNA region where a gene is located is independent of the strand where the gene is encoded. That is, methylation changes located in any of the two DNA strands inside the gene-body region will affect the flexibility of the DNA molecule <span class="citation">(Choy et al. 2010; Severin et al. 2011)</span>.</p>
+<p>Function <a href="https://genomaths.github.io/methylit/reference/getDIMPatGenes.html">getDIMPatGenes</a> is used to count the number of DMPs at gene-body. Nevertheless, it can be used for any arbitrary specified genomic region as well. The operation of this function is based on the ‘<em>findOverlaps</em>’ function from the ‘<em>GenomicRanges</em>’ Bioconductor R package. The ‘<em>findOverlaps</em>’ function has several critical parameters like, for example, ‘<em>maxgap</em>’, ‘<em>minoverlap</em>’, and ‘<em>ignore.strand</em>’. In our function <a href="https://genomaths.github.io/methylit/reference/getDIMPatGenes.html">getDIMPatGenes</a>, except for setting ignore.strand = TRUE and <em>type = “within”</em>, we preserve the rest of default ‘findOverlaps’ parameters. In this case, these are important parameter settings because the local mechanical effect of methylation changes on a DNA region where a gene is located is independent of the strand where the gene is encoded. That is, methylation changes located in any of the two DNA strands inside the gene-body region will affect the flexibility of the DNA molecule <span class="citation">(Choy et al. 2010; Severin et al. 2011)</span>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">nams &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(dmps)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2">dmps_at_genes &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span>(<span class="dt">GR =</span> dmps, <span class="dt">GENES =</span> genes, <span class="dt">ignore.strand =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">dmps_at_genes &lt;-<span class="st"> </span><span class="kw"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span>(dmps_at_genes, <span class="dt">columns =</span> 2L,</a>
@@ -538,7 +539,7 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <h3 class="hasAnchor">
 <a href="#setting-experiment-design" class="anchor"></a><em>Setting experiment design</em>
 </h3>
-<p>The experimental design is set with <a href="https://rdrr.io/github/genomaths/MethylIT/man/glmDataSet.html">glmDataSet</a> function</p>
+<p>The experimental design is set with <a href="https://genomaths.github.io/methylit/reference/glmDataSet.html">glmDataSet</a> function</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">colData &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">condition =</span> <span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>,</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">                                           <span class="st">"ML"</span>, <span class="st">"ML"</span>, <span class="st">"ML"</span>, <span class="st">"ML"</span>),</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">                                         <span class="dt">levels =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WT"</span>, <span class="st">"ML"</span>)),</a>
@@ -550,7 +551,7 @@ Pennsylvania State University, University Park, PA 16802</div></h4>
 <div id="testing-for-dmgs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#testing-for-dmgs" class="anchor"></a>Testing for DMGs</h3>
-<p>DMGs are detected using function <a href="https://rdrr.io/github/genomaths/MethylIT/man/countTest2.html">countTest2</a>.</p>
+<p>DMGs are detected using function <a href="https://genomaths.github.io/methylit/reference/countTest2.html">countTest2</a>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">dmgs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/countTest2.html">countTest2</a></span>(<span class="dt">DS =</span> ds, <span class="dt">num.cores =</span> 4L,</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">                   <span class="dt">tasks =</span> 2L,</a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">                   <span class="dt">minCountPerIndv =</span> <span class="dv">7</span>,</a>
