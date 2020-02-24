@@ -75,6 +75,10 @@
     <li>
       <a href="../articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a>
     </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -114,7 +118,7 @@ Mackenzie’s lab<br><br>
 Department of Biology and Plant Science.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 class="date">08 February 2020</h4>
+            <h4 class="date">23 February 2020</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/Methylation_analysis_with_Methyl-IT.Rmd"><code>vignettes/Methylation_analysis_with_Methyl-IT.Rmd</code></a></small>
       <div class="hidden name"><code>Methylation_analysis_with_Methyl-IT.Rmd</code></div>
@@ -386,19 +390,89 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">ft =<span class="st"> </span><span class="kw"><a href="../reference/FisherTest.html">FisherTest</a></span>(<span class="dt">LR =</span> divs, <span class="dt">tv.cut =</span> <span class="fl">0.67</span>,</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2">                     <span class="dt">pAdjustMethod =</span> <span class="st">"BH"</span>,  <span class="dt">pooling.stat =</span> <span class="st">"mean"</span>, </a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">                     <span class="dt">pvalCutOff =</span> <span class="fl">0.05</span>, <span class="dt">num.cores =</span> 4L,</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">                     <span class="dt">verbose =</span> <span class="ot">FALSE</span>, <span class="dt">saveAll =</span> <span class="ot">FALSE</span>) </a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co"># TV column is the standard TV value (without Bayesian correction of methylation</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co"># levels)</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8">ft.tv &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="dt">LR =</span> ft, <span class="dt">div.col =</span> 9L, <span class="dt">dist.name =</span> <span class="st">"None"</span>,</a>
-<a class="sourceLine" id="cb16-9" data-line-number="9">                          <span class="dt">tv.cut =</span> <span class="fl">0.67</span>, <span class="dt">tv.col =</span> <span class="dv">7</span>, <span class="dt">alpha =</span> <span class="fl">0.05</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb16-4" data-line-number="4">                     <span class="dt">verbose =</span> <span class="ot">FALSE</span>, <span class="dt">saveAll =</span> <span class="ot">FALSE</span>) </a></code></pre></div>
+<pre><code>## 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |======================================================================| 100%
+## 
+## 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |======================================================================| 100%
+## 
+## 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |======================================================================| 100%
+## 
+## 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |======================================================================| 100%
+## 
+## 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |======================================================================| 100%
+## 
+## 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># TV column is the standard TV value (without Bayesian correction of methylation</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co"># levels)</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">ft.tv &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="dt">LR =</span> ft, <span class="dt">div.col =</span> 9L, <span class="dt">dist.name =</span> <span class="st">"None"</span>,</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">                          <span class="dt">tv.cut =</span> <span class="fl">0.67</span>, <span class="dt">tv.col =</span> <span class="dv">7</span>, <span class="dt">alpha =</span> <span class="fl">0.05</span>)</a></code></pre></div>
 <p>The above setting would impose additional constrains on the output of DMPs resulting from Fisher’s exact test depending on how strong is the methylation background noise in the control population. Basically, methylation variations that can spontaneously occur in the control population with relatively high frequencies are disregarded. The decisions are based on the empirical cumulative distribution function (ECDF).</p>
 <p>Potential DMPs detected with FT can be constrained with the critical values derived for the best fitted probability distribution models</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Potential DMPs from Fisher's exact test </span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">ft.hd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="dt">LR =</span> ft, <span class="dt">div.col =</span> 9L, <span class="dt">nlms =</span> gof<span class="op">$</span>nlms, </a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">                          <span class="dt">tv.cut =</span> <span class="fl">0.674</span>, <span class="dt">tv.col =</span> <span class="dv">8</span>, <span class="dt">alpha =</span> <span class="fl">0.05</span>, </a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">                          <span class="dt">dist.name =</span> gof<span class="op">$</span>bestModel)</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">ft.hd<span class="op">$</span>T1</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># Potential DMPs from Fisher's exact test </span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">ft.hd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="dt">LR =</span> ft, <span class="dt">div.col =</span> 9L, <span class="dt">nlms =</span> gof<span class="op">$</span>nlms, </a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">                          <span class="dt">tv.cut =</span> <span class="fl">0.674</span>, <span class="dt">tv.col =</span> <span class="dv">8</span>, <span class="dt">alpha =</span> <span class="fl">0.05</span>, </a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">                          <span class="dt">dist.name =</span> gof<span class="op">$</span>bestModel)</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">ft.hd<span class="op">$</span>T1</a></code></pre></div>
 <pre><code>## GRanges object with 2226 ranges and 12 metadata columns:
 ##          seqnames    ranges strand |        c1        t1        c2        t2
 ##             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
@@ -456,8 +530,8 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
 <p>The above result shows column ‘adj.pval’ with the FT’s p.values adjusted for multiple comparisons and column ‘wprob’ with the predicted probabilities: <span class="math inline">\(1 - P(H_k &gt;= H_{\alpha = 0.05})\)</span> from the best fitted model.</p>
 <p>Summary table:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">ft =</span> <span class="kw"><a href="../reference/unlist.html">unlist</a></span>(<span class="kw"><a href="../reference/lapply.html">lapply</a></span>(ft.tv, length)), <span class="dt">ft.hd =</span> <span class="kw"><a href="../reference/unlist.html">unlist</a></span>(<span class="kw"><a href="../reference/lapply.html">lapply</a></span>(ft.hd, length)),</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="dt">BestModel =</span> <span class="kw"><a href="../reference/unlist.html">unlist</a></span>(<span class="kw"><a href="../reference/lapply.html">lapply</a></span>(PS, length)))</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">ft =</span> <span class="kw"><a href="../reference/unlist.html">unlist</a></span>(<span class="kw"><a href="../reference/lapply.html">lapply</a></span>(ft.tv, length)), <span class="dt">ft.hd =</span> <span class="kw"><a href="../reference/unlist.html">unlist</a></span>(<span class="kw"><a href="../reference/lapply.html">lapply</a></span>(ft.hd, length)),</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="dt">BestModel =</span> <span class="kw"><a href="../reference/unlist.html">unlist</a></span>(<span class="kw"><a href="../reference/lapply.html">lapply</a></span>(PS, length)))</a></code></pre></div>
 <pre><code>##      ft ft.hd BestModel
 ## C1 1865  1044      1044
 ## C2 1824  1075      1075
@@ -471,10 +545,10 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 <h3 class="hasAnchor">
 <a href="#critical-values-based-on-fitted-models" class="anchor"></a>Critical values based on fitted models</h3>
 <p>Critical values <span class="math inline">\(H_{\alpha=0.05}\)</span> can be estimated from each fitted model using <a href="https://rdrr.io/github/genomaths/MethylIT.utils/man/predict.ProbDistr.html">predict</a> function:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># ==== 95% quantiles </span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">q95 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">q95 =</span> <span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="dt">nlm =</span> gof<span class="op">$</span>nlms, <span class="dt">pred =</span> <span class="st">"quant"</span>, <span class="dt">q =</span> <span class="fl">0.95</span>,</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">                                <span class="dt">dist.name =</span> gof<span class="op">$</span>bestModel))</a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">q95</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># ==== 95% quantiles </span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">q95 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">q95 =</span> <span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="dt">nlm =</span> gof<span class="op">$</span>nlms, <span class="dt">pred =</span> <span class="st">"quant"</span>, <span class="dt">q =</span> <span class="fl">0.95</span>,</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">                                <span class="dt">dist.name =</span> gof<span class="op">$</span>bestModel))</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">q95</a></code></pre></div>
 <pre><code>##          q95
 ## C1  59.08940
 ## C2  58.32025
@@ -496,19 +570,19 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 <h3 class="hasAnchor">
 <a href="#cutpoint-for-ps-estimated-based-on-the-best-probability-distribution-model" class="anchor"></a>Cutpoint for PS estimated based on the best probability distribution model</h3>
 <p>Next, the search for an optimal cutpoint is accomplished with a model classifier and using the total variation distance (with Bayesian correction, bay.TV)</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">cutpoint =<span class="st"> </span><span class="kw"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span>(<span class="dt">LR =</span> PS, </a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">                            <span class="dt">control.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span>), </a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">                            <span class="dt">treatment.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span>),</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">                            <span class="dt">simple =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">                            <span class="dt">classifier1 =</span> <span class="st">"pca.logistic"</span>, </a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">                            <span class="dt">classifier2 =</span> <span class="st">"pca.qda"</span>, </a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">                            <span class="dt">column =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">hdiv =</span> <span class="ot">TRUE</span>, <span class="dt">bay.TV =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">                                       <span class="dt">wprob =</span> <span class="ot">TRUE</span>, <span class="dt">pos =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb23-9" data-line-number="9">                            <span class="dt">n.pc =</span> <span class="dv">4</span> , <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb23-10" data-line-number="10">                            <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">clas.perf =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb23-11" data-line-number="11">cutpoint<span class="op">$</span>cutpoint</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">cutpoint =<span class="st"> </span><span class="kw"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span>(<span class="dt">LR =</span> PS, </a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">                            <span class="dt">control.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span>), </a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">                            <span class="dt">treatment.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span>),</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">                            <span class="dt">simple =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">                            <span class="dt">classifier1 =</span> <span class="st">"pca.logistic"</span>, </a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">                            <span class="dt">classifier2 =</span> <span class="st">"pca.qda"</span>, </a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">                            <span class="dt">column =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">hdiv =</span> <span class="ot">TRUE</span>, <span class="dt">bay.TV =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">                                       <span class="dt">wprob =</span> <span class="ot">TRUE</span>, <span class="dt">pos =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">                            <span class="dt">n.pc =</span> <span class="dv">4</span> , <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">                            <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">clas.perf =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">cutpoint<span class="op">$</span>cutpoint</a></code></pre></div>
 <pre><code>## [1] 131.581</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">cutpoint<span class="op">$</span>testSetPerformance</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">cutpoint<span class="op">$</span>testSetPerformance</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -536,26 +610,26 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 ##                                      
 ##        'Positive' Class : TT         
 ## </code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">cutpoint<span class="op">$</span>testSetModel.FDR</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">cutpoint<span class="op">$</span>testSetModel.FDR</a></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 </div>
 <div id="cutpoint-for-ps-estimated-based-on-ft" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cutpoint-for-ps-estimated-based-on-ft" class="anchor"></a>Cutpoint for PS estimated based on FT</h3>
 <p>The best classification performance based PS estimated based on FT are obtained with the application of <a href="https://en.wikipedia.org/wiki/Youden%27s_J_statistic">Youden index</a> <span class="citation">(Youden 1950)</span>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">cutpoint2 =<span class="st"> </span><span class="kw"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span>(<span class="dt">LR =</span> ft.tv, </a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">                            <span class="dt">control.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span>), </a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">                            <span class="dt">treatment.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span>),</a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">                            <span class="dt">simple =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb29-5" data-line-number="5">                            <span class="dt">classifier1 =</span> <span class="st">"pca.qda"</span>, </a>
-<a class="sourceLine" id="cb29-6" data-line-number="6">                            <span class="dt">column =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">hdiv =</span> <span class="ot">TRUE</span>, <span class="dt">bay.TV =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb29-7" data-line-number="7">                                       <span class="dt">wprob =</span> <span class="ot">TRUE</span>, <span class="dt">pos =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb29-8" data-line-number="8">                            <span class="dt">n.pc =</span> <span class="dv">4</span> , <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb29-9" data-line-number="9">                            <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">clas.perf =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb29-10" data-line-number="10">                            <span class="dt">post.cut =</span> <span class="fl">0.9</span>)</a>
-<a class="sourceLine" id="cb29-11" data-line-number="11">cutpoint2<span class="op">$</span>cutpoint</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">cutpoint2 =<span class="st"> </span><span class="kw"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span>(<span class="dt">LR =</span> ft.tv, </a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">                            <span class="dt">control.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span>), </a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">                            <span class="dt">treatment.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span>),</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">                            <span class="dt">simple =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">                            <span class="dt">classifier1 =</span> <span class="st">"pca.qda"</span>, </a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">                            <span class="dt">column =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">hdiv =</span> <span class="ot">TRUE</span>, <span class="dt">bay.TV =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb31-7" data-line-number="7">                                       <span class="dt">wprob =</span> <span class="ot">TRUE</span>, <span class="dt">pos =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb31-8" data-line-number="8">                            <span class="dt">n.pc =</span> <span class="dv">4</span> , <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb31-9" data-line-number="9">                            <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">clas.perf =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb31-10" data-line-number="10">                            <span class="dt">post.cut =</span> <span class="fl">0.9</span>)</a>
+<a class="sourceLine" id="cb31-11" data-line-number="11">cutpoint2<span class="op">$</span>cutpoint</a></code></pre></div>
 <pre><code>## [1] 99.9462</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">cutpoint2<span class="op">$</span>testSetPerformance</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">cutpoint2<span class="op">$</span>testSetPerformance</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -583,22 +657,22 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 ##                                          
 ##        'Positive' Class : TT             
 ## </code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">cutpoint2<span class="op">$</span>testSetModel.FDR</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">cutpoint2<span class="op">$</span>testSetModel.FDR</a></code></pre></div>
 <pre><code>## [1] 0.09862672</code></pre>
 <p>Addition of information on the probability distribution of the methylation signal to potential signal identified with FT will emulate the results obtained with the Methyl-IT pipeline.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">cutpoint3 =<span class="st"> </span><span class="kw"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span>(<span class="dt">LR =</span> ft.hd, </a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">                            <span class="dt">control.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span>), </a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">                            <span class="dt">treatment.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span>),</a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">                            <span class="dt">simple =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">                            <span class="dt">classifier1 =</span> <span class="st">"pca.logistic"</span>, </a>
-<a class="sourceLine" id="cb35-6" data-line-number="6">                            <span class="dt">classifier2 =</span> <span class="st">"pca.qda"</span>, </a>
-<a class="sourceLine" id="cb35-7" data-line-number="7">                            <span class="dt">column =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">hdiv =</span> <span class="ot">TRUE</span>, <span class="dt">bay.TV =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb35-8" data-line-number="8">                                       <span class="dt">wprob =</span> <span class="ot">TRUE</span>, <span class="dt">pos =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb35-9" data-line-number="9">                            <span class="dt">n.pc =</span> <span class="dv">4</span> , <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb35-10" data-line-number="10">                            <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">clas.perf =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb35-11" data-line-number="11">cutpoint3<span class="op">$</span>cutpoint</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">cutpoint3 =<span class="st"> </span><span class="kw"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span>(<span class="dt">LR =</span> ft.hd, </a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">                            <span class="dt">control.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span>), </a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">                            <span class="dt">treatment.names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span>),</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">                            <span class="dt">simple =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">                            <span class="dt">classifier1 =</span> <span class="st">"pca.logistic"</span>, </a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">                            <span class="dt">classifier2 =</span> <span class="st">"pca.qda"</span>, </a>
+<a class="sourceLine" id="cb37-7" data-line-number="7">                            <span class="dt">column =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">hdiv =</span> <span class="ot">TRUE</span>, <span class="dt">bay.TV =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb37-8" data-line-number="8">                                       <span class="dt">wprob =</span> <span class="ot">TRUE</span>, <span class="dt">pos =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb37-9" data-line-number="9">                            <span class="dt">n.pc =</span> <span class="dv">4</span> , <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb37-10" data-line-number="10">                            <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">clas.perf =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb37-11" data-line-number="11">cutpoint3<span class="op">$</span>cutpoint</a></code></pre></div>
 <pre><code>## [1] 131.581</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">cutpoint3<span class="op">$</span>testSetPerformance</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">cutpoint3<span class="op">$</span>testSetPerformance</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -626,7 +700,7 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 ##                                      
 ##        'Positive' Class : TT         
 ## </code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">cutpoint3<span class="op">$</span>testSetModel.FDR</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">cutpoint3<span class="op">$</span>testSetModel.FDR</a></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Therefore, invoking the parsimony principle, we assume that signal detection and machine-learning classifiers are sufficient <span class="citation">(El Naqa et al. 2018)</span>.</p>
 </div>
@@ -634,23 +708,23 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 <h2 class="hasAnchor">
 <a href="#dmps" class="anchor"></a>DMPs</h2>
 <p>Cytosine sites carrying a methylation signal are designated differentially informative methylated positions (DMPs). With high probability true DMPs can be selected with Methyl-IT function <a href="https://genomaths.github.io/methylit/reference/selectDIMP.html">selectDIMP</a>.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">DMPs =<span class="st"> </span><span class="kw"><a href="../reference/selectDIMP.html">selectDIMP</a></span>(PS, <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">cutpoint =</span> cutpoint<span class="op">$</span>cutpoint)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">DMPs =<span class="st"> </span><span class="kw"><a href="../reference/selectDIMP.html">selectDIMP</a></span>(PS, <span class="dt">div.col =</span> <span class="dv">9</span>, <span class="dt">cutpoint =</span> cutpoint<span class="op">$</span>cutpoint)</a></code></pre></div>
 <div id="evaluation-of-dmp-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#evaluation-of-dmp-classification" class="anchor"></a>Evaluation of DMP classification</h3>
 <p>As shown above, DMPs are found in the control population as well. Hence, it is important to know whether a DMP is the resulting effect of the treatment or just spontaneously occurred in the control sample as well. In particular, the confrontation of this issue is extremely important when methylation analysis is intended to be used as part of a diagnostic clinical test and a decision making in biotechnology industry.</p>
-<p>Methyl-IT function <a href="https://genomaths.github.io/methylit/reference/evaluateDIMPclass.html">evaluateDIMPclass</a> is used here, to evaluate the classification of DMPs into one of the two classes, control and treatment. Several classifiers are available to be used with this function (see the help/manual for this function or type ?evaluateDIMPclass in command line).</p>
-<p>A first evaluation of DMP classification performance was already done after setting “clas.perf = TRUE” in function <a href="https://genomaths.github.io/methylit/reference/estimateCutPoint.html">estimateCutPoint</a>. However, this performance derives just from randomly split the set of sample into two subsets: training (60%) and testing (40%). A good classification performance report would be just the result of a lucky split of the sample! Hence, what would happen if the random split and further analysis are repeated 300 times?</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">class.perf =<span class="st"> </span><span class="kw"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span>(<span class="dt">LR =</span> DMPs, <span class="dt">control.names =</span> control.nam,</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">                           <span class="dt">treatment.names =</span> treatment.nam,</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">                           <span class="dt">column =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">hdiv =</span> <span class="ot">TRUE</span>, <span class="dt">TV =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb42-4" data-line-number="4">                                      <span class="dt">wprob =</span> <span class="ot">TRUE</span>, <span class="dt">pos =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">                           <span class="dt">classifier =</span> <span class="st">"pca.qda"</span>, <span class="dt">n.pc =</span> <span class="dv">4</span>, <span class="dt">pval.col =</span> 10L, </a>
-<a class="sourceLine" id="cb42-6" data-line-number="6">                           <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">num.boot =</span> <span class="dv">300</span>,</a>
-<a class="sourceLine" id="cb42-7" data-line-number="7">                           <span class="dt">output =</span> <span class="st">"mc.val"</span>, <span class="dt">prop =</span> <span class="fl">0.6</span>, <span class="dt">num.cores =</span> 4L,</a>
-<a class="sourceLine" id="cb42-8" data-line-number="8">                           <span class="dt">tasks =</span> 2L</a>
-<a class="sourceLine" id="cb42-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb42-10" data-line-number="10">class.perf</a></code></pre></div>
+<p>Methyl-IT function <a href="https://genomaths.github.io/methylit/reference/evaluateDIMPclass.html">evaluateDIMPclass</a> is used here to evaluate the classification of DMPs into one of the two classes, control and treatment. Several classifiers are available to be used with this function (see the help/manual for this function or type ?evaluateDIMPclass in command line).</p>
+<p>A first evaluation of DMP classification performance was already done after setting “clas.perf = TRUE” in function <a href="https://genomaths.github.io/methylit/reference/estimateCutPoint.html">estimateCutPoint</a>. However, this performance derives just from randomly split the set of sample into two subsets: training (60%) and testing (40%). A good classification performance report would be just the result from a lucky split of the set of samples! Hence, what would happen if the random split and further analysis are repeated 300 times?</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">class.perf =<span class="st"> </span><span class="kw"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span>(<span class="dt">LR =</span> DMPs, <span class="dt">control.names =</span> control.nam,</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">                           <span class="dt">treatment.names =</span> treatment.nam,</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">                           <span class="dt">column =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">hdiv =</span> <span class="ot">TRUE</span>, <span class="dt">TV =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">                                      <span class="dt">wprob =</span> <span class="ot">TRUE</span>, <span class="dt">pos =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">                           <span class="dt">classifier =</span> <span class="st">"pca.qda"</span>, <span class="dt">n.pc =</span> <span class="dv">4</span>, <span class="dt">pval.col =</span> 10L, </a>
+<a class="sourceLine" id="cb44-6" data-line-number="6">                           <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">num.boot =</span> <span class="dv">300</span>,</a>
+<a class="sourceLine" id="cb44-7" data-line-number="7">                           <span class="dt">output =</span> <span class="st">"mc.val"</span>, <span class="dt">prop =</span> <span class="fl">0.6</span>, <span class="dt">num.cores =</span> 4L,</a>
+<a class="sourceLine" id="cb44-8" data-line-number="8">                           <span class="dt">tasks =</span> 2L</a>
+<a class="sourceLine" id="cb44-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb44-10" data-line-number="10">class.perf</a></code></pre></div>
 <pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
 ##  Min.   :1   Min.   :1   Min.   :0.9987   Min.   :1     Min.   :0.9301  
 ##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9987   1st Qu.:1     1st Qu.:0.9301  

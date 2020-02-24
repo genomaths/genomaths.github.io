@@ -116,6 +116,10 @@ will filter by coverage each cytosine site from each GRanges object." />
     <li>
       <a href="../articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -165,6 +169,7 @@ will filter by coverage each cytosine site from each GRanges object.</p>
   <span class='kw'>min.coverage</span> <span class='kw'>=</span> <span class='fl'>4</span>,
   <span class='kw'>min.meth</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>min.umeth</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>min.sitecov</span> <span class='kw'>=</span> <span class='fl'>4</span>,
   <span class='kw'>percentile</span> <span class='kw'>=</span> <span class='fl'>0.9999</span>,
   <span class='kw'>high.coverage</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>mC</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fl'>2</span>),
@@ -217,6 +222,13 @@ reads to consider cytosine position. Specifically cytosine positions
 where (uC &lt;= min.umeth) &amp; (mC &gt; 0) &amp; (mC &lt; min.meth) hold will be
 removed, where mC and uC stand for the numbers of methylated and
 unmethylated reads. Default is min.umeth = 0.</p></td>
+    </tr>
+    <tr>
+      <th>min.sitecov</th>
+      <td><p>An integer. The minimum total coverage. Only sites where
+the total coverage (cov1 + cov2) is greater than 'min.sitecov' are
+considered for downstream analysis, where cov1 and cov2 are the coverages
+for samples 1 and 2, respectively.</p></td>
     </tr>
     <tr>
       <th>percentile</th>

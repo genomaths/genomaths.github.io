@@ -121,6 +121,10 @@ control group versus treatment group." />
     <li>
       <a href="../articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -177,6 +181,7 @@ control group versus treatment group.</p>
   <span class='kw'>classifier1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"logistic"</span>, <span class='st'>"pca.logistic"</span>, <span class='st'>"lda"</span>, <span class='st'>"qda"</span>, <span class='st'>"pca.lda"</span>, <span class='st'>"pca.qda"</span>),
   <span class='kw'>classifier2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.25</span>,
+  <span class='kw'>tv.col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>clas.perf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>post.cut</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
@@ -243,6 +248,11 @@ and the corresponding best fitted model will be returned.</p></td>
 site/range. Only sites/ranges <em>k</em> with \(TVD_{k} &gt; tv.cut\) are
 are used in the analysis. Its value must be a number.
 \(0 &lt; tv.cut &lt; 1\). Default is \(tv.cut = 0.25\).</p></td>
+    </tr>
+    <tr>
+      <th>tv.col</th>
+      <td><p>Column number for the total variation to be used for filtering
+cytosine positions (if provided).</p></td>
     </tr>
     <tr>
       <th>div.col</th>
@@ -345,7 +355,7 @@ cutpoint</p></li>
 <li><p>classifier: Name of the model classifier used in the
 performance evaluation.</p></li>
 <li><p>statistic: Name of the performance statistic used to find the
-cutpoint when <em>simple</em> =  FALSE</p></li>
+cutpoint when <em>simple</em> =  FALSE.</p></li>
 <li><p>optStatVal: Value of the performance statistic at the cutpoint.</p></li>
 </ol>
 

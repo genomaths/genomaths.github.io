@@ -134,6 +134,10 @@ function estimateJDiv." />
     <li>
       <a href="../articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -203,6 +207,7 @@ function <code><a href='estimateJDiv.html'>estimateJDiv</a></code>.</p>
   <span class='kw'>min.coverage</span> <span class='kw'>=</span> <span class='fl'>4</span>,
   <span class='kw'>min.meth</span> <span class='kw'>=</span> <span class='fl'>4</span>,
   <span class='kw'>min.umeth</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>min.sitecov</span> <span class='kw'>=</span> <span class='fl'>4</span>,
   <span class='kw'>high.coverage</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>percentile</span> <span class='kw'>=</span> <span class='fl'>0.999</span>,
   <span class='kw'>JD</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -229,7 +234,7 @@ used in the estimation of the information divergence.</p></td>
     </tr>
     <tr>
       <th>Bayesian</th>
-      <td><p>Logical. Whether to perform the estimations based on
+      <td><p>logical(1). Whether to perform the estimations based on
 posterior estimations of methylation levels.</p></td>
     </tr>
     <tr>
@@ -268,6 +273,13 @@ removed, where mC and uC stand for the numbers of methylated and
 unmethylated reads. Default is min.umeth = 0.</p></td>
     </tr>
     <tr>
+      <th>min.sitecov</th>
+      <td><p>An integer. The minimum total coverage. Only sites where
+the total coverage (cov1 + cov2) is greater than 'min.sitecov' are
+considered for downstream analysis, where cov1 and cov2 are the coverages
+for samples 1 and 2, respectively.</p></td>
+    </tr>
+    <tr>
       <th>high.coverage</th>
       <td><p>An integer for read counts. Cytosine sites having
 higher coverage than this are discarded.</p></td>
@@ -300,7 +312,7 @@ BiocParallel package).</p></td>
     </tr>
     <tr>
       <th>meth.level</th>
-      <td><p>Logic. Whether methylation levels are given in place of
+      <td><p>logical(1) Whether methylation levels are given in place of
 counts. Default is FALSE.</p></td>
     </tr>
     <tr>
@@ -322,22 +334,34 @@ logbase = \(exp(1)\) for natural logarithm.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object from "infDiv" class with the four columns of counts, the
-information divergence, and additional columns: 1) The original matrix
-of methylated (c_i) and unmethylated (t_i) read counts from control
-(i=1) and treatment (i=2) samples. 2) p1" and "p2": methylation levels
-for control and treatment, respectively. 3) "bay.TV": total variation
-TV = p2 - p1. 4) "TV": total variation based on simple counts:
-TV=c1/(c1+t1)-c2/(c2+t2). 5) "hdiv": Hellinger divergence. If
-Bayesian = TRUE, the results are based on the posterior estimations of
-methylation levels.</p>
+information divergence, and additional columns:</p><dl class='dl-horizontal'>
+<dt>1)</dt><dd><p>The original matrix of methylated \(c_{ij}\) and unmethylated
+\(t_{ij}\) read counts from control \(j=1\) and treatment \(j=2\)
+samples at positions \(i\).</p></dd>
+<dt>2)</dt><dd><p>"p1" and "p2": methylation levels for control and treatment,
+respectively. If 'meth.level = FALSE' and 'Bayesian = TRUE' (recommended),
+"p1" and "p2" are estimated following the Bayesian approach described in
+reference (1).</p></dd>
+<dt>3)</dt><dd><p>"bay.TV": total variation TV = p2 - p1</p></dd>
+<dt>4)</dt><dd><p>"TV": total variation based on simple counts:
+\(TV=c_1/(c_1+t_1)-c_2/(c_2+t_2)\), where \(c_i\) and \(t_i\) denote
+methylated and unmethylated read counts, respectively.</p></dd>
+<dt>5)</dt><dd><p>"hdiv": Hellinger divergence. If Bayesian = TRUE, the results are
+based on the posterior estimations of methylation levels. if meth.level =
+FALSE', then "hdiv" is computed as given in reference (2), otherwise as:
+$$hdiv = (sqrt(p_1) - sqrt(p_2))^2 + (sqrt(1 -p_1) - sqrt(1 -
+p_2))^2$$</p></dd>
+
+</dl>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If read counts are provided, then Hellinger divergence is computed
 as given in the first formula from Theorem 1 from reference (1). In the
 present case:</p>
-<p>$$H = 2*(n[1] + 1)*(n[2] + 1)*((sqrt(p[1]) - sqrt(p[2]))^2 +
-         (sqrt(1-p[1]) - sqrt(1-p[2]))^2)/(n[1] + n[2] + 2)$$</p>
-<p>where \(n[1]\) and \(n[2]\) are the coverage for the control and
+<p>$$H = 2 (n_1 + 1) (n_2 + 1)*((sqrt(p_1) - sqrt(p_2))^2 +
+         (sqrt(1-p_2) - sqrt(1-p_2))^2)/(n_1 + n_2 + 2)$$</p>
+<p>where \(n_1\) and \(n_2\) are the coverage for the control and
 treatment, respectively. Notice that each row from the matrix of counts
 correspond to a single cytosine position and has four values corresponding to
 "mC1" and "uC1" (control), and mC2" and "uC2" for treatment.</p>
@@ -355,9 +379,9 @@ the number 12 (3 x 4) is the minimum coverage requested for the each cytosine
 site in the reference sample.</p>
 <p>If the methylation levels are provided in place of counts, then the Hellinger
 divergence is computed as:
-$$H = (sqrt(p[1]) - sqrt(p[2]))^2 + (sqrt(1 - p[1]) - sqrt(1 - p[2]))^2$$</p>
+$$H = (sqrt(p_1) - sqrt(p_2))^2 + (sqrt(1 - p_1) - sqrt(1 - p_2))^2$$</p>
 <p>This formula assumes that the probability vectors derived from the
-methylation levels (p_ij) p_j = c(p_ij, 1 - p_ij) (see
+methylation levels  \(p_i = c(p_{i1}, 1 - p_{i2}\)) (see
 <code><a href='estimateHellingerDiv.html'>estimateHellingerDiv</a></code> are an unbiased estimation of the expected
 one. The function applies a pairwise filtering after building a single
 GRanges from the two GRanges objects. Experimentally available cytosine sites
@@ -378,6 +402,21 @@ practice will be the removing of sites like that. This particular case is
 removed under the default settings: min.coverage = 4, min.meth = 4, and
 min.umeth = 0 (see example for function <code><a href='uniqueGRfilterByCov.html'>uniqueGRfilterByCov</a></code>,
 called by 'estimateDivergence').</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    
+<ol>
+<li><p>Sanchez R, Yang X, Maher T, Mackenzie S. Discrimination of DNA
+Methylation Signal from Background Variation for Clinical Diagnostics. Int.
+J. Mol Sci, 2019, 20:5343.</p></li>
+<li><p>Basu  A., Mandal  A., Pardo L. Hypothesis testing for two
+discrete populations based on the Hellinger distance. Stat. Probab.
+Lett. 2010, 80: 206-214.</p></li>
+</ol>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='estimateBayesianDivergence.html'>estimateBayesianDivergence</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## The read count data are created</span>
@@ -392,19 +431,20 @@ called by 'estimateDivergence').</p>
                     <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>num.samples</span>, <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>500</span>))
     <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(<span class='no'>x</span>, <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
     <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(<span class='no'>y</span>, <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-    <span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'>estimateDivergence</span>(<span class='kw'>ref</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>indiv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>y</span>), <span class='kw'>JD</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='message'>*** Processing sample #1 </span></div><div class='output co'>#&gt; <span class='message'> *** Building coordinates for the new GRanges object ...</span></div><div class='output co'>#&gt; <span class='message'> *** Strand information is preserved ...</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #1</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #2...</span></div><div class='output co'>#&gt; <span class='message'> *** Sorting by chromosomes and start positions...</span></div><div class='output co'>#&gt; *** Estimating Hellinger divergence... 
-#&gt; * Coercing from list to vector...</div><div class='input'>
+    <span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'>estimateDivergence</span>(<span class='kw'>ref</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>indiv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>y</span>), <span class='kw'>JD</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                            <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]
+
 <span class='co'>## Keep in mind that Hellinger and J divergences are, in general, correlated!</span>
     <span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>hd</span>$<span class='no'>hdiv</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>hd</span>$<span class='no'>jdiv</span>),
             <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"kendall"</span>)</div><div class='output co'>#&gt; 
 #&gt; 	Kendall's rank correlation tau
 #&gt; 
 #&gt; data:  as.numeric(hd$hdiv) and as.numeric(hd$jdiv)
-#&gt; z = 19.516, p-value &lt; 2.2e-16
+#&gt; z = 19.397, p-value &lt; 2.2e-16
 #&gt; alternative hypothesis: true tau is not equal to 0
 #&gt; sample estimates:
 #&gt;       tau 
-#&gt; 0.9136781 
+#&gt; 0.9093649 
 #&gt; </div><div class='input'>
 </div></pre>
   </div>
@@ -414,11 +454,13 @@ called by 'estimateDivergence').</p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
     <h2>Author</h2>
-    <p>Robersy Sanchez</p>
+    <p>Robersy Sanchez (<a href='https://genomaths.com'>https://genomaths.com</a>)</p>
   </div>
 </div>
 

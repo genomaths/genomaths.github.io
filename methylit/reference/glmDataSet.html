@@ -46,7 +46,7 @@
 
 <meta property="og:title" content="Data set constructor for class glmDataSet — glmDataSet" />
 <meta property="og:description" content="This function is used to build a object suitable to be used
-with Methyl-IT link{countTest2} function." />
+with Methyl-IT countTest2 function." />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -116,6 +116,10 @@ with Methyl-IT link{countTest2} function." />
     <li>
       <a href="../articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -156,7 +160,7 @@ with Methyl-IT link{countTest2} function." />
 
     <div class="ref-description">
     <p>This function is used to build a object suitable to be used
-with Methyl-IT <code>link{countTest2}</code> function.</p>
+with Methyl-IT <code><a href='countTest2.html'>countTest2</a></code> function.</p>
     </div>
 
     <pre class="usage"><span class='fu'>glmDataSet</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>counts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -185,6 +189,14 @@ th column names of the count matrix.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An object from "RangedGlmDataSet" class containing these attributes:
+"GR": the GRanges of the object, "counts": the counts for each sample
+at that genomic position, "colData": the condition of each sample,
+treatment or control, "sampleNames": the names of the samples, "levels":
+the values (perhaps TT and CT for treatment and control)  permitted in
+the "colData" attribute, optionData: additional metadata or NULL</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Data set constructor for class glmDataSet also validate the object</p>
@@ -213,10 +225,13 @@ th column names of the count matrix.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Robersy Sanchez</p>
   </div>
 </div>
 
