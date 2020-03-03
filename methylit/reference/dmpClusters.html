@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DMP cluster builder — dmpClusters • MethylIT</title>
+<title>DMP clustering — dmpClusters • MethylIT</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -44,7 +44,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="DMP cluster builder — dmpClusters" />
+<meta property="og:title" content="DMP clustering — dmpClusters" />
 <meta property="og:description" content="Given a 'pDMP' object carrying DMPs obtained in Methyl-IT
 downstream analysis, function &quot;dmpClusters&quot; build
 clusters of DMPs, which can be further tested to identify differentially
@@ -155,7 +155,7 @@ methylated regions (DMRs) with countTest2 function." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>DMP cluster builder</h1>
+    <h1>DMP clustering</h1>
     <small class="dont-index">Source: <a href='https://github.com/genomaths/MethylIT/blob/master/R/dmpClusters.R'><code>R/dmpClusters.R</code></a></small>
     <div class="hidden name"><code>dmpClusters.Rd</code></div>
     </div>
@@ -221,7 +221,7 @@ package).The number of tasks per job. value must be a scalar integer &gt;=
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>GRanges object with the numbers of positions inside each cluster
+    <p>A GRanges object with the numbers of positions inside each cluster,
 where DMPs were reported in at least one of the samples.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -248,7 +248,7 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Get a dataset of potential signals and the estimated cutpoint from the</span>
-<span class='co'>## package and performs cutpoint estimation</span>
+<span class='co'>## package</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PS</span>, <span class='no'>cutpoint</span>)
 
 <span class='co'>## The estimated cutpoints are used to discriminate signals from the noise.</span>
@@ -256,7 +256,7 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 <span class='no'>dmps</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='selectDIMP.html'>selectDIMP</a></span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>)
 
 <span class='co'>## Build clusters of DMPs</span>
-<span class='no'>x1</span> <span class='kw'>=</span> <span class='fu'>dmpClusters</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='no'>dmps</span>, <span class='kw'>maxDist</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>minNumDMPs</span> <span class='kw'>=</span> <span class='fl'>6</span>,<span class='kw'>num.cores</span><span class='kw'>=</span><span class='fl'>2L</span>,
+<span class='no'>x1</span> <span class='kw'>=</span> <span class='fu'>dmpClusters</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='no'>dmps</span>, <span class='kw'>maxDist</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>minNumDMPs</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>num.cores</span><span class='kw'>=</span><span class='fl'>2L</span>,
                 <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>x1</span></div><div class='output co'>#&gt; GRanges object with 60 ranges and 1 metadata column:
 #&gt;        seqnames    ranges strand |      dmps
@@ -274,7 +274,7 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 #&gt;   [60]        1 9911-9958      * |        14
 #&gt;   -------
 #&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</div><div class='input'>
-<span class='co'>## ==== Setting up the experimennt design to test for DMRs ===</span>
+<span class='co'>## ==== Setting up the experiment design to test for DMRs ===</span>
 <span class='no'>nams</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>dmps</span>)
 <span class='no'>dmps_at_clusters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='getDIMPatGenes.html'>getDIMPatGenes</a></span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='no'>dmps</span>, <span class='kw'>GENES</span> <span class='kw'>=</span> <span class='no'>x1</span>,
                                     <span class='kw'>ignore.strand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
@@ -286,10 +286,10 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 <span class='no'>colData</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>condition</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"CT"</span>, <span class='st'>"CT"</span>, <span class='st'>"CT"</span>,
                                            <span class='st'>"TT"</span>, <span class='st'>"TT"</span>, <span class='st'>"TT"</span>),
                                          <span class='kw'>levels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"CT"</span>, <span class='st'>"TT"</span>)),
-                      <span class='no'>nams</span>,
-                      <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+                    <span class='no'>nams</span>,
+                    <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
-<span class='co'>## Build RangedGlmDataSet is created</span>
+<span class='co'>## Build a RangedGlmDataSet object</span>
 <span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glmDataSet.html'>glmDataSet</a></span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='no'>dmps_at_clusters</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='no'>colData</span>)
 
 <span class='co'>## ================ Testing for DMRs ===========</span>
