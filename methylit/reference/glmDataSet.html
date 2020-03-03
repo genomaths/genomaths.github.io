@@ -163,7 +163,13 @@ with Methyl-IT countTest2 function." />
 with Methyl-IT <code><a href='countTest2.html'>countTest2</a></code> function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>glmDataSet</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>counts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>glmDataSet</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>counts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for glmDataSet</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"digits"</span>), <span class='no'>...</span>)
+
+<span class='co'># S3 method for RangedGlmDataSet</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"digits"</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,6 +192,15 @@ with Methyl-IT <code><a href='countTest2.html'>countTest2</a></code> function.</
 a factor with exactly two levels. The rownames of <em>colData</em>
 individual samples. The row names of <em>colData</em> must correspond to
 th column names of the count matrix.</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>Object from class <em>glmDataSet</em> or from class
+<em>"RangedGlmDataSet"</em>.</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>Number of significant digits to be used.</p></td>
     </tr>
     </table>
 

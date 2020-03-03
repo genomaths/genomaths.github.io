@@ -48,7 +48,7 @@
 <meta property="og:description" content="The Information divergence of methylation levels is estimated
 using the direct estimation or a Bayesian approach of the methylation
 levels. if 'meth.level = FALSE', Hellinger divergence is computed as
-given in reference (1). The Bayesian approach followed is decribed in
+given in reference (1). The Bayesian approach followed is described in
 reference (2)." />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -165,7 +165,7 @@ reference (2)." />
     <p>The Information divergence of methylation levels is estimated
 using the direct estimation or a Bayesian approach of the methylation
 levels. if 'meth.level = FALSE', Hellinger divergence is computed as
-given in reference (1). The Bayesian approach followed is decribed in
+given in reference (1). The Bayesian approach followed is described in
 reference (2).</p>
     </div>
 
@@ -293,7 +293,7 @@ $$H = (sqrt(p_1) - sqrt(p_2))^2 + (sqrt(1 - p_1) - sqrt(1 - p_2))^2$$</p>
 <p>This formula assumes that the probability vectors derived from the
 methylation levels \(p_i = c(p_{i2}, 1 - p_{i2})\) (see function
 <code><a href='estimateHellingerDiv.html'>estimateHellingerDiv</a></code>) are an unbiased estimation of the
-expected one. The Bayesian approach followed here is decribed in reference
+expected one. The Bayesian approach followed here is described in reference
 (2).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -329,11 +329,11 @@ J. Mol Sci, 2019, 20:5343.</p></li>
 #&gt; 	Kendall's rank correlation tau
 #&gt; 
 #&gt; data:  as.numeric(hd$hdiv) and as.numeric(hd$jdiv)
-#&gt; z = 28.119, p-value &lt; 2.2e-16
+#&gt; z = 28.137, p-value &lt; 2.2e-16
 #&gt; alternative hypothesis: true tau is not equal to 0
 #&gt; sample estimates:
 #&gt;       tau 
-#&gt; 0.8441749 
+#&gt; 0.8447189 
 #&gt; </div><div class='input'>
 <span class='co'>## An example with methylation levels</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
