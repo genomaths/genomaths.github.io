@@ -309,6 +309,11 @@ parameter value. For example,  scale = 0.0000000001 in 'GGamma3P' or in
 'Weibull2P' models. This last situation can result from the numerical
 algorithm used in the parameter estimation. The numerical algorithms for
 nonlinear fit estimation are not perfect!</p>
+<p>For distribution models that include a location parameter ('Weibull3P',
+'Gamma3P', and 'GGamma4P') there is an additional important constraint, which
+cannot be evaluated with 'AIC' or 'R.Cross.val': \(\mu &gt; 0\). That is, the
+information divergences are strictly positive magnitudes, therefore, any best
+model in terms of AIC with values \(\mu &lt; 0\) are meaningless and rejected.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -332,21 +337,21 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 <span class='co'>## The GoF report</span>
 <span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>gofReport</span>(<span class='no'>hd</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
 #&gt; 
-#&gt;  *** Creating report ... </div><div class='output co'>#&gt; <span class='warning'>Warning: The best fitted model for sample(s) T1 require(s) for further analysis. </span>
-#&gt; <span class='warning'>The model with the lowest AIC must have the highest R.Cross.val</span></div><div class='output co'>#&gt;      w2p_AIC w2p_R.Cross.val   w3p_AIC w3p_R.Cross.val   g2p_AIC
-#&gt; C1 -455.0259       0.9963849        NA              NA -437.3394
-#&gt; C2 -426.8983       0.9951161 -431.1954       0.9956952 -409.3027
-#&gt; C3 -582.1629       0.9990002        NA              NA -560.5544
-#&gt; T1 -494.5917       0.9975048 -493.8734       0.9975519 -461.7047
-#&gt; T2 -472.0464       0.9971160        NA              NA -477.2328
-#&gt; T3 -517.5384       0.9980853 -515.9888       0.9981240 -493.3195
-#&gt;    g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val      bestModel
-#&gt; C1       0.9958804 -434.8702       0.9958220            w2p
-#&gt; C2       0.9950139 -411.1744       0.9953230            w3p
-#&gt; C3       0.9988600 -559.6221       0.9987277            w2p
-#&gt; T1       0.9970319 -484.9045       0.9974664 Needs revision
-#&gt; T2       0.9974107 -481.0623       0.9975013            g3p
-#&gt; T3       0.9977381 -526.9134       0.9983114            g3p
+#&gt;  *** Creating report ... 
+#&gt;      w2p_AIC w2p_R.Cross.val   w3p_AIC w3p_R.Cross.val   g2p_AIC
+#&gt; C1 -455.0259       0.9965924        NA              NA -437.3394
+#&gt; C2 -426.8983       0.9955595 -431.1954       0.9957324 -409.3027
+#&gt; C3 -582.1629       0.9990222        NA              NA -560.5544
+#&gt; T1 -494.5917       0.9976236 -493.8734       0.9976049 -461.7047
+#&gt; T2 -472.0464       0.9971643        NA              NA -477.2328
+#&gt; T3 -517.5384       0.9981309 -515.9888       0.9981126 -493.3195
+#&gt;    g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val bestModel
+#&gt; C1       0.9958804 -434.8702       0.9958220       w2p
+#&gt; C2       0.9950139 -411.1744       0.9953230       w3p
+#&gt; C3       0.9988600 -559.6221       0.9987277       w2p
+#&gt; T1       0.9970319 -484.9045       0.9974664       w2p
+#&gt; T2       0.9974107       Inf       0.0000000       g2p
+#&gt; T3       0.9977381 -526.9134       0.9983114       g3p
 #&gt; </div><div class='input'>
 <span class='co'>## To get the potential DMPs</span>
 <span class='no'>ps_dmp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='getPotentialDIMP.html'>getPotentialDIMP</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>hd</span>, <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>nlms</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>,

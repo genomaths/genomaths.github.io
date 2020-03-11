@@ -50,9 +50,9 @@ cytosine site, this function computes the J information divergence
 (JD) between methylation levels. The motivation to introduce
 JD in Methyl-IT is founded on:
 It is a symmetrised form of Kullback–Leibler divergence
-(\(D_KL\)). Kullback and Leibler themselves actually defined
-the divergence as: \(D_KL(P || Q) + D_KL(Q || P)\), which is
-symmetric and nonnegative, where the probability distributions
+(\(D_{KL}\)). Kullback and Leibler themselves actually defined
+the divergence as: \(D_{KL}(P || Q) + D_{KL}(Q || P)\), which
+is symmetric and nonnegative, where the probability distributions
 P and Q are defined on the same probability space
 (see
 Wikipedia).
@@ -182,9 +182,9 @@ cytosine site, this function computes the J information divergence
 (<em>JD</em>) between methylation levels. The motivation to introduce
 <em>JD</em> in Methyl-IT is founded on:</p><ol>
 <li><p>It is a symmetrised form of Kullback–Leibler divergence
-(\(D_KL\)). Kullback and Leibler themselves actually defined
-the divergence as: \(D_KL(P || Q) + D_KL(Q || P)\), which is
-symmetric and nonnegative, where the probability distributions
+(\(D_{KL}\)). Kullback and Leibler themselves actually defined
+the divergence as: \(D_{KL}(P || Q) + D_{KL}(Q || P)\), which
+is symmetric and nonnegative, where the probability distributions
 <em>P</em> and <em>Q</em> are defined on the same probability space
 (see
 <a href='https://is.gd/oS8Bwv'>Wikipedia</a>).</p></li>
@@ -222,16 +222,18 @@ used as default. Use logbase = exp(1) for natural logarithm.</p></td>
 returned</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The methylation level \(p_ij\) at a given cytosine site <em>i</em>
-from an individual <em>j</em> corresponds to a probability vector \(q_ij
-    = c(p_ij, 1 - p_ij)\). Then, the J-information divergence between the
-methylation levels <em>p_i1</em> and <em>p_i2</em> is the divergence between
-the vectors \(q_i1 = (p_i1, 1 - p_i1)\) and \(q_i2 = c(p_i2, 1 -
-    p_i2)\). <em>JD</em> is computed as in reference (1):</p>
-<p>$$JD(q_i1, q_i2) = (q_i1[1] * log(q_i1[1]/q_i2[1]) + q_i1[2] *
-                        log(q_i1[2]/q_i2[2]) +
-                q_i2[1] * log(q_i2[1]/q_i1[1]) + q_i2[2] *
-                            log(q_i2[2]/q_i1[2]))/2$$.</p>
+    <p>The methylation levels \(p_{ij}\), at a given cytosine site
+<em>i</em> from an individual <em>j</em>, lead to the probability vectors
+\(p^{ij} = (p_{ij}, 1 - p_{ij})\). Then, the J-information divergence
+between the methylation levels \(p_{ij}\) and the methylation levels
+\(q_i\), used as reference, corresponds to the divergence between the
+probability vectors \(p^{ij}\) and \(q^i = (q_i, 1 - q_i)\). <em>JD</em>
+is computed as in reference (1), adapted here for discrete probability
+distributions:</p>
+<p>$$JD(p^{ij}, q^i) = (p_{ij} * log(p_{ij}/q_i) +
+                        (1 - p_{ij}) * log((1 - p_{ij})/(1 - q_i)) +
+                q_i * log(q_i/p_ij) +
+                (1 - q_i) * log((1 - q_i)/(1 - p_{ij})))/2$$.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
