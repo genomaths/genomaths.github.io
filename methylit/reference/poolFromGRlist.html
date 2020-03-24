@@ -18,12 +18,16 @@ counts — poolFromGRlist • MethylIT</title>
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -50,7 +54,6 @@ counts — poolFromGRlist" />
 <meta property="og:description" content="This function will build a GRanges methylation pool from a list
 of GRanges objects" />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -68,7 +71,7 @@ of GRanges objects" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -128,7 +131,7 @@ of GRanges objects" />
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -188,16 +191,16 @@ pool)</p></td>
     </tr>
     <tr>
       <th>stat</th>
-      <td><p>statistic used to estimate the methylation pool: row "mean", row
-"median", row "sum", or Jacknife row mean ("jackmean") of methylated and
+      <td><p>statistic used to estimate the methylation pool: row 'mean', row
+'median', row 'sum', or Jacknife row mean ('jackmean') of methylated and
 unmethylated read counts across individuals. Notice that, for only two
-samples, "jackmean" makes not sense. Since the centrality statistics are
+samples, 'jackmean' makes not sense. Since the centrality statistics are
 sensitive to extreme values, stat = 'sum' is an attractive option.
 However, in this last case, a further correction for the minimum coverage
 for the reference sample must be taken into account in a furhter
 estimation of the Hellinger divergence of methylation levels, which is
 explained in the detail section from the help of function
-<code><a href='estimateDivergence.html'>estimateDivergence</a></code>. A conservative option is "mean", which
+<code><a href='estimateDivergence.html'>estimateDivergence</a></code>. A conservative option is 'mean', which
 will return the group centroid.</p></td>
     </tr>
     <tr>
@@ -230,10 +233,10 @@ where the prob values are found must be provided. Otherwise, column = 1L.</p></t
     </tr>
     <tr>
       <th>jstat</th>
-      <td><p>If stat = "jackmean", then any of the 'stat' possible values:
-"sum", "mean", or "median" can be used to compute, for each cytosine
+      <td><p>If stat = 'jackmean', then any of the 'stat' possible values:
+'sum', 'mean', or 'median' can be used to compute, for each cytosine
 site, the Jacknife vector of the selected statistics and then to
-compute the corresponding mean. Default is jstat = "sum".</p></td>
+compute the corresponding mean. Default is jstat = 'sum'.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -252,30 +255,23 @@ compute the corresponding mean. Default is jstat = "sum".</p></td>
 
     <p>The list of GRanges objects (LR) provided to build a virtual
 methylome should be an output of the function 'readCounts2GRangesList' or
-at least each GRanges must have the columns named "mC" and "uC", for the
+at least each GRanges must have the columns named 'mC' and 'uC', for the
 read counts of methylated and unmethylated cytosines, respectively.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>gr1</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(
-    <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>"chr1"</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>,
-               <span class='kw'>strand</span> <span class='kw'>=</span> <span class='st'>'*'</span>, <span class='kw'>mC</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>),
-    <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>'chr1'</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>, <span class='kw'>strand</span> <span class='kw'>=</span> <span class='st'>'*'</span>,
+<span class='kw'>mC</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>gr2</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(
-    <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>"chr1"</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>,
-               <span class='kw'>strand</span> <span class='kw'>=</span> <span class='st'>'*'</span>, <span class='kw'>mC</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>),
-    <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>'chr1'</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>,
+<span class='kw'>strand</span> <span class='kw'>=</span> <span class='st'>'*'</span>, <span class='kw'>mC</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='no'>answer</span> <span class='kw'>&lt;-</span> <span class='fu'>poolFromGRlist</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>gr1</span>, <span class='no'>gr2</span>), <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>'mean'</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

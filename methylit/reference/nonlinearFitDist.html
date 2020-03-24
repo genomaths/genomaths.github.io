@@ -17,12 +17,16 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -48,7 +52,6 @@
 <meta property="og:description" content="A wrapper to call functions 'Weibull3P' and
 'fitGGammaDist' to operate on list of GRanges." />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -66,7 +69,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -126,7 +129,7 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -199,10 +202,11 @@ where the information divergence is given. Default column = 1</p></td>
     </tr>
     <tr>
       <th>dist.name</th>
-      <td><p>name of the distribution to fit: Weibull (default:
-"Weibull"), gamma with three-parameter (Gamma3P), gamma with
-two-parameter (Gamma2P), generalized gamma with three-parameter
-("GGamma3P") or four-parameter ("GGamma4P"), and Log-Normal (LogNorm).</p></td>
+      <td><p>Name(s) of the distribution to fit. A single character
+string or character vector naming the distribution(s): 'Weibull'
+(default), gamma with three-parameter (Gamma3P), gamma with two-parameter
+(Gamma2P), generalized gamma with three-parameter ('GGamma3P') or
+four-parameter ('GGamma4P'), and Log-Normal (LogNorm).</p></td>
     </tr>
     <tr>
       <th>sample.size</th>
@@ -228,11 +232,11 @@ Generalized Gamma distribution.</p></td>
     </tr>
     <tr>
       <th>model</th>
-      <td><p>Optional. Only when dist.name = "Weibull". A selection of the
+      <td><p>Optional. Only when dist.name = 'Weibull'. A selection of the
 distribution model, two-parameters and three-parameters Weibull model
-("2P" and "3P"). Default is "all" and the model with the best AIC
-criterion is reported. Alternatively, just use dist.name = "Weibull2P" or
-dist.name = "Weibull3P".</p></td>
+('2P' and '3P'). Default is 'all' and the model with the best AIC
+criterion is reported. Alternatively, just use dist.name = 'Weibull2P' or
+dist.name = 'Weibull3P'.</p></td>
     </tr>
     <tr>
       <th>maxiter</th>
@@ -308,7 +312,7 @@ coefficient covariance matrix.</p>
 
     <p>The algorithm prepares the information divergence variable
 to try fitting Weibull or generalized gamma distribution model to the data.
-If Weibull distribution is selected (default: "Weibull"), function
+If Weibull distribution is selected (default: 'Weibull'), function
 'Weibull2P' first attempts fitting to the two-parameter Weibull CDF
 (Weibull2P). If Weibull2P did not fit, then the algorithm will try to fit
 Weibull3P. The Levenberg-Marquardt algorithm implemented in R package
@@ -317,9 +321,9 @@ nonlinear regressions (R.Cross.val) are performed in each methylome as
 described in reference (1-2). In addition, Stein's formula for adjusted R
 squared (rho) is used as an estimator of the average cross-validation
 predictive power (2).</p>
-<p>If "GGamma3P" is selected the call to function 'fitGGammaDist' permits the
-fitting to the three-parameter GGamma CDF ("GGamma3P"). The fit to the
-four-parameter GGamma ("GGamma4P") is also available. GGamma distribution are
+<p>If 'GGamma3P' is selected the call to function 'fitGGammaDist' permits the
+fitting to the three-parameter GGamma CDF ('GGamma3P'). The fit to the
+four-parameter GGamma ('GGamma4P') is also available. GGamma distribution are
 fitted using a modification of Levenberg-Marquardt algorithm implemented in
 function 'nls.lm' from the 'minpack.lm' R package. Notice that the fit to
 GGamma distribution is computationally time consuming (see ?fitGGammaDist for
@@ -342,45 +346,39 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Load a dataset with Hellinger Divergence of methylation levels on it.</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>HD</span>)
+
 <span class='co'>## The nonlinear fit based on three-parameter GGamma distribution</span>
-<span class='no'>nlms2</span> <span class='kw'>&lt;-</span> <span class='fu'>nonlinearFitDist</span>(<span class='no'>HD</span>, <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>dist.name</span> <span class='kw'>=</span> <span class='st'>"GGamma3P"</span>,
-                          <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>nlms2</span> <span class='kw'>&lt;-</span> <span class='fu'>nonlinearFitDist</span>(<span class='no'>HD</span>, <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>dist.name</span> <span class='kw'>=</span> <span class='st'>'GGamma3P'</span>,
+                            <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
 <span class='co'>## Weilbull distribution is a particular case of GGamma.</span>
 <span class='no'>nlms</span> <span class='kw'>&lt;-</span> <span class='fu'>nonlinearFitDist</span>(<span class='no'>HD</span>, <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='co'>## The goodness-of-fit indicators AIC suggests that the best fitted model is</span>
-<span class='co'>## obtained with GGamma distribution (in this example).</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mapply.html'>mapply</a></span>(<span class='kw'>function</span>(<span class='no'>m1</span>,<span class='no'>m2</span>) {
-  <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Weibull</span> <span class='kw'>=</span> <span class='no'>m1</span>$<span class='no'>AIC</span>[<span class='fl'>1</span>], <span class='kw'>GGamma</span> <span class='kw'>=</span> <span class='no'>m2</span>$<span class='no'>AIC</span>[<span class='fl'>1</span>]))
-}, <span class='no'>nlms</span>, <span class='no'>nlms2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>res</span>) <span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Weibull"</span>, <span class='st'>"GGamma"</span>)
+<span class='co'>## The goodness-of-fit indicators AIC suggests that the best fitted model</span>
+<span class='co'>## is obtained with GGamma distribution (in this example).</span>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mapply.html'>mapply</a></span>(<span class='kw'>function</span>(<span class='no'>m1</span>,<span class='no'>m2</span>) <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Weibull</span> <span class='kw'>=</span> <span class='no'>m1</span>$<span class='no'>AIC</span>[<span class='fl'>1</span>],
+                                        <span class='kw'>GGamma</span> <span class='kw'>=</span> <span class='no'>m2</span>$<span class='no'>AIC</span>[<span class='fl'>1</span>])),
+                <span class='no'>nlms</span>, <span class='no'>nlms2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>res</span>) <span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'Weibull'</span>, <span class='st'>'GGamma'</span>)
 <span class='no'>res</span></div><div class='output co'>#&gt;                 C1          C2         C3         T1          T2         T3
 #&gt; Weibull  -1082.832   -532.6643  -1039.062  -1039.603   -759.6107  -1305.161
 #&gt; GGamma  -47803.765 -39650.7859 -49316.039 -60767.627 -61903.8278 -62901.111</div><div class='input'>
 <span class='co'>## However, the Cross-validations correlation coefficient is saying that</span>
-<span class='co'>## the Weibull distribution would be a little better probability predictor.</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mapply.html'>mapply</a></span>(<span class='kw'>function</span>(<span class='no'>m1</span>,<span class='no'>m2</span>) {
-  <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Weibull</span> <span class='kw'>=</span> <span class='no'>m1</span>$<span class='no'>R.Cross.val</span>[<span class='fl'>1</span>], <span class='kw'>GGamma</span> <span class='kw'>=</span> <span class='no'>m2</span>$<span class='no'>R.Cross.val</span>[<span class='fl'>1</span>]))
-}, <span class='no'>nlms</span>, <span class='no'>nlms2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>res</span>) <span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Weibull"</span>, <span class='st'>"GGamma"</span>)
+<span class='co'>## the Weibull distribution would be a little better probability</span>
+<span class='co'>## predictor.</span>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mapply.html'>mapply</a></span>(<span class='kw'>function</span>(<span class='no'>m1</span>,<span class='no'>m2</span>) <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Weibull</span> <span class='kw'>=</span> <span class='no'>m1</span>$<span class='no'>R.Cross.val</span>[<span class='fl'>1</span>],
+                                        <span class='kw'>GGamma</span> <span class='kw'>=</span> <span class='no'>m2</span>$<span class='no'>R.Cross.val</span>[<span class='fl'>1</span>])),
+                <span class='no'>nlms</span>, <span class='no'>nlms2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>res</span>) <span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'Weibull'</span>, <span class='st'>'GGamma'</span>)
 <span class='no'>res</span></div><div class='output co'>#&gt;                C1        C2        C3        T1        T2        T3
 #&gt; Weibull 0.9999157 0.9995783 0.9997575 0.9996635 0.9997079 0.9998412
 #&gt; GGamma  0.9997024 0.9994651 0.9995173 0.9981528 0.9992647 0.9997022</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Robersy Sanchez 01/31/2018 <a href='https://github.com/genomaths'>https://github.com/genomaths</a></p>
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

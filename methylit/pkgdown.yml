@@ -1,11 +1,12 @@
 pandoc: 2.3.1
 pkgdown: 1.4.1.9000
-pkgdown_sha: 134033d9d744c548c6fbe297bc0fbd1a2f498e83
+pkgdown_sha: 4cb1ae85bb7deeb8810153d55e355f872260995c
 articles:
   Cutpoint_estimation_with_Methyl-IT: Cutpoint_estimation_with_Methyl-IT.html
   MethylIT: MethylIT.html
   Methylation_analysis_with_Methyl-IT: Methylation_analysis_with_Methyl-IT.html
   cancer_example: cancer_example.html
+last_built: 2020-03-23T03:17Z
 urls:
   reference: https://genomaths.github.io/methylit//reference
   article: https://genomaths.github.io/methylit//articles

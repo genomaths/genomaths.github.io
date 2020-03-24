@@ -17,12 +17,16 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -50,7 +54,6 @@ carrying the potential methylation signal. The potential signals from
 controls and treatments are used as prior classification in further step
 of signal detection." />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -68,7 +71,7 @@ of signal detection." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -128,7 +131,7 @@ of signal detection." />
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -188,7 +191,7 @@ of signal detection.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>LR</th>
-      <td><p>An object from 'InfDiv' or "testDMP" class. These objects are
+      <td><p>An object from 'InfDiv' or 'testDMP' class. These objects are
 previously obtained with function <code><a href='estimateDivergence.html'>estimateDivergence</a></code> or
 <code><a href='FisherTest.html'>FisherTest</a></code>.</p></td>
     </tr>
@@ -207,14 +210,14 @@ meta-column.</p></td>
       <th>dist.name</th>
       <td><p>Name of the fitted distribution. This could be the name of
 one distribution or a characters vector of length(nlms). Default is two
-parameters Weibull distribution: "Weibull2P". The available options are
-Weibull three- parameters ("Weibull3P"), gamma with three-parameter
-("Gamma3P"), gamma with two-parameter ("Gamma2P"), generalized gamma with
-three-parameter ("GGamma3P") or four-parameter ("GGamma4P"), the
-empirical cumulative distribution function ("ECDF") or "None". If
-<strong>dist.name != "None"</strong>, and <strong>nlms != NULL</strong>, then a column
-named "wprob" with a probability vector derived from the application of
-model "nlms" will be returned.</p></td>
+parameters Weibull distribution: 'Weibull2P'. The available options are
+Weibull three- parameters ('Weibull3P'), gamma with three-parameter
+('Gamma3P'), gamma with two-parameter ('Gamma2P'), generalized gamma with
+three-parameter ('GGamma3P') or four-parameter ('GGamma4P'), the
+empirical cumulative distribution function ('ECDF') or 'None'. If
+<strong>dist.name != 'None'</strong>, and <strong>nlms != NULL</strong>, then a column
+named 'wprob' with a probability vector derived from the application of
+model 'nlms' will be returned.</p></td>
     </tr>
     <tr>
       <th>absolute</th>
@@ -234,9 +237,9 @@ which the the probabilities hold: \(P(DIV_k &gt; DIV(\alpha))\).</p></td>
     <tr>
       <th>pval.col</th>
       <td><p>An integer denoting a column from each GRanges object from
-LR where p-values are provided when <strong>dist.name == "None"</strong> and
+LR where p-values are provided when <strong>dist.name == 'None'</strong> and
 <strong>nlms == NULL</strong>. Default is NULL. If NUll and
-<strong>dist.name == "None"</strong> and <strong>nlms == NULL</strong>, then a column
+<strong>dist.name == 'None'</strong> and <strong>nlms == NULL</strong>, then a column
 named <strong>adj.pval</strong> will used to select the potential DMPs.</p></td>
     </tr>
     <tr>
@@ -296,14 +299,9 @@ distribution model that has been supplied.</p>
                     <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

@@ -17,12 +17,16 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -48,7 +52,6 @@
 <meta property="og:description" content="This function classify each DMP as a control or a treatment
 DMP" />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -66,7 +69,7 @@ DMP" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -126,7 +129,7 @@ DMP" />
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -179,8 +182,8 @@ DMP</p>
       <td><p>A list of GRanges objects obtained through the through MethylIT
 downstream analysis. Basically, this object is a list of GRanges
 containing only differentially methylated position (DMPs). The metacolumn
-of each GRanges must contain the column: Hellinger divergence "hdiv",
-total variation "TV", the probability of potential DMP "wprob", which
+of each GRanges must contain the column: Hellinger divergence 'hdiv',
+total variation 'TV', the probability of potential DMP 'wprob', which
 naturally are added in the downstream analysis of MethylIT.</p></td>
     </tr>
     <tr>
@@ -207,10 +210,10 @@ must be include in the variable LR (default, NULL).</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The same LR object with tow new columns named "class" and "posterior"
+    <p>The same LR object with tow new columns named 'class' and 'posterior'
 added to each GRanges object from LR (default). Based on the model
-prediction each DMP is labeled as control "CT" or as treatment "TT" in
-column "class". Column "posterior" provides, for each DMP, the posterior
+prediction each DMP is labeled as control 'CT' or as treatment 'TT' in
+column 'class'. Column 'posterior' provides, for each DMP, the posterior
 probability that the given DMP can be classified as induced by the
 'treatment' (a treatment DMP).</p><pre>Control DMPs classified as 'treatment' are false positives. However, if
 the same cytosine position is classified as 'treatment DMP' in both
@@ -218,7 +221,7 @@ groups, control and treatment, but with higher posterior probability
 in the treatment group, then this would indicate a reinforcement of the
 methylation status in such a position induced by the treatment.
 
-If "conf.matrix" is TRUE and the arguments control.names and
+If 'conf.matrix' is TRUE and the arguments control.names and
 treatment.names are provided, then the overall confusion matrix is
 returned.
 </pre>
@@ -231,39 +234,28 @@ same condition set for the DMPs used to build the model.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cutpoint</span>, <span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MethylIT"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cutpoint</span>, <span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
 
 <span class='co'>## DMPs are selected using the cupoints</span>
 <span class='no'>DMPs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='selectDIMP.html'>selectDIMP</a></span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>,
-                   <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.92</span>)
+<span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.92</span>)
 
 <span class='co'>## Classification of DMPs into two clases: DMPS from control and DMPs from</span>
 <span class='co'>## treatment samples and evaluation of the classifier performance (for more</span>
 <span class='co'>## details see ?evaluateDIMPclass).</span>
-<span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>,
-                          <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                                     <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-                          <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='st'>"lda"</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4L</span>,
-                          <span class='kw'>control.names</span> <span class='kw'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C1"</span>, <span class='st'>"C2"</span>, <span class='st'>"C3"</span>),
-                          <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"T1"</span>, <span class='st'>"T2"</span>, <span class='st'>"T3"</span>),
-                          <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                          <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)
+<span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='st'>'lda'</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4L</span>,
+<span class='kw'>control.names</span> <span class='kw'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>), <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>),
+<span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)
 
-<span class='co'>#' Now predictions of DMP for control and treament can be obtained</span>
-<span class='no'>pred</span> <span class='kw'>=</span> <span class='fu'>predictDIMPclass</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='no'>perf</span>$<span class='no'>model</span>,
-                        <span class='kw'>conf.matrix</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                        <span class='kw'>control.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C1"</span>, <span class='st'>"C2"</span>, <span class='st'>"C3"</span>),
-                        <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"T1"</span>, <span class='st'>"T2"</span>, <span class='st'>"T3"</span>))</div></pre>
+<span class='co'>## Now predictions of DMP for control and treament can be obtained</span>
+<span class='no'>pred</span> <span class='kw'>=</span> <span class='fu'>predictDIMPclass</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='no'>perf</span>$<span class='no'>model</span>, <span class='kw'>conf.matrix</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='kw'>control.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>), <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

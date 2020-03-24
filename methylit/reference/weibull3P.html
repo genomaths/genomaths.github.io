@@ -17,12 +17,16 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -48,7 +52,6 @@
 <meta property="og:description" content="This function performs the nonlinear fit of Weibull CDF of a
 variable x" />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -66,7 +69,7 @@ variable x" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -126,7 +129,7 @@ variable x" />
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -192,8 +195,8 @@ variable x</p>
     <tr>
       <th>model</th>
       <td><p>Distribution model to fit, two-parameters and three-parameters
-Weibull model ("Weibull2P" or simply "2P" and "Weibull3P" or "3P).
-Default is "all" and the model with the best AIC criterion is reported.</p></td>
+Weibull model ('Weibull2P' or simply '2P' and 'Weibull3P' or '3P). Default
+is 'all' and the model with the best AIC criterion is reported.</p></td>
     </tr>
     <tr>
       <th>npoints</th>
@@ -213,23 +216,23 @@ relative offset convergence criterion. Default value: 1e-12,</p></td>
       <th>ftol</th>
       <td><p>non-negative numeric. Termination occurs when both the actual and
 predicted relative reductions in the sum of squares are at most ftol.
-Therefore, ftol measures the relative error desired in the sum of
-squares. Default value: 1e-12,</p></td>
+Therefore, ftol measures the relative error desired in the sum of squares.
+Default value: 1e-12,</p></td>
     </tr>
     <tr>
       <th>ptol</th>
       <td><p>non-negative numeric. Termination occurs when the relative error
-between two consecutive iterates is at most ptol. Therefore, ptol
-measures the relative error desired in the approximate solution. Default
-value: 1e-12,</p></td>
+between two consecutive iterates is at most ptol. Therefore, ptol measures
+the relative error desired in the approximate solution. Default value:
+1e-12,</p></td>
     </tr>
     <tr>
       <th>minFactor</th>
       <td><p>A positive numeric value specifying the minimum step-size
 factor allowed on any step in the iteration. The increment is calculated
-with a Gauss-Newton algorithm and successively halved until the residual
-sum of squares has been decreased or until the step-size factor has been
-reduced below this limit. Default value: 10^-6</p></td>
+with a Gauss-Newton algorithm and successively halved until the residual sum
+of squares has been decreased or until the step-size factor has been reduced
+below this limit. Default value: 10^-6</p></td>
     </tr>
     <tr>
       <th>nlms</th>
@@ -255,8 +258,8 @@ coefficient covariance matrix.</p>
 
     <p>The script algorithm first try to fit the two-parameter Weibull CDF
 (Weibull2P). If Weibull2P did not fit, then the algorithm will try to fit
-Weibull3P. The Levenberg-Marquardt algorithm implemented in 'minpack.lm'
-R package is used to perform the nonlinear fit. Cross-validations for the
+Weibull3P. The Levenberg-Marquardt algorithm implemented in 'minpack.lm' R
+package is used to perform the nonlinear fit. Cross-validations for the
 nonlinear regressions (R.Cross.val) were performed in each methylome as
 described in reference (1). In addition, Stein's formula for adjusted R
 squared (rho) was used as an estimator of the average cross-validation
@@ -291,17 +294,9 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Robersy Sanchez - 06/03/2016 <a href='https://github.com/genomaths'>https://github.com/genomaths</a></p>
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

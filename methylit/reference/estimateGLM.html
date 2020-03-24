@@ -17,12 +17,16 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -50,10 +54,9 @@ would need to call it directly only in very special cases.
 Perform Poisson and Negative Binomial regression analysis to
 compare the counts from different groups, treatment and control x:
 vector of counts groups: factor labeling the members from each group
-Evaluated models are &quot;Poisson&quot;, &quot;Quasipoisson&quot;, &quot;Neg.Binomial.W&quot;, and
-&quot;Neg.Binomial&quot;" />
+Evaluated models are 'Poisson', 'Quasipoisson', 'Neg.Binomial.W', and
+'Neg.Binomial'" />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -71,7 +74,7 @@ Evaluated models are &quot;Poisson&quot;, &quot;Quasipoisson&quot;, &quot;Neg.Bi
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -131,7 +134,7 @@ Evaluated models are &quot;Poisson&quot;, &quot;Quasipoisson&quot;, &quot;Neg.Bi
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -169,8 +172,8 @@ would need to call it directly only in very special cases.</p>
 <p>Perform Poisson and Negative Binomial regression analysis to
 compare the counts from different groups, treatment and control x:
 vector of counts groups: factor labeling the members from each group
-Evaluated models are "Poisson", "Quasipoisson", "Neg.Binomial.W", and
-"Neg.Binomial"</p>
+Evaluated models are 'Poisson', 'Quasipoisson', 'Neg.Binomial.W', and
+'Neg.Binomial'</p>
     </div>
 
     <pre class="usage"><span class='fu'>.estimateGLM</span>(<span class='no'>x</span>, <span class='no'>groups</span>, <span class='no'>baseMV</span>, <span class='no'>w</span>, <span class='no'>MVrate</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Wald"</span>, <span class='st'>"LRT"</span>))</pre>
@@ -190,9 +193,9 @@ Evaluated models are "Poisson", "Quasipoisson", "Neg.Binomial.W", and
     <tr>
       <th>baseMV</th>
       <td><p>Mean and variance of group counts. If
-baseMean &gt;= baseVar*MVrate, then the nonlinear fit to "Poisson" and
-"QuasiPoisson" models are performed, otherwise only the nonlinear fit to
-"Neg.Binomial" and "Neg.Binomial with weights" models are performed</p></td>
+baseMean &gt;= baseVar*MVrate, then the nonlinear fit to 'Poisson' and
+'QuasiPoisson' models are performed, otherwise only the nonlinear fit to
+'Neg.Binomial' and 'Neg.Binomial with weights' models are performed</p></td>
     </tr>
     <tr>
       <th>w</th>
@@ -204,16 +207,16 @@ baseMean &gt;= baseVar*MVrate, then the nonlinear fit to "Poisson" and
     </tr>
     <tr>
       <th>test</th>
-      <td><p>A character string matching one of "Wald" or "LRT". If test =
-"Wald", then the p-value of the Wald test for the coefficient of the
+      <td><p>A character string matching one of 'Wald' or 'LRT'. If test =
+'Wald', then the p-value of the Wald test for the coefficient of the
 independent variable (<em>treatment group</em>) will be reported.
-If test = "LRT", then the p-value from a likelihood ratio test given by
+If test = 'LRT', then the p-value from a likelihood ratio test given by
 <code><a href='https://rdrr.io/r/stats/anova.html'>anova</a></code> function from <em>stats</em> packages will be
 the reported p-value for the group comparison when the best fitted model
 is the negative binomial. As suggested for <code><a href='https://rdrr.io/r/stats/glm.html'>glm</a></code>, if
 best fitted model is Poisson or quasi-Poisson, then the best test is
 'Chi-squared' or 'F-test', respectively. So, for the sake of simplicity,
-the corresponding suitable test will be applied when test = "LRT".</p></td>
+the corresponding suitable test will be applied when test = 'LRT'.</p></td>
     </tr>
     </table>
 
@@ -223,12 +226,9 @@ the corresponding suitable test will be applied when test = "LRT".</p></td>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

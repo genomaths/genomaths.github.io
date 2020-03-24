@@ -18,12 +18,16 @@ Analysis (PCA) — pcaLogisticR • MethylIT</title>
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -48,12 +52,11 @@ Analysis (PCA) — pcaLogisticR • MethylIT</title>
 <meta property="og:title" content="Logistic Classification Model using Principal Component
 Analysis (PCA) — pcaLogisticR" />
 <meta property="og:description" content="Principal components (PCs) are estimated from the predictor
-variables provided as input data. Next, the individual coordinates in the
-selected PCs are used as predictors in the logistic regression.
+variables provided as input data. Next, the individual coordinates in
+the selected PCs are used as predictors in the logistic regression.
 Logistic regression using Principal Components from PCA as
 predictor variables" />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -71,7 +74,7 @@ predictor variables" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -131,7 +134,7 @@ predictor variables" />
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -166,8 +169,8 @@ Analysis (PCA)</h1>
 
     <div class="ref-description">
     <p>Principal components (PCs) are estimated from the predictor
-variables provided as input data. Next, the individual coordinates in the
-selected PCs are used as predictors in the logistic regression.</p>
+variables provided as input data. Next, the individual coordinates in
+the selected PCs are used as predictors in the logistic regression.</p>
 <p>Logistic regression using Principal Components from PCA as
 predictor variables</p>
     </div>
@@ -225,7 +228,7 @@ predictor variables</p>
       <th>object</th>
       <td><p>To use with function 'predict'. A 'pcaLogisticR' object
 containing a list of two objects: 1) an object of class inheriting from
-"glm" and 2) an object of class inheriting from "prcomp".</p></td>
+'glm' and 2) an object of class inheriting from 'prcomp'.</p></td>
     </tr>
     <tr>
       <th>newdata</th>
@@ -235,7 +238,7 @@ prediction</p></td>
     <tr>
       <th>type</th>
       <td><p>To use with function 'predict'. The type of prediction required:
-"class", "posterior", "pca.ind.coord", or "all". If type = 'all', function
+'class', 'posterior', 'pca.ind.coord', or 'all'. If type = 'all', function
 'predict.pcaLogisticR' ('predict') returns a list with:
 1) 'class': individual classification.
 2) 'posterior': probabilities for the positive class.
@@ -258,8 +261,8 @@ containing a list of two objects:
     \item 'logistic': an object of class 'glm' from package 'stats'.
     \item 'pca': an object of class 'prcomp' from package 'stats'.
     \item reference.level: response level used as reference.
-    \item positive.level: response level that corresponds to a "positive"
-        result. When type = "response", the probability vector returned
+    \item positive.level: response level that corresponds to a 'positive'
+        result. When type = 'response', the probability vector returned
         correspond to the probabilities of each individual to be a
         result, i.e., the probability to belong to the class of positive
         level.
@@ -273,12 +276,12 @@ For information on how to use these objects see ?glm and ?prcomp.
 <code><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></code>, while the logistic regression is performed
 using function <code><a href='https://rdrr.io/r/stats/glm.html'>glm</a></code>, both functions from R package
 'stats'. The current application only use basic functionalities from the
-mentioned functions. As shown in the example, 'pcaLogisticR' function can
-be used in general classification problems.</p>
+mentioned functions. As shown in the example, 'pcaLogisticR' function
+can be used in general classification problems.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>[ <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>!=</span> <span class='st'>"virginica"</span>, ]
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>[ <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>!=</span> <span class='st'>'virginica'</span>, ]
 <span class='no'>data</span>$<span class='no'>Species</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/droplevels.html'>droplevels</a></span>(<span class='no'>data</span>$<span class='no'>Species</span>)
 <span class='no'>formula</span> <span class='kw'>&lt;-</span> <span class='no'>Species</span> ~ <span class='no'>Petal.Length</span> + <span class='no'>Sepal.Length</span> + <span class='no'>Petal.Width</span>
 <span class='no'>pca.logistic</span> <span class='kw'>&lt;-</span> <span class='fu'>pcaLogisticR</span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>formula</span>,
@@ -286,17 +289,12 @@ be used in general classification problems.</p>
                             <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max.pc</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
 <span class='no'>newdata</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>150</span>, <span class='fl'>40</span>), <span class='fl'>1</span>:<span class='fl'>4</span>]
-<span class='no'>newdata.prediction</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>pca.logistic</span>, <span class='no'>newdata</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"all"</span>)</div></pre>
+<span class='no'>newdata.prediction</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>pca.logistic</span>, <span class='no'>newdata</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'all'</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

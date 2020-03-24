@@ -37,6 +37,9 @@
     <loc>https://genomaths.github.io/methylit//reference/cutpoint.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit//reference/dmpClusters.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit//reference/estimateBayesianDivergence.html</loc>
   </url>
   <url>
@@ -115,6 +118,9 @@
     <loc>https://genomaths.github.io/methylit//reference/lapply.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit//reference/mlCutpoint.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit//reference/nonlinearFitDist.html</loc>
   </url>
   <url>
@@ -142,12 +148,6 @@
     <loc>https://genomaths.github.io/methylit//reference/predictDIMPclass.html</loc>
   </url>
   <url>
-    <loc>https://genomaths.github.io/methylit//reference/print.CutPoint.html</loc>
-  </url>
-  <url>
-    <loc>https://genomaths.github.io/methylit//reference/print.glmDataSet.html</loc>
-  </url>
-  <url>
     <loc>https://genomaths.github.io/methylit//reference/print.ldaDMP.html</loc>
   </url>
   <url>
@@ -161,6 +161,9 @@
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/selectDIMP.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/simpleCutPoint.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/sortBySeqnameAndStart.html</loc>

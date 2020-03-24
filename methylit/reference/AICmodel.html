@@ -17,12 +17,16 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -48,7 +52,6 @@
 <meta property="og:description" content="this function permits the estimation of the AIC for models for
 which the function 'AIC' from the 'stats' package does not work." />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -66,7 +69,7 @@ which the function 'AIC' from the 'stats' package does not work." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -126,7 +129,7 @@ which the function 'AIC' from the 'stats' package does not work." />
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -196,15 +199,19 @@ provided, then 'np' and 'residuals' must be provided.</p></td>
     <p>if for a given model 'm' AIC(m) works, then AICmodel(m) = AIC(m).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>77</span>)
+    <pre class="examples"><div class='input'><span class='co'>## Build a set of point holding an exponential decay</span>
+<span class='co'>## and adding random noise.</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>77</span>)
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>100</span>, <span class='fl'>1</span>, <span class='fl'>5</span>)
 <span class='no'>y</span> <span class='kw'>=</span> <span class='fl'>2</span> * <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>(-<span class='fl'>0.5</span> * <span class='no'>x</span>) + <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>100</span>, <span class='fl'>0</span>, <span class='fl'>0.1</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='img'><img src='AICmodel-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'>## Non-linear regression</span>
 <span class='no'>nlm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/nls.html'>nls</a></span>(<span class='no'>Y</span> ~ <span class='no'>a</span> * <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>( <span class='no'>b</span> * <span class='no'>X</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>X</span><span class='kw'>=</span><span class='no'>x</span>, <span class='kw'>Y</span><span class='kw'>=</span><span class='no'>y</span>),
             <span class='kw'>start</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1.5</span>, <span class='kw'>b</span><span class='kw'>=</span>-<span class='fl'>0.7</span>),
             <span class='kw'>control</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/nls.control.html'>nls.control</a></span>(<span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>10</span>^<span class='fl'>4</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-05</span>),
-            <span class='kw'>algorithm</span><span class='kw'>=</span><span class='st'>"port"</span>)
-<span class='co'>## The estimations of Akaike information criteria given by 'AIC' function</span>
+            <span class='kw'>algorithm</span><span class='kw'>=</span><span class='st'>'port'</span>)
+
+<span class='co'>## Estimations of Akaike information criteria given by 'AIC' function</span>
 <span class='co'>## from stats' R package and from 'AICmodel' function are equal.</span>
 <span class='fu'>AICmodel</span>(<span class='no'>nlm</span>) <span class='kw'>==</span> <span class='fu'><a href='https://rdrr.io/r/stats/AIC.html'>AIC</a></span>(<span class='no'>nlm</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'>## Now, using residuals from the fitted model:</span>
@@ -214,14 +221,9 @@ provided, then 'np' and 'residuals' must be provided.</p></td>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

@@ -17,12 +17,16 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -50,7 +54,6 @@ estimateCutPoint), 'evaluateDIMPclass' will return the evaluation of the
 classification of DMPs into two clases: DMPS from control and DMPs
 from treatment samples." />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -68,7 +71,7 @@ from treatment samples." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -128,7 +131,7 @@ from treatment samples." />
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -211,31 +214,31 @@ included in the variable LR.</p></td>
     <tr>
       <th>column</th>
       <td><p>a logical vector for column names for the predictor variables
-to be used: Hellinger divergence "hdiv", total variation "TV", TV
-estimated with Bayesian correction of methylation levels "bay.TV",
-probability of potential DMP "wprob", and the relative cytosine site
-position "pos" in respect to the chromosome where it is located. The
+to be used: Hellinger divergence 'hdiv', total variation 'TV', TV
+estimated with Bayesian correction of methylation levels 'bay.TV',
+probability of potential DMP 'wprob', and the relative cytosine site
+position 'pos' in respect to the chromosome where it is located. The
 relative position is estimated as (x - x.min)/(x.max - x), where x.min
 and x.max are the maximum and minimum for the corresponding chromosome,
-respectively. If "wprob = TRUE", then Logarithm base-10 of "wprob" will
-be used as predictor in place of "wprob".</p></td>
+respectively. If 'wprob = TRUE', then Logarithm base-10 of 'wprob' will
+be used as predictor in place of 'wprob'.</p></td>
     </tr>
     <tr>
       <th>classifier</th>
-      <td><p>Classification model to use. Option "logistic" applies a
-logistic regression model; option "lda" applies a Linear Discriminant
-Analysis (LDA); "qda" applies a Quadratic Discriminant Analysis (QDA),
-"pca.logistic" applies logistic regression model using the Principal
+      <td><p>Classification model to use. Option 'logistic' applies a
+logistic regression model; option 'lda' applies a Linear Discriminant
+Analysis (LDA); 'qda' applies a Quadratic Discriminant Analysis (QDA),
+'pca.logistic' applies logistic regression model using the Principal
 Component (PCs) estimated with Principal Component Analysis (PCA) as
-predictor variables. pca.lda" applies LDA using PCs as predictor
-variables, and the option "pca.qda" applies a Quadratic Discriminant
+predictor variables. pca.lda' applies LDA using PCs as predictor
+variables, and the option 'pca.qda' applies a Quadratic Discriminant
 Analysis (QDA) using PCs as predictor variables.</p></td>
     </tr>
     <tr>
       <th>pval.col</th>
       <td><p>Column number for p-value used in the performance
 analysis and estimation of the cutpoints. Default: NULL. If NULL it is
-assumed that the column is named "wprob".</p></td>
+assumed that the column is named 'wprob'.</p></td>
     </tr>
     <tr>
       <th>n.pc</th>
@@ -246,25 +249,25 @@ not 'logistic'. In the current case, the maximun number of PCs is 4.</p></td>
       <th>center</th>
       <td><p>A logical value indicating whether the variables should be
 shifted to be zero centered (same as in 'prcomp' prcomp). Only used if
-classifier = "pcaLDA".</p></td>
+classifier = 'pcaLDA'.</p></td>
     </tr>
     <tr>
       <th>scale</th>
       <td><p>A logical value indicating whether the variables should be
 scaled to have unit variance before the analysis takes place (same as in
-'prcomp' prcomp). Only used if classifier = "pcaLDA".</p></td>
+'prcomp' prcomp). Only used if classifier = 'pcaLDA'.</p></td>
     </tr>
     <tr>
       <th>interaction</th>
       <td><p>Variable interactions to consider in a logistic
-regression model. Any pairwise combination of the variable "hdiv", "TV",
-"wprob", and "pos" can be provided. For example: "hdiv:TV", "wprob:pos",
-"wprob:TV", etc.</p></td>
+regression model. Any pairwise combination of the variable 'hdiv', 'TV',
+'wprob', and 'pos' can be provided. For example: 'hdiv:TV', 'wprob:pos',
+'wprob:TV', etc.</p></td>
     </tr>
     <tr>
       <th>output</th>
-      <td><p>Type of output to request: output = c("conf.mat", "mc.val",
-"boot.all", "all"). See below.</p></td>
+      <td><p>Type of output to request: output = c('conf.mat', 'mc.val',
+'boot.all', 'all'). See below.</p></td>
     </tr>
     <tr>
       <th>prop</th>
@@ -297,18 +300,18 @@ use, i.e. at most how many child processes will be run simultaneously
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Setting output = "conf.mat" will perform a logistic regression group
+    <p>Setting output = 'conf.mat' will perform a logistic regression group
 versus divergence (at DMPs) to evaluate the discrimination between
 control-DMPs and treatment-DMPs. The evaluation of this classification is
 provided through the function 'confusionMatrix' from R package 'caret'.
-"mc.val" will perform a 'num.boot'-times Monte Carlo (bootstrap) validation
+'mc.val' will perform a 'num.boot'-times Monte Carlo (bootstrap) validation
 and return a summary. By default function 'confusionMatrix' from R package
 caret' randomly splits the sample into two subsets, training and testing,
 according to the supplied proportion 'prop' (i.e., prop = 0.6). After
-selecting output = "mc.val", the function 'confusionMatrix' will be executed
+selecting output = 'mc.val', the function 'confusionMatrix' will be executed
 'num.boot'-times, each time performing a different random split of the
-sample. "boot.all" same as "mc.val" plus a matrix with statistcs reported by
-'confusionMatrix'. "all" return a list with all the mentioned outputs.</p>
+sample. 'boot.all' same as 'mc.val' plus a matrix with statistcs reported by
+'confusionMatrix'. 'all' return a list with all the mentioned outputs.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The regulatory methylation signal is also an output from a natural
@@ -318,8 +321,8 @@ conditions. Here, to distinguish a control methylation signal from a
 treatment, three classification models are provided: 1) logistic, 2) Linear
 Discriminant Analysis (LDA) and 3) Quadratic Discriminant Analysis (QDA). In
 particular, four predictor variables can be used: Hellinger divergence
-"hdiv", total variation "TV", probability of potential DMP "wprob" and DMP
-genomic coordinated "pos". Principal component analysis (PCA) is used to
+'hdiv', total variation 'TV', probability of potential DMP 'wprob' and DMP
+genomic coordinated 'pos'. Principal component analysis (PCA) is used to
 convert a set of observations of possibly correlated predictor variables into
 a set of values of linearly uncorrelated variables (principal components,
 PCs). The PCs are used as new, uncorrelated predictor variables for LDA, QDA,
@@ -329,23 +332,22 @@ classification performance indicators (see below) suggest that the treatment
 does not induce a significant regulatory signal different from control.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cutpoint</span>, <span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MethylIT"</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cutpoint</span>, <span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
 
 <span class='co'>## DMPs are selected using the cupoints</span>
 <span class='no'>DMPs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='selectDIMP.html'>selectDIMP</a></span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>,
-                   <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.68</span>)
+<span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.68</span>)
 
-<span class='co'>## Classification of DMPs into two clases: DMPS from control and DMPs from</span>
-<span class='co'>## treatment samples and evaluation of the classifier performance (for more</span>
-<span class='co'>## details see ?evaluateDIMPclass).</span>
+<span class='co'>## Classification of DMPs into two clases: DMPS from control and DMPs</span>
+<span class='co'>## from treatment samples and evaluation of the classifier performance</span>
+<span class='co'>## (for more details see ?evaluateDIMPclass).</span>
 <span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'>evaluateDIMPclass</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>,
-                          <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                                     <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-                          <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='st'>"lda"</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4L</span>,
-                          <span class='kw'>control.names</span> <span class='kw'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C1"</span>, <span class='st'>"C2"</span>, <span class='st'>"C3"</span>),
-                          <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"T1"</span>, <span class='st'>"T2"</span>, <span class='st'>"T3"</span>),
-                          <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                          <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)
+                        <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                                    <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
+                        <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='st'>'lda'</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4L</span>,
+                        <span class='kw'>control.names</span> <span class='kw'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>),
+                        <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>),
+                        <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)
 
 <span class='co'>## Model classification performance</span>
 <span class='no'>perf</span>$<span class='no'>Performance</span></div><div class='output co'>#&gt; Confusion Matrix and Statistics
@@ -377,14 +379,9 @@ does not induce a significant regulatory signal different from control.</p>
 #&gt;                                      </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

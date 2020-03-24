@@ -18,12 +18,16 @@ Analysis (PCA) — pcaQDA • MethylIT</title>
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -52,7 +56,6 @@ as input data are estimated and then the individual coordinates in the
 selected PCs are used as predictors in the qda
 Predict using a PCA-LDA model built with function 'pcaLDA'" />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -70,7 +73,7 @@ Predict using a PCA-LDA model built with function 'pcaLDA'" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -130,7 +133,7 @@ Predict using a PCA-LDA model built with function 'pcaLDA'" />
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/genomaths/MethylIT">
+  <a href="https://github.com/genomaths/MethylIT/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -233,8 +236,8 @@ selected PCs are used as predictors in the qda</p>
     <tr>
       <th>object</th>
       <td><p>To use with function 'predict'. A 'pcaQDA' object containing a
-list of two objects: 1) an object of class inheriting from "qda" and 2)
-an object of class inheriting from "prcomp".</p></td>
+list of two objects: 1) an object of class inheriting from 'qda' and 2)
+an object of class inheriting from 'prcomp'.</p></td>
     </tr>
     <tr>
       <th>newdata</th>
@@ -244,8 +247,8 @@ prediction.</p></td>
     <tr>
       <th>type</th>
       <td><p>To use with function 'predict'. The type of prediction
-required. The default is "all" basic predictions: classes and posterior
-classification probabilities. Option "qda.pred" returns the
+required. The default is 'all' basic predictions: classes and posterior
+classification probabilities. Option 'qda.pred' returns the
 object given by function 'predict.qda' from MASS package: 'class',
 'posterior', 'scores' (cases scores on discriminant variables,
 see <code><a href='https://rdrr.io/pkg/MASS/man/qda.html'>qda</a></code>.</p></td>
@@ -258,7 +261,7 @@ see <code><a href='https://rdrr.io/pkg/MASS/man/qda.html'>qda</a></code>.</p></t
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Function 'pcaQDA' returns an object ("pcaQDA") consisting of a list with
+    <p>Function 'pcaQDA' returns an object ('pcaQDA') consisting of a list with
 two objects:</p><ol>
 <li><p>'qda': an object of class <code><a href='https://rdrr.io/pkg/MASS/man/qda.html'>qda</a></code> from package
 'MASS'.</p></li>
@@ -280,18 +283,20 @@ basic functionalities of mentioned functions. As shown in the example,
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
 <span class='no'>qd1</span> <span class='kw'>&lt;-</span> <span class='fu'>pcaQDA</span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>Species</span> ~ <span class='no'>Petal.Length</span> + <span class='no'>Sepal.Length</span> + <span class='no'>Sepal.Width</span>,
-            <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>max.pc</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>max.pc</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'>## === Prediction === ##</span>
 <span class='no'>qd2</span> <span class='kw'>&lt;-</span> <span class='fu'>pcaQDA</span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>Species</span> ~<span class='no'>.</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>max.pc</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-             <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'>## Set a random seed to reproduce the sampling</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
 <span class='no'>idx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>150</span>, <span class='fl'>40</span>)
 <span class='no'>newdata</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>[<span class='no'>idx</span>, <span class='fl'>1</span>:<span class='fl'>4</span>]
-<span class='no'>newdata.prediction</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>qd2</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"all"</span>)
+<span class='no'>newdata.prediction</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>qd2</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'all'</span>)
 
 <span class='co'>## The confusion matrix</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>TRUE.class</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>[<span class='no'>idx</span>],
-               <span class='kw'>PRED.class</span> <span class='kw'>=</span> <span class='no'>newdata.prediction</span>$<span class='no'>class</span>)
+<span class='kw'>PRED.class</span> <span class='kw'>=</span> <span class='no'>newdata.prediction</span>$<span class='no'>class</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;             PRED.class
 #&gt; TRUE.class   setosa versicolor virginica
 #&gt;   setosa         12          0         0
@@ -299,15 +304,9 @@ basic functionalities of mentioned functions. As shown in the example,
 #&gt;   virginica       0          1        13</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
