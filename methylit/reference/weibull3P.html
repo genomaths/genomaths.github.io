@@ -29,15 +29,15 @@
 <script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -275,22 +275,15 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>rweibull</a></span>(<span class='fl'>1000</span>, <span class='kw'>shape</span><span class='kw'>=</span><span class='fl'>0.75</span>, <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='fu'>weibull3P</span>(<span class='no'>x</span>, <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; *** Non-linear regression </div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 2P model...</span></div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 3P model ...</span></div><div class='output co'>#&gt; <span class='message'>*** Weibull-3P is the best fitted model</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model crossvalidation...</div><div class='output co'>#&gt;          Estimate   Std. Error   t value   Pr(&gt;|t|))      Adj.R.Square
-#&gt; shape 0.788201747 0.0015002736 525.37202 0.000000000 0.999232922276757
-#&gt; scale 1.059772372 0.0014507358 730.50680 0.000000000                  
-#&gt; mu    0.001530409 0.0005002465   3.05931 0.002277756                  
+<span class='fu'>weibull3P</span>(<span class='no'>x</span>, <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; *** Non-linear regression </div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 2P model...</span></div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 3P model ...</span></div><div class='output co'>#&gt; <span class='message'>*** Weibull-2P is the best fitted model</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model crossvalidation...</div><div class='output co'>#&gt;        Estimate   Std. Error  t value Pr(&gt;|t|))     Adj.R.Square
+#&gt; shape 0.7841369 0.0007681044 1020.873         0 0.99966611488895
+#&gt; scale 0.9975163 0.0008096235 1232.074         0                 
 #&gt;                     rho       R.Cross.val                DEV               AIC
-#&gt; shape 0.999227520330314 0.999620789159373 0.0637951055469124 -6813.95701971261
+#&gt; shape 0.999664438085732 0.999834392576797 0.0277958798474308 -7646.74568876902
 #&gt; scale                                                                         
-#&gt; mu                                                                            
-#&gt;                     BIC     COV.shape     COV.scale        COV.mu    n
-#&gt; shape -6794.32599859668  2.250821e-06  1.454229e-07 -4.663272e-07 1000
-#&gt; scale                    1.454229e-07  2.104634e-06 -3.145357e-07 1000
-#&gt; mu                      -4.663272e-07 -3.145357e-07  2.502466e-07 1000
-#&gt;           model
-#&gt; shape Weibull3P
-#&gt; scale          
-#&gt; mu             </div><div class='input'>
+#&gt;                     BIC     COV.shape     COV.scale COV.mu    n     model
+#&gt; shape -7632.02242293207  5.899844e-07 -1.674450e-07     NA 1000 Weibull2P
+#&gt; scale                   -1.674450e-07  6.554902e-07     NA 1000          </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -307,7 +300,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>

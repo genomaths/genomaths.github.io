@@ -29,15 +29,15 @@
 <script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -219,8 +219,8 @@ the visualization of the graphics for the density distribution, evaluation of
 whether the parameter values can be meaningful or not, etc. Nevertheless, the
 best model will, in general, lead to the identification of the greater amount
 of potential DMPs and DMPs, as well as, the highest classification accuracy
-estimated with functions <code><a href='estimateCutPoint.html'>estimateCutPoint</a></code> and
-<code><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></code>. In the worse scenario, these observations
+estimated with functions <code>estimateCutPoint</code> and
+<code>evaluateDIMPclass</code>. In the worse scenario, these observations
 can ultimately lead to a post-hoc decision on which the best model is.</p>
     </div>
 
@@ -242,20 +242,20 @@ can ultimately lead to a post-hoc decision on which the best model is.</p>
     <tr>
       <th>HD</th>
       <td><p>An 'InfDiv' object returned by function
-<code><a href='estimateDivergence.html'>estimateDivergence</a></code>.</p></td>
+<code>estimateDivergence</code>.</p></td>
     </tr>
     <tr>
       <th>model</th>
       <td><p>A character vector naming the models to fit. Default is
 model = c('Weibull2P', 'Weibull3P', 'Gamma2P', 'Gamma3P'). See
-<code><a href='nonlinearFitDist.html'>nonlinearFitDist</a></code> for more options.</p></td>
+<code>nonlinearFitDist</code> for more options.</p></td>
     </tr>
     <tr>
       <th>column</th>
       <td><p>An integer number denoting the index of the GRanges column where
 the information divergence is given. Default column = 9, which is the
 column where the Hellinger divergence values are reported (by default) by
-function <code><a href='estimateDivergence.html'>estimateDivergence</a></code>.</p></td>
+function <code>estimateDivergence</code>.</p></td>
     </tr>
     <tr>
       <th>absolute</th>
@@ -288,7 +288,7 @@ at most how many child processes will be run simultaneously (see
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Further arguments to pass to <code><a href='nonlinearFitDist.html'>nonlinearFitDist</a></code>.</p></td>
+      <td><p>Further arguments to pass to <code>nonlinearFitDist</code>.</p></td>
     </tr>
     </table>
 
@@ -297,7 +297,7 @@ at most how many child processes will be run simultaneously (see
     <p>If 'output = 'best.model'', a character vector with the name of the
 best fitted model for each sample and model statistics, which can be used the
 next step to get the potential DMPs with function
-<code><a href='getPotentialDIMP.html'>getPotentialDIMP</a></code>. Otherwise, it will return a list with the
+<code>getPotentialDIMP</code>. Otherwise, it will return a list with the
 table carrying the GoF values and the previously mentioned data.</p>
 <p>The best model selection is based on the lowest AIC. However, if 'confl_model
 = TRUE', then the returned list will contain a sublist named 'confl_model'
@@ -330,14 +330,14 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='nonlinearFitDist.html'>nonlinearFitDist</a></code></p></div>
+    <div class='dont-index'><p><code>nonlinearFitDist</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Loading information divergence dataset</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>HD</span>)
 
 <span class='co'>## Subsetting object HD (for the sake of runnig a faster example)</span>
-<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lapply.html'>lapply</a></span>(<span class='no'>HD</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>100</span>)], <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>HD</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>100</span>)], <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## The GoF report</span>
 <span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>gofReport</span>(<span class='no'>hd</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
@@ -359,7 +359,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 #&gt; T3       0.9977381 -526.9134       0.9983114            g3p
 #&gt; </div><div class='input'>
 <span class='co'>## To get the potential DMPs</span>
-<span class='no'>ps_dmp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='getPotentialDIMP.html'>getPotentialDIMP</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>hd</span>, <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>nlms</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>,
+<span class='no'>ps_dmp</span> <span class='kw'>&lt;-</span> <span class='fu'>getPotentialDIMP</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>hd</span>, <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>nlms</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>,
                             <span class='kw'>dist.name</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>bestModel</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -376,7 +376,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>
