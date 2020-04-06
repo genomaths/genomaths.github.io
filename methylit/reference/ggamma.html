@@ -45,8 +45,6 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Generalized Gamma distribution — ggamma" />
 <meta property="og:description" content="Probability density function (PDF), cumulative density function
@@ -54,7 +52,6 @@
 (GG) distribution with 3 or 4 parameters: alpha, scale, mu, and psi. The
 function is reduced to GGamma distribution with 3 parameters by setting
 mu = 0." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -125,6 +122,10 @@ mu = 0." />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -280,12 +281,12 @@ Methylation. PLoS One 11, e0150427 (2016).</p></li>
 <span class='co'>## To fit random generated numbers</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rggamma</span>(<span class='fl'>2000</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1.03</span>, <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>2.1</span>)
-<span class='fu'>fitGGammaDist</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 3P Gamma distribution model  values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
+<span class='fu'><a href='fitGGammaDist.html'>fitGGammaDist</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 3P Gamma distribution model  values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
 #&gt; alpha 0.9673236 0.004522499 213.8914         0 0.999999987853079
 #&gt; scale 1.9144838 0.014958723 127.9844         0                  
 #&gt; psi   0.8336444 0.005740757 145.2151         0                  
 #&gt;                     rho       R.Cross.val                  DEV              AIC
-#&gt; alpha 0.999999987810436 0.999883383772831 2.02246091083126e-06 -16008.797746206
+#&gt; alpha 0.999999987810436 0.999883699261168 2.02246091083126e-06 -16008.797746206
 #&gt; scale                                                                          
 #&gt; psi                                                                            
 #&gt;                     BIC     COV.alpha     COV.scale       COV.psi COV.mu    N

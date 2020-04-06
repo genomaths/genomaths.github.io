@@ -45,14 +45,11 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Count DMPs at gene-body — getDIMPatGene" />
 <meta property="og:description" content="The function counts DMPs overlapping with gene-body. In fact,
 this function also can be used to count DMPs overlapping with any set of
 regions given in a GRanges object." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -123,6 +120,10 @@ regions given in a GRanges object." />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -205,10 +206,6 @@ will be created using the gene (region) coordinates.</p></td>
       <td><p>When set to TRUE, the strand information is ignored in
 the calculations. Default value: TRUE</p></td>
     </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Not in use.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -229,7 +226,7 @@ the calculations. Default value: TRUE</p></td>
 
 <span class='co'>## The estimated cutpoints are used to discriminate signals from the noise.</span>
 <span class='co'>## That is, DMPs are selected using the cupoints</span>
-<span class='no'>DIMPs</span> <span class='kw'>&lt;-</span> <span class='fu'>selectDIMP</span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>)
+<span class='no'>DIMPs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='selectDIMP.html'>selectDIMP</a></span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>)
 
 <span class='co'>## Finally DMPs found on genes</span>
 <span class='no'>DIMR</span> <span class='kw'>&lt;-</span> <span class='fu'>getDIMPatGenes</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='no'>DIMPs</span>$<span class='no'>T1</span>, <span class='kw'>GENES</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div></pre>

@@ -45,13 +45,10 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Weibull distribution with three parameters — pweibull3P" />
 <meta property="og:description" content="Density, distribution function, quantile function and random
 generation for the Weibull distribution with three parameters" />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -122,6 +119,10 @@ generation for the Weibull distribution with three parameters" />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -198,7 +199,7 @@ generation for the Weibull distribution with three parameters</p>
 <span class='no'>shape</span> <span class='kw'>&lt;-</span> <span class='fl'>0.75</span>
 <span class='no'>scale</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>rweibull</a></span>(<span class='no'>num.samples</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>shape</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='no'>scale</span>)
-<span class='no'>wei.model</span> <span class='kw'>&lt;-</span> <span class='fu'>weibull3P</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; *** Non-linear regression </div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 2P model...</span></div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 3P model ...</span></div><div class='output co'>#&gt; <span class='message'>*** Weibull-3P is the best fitted model</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model crossvalidation...</div><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>pweibull3P</span>(<span class='no'>x</span>,
+<span class='no'>wei.model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='weibull3P.html'>weibull3P</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; *** Non-linear regression </div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 2P model...</span></div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 3P model ...</span></div><div class='output co'>#&gt; <span class='message'>*** Weibull-3P is the best fitted model</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model crossvalidation...</div><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>pweibull3P</span>(<span class='no'>x</span>,
                 <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>wei.model</span>$<span class='no'>Estimate</span>[<span class='fl'>1</span>]),
                 <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>wei.model</span>$<span class='no'>Estimate</span>[<span class='fl'>2</span>]),
                 <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>wei.model</span>$<span class='no'>Estimate</span>[<span class='fl'>3</span>]) )</div></pre>

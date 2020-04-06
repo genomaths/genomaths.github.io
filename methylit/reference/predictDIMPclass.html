@@ -45,13 +45,10 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Predict DIMP class — predictDIMPclass" />
 <meta property="og:description" content="This function classify each DMP as a control or a treatment
 DMP" />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -122,6 +119,10 @@ DMP" />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -237,13 +238,13 @@ same condition set for the DMPs used to build the model.</p>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cutpoint</span>, <span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
 
 <span class='co'>## DMPs are selected using the cupoints</span>
-<span class='no'>DMPs</span> <span class='kw'>&lt;-</span> <span class='fu'>selectDIMP</span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>,
+<span class='no'>DMPs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='selectDIMP.html'>selectDIMP</a></span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>,
 <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.92</span>)
 
 <span class='co'>## Classification of DMPs into two clases: DMPS from control and DMPs from</span>
 <span class='co'>## treatment samples and evaluation of the classifier performance (for more</span>
 <span class='co'>## details see ?evaluateDIMPclass).</span>
-<span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'>evaluateDIMPclass</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
 <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='st'>'lda'</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4L</span>,
 <span class='kw'>control.names</span> <span class='kw'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>), <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>),
 <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)

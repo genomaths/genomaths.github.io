@@ -45,13 +45,10 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Data set constructor for class glmDataSet — glmDataSet" />
 <meta property="og:description" content="This function is used to build a object suitable to be used
 with Methyl-IT countTest2 function." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -123,6 +120,10 @@ with Methyl-IT countTest2 function." />
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -163,25 +164,19 @@ with Methyl-IT countTest2 function." />
 
     <div class="ref-description">
     <p>This function is used to build a object suitable to be used
-with Methyl-IT <code>countTest2</code> function.</p>
+with Methyl-IT <code><a href='countTest2.html'>countTest2</a></code> function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>glmDataSet</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>counts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='co'># S3 method for glmDataSet</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"digits"</span>), <span class='no'>...</span>)
-
-<span class='co'># S3 method for RangedGlmDataSet</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"digits"</span>), <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>glmDataSet</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>counts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>GR</th>
-      <td><p>A GRanges object with the count matrix of DMPs in the metacolumns
-(see <em>'counts'</em>). If provided, then leave parameter
-<em>'counts = NULL'</em>.</p></td>
+      <td><p>A <code><a href='https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html'>GRanges-class</a></code> object with the count
+matrix of DMPs in the metacolumns (see <em>'counts'</em>). If provided, then
+leave parameter <em>'counts = NULL'</em>.</p></td>
     </tr>
     <tr>
       <th>counts</th>
@@ -195,15 +190,6 @@ with Methyl-IT <code>countTest2</code> function.</p>
 a factor with exactly two levels. The rownames of <em>colData</em>
 individual samples. The row names of <em>colData</em> must correspond to
 th column names of the count matrix.</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Object from class <em>glmDataSet</em> or from class
-<em>'RangedGlmDataSet'</em>.</p></td>
-    </tr>
-    <tr>
-      <th>digits</th>
-      <td><p>Number of significant digits to be used.</p></td>
     </tr>
     </table>
 
@@ -238,7 +224,17 @@ the 'colData' attribute, optionData: additional metadata or NULL</p>
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'A1'</span>,<span class='st'>'A2'</span>,<span class='st'>'B1'</span>,<span class='st'>'B2'</span>), <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='co'>## A RangedGlmDataSet is created</span>
-<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'>glmDataSet</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='no'>GR</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='no'>colData</span>)</div></pre>
+<span class='fu'>glmDataSet</span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='no'>GR</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='no'>colData</span>)</div><div class='output co'>#&gt; RangedGlmDataSet with 125 regions and 4 columns (individuals) with factor levels 'A' and 'B' 
+#&gt; The accessible objects in the dataset are: 
+#&gt;             Length Class      Mode     
+#&gt; GR          125    GRanges    S4       
+#&gt; counts      500    -none-     numeric  
+#&gt; colData       1    data.frame list     
+#&gt; sampleNames   4    -none-     character
+#&gt; levels        2    -none-     character
+#&gt; optionData    0    -none-     NULL     
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

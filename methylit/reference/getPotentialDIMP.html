@@ -45,15 +45,12 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Potential methylation signal — getPotentialDIMP" />
 <meta property="og:description" content="This function perform a selection of the cytosine sites
 carrying the potential methylation signal. The potential signals from
 controls and treatments are used as prior classification in further step
 of signal detection." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -125,6 +122,10 @@ of signal detection." />
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -192,13 +193,13 @@ of signal detection.</p>
     <tr>
       <th>LR</th>
       <td><p>An object from 'InfDiv' or 'testDMP' class. These objects are
-previously obtained with function <code>estimateDivergence</code> or
-<code>FisherTest</code>.</p></td>
+previously obtained with function <code><a href='estimateDivergence.html'>estimateDivergence</a></code> or
+<code><a href='FisherTest.html'>FisherTest</a></code>.</p></td>
     </tr>
     <tr>
       <th>nlms</th>
       <td><p>A list of distribution fitted models (output of
-<code>gofReport</code> function) or NULL. If NULL, then empirical
+<code><a href='gofReport.html'>gofReport</a></code> function) or NULL. If NULL, then empirical
 cumulative distribution function is used to get the potential DMPs.</p></td>
     </tr>
     <tr>

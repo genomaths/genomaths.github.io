@@ -45,12 +45,9 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Get Supplemental Files from GEO — getGEOSuppFiles" />
 <meta property="og:description" content="Decompress 'gzip' files." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -121,6 +118,10 @@
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -220,9 +221,11 @@ call to the function.</p>
 <span class='co'>## in variable filename. The parameter 'pattern' permits us to download only</span>
 <span class='co'>## the specified filesCG, in this case, CG and CHG methylation contexts.</span>
 
-<span class='no'>filenames</span> <span class='kw'>&lt;-</span> <span class='fu'>getGEOSuppFiles</span>(<span class='kw'>GEO</span> <span class='kw'>=</span> <span class='st'>'GSM881757'</span>,
+<span class='co'># \donttest{</span>
+ <span class='no'>filenames</span> <span class='kw'>&lt;-</span> <span class='fu'>getGEOSuppFiles</span>(<span class='kw'>GEO</span> <span class='kw'>=</span> <span class='st'>'GSM881757'</span>,
                 <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>'G_cytosine.txt.gz'</span>)</div><div class='output co'>#&gt; *** Downloading files ...</div><div class='output co'>#&gt; <span class='message'>https://ftp.ncbi.nlm.nih.gov/geo/samples/GSM881nnn/GSM881757/suppl/</span></div><div class='output co'>#&gt; <span class='message'>OK</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='no'>filenames</span>) <span class='co'>## Remove the downloaded file</span></div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
+ <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='no'>filenames</span>) <span class='co'>## Remove the downloaded file</span></div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'># }
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -45,15 +45,12 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Evaluate DMPs Classification — evaluateDIMPclass" />
 <meta property="og:description" content="For a given cutpoint (previously estimated with the function
 estimateCutPoint), 'evaluateDIMPclass' will return the evaluation of the
 classification of DMPs into two clases: DMPS from control and DMPs
 from treatment samples." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -124,6 +121,10 @@ from treatment samples." />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -332,16 +333,13 @@ classification performance indicators (see below) suggest that the treatment
 does not induce a significant regulatory signal different from control.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cutpoint</span>, <span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
-
-<span class='co'>## DMPs are selected using the cupoints</span>
-<span class='no'>DMPs</span> <span class='kw'>&lt;-</span> <span class='fu'>selectDIMP</span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>,
-<span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.68</span>)
+    <pre class="examples"><div class='input'><span class='co'>## Get a data set of DMPs</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dmps</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
 
 <span class='co'>## Classification of DMPs into two clases: DMPS from control and DMPs</span>
 <span class='co'>## from treatment samples and evaluation of the classifier performance</span>
 <span class='co'>## (for more details see ?evaluateDIMPclass).</span>
-<span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'>evaluateDIMPclass</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>,
+<span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'>evaluateDIMPclass</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>dmps</span>,
                         <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                                     <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
                         <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='st'>'lda'</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4L</span>,
@@ -376,7 +374,8 @@ does not induce a significant regulatory signal different from control.</p>
 #&gt;       Balanced Accuracy : 1.0000     
 #&gt;                                      
 #&gt;        'Positive' Class : TT         
-#&gt;                                      </div></pre>
+#&gt;                                      </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

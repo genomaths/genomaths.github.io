@@ -45,8 +45,6 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Report the Best Fitted Probability Distribution Model — gofReport" />
 <meta property="og:description" content="In Methyl-IT,  the signal detection step requires for the
@@ -80,7 +78,6 @@ of potential DMPs and DMPs, as well as, the highest classification accuracy
 estimated with functions estimateCutPoint and
 evaluateDIMPclass. In the worse scenario, these observations
 can ultimately lead to a post-hoc decision on which the best model is." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -152,6 +149,10 @@ can ultimately lead to a post-hoc decision on which the best model is." />
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -219,8 +220,8 @@ the visualization of the graphics for the density distribution, evaluation of
 whether the parameter values can be meaningful or not, etc. Nevertheless, the
 best model will, in general, lead to the identification of the greater amount
 of potential DMPs and DMPs, as well as, the highest classification accuracy
-estimated with functions <code>estimateCutPoint</code> and
-<code>evaluateDIMPclass</code>. In the worse scenario, these observations
+estimated with functions <code><a href='estimateCutPoint.html'>estimateCutPoint</a></code> and
+<code><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></code>. In the worse scenario, these observations
 can ultimately lead to a post-hoc decision on which the best model is.</p>
     </div>
 
@@ -242,20 +243,20 @@ can ultimately lead to a post-hoc decision on which the best model is.</p>
     <tr>
       <th>HD</th>
       <td><p>An 'InfDiv' object returned by function
-<code>estimateDivergence</code>.</p></td>
+<code><a href='estimateDivergence.html'>estimateDivergence</a></code>.</p></td>
     </tr>
     <tr>
       <th>model</th>
       <td><p>A character vector naming the models to fit. Default is
 model = c('Weibull2P', 'Weibull3P', 'Gamma2P', 'Gamma3P'). See
-<code>nonlinearFitDist</code> for more options.</p></td>
+<code><a href='nonlinearFitDist.html'>nonlinearFitDist</a></code> for more options.</p></td>
     </tr>
     <tr>
       <th>column</th>
       <td><p>An integer number denoting the index of the GRanges column where
 the information divergence is given. Default column = 9, which is the
 column where the Hellinger divergence values are reported (by default) by
-function <code>estimateDivergence</code>.</p></td>
+function <code><a href='estimateDivergence.html'>estimateDivergence</a></code>.</p></td>
     </tr>
     <tr>
       <th>absolute</th>
@@ -288,7 +289,7 @@ at most how many child processes will be run simultaneously (see
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Further arguments to pass to <code>nonlinearFitDist</code>.</p></td>
+      <td><p>Further arguments to pass to <code><a href='nonlinearFitDist.html'>nonlinearFitDist</a></code>.</p></td>
     </tr>
     </table>
 
@@ -297,7 +298,7 @@ at most how many child processes will be run simultaneously (see
     <p>If 'output = 'best.model'', a character vector with the name of the
 best fitted model for each sample and model statistics, which can be used the
 next step to get the potential DMPs with function
-<code>getPotentialDIMP</code>. Otherwise, it will return a list with the
+<code><a href='getPotentialDIMP.html'>getPotentialDIMP</a></code>. Otherwise, it will return a list with the
 table carrying the GoF values and the previously mentioned data.</p>
 <p>The best model selection is based on the lowest AIC. However, if 'confl_model
 = TRUE', then the returned list will contain a sublist named 'confl_model'
@@ -330,36 +331,37 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>nonlinearFitDist</code></p></div>
+    <div class='dont-index'><p><code><a href='nonlinearFitDist.html'>nonlinearFitDist</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Loading information divergence dataset</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>HD</span>)
 
 <span class='co'>## Subsetting object HD (for the sake of runnig a faster example)</span>
-<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>HD</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>100</span>)], <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lapply.html'>lapply</a></span>(<span class='no'>HD</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>100</span>)], <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## The GoF report</span>
 <span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>gofReport</span>(<span class='no'>hd</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
 #&gt; 
-#&gt;  *** Creating report ... </div><div class='output co'>#&gt; <span class='warning'>Warning: The best fitted model for sample(s) T1 require(s) for further analysis. </span>
+#&gt;  *** Creating report ... </div><div class='output co'>#&gt; <span class='warning'>Warning: </span>
+#&gt; <span class='warning'> The best fitted model for sample(s) C2, T1 require(s) for further analysis. </span>
 #&gt; <span class='warning'>The model with the lowest AIC must have the highest R.Cross.val</span></div><div class='output co'>#&gt;      w2p_AIC w2p_R.Cross.val   w3p_AIC w3p_R.Cross.val   g2p_AIC
-#&gt; C1 -455.0259       0.9963849        NA              NA -437.3394
-#&gt; C2 -426.8983       0.9951161 -431.1954       0.9956952 -409.3027
-#&gt; C3 -582.1629       0.9990002        NA              NA -560.5544
-#&gt; T1 -494.5917       0.9975048 -493.8734       0.9975519 -461.7047
-#&gt; T2 -472.0464       0.9971160        NA              NA -477.2328
-#&gt; T3 -517.5384       0.9980853 -515.9888       0.9981240 -493.3195
+#&gt; C1 -455.0259       0.9964832        NA              NA -437.3394
+#&gt; C2 -426.8983       0.9955353 -431.1954       0.9948856 -409.3027
+#&gt; C3 -582.1629       0.9990141        NA              NA -560.5544
+#&gt; T1 -494.5917       0.9976367 -493.8734       0.9977187 -461.7047
+#&gt; T2 -472.0464       0.9970946        NA              NA -477.2328
+#&gt; T3 -517.5384       0.9981496 -515.9888       0.9981238 -493.3195
 #&gt;    g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val      bestModel
-#&gt; C1       0.9958804 -434.8702       0.9958220            w2p
-#&gt; C2       0.9950139 -411.1744       0.9953230            w3p
-#&gt; C3       0.9988600 -559.6221       0.9987277            w2p
-#&gt; T1       0.9970319 -484.9045       0.9974664 Needs revision
-#&gt; T2       0.9974107       Inf       0.0000000            g2p
-#&gt; T3       0.9977381 -526.9134       0.9983114            g3p
+#&gt; C1       0.9959525 -434.8702       0.9959088            w2p
+#&gt; C2       0.9949807 -411.1744       0.9953541 Needs revision
+#&gt; C3       0.9988564 -559.6221       0.9988700            w2p
+#&gt; T1       0.9971169 -484.9045       0.9975571 Needs revision
+#&gt; T2       0.9973566       Inf       0.0000000            g2p
+#&gt; T3       0.9975695 -526.9134       0.9982601            g3p
 #&gt; </div><div class='input'>
 <span class='co'>## To get the potential DMPs</span>
-<span class='no'>ps_dmp</span> <span class='kw'>&lt;-</span> <span class='fu'>getPotentialDIMP</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>hd</span>, <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>nlms</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>,
+<span class='no'>ps_dmp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='getPotentialDIMP.html'>getPotentialDIMP</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>hd</span>, <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>nlms</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>,
                             <span class='kw'>dist.name</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>bestModel</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

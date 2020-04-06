@@ -45,14 +45,11 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Fisher's exact test for read counts on GRanges objects — FisherTest" />
 <meta property="og:description" content="Given a GRanges object with the methylated and unmethylated
 read counts for control and treatment in its metacolumn, Fisher's exact
 test is performed for each cytosine site." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -123,6 +120,10 @@ test is performed for each cytosine site." />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -204,7 +205,7 @@ from the list must coincide with a control or a treatment name.</p></td>
 columns. If not given, then it is assumed that the methylated and
 unmethylated read counts are located in columns 1 and 2 of each GRanges
 metacolumns. If object LR is the output of Methyl-IT function
-<code>estimateDivergence</code>, then columns 1:4 are the read
+<code><a href='estimateDivergence.html'>estimateDivergence</a></code>, then columns 1:4 are the read
 count columns: columns 1 and 2 are methylated and unmethylated read
 counts from the reference group, while columns 3 and 4 are methylated and
 unmethylated read counts from the treatment group, respectively. In this
@@ -245,7 +246,7 @@ number \(0 &lt; tv.cut &lt; 1\).</p></td>
       <th>hdiv.cut</th>
       <td><p>An optional cutoff for the Hellinger divergence (<em>hdiv</em>). If
 the LR object derives from the previous application of function
-<code>estimateDivergence</code>, then a column with the <em>hdiv</em> values is
+<code><a href='estimateDivergence.html'>estimateDivergence</a></code>, then a column with the <em>hdiv</em> values is
 provided. If combined with tv.cut, this permits a more effective
 filtering of the signal from the noise. Default is NULL.</p></td>
     </tr>
@@ -293,7 +294,7 @@ BiocParallel package).</p></td>
     <tr>
       <th>...</th>
       <td><p>Additional parameters for function
-<code>uniqueGRanges</code>.</p></td>
+<code><a href='uniqueGRanges.html'>uniqueGRanges</a></code>.</p></td>
     </tr>
     </table>
 
@@ -319,7 +320,7 @@ built for range from GRanges object.</p>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>HD</span>)
 
 <span class='co'>### --- To get the read counts</span>
-<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>HD</span>, <span class='kw'>function</span>(<span class='no'>hd</span>) {
+<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lapply.html'>lapply</a></span>(<span class='no'>HD</span>, <span class='kw'>function</span>(<span class='no'>hd</span>) {
 <span class='no'>hd</span> <span class='kw'>=</span> <span class='no'>hd</span>[<span class='fl'>1</span>:<span class='fl'>10</span>,<span class='fl'>3</span>:<span class='fl'>4</span>]
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='fu'>mcols</span>(<span class='no'>hd</span>)) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'mC'</span>, <span class='st'>'uC'</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='no'>hd</span>)

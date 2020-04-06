@@ -45,13 +45,10 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Apply a function over a list-like object preserving its attributes — lapply" />
 <meta property="og:description" content="lapply returns a list of the same length as 'x', each element of
 which is the result of applying FUN to the corresponding element of 'x'." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -123,6 +120,10 @@ which is the result of applying FUN to the corresponding element of 'x'." />
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -166,10 +167,10 @@ which is the result of applying FUN to the corresponding element of 'x'." />
 which is the result of applying FUN to the corresponding element of 'x'.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>x</span>, <span class='no'>FUN</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>lapply</span>(<span class='no'>x</span>, <span class='no'>FUN</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>x</span>, <span class='no'>FUN</span>, <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>lapply</span>(<span class='no'>x</span>, <span class='no'>FUN</span>, <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,9 +205,9 @@ Otherwise same values preserving original attributes from 'x'.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>x</span>) <span class='kw'>&lt;-</span> <span class='st'>'nice'</span>
 
 <span class='co'># compute the list mean for each list element using 'base::lapply'</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>x</span>, <span class='no'>mean</span>))</div><div class='output co'>#&gt; [1] "list"</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='fu'>lapply</span>(<span class='no'>x</span>, <span class='no'>mean</span>))</div><div class='output co'>#&gt; [1] "list"</div><div class='input'>
 <span class='co'># To preserve attributes</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>x</span>, <span class='no'>mean</span>, <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; [1] "nice"</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='fu'>lapply</span>(<span class='no'>x</span>, <span class='no'>mean</span>, <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; [1] "nice"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

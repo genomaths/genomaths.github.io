@@ -45,13 +45,10 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Nonlinear fit of Weibull CDF — weibull3P" />
 <meta property="og:description" content="This function performs the nonlinear fit of Weibull CDF of a
 variable x" />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -122,6 +119,10 @@ variable x" />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -275,15 +276,22 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>rweibull</a></span>(<span class='fl'>1000</span>, <span class='kw'>shape</span><span class='kw'>=</span><span class='fl'>0.75</span>, <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='fu'>weibull3P</span>(<span class='no'>x</span>, <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; *** Non-linear regression </div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 2P model...</span></div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 3P model ...</span></div><div class='output co'>#&gt; <span class='message'>*** Weibull-2P is the best fitted model</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model crossvalidation...</div><div class='output co'>#&gt;        Estimate   Std. Error  t value Pr(&gt;|t|))     Adj.R.Square
-#&gt; shape 0.7841369 0.0007681044 1020.873         0 0.99966611488895
-#&gt; scale 0.9975163 0.0008096235 1232.074         0                 
-#&gt;                     rho       R.Cross.val                DEV               AIC
-#&gt; shape 0.999664438085732 0.999834392576797 0.0277958798474308 -7646.74568876902
-#&gt; scale                                                                         
-#&gt;                     BIC     COV.shape     COV.scale COV.mu    n     model
-#&gt; shape -7632.02242293207  5.899844e-07 -1.674450e-07     NA 1000 Weibull2P
-#&gt; scale                   -1.674450e-07  6.554902e-07     NA 1000          </div><div class='input'>
+<span class='fu'>weibull3P</span>(<span class='no'>x</span>, <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; *** Non-linear regression </div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 2P model...</span></div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 3P model ...</span></div><div class='output co'>#&gt; <span class='message'>*** Weibull-3P is the best fitted model</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model crossvalidation...</div><div class='output co'>#&gt;           Estimate   Std. Error    t value  Pr(&gt;|t|))      Adj.R.Square
+#&gt; shape 0.7875709036 0.0008195326  961.00004 0.00000000 0.999756984316194
+#&gt; scale 1.0573752165 0.0008042537 1314.72851 0.00000000                  
+#&gt; mu    0.0006391158 0.0002643323    2.41785 0.01579094                  
+#&gt;                     rho      R.Cross.val                DEV               AIC
+#&gt; shape 0.999755272941102 0.99987861274228 0.0202107436159564 -7963.41916636027
+#&gt; scale                                                                        
+#&gt; mu                                                                           
+#&gt;                     BIC     COV.shape     COV.scale        COV.mu    n
+#&gt; shape -7943.78814524434  6.716337e-07  4.069389e-08 -1.308231e-07 1000
+#&gt; scale                    4.069389e-08  6.468239e-07 -8.982951e-08 1000
+#&gt; mu                      -1.308231e-07 -8.982951e-08  6.987154e-08 1000
+#&gt;           model
+#&gt; shape Weibull3P
+#&gt; scale          
+#&gt; mu             </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

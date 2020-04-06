@@ -46,8 +46,6 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Linear Discriminant Analysis (LDA) using Principal Component Analysis
 (PCA) — pcaLDA" />
@@ -55,7 +53,6 @@
 as input data are estimated and then the individual coordinates in the
 selected PCs are used as predictors in the LDA
 Predict using a PCA-LDA model built with function 'pcaLDA'" />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -126,6 +123,10 @@ Predict using a PCA-LDA model built with function 'pcaLDA'" />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -276,7 +277,7 @@ basic functionalities of mentioned functions. As shown in the example,
 pcaLDA' function can be used in general classification problems.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>pcaQDA</code>, <code><a href='https://rdrr.io/pkg/MASS/man/lda.html'>lda</a></code> and
+    <div class='dont-index'><p><code><a href='pcaQDA.html'>pcaQDA</a></code>, <code><a href='https://rdrr.io/pkg/MASS/man/lda.html'>lda</a></code> and
 <code><a href='https://rdrr.io/pkg/MASS/man/predict.lda.html'>predict.lda</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -298,9 +299,9 @@ pcaLDA' function can be used in general classification problems.</p>
 <span class='kw'>PRED.class</span> <span class='kw'>=</span> <span class='no'>newdata.prediction</span>$<span class='no'>class</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;             PRED.class
 #&gt; TRUE.class   setosa versicolor virginica
-#&gt;   setosa         12          0         0
-#&gt;   versicolor      0         12         2
-#&gt;   virginica       0          1        13</div><div class='input'>
+#&gt;   setosa         10          0         0
+#&gt;   versicolor      0         13         1
+#&gt;   virginica       0          3        13</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

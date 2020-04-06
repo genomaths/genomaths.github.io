@@ -46,8 +46,6 @@ from the control — estimateCutPoint • MethylIT</title>
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Estimate cutpoints to distinguish the treatment methylation signal
 from the control — estimateCutPoint" />
@@ -56,7 +54,6 @@ carrying the potential signals (prior classification) from controls and
 treatments in terms of an information divergence
 (given the metacolumns), the function estimates the cutpoints of the
 control group versus treatment group." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -127,6 +124,10 @@ control group versus treatment group." />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -205,7 +206,7 @@ control group versus treatment group.</p>
     <tr>
       <th>LR</th>
       <td><p>An object from 'pDMP' class. This object is previously obtained
-with function <code>getPotentialDIMP</code>.</p></td>
+with function <code><a href='getPotentialDIMP.html'>getPotentialDIMP</a></code>.</p></td>
     </tr>
     <tr>
       <th>control.names, treatment.names</th>
@@ -393,23 +394,52 @@ approach.</p>
 <p>Nevertheless, when simple = TRUE, still a ML model classifier can be built
 using the optimal cutpoint estimated and setting clas.perf = TRUE. Such a ML
 model can be used for predictions in further analyses with function
-<code>predictDIMPclass</code>.</p>
+<code><a href='predictDIMPclass.html'>predictDIMPclass</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>evaluateDIMPclass</code></p></div>
+    <div class='dont-index'><p><code><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Get a dataset of potential signals and the estimates cutpoint</span>
 <span class='co'>## from the package and performs cutpoint estimation</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PS</span>)
-<span class='no'>cutpoint</span> <span class='kw'>=</span> <span class='fu'>estimateCutPoint</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>PS</span>, <span class='kw'>simple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-                            <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                                        <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-                            <span class='kw'>classifier1</span> <span class='kw'>=</span> <span class='st'>'qda'</span>,
-                            <span class='kw'>control.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>),
-                            <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>),
-                            <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.68</span>, <span class='kw'>clas.perf</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
-                            <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>)</div></pre>
+
+<span class='no'>cutp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mlCutpoint.html'>mlCutpoint</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>PS</span>,
+                   <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                              <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
+                   <span class='kw'>classifier1</span> <span class='kw'>=</span> <span class='st'>'qda'</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+                   <span class='kw'>control.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>),
+                   <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>),
+                   <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.68</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
+                   <span class='kw'>cut.values</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>114</span>, <span class='fl'>118</span>, <span class='fl'>1</span>),
+                   <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>)
+<span class='no'>cutp</span></div><div class='output co'>#&gt; Cutpoint estimation with 'qda' classifier 
+#&gt; Cutpoint search performed using model posterior probabilities 
+#&gt; 
+#&gt; Posterior probability used to get the cutpoint = 0.5 
+#&gt; Cytosine sites with treatment PostProbCut &gt;= 0.5 have a 
+#&gt; divergence value &gt;= 117.9342 
+#&gt; 
+#&gt; Optimized statistic: Accuracy = 1 
+#&gt; Cutpoint = 117.93 
+#&gt; 
+#&gt; Model classifier 'qda' 
+#&gt; 
+#&gt; The accessible objects in the output list are: 
+#&gt;                    Length Class           Mode     
+#&gt; cutpoint            1     -none-          numeric  
+#&gt; testSetPerformance  6     confusionMatrix list     
+#&gt; testSetModel.FDR    1     -none-          numeric  
+#&gt; model              10     qdaDMP          list     
+#&gt; modelConfMatrix     6     confusionMatrix list     
+#&gt; initModel           1     -none-          character
+#&gt; postProbCut         1     -none-          numeric  
+#&gt; postCut             1     -none-          numeric  
+#&gt; classifier          1     -none-          character
+#&gt; statistic           1     -none-          character
+#&gt; optStatVal          1     -none-          numeric  
+#&gt; cutpData            1     -none-          logical  </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

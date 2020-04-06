@@ -45,14 +45,11 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Flatten lists extended to any class — unlist" />
 <meta property="og:description" content="Given a list 'x' of R objects from the same class and same
 format, unlist simplifies it to produce a new R object which contains all
 the initial components which in 'x' object." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -124,6 +121,10 @@ the initial components which in 'x' object." />
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -168,7 +169,7 @@ format, unlist simplifies it to produce a new R object which contains all
 the initial components which in 'x' object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span>(<span class='no'>x</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>use.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>unlist</span>(<span class='no'>x</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>use.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,7 +231,7 @@ any list of objects from the same class.</p>
 #&gt;   [2]     chr2       4-9      - |         2       0.1
 #&gt;   -------
 #&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span>(<span class='no'>grl</span>)</div><div class='output co'>#&gt; GRanges object with 5 ranges and 2 metadata columns:
+#&gt; </div><div class='input'><span class='fu'>unlist</span>(<span class='no'>grl</span>)</div><div class='output co'>#&gt; GRanges object with 5 ranges and 2 metadata columns:
 #&gt;       seqnames    ranges strand |     score        GC
 #&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
 #&gt;   [1]     chr2       3-6      + |         5      0.45

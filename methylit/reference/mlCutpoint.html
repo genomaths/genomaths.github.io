@@ -45,13 +45,10 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Machine-learning Approach for Cutpoint Estimation — mlCutpoint" />
 <meta property="og:description" content="Internal function to estimate cutpoint following a
 machine-learning approach" />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -123,6 +120,10 @@ machine-learning approach" />
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -192,35 +193,37 @@ machine-learning approach</p>
     <tr>
       <th>LR, res, control.names, treatment.names, column, div.col</th>
       <td><p>Same as in
-<code>estimateCutPoint</code></p></td>
+<code><a href='estimateCutPoint.html'>estimateCutPoint</a></code></p></td>
     </tr>
     <tr>
       <th>column, div.col, tv.col, tv.cut, cut.values, stat</th>
       <td><p>Same as in
-<code>estimateCutPoint</code></p></td>
+<code><a href='estimateCutPoint.html'>estimateCutPoint</a></code></p></td>
     </tr>
     <tr>
       <th>classifier1, classifier2, n.pc, prop, post.cut</th>
       <td><p>Same as in
-<code>estimateCutPoint</code></p></td>
+<code><a href='estimateCutPoint.html'>estimateCutPoint</a></code></p></td>
     </tr>
     <tr>
       <th>cutp_data, num.cores, tasks</th>
-      <td><p>Same as in <code>estimateCutPoint</code></p></td>
+      <td><p>Same as in <code><a href='estimateCutPoint.html'>estimateCutPoint</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Specified in function <code>estimateCutPoint</code> for parameter
+    <p>Specified in function <code><a href='estimateCutPoint.html'>estimateCutPoint</a></code> for parameter
 setting <em>simple = FALSE</em></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is called by function <code>estimateCutPoint</code>.</p>
+    <p>This function is called by function <code><a href='estimateCutPoint.html'>estimateCutPoint</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
-<span class='no'>cutp</span> <span class='kw'>=</span> <span class='fu'>mlCutpoint</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>PS</span>,
+    <pre class="examples"><div class='input'><span class='co'>## Get a set of potential DMPS (PS)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
+
+<span class='no'>cutp</span> <span class='kw'>&lt;-</span> <span class='fu'>mlCutpoint</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>PS</span>,
                  <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                             <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
                  <span class='kw'>classifier1</span> <span class='kw'>=</span> <span class='st'>'qda'</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4</span>,
@@ -228,33 +231,32 @@ setting <em>simple = FALSE</em></p>
                  <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>),
                  <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.68</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
                  <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>)
-<span class='no'>cutp</span>$<span class='no'>testSetPerformance</span></div><div class='output co'>#&gt; Confusion Matrix and Statistics
+<span class='no'>cutp</span></div><div class='output co'>#&gt; Cutpoint estimation with 'qda' classifier 
+#&gt; Cutpoint search performed using model posterior probabilities 
 #&gt; 
-#&gt;           Reference
-#&gt; Prediction  CT  TT
-#&gt;         CT  62   0
-#&gt;         TT   0 596
-#&gt;                                      
-#&gt;                Accuracy : 1          
-#&gt;                  95% CI : (0.9944, 1)
-#&gt;     No Information Rate : 0.9058     
-#&gt;     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
-#&gt;                                      
-#&gt;                   Kappa : 1          
-#&gt;                                      
-#&gt;  Mcnemar's Test P-Value : NA         
-#&gt;                                      
-#&gt;             Sensitivity : 1.0000     
-#&gt;             Specificity : 1.0000     
-#&gt;          Pos Pred Value : 1.0000     
-#&gt;          Neg Pred Value : 1.0000     
-#&gt;              Prevalence : 0.9058     
-#&gt;          Detection Rate : 0.9058     
-#&gt;    Detection Prevalence : 0.9058     
-#&gt;       Balanced Accuracy : 1.0000     
-#&gt;                                      
-#&gt;        'Positive' Class : TT         
-#&gt;                                      </div></pre>
+#&gt; Posterior probability used to get the cutpoint = 0.5 
+#&gt; Cytosine sites with treatment PostProbCut &gt;= 0.5 have a 
+#&gt; divergence value &gt;= 117.9342 
+#&gt; 
+#&gt; Optimized statistic: Accuracy = 1 
+#&gt; Cutpoint = 117.93 
+#&gt; 
+#&gt; Model classifier 'qda' 
+#&gt; 
+#&gt; The accessible objects in the output list are: 
+#&gt;                    Length Class           Mode     
+#&gt; cutpoint            1     -none-          numeric  
+#&gt; testSetPerformance  6     confusionMatrix list     
+#&gt; testSetModel.FDR    1     -none-          numeric  
+#&gt; model              10     qdaDMP          list     
+#&gt; modelConfMatrix     6     confusionMatrix list     
+#&gt; initModel           1     -none-          character
+#&gt; postProbCut         1     -none-          numeric  
+#&gt; postCut             1     -none-          numeric  
+#&gt; classifier          1     -none-          character
+#&gt; statistic           1     -none-          character
+#&gt; optStatVal          1     -none-          numeric  
+#&gt; cutpData            1     -none-          logical  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

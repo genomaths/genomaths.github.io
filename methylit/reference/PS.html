@@ -45,12 +45,9 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Simulated dataset of potential DMPs used in examples — PS" />
 <meta property="og:description" content="Each individuals sample includes 10000 cytosine positions" />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -122,6 +119,10 @@
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -171,19 +172,20 @@
 
     <p>PS is an object from class 'pDMP' carrying in the meta-columns the
 following variables:</p><dl'>
-<dt>p1</dt><dd><p>methylation level from the reference sample</p></dd>
-<dt>p2</dt><dd><p>methylation level from the treatment sample</p></dd>
-<dt>TV</dt><dd><p>the total variation distance (difference of
+<dt><strong>p1</strong></dt><dd><p>methylation level from the reference sample</p></dd>
+<dt><strong>p2</strong></dt><dd><p>methylation level from the treatment sample</p></dd>
+<dt><strong>TV</strong></dt><dd><p>the total variation distance (difference of
 methylation levels)</p></dd>
-<dt>hdiv</dt><dd><p>Hellinger divergence</p></dd>
-<dt>wprob</dt><dd><p>the probabilities:
+<dt><strong>hdiv</strong></dt><dd><p>Hellinger divergence</p></dd>
+<dt><strong>wprob</strong></dt><dd><p>the probabilities:
 \(wprob = 1 - CDF probability\)</p></dd>
 
 </dl>
 
-<p>'PS' is an object from class 'pDMP' carrying the same meta-columns as 'HD'
-(dataset) plus the probabilities: \(wprob = 1 - CDF probability\). 'PS'
-was obtained with function <code>getPotentialDIMP</code>.</p>
+<p><strong><em>PS</em></strong> is an object from class <em>'pDMP'</em> carrying the same
+meta-columns as 'HD' (dataset) plus the probabilities: \(wprob = 1 - CDF
+probability\). <strong><em>PS</em></strong> object was obtained with function
+<code><a href='getPotentialDIMP.html'>getPotentialDIMP</a></code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -45,8 +45,6 @@
 
 
 
-  <link href="../extra.css" rel="stylesheet">
-  
 
 <meta property="og:title" content="Information divergence estimator — estimateBayesianDivergence" />
 <meta property="og:description" content="The Information divergence of methylation levels is estimated
@@ -54,7 +52,6 @@ using the direct estimation or a Bayesian approach of the methylation
 levels. if 'meth.level = FALSE', Hellinger divergence is computed as
 given in reference (1). The Bayesian approach followed is described in
 reference (2)." />
-<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -125,6 +122,10 @@ reference (2)." />
     <li class="divider"></li>
     <li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
 </li>
@@ -205,7 +206,7 @@ posterior estimations of methylation levels.</p></td>
     <tr>
       <th>JD</th>
       <td><p>Logic (Default:FALSE). Option on whether to add a column with
-values of J-information divergence (see <code>estimateJDiv</code>).
+values of J-information divergence (see <code><a href='estimateJDiv.html'>estimateJDiv</a></code>).
 It is only compute if JD = TRUE and meth.level = FALSE.</p></td>
     </tr>
     <tr>
@@ -295,7 +296,7 @@ Hellinger divergence is computed as:
 $$H = (sqrt(p_1) - sqrt(p_2))^2 + (sqrt(1 - p_1) - sqrt(1 - p_2))^2$$</p>
 <p>This formula assumes that the probability vectors derived from the
 methylation levels \(p_i = c(p_{i2}, 1 - p_{i2})\) (see function
-<code>estimateHellingerDiv</code>) are an unbiased estimation of the
+<code><a href='estimateHellingerDiv.html'>estimateHellingerDiv</a></code>) are an unbiased estimation of the
 expected one. The Bayesian approach followed here is described in reference
 (2).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -312,7 +313,7 @@ J. Mol Sci, 2019, 20:5343.</p></li>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>estimateDivergence</code></p></div>
+    <div class='dont-index'><p><code><a href='estimateDivergence.html'>estimateDivergence</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## The read count data are created</span>
@@ -334,11 +335,11 @@ J. Mol Sci, 2019, 20:5343.</p></li>
 #&gt; 	Kendall's rank correlation tau
 #&gt; 
 #&gt; data:  as.numeric(hd$hdiv) and as.numeric(hd$jdiv)
-#&gt; z = 26.247, p-value &lt; 2.2e-16
+#&gt; z = 26.473, p-value &lt; 2.2e-16
 #&gt; alternative hypothesis: true tau is not equal to 0
 #&gt; sample estimates:
 #&gt;       tau 
-#&gt; 0.7893012 
+#&gt; 0.7958911 
 #&gt; </div><div class='input'>
 <span class='co'>## An example with methylation levels</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
