@@ -19,6 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Association Between Gene Expression and Cytosine DNA Methylation at gene-body">
 <meta property="og:description" content="MethylIT">
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -79,6 +80,10 @@
     </li>
     <li class="divider">
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider">
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
   </ul>
@@ -114,7 +119,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Association Between Gene Expression and Cytosine DNA Methylation at gene-body</h1>
             
-            <h4 class="date">06 April 2020</h4>
+            <h4 class="date">08 April 2020</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/GenExp_Methylation_association_hyper_down-regulated.Rmd"><code>vignettes/GenExp_Methylation_association_hyper_down-regulated.Rmd</code></a></small>
       <div class="hidden name"><code>GenExp_Methylation_association_hyper_down-regulated.Rmd</code></div>
@@ -194,14 +199,14 @@ pre { /* Code block - determines code spacing between lines */
 <div id="background" class="section level1">
 <h1 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h1>
-<p>The classical statistical approach to analyze the association between two variables is based in correlation tests. However, small or zero correlation coefficient does not necessarily implies independence of the tested variables/processes and, consequently, does not implies the lack of association at all. There various steps involved in investigating the dependence between two random variables. The state of the art include the application of copula distribtuions. Herein, we provide study of the statistical dependence structure betweeen gene expression and methylation in memory line. To uncover the association between gene expression and cytosine DNA methylation, first, the probability distributions of gene expression (in terms of logarithm of fold changes: logFC) and methylation divergences are estimated.</p>
+<p>The classical statistical approach to analyze the association between two variables is based in correlation tests. However, small or zero correlation coefficient does not necessarily implies independence of the tested variables/processes and, consequently, does not implies the lack of association at all. There various steps involved in investigating the dependence between two random variables. The state of the art include the application of copula distributions. Herein, we provide study of the statistical dependence structure between gene expression and methylation in memory line. To uncover the association between gene expression and cytosine DNA methylation, first, the probability distributions of gene expression (in terms of logarithm of fold changes: logFC) and methylation divergences are estimated.</p>
 <p>Next, the joint probability distribution is estimated, expressed in term of copula distribution. All the analyses are performed in R and can be reproduced as presented here. The association is investigated with the application of <a href="https://en.wikipedia.org/wiki/Copula_(probability_theory)">copula distributions</a>.</p>
 </div>
 <div id="required-r-packages" class="section level1">
 <h1 class="hasAnchor">
 <a href="#required-r-packages" class="anchor"></a>Required R packages</h1>
 <p>With the exception of <em>usefr</em> R package, all the packages are available in Bioconductor and in CRAN repository. Package <em>usefr</em> is available in GitHub at <a href="https://github.com/genomaths/usefr" class="uri">https://github.com/genomaths/usefr</a> You can install usefr package from GitHub typing the following command in the R console:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"> <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_git</a></span>(<span class="st">"https://github.com/genomaths/usefr.git"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"> <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_git</a></span>(<span class="st">"https://github.com/genomaths/usefr.git"</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">GenomicRanges</span> )
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">DESeq2</span> )
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">ggplot2</span> )
@@ -217,7 +222,7 @@ pre { /* Code block - determines code spacing between lines */
 <div id="data-sets" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-sets" class="anchor"></a>Data sets</h2>
-<p>Gene expression data sets were derived using the R package edgeR. All the genes with the minimal cuality of gene expression differences are included in the analyses. That is, to evaluate the existence of an association between gene expression and cytosine methylation all the genes with meaningful expression and methylation values must be included, regardeless they would be differentially methylated and/or differentially expressed or not.</p>
+<p>Gene expression data sets were derived using the R package edgeR. All the genes with the minimal quality of gene expression differences are included in the analyses. That is, to evaluate the existence of an association between gene expression and cytosine methylation all the genes with meaningful expression and methylation values must be included, regardless they would be differentially methylated and/or differentially expressed or not.</p>
 <p>Gene expression data for Arabidopsis Memory first generation (G1)</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">## ===== Download methylation data from Github ========</span>
 <span class="no">url</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"github.com/genomaths/genomaths.github.io/raw/master/supp-inf/"</span>,
@@ -309,7 +314,7 @@ pre { /* Code block - determines code spacing between lines */
 ##   AT4G40080        4 18579314-18580717      * | 0.141613257526915
 ##   -------
 ##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</code></pre>
-<p>Final variables: |<em>group means density differences</em>| and <span class="math inline">\(|logFC|\)</span>. For the sake of brevety and clarity, we shall call the first variable: <em>divergence of methylation densities</em> or simply <em>methylation divergence</em> (<span class="math inline">\(MD\)</span>).</p>
+<p>Final variables: |<em>group means density differences</em>| and <span class="math inline">\(|logFC|\)</span>. For the sake of brevity and clarity, we shall call the first variable: <em>divergence of methylation densities</em> or simply <em>methylation divergence</em> (<span class="math inline">\(MD\)</span>).</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">.deg_mm1_wt1</span> <span class="kw">&lt;-</span> <span class="no">deg_mm1_wt1</span>[<span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmp_den_wt1_mm1</span>), <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">deg_mm1_wt1</span>)), ]
 
 <span class="no">MD</span> <span class="kw">&lt;-</span> <span class="no">dmp_den_wt1_mm1</span>$<span class="no">dmp_den</span> <span class="co"># Methylation (|group mean density differences|)</span>
@@ -356,19 +361,19 @@ pre { /* Code block - determines code spacing between lines */
 <pre><code>## 
 ## Parameters:
 ##                Estimate Std. Error t value Pr(&gt;|t|)    
-## lnorm.meanlog -1.090016   0.005903 -184.66   &lt;2e-16 ***
-## lnorm.sdlog    0.654107   0.004619  141.62   &lt;2e-16 ***
-## weibull.shape  1.799071   0.019051   94.43   &lt;2e-16 ***
-## weibull.scale  1.496927   0.009545  156.83   &lt;2e-16 ***
+## lnorm.meanlog -1.089991   0.005903 -184.66   &lt;2e-16 ***
+## lnorm.sdlog    0.654126   0.004619  141.62   &lt;2e-16 ***
+## weibull.shape  1.799164   0.019053   94.43   &lt;2e-16 ***
+## weibull.scale  1.496959   0.009545  156.83   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 0.01926 on 1022 degrees of freedom
-## Number of iterations to termination: 25 
+## Number of iterations to termination: 26 
 ## Reason for termination: Relative error in the sum of squares is at most `ftol'.</code></pre>
 <div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">meth_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
 <pre><code>## 
-##  Mixture proportions (phi): 0.4119809 0.5880191</code></pre>
+##  Mixture proportions (phi): 0.4120106 0.5879894</code></pre>
 <p>The graphic for histogram and density distribution curves:</p>
 <div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span> , <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(<span class="no">x</span>, <span class="fl">240</span>, <span class="kw">freq</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="co">#ylim = c(0, 0.021), cex = 1,</span>
@@ -442,19 +447,19 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#joint-distribution-of-md-and-logfc-expressed-in-terms-of-copula-distribution-" class="anchor"></a>Joint distribution of <span class="math inline">\(MD\)</span> and <span class="math inline">\(|logFC|\)</span> expressed in terms of Copula distribution.</h2>
 <p>There various steps involved in investigating the dependence between two random variables. The state of the art in this subject include the application of copula distribtuions.</p>
-<p>Sklar’s theorem (<span class="citation">(Sklar 1959, 1973)</span>) named after Abe Sklar, provides the theoretical foundation for the application of copulas. Sklar’s theorem states that every multivariate c umulative distribution function (CDF):</p>
+<p>Sklar’s theorem (<span class="citation">(Sklar 1959, 1973)</span>) named after Abe Sklar, provides the theoretical foundation for the application of copulas. Sklar’s theorem states that every multivariate cumulative distribution function (CDF):</p>
 <p><span class="math display">\[H(x_1, ..., x_d)=Pr(X_1 \leq x_1, ..., X_d \leq x_d)\]</span></p>
 <p>of any <span class="math inline">\(d-tuple\)</span> of continuous random variables <span class="math inline">\((X_1, ..., X_d)\)</span> can be expressed in terms of its marginals CDFs: <span class="math inline">\(F_i(x_i)=Pr(X_i \leq x_i)\)</span> a copula <span class="math inline">\(C\)</span>:</p>
 <p><span class="math display">\[H(x_1, ..., x_d)=C(F_1(x_1), ..., F_d(x_d))\]</span> While Sklar showed that <span class="math inline">\(C\)</span> and <span class="math inline">\(F_i\)</span> are uniquely determined when H is known, a valid model for <span class="math inline">\((X_1, ..., X_d)\)</span> arises from the last equation whenever the “ingredients” are chosen from given parametric families of distribtuion (<span class="citation">(<span class="citeproc-not-found" data-reference-id="Christian2007"><strong>???</strong></span>)</span>): <span class="math display">\[F \in (F_\delta), C \in (C_\alpha)\]</span> Current literature on copula theory provides abundant information on models and copula families. Here, for the particular case of bi-dimensional copula defined for <span class="math inline">\(MD\)</span> and <span class="math inline">\(|logFC|\)</span>, we have chosen Farlie–Gumbel–Morgenstern family of copulas, which are defined for, each <span class="math inline">\(\theta \in [-1, 1]\)</span> by: <span class="math display">\[C_\alpha(u, v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</span>. The correlation coefficient <span class="math inline">\(\rho\)</span> is linked to <span class="math inline">\(\alpha\)</span> by the relationship: <span class="math inline">\(\rho=\frac{\alpha}{3}\)</span>, which ranges from <span class="math inline">\(-\frac{1}{3}\)</span> to <span class="math inline">\(\frac{1}{3}\)</span>, where <span class="math inline">\(u=F(x)\)</span>, <span class="math inline">\(v=G(y)\)</span>, with marginal CDFs: <span class="math inline">\(F(x)\)</span> and <span class="math inline">\(G(y)\)</span>.</p>
 <div id="fitting-farliegumbelmorgenstern-copulas-with-md-and-logfc-marginal-cdfs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#fitting-farliegumbelmorgenstern-copulas-with-md-and-logfc-marginal-cdfs" class="anchor"></a>Fitting Farlie–Gumbel–Morgenstern copulas with <span class="math inline">\(MD\)</span> and <span class="math inline">\(|logFC|\)</span> marginal CDFs</h3>
-<p>The first step requires for provide the parameters values, previously estimated, of the marginal distributions, which were given troughout the function <a href="https://genomaths.github.io/usefr_manual/mixtdistr.html">mixtdistr</a>. The the specific parameter values are retrieved from the previous nonlinear fit obtained for the marginal CDFs:</p>
+<p>The first step requires for provide the parameters values, previously estimated, of the marginal distributions, which were given throughout the function <a href="https://genomaths.github.io/usefr_manual/mixtdistr.html">mixtdistr</a>. The the specific parameter values are retrieved from the previous nonlinear fit obtained for the marginal CDFs:</p>
 <div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">margins</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mixtdistr"</span>, <span class="st">"mixtdistr"</span>)
 <span class="no">parMargins</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">phi</span> <span class="kw">=</span> <span class="no">meth_FIT</span>$<span class="no">phi</span>, <span class="kw">arg</span> <span class="kw">=</span> <span class="no">meth_FIT</span>$<span class="no">args</span>),
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">phi</span> <span class="kw">=</span> <span class="no">gexp_FIT</span>$<span class="no">phi</span>, <span class="kw">arg</span> <span class="kw">=</span> <span class="no">gexp_FIT</span>$<span class="no">args</span>))</pre></body></html></div>
-<p>The parameter estimation and goodness-of-fit (GOF) test take adventages of the tools availables in the R package <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1">copula</a>. Both, parameter estimation and GOF, can be accomplished with function <a href="https://genomaths.github.io/usefr_manual/bicopulaGOF.html">bicopulaGOF</a> from the R package <a href="https://github.com/genomaths/usefr">usefr</a>.</p>
+<p>The parameter estimation and goodness-of-fit (GOF) test take advantages of the tools available in the R package <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1">copula</a>. Both, parameter estimation and GOF, can be accomplished with function <a href="https://genomaths.github.io/usefr_manual/bicopulaGOF.html">bicopulaGOF</a> from the R package <a href="https://github.com/genomaths/usefr">usefr</a>.</p>
 <div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="no">fgm_cop</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/bicopulaGOF.html">bicopulaGOF</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="st">"fgmCopula"</span>, <span class="kw">sample.size</span> <span class="kw">=</span> <span class="fl">13000</span>,
                        <span class="kw">margins</span> <span class="kw">=</span> <span class="no">margins</span>, <span class="kw">paramMargins</span> <span class="kw">=</span> <span class="no">parMargins</span>, <span class="kw">nboots</span> <span class="kw">=</span> <span class="fl">10</span>,
                        <span class="kw">approach</span> <span class="kw">=</span> <span class="st">"chisq"</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">30</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">6L</span>, <span class="kw">seed</span> <span class="kw">=</span> <span class="fl">123</span>,
@@ -474,7 +479,7 @@ pre { /* Code block - determines code spacing between lines */
 <div id="p-p-plot--graphical-diagnostics-of-gof" class="section level3">
 <h3 class="hasAnchor">
 <a href="#p-p-plot--graphical-diagnostics-of-gof" class="anchor"></a>P-P plot. Graphical Diagnostics of GOF</h3>
-<p>The P-P plot is build with function <a href="https://genomaths.github.io/usefr_manual/ppCplot.html">ppCplot</a> from the R package <a href="https://github.com/genomaths/usefr">usefr</a>. If the GOF is good enough, then it is expected that points in the graphics are closed to the diagonal (red) straight line. Details on how the computation is performe are provided in the help for function. <a href="https://genomaths.github.io/usefr_manual/ppCplot.html">ppCplot</a>.</p>
+<p>The P-P plot is build with function <a href="https://genomaths.github.io/usefr_manual/ppCplot.html">ppCplot</a> from the R package <a href="https://github.com/genomaths/usefr">usefr</a>. If the GOF is good enough, then it is expected that points in the graphics are closed to the diagonal (red) straight line. Details on how the computation is performed are provided in the help for function. <a href="https://genomaths.github.io/usefr_manual/ppCplot.html">ppCplot</a>.</p>
 <div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">g</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ppCplot.html">ppCplot</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">Y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="no">fgm_cop</span>$<span class="no">copula</span>, <span class="kw">npoints</span> <span class="kw">=</span> <span class="fl">500</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"blue"</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.5</span>)</pre></body></html></div>
 <p><img src="GenExp_Methylation_association_hyper_down-regulated_files/figure-html/ppPlot-1.png" width="700"></p>
 <p>Information on the data and copula used to yield the graphic are stored in the output variable <em>“g”</em>. For example, the empirical and theoretical probabilities used to built the graphic can be retrieved from the data frame: <em>“g$data”</em>:</p>
@@ -494,9 +499,9 @@ pre { /* Code block - determines code spacing between lines */
 ## 499 0.0558659217877095 0.0541012765530105
 ## 500  0.826529150551497  0.826545704369492</code></pre>
 </div>
-<div id="three-dimentional-copula-density-plot" class="section level3">
+<div id="three-dimensional-copula-density-plot" class="section level3">
 <h3 class="hasAnchor">
-<a href="#three-dimentional-copula-density-plot" class="anchor"></a>Three-dimentional copula density plot</h3>
+<a href="#three-dimensional-copula-density-plot" class="anchor"></a>Three-dimensional copula density plot</h3>
 <p>The domain region <span class="math inline">\((X, Y)\)</span> is defined and function <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1/topics/Mvdc">dMvdc</a> is used to compute the density <span class="math inline">\(z\)</span> in the grid <span class="math inline">\([X,Y] \times [X,Y]\)</span> using the previous FMG fitted copula.</p>
 <div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">X</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>)
 <span class="no">Y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>)
@@ -545,15 +550,15 @@ pre { /* Code block - determines code spacing between lines */
 <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span>(-<span class="fl">0.3</span>,-<span class="fl">0.6</span>, <span class="kw">srt</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Spearman' s "</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">italic</a></span>(<span class="no">rho</span>), <span class="st">": "</span>, -<span class="fl">0.17</span>)),
      <span class="kw">xpd</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
 <p><img src="GenExp_Methylation_association_hyper_down-regulated_files/figure-html/3d_cop-1.png" width="700"></p>
-<p>The marginal distribtuions are drawn in the <span class="math inline">\(XZ\)</span> and <span class="math inline">\(YZ\)</span> vertical planes. Consistent with the Spearman’ s <span class="math inline">\(\rho=-0.17\)</span>, for a fixed value of <span class="math inline">\(|log_2FC|\)</span>, (a line parallel to <span class="math inline">\(MD\)</span> axis) the joint probability density distribution function <span class="math inline">\(f(X \leq MD, Y \leq |log_2FC|)\)</span> decreasses with the increment of <span class="math inline">\(MD\)</span>. That is, the probability to observe DEGs with values, say between 0.1 and 0.5,<br><span class="math inline">\(0.1 \leq |log_2FC| \leq 0.5\)</span>, is greater for <span class="math inline">\(0.1 \eq MD \leq 0.5\)</span> than for <span class="math inline">\(0.5 &lt; MD \leq 1\)</span>.</p>
+<p>The marginal distribtuions are drawn in the <span class="math inline">\(XZ\)</span> and <span class="math inline">\(YZ\)</span> vertical planes. Consistent with the Spearman’ s <span class="math inline">\(\rho=-0.17\)</span>, for a fixed value of <span class="math inline">\(|log_2FC|\)</span>, (a line parallel to <span class="math inline">\(MD\)</span> axis) the joint probability density distribution function <span class="math inline">\(f(X \leq MD, Y \leq |log_2FC|)\)</span> decreases with the increment of <span class="math inline">\(MD\)</span>. That is, the probability to observe DEGs with values, say between 0.1 and 0.5,<br><span class="math inline">\(0.1 \leq |log_2FC| \leq 0.5\)</span>, is greater for <span class="math inline">\(0.1 \eq MD \leq 0.5\)</span> than for <span class="math inline">\(0.5 &lt; MD \leq 1\)</span>.</p>
 </div>
 <div id="two-dimentional-copula-density-plot-contour-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#two-dimentional-copula-density-plot-contour-plot" class="anchor"></a>Two-dimentional copula density plot, Contour plot</h3>
 <p>The 2D-dimensional plot permits to see in more detail the projection of the density surface on the <span class="math inline">\(XY\)</span> plane and contour lines.</p>
 <p><img src="GenExp_Methylation_association_hyper_down-regulated_files/figure-html/contour-1.png" width="700"></p>
-<p>It is not dificult to see that for a fixed value of <span class="math inline">\(MD\)</span> (a line parallel to <span class="math inline">\(|log_2FC|\)</span> axis) the joint probability density distribution function <span class="math inline">\(f(X \leq MD, Y \leq |log_2FC|)\)</span> (color gradient from red to blue) decreasses with the increment of <span class="math inline">\(|log_2FC|\)</span>. That is, the probability to observe <span class="math inline">\(MD\)</span> values, say between 0.1 and 0.5 (see the squared region below) <span class="math inline">\(0.1 \leq MD \leq 0.5\)</span>, is greater for <span class="math inline">\(0.1 \leq |log_2FC| \leq 0.5\)</span> than for <span class="math inline">\(0.5 &lt; |log_2FC| \leq 1\)</span>.</p>
-<p>In summary, gene expression and methylation processes (2kb uptream gene TSS regions) are not independent in memory line first generation. There exist an stochastic deterministic dependence between <span class="math inline">\(|log_2FC|\)</span> and <span class="math inline">\(MD\)</span> that can be expressed in terms joint probability distribution, which leads to an inverse relationship between the conditioned expected values <span class="math inline">\(|log_2FC|\)</span> given <span class="math inline">\(MD\)</span>, and vice versa. This association is, however, weaker than the association found for gene expression and methylation at gene body.</p>
+<p>It is not difficult to see that for a fixed value of <span class="math inline">\(MD\)</span> (a line parallel to <span class="math inline">\(|log_2FC|\)</span> axis) the joint probability density distribution function <span class="math inline">\(f(X \leq MD, Y \leq |log_2FC|)\)</span> (color gradient from red to blue) decreasses with the increment of <span class="math inline">\(|log_2FC|\)</span>. That is, the probability to observe <span class="math inline">\(MD\)</span> values, say between 0.1 and 0.5 (see the squared region below) <span class="math inline">\(0.1 \leq MD \leq 0.5\)</span>, is greater for <span class="math inline">\(0.1 \leq |log_2FC| \leq 0.5\)</span> than for <span class="math inline">\(0.5 &lt; |log_2FC| \leq 1\)</span>.</p>
+<p>In summary, gene expression and methylation processes (2kb upstream gene TSS regions) are not independent in memory line first generation. There exist an stochastic deterministic dependence between <span class="math inline">\(|log_2FC|\)</span> and <span class="math inline">\(MD\)</span> that can be expressed in terms joint probability distribution, which leads to an inverse relationship between the conditioned expected values <span class="math inline">\(|log_2FC|\)</span> given <span class="math inline">\(MD\)</span>, and vice versa. This association is, however, weaker than the association found for gene expression and methylation at gene body.</p>
 </div>
 </div>
 <div id="asymptotic-linear-by-linear-association-test" class="section level2">
@@ -561,7 +566,7 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#asymptotic-linear-by-linear-association-test" class="anchor"></a>Asymptotic linear-by-linear association test</h2>
 <p>The above 3D and 2D density plots and results suggest that most of the genes have low <span class="math inline">\(|logFC|\)</span> and low <span class="math inline">\(MD\)</span>, and the number of genes decrease for middle levels of <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>. This observation leads to the application of a linear-by-linear association test.</p>
 <p>The linear-by-linear test (LLT) is used to test a linear association among variables in a contingency table with ordered categories (<span class="citation">Agresti (2007)</span>). The null hypothesis for the linear-by-linear test is that there is no association among the variables in the table.</p>
-<p>It is obvious from the 2D density plots that a relationship for <span class="math inline">\(MD\)</span> &lt; 0.08 is not meaninful. In particular, both variables, <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>, are at the level of technical noise. The percentage of the genes at noise level are:</p>
+<p>It is obvious from the 2D density plots that a relationship for <span class="math inline">\(MD\)</span> &lt; 0.08 is not meaningful. In particular, both variables, <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>, are at the level of technical noise. The percentage of the genes at noise level are:</p>
 <div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fl">100</span> * <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">MD</span> <span class="kw">&lt;</span> <span class="fl">0.08</span>)/<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">MD</span>), <span class="fl">2</span>)</pre></body></html></div>
 <pre><code>## [1] 1.78</code></pre>
 <p>Hence, the genes considered in the downstream analysis are:</p>
@@ -647,7 +652,7 @@ pre { /* Code block - determines code spacing between lines */
 ##   eLow    5807   3894  765
 ##   eMiddle 1995    630  179
 ##   eHigh    354     69   21</code></pre>
-<p>The <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.0/topics/spineplot">spineplot</a> of this contingency table (table(x = logfc_level, y = md_level)) help to visualize the existent relationship bewtween <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>.</p>
+<p>The <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.0/topics/spineplot">spineplot</a> of this contingency table (table(x = logfc_level, y = md_level)) help to visualize the existent relationship between <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>.</p>
 <div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>( <span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">4</span>), <span class="kw">family</span> <span class="kw">=</span> <span class="st">"Serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.8</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.2</span> )
 <span class="no">tb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/spineplot.html">spineplot</a></span>(<span class="no">m</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>( <span class="st">"blue"</span>, <span class="st">"dodgerblue"</span>,<span class="st">"deepskyblue"</span> ),
                 <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">""</span>)
@@ -665,7 +670,7 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#testing-association-between-logfc-and-md" class="anchor"></a>Testing association between <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>
 </h3>
 <p>Here, we use the LLT test implemented in function <a href="https://www.rdocumentation.org/packages/coin/versions/1.3-0/topics/ContingencyTests">lbl_test</a> from the R package <em>coin</em>. Two test variants are available: 1) permutation test and asymptotic test.</p>
-<p>The asimptotic LLT test:</p>
+<p>The asymptotic LLT test:</p>
 <div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span> )</pre></body></html></div>
 <pre><code>## 
 ##  Asymptotic Linear-by-Linear Association Test
@@ -695,7 +700,7 @@ pre { /* Code block - determines code spacing between lines */
 <span class="no">xy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">xy</span>[<span class="no">idx</span>, ])
 <span class="no">xy</span>$<span class="no">md</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
 <span class="no">xy</span>$<span class="no">md</span>[<span class="no">xy</span>$<span class="no">MD</span> <span class="kw">&gt;</span> <span class="no">meth_cut</span>] <span class="kw">&lt;-</span> <span class="fl">1</span></pre></body></html></div>
-<p>The glm support the decrease of <span class="math inline">\(-logFC\)</span> with th eincrement of <span class="math inline">\(MD\)</span>. The model coefficients are higly statistically significant.</p>
+<p>The glm support the decrease of <span class="math inline">\(-logFC\)</span> with th increment of <span class="math inline">\(MD\)</span>. The model coefficients are higly statistically significant.</p>
 <div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="no">gm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span><span class="kw">=</span><span class="no">xy</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span>(<span class="kw">link</span> <span class="kw">=</span> <span class="st">"identity"</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
 <pre><code>## 
@@ -740,7 +745,7 @@ pre { /* Code block - determines code spacing between lines */
 <div id="boxplot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#boxplot" class="anchor"></a>Boxplot</h3>
-<p>The boxplot suggest a clear trend of <span class="math inline">\(-logFC\)</span> decreassing with increment of MD levels. Notice that the <em>notchs</em> from the boxes do not overlap, which implies that the differences between medians from three groups (“Low”, “Middle”, and “High”) are statistically significant. So, the GLM results can be visualized.</p>
+<p>The boxplot suggest a clear trend of <span class="math inline">\(-logFC\)</span> decreasing with increment of MD levels. Notice that the <em>notchs</em> from the boxes do not overlap, which implies that the differences between medians from three groups (“Low”, “Middle”, and “High”) are statistically significant. So, the GLM results can be visualized.</p>
 <div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1.1</span>))
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">xy</span>, <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.4</span>, <span class="fl">2.5</span>), <span class="kw">xaxt</span> <span class="kw">=</span><span class="st">"n"</span>,  <span class="kw">yaxt</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">ann</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/rect.html">rect</a></span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>, <span class="fl">3.5</span>, <span class="fl">5</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"grey94"</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1</span>)
@@ -907,7 +912,7 @@ pre { /* Code block - determines code spacing between lines */
 <p>The null hypothesis that the data follows FGM copula distribution is not rejected.</p>
 <div class="sourceCode" id="cb83"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">gof</span></pre></body></html></div>
 <pre><code>##   Chisq.stat   mc_p.value  sample.size    num.sampl 
-##  924.4173422    0.2727273 5999.0000000   10.0000000</code></pre>
+##  924.4173422    0.1818182 5999.0000000   10.0000000</code></pre>
 <p>All the information needed about the fitted FGM copula is found in the object <em>fgm_cop$copula</em>, which is a <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1/topics/mvdc-class">mvdc</a> object from <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1">copula</a> package with several slots. In particular, the specific information about FGM copula is found in:</p>
 <div class="sourceCode" id="cb85"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">copula</span>@<span class="kw">copula</span></pre></body></html></div>
 <pre><code>## Farlie-Gumbel-Morgenstern (FGM) copula, dim. d = 2
@@ -1157,7 +1162,7 @@ pre { /* Code block - determines code spacing between lines */
 ## AIC: 2751.1
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<p>The ANOVA test confirm the negative trend given by the coefficient of MD (highly statisticallly significant).</p>
+<p>The ANOVA test confirm the negative trend given by the coefficient of MD (highly statistically significant).</p>
 <div class="sourceCode" id="cb115"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
 <pre><code>## Analysis of Deviance Table
 ## 
@@ -1307,7 +1312,7 @@ pre { /* Code block - determines code spacing between lines */
 <p>Agresti, Alan. 2007. <em>An Introduction to Categorical Data Analysis</em>. John Wiley &amp; Sons, Inc. <a href="https://doi.org/10.1002/9780470114759.ch2">https://doi.org/10.1002/9780470114759.ch2</a>.</p>
 </div>
 <div id="ref-Balakrishna2009">
-<p>Balakrishna, N, and Chin Diew Lai. 2009. “Distributions Expressed as Copulas.” In <em>Continuous Bivariate Distributions: Second Edition</em>, 67–103. New York, NY: Springer New York. <a href="https://doi.org/10.1007/b101765_3">https://doi.org/10.1007/b101765_3</a>.</p>
+<p>Balakrishna, N, and Chin Diew Lai. 2009. <em>Distributions Expressed as Copulas</em>. New York, NY: Springer New York. <a href="https://doi.org/10.1007/b101765_3">https://doi.org/10.1007/b101765_3</a>.</p>
 </div>
 <div id="ref-Sklar1959">
 <p>Sklar, Abe. 1959. “Fonctions de répartition à n dimensions et leurs marges.” <em>Publ. Inst. Statist. Univ. Paris</em> 8: 229–31.</p>
