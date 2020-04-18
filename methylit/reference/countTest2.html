@@ -52,6 +52,7 @@ compare the counts from different groups, treatment and control. The
 difference between functions 'countTest2' and 'countTest' resides in the
 estimation of the prior weights used in Negative Binomial generalized
 linear model." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -125,7 +126,14 @@ linear model." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
   </ul>
 </li>
@@ -332,55 +340,31 @@ The experimental design settings must be introduced using function
 
 <span class='co'>## The gneralized linear model pairwise group comparison, group 'A'</span>
 <span class='co'>## ('control') versus 'B' (treatment) is performed.</span>
-<span class='fu'>countTest2</span>(<span class='no'>ds</span>, <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>maxGrpCV</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.4</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; GRanges object with 10 ranges and 12 metadata columns:
-#&gt;          seqnames        ranges strand |        A1        A2        B1
-#&gt;             &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;
-#&gt;    gene5     chr1     8001-9001      * |        43        42        72
-#&gt;   gene36     chr1   70001-71001      * |       165       187        25
-#&gt;   gene38     chr1   74001-75001      * |       117       165        27
-#&gt;   gene41     chr1   80001-81001      * |        76       102       198
-#&gt;   gene42     chr1   82001-83001      * |       142       188        86
-#&gt;   gene47     chr1   92001-93001      * |        24        16       101
-#&gt;   gene69     chr1 136001-137001      * |        49        75       110
-#&gt;   gene72     chr2 142001-143001      * |        51        38       112
-#&gt;   gene75     chr2 148001-149001      * |       195       190        26
-#&gt;   gene78     chr2 154001-155001      * |       117        80       184
-#&gt;                 B2             log2FC  scaled.deviance               pvalue
-#&gt;          &lt;integer&gt;          &lt;numeric&gt;        &lt;numeric&gt;            &lt;numeric&gt;
-#&gt;    gene5       128   0.85566611005772 14.0356701793316 0.000180245933077019
-#&gt;   gene36        35    -1.769286613376 25.1439698545735 5.36539225149968e-06
-#&gt;   gene38        17  -1.85771743701985 6.79422202295607    0.013376785333257
-#&gt;   gene41       126  0.598959965500245 9.38158872001879   0.0021460958381637
-#&gt;   gene42       113 -0.505787829736033 13.1528553754701 0.000295434175502001
-#&gt;   gene47        72   1.46441214038384 7.91261025502834  0.00689645785092455
-#&gt;   gene69       129  0.656181986326474 22.5625506376617 2.62351534194847e-06
-#&gt;   gene72        96  0.848901709969179 9.92488082051744  0.00219603135316477
-#&gt;   gene75        40  -1.76358859226136 19.7071745248823 5.06968870813117e-05
-#&gt;   gene78       186  0.630299276900281 5.19588591833575   0.0236384622748537
-#&gt;                   model             adj.pval   CT.SignalDensity
-#&gt;                &lt;factor&gt;            &lt;numeric&gt;          &lt;numeric&gt;
-#&gt;    gene5   Neg.Binomial 0.000450614832692548 0.0424575424575425
-#&gt;   gene36 Neg.Binomial.W 2.68269612574984e-05  0.175824175824176
-#&gt;   gene38 Neg.Binomial.W     0.01486309481473  0.140859140859141
-#&gt;   gene41   Neg.Binomial  0.00313718764737824 0.0889110889110889
-#&gt;   gene42   Neg.Binomial 0.000590868351004001  0.164835164835165
-#&gt;   gene47 Neg.Binomial.W  0.00862057231365569   0.01998001998002
-#&gt;   gene69   Neg.Binomial 2.62351534194847e-05 0.0619380619380619
-#&gt;   gene72 Neg.Binomial.W  0.00313718764737824 0.0444555444555445
-#&gt;   gene75 Neg.Binomial.W 0.000168989623604372  0.192307692307692
-#&gt;   gene78 Neg.Binomial.W   0.0236384622748537 0.0984015984015984
-#&gt;            TT.SignalDensity SignalDensityVariation
-#&gt;                   &lt;numeric&gt;              &lt;numeric&gt;
-#&gt;    gene5 0.0999000999000999     0.0574425574425574
-#&gt;   gene36   0.02997002997003     -0.145854145854146
-#&gt;   gene38  0.021978021978022     -0.118881118881119
-#&gt;   gene41  0.161838161838162     0.0729270729270729
-#&gt;   gene42 0.0994005994005994    -0.0654345654345654
-#&gt;   gene47 0.0864135864135864     0.0664335664335664
-#&gt;   gene69  0.119380619380619     0.0574425574425574
-#&gt;   gene72  0.103896103896104     0.0594405594405594
-#&gt;   gene75  0.032967032967033     -0.159340659340659
-#&gt;   gene78  0.184815184815185     0.0864135864135864
+<span class='fu'>countTest2</span>(<span class='no'>ds</span>, <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>maxGrpCV</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.4</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; GRanges object with 4 ranges and 12 metadata columns:
+#&gt;           seqnames        ranges strand |        A1        A2        B1
+#&gt;              &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;
+#&gt;    gene69     chr1 136001-137001      * |        57        67       117
+#&gt;    gene98     chr2 194001-195001      * |        34        39       116
+#&gt;   gene101     chr2 200001-201001      * |       166       168       117
+#&gt;   gene114     chr2 226001-227001      * |        33        34       111
+#&gt;                  B2             log2FC  scaled.deviance               pvalue
+#&gt;           &lt;integer&gt;          &lt;numeric&gt;        &lt;numeric&gt;            &lt;numeric&gt;
+#&gt;    gene69       102  0.568790164211464 5.83269393556315   0.0174630326603942
+#&gt;    gene98       151   1.29678921725186 16.6046066059768 9.64429134876082e-05
+#&gt;   gene101        71 -0.574699030146751  13.083046592507 0.000300075021226224
+#&gt;   gene114       158   1.39001876021087 13.7507594566238 0.000343173594743556
+#&gt;                    model             adj.pval   CT.SignalDensity
+#&gt;                 &lt;factor&gt;            &lt;numeric&gt;          &lt;numeric&gt;
+#&gt;    gene69 Neg.Binomial.W   0.0174630326603942 0.0619380619380619
+#&gt;    gene98 Neg.Binomial.W 0.000385771653950433 0.0364635364635365
+#&gt;   gene101   Neg.Binomial 0.000457564792991408  0.166833166833167
+#&gt;   gene114 Neg.Binomial.W 0.000457564792991408 0.0334665334665335
+#&gt;             TT.SignalDensity SignalDensityVariation
+#&gt;                    &lt;numeric&gt;              &lt;numeric&gt;
+#&gt;    gene69  0.109390609390609     0.0474525474525475
+#&gt;    gene98  0.133366633366633     0.0969030969030969
+#&gt;   gene101 0.0939060939060939    -0.0729270729270729
+#&gt;   gene114  0.134365634365634      0.100899100899101
 #&gt;   -------
 #&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</div><div class='input'>
 </div></pre>
@@ -399,7 +383,7 @@ The experimental design settings must be introduced using function
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
