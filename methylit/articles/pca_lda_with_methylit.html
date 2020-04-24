@@ -123,18 +123,16 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Principal Components and Linear Discriminant Analyses with Methyl-IT</h1>
             <h3 class="subtitle"><h1>
-</h1></h3>
-<p>A <a href="https://github.com/genomaths/MethylIT">Methyl-IT</a> user guide</p>
+A <a href="https://github.com/genomaths/MethylIT">Methyl-IT</a> user guide</h1></h3>
                         <h4 class="author">
-<div style="white-space: pre-line;">Robersy Sanchez
-<a href="mailto:rus547@psu.edu">rus547@psu.edu</a>
+<div class="line-block">Robersy Sanchez<br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br>
 Mackenzie’s lab</div>
-<div style="white-space: pre-line;">Department of Biology and Plant Science.
-Pennsylvania State University, University Park, PA 16802
+<div class="line-block">Department of Biology and Plant Science.<br>
+Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div>
 </h4>
             
-            <h4 class="date">17 April 2020</h4>
+            <h4 class="date">24 April 2020</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/pca_lda_with_methylit.Rmd"><code>vignettes/pca_lda_with_methylit.Rmd</code></a></small>
       <div class="hidden name"><code>pca_lda_with_methylit.Rmd</code></div>
@@ -144,7 +142,7 @@ Maintainer: Robersy Sanchez</div>
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      <p>When methylation analysis is intended for diagnostic/prognostic purposes, for example, in clinical applications for patient diagnostics, to know whether the patient would be in healthy or disease stage we would like to have a good predictor tool in our side. It turns out that classical machine learning (ML) tools like hierarchical clustering, principal components and linear discriminant analysis can help us to reach such a goal. The current Methyl-IT downstream analysis is equipped with the mentioned ML tools.</p>
+      When methylation analysis is intended for diagnostic/prognostic purposes, for example, in clinical applications for patient diagnostics, to know whether the patient would be in healthy or disease stage we would like to have a good predictor tool in our side. It turns out that classical machine learning (ML) tools like hierarchical clustering, principal components and linear discriminant analysis can help us to reach such a goal. The current Methyl-IT downstream analysis is equipped with the mentioned ML tools.
     </div>
     
 <style type="text/css">
@@ -222,7 +220,7 @@ pre { /* Code block - determines code spacing between lines */
 <h1 class="hasAnchor">
 <a href="#data-generation" class="anchor"></a>Data generation</h1>
 <p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read-count matrices of methylated and unmethylated cytosine are generated with MethylIT.utils function <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/simulateCounts.html">simulateCounts</a>. A basic example generating datasets is given in the web page: <a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a></p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MethylIT</span>)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MethylIT</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MethylIT.utils</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ape</span>)
@@ -257,7 +255,7 @@ pre { /* Code block - determines code spacing between lines */
                         <span class="kw">beta</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">theta</span> <span class="kw">=</span> <span class="fl">4.5</span>,
                         <span class="kw">sample.ids</span> <span class="kw">=</span> <span class="no">treatment.nam2</span>)</pre></body></html></div>
 <p>A reference sample (virtual individual) is created using individual samples from the control population using function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/poolFromGRlist.html">poolFromGRlist</a>. The reference sample is further used to compute the information divergences of methylation levels, <span class="math inline">\(TV_d\)</span> and <span class="math inline">\(H\)</span>, with function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateDivergence.html">estimateDivergence</a>. This is a first fundamental step to remove the background noise (fluctuations) generated by the inherent stochasticity of the molecular processes in the cells.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co"># === Methylation level divergences ===</span>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># === Methylation level divergences ===</span>
 <span class="co"># Reference sample</span>
 <span class="no">ref</span> <span class="kw">=</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span>(<span class="no">ref0</span>, <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"mean"</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">4L</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 
@@ -268,7 +266,7 @@ pre { /* Code block - determines code spacing between lines */
 <span class="no">divs</span> <span class="kw">=</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">divs</span>, <span class="kw">function</span>(<span class="no">div</span>) <span class="no">div</span>[ <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">div</span>$<span class="no">hdiv</span>) <span class="kw">&gt;</span> <span class="fl">0</span> ], <span class="kw">keep.attr</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">divs</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">divs</span>)</pre></body></html></div>
 <p>To get some statistical description about the sample is useful. Here, empirical critical values for the probability distribution of <span class="math inline">\(H\)</span> and <span class="math inline">\(TV\)</span> can is obtained using <em>quantile</em> function from the R package <em>stats</em>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">critical.val</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">divs</span>, <span class="kw">function</span>(<span class="no">x</span>) {
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">critical.val</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">divs</span>, <span class="kw">function</span>(<span class="no">x</span>) {
   <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span>[<span class="no">x</span>$<span class="no">hdiv</span> <span class="kw">&gt;</span> <span class="fl">0</span>]
   <span class="no">hd.95</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">x</span>$<span class="no">hdiv</span>, <span class="fl">0.95</span>)
   <span class="no">tv.95</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">x</span>$<span class="no">bay.TV</span>), <span class="fl">0.95</span>)
@@ -297,10 +295,10 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#modeling-the-methylation-signal" class="anchor"></a>Modeling the methylation signal</h1>
 <p>Here, the methylation signal is expressed in terms of Hellinger divergence of methylation levels. Here, the signal distribution is modelled by a Weibull probability distribution model. Basically, the model could be a member of the generalized gamma distribution family. For example, it could be gamma distribution, Weibull, or log-normal. To describe the signal, we may prefer a model with a cross-validations: R.Cross.val &gt; 0.95. Cross-validations for the nonlinear regressions are performed in each methylome as described in <span class="citation">(Stevens 2009)</span>. The non-linear fit is performed through the function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/nonlinearFitDist.html">nonlinearFitDist</a></p>
 <p>The best model excluding “GGamma3P” model, for which the computation is computationally expensive:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>, <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span>)
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>, <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span>)
 <span class="no">gof</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gofReport.html">gofReport</a></span>(<span class="kw">HD</span> <span class="kw">=</span> <span class="no">divs</span>, <span class="kw">column</span> <span class="kw">=</span> <span class="fl">9L</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="no">d</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">6L</span>,
                     <span class="kw">output</span> <span class="kw">=</span> <span class="st">"all"</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">gof</span>$<span class="no">bestModel</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">gof</span>$<span class="no">bestModel</span></pre></body></html></div>
 <pre><code>##          C1          C2          C3          C4          C5          T1 
 ## "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" 
 ##          T2          T3          T4          T5          T6          T7 
@@ -308,23 +306,23 @@ pre { /* Code block - determines code spacing between lines */
 ##          T8          T9         T10 
 ## "Weibull3P" "Weibull3P" "Weibull3P"</code></pre>
 <p>Although we did not included the main member of the generalized gamma distribution family (“GGamma3P”), the Cross-validations correlation coefficient <em>w3p_R.Cross.val</em> values above 0.99 gives us some peace of mind on our confidence on the model prediction power/performance when confronted with external data sets (AIC and BIC are not conceived to provide such an information).</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">gof</span>$<span class="no">stats</span></pre></body></html></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">gof</span>$<span class="no">stats</span></pre></body></html></div>
 <pre><code>##       w2p_AIC w2p_R.Cross.val   w3p_AIC w3p_R.Cross.val   g2p_AIC
-## C1  -172642.0       0.9994638 -174557.7       0.9994974 -164820.3
-## C2  -175594.8       0.9995131 -177009.1       0.9995358 -167532.6
-## C3  -177238.3       0.9995420 -178755.3       0.9995651 -169774.1
+## C1  -172642.0       0.9994639 -174557.7       0.9994974 -164820.3
+## C2  -175594.8       0.9995132 -177009.1       0.9995356 -167532.6
+## C3  -177238.3       0.9995421 -178755.3       0.9995652 -169774.1
 ## C4  -219269.6       0.9994956 -264072.9       0.9998549 -206343.4
-## C5  -217500.5       0.9994371 -273018.4       0.9998799 -205306.2
-## T1  -168079.8       0.9972702 -225575.8       0.9994668 -160887.9
-## T2  -167286.1       0.9972726 -226888.2       0.9995015 -160748.6
-## T3  -170301.7       0.9974337 -227799.2       0.9995011 -163997.9
-## T4  -168551.1       0.9973214 -225182.0       0.9994659 -162169.6
-## T5  -167122.0       0.9972263 -227207.9       0.9994984 -160694.2
-## T6  -173245.4       0.9971881 -229256.8       0.9993947 -165656.4
-## T7  -170905.0       0.9970146 -228452.3       0.9993818 -163341.9
-## T8  -171372.5       0.9970755 -229286.8       0.9994007 -163649.4
-## T9  -170096.9       0.9969618 -227490.3       0.9993671 -162250.4
-## T10 -171266.7       0.9970279 -228041.3       0.9993710 -163857.2
+## C5  -217500.5       0.9994372 -273018.4       0.9998795 -205306.2
+## T1  -168079.8       0.9972701 -225575.8       0.9994668 -160887.9
+## T2  -167286.1       0.9972726 -226888.2       0.9995013 -160748.6
+## T3  -170301.7       0.9974336 -227799.2       0.9995012 -163997.9
+## T4  -168551.1       0.9973218 -225182.0       0.9994659 -162169.6
+## T5  -167122.0       0.9972264 -227207.9       0.9994985 -160694.2
+## T6  -173245.4       0.9971876 -229256.8       0.9993947 -165656.4
+## T7  -170905.0       0.9970144 -228452.3       0.9993819 -163341.9
+## T8  -171372.5       0.9970764 -229286.8       0.9994006 -163649.4
+## T9  -170096.9       0.9969616 -227490.3       0.9993672 -162250.4
+## T10 -171266.7       0.9970285 -228041.3       0.9993708 -163857.2
 ##     g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val      bestModel
 ## C1        0.9993929 -166320.3       0.9994541            w3p
 ## C2        0.9994499 -168751.9       0.9994939            w3p
@@ -347,7 +345,7 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#estimation-of-an-optimal-cutpoint-to-discriminate-the-signal-induced-by-the-treatment" class="anchor"></a>Estimation of an optimal cutpoint to discriminate the signal induced by the treatment</h1>
 <p>The above statistical description of the dataset (evidently) suggests that there two main groups: control and treatments, while treatment group would split into two subgroups of samples. In the current case, to search for a good cutpoint, we do not need to use all the samples. The critical value <span class="math inline">\(H_{\alpha=0.05}=33.51223\)</span> suggests that any optimal cutpoint for the subset of samples T1 to T5 will be optimal for the samples T6 to T10 as well.</p>
 <p>Below, we are letting the PCA+LDA model classifier to take the decision on whether a differentially methylated cytosine position is a treatment DMP. To do it, Methyl-IT function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/getPotentialDIMP.html">getPotentialDIMP</a> is used to get methylation signal probabilities of the observed <span class="math inline">\(H\)</span> values for all cytosine site (alpha = 1), in accordance with the 2-parameter Weibull distribution model. Next, this information will be used to identify DMPs using Methyl-IT function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateCutPoint.html">estimateCutPoint</a>. Cytosine positions with <span class="math inline">\(H\)</span> values above the cutpoint are considered DMPs. Finally, a PCA + QDA model classifier will be fitted to classify DMPs into two classes: DMPs from control and those from treatment.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">divs</span>,
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">divs</span>,
                          <span class="kw">nlms</span> <span class="kw">=</span> <span class="no">gof</span>$<span class="no">nlms</span>,  <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9L</span>,
                          <span class="kw">tv.cut</span> <span class="kw">=</span> <span class="fl">0.461</span>, <span class="kw">tv.col</span> <span class="kw">=</span> <span class="fl">8</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.05</span>,
                          <span class="kw">dist.name</span> <span class="kw">=</span> <span class="no">gof</span>$<span class="no">bestModel</span>)
@@ -391,7 +389,7 @@ pre { /* Code block - determines code spacing between lines */
 ## cutpData           1      -none-          logical</code></pre>
 <p>In this case, the cutpoint <span class="math inline">\(H_{cutpoint}=92.138\)</span> is lower from what is expected from the higher treatment empirical <span class="math inline">\(H_{\alpha = 0.05}^{TT_{Emp}}=120.45119\)</span> critical value: <span class="math inline">\(H_{cutpoint} &lt; H_{\alpha = 0.05}^{TT_{Emp}}\)</span>.</p>
 <p>The model performance in in the test dataset is:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cutp</span>$<span class="no">testSetPerformance</span></pre></body></html></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">cutp</span>$<span class="no">testSetPerformance</span></pre></body></html></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -424,13 +422,13 @@ pre { /* Code block - determines code spacing between lines */
 <h1 class="hasAnchor">
 <a href="#representing-individual-samples-as-vectors-from-the-n-dimensional-space" class="anchor"></a>Representing individual samples as vectors from the <em>N</em>-dimensional space</h1>
 <p>The above cutpoint can be used to identify DMPs from control and treatment. The PCA+QDA model classifier can be used any time to discriminate control DMPs from those treatment. DMPs are retrieved using <a href="https://genomaths.github.io/MethylIT_HTML_Manual/selectDIMP.html">selectDIMP</a> function (<code>selectDIMP</code>):</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">divs</span>, <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9L</span>, <span class="kw">cutpoint</span> <span class="kw">=</span> <span class="no">cutp</span>$<span class="no">cutpoint</span>,
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">divs</span>, <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9L</span>, <span class="kw">cutpoint</span> <span class="kw">=</span> <span class="no">cutp</span>$<span class="no">cutpoint</span>,
                    <span class="kw">tv.cut</span> <span class="kw">=</span> <span class="fl">0.34</span>, <span class="kw">tv.col</span> <span class="kw">=</span> <span class="fl">7</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">dmps</span>,<span class="no">length</span>)</pre></body></html></div>
 <pre><code>##   C1   C2   C3   C4   C5   T1   T2   T3   T4   T5   T6   T7   T8   T9  T10 
 ##  450  428  410  522  578 2808 2651 2632 2735 2768 3170 3233 3210 3318 3239</code></pre>
 <p>Next, to represent individual samples as vectors from the <em>N</em>-dimensional space, we can use <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/getGRegionsStat-methods.html">getGRegionsStat</a> function from <a href="https://github.com/genomaths/MethylIT.utils">MethylIT.utils</a> R package. Here, the simulated “chromosome” is split into regions of 450bp non-overlapping windows. and the <em>density</em> of Hellinger divergences values is taken for each windows.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">ns</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmps</span>)
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">ns</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmps</span>)
 <span class="no">DMRs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/getGRegionsStat-methods.html">getGRegionsStat</a></span>(<span class="kw">GR</span> <span class="kw">=</span> <span class="no">dmps</span>, <span class="kw">win.size</span> <span class="kw">=</span> <span class="fl">150</span>, <span class="kw">step.size</span> <span class="kw">=</span> <span class="fl">150</span>,
                         <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"density"</span>, <span class="kw">column</span> <span class="kw">=</span> <span class="fl">9L</span>, <span class="kw">scaling</span> <span class="kw">=</span> <span class="fl">1</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">DMRs</span>) <span class="kw">&lt;-</span> <span class="no">ns</span>
@@ -440,7 +438,7 @@ pre { /* Code block - determines code spacing between lines */
 <h1 class="hasAnchor">
 <a href="#hierarchical-clustering" class="anchor"></a>Hierarchical Clustering</h1>
 <p>Hierarchical clustering (HC) is an unsupervised machine learning approach. HC can provide an initial estimation of the number of possible groups and information on their members. However, the effectivity of HC will depend on the experimental dataset, the metric used, and the agglomeration algorithm applied. For an unknown reason (and based on the personal experience of the author working in numerical taxonomy), Ward’s agglomeration algorithm performs much better on biological experimental datasets than the rest of the available algorithms like UPGMA, UPGMC, etc.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dmgm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span>(<span class="no">DMRs</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">dmgm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span>(<span class="no">DMRs</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="no">dmgm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="fu">mcols</span>(<span class="no">dmgm</span>)))
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">dmgm</span>) <span class="kw">&lt;-</span> <span class="no">ns</span>
 <span class="no">sampleNames</span> <span class="kw">&lt;-</span> <span class="no">ns</span>
@@ -451,7 +449,7 @@ pre { /* Code block - determines code spacing between lines */
 <div id="dendrogram" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dendrogram" class="anchor"></a>Dendrogram</h2>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">colors</span> <span class="kw">=</span> <span class="no">sampleNames</span>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">colors</span> <span class="kw">=</span> <span class="no">sampleNames</span>
 <span class="no">colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="st">"C"</span>, <span class="no">colors</span>)] <span class="kw">&lt;-</span> <span class="st">"green4"</span>
 <span class="no">colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="st">"T[6-9]{1}"</span>, <span class="no">colors</span>)] <span class="kw">&lt;-</span> <span class="st">"red"</span>
 <span class="no">colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="st">"T10"</span>, <span class="no">colors</span>)] <span class="kw">&lt;-</span> <span class="st">"red"</span>
@@ -467,7 +465,7 @@ pre { /* Code block - determines code spacing between lines */
 <span class="fu"><a href="https://rdrr.io/pkg/ape/man/axisPhylo.html">axisPhylo</a></span>( <span class="fl">2</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.4</span>, <span class="kw">cex.axis</span> <span class="kw">=</span> <span class="fl">1.4</span>, <span class="kw">hadj</span> <span class="kw">=</span> <span class="fl">0.8</span>, <span class="kw">tck</span> <span class="kw">=</span> -<span class="fl">0.01</span> )
 <span class="co">## cuts = c(xleft, ybottom, xright, ytop)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/hclust_rect.html">hclust_rect</a></span>(<span class="no">hc.rsq</span>, <span class="kw">k</span> <span class="kw">=</span> <span class="fl">3L</span>, <span class="kw">border</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green4"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span>),
-            <span class="kw">color</span> <span class="kw">=</span> <span class="no">clusters.color</span>, <span class="kw">cuts</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.56</span>, <span class="fl">1.4</span>, <span class="fl">0.41</span>, <span class="fl">34</span>))</pre></body></html></div>
+            <span class="kw">color</span> <span class="kw">=</span> <span class="no">clusters.color</span>, <span class="kw">cuts</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.56</span>, <span class="fl">1.4</span>, <span class="fl">0.41</span>, <span class="fl">106</span>))</pre></body></html></div>
 <p><img src="pca_lda_with_methylit_files/figure-html/dendrogram-1.png" width="700"></p>
 <p>Here, we have use function <a href="https://www.rdocumentation.org/packages/ape/versions/5.3/topics/as.phylo">as.phylo</a> from the R package <a href="https://www.rdocumentation.org/packages/ape/versions/5.3">ape</a> for better dendrogram visualization and function <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/hclust_rect.html">hclust_rect</a> from <a href="https://github.com/genomaths/MethylIT.utils">MethylIT.utils</a> R package to draw rectangles with background colors around the branches of a dendrogram highlighting the corresponding clusters.</p>
 </div>
@@ -477,7 +475,7 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#pca-lda" class="anchor"></a>PCA + LDA</h1>
 <p>MethylIT function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/pcaLDA.html">pcaLDA</a> will be used to perform the PCA and PCA + LDA analyses. The function returns a list of two objects: 1) ‘lda’: an object of class ‘lda’ from package ‘MASS’. 2) ‘pca’: an object of class ‘prcomp’ from package ‘stats’. For information on how to use these objects see ?lda and ?prcomp.</p>
 <p>Unlike hierarchical clustering (HC), LDA is a supervised machine learning approach. So, we must provide a prior classification of the individuals, which can be derived, for example, from the HC, or from a previous exploratory analysis with PCA.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co"># A prior classification derived from HC</span>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co"># A prior classification derived from HC</span>
 <span class="no">grps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html">cutree</a></span>(<span class="no">hc</span>, <span class="kw">k</span> <span class="kw">=</span> <span class="fl">3</span>)
 <span class="no">grps</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="fl">1</span>, <span class="no">grps</span>)] <span class="kw">&lt;-</span> <span class="st">"CT"</span>
 <span class="no">grps</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="fl">2</span>, <span class="no">grps</span>)] <span class="kw">&lt;-</span> <span class="st">"T1"</span>
@@ -497,7 +495,7 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#pca" class="anchor"></a>PCA</h2>
 <p>The individual coordinates in the principal components (PCs) are returned by function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/pcaLDA.html">pcaLDA</a>. In the current case, based on the cumulative proportion of variance, the two firsts PCs carried about the 84% of the total sample variance and could split the sample into meaningful groups.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">pca.coord</span> <span class="kw">&lt;-</span> <span class="no">ld</span>$<span class="no">pca</span>$<span class="no">x</span>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">pca.coord</span> <span class="kw">&lt;-</span> <span class="no">ld</span>$<span class="no">pca</span>$<span class="no">x</span>
 <span class="no">pca.coord</span></pre></body></html></div>
 <pre><code>##            PC1          PC2         PC3
 ## C1   -63.94820    2.6773997  -2.0772261
@@ -520,7 +518,7 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#graphic-pc1-vs-pc2" class="anchor"></a>Graphic PC1 vs PC2</h2>
 <p>Next, the graphic for individual coordinates in the two firsts PCs can be easily visualized now:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">pca.coord</span>[, <span class="fl">1</span>:<span class="fl">2</span>], <span class="kw">subgrp</span> <span class="kw">=</span> <span class="no">grps</span>)
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">dt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">pca.coord</span>[, <span class="fl">1</span>:<span class="fl">2</span>], <span class="kw">subgrp</span> <span class="kw">=</span> <span class="no">grps</span>)
 
 <span class="no">p0</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
   <span class="kw">axis.text.x</span>  <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>( <span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>,
@@ -558,7 +556,7 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#graphic-ld1-vs-ld2" class="anchor"></a>Graphic LD1 vs LD2</h2>
 <p>In the current case, better resolution is obtained with the linear discriminant functions, which is based on the three firsts PCs. Notice that the number principal components used the LDA step must be lower than the number of individuals (<span class="math inline">\(N\)</span>) divided by 3: <span class="math inline">\(N/3\)</span>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">ind.coord</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">ld</span>, <span class="kw">newdata</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">dmgm</span>), <span class="kw">type</span> <span class="kw">=</span> <span class="st">"scores"</span>)
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">ind.coord</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">ld</span>, <span class="kw">newdata</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">dmgm</span>), <span class="kw">type</span> <span class="kw">=</span> <span class="st">"scores"</span>)
 <span class="no">dt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">ind.coord</span>, <span class="kw">subgrp</span> <span class="kw">=</span> <span class="no">grps</span>)
 
 <span class="no">p0</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
@@ -599,7 +597,7 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#references" class="anchor"></a>References</h1>
 <div id="refs">
 <div id="ref-Liese2006">
-<p>Liese, Friedrich, and Igor Vajda. 2006. “On divergences and informations in statistics and information theory.” <em>IEEE Transactions on Information Theory</em> 52 (10): 4394–4412. doi:<a href="https://doi.org/10.1109/TIT.2006.881731">10.1109/TIT.2006.881731</a>.</p>
+<p>Liese, Friedrich, and Igor Vajda. 2006. “On divergences and informations in statistics and information theory.” <em>IEEE Transactions on Information Theory</em> 52 (10): 4394–4412. <a href="https://doi.org/10.1109/TIT.2006.881731">https://doi.org/10.1109/TIT.2006.881731</a>.</p>
 </div>
 <div id="ref-Stevens2009">
 <p>Stevens, James P. 2009. <em>Applied Multivariate Statistics for the Social Sciences</em>. Fifth Edit. Routledge Academic.</p>
@@ -609,13 +607,14 @@ pre { /* Code block - determines code spacing between lines */
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 1.19.2.1:</p>
-<pre><code>## R version 3.6.0 (2019-04-26)
-## Platform: x86_64-redhat-linux-gnu (64-bit)
-## Running under: CentOS Linux 7 (Core)
+<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.3.1:</p>
+<pre><code>## R version 3.6.3 (2020-02-29)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 18.04.4 LTS
 ## 
 ## Matrix products: default
-## BLAS/LAPACK: /usr/lib64/R/lib/libRblas.so
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.7.1
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.7.1
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -636,59 +635,60 @@ pre { /* Code block - determines code spacing between lines */
 ## [10] BiocGenerics_0.30.0 
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] colorspace_1.4-1            class_7.3-15               
-##   [3] modeltools_0.2-23           mclust_5.4.5               
-##   [5] rprojroot_1.3-2             XVector_0.24.0             
-##   [7] ArgumentCheck_0.10.2        fs_1.3.2                   
-##   [9] rstudioapi_0.11             farver_2.0.1               
-##  [11] flexmix_2.3-15              bit64_0.9-7                
-##  [13] AnnotationDbi_1.46.1        prodlim_2019.11.13         
-##  [15] lubridate_1.7.4             codetools_0.2-16           
-##  [17] splines_3.6.0               knitr_1.28                 
-##  [19] Formula_1.2-3               pROC_1.16.1                
-##  [21] Rsamtools_2.0.3             caret_6.0-86               
-##  [23] annotate_1.62.0             kernlab_0.9-29             
-##  [25] compiler_3.6.0              backports_1.1.5            
-##  [27] assertthat_0.2.1            Matrix_1.2-18              
-##  [29] htmltools_0.4.0             tools_3.6.0                
-##  [31] gtable_0.3.0                glue_1.3.2                 
-##  [33] GenomeInfoDbData_1.2.1      reshape2_1.4.3             
-##  [35] dplyr_0.8.5                 Rcpp_1.0.4                 
-##  [37] Biobase_2.44.0              pkgdown_1.5.1.9000         
-##  [39] vctrs_0.2.4                 Biostrings_2.52.0          
-##  [41] nlme_3.1-145                iterators_1.0.12           
-##  [43] betareg_3.1-3               lmtest_0.9-37              
-##  [45] timeDate_3043.102           gower_0.2.1                
-##  [47] xfun_0.12                   stringr_1.4.0              
-##  [49] lifecycle_0.1.0             XML_3.99-0.3               
-##  [51] zlibbioc_1.30.0             MASS_7.3-51.5              
-##  [53] zoo_1.8-7                   scales_1.1.0               
-##  [55] ipred_0.9-9                 SummarizedExperiment_1.14.1
-##  [57] sandwich_2.5-1              yaml_2.2.1                 
-##  [59] memoise_1.1.0               rpart_4.1-15               
-##  [61] segmented_1.1-0             stringi_1.4.6              
-##  [63] RSQLite_2.2.0               genefilter_1.66.0          
-##  [65] desc_1.2.0                  foreach_1.4.8              
-##  [67] e1071_1.7-3                 BiocParallel_1.18.1        
-##  [69] lava_1.6.7                  rlang_0.4.5                
-##  [71] pkgconfig_2.0.3             matrixStats_0.56.0         
-##  [73] bitops_1.0-6                evaluate_0.14              
-##  [75] lattice_0.20-40             purrr_0.3.3                
-##  [77] labeling_0.3                GenomicAlignments_1.20.1   
-##  [79] recipes_0.1.10              bit_1.1-15.2               
-##  [81] tidyselect_1.0.0            plyr_1.8.6                 
-##  [83] magrittr_1.5                nls2_0.2                   
-##  [85] R6_2.4.1                    generics_0.0.2             
-##  [87] DelayedArray_0.10.0         DBI_1.1.0                  
-##  [89] pillar_1.4.3                withr_2.1.2                
-##  [91] mixtools_1.2.0              survival_3.1-11            
-##  [93] RCurl_1.98-1.1              nnet_7.3-13                
-##  [95] tibble_2.1.3                crayon_1.3.4               
-##  [97] rmarkdown_2.1               grid_3.6.0                 
-##  [99] minpack.lm_1.2-1            data.table_1.12.8          
-## [101] blob_1.2.1                  ModelMetrics_1.2.2.2       
-## [103] digest_0.6.25               xtable_1.8-4               
-## [105] munsell_0.5.0</code></pre>
+##   [1] colorspace_1.4-1            ellipsis_0.3.0             
+##   [3] class_7.3-16                modeltools_0.2-23          
+##   [5] mclust_5.4.5                rprojroot_1.3-2            
+##   [7] XVector_0.24.0              ArgumentCheck_0.10.2       
+##   [9] fs_1.4.0                    rstudioapi_0.11            
+##  [11] farver_2.0.3                flexmix_2.3-15             
+##  [13] bit64_0.9-7                 AnnotationDbi_1.46.1       
+##  [15] prodlim_2019.11.13          fansi_0.4.1                
+##  [17] lubridate_1.7.4             codetools_0.2-16           
+##  [19] splines_3.6.3               knitr_1.28                 
+##  [21] Formula_1.2-3               pROC_1.16.2                
+##  [23] Rsamtools_2.0.3             caret_6.0-86               
+##  [25] annotate_1.56.1             kernlab_0.9-29             
+##  [27] compiler_3.6.3              backports_1.1.5            
+##  [29] assertthat_0.2.1            Matrix_1.2-18              
+##  [31] cli_2.0.2                   htmltools_0.4.0            
+##  [33] tools_3.6.3                 gtable_0.3.0               
+##  [35] glue_1.3.2                  GenomeInfoDbData_1.2.1     
+##  [37] reshape2_1.4.3              dplyr_0.8.5                
+##  [39] Rcpp_1.0.4                  Biobase_2.44.0             
+##  [41] pkgdown_1.5.0               vctrs_0.2.4                
+##  [43] Biostrings_2.52.0           nlme_3.1-145               
+##  [45] iterators_1.0.12            betareg_3.1-3              
+##  [47] lmtest_0.9-37               timeDate_3043.102          
+##  [49] gower_0.2.1                 xfun_0.12                  
+##  [51] stringr_1.4.0               lifecycle_0.2.0            
+##  [53] XML_3.99-0.3                zlibbioc_1.30.0            
+##  [55] MASS_7.3-51.5               zoo_1.8-7                  
+##  [57] scales_1.1.0                ipred_0.9-9                
+##  [59] SummarizedExperiment_1.14.1 sandwich_2.5-1             
+##  [61] yaml_2.2.1                  memoise_1.1.0              
+##  [63] segmented_1.1-0             rpart_4.1-15               
+##  [65] stringi_1.4.6               RSQLite_2.2.0              
+##  [67] genefilter_1.66.0           desc_1.2.0                 
+##  [69] foreach_1.5.0               e1071_1.7-3                
+##  [71] BiocParallel_1.18.1         lava_1.6.7                 
+##  [73] rlang_0.4.5                 pkgconfig_2.0.3            
+##  [75] matrixStats_0.56.0          bitops_1.0-6               
+##  [77] evaluate_0.14               lattice_0.20-40            
+##  [79] purrr_0.3.3                 labeling_0.3               
+##  [81] GenomicAlignments_1.20.1    recipes_0.1.10             
+##  [83] bit_1.1-15.2                tidyselect_1.0.0           
+##  [85] plyr_1.8.6                  magrittr_1.5               
+##  [87] nls2_0.2                    R6_2.4.1                   
+##  [89] generics_0.0.2              DelayedArray_0.10.0        
+##  [91] DBI_1.1.0                   pillar_1.4.3               
+##  [93] withr_2.1.2                 mixtools_1.2.0             
+##  [95] survival_3.1-11             RCurl_1.98-1.1             
+##  [97] nnet_7.3-13                 tibble_3.0.0               
+##  [99] crayon_1.3.4                rmarkdown_2.1.1            
+## [101] grid_3.6.3                  minpack.lm_1.2-1           
+## [103] data.table_1.12.8           blob_1.2.1                 
+## [105] ModelMetrics_1.2.2.2        digest_0.6.25              
+## [107] xtable_1.8-4                munsell_0.5.0</code></pre>
 </div>
   </div>
 
@@ -707,7 +707,7 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>
