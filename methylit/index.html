@@ -143,36 +143,31 @@
 <div id="status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#status" class="anchor"></a>Status</h2>
-<p>Currently, the package is actively used in methylation analyses. Nevertheless, improvements are regularly introduced. Watch this repo or check for updates. THE PACKAGE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.</p>
+<p>Currently, the package is actively used in methylation analyses. Nevertheless, improvements are regularly introduced. Watch this repo or check for updates. THE PACKAGE IS PROVIDED âAS ISâ, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Be sure that both the R and bioconductor packages are up to date. To get the latest version of Bioconductor by starting R and entering the commands:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">"BiocManager"</span>)) <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)
-BiocManager<span class="op">::</span><span class="kw">install</span>()</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">"BiocManager"</span>)) <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">BiocManager<span class="op">::</span><span class="kw">install</span>()</a></code></pre></div>
 <p>Install OS packages:</p>
 <p>CentOS 7</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">sudo yum <span class="op">-</span>y install libcurl<span class="op">-</span>devel.x86_<span class="dv">64</span> openssl<span class="op">-</span>devel.x86_<span class="dv">64</span> libxml2<span class="op">-</span>devel mariadb<span class="op">-</span>devel.x86_<span class="dv">64</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">sudo yum <span class="op">-</span>y install libcurl<span class="op">-</span>devel.x86_<span class="dv">64</span> openssl<span class="op">-</span>devel.x86_<span class="dv">64</span> libxml2<span class="op">-</span>devel mariadb<span class="op">-</span>devel.x86_<span class="dv">64</span></a></code></pre></div>
 <p>Ubuntu</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">sudo apt install libmysqlclient<span class="op">-</span>dev libcurl4<span class="op">-</span>openssl<span class="op">-</span>dev libssl<span class="op">-</span>dev libxml2<span class="op">-</span>dev git build<span class="op">-</span>essential</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">sudo apt install libmysqlclient<span class="op">-</span>dev libcurl4<span class="op">-</span>openssl<span class="op">-</span>dev libssl<span class="op">-</span>dev libxml2<span class="op">-</span>dev git build<span class="op">-</span>essential</a></code></pre></div>
 <p>Install R dependencies:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"ArgumentCheck"</span>, <span class="st">"caret"</span>, <span class="st">"Epi"</span>, <span class="st">"e1071"</span>, <span class="st">"minpack.lm"</span>, <span class="st">"nls2"</span>, <span class="st">"caTools"</span>, <span class="st">"rmarkdown"</span>,   <span class="st">"RCurl"</span>),<span class="dt">dependencies=</span><span class="ot">TRUE</span>)
-
-BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="kw">c</span>(<span class="st">'BiocParallel'</span>, <span class="st">'biovizBase'</span>, <span class="st">'genefilter'</span>, <span class="st">'GenomeInfoDb'</span>, <span class="st">'GenomicRanges'</span>))</code></pre></div>
-<p>You can install MethylIT from GitHub or PSU’s GitLab:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
-<span class="co"># Master stable version (0.3.2)</span>
-devtools<span class="op">::</span><span class="kw">install_git</span>(<span class="st">"https://github.com/genomaths/MethylIT.git"</span>)
-
-<span class="co"># Beta (developing) version (0.3.2_beta):</span>
-devtools<span class="op">::</span><span class="kw">install_git</span>(<span class="st">"https://github.com/genomaths/MethylIT.git"</span>, <span class="dt">ref =</span> <span class="st">"MethylIT_0.3.2_beta"</span>)
-
-<span class="kw">Or</span> (older version <span class="fl">0.3</span>.<span class="dv">1</span>)
-
-devtools<span class="op">::</span><span class="kw">install_git</span>(<span class="st">"https://git.psu.edu/genomath/MethylIT.git"</span>, <span class="dt">ref =</span> <span class="st">"MethylIT_0.3.1"</span>)
-
-   </code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"ArgumentCheck"</span>, <span class="st">"caret"</span>, <span class="st">"Epi"</span>, <span class="st">"e1071"</span>, <span class="st">"minpack.lm"</span>, <span class="st">"nls2"</span>, <span class="st">"caTools"</span>, <span class="st">"rmarkdown"</span>,   <span class="st">"RCurl"</span>),<span class="dt">dependencies=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="kw">c</span>(<span class="st">'BiocParallel'</span>, <span class="st">'biovizBase'</span>, <span class="st">'genefilter'</span>, <span class="st">'GenomeInfoDb'</span>, <span class="st">'GenomicRanges'</span>))</a></code></pre></div>
+<p>You can install MethylIT from GitHub or PSUâs GitLab:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># Master stable version (0.3.2)</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">devtools<span class="op">::</span><span class="kw">install_git</span>(<span class="st">"https://github.com/genomaths/MethylIT.git"</span>)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co"># Beta (developing) version (0.3.2_beta):</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">devtools<span class="op">::</span><span class="kw">install_git</span>(<span class="st">"https://github.com/genomaths/MethylIT.git"</span>, <span class="dt">ref =</span> <span class="st">"MethylIT_0.3.2_beta"</span>) </a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">   </a></code></pre></div>
 </div>
 <div id="flow-diagram" class="section level2">
 <h2 class="hasAnchor">
@@ -193,16 +188,15 @@ devtools<span class="op">::</span><span class="kw">install_git</span>(<span clas
 <p><a href="https://genomaths.github.io/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a></p>
 <hr>
 </div>
-<div id="methylit-package-manual" class="section level2">
+<div id="methyl-it-documentation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#methylit-package-manual" class="anchor"></a>MethylIT Package Manual:</h2>
-<p><a href="https://github.com/genomaths/MethylIT/blob/master/MethylIT.pdf" target="_blank">MethylIT PDF manual</a></p>
-<p><a href="https://genomaths.github.io/methylit/reference/index.html" target="_blank">MethylIT browser manual</a></p>
+<a href="#methyl-it-documentation" class="anchor"></a>Methyl-IT documentation:</h2>
+<p>Whole documentation, manual and several examples, are available at <a href="https://genomaths.github.io/methylit/" target="_blank">Methyl-IT website</a></p>
 <hr>
 </div>
-<div id="scripts-and-examples-at" class="section level2">
+<div id="scripts-and-additional-examples-at" class="section level2">
 <h2 class="hasAnchor">
-<a href="#scripts-and-examples-at" class="anchor"></a>Scripts and examples at:</h2>
+<a href="#scripts-and-additional-examples-at" class="anchor"></a>Scripts and additional examples at:</h2>
 <p><a href="https://git.psu.edu/genomath/MethylIT_examples" class="uri">https://git.psu.edu/genomath/MethylIT_examples</a></p>
 <p><a href="https://drive.google.com/open?id=12D0vasaptB2IpA_HFxe6lzP5kxNEJqPF">R script and data for testing after installation</a></p>
 <hr>
@@ -229,7 +223,7 @@ devtools<span class="op">::</span><span class="kw">install_git</span>(<span clas
 <div id="contact" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contact" class="anchor"></a>Contact</h2>
-<p>For questions about the MethylIT project, contact <a href="mailto:rus547@psu.edu">rus547@psu.edu</a></p>
+<p>For questions about the MethylIT project, contact <a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a></p>
 </div>
 <div id="contributor-code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
@@ -277,7 +271,7 @@ devtools<span class="op">::</span><span class="kw">install_git</span>(<span clas
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>
