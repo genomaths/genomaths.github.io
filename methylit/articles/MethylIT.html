@@ -86,6 +86,7 @@
     <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
+    <li class="divider">
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
@@ -123,10 +124,10 @@
       <h1 data-toc-skip>Get started-with Methyl-IT</h1>
                         <h4 class="author">Robersy Sanchez</h4>
             <address class="author_afil">
-      Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu">rus547@psu.edu</a>
+      Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 class="date">17 April 2020</h4>
+            <h4 class="date">04 May 2020</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/MethylIT.Rmd"><code>vignettes/MethylIT.Rmd</code></a></small>
       <div class="hidden name"><code>MethylIT.Rmd</code></div>
@@ -136,7 +137,7 @@
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      <p>A fast introduction into methylation analysis with Methyl-IT is provided here. The methylome analysis implemented in Methyl-IT based on a signal-detection and machine-learning approach. Vignettes with further examples are available at <a href="https://genomaths.github.io/methylit/" class="uri">https://genomaths.github.io/methylit/</a>.</p>
+      A fast introduction into methylation analysis with Methyl-IT is provided here. The methylome analysis implemented in Methyl-IT based on a signal-detection and machine-learning approach. Vignettes with further examples are available at <a href="https://genomaths.github.io/methylit/" class="uri">https://genomaths.github.io/methylit/</a>.
     </div>
     
 <style type="text/css">
@@ -158,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (links[i].hostname != window.location.hostname)
       links[i].target = '_blank';
 });
-</script><div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MethylIT</span>)</pre></body></html></div>
+</script><div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MethylIT</span>)</pre></body></html></div>
 <div id="background" class="section level1">
 <h1 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h1>
@@ -168,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h1 class="hasAnchor">
 <a href="#data-sets" class="anchor"></a>Data sets</h1>
 <p>Methyl-IT uses the read counts of methylation called derived from whole-genome bisulfite sequencing (WGBS). Methylome datasets of WGBS are available at Gene Expression Omnibus (GEO DataSets). For the current example, we just load RData files containing the read-counts from several samples.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co">## ===== Download methylation data from PSU's GitLab ========</span>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co">## ===== Download methylation data from PSU's GitLab ========</span>
 <span class="no">url</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"https://git.psu.edu/genomath/MethylIT_examples"</span>,
             <span class="st">"/raw/master/MethylIT_testing/"</span>,
             <span class="st">"memoryLine_100k_samples_cg.RData"</span>)
@@ -185,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h2 class="hasAnchor">
 <a href="#gene-annotation" class="anchor"></a>Gene annotation</h2>
 <p>Download <em>Arabidopsis thaliana</em> TAIR10 gene annotation data</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">url</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"https://git.psu.edu/genomath/MethylIT_examples"</span>,
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">url</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"https://git.psu.edu/genomath/MethylIT_examples"</span>,
             <span class="st">"/raw/master/MethylIT_testing/"</span>,
             <span class="st">"Arabidopsis_thaliana.TAIR10.38_only_genes.RData"</span>)
 <span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="kw">fileext</span> <span class="kw">=</span> <span class="st">".RData"</span>)
@@ -198,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h2 class="hasAnchor">
 <a href="#the-reference-sample" class="anchor"></a>The reference sample</h2>
 <p>To perform the comparison between the uncertainty of methylation levels from each group of individuals, control <span class="math inline">\((c)\)</span> and treatment <span class="math inline">\((t)\)</span>, we should estimate the uncertainty variation with respect to the same reference individual on the mentioned metric space. The reason to measure the uncertainty variation with respect to the same reference resides in that even sibling individuals follow an independent ontogenetic development and, consequently, their developments follow independent stochastic processes. The reference individual is estimated with function <a href="https://is.gd/qR79kW">poolFromGRlist</a>:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">ref</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">meth_samples</span>$<span class="no">W_3_1</span>, <span class="no">meth_samples</span>$<span class="no">W_3_2</span>,
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">ref</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">meth_samples</span>$<span class="no">W_3_1</span>, <span class="no">meth_samples</span>$<span class="no">W_3_2</span>,
                         <span class="no">meth_samples</span>$<span class="no">W_3_3</span>), <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"mean"</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">4L</span>
 )
 <span class="co">#&gt; *** Building a unique GRanges object from the list...</span>
@@ -215,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h1 class="hasAnchor">
 <a href="#estimation-of-information-divergences" class="anchor"></a>Estimation of information divergences</h1>
 <p>To perform the comparison between the uncertainty of methylation levels from each group of individuals, control <span class="math inline">\((c)\)</span> and treatment <span class="math inline">\((t)\)</span>, the divergence between the methylation levels of each individual is estimated with respect to the reference sample.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">ml_samples</span> <span class="kw">&lt;-</span> <span class="no">meth_samples</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"W_3_3"</span>, <span class="st">"W_3_4"</span>,<span class="st">"W_3_5"</span>,
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">ml_samples</span> <span class="kw">&lt;-</span> <span class="no">meth_samples</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"W_3_3"</span>, <span class="st">"W_3_4"</span>,<span class="st">"W_3_5"</span>,
                             <span class="st">"M_3_1"</span>,<span class="st">"M_3_2"</span>,<span class="st">"M_3_3"</span>,<span class="st">"M_3_4"</span>)]
 <span class="no">ml_hd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimateDivergence.html">estimateDivergence</a></span>(<span class="kw">ref</span> <span class="kw">=</span> <span class="no">ref</span>,
                             <span class="kw">indiv</span> <span class="kw">=</span> <span class="no">ml_samples</span>,
@@ -283,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <a href="#descriptive-statistical-analysis" class="anchor"></a><em>Descriptive statistical analysis</em>
 </h2>
 <p>A descriptive analysis on the distribution of Hellinger divergences of methylation levels is recommended. Like in any other statistical analysis, descriptive statistical analysis help us to detect potential issues in the raw data. It is the user responsibility to perform quality check of his/her dataset before start to apply Methyl-IT. Nevertheless, the quality checking of the raw data is not perfect. So, it is healthy to sees for potential issues.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co">## Critical values</span>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co">## Critical values</span>
 <span class="no">critical.val</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">ml_hd</span>, <span class="kw">function</span>(<span class="no">x</span>) {
     <span class="no">hd.95</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">x</span>$<span class="no">hdiv</span>, <span class="fl">0.95</span>)
     <span class="no">tv.95</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">x</span>$<span class="no">bay.TV</span>), <span class="fl">0.95</span>)
@@ -316,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h2 class="hasAnchor">
 <a href="#quality-checking-of-the-coverage" class="anchor"></a>Quality checking of the coverage</h2>
 <p>After the raw data filtering introduced with <a href="https://is.gd/0ViBO9">estimateDivergence</a> function, some coverage issue could be detected.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">covr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">ml_hd</span>, <span class="kw">function</span>(<span class="no">x</span>) {
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">covr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">ml_hd</span>, <span class="kw">function</span>(<span class="no">x</span>) {
                 <span class="no">cov</span> <span class="kw">&lt;-</span> <span class="no">x</span>$<span class="no">c2</span> + <span class="no">x</span>$<span class="no">t2</span>
                 <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">cov</span>)
 })
@@ -358,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h1 class="hasAnchor">
 <a href="#estimation-of-the-best-fitted-probability-distribution-model" class="anchor"></a>Estimation of the best fitted probability distribution model</h1>
 <p>A basic requirement for the application of signal detection is the knowledge of the probability distribution of the background noise. Probability distribution, as a Weibull distribution model, can be deduced on a statistical mechanical/thermodynamics basis for DNA methylation induced by thermal fluctuations <span class="citation">(Sanchez and Mackenzie 2016)</span>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">gof</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gofReport.html">gofReport</a></span>(<span class="kw">HD</span> <span class="kw">=</span> <span class="no">ml_hd</span>,
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">gof</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gofReport.html">gofReport</a></span>(<span class="kw">HD</span> <span class="kw">=</span> <span class="no">ml_hd</span>,
                 <span class="kw">model</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>,
                         <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span>),
                 <span class="kw">column</span> <span class="kw">=</span> <span class="fl">9</span>,
@@ -383,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <a href="#potential-methylation-signal" class="anchor"></a><em>Potential methylation signal</em>
 </h2>
 <p>The first estimation in our signal detection step is the identification of the cytosine sites carrying potential methylation signal <span class="math inline">\(PS\)</span>. The methylation regulatory signal does not hold the theoretical distribution and, consequently, for a given level of significance <span class="math inline">\(\alpha\)</span> (Type I error probability, e.g. <span class="math inline">\(\alpha = 0.05\)</span>), cytosine positions <span class="math inline">\(k\)</span> with information divergence <span class="math inline">\(H_k &gt;= H_{\alpha = 0.05}\)</span> can be selected as sites carrying potential signals <span class="math inline">\(PS\)</span>. The value of <span class="math inline">\(\alpha\)</span> can be specified. For example, potential signals with <span class="math inline">\(H_k &gt; H_{\alpha = 0.01}\)</span> can be selected. For each sample, cytosine sites are selected based on the corresponding fitted theoretical distribution model estimated in the previous step.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">ps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">ml_hd</span>,
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">ps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">ml_hd</span>,
                         <span class="kw">nlms</span> <span class="kw">=</span> <span class="no">gof</span>$<span class="no">nlms</span>,
                         <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9L</span>,
                         <span class="kw">tv.col</span> <span class="kw">=</span> <span class="fl">0.25</span>,
@@ -439,7 +440,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <p>The need for the application of (what is now known as) signal detection in cancer research was pointed out by Youden in the midst of the last century <span class="citation">(Youden 1950)</span>. In the next example, the simple cutpoint estimation available in Methyl-IT is based on the application of <a href="https://en.wikipedia.org/wiki/Youden%27s_J_statistic">Youden index</a> <span class="citation">(Youden 1950)</span>. Although cutpoints are estimated for a single variable, the classification performance can be evaluated for several variables and applying different model classifiers. A optimal cutpoint distinguishes disease stages from healthy individual. The performance of this classification is given in the output of function <a href="https://is.gd/RR9iWY">estimateCutPoint</a>.</p>
 <p>A model classifier can be requested for further predictions and its classification performance is also provided. Below, the selected model classifier is a quadratic discriminant analysis (QDA) (<em>classifier1</em> = “qda”, <em>clas.perf</em> = TRUE). Four predictor variables are available: the Hellinger divergence of methylation levels (<em>hdiv</em>), total variation distance (<em>TV</em>, absolute difference of methylation levels), relative position of cytosine site in the chromosome (<em>pos</em>), and the logarithm base two of the probability to observe a Hellinger divergence value <span class="math inline">\(H\)</span> greater than the critical value <span class="math inline">\(H_{\alpha = 0.05}\)</span> (values given as probabilities in object PS, <em>wprob</em>).</p>
 <p>Notice that the cutpoint can be estimated for any of the two currently available information divergences: <em>Hellinger divergence</em> (<em>div.col</em> = 9) or the <em>total</em> <em>variation distance</em> (with Bayesian correction, <em>div.col</em> = 8).</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co">### Cutpoint estimated using a model classifier</span>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co">### Cutpoint estimated using a model classifier</span>
 <span class="no">cutpoint</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">ps</span>,
                             <span class="kw">simple</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
                             <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9</span>,
@@ -488,7 +489,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="no">cutpoint</span>$<span class="no">testSetModel.FDR</span>
 <span class="co">#&gt; [1] 0.001834862</span></pre></body></html></div>
 <p>Differentially methylated positions (DMPs) can be now identified using <a href="https://is.gd/7cVEEd">selectDIMP</a> function</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span>(<span class="no">ps</span>, <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9</span>, <span class="kw">cutpoint</span> <span class="kw">=</span> <span class="no">cutpoint</span>$<span class="no">cutpoint</span>)
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span>(<span class="no">ps</span>, <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9</span>, <span class="kw">cutpoint</span> <span class="kw">=</span> <span class="no">cutpoint</span>$<span class="no">cutpoint</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">dmps</span> <span class="kw">=</span><span class="fu"><a href="../reference/unlist.html">unlist</a></span>(<span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">dmps</span>, <span class="no">length</span>)))
 <span class="co">#&gt;       dmps</span>
 <span class="co">#&gt; W_3_3  130</span>
@@ -505,7 +506,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <a href="#differentially-methylated-genes-dmgs" class="anchor"></a>Differentially methylated genes (DMGs)</h1>
 <p>Differentially methylated genes (DMGs) are estimated from group comparisons for the number of DMPs on gene-body regions between control and treatment.</p>
 <p>Function <a href="https://is.gd/WQzX5I">getDIMPatGenes</a> is used to count the number of DMPs at gene-body. Nevertheless, it can be used for any arbitrary specified genomic region as well. The operation of this function is based on the ‘<em>findOverlaps</em>’ function from the ‘<em>GenomicRanges</em>’ Bioconductor R package. The ‘<em>findOverlaps</em>’ function has several critical parameters like, for example, ‘<em>maxgap</em>’, ‘<em>minoverlap</em>’, and ‘<em>ignore.strand</em>’. In our function <a href="https://is.gd/WQzX5I">getDIMPatGenes</a>, except for setting ignore.strand = TRUE and <em>type = “within”</em>, we preserve the rest of default ‘findOverlaps’ parameters. In this case, these are important parameter settings because the local mechanical effect of methylation changes on a DNA region where a gene is located is independent of the strand where the gene is encoded. That is, methylation changes located in any of the two DNA strands inside the gene-body region will affect the flexibility of the DNA molecule <span class="citation">(Choy et al. 2010; Severin et al. 2011)</span>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">nams</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmps</span>)
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">nams</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmps</span>)
 <span class="no">dmps_at_genes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span>(<span class="kw">GR</span> <span class="kw">=</span> <span class="no">dmps</span>, <span class="kw">GENES</span> <span class="kw">=</span> <span class="no">genes</span>, <span class="kw">ignore.strand</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="no">dmps_at_genes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span>(<span class="no">dmps_at_genes</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fl">2L</span>,
                                 <span class="kw">ignore.strand</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"equal"</span>)
@@ -555,7 +556,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <a href="#setting-the-experiment-design" class="anchor"></a><em>Setting the experiment design</em>
 </h2>
 <p>The experimental design is set with <a href="https://genomaths.github.io/methylit/reference/glmDataSet.html">glmDataSet</a> function</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">colData</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">condition</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>,
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">colData</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">condition</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>,
                                             <span class="st">"ML"</span>, <span class="st">"ML"</span>, <span class="st">"ML"</span>, <span class="st">"ML"</span>),
                                         <span class="kw">levels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WT"</span>, <span class="st">"ML"</span>)),
                     <span class="no">nams</span>,
@@ -567,7 +568,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h2 class="hasAnchor">
 <a href="#testing-for-dmgs" class="anchor"></a>Testing for DMGs</h2>
 <p>DMGs are detected using function <a href="https://genomaths.github.io/methylit/reference/countTest2.html">countTest2</a>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dmgs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span>(<span class="kw">DS</span> <span class="kw">=</span> <span class="no">ds</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">4L</span>,
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">dmgs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span>(<span class="kw">DS</span> <span class="kw">=</span> <span class="no">ds</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">4L</span>,
                     <span class="kw">tasks</span> <span class="kw">=</span> <span class="fl">2L</span>,
                     <span class="kw">minCountPerIndv</span> <span class="kw">=</span> <span class="fl">7</span>,
                     <span class="kw">maxGrpCV</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">1.2</span>),
@@ -587,16 +588,16 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="co">#&gt;   [4]        5 34538-37999      * |         1         3         1         9</span>
 <span class="co">#&gt;           M_3_2     M_3_3     M_3_4            log2FC  scaled.deviance</span>
 <span class="co">#&gt;       &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;         &lt;numeric&gt;        &lt;numeric&gt;</span>
-<span class="co">#&gt;   [1]        15        14        12 0.993251772656744 17.1296341584782</span>
-<span class="co">#&gt;   [2]        11        12         7  1.15267950993839 6.06528363218338</span>
-<span class="co">#&gt;   [3]         8         6        10  1.25276296811468 13.8065706245684</span>
-<span class="co">#&gt;   [4]         7         6         6  1.43508452528932 11.7397953656204</span>
-<span class="co">#&gt;                     pvalue          model            adj.pval</span>
-<span class="co">#&gt;                  &lt;numeric&gt;       &lt;factor&gt;           &lt;numeric&gt;</span>
-<span class="co">#&gt;   [1]  0.00900757198765838   QuasiPoisson  0.0137864612185259</span>
-<span class="co">#&gt;   [2]   0.0137864612185259 Neg.Binomial.W  0.0137864612185259</span>
-<span class="co">#&gt;   [3]   0.0137730278928442   QuasiPoisson  0.0137864612185259</span>
-<span class="co">#&gt;   [4] 0.000611777498812674   Neg.Binomial 0.00244710999525069</span>
+<span class="co">#&gt;   [1]        15        14        12 0.993251773010284 46.1893444462227</span>
+<span class="co">#&gt;   [2]        11        12         7  1.15267950993839  6.0652836321834</span>
+<span class="co">#&gt;   [3]         8         6        10  1.25276296849529 9.16216983213072</span>
+<span class="co">#&gt;   [4]         7         6         6  1.43508452461667 23.8885478941796</span>
+<span class="co">#&gt;                    pvalue          model             adj.pval</span>
+<span class="co">#&gt;                 &lt;numeric&gt;       &lt;factor&gt;            &lt;numeric&gt;</span>
+<span class="co">#&gt;   [1] 1.0735927829192e-11 Neg.Binomial.W 4.29437113167679e-11</span>
+<span class="co">#&gt;   [2]  0.0137864612185258 Neg.Binomial.W   0.0137864612185258</span>
+<span class="co">#&gt;   [3] 0.00247069440811782 Neg.Binomial.W  0.00494138881623564</span>
+<span class="co">#&gt;   [4] 0.00452300284262087   QuasiPoisson  0.00603067045682782</span>
 <span class="co">#&gt;           CT.SignalDensity    TT.SignalDensity SignalDensityVariation</span>
 <span class="co">#&gt;                  &lt;numeric&gt;           &lt;numeric&gt;              &lt;numeric&gt;</span>
 <span class="co">#&gt;   [1] 0.000616750955963982 0.00166522758110275    0.00104847662513877</span>
@@ -612,47 +613,48 @@ document.addEventListener("DOMContentLoaded", function() {
 <a href="#references" class="anchor"></a>References</h1>
 <div id="refs">
 <div id="ref-Carter2016">
-<p>Carter, Jane V., Jianmin Pan, Shesh N. Rai, and Susan Galandiuk. 2016. “ROC-ing along: Evaluation and interpretation of receiver operating characteristic curves.” <em>Surgery</em> 159 (6). Mosby: 1638–45. doi:<a href="https://doi.org/10.1016/j.surg.2015.12.029">10.1016/j.surg.2015.12.029</a>.</p>
+<p>Carter, Jane V., Jianmin Pan, Shesh N. Rai, and Susan Galandiuk. 2016. “ROC-ing along: Evaluation and interpretation of receiver operating characteristic curves.” <em>Surgery</em> 159 (6). Mosby: 1638–45. <a href="https://doi.org/10.1016/j.surg.2015.12.029">https://doi.org/10.1016/j.surg.2015.12.029</a>.</p>
 </div>
 <div id="ref-Choy2010">
-<p>Choy, John S., Sijie Wei, Ju Yeon Lee, Song Tan, Steven Chu, and Tae Hee Lee. 2010. “DNA methylation increases nucleosome compaction and rigidity.” <em>Journal of the American Chemical Society</em> 132 (6). American Chemical Society: 1782–3. doi:<a href="https://doi.org/10.1021/ja910264z">10.1021/ja910264z</a>.</p>
+<p>Choy, John S., Sijie Wei, Ju Yeon Lee, Song Tan, Steven Chu, and Tae Hee Lee. 2010. “DNA methylation increases nucleosome compaction and rigidity.” <em>Journal of the American Chemical Society</em> 132 (6). American Chemical Society: 1782–3. <a href="https://doi.org/10.1021/ja910264z">https://doi.org/10.1021/ja910264z</a>.</p>
 </div>
 <div id="ref-Greiner2000">
-<p>Greiner, M, D Pfeiffer, and R D Smith. 2000. “Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests.” <em>Preventive Veterinary Medicine</em> 45 (1-2): 23–41. doi:<a href="https://doi.org/10.1016/S0167-5877(00)00115-X">10.1016/S0167-5877(00)00115-X</a>.</p>
+<p>Greiner, M, D Pfeiffer, and R D Smith. 2000. “Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests.” <em>Preventive Veterinary Medicine</em> 45 (1-2): 23–41. <a href="https://doi.org/10.1016/S0167-5877(00)00115-X">https://doi.org/10.1016/S0167-5877(00)00115-X</a>.</p>
 </div>
 <div id="ref-Harpaz2013">
-<p>Harpaz, Rave, William DuMouchel, Paea LePendu, Anna Bauer-Mehren, Patrick Ryan, and Nigam H Shah. 2013. “Performance of Pharmacovigilance Signal Detection Algorithms for the FDA Adverse Event Reporting System.” <em>Clin Pharmacol Ther</em> 93 (6): 1–19. doi:<a href="https://doi.org/10.1038/clpt.2013.24.Performance">10.1038/clpt.2013.24.Performance</a>.</p>
+<p>Harpaz, Rave, William DuMouchel, Paea LePendu, Anna Bauer-Mehren, Patrick Ryan, and Nigam H Shah. 2013. “Performance of Pharmacovigilance Signal Detection Algorithms for the FDA Adverse Event Reporting System.” <em>Clin Pharmacol Ther</em> 93 (6): 1–19. <a href="https://doi.org/10.1038/clpt.2013.24.Performance">https://doi.org/10.1038/clpt.2013.24.Performance</a>.</p>
 </div>
 <div id="ref-Kruspe2017">
-<p>Kruspe, Sven, David D. Dickey, Kevin T. Urak, Giselle N. Blanco, Matthew J. Miller, Karen C. Clark, Elliot Burghardt, et al. 2017. “Rapid and Sensitive Detection of Breast Cancer Cells in Patient Blood with Nuclease-Activated Probe Technology.” <em>Molecular Therapy - Nucleic Acids</em> 8 (September). Cell Press: 542–57. doi:<a href="https://doi.org/10.1016/j.omtn.2017.08.004">10.1016/j.omtn.2017.08.004</a>.</p>
+<p>Kruspe, Sven, David D. Dickey, Kevin T. Urak, Giselle N. Blanco, Matthew J. Miller, Karen C. Clark, Elliot Burghardt, et al. 2017. “Rapid and Sensitive Detection of Breast Cancer Cells in Patient Blood with Nuclease-Activated Probe Technology.” <em>Molecular Therapy - Nucleic Acids</em> 8 (September). Cell Press: 542–57. <a href="https://doi.org/10.1016/j.omtn.2017.08.004">https://doi.org/10.1016/j.omtn.2017.08.004</a>.</p>
 </div>
 <div id="ref-lopez2014">
-<p>López-Ratón, Mónica, Mar<span class="math inline">\(\backslash\)</span>’<span class="math inline">\(\backslash\)</span>ia Xosé Rodríguez-Álvarez, Carmen Cadarso-Suárez, Francisco Gude-Sampedro, and Others. 2014. “OptimalCutpoints: an R package for selecting optimal cutpoints in diagnostic tests.” <em>Journal of Statistical Software</em> 61 (8). Foundation for Open Access Statistics: 1–36. <a href="https://www.jstatsoft.org/article/view/v061i08" class="uri">https://www.jstatsoft.org/article/view/v061i08</a>.</p>
+<p>López-Ratón, Mónica, Mar<span class="math inline">\(\backslash\)</span>’<span class="math inline">\(\backslash\)</span>ia Xosé Rodríguez-Álvarez, Carmen Cadarso-Suárez, Francisco Gude-Sampedro, and Others. 2014. “OptimalCutpoints: an R package for selecting optimal cutpoints in diagnostic tests.” <em>Journal of Statistical Software</em> 61 (8). Foundation for Open Access Statistics: 1–36. <a href="https://www.jstatsoft.org/article/view/v061i08">https://www.jstatsoft.org/article/view/v061i08</a>.</p>
 </div>
 <div id="ref-Sanchez2016">
-<p>Sanchez, Robersy, and Sally A. Mackenzie. 2016. “Information Thermodynamics of Cytosine DNA Methylation.” Edited by Barbara Bardoni. <em>PLOS ONE</em> 11 (3). Public Library of Science: e0150427. doi:<a href="https://doi.org/10.1371/journal.pone.0150427">10.1371/journal.pone.0150427</a>.</p>
+<p>Sanchez, Robersy, and Sally A. Mackenzie. 2016. “Information Thermodynamics of Cytosine DNA Methylation.” Edited by Barbara Bardoni. <em>PLOS ONE</em> 11 (3). Public Library of Science: e0150427. <a href="https://doi.org/10.1371/journal.pone.0150427">https://doi.org/10.1371/journal.pone.0150427</a>.</p>
 </div>
 <div id="ref-Sanchez2019">
-<p>Sanchez, Robersy, Xiaodong Yang, Thomas Maher, and Sally Mackenzie. 2019. “Discrimination of DNA Methylation Signal from Background Variation for Clinical Diagnostics.” <em>Int. J. Mol. Sci.</em> 20 (21): 5343. doi:<a href="https://doi.org/https://doi.org/10.3390/ijms20215343">https://doi.org/10.3390/ijms20215343</a>.</p>
+<p>Sanchez, Robersy, Xiaodong Yang, Thomas Maher, and Sally Mackenzie. 2019. “Discrimination of DNA Methylation Signal from Background Variation for Clinical Diagnostics.” <em>Int. J. Mol. Sci.</em> 20 (21): 5343. <a href="https://doi.org/https://doi.org/10.3390/ijms20215343">https://doi.org/https://doi.org/10.3390/ijms20215343</a>.</p>
 </div>
 <div id="ref-Severin2011">
-<p>Severin, Philip M D, Xueqing Zou, Hermann E Gaub, and Klaus Schulten. 2011. “Cytosine methylation alters DNA mechanical properties.” <em>Nucleic Acids Research</em> 39 (20): 8740–51. doi:<a href="https://doi.org/10.1093/nar/gkr578">10.1093/nar/gkr578</a>.</p>
+<p>Severin, Philip M D, Xueqing Zou, Hermann E Gaub, and Klaus Schulten. 2011. “Cytosine methylation alters DNA mechanical properties.” <em>Nucleic Acids Research</em> 39 (20): 8740–51. <a href="https://doi.org/10.1093/nar/gkr578">https://doi.org/10.1093/nar/gkr578</a>.</p>
 </div>
 <div id="ref-Youden1950">
-<p>Youden, W. J. 1950. “Index for rating diagnostic tests.” <em>Cancer</em> 3 (1): 32–35. doi:<a href="https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3">10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3</a>.</p>
+<p>Youden, W. J. 1950. “Index for rating diagnostic tests.” <em>Cancer</em> 3 (1): 32–35. <a href="https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3">https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3</a>.</p>
 </div>
 </div>
 </div>
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 1.19.2.1:</p>
-<pre><code>#&gt; R version 3.6.0 (2019-04-26)
-#&gt; Platform: x86_64-redhat-linux-gnu (64-bit)
-#&gt; Running under: CentOS Linux 7 (Core)
+<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.3.1:</p>
+<pre><code>#&gt; R version 3.6.3 (2020-02-29)
+#&gt; Platform: x86_64-pc-linux-gnu (64-bit)
+#&gt; Running under: Ubuntu 18.04.4 LTS
 #&gt; 
 #&gt; Matrix products: default
-#&gt; BLAS/LAPACK: /usr/lib64/R/lib/libRblas.so
+#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.7.1
+#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.7.1
 #&gt; 
 #&gt; locale:
 #&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -669,57 +671,58 @@ document.addEventListener("DOMContentLoaded", function() {
 #&gt; other attached packages:
 #&gt; [1] MethylIT_0.3.2       rtracklayer_1.44.4   GenomicRanges_1.36.1
 #&gt; [4] GenomeInfoDb_1.20.0  IRanges_2.18.3       S4Vectors_0.22.1    
-#&gt; [7] BiocGenerics_0.30.0  BiocStyle_2.15.8    
+#&gt; [7] BiocGenerics_0.30.0  BiocStyle_2.15.6    
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
 #&gt;  [1] nlme_3.1-145                bitops_1.0-6               
-#&gt;  [3] matrixStats_0.56.0          fs_1.3.2                   
+#&gt;  [3] matrixStats_0.56.0          fs_1.4.0                   
 #&gt;  [5] bit64_0.9-7                 lubridate_1.7.4            
-#&gt;  [7] rprojroot_1.3-2             tools_3.6.0                
+#&gt;  [7] rprojroot_1.3-2             tools_3.6.3                
 #&gt;  [9] backports_1.1.5             R6_2.4.1                   
 #&gt; [11] rpart_4.1-15                DBI_1.1.0                  
 #&gt; [13] colorspace_1.4-1            nnet_7.3-13                
 #&gt; [15] withr_2.1.2                 tidyselect_1.0.0           
-#&gt; [17] bit_1.1-15.2                compiler_3.6.0             
-#&gt; [19] Biobase_2.44.0              desc_1.2.0                 
-#&gt; [21] DelayedArray_0.10.0         bookdown_0.18              
-#&gt; [23] scales_1.1.0                genefilter_1.66.0          
-#&gt; [25] pkgdown_1.5.1.9000          stringr_1.4.0              
-#&gt; [27] digest_0.6.25               Rsamtools_2.0.3            
-#&gt; [29] rmarkdown_2.1               XVector_0.24.0             
-#&gt; [31] pkgconfig_2.0.3             htmltools_0.4.0            
-#&gt; [33] rlang_0.4.5                 RSQLite_2.2.0              
-#&gt; [35] rstudioapi_0.11             generics_0.0.2             
-#&gt; [37] BiocParallel_1.18.1         dplyr_0.8.5                
-#&gt; [39] ModelMetrics_1.2.2.2        nls2_0.2                   
-#&gt; [41] RCurl_1.98-1.1              magrittr_1.5               
-#&gt; [43] GenomeInfoDbData_1.2.1      Matrix_1.2-18              
-#&gt; [45] Rcpp_1.0.4                  munsell_0.5.0              
-#&gt; [47] lifecycle_0.1.0             stringi_1.4.6              
-#&gt; [49] pROC_1.16.1                 yaml_2.2.1                 
-#&gt; [51] MASS_7.3-51.5               SummarizedExperiment_1.14.1
-#&gt; [53] zlibbioc_1.30.0             plyr_1.8.6                 
-#&gt; [55] recipes_0.1.10              blob_1.2.1                 
-#&gt; [57] grid_3.6.0                  crayon_1.3.4               
-#&gt; [59] lattice_0.20-40             Biostrings_2.52.0          
-#&gt; [61] splines_3.6.0               annotate_1.62.0            
-#&gt; [63] knitr_1.28                  pillar_1.4.3               
-#&gt; [65] reshape2_1.4.3              codetools_0.2-16           
-#&gt; [67] XML_3.99-0.3                glue_1.3.2                 
-#&gt; [69] evaluate_0.14               data.table_1.12.8          
-#&gt; [71] BiocManager_1.30.10         vctrs_0.2.4                
-#&gt; [73] foreach_1.4.8               gtable_0.3.0               
-#&gt; [75] purrr_0.3.3                 assertthat_0.2.1           
-#&gt; [77] ggplot2_3.3.0               xfun_0.12                  
-#&gt; [79] gower_0.2.1                 prodlim_2019.11.13         
-#&gt; [81] xtable_1.8-4                e1071_1.7-3                
-#&gt; [83] ArgumentCheck_0.10.2        class_7.3-15               
-#&gt; [85] survival_3.1-11             timeDate_3043.102          
-#&gt; [87] minpack.lm_1.2-1            tibble_2.1.3               
-#&gt; [89] iterators_1.0.12            AnnotationDbi_1.46.1       
-#&gt; [91] GenomicAlignments_1.20.1    memoise_1.1.0              
-#&gt; [93] lava_1.6.7                  caret_6.0-86               
-#&gt; [95] ipred_0.9-9</code></pre>
+#&gt; [17] bit_1.1-15.2                compiler_3.6.3             
+#&gt; [19] cli_2.0.2                   Biobase_2.44.0             
+#&gt; [21] desc_1.2.0                  DelayedArray_0.10.0        
+#&gt; [23] bookdown_0.18               scales_1.1.0               
+#&gt; [25] genefilter_1.66.0           pkgdown_1.5.0              
+#&gt; [27] stringr_1.4.0               digest_0.6.25              
+#&gt; [29] Rsamtools_2.0.3             rmarkdown_2.1.1            
+#&gt; [31] XVector_0.24.0              pkgconfig_2.0.3            
+#&gt; [33] htmltools_0.4.0             rlang_0.4.5                
+#&gt; [35] RSQLite_2.2.0               rstudioapi_0.11            
+#&gt; [37] generics_0.0.2              BiocParallel_1.18.1        
+#&gt; [39] dplyr_0.8.5                 ModelMetrics_1.2.2.2       
+#&gt; [41] nls2_0.2                    RCurl_1.98-1.1             
+#&gt; [43] magrittr_1.5                GenomeInfoDbData_1.2.1     
+#&gt; [45] Matrix_1.2-18               Rcpp_1.0.4                 
+#&gt; [47] munsell_0.5.0               fansi_0.4.1                
+#&gt; [49] lifecycle_0.2.0             pROC_1.16.2                
+#&gt; [51] stringi_1.4.6               yaml_2.2.1                 
+#&gt; [53] MASS_7.3-51.5               SummarizedExperiment_1.14.1
+#&gt; [55] zlibbioc_1.30.0             plyr_1.8.6                 
+#&gt; [57] recipes_0.1.10              blob_1.2.1                 
+#&gt; [59] grid_3.6.3                  crayon_1.3.4               
+#&gt; [61] lattice_0.20-40             Biostrings_2.52.0          
+#&gt; [63] splines_3.6.3               annotate_1.56.1            
+#&gt; [65] knitr_1.28                  pillar_1.4.3               
+#&gt; [67] reshape2_1.4.3              codetools_0.2-16           
+#&gt; [69] XML_3.99-0.3                glue_1.3.2                 
+#&gt; [71] evaluate_0.14               data.table_1.12.8          
+#&gt; [73] BiocManager_1.30.10         vctrs_0.2.4                
+#&gt; [75] foreach_1.5.0               gtable_0.3.0               
+#&gt; [77] purrr_0.3.3                 assertthat_0.2.1           
+#&gt; [79] ggplot2_3.3.0               xfun_0.12                  
+#&gt; [81] gower_0.2.1                 prodlim_2019.11.13         
+#&gt; [83] xtable_1.8-4                e1071_1.7-3                
+#&gt; [85] ArgumentCheck_0.10.2        class_7.3-16               
+#&gt; [87] survival_3.1-11             timeDate_3043.102          
+#&gt; [89] minpack.lm_1.2-1            tibble_3.0.0               
+#&gt; [91] iterators_1.0.12            AnnotationDbi_1.46.1       
+#&gt; [93] GenomicAlignments_1.20.1    memoise_1.1.0              
+#&gt; [95] lava_1.6.7                  ellipsis_0.3.0             
+#&gt; [97] caret_6.0-86                ipred_0.9-9</code></pre>
 </div>
   </div>
 
@@ -738,7 +741,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>
