@@ -49,6 +49,7 @@
 <meta property="og:title" content="Nonlinear fit of Generalized Gamma CDF (GGamma) — fitGGammaDist" />
 <meta property="og:description" content="This function performs the nonlinear fit of GGamma CDF of a
 variable x" />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -122,7 +123,15 @@ variable x" />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
   </ul>
 </li>
@@ -206,7 +215,7 @@ with four parameters (GGamma4P).</p></td>
     </tr>
     <tr>
       <th>sample.size</th>
-      <td><p>size of the sample.</p></td>
+      <td><p>Minimum size of the sample.</p></td>
     </tr>
     <tr>
       <th>npoints</th>
@@ -291,43 +300,43 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
 <span class='co'>## Fitting GGamma3P</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggamma.html'>rggamma</a></span>(<span class='fl'>3000</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1.03</span>, <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1.1</span>)
-<span class='fu'>fitGGammaDist</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 3P Gamma distribution model  values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
-#&gt; alpha 1.0646012 0.001915538 555.7714         0 0.999999998182352
-#&gt; scale 1.1382888 0.002872487 396.2730         0                  
-#&gt; psi   0.7383894 0.001898631 388.9062         0                  
+<span class='fu'>fitGGammaDist</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 3P Gamma distribution model 3000 values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
+#&gt; alpha 1.0646011 0.001915538 555.7713         0 0.999999998182352
+#&gt; scale 1.1382887 0.002872487 396.2729         0                  
+#&gt; psi   0.7383895 0.001898632 388.9061         0                  
 #&gt;                     rho       R.Cross.val                  DEV
-#&gt; alpha 0.999999998178102 0.999951580153113 4.54108853940503e-07
+#&gt; alpha 0.999999998178102 0.999951555969796 4.54108853939058e-07
 #&gt; scale                                                         
 #&gt; psi                                                           
-#&gt;                     AIC               BIC     COV.alpha     COV.scale
-#&gt; alpha -26558.6964028123 -26534.6709325417  3.669286e-06  5.367184e-06
-#&gt; scale                                      5.367184e-06  8.251180e-06
-#&gt; psi                                       -3.602362e-06 -5.426152e-06
+#&gt;                     AIC              BIC     COV.alpha     COV.scale
+#&gt; alpha -26558.6966245116 -26534.671154241  3.669287e-06  5.367186e-06
+#&gt; scale                                     5.367186e-06  8.251183e-06
+#&gt; psi                                      -3.602364e-06 -5.426154e-06
 #&gt;             COV.psi COV.mu    N    model
-#&gt; alpha -3.602362e-06     NA 3000 GGamma3P
-#&gt; scale -5.426152e-06     NA 3000         
-#&gt; psi    3.604800e-06     NA 3000         </div><div class='input'><span class='co'>## Fitting GGamma4P</span>
+#&gt; alpha -3.602364e-06     NA 3000 GGamma3P
+#&gt; scale -5.426154e-06     NA 3000         
+#&gt; psi    3.604802e-06     NA 3000         </div><div class='input'><span class='co'>## Fitting GGamma4P</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> + <span class='fl'>1</span>
-<span class='fu'>fitGGammaDist</span>(<span class='no'>x</span>, <span class='kw'>location.par</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 4P Gamma distribution model  values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate   Std. Error    t value Pr(&gt;|t|))      Adj.R.Square
-#&gt; alpha 1.0322907 2.213369e-03   466.3889         0 0.999999998586538
-#&gt; scale 1.0778308 3.744285e-03   287.8602         0                  
-#&gt; mu    0.9981787 6.792417e-05 14695.4860         0                  
-#&gt; psi   0.7795589 2.616766e-03   297.9093         0                  
+<span class='fu'>fitGGammaDist</span>(<span class='no'>x</span>, <span class='kw'>location.par</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 4P Gamma distribution model 3000 values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate   Std. Error    t value Pr(&gt;|t|))      Adj.R.Square
+#&gt; alpha 1.0322905 2.213370e-03   466.3886         0 0.999999998586538
+#&gt; scale 1.0778304 3.744287e-03   287.8600         0                  
+#&gt; mu    0.9981787 6.792419e-05 14695.4819         0                  
+#&gt; psi   0.7795591 2.616769e-03   297.9091         0                  
 #&gt;                     rho       R.Cross.val                  DEV
-#&gt; alpha 0.999999998582287 0.999955205847209 3.53012009554565e-07
+#&gt; alpha 0.999999998582287 0.999955221091242 3.53012009550131e-07
 #&gt; scale                                                         
 #&gt; mu                                                            
 #&gt; psi                                                           
 #&gt;                     AIC               BIC     COV.alpha     COV.scale
-#&gt; alpha -26809.4736683803 -26779.4418305421  4.899002e-06  8.156166e-06
-#&gt; scale                                      8.156166e-06  1.401967e-05
-#&gt; mu                                         8.893837e-08  1.675479e-07
-#&gt; psi                                       -5.736769e-06 -9.779585e-06
+#&gt; alpha -26809.4737620864 -26779.4419242481  4.899005e-06  8.156174e-06
+#&gt; scale                                      8.156174e-06  1.401969e-05
+#&gt; mu                                         8.893848e-08  1.675482e-07
+#&gt; psi                                       -5.736776e-06 -9.779601e-06
 #&gt;             COV.psi        COV.mu    N    model
-#&gt; alpha  8.893837e-08 -5.736769e-06 3000 GGamma4P
-#&gt; scale  1.675479e-07 -9.779585e-06 3000         
-#&gt; mu     4.613693e-09 -1.174770e-07 3000         
-#&gt; psi   -1.174770e-07  6.847465e-06 3000         </div><div class='input'>
+#&gt; alpha  8.893848e-08 -5.736776e-06 3000 GGamma4P
+#&gt; scale  1.675482e-07 -9.779601e-06 3000         
+#&gt; mu     4.613695e-09 -1.174772e-07 3000         
+#&gt; psi   -1.174772e-07  6.847478e-06 3000         </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -344,7 +353,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

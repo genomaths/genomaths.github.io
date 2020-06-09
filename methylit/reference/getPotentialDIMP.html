@@ -51,6 +51,7 @@
 carrying the potential methylation signal. The potential signals from
 controls and treatments are used as prior classification in further step
 of signal detection." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -124,7 +125,15 @@ of signal detection." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
   </ul>
 </li>
@@ -210,13 +219,21 @@ meta-column.</p></td>
     <tr>
       <th>dist.name</th>
       <td><p>Name of the fitted distribution. This could be the name of
-one distribution or a characters vector of length(nlms). Default is two
-parameters Weibull distribution: 'Weibull2P'. The available options are
-Weibull three- parameters ('Weibull3P'), gamma with three-parameter
-('Gamma3P'), gamma with two-parameter ('Gamma2P'), generalized gamma with
-three-parameter ('GGamma3P') or four-parameter ('GGamma4P'), the
-empirical cumulative distribution function ('ECDF') or 'None'. If
-<strong>dist.name != 'None'</strong>, and <strong>nlms != NULL</strong>, then a column
+one distribution or a characters vector of length(nlms). Default is the
+two parameters Weibull distribution: 'Weibull2P'. The available options
+are:</p><dl'>
+<dt><strong>"Weibull2P"</strong></dt><dd><p>Weibull with two-parameters.</p></dd>
+<dt><strong>"Weibull3P"</strong></dt><dd><p>Weibull with three-parameters.</p></dd>
+<dt><strong>"Gamma2P"</strong></dt><dd><p>Gamma with two-parameters.</p></dd>
+<dt><strong>"Gamma3P"</strong></dt><dd><p>Gamma with three-parameters.</p></dd>
+<dt><strong>"GGamma3P"</strong></dt><dd><p>Generalized gamma with three-parameters.</p></dd>
+<dt><strong>"GGamma4P"</strong></dt><dd><p>Generalized gamma with four-parameters.</p></dd>
+<dt><strong>"ECDF"</strong></dt><dd><p>The empirical cumulative distribution function.</p></dd>
+<dt><strong>"None"</strong></dt><dd><p>No distribution.</p></dd>
+
+</dl>
+
+<p>If <strong>dist.name != 'None'</strong>, and <strong>nlms != NULL</strong>, then a column
 named 'wprob' with a probability vector derived from the application of
 model 'nlms' will be returned.</p></td>
     </tr>
@@ -313,7 +330,7 @@ distribution model that has been supplied.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

@@ -132,6 +132,7 @@ linear model." />
     <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
+    <li class="divider"></li>
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
@@ -262,7 +263,7 @@ treatment is differentially expressed in respect to the control</p></td>
     </tr>
     <tr>
       <th>pvalCutOff</th>
-      <td><p>cutoff used then a p-value adjustment is performed</p></td>
+      <td><p>cutoff used then a p-value adjustment is performed.</p></td>
     </tr>
     <tr>
       <th>MVrate</th>
@@ -347,24 +348,18 @@ The experimental design settings must be introduced using function
 #&gt;    gene98     chr2 194001-195001      * |        34        39       116
 #&gt;   gene101     chr2 200001-201001      * |       166       168       117
 #&gt;   gene114     chr2 226001-227001      * |        33        34       111
-#&gt;                  B2             log2FC  scaled.deviance               pvalue
-#&gt;           &lt;integer&gt;          &lt;numeric&gt;        &lt;numeric&gt;            &lt;numeric&gt;
-#&gt;    gene69       102  0.568790164211464 5.83269393556315   0.0174630326603942
-#&gt;    gene98       151   1.29678921725186 16.6046066059768 9.64429134876082e-05
-#&gt;   gene101        71 -0.574699030146751  13.083046592507 0.000300075021226224
-#&gt;   gene114       158   1.39001876021087 13.7507594566238 0.000343173594743556
-#&gt;                    model             adj.pval   CT.SignalDensity
-#&gt;                 &lt;factor&gt;            &lt;numeric&gt;          &lt;numeric&gt;
-#&gt;    gene69 Neg.Binomial.W   0.0174630326603942 0.0619380619380619
-#&gt;    gene98 Neg.Binomial.W 0.000385771653950433 0.0364635364635365
-#&gt;   gene101   Neg.Binomial 0.000457564792991408  0.166833166833167
-#&gt;   gene114 Neg.Binomial.W 0.000457564792991408 0.0334665334665335
-#&gt;             TT.SignalDensity SignalDensityVariation
-#&gt;                    &lt;numeric&gt;              &lt;numeric&gt;
-#&gt;    gene69  0.109390609390609     0.0474525474525475
-#&gt;    gene98  0.133366633366633     0.0969030969030969
-#&gt;   gene101 0.0939060939060939    -0.0729270729270729
-#&gt;   gene114  0.134365634365634      0.100899100899101
+#&gt;                  B2    log2FC scaled.deviance      pvalue        model
+#&gt;           &lt;integer&gt; &lt;numeric&gt;       &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;
+#&gt;    gene69       102  0.568790         26.6591 4.17023e-07 Neg.Binomial
+#&gt;    gene98       151  1.296789         82.6185 9.57148e-18 Neg.Binomial
+#&gt;   gene101        71 -0.574699         13.0830 3.00075e-04 Neg.Binomial
+#&gt;   gene114       158  1.390019         64.7083 7.92421e-15 Neg.Binomial
+#&gt;              adj.pval CT.SignalDensity TT.SignalDensity SignalDensityVariation
+#&gt;             &lt;numeric&gt;        &lt;numeric&gt;        &lt;numeric&gt;              &lt;numeric&gt;
+#&gt;    gene69 5.56031e-07        0.0619381        0.1093906              0.0474525
+#&gt;    gene98 3.82859e-17        0.0364635        0.1333666              0.0969031
+#&gt;   gene101 3.00075e-04        0.1668332        0.0939061             -0.0729271
+#&gt;   gene114 1.58484e-14        0.0334665        0.1343656              0.1008991
 #&gt;   -------
 #&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</div><div class='input'>
 </div></pre>
@@ -383,7 +378,7 @@ The experimental design settings must be introduced using function
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

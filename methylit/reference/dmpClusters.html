@@ -47,10 +47,11 @@
 
 
 <meta property="og:title" content="DMP clustering — dmpClusters" />
-<meta property="og:description" content="Given a 'pDMP' object carrying DMPs obtained in Methyl-IT
-downstream analysis, function 'dmpClusters' build
-clusters of DMPs, which can be further tested to identify differentially
-methylated regions (DMRs) with countTest2 function." />
+<meta property="og:description" content="Given a 'pDMP' (or 'InfDiv') object carrying DMPs (methylated
+cytosines) detected in Methyl-IT downstream analysis, function
+'dmpClusters' build clusters of DMPs, which can be further
+tested to identify differentially methylated regions (DMRs) with
+countTest2 function." />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
@@ -131,6 +132,7 @@ methylated regions (DMRs) with countTest2 function." />
     <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
+    <li class="divider"></li>
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
@@ -173,10 +175,11 @@ methylated regions (DMRs) with countTest2 function." />
     </div>
 
     <div class="ref-description">
-    <p>Given a 'pDMP' object carrying DMPs obtained in Methyl-IT
-downstream analysis, function <strong><em>'dmpClusters'</em></strong> build
-clusters of DMPs, which can be further tested to identify differentially
-methylated regions (DMRs) with <code><a href='countTest2.html'>countTest2</a></code> function.</p>
+    <p>Given a 'pDMP' (or 'InfDiv') object carrying DMPs (methylated
+cytosines) detected in Methyl-IT downstream analysis, function
+<strong><em>'dmpClusters'</em></strong> build clusters of DMPs, which can be further
+tested to identify differentially methylated regions (DMRs) with
+<code><a href='countTest2.html'>countTest2</a></code> function.</p>
     </div>
 
     <pre class="usage"><span class='fu'>dmpClusters</span>(
@@ -186,6 +189,7 @@ methylated regions (DMRs) with <code><a href='countTest2.html'>countTest2</a></c
   <span class='kw'>maxClustDist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"relaxed"</span>, <span class='st'>"fixed.int"</span>),
   <span class='kw'>chromosomes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>9L</span>,
   <span class='kw'>ignore.strand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
   <span class='kw'>tasks</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
@@ -224,11 +228,12 @@ Default: \(minNumDMPs = 1\).</p></td>
 <dt><strong>"relaxed":</strong></dt><dd><p>DMP ranges which are separated by a distance
 less than <em>'maxClustDist'</em> are merged and ranges with less
 than <em>'minNumDMPs'</em> are removed.</p></dd>
-<dt><strong>"fixed.int":</strong></dt><dd><p>It will gnetate a partition where the distance
-between consecutive DMPs is not greater than <em>'maxDist'</em>.
-Ranges with less than <em>'minNumDMPs'</em> are removed. If,
-aditionally, a value <em>maxClustDist &gt; 0 </em> is provided, then the
-"relaxed" approach is applied to the ranges from the first step.</p></dd>
+<dt><strong>"fixed.int":</strong></dt><dd><p>It will generate a partition where the
+distance between consecutive DMPs is not greater than
+<em>'maxDist'</em>. Ranges with less than <em>'minNumDMPs'</em> are
+removed. If, additionally, a value <em>maxClustDist &gt; 0 </em> is
+provided, then the "relaxed" approach is applied to the ranges from
+the first step.</p></dd>
 
 </dl></td>
     </tr>
@@ -236,6 +241,12 @@ aditionally, a value <em>maxClustDist &gt; 0 </em> is provided, then the
       <th>chromosomes</th>
       <td><p>vector of characters labeling the chromosomes included in
 the analysis. Default: chromosomes = NULL (all chromosomes are included).</p></td>
+    </tr>
+    <tr>
+      <th>columns</th>
+      <td><p>An integer number corresponding to the specific column(s) to
+use from the meta-column of each GRanges. Default values is 9 (the column
+carrying to the Hellinger divergence values).</p></td>
     </tr>
     <tr>
       <th>ignore.strand</th>
@@ -256,7 +267,7 @@ package).The number of tasks per job. value must be a scalar integer &gt;=
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Further parameters for uniqueGRanges function.</p></td>
+      <td><p>Further parameters for <code><a href='uniqueGRanges.html'>uniqueGRanges</a></code> function.</p></td>
     </tr>
     </table>
 
@@ -267,7 +278,7 @@ where DMPs were reported in at least one of the samples.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Two algorithmic approaches are implemented, named: "relaxed" and
-"fixed.int" (see the decription of parmeter 'method'). The "fixed.int" is
+"fixed.int" (see the description of parameter 'method'). The "fixed.int" is
 mostly addressed to find specific methylation patterns, but the price is
 the number of DMRs found is lower.</p>
 <p>The number of DMPs reported in each cluster corresponds to the numbers of
@@ -322,59 +333,46 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 <span class='no'>dmrs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='countTest2.html'>countTest2</a></span>(<span class='kw'>DS</span> <span class='kw'>=</span> <span class='no'>ds</span>, <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>4L</span>, <span class='kw'>minCountPerIndv</span> <span class='kw'>=</span> <span class='fl'>4</span>,
                 <span class='kw'>maxGrpCV</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>), <span class='kw'>Minlog2FC</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
                 <span class='kw'>CountPerBp</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>'LRT'</span>,
-                <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>*** Number of GR after filtering counts 92</span></div><div class='output co'>#&gt; <span class='message'>*** GLM...</span></div><div class='input'><span class='no'>dmrs</span></div><div class='output co'>#&gt; GRanges object with 22 ranges and 12 metadata columns:
+                <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>*** Number of GR after filtering counts 92</span></div><div class='output co'>#&gt; <span class='message'>*** GLM...</span></div><div class='input'><span class='no'>dmrs</span></div><div class='output co'>#&gt; GRanges object with 17 ranges and 12 metadata columns:
 #&gt;           seqnames        ranges strand |        A1        A2        B1
 #&gt;              &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;
 #&gt;    gene22     chr1   42001-43001      * |        44        53       187
 #&gt;    gene26     chr1   50001-51001      * |       174       139        32
 #&gt;    gene29     chr1   56001-57001      * |        12        19       129
-#&gt;    gene44     chr1   86001-87001      * |       110       173        23
 #&gt;    gene57     chr1 112001-113001      * |        25        94       187
+#&gt;    gene58     chr1 114001-115001      * |       131        70        28
 #&gt;       ...      ...           ...    ... .       ...       ...       ...
+#&gt;   gene101     chr2 200001-201001      * |       166       168       117
+#&gt;   gene104     chr2 206001-207001      * |       116        64       152
 #&gt;   gene106     chr2 210001-211001      * |       122        85         3
 #&gt;   gene107     chr2 212001-213001      * |       181       111        76
-#&gt;   gene113     chr2 224001-225001      * |       142       172        59
 #&gt;   gene114     chr2 226001-227001      * |        33        34       111
-#&gt;   gene117     chr2 232001-233001      * |        55        77        13
-#&gt;                  B2             log2FC  scaled.deviance               pvalue
-#&gt;           &lt;integer&gt;          &lt;numeric&gt;        &lt;numeric&gt;            &lt;numeric&gt;
-#&gt;    gene22        85   1.03109108779261 11.5705078723797 0.000670061144147836
-#&gt;    gene26        62  -1.20290840827015 30.9662853450191 2.62549774873693e-08
-#&gt;    gene29        64   1.82870298441974 29.4987592669987 5.59525099643946e-08
-#&gt;    gene44        88 -0.935916696330904  3.9493596280495   0.0468892079882497
-#&gt;    gene57       174   1.10975446522135 6.43211707492669    0.011207491350226
-#&gt;       ...       ...                ...              ...                  ...
-#&gt;   gene106        16  -2.38827981409893 30.9821950561452 2.60406378697818e-08
-#&gt;   gene107        21   -1.1020428237649 5.75602794152791   0.0164321785717638
-#&gt;   gene113       127 -0.523646312195051 3.84537303089257   0.0498834241817064
-#&gt;   gene114       158   1.39001876021087 15.1218903312962 0.000100787798473054
-#&gt;   gene117        43 -0.857450231851222 4.67402216233158   0.0306221309485589
-#&gt;                    model             adj.pval   CT.SignalDensity
-#&gt;              &lt;character&gt;            &lt;numeric&gt;          &lt;numeric&gt;
-#&gt;    gene22   Neg.Binomial   0.0012284454309377 0.0484515484515484
-#&gt;    gene26   Neg.Binomial 1.92536501574041e-07  0.156343656343656
-#&gt;    gene29   Neg.Binomial 3.07738804804171e-07 0.0154845154845155
-#&gt;    gene44   Neg.Binomial   0.0491220274162616  0.141358641358641
-#&gt;    gene57   Neg.Binomial   0.0164376539803314 0.0594405594405594
-#&gt;       ...            ...                  ...                ...
-#&gt;   gene106   Neg.Binomial 1.92536501574041e-07  0.103396603396603
-#&gt;   gene107   Neg.Binomial   0.0212651722693414  0.145854145854146
-#&gt;   gene113   Neg.Binomial   0.0498834241817064  0.156843156843157
-#&gt;   gene114 Neg.Binomial.W 0.000256868046468425 0.0334665334665335
-#&gt;   gene117   Neg.Binomial   0.0374270489371276 0.0659340659340659
-#&gt;              TT.SignalDensity SignalDensityVariation
-#&gt;                     &lt;numeric&gt;              &lt;numeric&gt;
-#&gt;    gene22   0.135864135864136     0.0874125874125874
-#&gt;    gene26   0.046953046953047     -0.109390609390609
-#&gt;    gene29  0.0964035964035964     0.0809190809190809
-#&gt;    gene44  0.0554445554445554    -0.0859140859140859
-#&gt;    gene57    0.18031968031968      0.120879120879121
-#&gt;       ...                 ...                    ...
-#&gt;   gene106 0.00949050949050949    -0.0939060939060939
-#&gt;   gene107  0.0484515484515484    -0.0974025974025974
-#&gt;   gene113  0.0929070929070929    -0.0639360639360639
-#&gt;   gene114   0.134365634365634      0.100899100899101
-#&gt;   gene117   0.027972027972028     -0.037962037962038
+#&gt;                  B2    log2FC scaled.deviance      pvalue        model
+#&gt;           &lt;integer&gt; &lt;numeric&gt;       &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;
+#&gt;    gene22        85   1.03109        11.57051 6.70061e-04 Neg.Binomial
+#&gt;    gene26        62  -1.20291        30.96629 2.62550e-08 Neg.Binomial
+#&gt;    gene29        64   1.82870        29.49876 5.59525e-08 Neg.Binomial
+#&gt;    gene57       174   1.10975         6.43212 1.12075e-02 Neg.Binomial
+#&gt;    gene58        41  -1.06920        15.04312 1.05082e-04 Neg.Binomial
+#&gt;       ...       ...       ...             ...         ...          ...
+#&gt;   gene101        71 -0.574699        13.08305 2.97980e-04 Neg.Binomial
+#&gt;   gene104       146  0.504137         6.60778 1.01534e-02 Neg.Binomial
+#&gt;   gene106        16 -2.388280        30.98220 2.60406e-08 Neg.Binomial
+#&gt;   gene107        21 -1.102043         5.75603 1.64322e-02 Neg.Binomial
+#&gt;   gene114       158  1.390019        64.70832 8.68475e-16 Neg.Binomial
+#&gt;              adj.pval CT.SignalDensity TT.SignalDensity SignalDensityVariation
+#&gt;             &lt;numeric&gt;        &lt;numeric&gt;        &lt;numeric&gt;              &lt;numeric&gt;
+#&gt;    gene22 2.37099e-03        0.0484515        0.1358641              0.0874126
+#&gt;    gene26 2.41546e-07        0.1563437        0.0469530             -0.1093906
+#&gt;    gene29 4.28969e-07        0.0154845        0.0964036              0.0809191
+#&gt;    gene57 3.22215e-02        0.0594406        0.1803197              0.1208791
+#&gt;    gene58 4.83379e-04        0.1003996        0.0344655             -0.0659341
+#&gt;       ...         ...              ...              ...                    ...
+#&gt;   gene101 1.14226e-03        0.1668332       0.09390609             -0.0729271
+#&gt;   gene104 3.11371e-02        0.0899101       0.14885115              0.0589411
+#&gt;   gene106 2.41546e-07        0.1033966       0.00949051             -0.0939061
+#&gt;   gene107 4.44635e-02        0.1458541       0.04845155             -0.0974026
+#&gt;   gene114 1.33166e-14        0.0334665       0.13436563              0.1008991
 #&gt;   -------
 #&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</div><div class='input'># }
 
@@ -394,7 +392,7 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

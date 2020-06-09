@@ -81,7 +81,7 @@ Youden Index." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.1</span>
       </span>
     </div>
 
@@ -129,8 +129,13 @@ Youden Index." />
     <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
+    <li class="divider"></li>
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -185,6 +190,7 @@ Youden Index.</p>
   <span class='no'>tv.cut</span>,
   <span class='no'>clas.perf</span>,
   <span class='no'>classifier</span>,
+  <span class='kw'>interactions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='no'>n.pc</span>,
   <span class='no'>prop</span>,
   <span class='kw'>cutp_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -210,6 +216,13 @@ Youden Index.</p>
       <th>classifier, n.pc, prop, cutp_data, num.cores, tasks</th>
       <td><p>Same as in
 <code><a href='estimateCutPoint.html'>estimateCutPoint</a></code></p></td>
+    </tr>
+    <tr>
+      <th>interactions</th>
+      <td><p>If a logistic classifier is used. Variable interactions to
+consider in a logistic regression model. Any pairwise combination of the
+variable 'hdiv', 'TV', 'wprob', and 'pos' can be provided. For example:
+'hdiv:TV', 'wprob:pos', 'wprob:TV', etc.</p></td>
     </tr>
     </table>
 
@@ -271,7 +284,7 @@ setting <em>simple = TRUE</em></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

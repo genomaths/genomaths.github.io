@@ -51,6 +51,7 @@ counts — poolFromGRlist • MethylIT</title>
 counts — poolFromGRlist" />
 <meta property="og:description" content="This function will build a GRanges methylation pool from a list
 of GRanges objects" />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -124,7 +125,15 @@ of GRanges objects" />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
   </ul>
 </li>
@@ -187,8 +196,15 @@ of GRanges objects</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>LR</th>
-      <td><p>list of GRanges objects to build a virtual individual (methylation
-pool)</p></td>
+      <td><p>List of GRanges objects to build a virtual individual (methylation
+pool). It is assumed that the list of GRanges was obtained with
+<code><a href='readCounts2GRangesList.html'>readCounts2GRangesList</a></code>. That is, the metacolumn from each
+GRanges object must contain the columns named 'mC' (number of reads
+signaling methylated cytosine) and 'uC' (number of reads signaling
+non-methylated cytosine). If more than two columns are carried on each
+GRanges object, then the parameter "columns" denoting the column numbers
+where "uC" and "mC" are located must be passed to
+<code><a href='uniqueGRanges.html'>uniqueGRanges</a></code> function.</p></td>
     </tr>
     <tr>
       <th>stat</th>
@@ -245,7 +261,7 @@ compute the corresponding mean. Default is jstat = 'sum'.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional parameters for 'uniqueGRanges' function.</p></td>
+      <td><p>Additional parameters for <code><a href='uniqueGRanges.html'>uniqueGRanges</a></code> function.</p></td>
     </tr>
     </table>
 
@@ -283,7 +299,7 @@ read counts of methylated and unmethylated cytosines, respectively.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

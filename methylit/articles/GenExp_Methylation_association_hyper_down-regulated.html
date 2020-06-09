@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.1</span>
       </span>
     </div>
 
@@ -90,6 +90,10 @@
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -123,7 +127,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Association Between Gene Expression and Cytosine DNA Methylation at gene-body</h1>
             
-            <h4 class="date">17 April 2020</h4>
+            <h4 class="date">09 June 2020</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/GenExp_Methylation_association_hyper_down-regulated.Rmd"><code>vignettes/GenExp_Methylation_association_hyper_down-regulated.Rmd</code></a></small>
       <div class="hidden name"><code>GenExp_Methylation_association_hyper_down-regulated.Rmd</code></div>
@@ -133,7 +137,7 @@
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      <p>This document is Supplementary Information for the manuscript: <em>“Segregation of an MSH1 RNAi transgene produces heritable non-genetic memory in association with methylome reprogramming”</em> (currently in Press). Statistical analysis supporting the association between gene expression and cytosine DNA methylation at gene-body is provided.</p>
+      <p>This document is Supplementary Information for the manuscript: <em>“Segregation of an MSH1 RNAi transgene produces heritable non-genetic memory in association with methylome reprogramming”</em> <span class="citation">(Yang et al. 2020)</span>. Statistical analysis supporting the association between gene expression and cytosine DNA methylation at gene-body is provided.</p>
     </div>
     
 <style type="text/css">
@@ -210,9 +214,8 @@ pre { /* Code block - determines code spacing between lines */
 <h1 class="hasAnchor">
 <a href="#required-r-packages" class="anchor"></a>Required R packages</h1>
 <p>With the exception of <em>usefr</em> R package, all the packages are available in Bioconductor and in CRAN repository. Package <em>usefr</em> is available in GitHub at <a href="https://github.com/genomaths/usefr" class="uri">https://github.com/genomaths/usefr</a> You can install usefr package from GitHub typing the following command in the R console:</p>
-<div class="sourceCode"><html><body><pre class="r"> <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_git</a></span>(<span class="st">"https://github.com/genomaths/usefr.git"</span>)</pre></body></html></div>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">GenomicRanges</span> )
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">DESeq2</span> )
+<div class="sourceCode" id="cb1"><html><body><pre class="r"> <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_git</a></span>(<span class="st">"https://github.com/genomaths/usefr.git"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">GenomicRanges</span> )
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">ggplot2</span> )
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">edgeR</span> )
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>( <span class="no">usefr</span> )
@@ -228,7 +231,7 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#data-sets" class="anchor"></a>Data sets</h2>
 <p>Gene expression data sets were derived using the R package edgeR. All the genes with the minimal quality of gene expression differences are included in the analyses. That is, to evaluate the existence of an association between gene expression and cytosine methylation all the genes with meaningful expression and methylation values must be included, regardless they would be differentially methylated and/or differentially expressed or not.</p>
 <p>Gene expression data for Arabidopsis Memory first generation (G1)</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co">## ===== Download methylation data from Github ========</span>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">## ===== Download methylation data from Github ========</span>
 <span class="no">url</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"github.com/genomaths/genomaths.github.io/raw/master/supp-inf/"</span>,
               <span class="st">"mm_nm_wt_transgen_meth_density_and_gene-exp_at_genes_06-01-19."</span>,
               <span class="st">"RData"</span>)
@@ -236,7 +239,7 @@ pre { /* Code block - determines code spacing between lines */
 <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="kw">url</span> <span class="kw">=</span> <span class="no">url</span>, <span class="kw">destfile</span> <span class="kw">=</span> <span class="no">temp</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="no">temp</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/files.html">file.remove</a></span>(<span class="no">temp</span>); <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="no">temp</span>, <span class="no">url</span>)</pre></body></html></div>
-<div class="sourceCode"><html><body><pre class="r"><span class="co">## Gene expresion data set</span>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co">## Gene expresion data set</span>
 <span class="no">deg_mm1_wt1</span></pre></body></html></div>
 <pre><code>## An object of class "DGEExact"
 ## $table
@@ -267,21 +270,21 @@ pre { /* Code block - determines code spacing between lines */
 ## 20284 more rows ...</code></pre>
 <p>Methylation dataset contains the densities of methylation levels from control (Col-0) and Memory lines samples at DMP on gene-body regions. Densities were computed using function <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/getGRegionsStat-methods.html">getGRegionsStat</a> from the R package <a href="https://github.com/genomaths/MethylIT.utils">MethylIT.utils</a>.</p>
 <p>Methylation data for a memory G1 sample</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dmp_den_genes</span>[, <span class="st">"M_1_105"</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">dmp_den_genes</span>[, <span class="st">"M_1_105"</span>]</pre></body></html></div>
 <pre><code>## GRanges object with 33164 ranges and 1 metadata column:
-##             seqnames            ranges strand |           M_1_105
-##                &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; |         &lt;numeric&gt;
-##   AT1G01010        1         3631-5899      * | 0.841606597314296
-##   AT1G01020        1         6788-9130      * | 0.389668082664022
-##   AT1G03987        1       11101-11372      * |                 0
-##   AT1G01030        1       11649-13714      * |                 0
-##   AT1G01040        1       23121-31227      * |  6.77614133961173
-##         ...      ...               ...    ... .               ...
-##   AT5G09945        5 26966885-26967079      * |                 0
-##   AT5G67630        5 26967378-26969400      * |  1.28800825215985
-##   AT5G67640        5 26969516-26970668      * |                 0
-##   AT5G09955        5 26971389-26971689      * |  1.05172431686648
-##   AT5G09965        5 26972177-26972644      * |                 0
+##             seqnames            ranges strand |   M_1_105
+##                &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt;
+##   AT1G01010        1         3631-5899      * |  0.841607
+##   AT1G01020        1         6788-9130      * |  0.389668
+##   AT1G03987        1       11101-11372      * |  0.000000
+##   AT1G01030        1       11649-13714      * |  0.000000
+##   AT1G01040        1       23121-31227      * |  6.776141
+##         ...      ...               ...    ... .       ...
+##   AT5G09945        5 26966885-26967079      * |   0.00000
+##   AT5G67630        5 26967378-26969400      * |   1.28801
+##   AT5G67640        5 26969516-26970668      * |   0.00000
+##   AT5G09955        5 26971389-26971689      * |   1.05172
+##   AT5G09965        5 26972177-26972644      * |   0.00000
 ##   -------
 ##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</code></pre>
 </div>
@@ -289,37 +292,37 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#dataset-for-the-first-generation" class="anchor"></a>Dataset for the first generation</h2>
 <p>The analysis will be performed with Memory line (M1) and wild type (WT1) control, both of them, MM1 and WT1, first generation G1.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">deg_mm1_wt1</span>), <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmp_den_genes</span>)))
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">deg_mm1_wt1</span>), <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmp_den_genes</span>)))
 <span class="no">dmp_den_m1</span> <span class="kw">&lt;-</span> <span class="no">dmp_den_genes</span>[<span class="no">idx</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"M_1_105"</span>, <span class="st">"M_1_168"</span>, <span class="st">"M_1_179"</span>, <span class="st">"M_1_27"</span>, <span class="st">"M_1_3"</span>)]
 <span class="no">dmp_den_wt1</span> <span class="kw">&lt;-</span> <span class="no">dmp_den_genes</span>[<span class="no">idx</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>( <span class="st">"W_1_1"</span>, <span class="st">"W_1_3"</span>, <span class="st">"W_1_4"</span>, <span class="st">"W_1_5"</span>)]</pre></body></html></div>
 <p>The means of methylation levels densities are computed for each group</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu">mcols</span>(<span class="no">dmp_den_wt1</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="fu">mcols</span>(<span class="no">dmp_den_wt1</span>)))
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu">mcols</span>(<span class="no">dmp_den_wt1</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="fu">mcols</span>(<span class="no">dmp_den_wt1</span>)))
 <span class="fu">mcols</span>(<span class="no">dmp_den_m1</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="fu">mcols</span>(<span class="no">dmp_den_m1</span>)))</pre></body></html></div>
 <p>The absolute difference of the group density means of methylation levels between control (Col-0) and Memory lines at gene-body regions (G1).</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dmp_den_wt1_mm1</span> <span class="kw">&lt;-</span> <span class="no">dmp_den_m1</span>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">dmp_den_wt1_mm1</span> <span class="kw">&lt;-</span> <span class="no">dmp_den_m1</span>
 <span class="fu">mcols</span>(<span class="no">dmp_den_wt1_mm1</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="fu">mcols</span>(<span class="no">dmp_den_m1</span>)) - <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="fu">mcols</span>(<span class="no">dmp_den_wt1</span>))
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="fu">mcols</span>(<span class="no">dmp_den_wt1_mm1</span>)) <span class="kw">&lt;-</span> <span class="st">"dmp_den"</span>
 <span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">dmp_den_wt1_mm1</span>$<span class="no">dmp_den</span> <span class="kw">&gt;</span> <span class="fl">0</span>)
 <span class="no">dmp_den_wt1_mm1</span> <span class="kw">&lt;-</span> <span class="no">dmp_den_wt1_mm1</span>[<span class="no">idx</span>]
 <span class="no">dmp_den_wt1_mm1</span></pre></body></html></div>
 <pre><code>## GRanges object with 20022 ranges and 1 metadata column:
-##             seqnames            ranges strand |           dmp_den
-##                &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; |         &lt;numeric&gt;
-##   AT1G01010        1         3631-5899      * |  0.73420351887307
-##   AT1G01020        1         6788-9130      * | 0.304498471436596
-##   AT1G01030        1       11649-13714      * |  0.18061788548009
-##   AT1G01040        1       23121-31227      * |  6.57147424273809
-##   AT1G01046        1       28500-28706      * |  2.59718529459093
-##         ...      ...               ...    ... .               ...
-##   AT4G40060        4 18571239-18573084      * | 0.166230374277071
-##   AT4G40065        4 18574503-18575585      * | 0.121346072492451
-##   AT4G40070        4 18576216-18577774      * | 0.151445536035052
-##   AT4G40085        4 18579194-18580702      * | 0.161782620001451
-##   AT4G40080        4 18579314-18580717      * | 0.141613257526915
+##             seqnames            ranges strand |   dmp_den
+##                &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt;
+##   AT1G01010        1         3631-5899      * |  0.734204
+##   AT1G01020        1         6788-9130      * |  0.304498
+##   AT1G01030        1       11649-13714      * |  0.180618
+##   AT1G01040        1       23121-31227      * |  6.571474
+##   AT1G01046        1       28500-28706      * |  2.597185
+##         ...      ...               ...    ... .       ...
+##   AT4G40060        4 18571239-18573084      * |  0.166230
+##   AT4G40065        4 18574503-18575585      * |  0.121346
+##   AT4G40070        4 18576216-18577774      * |  0.151446
+##   AT4G40085        4 18579194-18580702      * |  0.161783
+##   AT4G40080        4 18579314-18580717      * |  0.141613
 ##   -------
 ##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</code></pre>
 <p>Final variables: |<em>group means density differences</em>| and <span class="math inline">\(|logFC|\)</span>. For the sake of brevity and clarity, we shall call the first variable: <em>divergence of methylation densities</em> or simply <em>methylation divergence</em> (<span class="math inline">\(MD\)</span>).</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">.deg_mm1_wt1</span> <span class="kw">&lt;-</span> <span class="no">deg_mm1_wt1</span>[<span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmp_den_wt1_mm1</span>), <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">deg_mm1_wt1</span>)), ]
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">.deg_mm1_wt1</span> <span class="kw">&lt;-</span> <span class="no">deg_mm1_wt1</span>[<span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmp_den_wt1_mm1</span>), <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">deg_mm1_wt1</span>)), ]
 
 <span class="no">MD</span> <span class="kw">&lt;-</span> <span class="no">dmp_den_wt1_mm1</span>$<span class="no">dmp_den</span> <span class="co"># Methylation (|group mean density differences|)</span>
 <span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">.deg_mm1_wt1</span>$<span class="no">table</span>$<span class="no">logFC</span> <span class="kw">&lt;</span> <span class="fl">0</span> ) <span class="co"># Down-regulated</span>
@@ -327,19 +330,19 @@ pre { /* Code block - determines code spacing between lines */
 <span class="no">MD</span> <span class="kw">&lt;-</span> <span class="no">MD</span>[<span class="no">idx</span>]
 <span class="fu">DataFrame</span>(<span class="no">MD</span>,<span class="no">logFC</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 13962 rows and 2 columns
-##                      MD             logFC
-##               &lt;numeric&gt;         &lt;numeric&gt;
-## 1      0.73420351887307 0.600929845599646
-## 2     0.304498471436596 0.607292004858521
-## 3      0.18061788548009 0.254382322134163
-## 4      2.59718529459093  1.61271934905265
-## 5     0.823158202228347 0.515992565153794
-## ...                 ...               ...
-## 13958 0.383502955882139 0.371767534307594
-## 13959 0.532277135514465 0.136153352959339
-## 13960 0.166230374277071 0.201575615802405
-## 13961 0.161782620001451 0.115827555426699
-## 13962 0.141613257526915  1.62819472737334</code></pre>
+##              MD     logFC
+##       &lt;numeric&gt; &lt;numeric&gt;
+## 1      0.734204  0.600930
+## 2      0.304498  0.607292
+## 3      0.180618  0.254382
+## 4      2.597185  1.612719
+## 5      0.823158  0.515993
+## ...         ...       ...
+## 13958  0.383503  0.371768
+## 13959  0.532277  0.136153
+## 13960  0.166230  0.201576
+## 13961  0.161783  0.115828
+## 13962  0.141613  1.628195</code></pre>
 <p>There are 13962 genes to be included in the downstream analysis.</p>
 </div>
 <div id="distribution-of-the-divergence-of-methylation-level-density-at-gene-body--mm1-vs-wt1" class="section level2">
@@ -347,7 +350,7 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#distribution-of-the-divergence-of-methylation-level-density-at-gene-body--mm1-vs-wt1" class="anchor"></a>Distribution of the divergence of methylation level density at gene-body. MM1 vs WT1</h2>
 <p>Searching for the best fitted distribution functions by using R functions <a href="https://www.rdocumentation.org/packages/MASS/versions/7.3-51.4/topics/fitdistr">fitdistr</a> from <a href="https://www.rdocumentation.org/packages/MASS/versions/7.3-50">MASS</a> R package and <a href="https://genomaths.github.io/usefr_manual/fitCDF.html">fitCDF</a> from <a href="https://github.com/genomaths/usefr">usefr</a> R package did not yield a suitable results. The best fitted model was found for a mixture distribution model obtained with the function <a href="https://genomaths.github.io/usefr_manual/fitMixDist.html">fitMixDist</a> from <a href="https://github.com/genomaths/usefr">usefr</a> R package.</p>
 <p>The best fitted model for <span class="math inline">\(MD\)</span>, from comparison MM1 <em>vs</em> WT1, was a mixture of Log-Normal and Weibull distributions.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">MD</span>[ <span class="no">MD</span> <span class="kw">&gt;</span> <span class="fl">0</span>] <span class="co"># Weibull distribution is defineed for MD &gt; 0.</span>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">MD</span>[ <span class="no">MD</span> <span class="kw">&gt;</span> <span class="fl">0</span>] <span class="co"># Weibull distribution is defineed for MD &gt; 0.</span>
 
 <span class="no">meth_FIT</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitMixDist.html">fitMixDist</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">x</span>, <span class="kw">args</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">lnorm</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">meanlog</span> <span class="kw">=</span> <span class="fl">2.3</span>, <span class="kw">sdlog</span> <span class="kw">=</span> <span class="fl">0.7</span>),
                                      <span class="kw">weibull</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">2</span>)),
@@ -361,25 +364,25 @@ pre { /* Code block - determines code spacing between lines */
   |                                                                            
   |======================================================================| 100%
 ## *** Performing nonlinear regression model  crossvalidation...</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>(<span class="no">meth_FIT</span>$<span class="no">fit</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">meth_FIT</span>$<span class="no">fit</span>)</pre></body></html></div>
 <pre><code>## 
 ## Parameters:
 ##                Estimate Std. Error t value Pr(&gt;|t|)    
-## lnorm.meanlog -1.090082   0.005903 -184.65   &lt;2e-16 ***
-## lnorm.sdlog    0.654056   0.004619  141.60   &lt;2e-16 ***
-## weibull.shape  1.798826   0.019046   94.44   &lt;2e-16 ***
-## weibull.scale  1.496843   0.009545  156.83   &lt;2e-16 ***
+## lnorm.meanlog -1.090124   0.005904 -184.65   &lt;2e-16 ***
+## lnorm.sdlog    0.654024   0.004619  141.60   &lt;2e-16 ***
+## weibull.shape  1.798669   0.019043   94.45   &lt;2e-16 ***
+## weibull.scale  1.496789   0.009544  156.83   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 0.01926 on 1022 degrees of freedom
-## Number of iterations to termination: 26 
+## Number of iterations to termination: 27 
 ## Reason for termination: Relative error in the sum of squares is at most `ftol'.</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">meth_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">meth_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
 <pre><code>## 
-##  Mixture proportions (phi): 0.4119023 0.5880977</code></pre>
+##  Mixture proportions (phi): 0.4118521 0.5881479</code></pre>
 <p>The graphic for histogram and density distribution curves:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span> , <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span> , <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(<span class="no">x</span>, <span class="fl">240</span>, <span class="kw">freq</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="co">#ylim = c(0, 0.021), cex = 1,</span>
      <span class="kw">panel.first</span><span class="kw">=</span>{<span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="kw">pch</span><span class="kw">=</span><span class="fl">16</span>, <span class="kw">cex</span><span class="kw">=</span><span class="fl">1e6</span>, <span class="kw">col</span><span class="kw">=</span><span class="st">"grey95"</span>)
        <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span>(<span class="kw">col</span><span class="kw">=</span><span class="st">"white"</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">1</span>)}, <span class="kw">main</span> <span class="kw">=</span> <span class="no">text</span>,
@@ -399,7 +402,7 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#distribution-of-the-logfc--mm1-vs-wt1" class="anchor"></a>Distribution of the <span class="math inline">\(|logFC|\)</span>. MM1 vs WT1</h2>
 <p>The best fitted model for the <span class="math inline">\(|logFC|\)</span>, from comparison MM1 <em>vs</em> WT1, was a mixture of Gamma and Weibull distributions. Function <a href="https://genomaths.github.io/usefr_manual/fitMixDist.html">fitMixDist</a> calls the mixture function models set up in function <a href="https://genomaths.github.io/usefr_manual/mixtdistr.html">mixtdistr</a></p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">logFC</span>[ <span class="no">logFC</span> <span class="kw">&gt;</span> <span class="fl">0</span> ]
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">logFC</span>[ <span class="no">logFC</span> <span class="kw">&gt;</span> <span class="fl">0</span> ]
 
 <span class="no">gexp_FIT</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitMixDist.html">fitMixDist</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">x</span>, <span class="kw">args</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">gamma</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">0.41</span>),
                                           <span class="kw">weibull</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">0.4</span>)),
@@ -413,7 +416,7 @@ pre { /* Code block - determines code spacing between lines */
   |                                                                            
   |======================================================================| 100%
 ## *** Performing nonlinear regression model  crossvalidation...</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>(<span class="no">gexp_FIT</span>$<span class="no">fit</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">gexp_FIT</span>$<span class="no">fit</span>)</pre></body></html></div>
 <pre><code>## 
 ## Parameters:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
@@ -427,11 +430,11 @@ pre { /* Code block - determines code spacing between lines */
 ## Residual standard error: 0.02757 on 937 degrees of freedom
 ## Number of iterations to termination: 18 
 ## Reason for termination: Relative error in the sum of squares is at most `ftol'.</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">gexp_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">gexp_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
 <pre><code>## 
 ##  Mixture proportions (phi): 0.7850078 0.2149922</code></pre>
 <p>The graphic for histogram and density distribution curves:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(<span class="no">x</span>, <span class="fl">200</span>, <span class="kw">freq</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="co">#ylim = c(0, 0.021), cex = 1,</span>
      <span class="kw">panel.first</span><span class="kw">=</span>{<span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="kw">pch</span><span class="kw">=</span><span class="fl">16</span>, <span class="kw">cex</span><span class="kw">=</span><span class="fl">1e6</span>, <span class="kw">col</span><span class="kw">=</span><span class="st">"grey95"</span>)
        <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span>(<span class="kw">col</span><span class="kw">=</span><span class="st">"white"</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">1</span>)}, <span class="kw">main</span> <span class="kw">=</span> <span class="no">text</span>,
@@ -451,31 +454,31 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#joint-distribution-of-md-and-logfc-expressed-in-terms-of-copula-distribution-" class="anchor"></a>Joint distribution of <span class="math inline">\(MD\)</span> and <span class="math inline">\(|logFC|\)</span> expressed in terms of Copula distribution.</h2>
 <p>There various steps involved in investigating the dependence between two random variables. The state of the art in this subject include the application of copula distributions.</p>
-<p>Sklar’s theorem (<span class="citation">(Sklar 1959; Sklar 1973)</span>) named after Abe Sklar, provides the theoretical foundation for the application of copulas. Sklar’s theorem states that every multivariate cumulative distribution function (CDF):</p>
+<p>Sklar’s theorem (<span class="citation">(Sklar 1959, 1973)</span>) named after Abe Sklar, provides the theoretical foundation for the application of copulas. Sklar’s theorem states that every multivariate cumulative distribution function (CDF):</p>
 <p><span class="math display">\[H(x_1, ..., x_d)=Pr(X_1 \leq x_1, ..., X_d \leq x_d)\]</span></p>
 <p>of any <span class="math inline">\(d-tuple\)</span> of continuous random variables <span class="math inline">\((X_1, ..., X_d)\)</span> can be expressed in terms of its marginals CDFs: <span class="math inline">\(F_i(x_i)=Pr(X_i \leq x_i)\)</span> a copula <span class="math inline">\(C\)</span>:</p>
-<p><span class="math display">\[H(x_1, ..., x_d)=C(F_1(x_1), ..., F_d(x_d))\]</span> While Sklar showed that <span class="math inline">\(C\)</span> and <span class="math inline">\(F_i\)</span> are uniquely determined when H is known, a valid model for <span class="math inline">\((X_1, ..., X_d)\)</span> arises from the last equation whenever the “ingredients” are chosen from given parametric families of distribution (<span class="citation">(<span class="citeproc-not-found" data-reference-id="Christian2007"><strong>???</strong></span>)</span>): <span class="math display">\[F \in (F_\delta), C \in (C_\alpha)\]</span></p>
+<p><span class="math display">\[H(x_1, ..., x_d)=C(F_1(x_1), ..., F_d(x_d))\]</span> While Sklar showed that <span class="math inline">\(C\)</span> and <span class="math inline">\(F_i\)</span> are uniquely determined when H is known, a valid model for <span class="math inline">\((X_1, ..., X_d)\)</span> arises from the last equation whenever the “ingredients” are chosen from given parametric families of distribution (<span class="citation">(Christian and Favre 2007)</span>): <span class="math display">\[F \in (F_\delta), C \in (C_\alpha)\]</span></p>
 <p>Current literature on copula theory provides abundant information on models and copula families. Here, for the particular case of bi-dimensional copula defined for <span class="math inline">\(MD\)</span> and <span class="math inline">\(|logFC|\)</span>, we have chosen Farlie–Gumbel–Morgenstern family of copulas, which are defined for, each <span class="math inline">\(\theta \in [-1, 1]\)</span> by: <span class="math display">\[C_\alpha(u,
 v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</span>. The correlation coefficient <span class="math inline">\(\rho\)</span> is linked to <span class="math inline">\(\alpha\)</span> by the relationship: <span class="math inline">\(\rho=\frac{\alpha}{3}\)</span>, which ranges from <span class="math inline">\(-\frac{1}{3}\)</span> to <span class="math inline">\(\frac{1}{3}\)</span>, where <span class="math inline">\(u=F(x)\)</span>, <span class="math inline">\(v=G(y)\)</span>, with marginal CDFs: <span class="math inline">\(F(x)\)</span> and <span class="math inline">\(G(y)\)</span>.</p>
 <div id="fitting-farliegumbelmorgenstern-copulas-with-md-and-logfc-marginal-cdfs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#fitting-farliegumbelmorgenstern-copulas-with-md-and-logfc-marginal-cdfs" class="anchor"></a>Fitting Farlie–Gumbel–Morgenstern copulas with <span class="math inline">\(MD\)</span> and <span class="math inline">\(|logFC|\)</span> marginal CDFs</h3>
 <p>The first step requires for provide the parameters values, previously estimated, of the marginal distributions, which were given throughout the function <a href="https://genomaths.github.io/usefr_manual/mixtdistr.html">mixtdistr</a>. The the specific parameter values are retrieved from the previous nonlinear fit obtained for the marginal CDFs:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">margins</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mixtdistr"</span>, <span class="st">"mixtdistr"</span>)
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">margins</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mixtdistr"</span>, <span class="st">"mixtdistr"</span>)
 <span class="no">parMargins</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">phi</span> <span class="kw">=</span> <span class="no">meth_FIT</span>$<span class="no">phi</span>, <span class="kw">arg</span> <span class="kw">=</span> <span class="no">meth_FIT</span>$<span class="no">args</span>),
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">phi</span> <span class="kw">=</span> <span class="no">gexp_FIT</span>$<span class="no">phi</span>, <span class="kw">arg</span> <span class="kw">=</span> <span class="no">gexp_FIT</span>$<span class="no">args</span>))</pre></body></html></div>
 <p>The parameter estimation and goodness-of-fit (GOF) test take advantages of the tools available in the R package <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1">copula</a>. Both, parameter estimation and GOF, can be accomplished with function <a href="https://genomaths.github.io/usefr_manual/bicopulaGOF.html">bicopulaGOF</a> from the R package <a href="https://github.com/genomaths/usefr">usefr</a>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">fgm_cop</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/bicopulaGOF.html">bicopulaGOF</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="st">"fgmCopula"</span>, <span class="kw">sample.size</span> <span class="kw">=</span> <span class="fl">13000</span>,
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="no">fgm_cop</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/bicopulaGOF.html">bicopulaGOF</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="st">"fgmCopula"</span>, <span class="kw">sample.size</span> <span class="kw">=</span> <span class="fl">13000</span>,
                        <span class="kw">margins</span> <span class="kw">=</span> <span class="no">margins</span>, <span class="kw">paramMargins</span> <span class="kw">=</span> <span class="no">parMargins</span>, <span class="kw">nboots</span> <span class="kw">=</span> <span class="fl">10</span>,
                        <span class="kw">approach</span> <span class="kw">=</span> <span class="st">"chisq"</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">30</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">6L</span>, <span class="kw">seed</span> <span class="kw">=</span> <span class="fl">123</span>,
                        <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>The null hypothesis that the data follows FGM copula distribution is not rejected.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">gof</span></pre></body></html></div>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">gof</span></pre></body></html></div>
 <pre><code>##   Chisq.stat   mc_p.value  sample.size    num.sampl 
-## 1.117630e+03 9.090909e-02 1.300000e+04 1.000000e+01</code></pre>
+## 1.117630e+03 3.636364e-01 1.300000e+04 1.000000e+01</code></pre>
 <p>All the information needed about the fitted FGM copula is found in the object <em>fgm_cop$copula</em>, which is a <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1/topics/mvdc-class">mvdc</a> object from <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1">copula</a> package with several slots. In particular, the specific information about FGM copula is found in:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">copula</span>@<span class="kw">copula</span></pre></body></html></div>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">copula</span>@<span class="kw">copula</span></pre></body></html></div>
 <pre><code>## Farlie-Gumbel-Morgenstern (FGM) copula, dim. d = 2
 ##  param.: -0.509 
 ## Dimension:  2 
@@ -486,30 +489,30 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#p-p-plot--graphical-diagnostics-of-gof" class="anchor"></a>P-P plot. Graphical Diagnostics of GOF</h3>
 <p>The P-P plot is build with function <a href="https://genomaths.github.io/usefr_manual/ppCplot.html">ppCplot</a> from the R package <a href="https://github.com/genomaths/usefr">usefr</a>. If the GOF is good enough, then it is expected that points in the graphics are closed to the diagonal (red) straight line. Details on how the computation is performed are provided in the help for function. <a href="https://genomaths.github.io/usefr_manual/ppCplot.html">ppCplot</a>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">g</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ppCplot.html">ppCplot</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">Y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="no">fgm_cop</span>$<span class="no">copula</span>, <span class="kw">npoints</span> <span class="kw">=</span> <span class="fl">500</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"blue"</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.5</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">g</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ppCplot.html">ppCplot</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">Y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="no">fgm_cop</span>$<span class="no">copula</span>, <span class="kw">npoints</span> <span class="kw">=</span> <span class="fl">500</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"blue"</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.5</span>)</pre></body></html></div>
 <p><img src="GenExp_Methylation_association_hyper_down-regulated_files/figure-html/ppPlot-1.png" width="700"></p>
 <p>Information on the data and copula used to yield the graphic are stored in the output variable <em>“g”</em>. For example, the empirical and theoretical probabilities used to built the graphic can be retrieved from the data frame: <em>“g$data”</em>:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu">DataFrame</span>(<span class="no">g</span>$<span class="no">data</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="fu">DataFrame</span>(<span class="no">g</span>$<span class="no">data</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 500 rows and 2 columns
-##                  emprob              thprob
-##               &lt;numeric&gt;           &lt;numeric&gt;
-## 1    0.0883111302105715  0.0891191858209128
-## 2     0.112233204411975    0.11661559674292
-## 3     0.104497922933677   0.111333586841031
-## 4     0.123191519839565   0.122738598425359
-## 5     0.204340352385045   0.198329568897564
-## ...                 ...                 ...
-## 496 0.00286491906603638 0.00296597071431409
-## 497     0.2834837415843   0.292972916428965
-## 498  0.0859475719810915  0.0830068063425731
-## 499   0.490116029222174   0.499123466454355
-## 500   0.396719667669388   0.392611569345542</code></pre>
+##         emprob     thprob
+##      &lt;numeric&gt;  &lt;numeric&gt;
+## 1    0.0883111  0.0891192
+## 2    0.1122332  0.1166156
+## 3    0.1044979  0.1113336
+## 4    0.1231915  0.1227386
+## 5    0.2043404  0.1983296
+## ...        ...        ...
+## 496 0.00286492 0.00296597
+## 497 0.28348374 0.29297292
+## 498 0.08594757 0.08300681
+## 499 0.49011603 0.49912347
+## 500 0.39671967 0.39261157</code></pre>
 </div>
 <div id="three-dimensional-copula-density-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#three-dimensional-copula-density-plot" class="anchor"></a>Three-dimensional copula density plot</h3>
 <p>The domain region <span class="math inline">\((X, Y)\)</span> is defined and function <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1/topics/Mvdc">dMvdc</a> is used to compute the density <span class="math inline">\(z\)</span> in the grid <span class="math inline">\([X,Y] \times [X,Y]\)</span> using the previous FMG fitted copula.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">X</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>)
+<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">X</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>)
 <span class="no">Y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>)
 <span class="no">sp_rho</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/copula/man/assocMeasures.html">rho</a></span>(<span class="no">fgm_cop</span>$<span class="no">copula</span>@<span class="kw">copula</span>),<span class="fl">3</span>) <span class="co"># Spearman's rho: -0.171</span>
 
@@ -522,7 +525,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Spearman's rho = "</span>, <span class="no">sp_rho</span>)</pre></body></html></div>
 <pre><code>## Spearman's rho =  -0.17</code></pre>
 <p>An auxiliary function to draw the panels</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">panelfirst</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">pmat</span>) {
+<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="no">panelfirst</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">pmat</span>) {
   <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>),<span class="kw">mar</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">0</span>, <span class="fl">1</span>), <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.01</span>, <span class="kw">cex</span> <span class="kw">=</span><span class="fl">1</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>)
   <span class="no">YZ</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plot3D/man/trans3D.html">trans3D</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">z</span>)), <span class="no">Y</span>, <span class="no">z</span>[<span class="fl">18</span>,], <span class="kw">pmat</span> <span class="kw">=</span> <span class="no">pmat</span>)
 
@@ -537,7 +540,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 
 }</pre></body></html></div>
 <p>The graphical settings depend on the final printing destiny and on the dataset.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>),<span class="kw">mar</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">0</span>, <span class="fl">1</span>), <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">cex</span> <span class="kw">=</span><span class="fl">1</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>)
+<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>),<span class="kw">mar</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">0</span>, <span class="fl">1</span>), <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">cex</span> <span class="kw">=</span><span class="fl">1</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/plot3D/man/persp3D.html">persp3D</a></span>(<span class="no">X</span>, <span class="no">Y</span>, <span class="no">z</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.01</span>, <span class="kw">image</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
         <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">zlab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>,
         <span class="kw">box</span> <span class="kw">=</span> <span class="no">T</span>, <span class="kw">panel.first</span> <span class="kw">=</span> <span class="no">panelfirst</span>, <span class="kw">bty</span> <span class="kw">=</span> <span class="st">"u"</span>,
@@ -573,10 +576,10 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <p>The above 3D and 2D density plots and results suggest that most of the genes have low <span class="math inline">\(|logFC|\)</span> and low <span class="math inline">\(MD\)</span>, and the number of genes decrease for middle levels of <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>. This observation leads to the application of a linear-by-linear association test.</p>
 <p>The linear-by-linear test (LLT) is used to test a linear association among variables in a contingency table with ordered categories (<span class="citation">Agresti (2007)</span>). The null hypothesis for the linear-by-linear test is that there is no association among the variables in the table.</p>
 <p>It is obvious from the 2D density plots that a relationship for <span class="math inline">\(MD\)</span> &lt; 0.08 is not meaningful. In particular, both variables, <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>, are at the level of technical noise. The percentage of the genes at noise level are:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fl">100</span> * <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">MD</span> <span class="kw">&lt;</span> <span class="fl">0.08</span>)/<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">MD</span>), <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fl">100</span> * <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">MD</span> <span class="kw">&lt;</span> <span class="fl">0.08</span>)/<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">MD</span>), <span class="fl">2</span>)</pre></body></html></div>
 <pre><code>## [1] 1.78</code></pre>
 <p>Hence, the genes considered in the downstream analysis are:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">MD</span> <span class="kw">&gt;</span> <span class="fl">0.08</span>)
+<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">MD</span> <span class="kw">&gt;</span> <span class="fl">0.08</span>)
 <span class="no">md</span>  <span class="kw">&lt;-</span> <span class="no">MD</span>[ <span class="no">idx</span>]
 <span class="no">logfc</span>  <span class="kw">&lt;-</span> <span class="no">logFC</span>[ <span class="no">idx</span> ]
 <span class="no">dt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">md</span> <span class="kw">=</span> <span class="no">md</span> , <span class="kw">logfc</span> <span class="kw">=</span> <span class="no">logfc</span>)
@@ -587,7 +590,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <a href="#discretization-of-md-and-logfc" class="anchor"></a>Discretization of <span class="math inline">\(MD\)</span> and <span class="math inline">\(|logFC|\)</span>
 </h3>
 <p>To apply the LLT the values of <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span> must be discretized into ordinal values. A K-means discretization approach is applied with following auxiliary function</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co"># ------------------- Auxiliary function for discretization ------------------ #</span>
+<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="co"># ------------------- Auxiliary function for discretization ------------------ #</span>
 <span class="no">Kmean.discretization</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">categories</span>, <span class="no">algorithm</span> <span class="kw">=</span> <span class="st">"Hartigan-Wong"</span>,
                                  <span class="no">iter.max</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">6</span>, <span class="no">column</span> <span class="kw">=</span> <span class="fl">1L</span>) {
   <span class="no">centers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span>(<span class="no">x</span>, <span class="kw">centers</span> <span class="kw">=</span> <span class="no">categories</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="no">algorithm</span>,
@@ -603,8 +606,8 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#discretization-for-md" class="anchor"></a>Discretization for <span class="math inline">\(MD\)</span>
 </h3>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cl</span> <span class="kw">=</span> <span class="fu">Kmean.discretization</span>(<span class="no">md</span>, <span class="kw">categories</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"MacQueen"</span> )
-<span class="no">cl_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">function</span>(<span class="no">k</span>) <span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>(<span class="no">cl</span>$<span class="no">x</span>[<span class="no">cl</span>$<span class="no">cluster</span> <span class="kw">==</span> <span class="no">k</span>]))
+<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="no">cl</span> <span class="kw">=</span> <span class="fu">Kmean.discretization</span>(<span class="no">md</span>, <span class="kw">categories</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"MacQueen"</span> )
+<span class="no">cl_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">function</span>(<span class="no">k</span>) <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">cl</span>$<span class="no">x</span>[<span class="no">cl</span>$<span class="no">cluster</span> <span class="kw">==</span> <span class="no">k</span>]))
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">cl_summary</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"low"</span>, <span class="st">"middle"</span>, <span class="st">"high"</span>)
 <span class="no">cl_summary</span></pre></body></html></div>
 <pre><code>##                low    middle      high
@@ -615,7 +618,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## 3rd Qu. 0.62903372 1.7719768  3.410265
 ## Max.    0.97438946 2.3393763 20.519587</code></pre>
 <p>Cutpoint are now applied:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cutpoint1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">2</span>])
+<div class="sourceCode" id="cb48"><html><body><pre class="r"><span class="no">cutpoint1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">2</span>])
 <span class="no">cutpoint2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">3</span>])
 
 <span class="no">dt</span>$<span class="no">md_level</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"High"</span>)
@@ -627,8 +630,8 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#discretization-for-logfc" class="anchor"></a>Discretization for <span class="math inline">\(|logFC|\)</span>
 </h3>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cl</span> <span class="kw">=</span> <span class="fu">Kmean.discretization</span>(<span class="no">logfc</span>, <span class="kw">categories</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"MacQueen"</span> )
-<span class="no">cl_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">function</span>(<span class="no">k</span>) <span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>(<span class="no">cl</span>$<span class="no">x</span>[<span class="no">cl</span>$<span class="no">cluster</span> <span class="kw">==</span> <span class="no">k</span>]))
+<div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="no">cl</span> <span class="kw">=</span> <span class="fu">Kmean.discretization</span>(<span class="no">logfc</span>, <span class="kw">categories</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"MacQueen"</span> )
+<span class="no">cl_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">function</span>(<span class="no">k</span>) <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">cl</span>$<span class="no">x</span>[<span class="no">cl</span>$<span class="no">cluster</span> <span class="kw">==</span> <span class="no">k</span>]))
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">cl_summary</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"eLow"</span>, <span class="st">"eMiddle"</span>, <span class="st">"eHigh"</span>)
 <span class="no">cl_summary</span></pre></body></html></div>
 <pre><code>##                 eLow   eMiddle    eHigh
@@ -638,7 +641,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## Mean    2.729755e-01 0.9997545 2.671355
 ## 3rd Qu. 4.015427e-01 1.1817728 2.905358
 ## Max.    6.360073e-01 1.8328136 9.407983</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cutpoint1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">2</span>])
+<div class="sourceCode" id="cb51"><html><body><pre class="r"><span class="no">cutpoint1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">2</span>])
 <span class="no">cutpoint2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">3</span>])
 
 <span class="no">dt</span>$<span class="no">logfc_level</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"eHigh"</span>)
@@ -651,7 +654,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#the-contingency-table-and-its-graphic-visualization" class="anchor"></a>The contingency table and its graphic visualization</h3>
 <p>In the current case, the contingency table suggests an obvious relationship between <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>( <span class="kw pkg">base</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>( <span class="no">dt</span>$<span class="no">logfc_level</span>, <span class="no">dt</span>$<span class="no">md_level</span>) )
+<div class="sourceCode" id="cb52"><html><body><pre class="r"><span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>( <span class="kw pkg">base</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>( <span class="no">dt</span>$<span class="no">logfc_level</span>, <span class="no">dt</span>$<span class="no">md_level</span>) )
 <span class="no">m</span></pre></body></html></div>
 <pre><code>##          
 ##            Low Middle High
@@ -659,8 +662,8 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ##   eMiddle 1995    630  179
 ##   eHigh    354     69   21</code></pre>
 <p>The <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.0/topics/spineplot">spineplot</a> of this contingency table (table(x = logfc_level, y = md_level)) help to visualize the existent relationship between <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>( <span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">4</span>), <span class="kw">family</span> <span class="kw">=</span> <span class="st">"Serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.8</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.2</span> )
-<span class="no">tb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/spineplot.html">spineplot</a></span>(<span class="no">m</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>( <span class="st">"blue"</span>, <span class="st">"dodgerblue"</span>,<span class="st">"deepskyblue"</span> ),
+<div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>( <span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">4</span>), <span class="kw">family</span> <span class="kw">=</span> <span class="st">"Serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.8</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.2</span> )
+<span class="no">tb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/spineplot.html">spineplot</a></span>(<span class="no">m</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>)], <span class="kw">col</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>( <span class="st">"blue"</span>, <span class="st">"dodgerblue"</span>,<span class="st">"deepskyblue"</span> ),
                 <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">""</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span>(<span class="kw">side</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">text</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">italic</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">logFC</span>))),
       <span class="kw">line</span> <span class="kw">=</span> <span class="fl">2.5</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">3</span>)
@@ -677,7 +680,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 </h3>
 <p>Here, we use the LLT test implemented in function <a href="https://www.rdocumentation.org/packages/coin/versions/1.3-0/topics/ContingencyTests">lbl_test</a> from the R package <em>coin</em>. Two test variants are available: 1) permutation test and asymptotic test.</p>
 <p>The asymptotic LLT test:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span> )</pre></body></html></div>
+<div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span> )</pre></body></html></div>
 <pre><code>## 
 ##  Asymptotic Linear-by-Linear Association Test
 ## 
@@ -685,7 +688,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## Z = -14.599, p-value &lt; 2.2e-16
 ## alternative hypothesis: two.sided</code></pre>
 <p>The permutation LLT test:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span>, <span class="kw">distribution</span> <span class="kw">=</span> <span class="st">"approximate"</span>, <span class="kw">B</span> <span class="kw">=</span> <span class="fl">10000</span>, <span class="kw">alternative</span> <span class="kw">=</span> <span class="st">"less"</span> )</pre></body></html></div>
+<div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span>, <span class="kw">distribution</span> <span class="kw">=</span> <span class="st">"approximate"</span>, <span class="kw">B</span> <span class="kw">=</span> <span class="fl">10000</span>, <span class="kw">alternative</span> <span class="kw">=</span> <span class="st">"less"</span> )</pre></body></html></div>
 <pre><code>## 
 ##  Approximative Linear-by-Linear Association Test
 ## 
@@ -699,7 +702,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h2 class="hasAnchor">
 <a href="#generalized-linear-model-glm" class="anchor"></a>Generalized linear model (GLM)</h2>
 <p>The variable <span class="math inline">\(MD\)</span> was split into three levels, “0”: “Low” (<span class="math inline">\(0 &lt; MD \leq 0.5\)</span>), “1”: “Middle” (<span class="math inline">\(0.5 &lt; MD \leq 1\)</span>), and “2”: “High” ($1 &lt; MD $)</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">meth_cut</span> <span class="kw">&lt;-</span> <span class="fl">1</span>
+<div class="sourceCode" id="cb59"><html><body><pre class="r"><span class="no">meth_cut</span> <span class="kw">&lt;-</span> <span class="fl">1</span>
 
 <span class="no">xy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/edgeR/man/cbind.html">cbind</a></span>(<span class="no">MD</span>, <span class="no">logFC</span>)
 <span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">logFC</span> <span class="kw">&gt;</span> <span class="fl">0.5</span>)
@@ -707,8 +710,8 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <span class="no">xy</span>$<span class="no">md</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
 <span class="no">xy</span>$<span class="no">md</span>[<span class="no">xy</span>$<span class="no">MD</span> <span class="kw">&gt;</span> <span class="no">meth_cut</span>] <span class="kw">&lt;-</span> <span class="fl">1</span></pre></body></html></div>
 <p>The glm support the decrease of <span class="math inline">\(-logFC\)</span> with th increment of <span class="math inline">\(MD\)</span>. The model coefficients are highly statistically significant.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">gm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span><span class="kw">=</span><span class="no">xy</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span>(<span class="kw">link</span> <span class="kw">=</span> <span class="st">"identity"</span>))
-<span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
+<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="no">gm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span><span class="kw">=</span><span class="no">xy</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span>(<span class="kw">link</span> <span class="kw">=</span> <span class="st">"identity"</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = logFC ~ md, family = Gamma(link = "identity"), 
@@ -733,7 +736,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
 <p>The ANOVA test confirm the negative trend given by the coefficient of MD (highly statistically significant).</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb62"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: Gamma, link: identity
@@ -752,7 +755,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#boxplot" class="anchor"></a>Boxplot</h3>
 <p>The boxplot suggest a clear trend of <span class="math inline">\(-logFC\)</span> decreasing with increment of MD levels. Notice that the <em>notchs</em> from the boxes do not overlap, which implies that the differences between medians from three groups (“Low”, “Middle”, and “High”) are statistically significant. So, the GLM results can be visualized.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1.1</span>))
+<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1.1</span>))
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">xy</span>, <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.4</span>, <span class="fl">2.5</span>), <span class="kw">xaxt</span> <span class="kw">=</span><span class="st">"n"</span>,  <span class="kw">yaxt</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">ann</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/rect.html">rect</a></span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>, <span class="fl">3.5</span>, <span class="fl">5</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"grey94"</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span>(<span class="fl">0</span>, <span class="fl">5</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">1</span>)
@@ -776,7 +779,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <div id="data-set-ii" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-set-ii" class="anchor"></a>Data set (II)</h2>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">.deg_mm1_wt1</span> <span class="kw">&lt;-</span> <span class="no">deg_mm1_wt1</span>[<span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmp_den_wt1_mm1</span>), <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">deg_mm1_wt1</span>)), ]
+<div class="sourceCode" id="cb65"><html><body><pre class="r"><span class="no">.deg_mm1_wt1</span> <span class="kw">&lt;-</span> <span class="no">deg_mm1_wt1</span>[<span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmp_den_wt1_mm1</span>), <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">deg_mm1_wt1</span>)), ]
 
 <span class="no">MD</span> <span class="kw">&lt;-</span> <span class="no">dmp_den_wt1_mm1</span>$<span class="no">dmp_den</span> <span class="co"># Methylation (|group mean density differences|)</span>
 <span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">.deg_mm1_wt1</span>$<span class="no">table</span>$<span class="no">logFC</span> <span class="kw">&gt;</span> <span class="fl">0</span> ) <span class="co"># Up-regulated</span>
@@ -784,26 +787,26 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <span class="no">MD</span> <span class="kw">&lt;-</span> <span class="no">MD</span>[<span class="no">idx</span>]
 <span class="fu">DataFrame</span>(<span class="no">MD</span>,<span class="no">logFC</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 6060 rows and 2 columns
-##                     MD              logFC
-##              &lt;numeric&gt;          &lt;numeric&gt;
-## 1     6.57147424273809 0.0359792469438899
-## 2     1.19958262095502   0.52872167140675
-## 3    0.762753326370201  0.124533369771406
-## 4    0.274631495880412 0.0142820339929589
-## 5    0.623658326256691   0.44979492311122
-## ...                ...                ...
-## 6056 0.223080406326939  0.317755731170421
-## 6057 0.634709097710899  0.394906075496325
-## 6058 0.296652896460542  0.943017752201318
-## 6059 0.121346072492451   1.68055281222411
-## 6060 0.151445536035052   1.92100057381504</code></pre>
+##             MD     logFC
+##      &lt;numeric&gt; &lt;numeric&gt;
+## 1     6.571474 0.0359792
+## 2     1.199583 0.5287217
+## 3     0.762753 0.1245334
+## 4     0.274631 0.0142820
+## 5     0.623658 0.4497949
+## ...        ...       ...
+## 6056  0.223080  0.317756
+## 6057  0.634709  0.394906
+## 6058  0.296653  0.943018
+## 6059  0.121346  1.680553
+## 6060  0.151446  1.921001</code></pre>
 <p>There are 6060 genes with <span class="math inline">\(MD &gt; 0\)</span> and <span class="math inline">\(logFC &gt; 0\)</span> to be included in the downstream analysis.</p>
 </div>
 <div id="distribution-of-the-divergence-of-methylation-level-density-at-gene-body--mm1-vs-wt1-ii" class="section level2">
 <h2 class="hasAnchor">
 <a href="#distribution-of-the-divergence-of-methylation-level-density-at-gene-body--mm1-vs-wt1-ii" class="anchor"></a>Distribution of the divergence of methylation level density at gene-body. MM1 vs WT1 (II)</h2>
 <p>The best fitted model for <span class="math inline">\(MD\)</span>, from comparison MM1 <em>vs</em> WT1, was a mixture of Log-Normal and Weibull distributions.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">meth_FIT</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitMixDist.html">fitMixDist</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">args</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">lnorm</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">meanlog</span> <span class="kw">=</span> <span class="fl">2.3</span>, <span class="kw">sdlog</span> <span class="kw">=</span> <span class="fl">0.7</span>),
+<div class="sourceCode" id="cb67"><html><body><pre class="r"><span class="no">meth_FIT</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitMixDist.html">fitMixDist</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">args</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">lnorm</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">meanlog</span> <span class="kw">=</span> <span class="fl">2.3</span>, <span class="kw">sdlog</span> <span class="kw">=</span> <span class="fl">0.7</span>),
                                      <span class="kw">weibull</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">2</span>)),
                   <span class="kw">dens</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">npoints</span> <span class="kw">=</span> <span class="fl">900</span>)</pre></body></html></div>
 <pre><code>## fitting ...
@@ -815,7 +818,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
   |                                                                            
   |======================================================================| 100%
 ## *** Performing nonlinear regression model  crossvalidation...</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>(<span class="no">meth_FIT</span>$<span class="no">fit</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb69"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">meth_FIT</span>$<span class="no">fit</span>)</pre></body></html></div>
 <pre><code>## 
 ## Parameters:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
@@ -829,11 +832,11 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## Residual standard error: 0.04895 on 1044 degrees of freedom
 ## Number of iterations to termination: 29 
 ## Reason for termination: Relative error in the sum of squares is at most `ftol'.</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">meth_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb71"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">meth_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
 <pre><code>## 
 ##  Mixture proportions (phi): 0.4201782 0.5798218</code></pre>
 <p>The graphic for histogram and density distribution curves:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span> , <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
+<div class="sourceCode" id="cb73"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span> , <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(<span class="no">MD</span>, <span class="fl">90</span>, <span class="kw">freq</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="co">#ylim = c(0, 0.021), cex = 1,</span>
      <span class="kw">panel.first</span><span class="kw">=</span>{<span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="kw">pch</span><span class="kw">=</span><span class="fl">16</span>, <span class="kw">cex</span><span class="kw">=</span><span class="fl">1e6</span>, <span class="kw">col</span><span class="kw">=</span><span class="st">"grey95"</span>)
        <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span>(<span class="kw">col</span><span class="kw">=</span><span class="st">"white"</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">1</span>)}, <span class="kw">main</span> <span class="kw">=</span> <span class="no">text</span>,
@@ -853,7 +856,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h2 class="hasAnchor">
 <a href="#distribution-of-the-logfc--mm1-vs-wt1-ii" class="anchor"></a>Distribution of the <span class="math inline">\(|logFC|\)</span>. MM1 vs WT1 (II)</h2>
 <p>The best fitted model for the <span class="math inline">\(|logFC|\)</span>, from comparison MM1 <em>vs</em> WT1, was a mixture of Gamma and Weibull distributions. Function <a href="https://genomaths.github.io/usefr_manual/fitMixDist.html">fitMixDist</a> calls the mixture function models set up in function <a href="https://genomaths.github.io/usefr_manual/mixtdistr.html">mixtdistr</a></p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">gexp_FIT</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitMixDist.html">fitMixDist</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">args</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">gamma</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">0.41</span>),
+<div class="sourceCode" id="cb74"><html><body><pre class="r"><span class="no">gexp_FIT</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitMixDist.html">fitMixDist</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">args</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">gamma</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">0.41</span>),
                                           <span class="kw">weibull</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">0.4</span>)),
                        <span class="kw">dens</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">npoints</span> <span class="kw">=</span> <span class="fl">900</span>)</pre></body></html></div>
 <pre><code>## fitting ...
@@ -865,7 +868,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
   |                                                                            
   |======================================================================| 100%
 ## *** Performing nonlinear regression model  crossvalidation...</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>(<span class="no">gexp_FIT</span>$<span class="no">fit</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb76"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">gexp_FIT</span>$<span class="no">fit</span>)</pre></body></html></div>
 <pre><code>## 
 ## Parameters:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
@@ -879,11 +882,11 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## Residual standard error: 0.04624 on 791 degrees of freedom
 ## Number of iterations to termination: 17 
 ## Reason for termination: Relative error in the sum of squares is at most `ftol'.</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">gexp_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb78"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n Mixture proportions (phi):"</span>, <span class="no">gexp_FIT</span>$<span class="no">phi</span>)</pre></body></html></div>
 <pre><code>## 
 ##  Mixture proportions (phi): 0.7545028 0.2454972</code></pre>
 <p>The graphic for histogram and density distribution curves:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
+<div class="sourceCode" id="cb80"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>), <span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1.4</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(<span class="no">logFC</span>, <span class="fl">120</span>, <span class="kw">freq</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="co">#ylim = c(0, 0.021), cex = 1,</span>
      <span class="kw">panel.first</span><span class="kw">=</span>{<span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="kw">pch</span><span class="kw">=</span><span class="fl">16</span>, <span class="kw">cex</span><span class="kw">=</span><span class="fl">1e6</span>, <span class="kw">col</span><span class="kw">=</span><span class="st">"grey95"</span>)
        <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span>(<span class="kw">col</span><span class="kw">=</span><span class="st">"white"</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">1</span>)}, <span class="kw">main</span> <span class="kw">=</span> <span class="no">text</span>,
@@ -906,21 +909,21 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#fitting-farliegumbelmorgenstern-copulas-with-md-and-logfc-marginal-cdfs-ii" class="anchor"></a>Fitting Farlie–Gumbel–Morgenstern copulas with <span class="math inline">\(MD\)</span> and <span class="math inline">\(|logFC|\)</span> marginal CDFs (II)</h3>
 <p>The first step requires for provide the parameters values, previously estimated, of the marginal distributions, which were given throughout the function <a href="https://genomaths.github.io/usefr_manual/mixtdistr.html">mixtdistr</a>. The specific parameter values are retrieved from the previous nonlinear fit obtained for the marginal CDFs:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">margins</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mixtdistr"</span>, <span class="st">"mixtdistr"</span>)
+<div class="sourceCode" id="cb81"><html><body><pre class="r"><span class="no">margins</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mixtdistr"</span>, <span class="st">"mixtdistr"</span>)
 <span class="no">parMargins</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">phi</span> <span class="kw">=</span> <span class="no">meth_FIT</span>$<span class="no">phi</span>, <span class="kw">arg</span> <span class="kw">=</span> <span class="no">meth_FIT</span>$<span class="no">args</span>),
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">phi</span> <span class="kw">=</span> <span class="no">gexp_FIT</span>$<span class="no">phi</span>, <span class="kw">arg</span> <span class="kw">=</span> <span class="no">gexp_FIT</span>$<span class="no">args</span>))</pre></body></html></div>
 <p>The parameter estimation and goodness-of-fit (GOF) test take advantage of the tools available in the R package <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1">copula</a>. Both, parameter estimation and GOF, can be accomplished with function <a href="https://genomaths.github.io/usefr_manual/bicopulaGOF.html">bicopulaGOF</a> from the R package <a href="https://github.com/genomaths/usefr">usefr</a>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">fgm_cop</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/bicopulaGOF.html">bicopulaGOF</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="st">"fgmCopula"</span>, <span class="kw">sample.size</span> <span class="kw">=</span> <span class="fl">5999</span>,
+<div class="sourceCode" id="cb82"><html><body><pre class="r"><span class="no">fgm_cop</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/bicopulaGOF.html">bicopulaGOF</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="st">"fgmCopula"</span>, <span class="kw">sample.size</span> <span class="kw">=</span> <span class="fl">5999</span>,
                        <span class="kw">margins</span> <span class="kw">=</span> <span class="no">margins</span>, <span class="kw">paramMargins</span> <span class="kw">=</span> <span class="no">parMargins</span>, <span class="kw">nboots</span> <span class="kw">=</span> <span class="fl">10</span>,
                        <span class="kw">approach</span> <span class="kw">=</span> <span class="st">"chisq"</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">30</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">6L</span>, <span class="kw">seed</span> <span class="kw">=</span> <span class="fl">123</span>,
                        <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>The null hypothesis that the data follows FGM copula distribution is not rejected.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">gof</span></pre></body></html></div>
+<div class="sourceCode" id="cb83"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">gof</span></pre></body></html></div>
 <pre><code>##   Chisq.stat   mc_p.value  sample.size    num.sampl 
 ##  924.4173422    0.1818182 5999.0000000   10.0000000</code></pre>
 <p>All the information needed about the fitted FGM copula is found in the object <em>fgm_cop$copula</em>, which is a <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1/topics/mvdc-class">mvdc</a> object from <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1">copula</a> package with several slots. In particular, the specific information about FGM copula is found in:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">copula</span>@<span class="kw">copula</span></pre></body></html></div>
+<div class="sourceCode" id="cb85"><html><body><pre class="r"><span class="no">fgm_cop</span>$<span class="no">copula</span>@<span class="kw">copula</span></pre></body></html></div>
 <pre><code>## Farlie-Gumbel-Morgenstern (FGM) copula, dim. d = 2
 ##  param.: -0.492 
 ## Dimension:  2 
@@ -931,30 +934,30 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#p-p-plot--graphical-diagnostics-of-gof-ii" class="anchor"></a>P-P plot. Graphical Diagnostics of GOF (II)</h3>
 <p>The P-P plot is build with function <a href="https://genomaths.github.io/usefr_manual/ppCplot.html">ppCplot</a> from the R package <a href="https://github.com/genomaths/usefr">usefr</a>. If the GOF is good enough, then it is expected that points in the graphics are closed to the diagonal (red) straight line. Details on how the computation is performed are provided in the help for function. <a href="https://genomaths.github.io/usefr_manual/ppCplot.html">ppCplot</a>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">g</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ppCplot.html">ppCplot</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">Y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="no">fgm_cop</span>$<span class="no">copula</span>, <span class="kw">npoints</span> <span class="kw">=</span> <span class="fl">500</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"blue"</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.5</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb87"><html><body><pre class="r"><span class="no">g</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ppCplot.html">ppCplot</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">MD</span>, <span class="kw">Y</span> <span class="kw">=</span> <span class="no">logFC</span>, <span class="kw">copula</span> <span class="kw">=</span> <span class="no">fgm_cop</span>$<span class="no">copula</span>, <span class="kw">npoints</span> <span class="kw">=</span> <span class="fl">500</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"blue"</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.5</span>)</pre></body></html></div>
 <p><img src="GenExp_Methylation_association_hyper_down-regulated_files/figure-html/ppPlot_2-1.png" width="768"></p>
 <p>Information on the data and copula used to yield the graphic are stored in the output variable <em>“g”</em>. For example, the empirical and theoretical probabilities used to built the graphic can be retrieved from the data frame: <em>“g$data”</em>:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu">DataFrame</span>(<span class="no">g</span>$<span class="no">data</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb88"><html><body><pre class="r"><span class="fu">DataFrame</span>(<span class="no">g</span>$<span class="no">data</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 500 rows and 2 columns
-##                emprob             thprob
-##             &lt;numeric&gt;          &lt;numeric&gt;
-## 1   0.143069306930693  0.138299372224586
-## 2   0.253135313531353  0.246289891760151
-## 3   0.185148514851485  0.178854062344721
-## 4   0.102640264026403 0.0999548447025706
-## 5   0.217326732673267  0.215332646053619
-## ...               ...                ...
-## 496 0.127887788778878  0.130327695592795
-## 497 0.320792079207921  0.325585438787924
-## 498 0.400660066006601  0.402741757331367
-## 499  0.20973597359736  0.215686086818146
-## 500 0.166006600660066  0.163256933447634</code></pre>
+##        emprob    thprob
+##     &lt;numeric&gt; &lt;numeric&gt;
+## 1    0.143069 0.1382994
+## 2    0.253135 0.2462899
+## 3    0.185149 0.1788541
+## 4    0.102640 0.0999548
+## 5    0.217327 0.2153326
+## ...       ...       ...
+## 496  0.127888  0.130328
+## 497  0.320792  0.325585
+## 498  0.400660  0.402742
+## 499  0.209736  0.215686
+## 500  0.166007  0.163257</code></pre>
 </div>
 <div id="three-dimentional-copula-density-plot-ii" class="section level3">
 <h3 class="hasAnchor">
 <a href="#three-dimentional-copula-density-plot-ii" class="anchor"></a>Three-dimentional copula density plot (II)</h3>
 <p>The domain region <span class="math inline">\((X, Y)\)</span> is defined and function <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1/topics/Mvdc">dMvdc</a> is used to compute the density <span class="math inline">\(z\)</span> in the grid <span class="math inline">\([X,Y] \times [X,Y]\)</span> using the previous FMG fitted copula.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">X</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>)
+<div class="sourceCode" id="cb90"><html><body><pre class="r"><span class="no">X</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>)
 <span class="no">Y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.8</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>)
 <span class="no">sp_rho</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/copula/man/assocMeasures.html">rho</a></span>(<span class="no">fgm_cop</span>$<span class="no">copula</span>@<span class="kw">copula</span>),<span class="fl">3</span>) <span class="co"># Spearman' s rho: -0.171</span>
 
@@ -963,7 +966,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <span class="no">sp_rho</span></pre></body></html></div>
 <pre><code>## [1] -0.164</code></pre>
 <p>An auxiliary function to draw the panels</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">panelfirst</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">pmat</span>) {
+<div class="sourceCode" id="cb92"><html><body><pre class="r"><span class="no">panelfirst</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">pmat</span>) {
   <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>),<span class="kw">mar</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">0</span>, <span class="fl">1</span>), <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.01</span>, <span class="kw">cex</span> <span class="kw">=</span><span class="fl">1</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>)
   <span class="no">YZ</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plot3D/man/trans3D.html">trans3D</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">z</span>)), <span class="no">Y</span>, <span class="no">z</span>[<span class="fl">18</span>,], <span class="kw">pmat</span> <span class="kw">=</span> <span class="no">pmat</span>)
 
@@ -978,7 +981,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 
 }</pre></body></html></div>
 <p>The graphical settings depend on the final printing destiny and on the dataset.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>),<span class="kw">mar</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">0</span>, <span class="fl">1</span>), <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">cex</span> <span class="kw">=</span><span class="fl">1</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>)
+<div class="sourceCode" id="cb93"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>),<span class="kw">mar</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">0</span>, <span class="fl">1</span>), <span class="kw">font</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">cex</span> <span class="kw">=</span><span class="fl">1</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/plot3D/man/persp3D.html">persp3D</a></span>(<span class="no">X</span>, <span class="no">Y</span>, <span class="no">z</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.01</span>, <span class="kw">image</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
         <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">zlab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>,
         <span class="kw">box</span> <span class="kw">=</span> <span class="no">T</span>, <span class="kw">panel.first</span> <span class="kw">=</span> <span class="no">panelfirst</span>, <span class="kw">bty</span> <span class="kw">=</span> <span class="st">"u"</span>,
@@ -1012,10 +1015,10 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h2 class="hasAnchor">
 <a href="#asymptotic-linear-by-linear-association-test-ii" class="anchor"></a>Asymptotic linear-by-linear association test (II)</h2>
 <p>As in the previous case (above), tt is obvious from the 2D density plots that for <span class="math inline">\(MD\)</span> &lt; 0.08 the any relationship is not meaningful. In particular, both variables, <span class="math inline">\(logFC\)</span> and <span class="math inline">\(MD\)</span>, are at the level of technical noise. The percentage of the genes at noise level are:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fl">100</span> * <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">MD</span> <span class="kw">&lt;</span> <span class="fl">0.08</span>)/<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">MD</span>), <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb94"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fl">100</span> * <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">MD</span> <span class="kw">&lt;</span> <span class="fl">0.08</span>)/<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">MD</span>), <span class="fl">2</span>)</pre></body></html></div>
 <pre><code>## [1] 1.42</code></pre>
 <p>The genes for the downstream analysis are:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">MD</span> <span class="kw">&gt;</span> <span class="fl">0.08</span>)
+<div class="sourceCode" id="cb96"><html><body><pre class="r"><span class="no">idx</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">MD</span> <span class="kw">&gt;</span> <span class="fl">0.08</span>)
 <span class="no">md</span>  <span class="kw">&lt;-</span> <span class="no">MD</span>[ <span class="no">idx</span>]
 <span class="no">logfc</span>  <span class="kw">&lt;-</span> <span class="no">logFC</span>[ <span class="no">idx</span> ]
 <span class="no">dt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">md</span> <span class="kw">=</span> <span class="no">md</span> , <span class="kw">logfc</span> <span class="kw">=</span> <span class="no">logfc</span>)
@@ -1024,7 +1027,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <div id="discretization-of-md-and-logfc-ii" class="section level3">
 <h3 class="hasAnchor">
 <a href="#discretization-of-md-and-logfc-ii" class="anchor"></a>Discretization of <span class="math inline">\(MD\)</span> and <span class="math inline">\(logFC\)</span> (II)</h3>
-<div class="sourceCode"><html><body><pre class="r"><span class="co"># ------------------- Auxiliary function for discretization ------------------ #</span>
+<div class="sourceCode" id="cb98"><html><body><pre class="r"><span class="co"># ------------------- Auxiliary function for discretization ------------------ #</span>
 <span class="no">Kmean.discretization</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">categories</span>, <span class="no">algorithm</span> <span class="kw">=</span> <span class="st">"Hartigan-Wong"</span>,
                                  <span class="no">iter.max</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">6</span>, <span class="no">column</span> <span class="kw">=</span> <span class="fl">1L</span>) {
   <span class="no">centers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span>(<span class="no">x</span>, <span class="kw">centers</span> <span class="kw">=</span> <span class="no">categories</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="no">algorithm</span>,
@@ -1039,8 +1042,8 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <div id="discretization-for-md-ii" class="section level3">
 <h3 class="hasAnchor">
 <a href="#discretization-for-md-ii" class="anchor"></a>Discretization for <span class="math inline">\(MD\)</span> (II)</h3>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cl</span> <span class="kw">=</span> <span class="fu">Kmean.discretization</span>(<span class="no">md</span>, <span class="kw">categories</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"MacQueen"</span> )
-<span class="no">cl_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">function</span>(<span class="no">k</span>) <span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>(<span class="no">cl</span>$<span class="no">x</span>[<span class="no">cl</span>$<span class="no">cluster</span> <span class="kw">==</span> <span class="no">k</span>]))
+<div class="sourceCode" id="cb99"><html><body><pre class="r"><span class="no">cl</span> <span class="kw">=</span> <span class="fu">Kmean.discretization</span>(<span class="no">md</span>, <span class="kw">categories</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"MacQueen"</span> )
+<span class="no">cl_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">function</span>(<span class="no">k</span>) <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">cl</span>$<span class="no">x</span>[<span class="no">cl</span>$<span class="no">cluster</span> <span class="kw">==</span> <span class="no">k</span>]))
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">cl_summary</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"low"</span>, <span class="st">"middle"</span>, <span class="st">"high"</span>)
 <span class="no">cl_summary</span></pre></body></html></div>
 <pre><code>##               low    middle      high
@@ -1051,7 +1054,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## 3rd Qu. 0.6216258 1.7647503  3.509952
 ## Max.    0.9683489 2.3473622 10.496433</code></pre>
 <p>Cutpoint are now applied:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cutpoint1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">2</span>])
+<div class="sourceCode" id="cb101"><html><body><pre class="r"><span class="no">cutpoint1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">2</span>])
 <span class="no">cutpoint2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">3</span>])
 
 <span class="no">dt</span>$<span class="no">md_level</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"High"</span>)
@@ -1062,8 +1065,8 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <div id="discretization-for-logfc-ii" class="section level3">
 <h3 class="hasAnchor">
 <a href="#discretization-for-logfc-ii" class="anchor"></a>Discretization for <span class="math inline">\(logFC\)</span> (II)</h3>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cl</span> <span class="kw">=</span> <span class="fu">Kmean.discretization</span>(<span class="no">logfc</span>, <span class="kw">categories</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"MacQueen"</span> )
-<span class="no">cl_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">function</span>(<span class="no">k</span>) <span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>(<span class="no">cl</span>$<span class="no">x</span>[<span class="no">cl</span>$<span class="no">cluster</span> <span class="kw">==</span> <span class="no">k</span>]))
+<div class="sourceCode" id="cb102"><html><body><pre class="r"><span class="no">cl</span> <span class="kw">=</span> <span class="fu">Kmean.discretization</span>(<span class="no">logfc</span>, <span class="kw">categories</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">algorithm</span> <span class="kw">=</span> <span class="st">"MacQueen"</span> )
+<span class="no">cl_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">function</span>(<span class="no">k</span>) <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">cl</span>$<span class="no">x</span>[<span class="no">cl</span>$<span class="no">cluster</span> <span class="kw">==</span> <span class="no">k</span>]))
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">cl_summary</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"eLow"</span>, <span class="st">"eMiddle"</span>, <span class="st">"eHigh"</span>)
 <span class="no">cl_summary</span></pre></body></html></div>
 <pre><code>##                 eLow   eMiddle    eHigh
@@ -1073,7 +1076,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## Mean    2.257154e-01 1.0636271 3.027001
 ## 3rd Qu. 3.430369e-01 1.2671241 3.394137
 ## Max.    6.443115e-01 2.0306128 7.945112</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">cutpoint1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">2</span>])
+<div class="sourceCode" id="cb104"><html><body><pre class="r"><span class="no">cutpoint1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">2</span>])
 <span class="no">cutpoint2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">cl_summary</span>[,<span class="fl">3</span>])
 
 <span class="no">dt</span>$<span class="no">logfc_level</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"eHigh"</span>)
@@ -1086,7 +1089,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#the-contingency-table-and-its-graphic-visualization-ii" class="anchor"></a>The contingency table and its graphic visualization (II)</h3>
 <p>In the current case, the contingency table suggests an obvious relationship between <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>( <span class="kw pkg">base</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>( <span class="no">dt</span>$<span class="no">logfc_level</span>, <span class="no">dt</span>$<span class="no">md_level</span>) )
+<div class="sourceCode" id="cb105"><html><body><pre class="r"><span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>( <span class="kw pkg">base</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>( <span class="no">dt</span>$<span class="no">logfc_level</span>, <span class="no">dt</span>$<span class="no">md_level</span>) )
 <span class="no">m</span></pre></body></html></div>
 <pre><code>##          
 ##            Low Middle High
@@ -1094,8 +1097,8 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ##   eMiddle  795    210   59
 ##   eHigh    128     24    6</code></pre>
 <p>The <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.0/topics/spineplot">spineplot</a> of this contingency table (table(x = logfc_level, y = md_level)) help to visualize the existent relationship between <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>( <span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">4</span>), <span class="kw">family</span> <span class="kw">=</span> <span class="st">"Serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.8</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.2</span> )
-<span class="no">tb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/spineplot.html">spineplot</a></span>(<span class="no">m</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>( <span class="st">"blue"</span>, <span class="st">"dodgerblue"</span>,<span class="st">"deepskyblue"</span> ),
+<div class="sourceCode" id="cb107"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>( <span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">4</span>), <span class="kw">family</span> <span class="kw">=</span> <span class="st">"Serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.8</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.2</span> )
+<span class="no">tb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/spineplot.html">spineplot</a></span>(<span class="no">m</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>)], <span class="kw">col</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>( <span class="st">"blue"</span>, <span class="st">"dodgerblue"</span>,<span class="st">"deepskyblue"</span> ),
                 <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">""</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span>(<span class="kw">side</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">text</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">italic</a></span>(<span class="no">logFC</span>)),
       <span class="kw">line</span> <span class="kw">=</span> <span class="fl">2.5</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">3</span>)
@@ -1111,7 +1114,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <a href="#testing-association-between-logfc-and-md-ii" class="anchor"></a>Testing association between <span class="math inline">\(logFC\)</span> and <span class="math inline">\(MD\)</span> (II)</h3>
 <p>Here, we use the LLT test implemented in function <a href="https://www.rdocumentation.org/packages/coin/versions/1.3-0/topics/ContingencyTests">lbl_test</a> from the R package <em>coin</em>. Two test variants are available: 1) permutation test and asymptotic test.</p>
 <p>The asymptotic LLT test:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span> )</pre></body></html></div>
+<div class="sourceCode" id="cb108"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span> )</pre></body></html></div>
 <pre><code>## 
 ##  Asymptotic Linear-by-Linear Association Test
 ## 
@@ -1119,7 +1122,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## Z = -10.163, p-value &lt; 2.2e-16
 ## alternative hypothesis: two.sided</code></pre>
 <p>The permutation LLT test:</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span>, <span class="kw">distribution</span> <span class="kw">=</span> <span class="st">"approximate"</span>, <span class="kw">B</span> <span class="kw">=</span> <span class="fl">10000</span>, <span class="kw">alternative</span> <span class="kw">=</span> <span class="st">"less"</span> )</pre></body></html></div>
+<div class="sourceCode" id="cb110"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/coin/man/ContingencyTests.html">lbl_test</a></span>( <span class="no">m</span>, <span class="kw">distribution</span> <span class="kw">=</span> <span class="st">"approximate"</span>, <span class="kw">B</span> <span class="kw">=</span> <span class="fl">10000</span>, <span class="kw">alternative</span> <span class="kw">=</span> <span class="st">"less"</span> )</pre></body></html></div>
 <pre><code>## 
 ##  Approximative Linear-by-Linear Association Test
 ## 
@@ -1133,7 +1136,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h2 class="hasAnchor">
 <a href="#generalized-linear-model-glm-ii" class="anchor"></a>Generalized linear model (GLM) (II)</h2>
 <p>The variable <span class="math inline">\(MD\)</span> is split int three levels, 0:“Low” (<span class="math inline">\(0 &lt; MD \leq 0.5\)</span>), 1:“Middle” (<span class="math inline">\(0.5 &lt; MD \leq 1\)</span>), and 2:“High” ($1 &lt; MD $)</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">meth_cut1</span> <span class="kw">&lt;-</span> <span class="fl">0.5</span>
+<div class="sourceCode" id="cb112"><html><body><pre class="r"><span class="no">meth_cut1</span> <span class="kw">&lt;-</span> <span class="fl">0.5</span>
 <span class="no">meth_cut2</span> <span class="kw">&lt;-</span> <span class="fl">1.2</span>
 
 <span class="no">xy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/edgeR/man/cbind.html">cbind</a></span>(<span class="no">MD</span>, <span class="no">logFC</span>)
@@ -1143,8 +1146,8 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <span class="no">xy</span>$<span class="no">md</span>[<span class="no">xy</span>$<span class="no">MD</span> <span class="kw">&gt;</span> <span class="no">meth_cut1</span>] <span class="kw">&lt;-</span> <span class="fl">1</span>
 <span class="no">xy</span>$<span class="no">md</span>[<span class="no">xy</span>$<span class="no">MD</span> <span class="kw">&gt;</span> <span class="no">meth_cut2</span>] <span class="kw">&lt;-</span> <span class="fl">2</span></pre></body></html></div>
 <p>The glm support the decrease of <span class="math inline">\(-logFC\)</span> with the increment of <span class="math inline">\(MD\)</span>. The model coefficients are higly statistically significant.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">gm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span><span class="kw">=</span><span class="no">xy</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span>(<span class="kw">link</span> <span class="kw">=</span> <span class="st">"identity"</span>))
-<span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
+<div class="sourceCode" id="cb113"><html><body><pre class="r"><span class="no">gm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span><span class="kw">=</span><span class="no">xy</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span>(<span class="kw">link</span> <span class="kw">=</span> <span class="st">"identity"</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = logFC ~ md, family = Gamma(link = "identity"), 
@@ -1169,7 +1172,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>The ANOVA test confirm the negative trend given by the coefficient of MD (highly statistically significant).</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb115"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: Gamma, link: identity
@@ -1188,12 +1191,12 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#glm-group-i-low-md-versus-group-ii-middle-md-ii" class="anchor"></a>GLM group I (“Low” <span class="math inline">\(MD\)</span>) versus group II (“Middle” <span class="math inline">\(MD\)</span>) (II)</h3>
 <p>Only genes with <span class="math inline">\(MD &lt; 1\)</span> are analyzed. That is, only two groups are considered: 0:“Middle” (<span class="math inline">\(0.5 &lt; MD \leq 1\)</span>), and 1:“High” ($1 &lt; MD $)</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dt</span> <span class="kw">&lt;-</span> <span class="no">xy</span>[<span class="no">xy</span>$<span class="no">MD</span> <span class="kw">&lt;</span> <span class="no">meth_cut2</span>, ]
+<div class="sourceCode" id="cb117"><html><body><pre class="r"><span class="no">dt</span> <span class="kw">&lt;-</span> <span class="no">xy</span>[<span class="no">xy</span>$<span class="no">MD</span> <span class="kw">&lt;</span> <span class="no">meth_cut2</span>, ]
 <span class="no">dt</span>$<span class="no">md</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
 <span class="no">dt</span>$<span class="no">md</span>[ <span class="no">dt</span>$<span class="no">MD</span> <span class="kw">&gt;</span> <span class="no">meth_cut1</span>   ] <span class="kw">&lt;-</span> <span class="fl">1</span>
 
 <span class="no">gm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">dt</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span>(<span class="kw">link</span> <span class="kw">=</span> <span class="st">"identity"</span>))
-<span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = logFC ~ md, family = Gamma(link = "identity"), 
@@ -1217,10 +1220,10 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## AIC: 2291.1
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n =============== The ANOVA test  =============== \n\n"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb119"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n =============== The ANOVA test  =============== \n\n"</span>)</pre></body></html></div>
 <pre><code>## 
 ##  =============== The ANOVA test  ===============</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb121"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: Gamma, link: identity
@@ -1240,12 +1243,12 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#glm-group-ii-middle-md-versus-group-iii-high-md-ii" class="anchor"></a>GLM group II (“Middle” <span class="math inline">\(MD\)</span>) versus group III (“High” <span class="math inline">\(MD\)</span>) (II)</h3>
 <p>Only genes with <span class="math inline">\(MD &lt; 1\)</span> are analyzed. That is, only two groups are considered: 0:“Low” (<span class="math inline">\(0 &lt; MD \leq 0.5\)</span>), 1:“Middle” (<span class="math inline">\(0.5 &lt; MD \leq 1\)</span>).</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="no">dt</span> <span class="kw">&lt;-</span> <span class="no">xy</span>[<span class="no">xy</span>$<span class="no">MD</span> <span class="kw">&gt;</span> <span class="no">meth_cut1</span>, ]
+<div class="sourceCode" id="cb123"><html><body><pre class="r"><span class="no">dt</span> <span class="kw">&lt;-</span> <span class="no">xy</span>[<span class="no">xy</span>$<span class="no">MD</span> <span class="kw">&gt;</span> <span class="no">meth_cut1</span>, ]
 <span class="no">dt</span>$<span class="no">md</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
 <span class="no">dt</span>$<span class="no">md</span>[ <span class="no">dt</span>$<span class="no">MD</span> <span class="kw">&gt;</span> <span class="no">meth_cut2</span>   ] <span class="kw">&lt;-</span> <span class="fl">1</span>
 
 <span class="no">gm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">dt</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span>(<span class="kw">link</span> <span class="kw">=</span> <span class="st">"identity"</span>))
-<span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>( <span class="no">gm</span> )</pre></body></html></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = logFC ~ md, family = Gamma(link = "identity"), 
@@ -1269,10 +1272,10 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## AIC: 1171.9
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n =============== The ANOVA test  =============== \n\n"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb125"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"\n =============== The ANOVA test  =============== \n\n"</span>)</pre></body></html></div>
 <pre><code>## 
 ##  =============== The ANOVA test  ===============</code></pre>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb127"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span>(<span class="no">gm</span>, <span class="kw">test</span> <span class="kw">=</span> <span class="st">"LRT"</span>)</pre></body></html></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: Gamma, link: identity
@@ -1292,7 +1295,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <h3 class="hasAnchor">
 <a href="#boxplot-ii" class="anchor"></a>Boxplot (II)</h3>
 <p>The boxplot suggest a clear trend of <span class="math inline">\(-logFC\)</span> decreasing with increment of MD levels. Notice that the <em>notchs</em> from the boxes do not overlap, which implies that the differences between medians from three groups (“Low”, “Middle”, and “High”) are statistically significant. So, the GLM results can be visualized.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>)
+<div class="sourceCode" id="cb129"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.1</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="no">logFC</span> ~ <span class="no">md</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">xy</span>, <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.4</span>, <span class="fl">2.5</span>), <span class="kw">xaxt</span> <span class="kw">=</span><span class="st">"n"</span>,  <span class="kw">yaxt</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">ann</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/rect.html">rect</a></span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>, <span class="fl">3.5</span>, <span class="fl">5</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"grey94"</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span>(<span class="fl">0</span>, <span class="fl">5</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">1</span>)
@@ -1315,10 +1318,13 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <a href="#references" class="anchor"></a>References</h1>
 <div id="refs">
 <div id="ref-Agresti2007">
-<p>Agresti, Alan. 2007. <em>An Introduction to Categorical Data Analysis</em>. John Wiley &amp; Sons, Inc. doi:<a href="https://doi.org/10.1002/9780470114759.ch2">10.1002/9780470114759.ch2</a>.</p>
+<p>Agresti, Alan. 2007. <em>An Introduction to Categorical Data Analysis</em>. John Wiley &amp; Sons, Inc. <a href="https://doi.org/10.1002/9780470114759.ch2">https://doi.org/10.1002/9780470114759.ch2</a>.</p>
 </div>
 <div id="ref-Balakrishna2009">
-<p>Balakrishna, N, and Chin Diew Lai. 2009. <em>Distributions Expressed as Copulas</em>. New York, NY: Springer New York. doi:<a href="https://doi.org/10.1007/b101765_3">10.1007/b101765_3</a>.</p>
+<p>Balakrishna, N, and Chin Diew Lai. 2009. <em>Distributions Expressed as Copulas</em>. New York, NY: Springer New York. <a href="https://doi.org/10.1007/b101765_3">https://doi.org/10.1007/b101765_3</a>.</p>
+</div>
+<div id="ref-Christian2007">
+<p>Christian, Genest, and Anne-catherine Favre. 2007. “Everything You Always Wanted to Know about Copula Modeling but Were Afraid to Ask.” <em>J HYDROL ENG</em> 12 (4): 347–68. <a href="https://doi.org/10.1061/?ASCE?1084-0699?2007?12:4?347">https://doi.org/10.1061/?ASCE?1084-0699?2007?12:4?347</a>.</p>
 </div>
 <div id="ref-Sklar1959">
 <p>Sklar, Abe. 1959. “Fonctions de répartition à n dimensions et leurs marges.” <em>Publ. Inst. Statist. Univ. Paris</em> 8: 229–31.</p>
@@ -1326,18 +1332,22 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 <div id="ref-Sklar1973">
 <p>———. 1973. “Random Variables, Joint Distribution Functions, and Copulas.” <em>Kybernetika</em> 9 (6): 449–60.</p>
 </div>
+<div id="ref-Yang2020">
+<p>Yang, Xiaodong, Robersy Sanchez, Hardik Kundariya, Tom Maher, Isaac Dopp, Rosemary Schwegel, Kamaldeep Virdi, Michael J Axtell, and Sally A Mackenzie. 2020. “Segregation of an MSH1 RNAi transgene produces heritable non-genetic memory in association with methylome reprogramming.” <em>Nature Communications</em> 11 (1): 2214. <a href="https://doi.org/10.1038/s41467-020-16036-8">https://doi.org/10.1038/s41467-020-16036-8</a>.</p>
+</div>
 </div>
 </div>
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 1.19.2.1:</p>
-<pre><code>## R version 3.6.0 (2019-04-26)
-## Platform: x86_64-redhat-linux-gnu (64-bit)
-## Running under: CentOS Linux 7 (Core)
+<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.7.3:</p>
+<pre><code>## R version 4.0.0 (2020-04-24)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 18.04.4 LTS
 ## 
 ## Matrix products: default
-## BLAS/LAPACK: /usr/lib64/R/lib/libRblas.so
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.7.1
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.7.1
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -1352,50 +1362,37 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 ## [8] methods   base     
 ## 
 ## other attached packages:
-##  [1] coin_1.3-1                  survival_3.1-11            
-##  [3] copula_0.999-20             plot3D_1.3                 
-##  [5] usefr_0.1.0                 edgeR_3.26.8               
-##  [7] limma_3.40.6                ggplot2_3.3.0              
-##  [9] DESeq2_1.24.0               SummarizedExperiment_1.14.1
-## [11] DelayedArray_0.10.0         BiocParallel_1.18.1        
-## [13] matrixStats_0.56.0          Biobase_2.44.0             
-## [15] GenomicRanges_1.36.1        GenomeInfoDb_1.20.0        
-## [17] IRanges_2.18.3              S4Vectors_0.22.1           
-## [19] BiocGenerics_0.30.0        
+##  [1] coin_1.3-1           survival_3.1-12      copula_1.0-0        
+##  [4] plot3D_1.3           usefr_0.1.0          edgeR_3.30.3        
+##  [7] limma_3.44.1         ggplot2_3.3.1        GenomicRanges_1.40.0
+## [10] GenomeInfoDb_1.24.0  IRanges_2.22.2       S4Vectors_0.26.1    
+## [13] BiocGenerics_0.34.0 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] TH.data_1.0-10         colorspace_1.4-1       modeltools_0.2-23     
-##  [4] mclust_5.4.5           rprojroot_1.3-2        htmlTable_1.13.3      
-##  [7] XVector_0.24.0         base64enc_0.1-3        fs_1.3.2              
-## [10] rstudioapi_0.11        gsl_2.1-6              bit64_0.9-7           
-## [13] AnnotationDbi_1.46.1   mvtnorm_1.1-0          codetools_0.2-16      
-## [16] splines_3.6.0          libcoin_1.0-5          geneplotter_1.62.0    
-## [19] knitr_1.28             Formula_1.2-3          annotate_1.62.0       
-## [22] cluster_2.1.0          png_0.1-7              stabledist_0.7-1      
-## [25] compiler_3.6.0         backports_1.1.5        assertthat_0.2.1      
-## [28] Matrix_1.2-18          acepack_1.4.1          htmltools_0.4.0       
-## [31] tools_3.6.0            misc3d_0.8-4           gtable_0.3.0          
-## [34] glue_1.3.2             GenomeInfoDbData_1.2.1 dplyr_0.8.5           
-## [37] Rcpp_1.0.4             pkgdown_1.5.1.9000     vctrs_0.2.4           
-## [40] xfun_0.12              stringr_1.4.0          mixdist_0.5-5         
-## [43] lifecycle_0.1.0        XML_3.99-0.3           zlibbioc_1.30.0       
-## [46] MASS_7.3-51.5          zoo_1.8-7              scales_1.1.0          
-## [49] sandwich_2.5-1         RColorBrewer_1.1-2     yaml_2.2.1            
-## [52] memoise_1.1.0          gridExtra_2.3          rpart_4.1-15          
-## [55] latticeExtra_0.6-29    stringi_1.4.6          RSQLite_2.2.0         
-## [58] genefilter_1.66.0      desc_1.2.0             pcaPP_1.9-73          
-## [61] checkmate_2.0.0        rlang_0.4.5            pkgconfig_2.0.3       
-## [64] bitops_1.0-6           evaluate_0.14          lattice_0.20-40       
-## [67] purrr_0.3.3            htmlwidgets_1.5.1      bit_1.1-15.2          
-## [70] tidyselect_1.0.0       magrittr_1.5           nls2_0.2              
-## [73] R6_2.4.1               Hmisc_4.4-0            multcomp_1.4-13       
-## [76] ADGofTest_0.3          DBI_1.1.0              pillar_1.4.3          
-## [79] foreign_0.8-76         withr_2.1.2            RCurl_1.98-1.1        
-## [82] nnet_7.3-13            tibble_2.1.3           pspline_1.0-18        
-## [85] crayon_1.3.4           rmarkdown_2.1          jpeg_0.1-8.1          
-## [88] locfit_1.5-9.2         grid_3.6.0             minpack.lm_1.2-1      
-## [91] data.table_1.12.8      blob_1.2.1             digest_0.6.25         
-## [94] xtable_1.8-4           numDeriv_2016.8-1.1    munsell_0.5.0</code></pre>
+##  [1] splines_4.0.0          assertthat_0.2.1       GenomeInfoDbData_1.2.3
+##  [4] nls2_0.2               yaml_2.2.1             numDeriv_2016.8-1.1   
+##  [7] pillar_1.4.4           backports_1.1.7        lattice_0.20-41       
+## [10] glue_1.4.1             digest_0.6.25          XVector_0.28.0        
+## [13] sandwich_2.5-1         colorspace_1.4-1       htmltools_0.4.0       
+## [16] Matrix_1.2-18          pcaPP_1.9-73           pkgconfig_2.0.3       
+## [19] misc3d_0.8-4           zlibbioc_1.34.0        purrr_0.3.4           
+## [22] mvtnorm_1.1-1          scales_1.1.1           BiocParallel_1.22.0   
+## [25] tibble_3.0.1           ADGofTest_0.3          generics_0.0.2        
+## [28] ellipsis_0.3.1         TH.data_1.0-10         withr_2.2.0           
+## [31] magrittr_1.5           crayon_1.3.4           mclust_5.4.6          
+## [34] memoise_1.1.0          evaluate_0.14          fs_1.4.1              
+## [37] mixdist_0.5-5          MASS_7.3-51.6          gsl_2.1-6             
+## [40] tools_4.0.0            multcomp_1.4-13        matrixStats_0.56.0    
+## [43] minpack.lm_1.2-1       lifecycle_0.2.0        pspline_1.0-18        
+## [46] stringr_1.4.0          munsell_0.5.0          locfit_1.5-9.4        
+## [49] stabledist_0.7-1       compiler_4.0.0         pkgdown_1.5.1         
+## [52] rlang_0.4.6            grid_4.0.0             RCurl_1.98-1.2        
+## [55] rstudioapi_0.11        bitops_1.0-6           rmarkdown_2.2         
+## [58] codetools_0.2-16       gtable_0.3.0           R6_2.4.1              
+## [61] zoo_1.8-8              knitr_1.28             dplyr_1.0.0           
+## [64] libcoin_1.0-5          rprojroot_1.3-2        desc_1.2.0            
+## [67] modeltools_0.2-23      stringi_1.4.6          Rcpp_1.0.4.6          
+## [70] vctrs_0.3.1            tidyselect_1.1.0       xfun_0.14</code></pre>
 </div>
   </div>
 
@@ -1414,7 +1411,7 @@ v)=uv+\alpha uv(1-u)(1-v)\]</span> <span class="math inline">\(u,v \in [0,1]\)</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

@@ -134,6 +134,7 @@ Evaluated models are 'Poisson', 'Quasipoisson', 'Neg.Binomial.W', and
     <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
+    <li class="divider"></li>
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
@@ -185,7 +186,15 @@ Evaluated models are 'Poisson', 'Quasipoisson', 'Neg.Binomial.W', and
 'Neg.Binomial'</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.estimateGLM</span>(<span class='no'>x</span>, <span class='no'>groups</span>, <span class='no'>baseMV</span>, <span class='no'>w</span>, <span class='no'>MVrate</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Wald"</span>, <span class='st'>"LRT"</span>))</pre>
+    <pre class="usage"><span class='fu'>.estimateGLM</span>(
+  <span class='no'>x</span>,
+  <span class='no'>groups</span>,
+  <span class='no'>baseMV</span>,
+  <span class='no'>w</span>,
+  <span class='no'>MVrate</span>,
+  <span class='kw'>test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Wald"</span>, <span class='st'>"LRT"</span>),
+  <span class='kw'>p.value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,6 +236,10 @@ best fitted model is Poisson or quasi-Poisson, then the best test is
 'Chi-squared' or 'F-test', respectively. So, for the sake of simplicity,
 the corresponding suitable test will be applied when test = 'LRT'.</p></td>
     </tr>
+    <tr>
+      <th>p.value</th>
+      <td><p>Cut off p-value to reject the null hypothesis</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -244,8 +257,8 @@ the corresponding suitable test will be applied when test = 'LRT'.</p></td>
 <span class='kw pkg'>MethylIT</span><span class='kw ns'>:::</span><span class='fu'>.estimateGLM</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>groups</span> <span class='kw'>=</span> <span class='no'>ds</span>$<span class='no'>colData</span>$<span class='no'>condition</span>,
                         <span class='kw'>baseMV</span> <span class='kw'>=</span> <span class='no'>baseMeanAndVar</span>,
                         <span class='kw'>w</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>), <span class='kw'>MVrate</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-                        <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"LRT"</span>)</div><div class='output co'>#&gt;      log2FC scaled.deviance     pvalue        model
-#&gt; 1 0.5687902        29.07439 0.03271601 QuasiPoisson</div><div class='input'>
+                        <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"LRT"</span>)</div><div class='output co'>#&gt;      log2FC scaled.deviance       pvalue        model
+#&gt; 1 0.5687902        26.65912 2.427022e-07 Neg.Binomial</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -262,7 +275,7 @@ the corresponding suitable test will be applied when test = 'LRT'.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

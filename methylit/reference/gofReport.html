@@ -78,6 +78,7 @@ of potential DMPs and DMPs, as well as, the highest classification accuracy
 estimated with functions estimateCutPoint and
 evaluateDIMPclass. In the worse scenario, these observations
 can ultimately lead to a post-hoc decision on which the best model is." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -151,7 +152,15 @@ can ultimately lead to a post-hoc decision on which the best model is." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
   </ul>
 </li>
@@ -232,6 +241,7 @@ can ultimately lead to a post-hoc decision on which the best model is.</p>
   <span class='kw'>absolute</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"best.model"</span>, <span class='st'>"all"</span>),
   <span class='kw'>confl_model</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='no'>...</span>
@@ -276,6 +286,10 @@ corresponding statistics. Default is 'best.model'</p></td>
       <td><p>Logic. If TRUE, then the best model based on highest
 R.Cross.val is returned for those samples where the model(s) with lowest
 AIC has not the highest R.Cross.val.</p></td>
+    </tr>
+    <tr>
+      <th>npoints</th>
+      <td><p>number of points to be used in the fit. Default is NULL.</p></td>
     </tr>
     <tr>
       <th>num.cores</th>
@@ -344,21 +358,21 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 <span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>gofReport</span>(<span class='no'>hd</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
 #&gt; 
 #&gt;  *** Creating report ... </div><div class='output co'>#&gt; <span class='warning'>Warning: </span>
-#&gt; <span class='warning'> The best fitted model for sample(s) C2, T1 require(s) for further analysis. </span>
+#&gt; <span class='warning'> The best fitted model for sample(s) C2, T1, T3 require(s) for further analysis. </span>
 #&gt; <span class='warning'>The model with the lowest AIC must have the highest R.Cross.val</span></div><div class='output co'>#&gt;      w2p_AIC w2p_R.Cross.val   w3p_AIC w3p_R.Cross.val   g2p_AIC
-#&gt; C1 -455.0259       0.9964832        NA              NA -437.3394
-#&gt; C2 -426.8983       0.9955353 -431.1954       0.9948856 -409.3027
-#&gt; C3 -582.1629       0.9990141        NA              NA -560.5544
-#&gt; T1 -494.5917       0.9976367 -493.8734       0.9977187 -461.7047
-#&gt; T2 -472.0464       0.9970946        NA              NA -477.2328
-#&gt; T3 -517.5384       0.9981496 -515.9888       0.9981238 -493.3195
+#&gt; C1 -444.0596       0.9962152        NA              NA -441.8100
+#&gt; C2 -405.1273       0.9943017 -403.8039       0.9945712 -390.5325
+#&gt; C3 -491.5722       0.9978540        NA              NA -511.8597
+#&gt; T1 -479.9242       0.9973436 -484.5159       0.9971339 -448.9372
+#&gt; T2 -470.1731       0.9969376        NA              NA -473.6997
+#&gt; T3 -531.2913       0.9983133 -524.4815       0.9982653 -504.9354
 #&gt;    g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val      bestModel
-#&gt; C1       0.9959525 -434.8702       0.9959088            w2p
-#&gt; C2       0.9949807 -411.1744       0.9953541 Needs revision
-#&gt; C3       0.9988564 -559.6221       0.9988700            w2p
-#&gt; T1       0.9971169 -484.9045       0.9975571 Needs revision
-#&gt; T2       0.9973566       Inf       0.0000000            g2p
-#&gt; T3       0.9975695 -526.9134       0.9982601            g3p
+#&gt; C1       0.9960348       Inf       0.0000000            w2p
+#&gt; C2       0.9940991 -387.5697       0.9942472 Needs revision
+#&gt; C3       0.9981279       Inf       0.0000000            g2p
+#&gt; T1       0.9966225 -474.4274       0.9971180 Needs revision
+#&gt; T2       0.9972262       Inf       0.0000000            g2p
+#&gt; T3       0.9979546 -524.5915       0.9983985 Needs revision
 #&gt; </div><div class='input'>
 <span class='co'>## To get the potential DMPs</span>
 <span class='no'>ps_dmp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='getPotentialDIMP.html'>getPotentialDIMP</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>hd</span>, <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>nlms</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>,
@@ -378,7 +392,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

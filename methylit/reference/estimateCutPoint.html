@@ -86,7 +86,7 @@ control group versus treatment group." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.1</span>
       </span>
     </div>
 
@@ -134,8 +134,13 @@ control group versus treatment group." />
     <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
+    <li class="divider"></li>
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -199,7 +204,7 @@ control group versus treatment group.</p>
   <span class='kw'>post.cut</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
   <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
   <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>interaction</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>interactions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>cut.values</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>stat</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>cutp_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -294,7 +299,7 @@ testing.</p></td>
 not 'logistic'. In the current case, the maximun number of PCs is 4.</p></td>
     </tr>
     <tr>
-      <th>interaction</th>
+      <th>interactions</th>
       <td><p>If a logistic classifier is used. Variable interactions to
 consider in a logistic regression model. Any pairwise combination of the
 variable 'hdiv', 'TV', 'wprob', and 'pos' can be provided. For example:
@@ -463,7 +468,7 @@ model can be used for predictions in further analyses with function
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

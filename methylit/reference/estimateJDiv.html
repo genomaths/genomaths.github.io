@@ -67,6 +67,7 @@ bit of information, which set the basis for further
 information-thermodynamics analyses.
 
 " />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -140,7 +141,15 @@ information-thermodynamics analyses.
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
   </ul>
 </li>
@@ -232,16 +241,16 @@ returned</p>
 between the methylation levels \(p_{ij}\) and the methylation levels
 \(q_i\), used as reference, corresponds to the divergence between the
 probability vectors \(p^{ij}\) and \(q^i = (q_i, 1 - q_i)\). <em>JD</em>
-is computed as in reference (1), adapted here for discrete probability
-distributions:</p>
-<p>$$JD(p^{ij}, q^i) = (p_{ij} * log(p_{ij}/q_i) +
-                        (1 - p_{ij}) * log((1 - p_{ij})/(1 - q_i)) +
-                q_i * log(q_i/p_ij) +
-                (1 - q_i) * log((1 - q_i)/(1 - p_{ij})))/2$$.</p>
+is computed as in reference (1-2):</p>
+<p>$$JD(p^{ij}, q^i) = ((p_{ij} - q_i) * log(p_{ij}/q_i) +
+                        (q_i - p_{ij}) * log((1 - p_{ij})/(1 - q_i)))/2$$</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
 <ol>
+<li><p>J. K. Chung, P. L. Kannappan, C. T. Ng, P. K. Sahoo, Measures of
+distance between probability distributions. J. Math. Anal. Appl.
+138, 280–292 (1989).</p></li>
 <li><p>Lin J. Divergence Measures Based on the Shannon Entropy. IEEE
 Trans Inform Theory, 1991, 37:145–51.</p></li>
 <li><p>Sanchez R, Mackenzie SA. Information thermodynamics of cytosine
@@ -279,7 +288,7 @@ using it.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
