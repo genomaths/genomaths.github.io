@@ -270,11 +270,11 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#divergences-of-methylation-levels" class="anchor"></a>Divergences of methylation levels</h2>
 <p>The estimation of the divergences of methylation levels is required to proceed with the application of signal detection basic approach. The information divergence is estimated here using the function <em>estimateDivergence</em>. For each cytosine site, methylation levels are estimated according to the formulas: <span class="math inline">\(p_i={n_i}^{mC_j}/({n_i}^{mC_j}+{n_i}^{C_j})\)</span>, where <span class="math inline">\({n_i}^{mC_j}\)</span> and <span class="math inline">\({n_i}^{C_j}\)</span> are the number of methylated and unmethylated cytosines at site <span class="math inline">\(i\)</span>.</p>
-<p>If a Bayesian correction of counts is selected in function <em>estimateDivergence</em>, then methylated read counts are modeled by a beta-binomial distribution in a Bayesian framework, which accounts for the biological and sampling variations <span class="citation">(Hebestreit, Dugas, and Klein 2013; Robinson et al. 2014; Dolzhenko and Smith 2014)</span>. In our case we adopted the Bayesian approach suggested in reference <span class="citation">(Baldi and Brunak 2001)</span> (Chapter 3).</p>
+<p>If a Bayesian correction of counts is selected in function <em>estimateDivergence</em>, then methylated read counts are modeled by a beta-binomial distribution in a Bayesian framework, which accounts for the biological and sampling variations <span class="citation">(1–3)</span>. In our case we adopted the Bayesian approach suggested in reference <span class="citation">(4)</span> (Chapter 3).</p>
 <p>Two types of information divergences are estimated: <em>TV</em>, total variation (<em>TV</em>, absolute value of methylation levels) and Hellinger divergence (<em>H</em>). <em>TV</em> is computed according to the formula: <span class="math inline">\(TV_d=|p_{tt}-p_{ct}|\)</span> and <em>H</em>:</p>
 <p><span class="math display">\[H(\hat p_{ij},\hat p_{ir}) = w_i\Big[(\sqrt{\hat p_{ij}} - \sqrt{\hat
 p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <span class="math inline">\(w_i = 2 \frac{m_{ij} m_{ir}}{m_{ij} + m_{ir}}\)</span>, <span class="math inline">\(m_{ij} = {n_i}^{mC_j}+{n_i}^{uC_j}+1\)</span>, <span class="math inline">\(m_{ir} = {n_i}^{mC_r}+{n_i}^{uC_r}+1\)</span> and <span class="math inline">\(j \in {\{c,t}\}\)</span></p>
-<p>The equation for Hellinger divergence is given in reference <span class="citation">(Basu, Mandal, and Pardo 2010)</span>, but any other information theoretical divergences could be used as well.</p>
+<p>The equation for Hellinger divergence is given in reference <span class="citation">(5)</span>, but any other information theoretical divergences could be used as well.</p>
 <p>Divergences are estimated for control and treatment groups in respect to a virtual sample, which is created applying function <em>poolFromGRlist</em> on the reference group.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Reference sample</span>
@@ -364,7 +364,7 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
     <span class="op">)</span></code></pre></div>
 <p><img src="Methylation_analysis_with_Methyl-IT_files/figure-html/dens.graph-1.png" width="700"></p>
 <p>The graphic above shows that with high probability the methylation signal induced by the treatment has <em>H</em> values <span class="math inline">\(H^{TT}_{\alpha=0.05}\geq139\)</span>. According to the critical value estimated for the differences of methylation levels, the methylation signal holds <span class="math inline">\(TV^{TT}_{\alpha=0.05}\geq0.67\)</span>.</p>
-<p>Notice that most of the methylation changes are not signal but methylation background noise (found to the left of the critical values). This situation is typical for all the natural and technologically generated signals <span class="citation">(Sanchez and Mackenzie 2016; Sanchez et al. 2019)</span>.</p>
+<p>Notice that most of the methylation changes are not signal but methylation background noise (found to the left of the critical values). This situation is typical for all the natural and technologically generated signals <span class="citation">(6, 7)</span>.</p>
 <div id="signal-detection" class="section level2">
 <h2 class="hasAnchor">
 <a href="#signal-detection" class="anchor"></a>Signal detection</h2>
@@ -374,7 +374,7 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 <h3 class="hasAnchor">
 <a href="#estimation-of-the-best-fitted-probability-distribution-model" class="anchor"></a><em>Estimation of the best fitted probability distribution model</em>
 </h3>
-<p>Potential DMPs can be estimated using the critical values derived from the best fitted probability distribution model, which is obtained after the non-linear fit of the theoretical model on the genome-wide <span class="math inline">\(H\)</span> values for each individual sample using Methyl-IT function <a href="https://is.gd/0BLLkT">nonlinearFitDist</a> <span class="citation">(Sanchez and Mackenzie 2016)</span>. As before, only cytosine sites with critical values <span class="math inline">\(TV_d&gt;0.926\)</span> are considered DMPs. Notice that, it is always possible to use any other values of <span class="math inline">\(H\)</span> and <span class="math inline">\(TV_d\)</span> as critical values, but whatever could be the value it will affect the final accuracy of the classification performance of DMPs into two groups, DMPs from control and DMPs from treatment (see below). So, it is important to do an good choices of the critical values.</p>
+<p>Potential DMPs can be estimated using the critical values derived from the best fitted probability distribution model, which is obtained after the non-linear fit of the theoretical model on the genome-wide <span class="math inline">\(H\)</span> values for each individual sample using Methyl-IT function <a href="https://is.gd/0BLLkT">nonlinearFitDist</a> <span class="citation">(6)</span>. As before, only cytosine sites with critical values <span class="math inline">\(TV_d&gt;0.926\)</span> are considered DMPs. Notice that, it is always possible to use any other values of <span class="math inline">\(H\)</span> and <span class="math inline">\(TV_d\)</span> as critical values, but whatever could be the value it will affect the final accuracy of the classification performance of DMPs into two groups, DMPs from control and DMPs from treatment (see below). So, it is important to do an good choices of the critical values.</p>
 <p>Function <a href="https://is.gd/W7dlP0">gofReport</a> search for the best fitted model between the set of models requested by the user.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>, <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span>, <span class="st">"GGamma3P"</span><span class="op">)</span>
@@ -398,7 +398,7 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 <h3 class="hasAnchor">
 <a href="#potential-dmps-detected-with-fishers-exact-test-ft" class="anchor"></a><em>Potential DMPs detected with Fisher’s exact test (FT)</em>
 </h3>
-<p>Fisher’s exact test (FT) is run here as standard alternative approach. A full discussion on the performance of FT and other statistical approaches in comparison with Methyl-IT pipeline can be read in <span class="citation">(Sanchez et al. 2019)</span>. Notice that the standard application of FT does not include a signal detection step (see more at <span class="citation">(Sanchez et al. 2019)</span>).</p>
+<p>Fisher’s exact test (FT) is run here as standard alternative approach. A full discussion on the performance of FT and other statistical approaches in comparison with Methyl-IT pipeline can be read in <span class="citation">(7)</span>. Notice that the standard application of FT does not include a signal detection step (see more at <span class="citation">(7)</span>).</p>
 <p>In Methyl-IT, FT is implemented in function <em>FisherTest</em>. In the current case, a pairwise group application of FT to each cytosine site is performed. The differences between the group means of read counts of methylated and unmethylated cytosines at each site are used for testing (<span class="math inline">\(pooling.stat ="mean"\)</span>). Notice that only cytosine sites with critical values <span class="math inline">\(TV_d&gt;0.67\)</span> are tested (<em>tv.cut = 0.67</em>).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ft</span> <span class="op">=</span> <span class="fu"><a href="../reference/FisherTest.html">FisherTest</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, tv.cut <span class="op">=</span> <span class="fl">0.67</span>,
@@ -497,9 +497,9 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
 <div id="cutpoint-for-the-spontaneous-variability-in-the-control-group" class="section level1">
 <h1 class="hasAnchor">
 <a href="#cutpoint-for-the-spontaneous-variability-in-the-control-group" class="anchor"></a>Cutpoint for the spontaneous variability in the control group</h1>
-<p>Normally, there is a spontaneous variability in the control group. This is a consequence of the random fluctuations, or noise, inherent to the methylation process. The stochasticity of the the methylation process is derives from the stochasticity inherent in biochemical processes. There are fundamental physical reasons to acknowledge that biochemical processes are subject to noise and fluctuations <span class="citation">(Samoilov, Price, and Arkin 2006; Eldar and Elowitz 2010)</span>. So, regardless constant environment, statistically significant methylation changes can be found in control population with probability greater than zero and proportional to a Boltzmann factor <span class="citation">(Sanchez and Mackenzie 2016)</span>.</p>
+<p>Normally, there is a spontaneous variability in the control group. This is a consequence of the random fluctuations, or noise, inherent to the methylation process. The stochasticity of the the methylation process is derives from the stochasticity inherent in biochemical processes. There are fundamental physical reasons to acknowledge that biochemical processes are subject to noise and fluctuations <span class="citation">(8, 9)</span>. So, regardless constant environment, statistically significant methylation changes can be found in control population with probability greater than zero and proportional to a Boltzmann factor <span class="citation">(6)</span>.</p>
 <p>Natural signals and those generated by human technology are not free of noise and, as mentioned above, the methylation signal is no exception. Only signal detection based approaches are designed to filter out the signal from the noise, in natural and in human generated signals.</p>
-<p>The need for the application of (what is now known as) signal detection in cancer research was pointed out by Youden in the midst of the last century <span class="citation">(Youden 1950)</span>. Here, the application of signal detection approach was performed according with the standard practice in current implementations of clinical diagnostic test <span class="citation">(Carter et al. 2016; López-Ratón et al. 2014; Hippenstiel 2001)</span>. That is, optimal cutoff values of the methylation signal were estimated on the receiver operating characteristic curves (ROCs) and applied to identify DMPs. The decision of whether a DMP detected by Fisher’s exact test (or any other statistical test implemented in Methyl-IT) is taken based on the optimal cutoff value.</p>
+<p>The need for the application of (what is now known as) signal detection in cancer research was pointed out by Youden in the midst of the last century <span class="citation">(10)</span>. Here, the application of signal detection approach was performed according with the standard practice in current implementations of clinical diagnostic test <span class="citation">(11–13)</span>. That is, optimal cutoff values of the methylation signal were estimated on the receiver operating characteristic curves (ROCs) and applied to identify DMPs. The decision of whether a DMP detected by Fisher’s exact test (or any other statistical test implemented in Methyl-IT) is taken based on the optimal cutoff value.</p>
 <p>In the current example, the column carrying <em>TV</em> (<em>div.col</em> = 7L) will be used to estimate the cutpoint. The column values will be expressed in terms of <span class="math inline">\(TV_d=|p_{tt}-p_{ct}|\)</span> (<em>absolute</em> = TRUE):</p>
 <div id="cutpoint-for-ps-estimated-based-on-the-best-probability-distribution-model" class="section level3">
 <h3 class="hasAnchor">
@@ -554,7 +554,7 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
 <div id="cutpoint-for-ps-estimated-based-on-ft" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cutpoint-for-ps-estimated-based-on-ft" class="anchor"></a>Cutpoint for PS estimated based on FT</h3>
-<p>The best classification performance based PS estimated based on FT are obtained with the application of <a href="https://is.gd/t8UKvK">Youden index</a> <span class="citation">(Youden 1950)</span>.</p>
+<p>The best classification performance based PS estimated based on FT are obtained with the application of <a href="https://is.gd/t8UKvK">Youden index</a> <span class="citation">(10)</span>.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cutpoint2</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.tv</span>, 
                             control.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span><span class="op">)</span>, 
@@ -646,7 +646,7 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cutpoint3</span><span class="op">$</span><span class="va">testSetModel.FDR</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<p>Therefore, invoking the parsimony principle, we assume that signal detection and machine-learning classifiers are sufficient <span class="citation">(El Naqa et al. 2018)</span>.</p>
+<p>Therefore, invoking the parsimony principle, we assume that signal detection and machine-learning classifiers are sufficient <span class="citation">(14)</span>.</p>
 </div>
 <div id="dmps" class="section level2">
 <h2 class="hasAnchor">
@@ -742,48 +742,62 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Baldi2001" class="csl-entry">
-Baldi, Pierre, and Soren Brunak. 2001. <em><span class="nocase">Bioinformatics: the machine learning approach</span></em>. Second. Cambridge: MIT Press.
-</div>
-<div id="ref-Basu2010" class="csl-entry">
-Basu, A., A. Mandal, and L. Pardo. 2010. <span>“<span class="nocase">Hypothesis testing for two discrete populations based on the Hellinger distance</span>.”</span> <em>Statistics <span>&amp;</span> Probability Letters</em> 80 (3-4): 206–14. <a href="https://doi.org/10.1016/j.spl.2009.10.008">https://doi.org/10.1016/j.spl.2009.10.008</a>.
-</div>
-<div id="ref-Carter2016" class="csl-entry">
-Carter, Jane V., Jianmin Pan, Shesh N. Rai, and Susan Galandiuk. 2016. <span>“<span class="nocase">ROC-ing along: Evaluation and interpretation of receiver operating characteristic curves</span>.”</span> <em>Surgery</em> 159 (6): 1638–45. <a href="https://doi.org/10.1016/j.surg.2015.12.029">https://doi.org/10.1016/j.surg.2015.12.029</a>.
-</div>
-<div id="ref-Dolzhenko2014" class="csl-entry">
-Dolzhenko, Egor, and Andrew D Smith. 2014. <span>“<span class="nocase">Using beta-binomial regression for high-precision differential methylation analysis in multifactor whole-genome bisulfite sequencing experiments</span>.”</span> <em>BMC Bioinformatics</em> 15 (1): 215. <a href="https://doi.org/10.1186/1471-2105-15-215">https://doi.org/10.1186/1471-2105-15-215</a>.
-</div>
-<div id="ref-ElNaqa2018" class="csl-entry">
-El Naqa, Issam, Dan Ruan, Gilmer Valdes, Andre Dekker, Todd McNutt, Yaorong Ge, Q. Jackie Wu, et al. 2018. <span>“<span class="nocase">Machine learning and modeling: Data, validation, communication challenges</span>.”</span> <em>Medical Physics</em> 45 (10): e834–40. <a href="https://doi.org/10.1002/mp.12811">https://doi.org/10.1002/mp.12811</a>.
-</div>
-<div id="ref-Eldar2010" class="csl-entry">
-Eldar, Avigdor, and Michael B. Elowitz. 2010. <span>“<span class="nocase">Functional roles for noise in genetic circuits</span>.”</span> Nature Publishing Group. <a href="https://doi.org/10.1038/nature09326">https://doi.org/10.1038/nature09326</a>.
-</div>
+<div id="refs" class="references csl-bib-body">
 <div id="ref-Hebestreit2013" class="csl-entry">
-Hebestreit, Katja, Martin Dugas, and Hans-Ulrich Klein. 2013. <span>“<span class="nocase">Detection of significantly differentially methylated regions in targeted bisulfite sequencing data.</span>”</span> <em>Bioinformatics (Oxford, England)</em> 29 (13): 1647–53. <a href="https://doi.org/10.1093/bioinformatics/btt263">https://doi.org/10.1093/bioinformatics/btt263</a>.
-</div>
-<div id="ref-Hippenstiel2001" class="csl-entry">
-Hippenstiel, Ralph D. 2001. <em><span class="nocase">Detection theory: applications and digital signal processing</span></em>. CRC Press.
-</div>
-<div id="ref-lopez2014" class="csl-entry">
-López-Ratón, Mónica, Mar\backslash’\backslashia Xosé Rodríguez-Álvarez, Carmen Cadarso-Suárez, Francisco Gude-Sampedro, and Others. 2014. <span>“<span class="nocase">OptimalCutpoints: an R package for selecting optimal cutpoints in diagnostic tests</span>.”</span> <em>Journal of Statistical Software</em> 61 (8): 1–36. <a href="https://www.jstatsoft.org/article/view/v061i08">https://www.jstatsoft.org/article/view/v061i08</a>.
+<div class="csl-left-margin">1. </div>
+<div class="csl-right-inline">K. Hebestreit, M. Dugas, H.-U. Klein, <span class="nocase">Detection of significantly differentially methylated regions in targeted bisulfite sequencing data.</span> <em>Bioinformatics (Oxford, England)</em> <strong>29</strong>, 1647–53 (2013).</div>
 </div>
 <div id="ref-Robinson2014" class="csl-entry">
-Robinson, Mark D., Abdullah Kahraman, Charity W. Law, Helen Lindsay, Malgorzata Nowicka, Lukas M. Weber, and Xiaobei Zhou. 2014. <span>“<span class="nocase">Statistical methods for detecting differentially methylated loci and regions.</span>”</span> <em>Frontiers in Genetics</em> 5 (SEP): 324. <a href="https://doi.org/10.3389/fgene.2014.00324">https://doi.org/10.3389/fgene.2014.00324</a>.
+<div class="csl-left-margin">2. </div>
+<div class="csl-right-inline">M. D. Robinson, <em>et al.</em>, <span class="nocase">Statistical methods for detecting differentially methylated loci and regions.</span> <em>Frontiers in genetics</em> <strong>5</strong>, 324 (2014).</div>
 </div>
-<div id="ref-Samoilov2006" class="csl-entry">
-Samoilov, Michael S., Gavin Price, and Adam P. Arkin. 2006. <span>“<span class="nocase">From fluctuations to phenotypes: the physiology of noise.</span>”</span> <em>Science’s STKE : Signal Transduction Knowledge Environment</em> 2006 (366). <a href="https://doi.org/10.1126/stke.3662006re17">https://doi.org/10.1126/stke.3662006re17</a>.
+<div id="ref-Dolzhenko2014" class="csl-entry">
+<div class="csl-left-margin">3. </div>
+<div class="csl-right-inline">E. Dolzhenko, A. D. Smith, <span class="nocase">Using beta-binomial regression for high-precision differential methylation analysis in multifactor whole-genome bisulfite sequencing experiments</span>. <em>BMC bioinformatics</em> <strong>15</strong>, 215 (2014).</div>
+</div>
+<div id="ref-Baldi2001" class="csl-entry">
+<div class="csl-left-margin">4. </div>
+<div class="csl-right-inline">P. Baldi, S. Brunak, <em><span class="nocase">Bioinformatics: the machine learning approach</span></em>, Second (MIT Press, 2001).</div>
+</div>
+<div id="ref-Basu2010" class="csl-entry">
+<div class="csl-left-margin">5. </div>
+<div class="csl-right-inline">A. Basu, A. Mandal, L. Pardo, <span class="nocase">Hypothesis testing for two discrete populations based on the Hellinger distance</span>. <em>Statistics <span>&amp;</span> Probability Letters</em> <strong>80</strong>, 206–214 (2010).</div>
 </div>
 <div id="ref-Sanchez2016" class="csl-entry">
-Sanchez, Robersy, and Sally A. Mackenzie. 2016. <span>“<span class="nocase">Information Thermodynamics of Cytosine DNA Methylation</span>.”</span> Edited by Barbara Bardoni. <em>PLOS ONE</em> 11 (3): e0150427. <a href="https://doi.org/10.1371/journal.pone.0150427">https://doi.org/10.1371/journal.pone.0150427</a>.
+<div class="csl-left-margin">6. </div>
+<div class="csl-right-inline">R. Sanchez, S. A. Mackenzie, <span class="nocase">Information Thermodynamics of Cytosine DNA Methylation</span>. <em>PLOS ONE</em> <strong>11</strong>, e0150427 (2016).</div>
 </div>
 <div id="ref-Sanchez2019" class="csl-entry">
-Sanchez, Robersy, Xiaodong Yang, Thomas Maher, and Sally Mackenzie. 2019. <span>“<span class="nocase">Discrimination of DNA Methylation Signal from Background Variation for Clinical Diagnostics</span>.”</span> <em>Int. J. Mol. Sci.</em> 20 (21): 5343. https://doi.org/<a href="https://doi.org/10.3390/ijms20215343">https://doi.org/10.3390/ijms20215343</a>.
+<div class="csl-left-margin">7. </div>
+<div class="csl-right-inline">R. Sanchez, X. Yang, T. Maher, S. Mackenzie, <span class="nocase">Discrimination of DNA Methylation Signal from Background Variation for Clinical Diagnostics</span>. <em>Int. J. Mol. Sci.</em> <strong>20</strong>, 5343 (2019).</div>
+</div>
+<div id="ref-Samoilov2006" class="csl-entry">
+<div class="csl-left-margin">8. </div>
+<div class="csl-right-inline">M. S. Samoilov, G. Price, A. P. Arkin, <span class="nocase">From fluctuations to phenotypes: the physiology of noise.</span> <em>Science’s STKE : signal transduction knowledge environment</em> <strong>2006</strong> (2006).</div>
+</div>
+<div id="ref-Eldar2010" class="csl-entry">
+<div class="csl-left-margin">9. </div>
+<div class="csl-right-inline">A. Eldar, M. B. Elowitz, <span class="nocase">Functional roles for noise in genetic circuits</span>. <strong>467</strong>, 167–173 (2010).</div>
 </div>
 <div id="ref-Youden1950" class="csl-entry">
-Youden, W. J. 1950. <span>“<span class="nocase">Index for rating diagnostic tests</span>.”</span> <em>Cancer</em> 3 (1): 32–35. <a href="https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3">https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3</a>.
+<div class="csl-left-margin">10. </div>
+<div class="csl-right-inline">W. J. Youden, <span class="nocase">Index for rating diagnostic tests</span>. <em>Cancer</em> <strong>3</strong>, 32–35 (1950).</div>
+</div>
+<div id="ref-Carter2016" class="csl-entry">
+<div class="csl-left-margin">11. </div>
+<div class="csl-right-inline">J. V. Carter, J. Pan, S. N. Rai, S. Galandiuk, <span class="nocase">ROC-ing along: Evaluation and interpretation of receiver operating characteristic curves</span>. <em>Surgery</em> <strong>159</strong>, 1638–1645 (2016).</div>
+</div>
+<div id="ref-lopez2014" class="csl-entry">
+<div class="csl-left-margin">12. </div>
+<div class="csl-right-inline">M. López-Ratón, M. X. Rodríguez-Álvarez, C. Cadarso-Suárez, F. Gude-Sampedro, Others, <span class="nocase">OptimalCutpoints: an R package for selecting optimal cutpoints in diagnostic tests</span>. <em>Journal of statistical software</em> <strong>61</strong>, 1–36 (2014).</div>
+</div>
+<div id="ref-Hippenstiel2001" class="csl-entry">
+<div class="csl-left-margin">13. </div>
+<div class="csl-right-inline">R. D. Hippenstiel, <em><span class="nocase">Detection theory: applications and digital signal processing</span></em> (CRC Press, 2001).</div>
+</div>
+<div id="ref-ElNaqa2018" class="csl-entry">
+<div class="csl-left-margin">14. </div>
+<div class="csl-right-inline">I. El Naqa, <em>et al.</em>, <span class="nocase">Machine learning and modeling: Data, validation, communication challenges</span>. <em>Medical Physics</em> <strong>45</strong>, e834–e840 (2018).</div>
 </div>
 </div>
 </div>
