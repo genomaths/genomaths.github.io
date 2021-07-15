@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.2</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -101,13 +101,13 @@
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="pca_lda_with_methylit_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Principal Components and Linear Discriminant Analyses with Methyl-IT</h1>
@@ -136,7 +136,7 @@ Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div>
 </h4>
             
-            <h4 class="date">09 June 2020</h4>
+            <h4 class="date">14 July 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/pca_lda_with_methylit.Rmd"><code>vignettes/pca_lda_with_methylit.Rmd</code></a></small>
       <div class="hidden name"><code>pca_lda_with_methylit.Rmd</code></div>
@@ -217,163 +217,170 @@ pre { /* Code block - determines code spacing between lines */
 <h1 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h1>
 <p>The discrimination of the methylation signal from the stochastic methylation background resultant from the standard (non-stressful) biological processes is a critical step for the genome-wide methylation analysis. Such a discrimination requires for the knowledge of the probability distribution of the information divergence of methylation levels and a proper evaluation of the classification performance of differentially methylated positions (DMPs) into two classes: DMPs from control and DMPs from treatment.</p>
-<p>Once a methylation analysis is performed to detect the genome-wide DMPs, a natural next step is to investigate whether the detected DMPs carries enough discriminatory power to discern between individual groups. Then, we must move from the methylation analysis to statistical/machine learning field (multivariate statistics). To reach our goal, each individual can be represented as a vector from the <span class="math inline">\(N\)</span>-dimensional space of DMPs, where DMPs can be expressed in terms of some suitable measurement as function of the methylation levels. These suitable measurement are information divergences, such as total variation distance (<span class="math inline">\(TV_d\)</span>, the absolute value of methylation levels) and Hellinger divergence (<span class="math inline">\(H\)</span>). It is worthy to observe that methylation levels are uncertainty measurements and, therefore, they do not carry information per se. Information is only carried on measurements expressing uncertainty variations like <span class="math inline">\(TV_d\)</span>, <span class="math inline">\(H\)</span>, Jensen-Shannon Divergence, and in general, the so called information theoretical divergences <span class="citation">(Liese and Vajda 2006)</span>.</p>
+<p>Once a methylation analysis is performed to detect the genome-wide DMPs, a natural next step is to investigate whether the detected DMPs carries enough discriminatory power to discern between individual groups. Then, we must move from the methylation analysis to statistical/machine learning field (multivariate statistics). To reach our goal, each individual can be represented as a vector from the <span class="math inline">\(N\)</span>-dimensional space of DMPs, where DMPs can be expressed in terms of some suitable measurement as function of the methylation levels. These suitable measurement are information divergences, such as total variation distance (<span class="math inline">\(TV_d\)</span>, the absolute value of methylation levels) and Hellinger divergence (<span class="math inline">\(H\)</span>). It is worthy to observe that methylation levels are uncertainty measurements and, therefore, they do not carry information per se. Information is only carried on measurements expressing uncertainty variations like <span class="math inline">\(TV_d\)</span>, <span class="math inline">\(H\)</span>, Jensen-Shannon Divergence, and in general, the so called information theoretical divergences <span class="citation">(1)</span>.</p>
 <p>The <span class="math inline">\(N\)</span>-dimensional space of DMPs is, usually, too big. So, a first dimension reduction is required. This can be done by splitting the chromosomes into non-overlapping genomic region and next computing some statistic like the <em>sum</em> or <em>mean</em> of some information divergences of methylation levels at DMPs inside of each region. Still we will have to deal with a multidimensional space, but acceptable for a meaningful application of hierarchical clustering (HC), principal component analysis (PCA) and linear discriminant analysis (LDA). In the current examples, Methyl-IT methylation analysis will be applied to a dataset of simulated samples to detect DMPs on then. Next, after space dimension reduction, the mentioned machine learning approached will be applied.</p>
 </div>
 <div id="data-generation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#data-generation" class="anchor"></a>Data generation</h1>
 <p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read-count matrices of methylated and unmethylated cytosine are generated with MethylIT.utils function <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/simulateCounts.html">simulateCounts</a>. A basic example generating datasets is given in the web page: <a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MethylIT</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MethylIT.utils</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ape</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT">MethylIT</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">MethylIT.utils</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span>
 
-<span class="no">alpha.ct</span> <span class="kw">&lt;-</span> <span class="fl">0.019</span>
-<span class="no">alpha.g1</span> <span class="kw">&lt;-</span> <span class="fl">0.022</span>
-<span class="no">alpha.g2</span> <span class="kw">&lt;-</span> <span class="fl">0.025</span>
+<span class="va">alpha.ct</span> <span class="op">&lt;-</span> <span class="fl">0.019</span>
+<span class="va">alpha.g1</span> <span class="op">&lt;-</span> <span class="fl">0.022</span>
+<span class="va">alpha.g2</span> <span class="op">&lt;-</span> <span class="fl">0.025</span>
 
 <span class="co"># The number of cytosine sites to generate</span>
-<span class="no">sites</span> <span class="kw">=</span> <span class="fl">1.5e5</span>
+<span class="va">sites</span> <span class="op">=</span> <span class="fl">1.5e5</span> 
 <span class="co"># Set a seed for pseudo-random number generation</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">124</span>)
-<span class="no">control.nam</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span>, <span class="st">"C4"</span>, <span class="st">"C5"</span>)
-<span class="no">treatment.nam1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span>, <span class="st">"T4"</span>, <span class="st">"T5"</span>)
-<span class="no">treatment.nam2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"T6"</span>, <span class="st">"T7"</span>, <span class="st">"T8"</span>, <span class="st">"T9"</span>, <span class="st">"T10"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">124</span><span class="op">)</span>
+<span class="va">control.nam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span>, <span class="st">"C4"</span>, <span class="st">"C5"</span><span class="op">)</span>
+<span class="va">treatment.nam1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span>, <span class="st">"T4"</span>, <span class="st">"T5"</span><span class="op">)</span>
+<span class="va">treatment.nam2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T6"</span>, <span class="st">"T7"</span>, <span class="st">"T8"</span>, <span class="st">"T9"</span>, <span class="st">"T10"</span><span class="op">)</span>
 
 <span class="co"># Reference group </span>
-<span class="no">ref0</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span>(<span class="kw">num.samples</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">sites</span> <span class="kw">=</span> <span class="no">sites</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="no">alpha.ct</span>,
-                      <span class="kw">beta</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">theta</span> <span class="kw">=</span> <span class="fl">4.5</span>,
-                      <span class="kw">sample.ids</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"R1"</span>, <span class="st">"R2"</span>, <span class="st">"R3"</span>))
+<span class="va">ref0</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">3</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.ct</span>, 
+                      beta <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">50</span>, theta <span class="op">=</span> <span class="fl">4.5</span>, 
+                      sample.ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"R1"</span>, <span class="st">"R2"</span>, <span class="st">"R3"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># Control group </span>
-<span class="no">ctrl</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span>(<span class="kw">num.samples</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">sites</span> <span class="kw">=</span> <span class="no">sites</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="no">alpha.ct</span>,
-                      <span class="kw">beta</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">theta</span> <span class="kw">=</span> <span class="fl">4.5</span>,
-                      <span class="kw">sample.ids</span> <span class="kw">=</span> <span class="no">control.nam</span>)
+<span class="va">ctrl</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">5</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.ct</span>, 
+                      beta <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">50</span>, theta <span class="op">=</span> <span class="fl">4.5</span>, 
+                      sample.ids <span class="op">=</span> <span class="va">control.nam</span><span class="op">)</span>
 <span class="co"># Treatment group II</span>
-<span class="no">treat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span>(<span class="kw">num.samples</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">sites</span> <span class="kw">=</span> <span class="no">sites</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="no">alpha.g1</span>,
-                       <span class="kw">beta</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">theta</span> <span class="kw">=</span> <span class="fl">4.5</span>,
-                       <span class="kw">sample.ids</span> <span class="kw">=</span> <span class="no">treatment.nam1</span>)
+<span class="va">treat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">5</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.g1</span>,
+                       beta <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">50</span>, theta <span class="op">=</span> <span class="fl">4.5</span>, 
+                       sample.ids <span class="op">=</span> <span class="va">treatment.nam1</span><span class="op">)</span>
 
 <span class="co"># Treatment group II</span>
-<span class="no">treat2</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span>(<span class="kw">num.samples</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">sites</span> <span class="kw">=</span> <span class="no">sites</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="no">alpha.g2</span>,
-                        <span class="kw">beta</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">theta</span> <span class="kw">=</span> <span class="fl">4.5</span>,
-                        <span class="kw">sample.ids</span> <span class="kw">=</span> <span class="no">treatment.nam2</span>)</pre></body></html></div>
+<span class="va">treat2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">5</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.g2</span>,
+                        beta <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">50</span>, theta <span class="op">=</span> <span class="fl">4.5</span>, 
+                        sample.ids <span class="op">=</span> <span class="va">treatment.nam2</span><span class="op">)</span></code></pre></div>
 <p>A reference sample (virtual individual) is created using individual samples from the control population using function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/poolFromGRlist.html">poolFromGRlist</a>. The reference sample is further used to compute the information divergences of methylation levels, <span class="math inline">\(TV_d\)</span> and <span class="math inline">\(H\)</span>, with function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateDivergence.html">estimateDivergence</a>. This is a first fundamental step to remove the background noise (fluctuations) generated by the inherent stochasticity of the molecular processes in the cells.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># === Methylation level divergences ===</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># === Methylation level divergences ===</span>
 <span class="co"># Reference sample</span>
-<span class="no">ref</span> <span class="kw">=</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span>(<span class="no">ref0</span>, <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"mean"</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">4L</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="va">ref</span> <span class="op">=</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span><span class="op">(</span><span class="va">ref0</span>, stat <span class="op">=</span> <span class="st">"mean"</span>, num.cores <span class="op">=</span> <span class="fl">4L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="no">divs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimateDivergence.html">estimateDivergence</a></span>(<span class="kw">ref</span> <span class="kw">=</span> <span class="no">ref</span>, <span class="kw">indiv</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">ctrl</span>, <span class="no">treat</span>, <span class="no">treat2</span>), <span class="kw">Bayesian</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                           <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">6L</span>, <span class="kw">percentile</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="va">divs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimateDivergence.html">estimateDivergence</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="va">ref</span>, indiv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ctrl</span>, <span class="va">treat</span>, <span class="va">treat2</span><span class="op">)</span>, Bayesian <span class="op">=</span> <span class="cn">TRUE</span>, 
+                           num.cores <span class="op">=</span> <span class="fl">6L</span>, percentile <span class="op">=</span> <span class="fl">1</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co"># To remove hd == 0 to estimate. The methylation signal only is given for  </span>
-<span class="no">divs</span> <span class="kw">=</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">divs</span>, <span class="kw">function</span>(<span class="no">div</span>) <span class="no">div</span>[ <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">div</span>$<span class="no">hdiv</span>) <span class="kw">&gt;</span> <span class="fl">0</span> ], <span class="kw">keep.attr</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">divs</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">divs</span>)</pre></body></html></div>
+<span class="va">divs</span> <span class="op">=</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">div</span><span class="op">)</span> <span class="va">div</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">div</span><span class="op">$</span><span class="va">hdiv</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">]</span>, keep.attr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">divs</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">divs</span><span class="op">)</span></code></pre></div>
 <p>To get some statistical description about the sample is useful. Here, empirical critical values for the probability distribution of <span class="math inline">\(H\)</span> and <span class="math inline">\(TV\)</span> can is obtained using <em>quantile</em> function from the R package <em>stats</em>.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">critical.val</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">divs</span>, <span class="kw">function</span>(<span class="no">x</span>) {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span>[<span class="no">x</span>$<span class="no">hdiv</span> <span class="kw">&gt;</span> <span class="fl">0</span>]
-  <span class="no">hd.95</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">x</span>$<span class="no">hdiv</span>, <span class="fl">0.95</span>)
-  <span class="no">tv.95</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">x</span>$<span class="no">bay.TV</span>), <span class="fl">0.95</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">tv</span> <span class="kw">=</span> <span class="no">tv.95</span>, <span class="kw">hd</span> <span class="kw">=</span> <span class="no">hd.95</span>))
-}))
-<span class="no">critical.val</span></pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span>
+  <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span>
+  <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">bay.TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>tv <span class="op">=</span> <span class="va">tv.95</span>, hd <span class="op">=</span> <span class="va">hd.95</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span><span class="op">)</span>
+<span class="va">critical.val</span></code></pre></div>
 <pre><code>##        tv.95%    hd.95%
-## C1  0.6523410  62.26835
-## C2  0.6500774  60.89741
-## C3  0.6508289  61.48977
-## C4  0.4856903  56.60726
-## C5  0.4967501  58.12772
-## T1  0.9236788 126.34287
-## T2  0.9136199 120.45119
-## T3  0.9137842 121.99485
-## T4  0.9192167 124.54324
-## T5  0.9225962 124.25515
-## T6  0.9447952 132.69525
-## T7  0.9447369 134.88511
-## T8  0.9408397 131.80632
-## T9  0.9482647 134.69034
-## T10 0.9456276 133.87224</code></pre>
+## C1  0.6316890  63.94381
+## C2  0.6308368  62.39147
+## C3  0.6372794  64.57581
+## C4  0.9152682 117.69617
+## C5  0.9298600 119.94277
+## T1  0.9476171 131.70143
+## T2  0.9411354 125.97706
+## T3  0.9367599 126.56789
+## T4  0.9430966 130.05194
+## T5  0.9441060 129.00926
+## T6  0.9550471 135.98203
+## T7  0.9576300 140.06201
+## T8  0.9507792 134.73582
+## T9  0.9607266 139.48539
+## T10 0.9575098 138.32493</code></pre>
 </div>
 <div id="modeling-the-methylation-signal" class="section level1">
 <h1 class="hasAnchor">
 <a href="#modeling-the-methylation-signal" class="anchor"></a>Modeling the methylation signal</h1>
-<p>Here, the methylation signal is expressed in terms of Hellinger divergence of methylation levels. Here, the signal distribution is modelled by a Weibull probability distribution model. Basically, the model could be a member of the generalized gamma distribution family. For example, it could be gamma distribution, Weibull, or log-normal. To describe the signal, we may prefer a model with a cross-validations: R.Cross.val &gt; 0.95. Cross-validations for the nonlinear regressions are performed in each methylome as described in <span class="citation">(Stevens 2009)</span>. The non-linear fit is performed through the function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/nonlinearFitDist.html">nonlinearFitDist</a></p>
+<p>Here, the methylation signal is expressed in terms of Hellinger divergence of methylation levels. Here, the signal distribution is modelled by a Weibull probability distribution model. Basically, the model could be a member of the generalized gamma distribution family. For example, it could be gamma distribution, Weibull, or log-normal. To describe the signal, we may prefer a model with a cross-validations: R.Cross.val &gt; 0.95. Cross-validations for the nonlinear regressions are performed in each methylome as described in <span class="citation">(2)</span>. The non-linear fit is performed through the function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/nonlinearFitDist.html">nonlinearFitDist</a></p>
 <p>The best model excluding “GGamma3P” model, for which the computation is computationally expensive:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>, <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span>)
-<span class="no">gof</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gofReport.html">gofReport</a></span>(<span class="kw">HD</span> <span class="kw">=</span> <span class="no">divs</span>, <span class="kw">column</span> <span class="kw">=</span> <span class="fl">9L</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="no">d</span>, <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">6L</span>,
-                    <span class="kw">output</span> <span class="kw">=</span> <span class="st">"all"</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">gof</span>$<span class="no">bestModel</span></pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>, <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span><span class="op">)</span>
+<span class="va">gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gofReport.html">gofReport</a></span><span class="op">(</span>HD <span class="op">=</span> <span class="va">divs</span>, column <span class="op">=</span> <span class="fl">9L</span>, model <span class="op">=</span> <span class="va">d</span>, num.cores <span class="op">=</span> <span class="fl">6L</span>,
+                    output <span class="op">=</span> <span class="st">"all"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span></code></pre></div>
 <pre><code>##          C1          C2          C3          C4          C5          T1 
-## "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" 
+## "Weibull2P" "Weibull2P" "Weibull2P" "Weibull3P" "Weibull3P" "Weibull3P" 
 ##          T2          T3          T4          T5          T6          T7 
 ## "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" 
 ##          T8          T9         T10 
 ## "Weibull3P" "Weibull3P" "Weibull3P"</code></pre>
 <p>Although we did not included the main member of the generalized gamma distribution family (“GGamma3P”), the Cross-validations correlation coefficient <em>w3p_R.Cross.val</em> values above 0.99 gives us some peace of mind on our confidence on the model prediction power/performance when confronted with external data sets (AIC and BIC are not conceived to provide such an information).</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">gof</span>$<span class="no">stats</span></pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gof</span><span class="op">$</span><span class="va">stats</span></code></pre></div>
 <pre><code>##       w2p_AIC w2p_R.Cross.val   w3p_AIC w3p_R.Cross.val   g2p_AIC
-## C1  -172642.0       0.9994639 -174557.7       0.9994974 -164820.3
-## C2  -175594.8       0.9995131 -177009.1       0.9995357 -167532.6
-## C3  -177238.3       0.9995420 -178755.3       0.9995652 -169774.1
-## C4  -219269.6       0.9994955 -264072.9       0.9998548 -206343.4
-## C5  -217500.5       0.9994374 -273018.4       0.9998799 -205306.2
-## T1  -168079.8       0.9972701 -225575.8       0.9994668 -160887.9
-## T2  -167286.1       0.9972728 -226888.2       0.9995015 -160748.6
-## T3  -170301.7       0.9974336 -227799.2       0.9995012 -163997.9
-## T4  -168551.1       0.9973218 -225182.0       0.9994660 -162169.6
-## T5  -167122.0       0.9972267 -227207.9       0.9994985 -160694.2
-## T6  -173245.4       0.9971876 -229256.8       0.9993945 -165656.4
-## T7  -170905.0       0.9970145 -228452.3       0.9993819 -163341.9
-## T8  -171372.5       0.9970757 -229286.8       0.9994006 -163649.4
-## T9  -170096.9       0.9969616 -227490.3       0.9993672 -162250.4
-## T10 -171266.7       0.9970282 -228041.3       0.9993707 -163857.2
-##     g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val      bestModel
-## C1        0.9993929 -166320.3       0.9994541            w3p
-## C2        0.9994499 -168751.9       0.9994939            w3p
-## C3        0.9994861 -170986.9       0.9995260            w3p
-## C4        0.9993142 -262797.6       0.9998669 Needs revision
-## C5        0.9992290 -267887.9       0.9998753            w3p
-## T1        0.9963828 -205273.7       0.9989377            w3p
-## T2        0.9964685 -206912.6       0.9990147            w3p
-## T3        0.9966887 -208521.3       0.9990291            w3p
-## T4        0.9965315 -205648.9       0.9989541            w3p
-## T5        0.9964091 -206816.6       0.9989987            w3p
-## T6        0.9962174 -208521.5       0.9988035            w3p
-## T7        0.9959979 -206833.2       0.9987503            w3p
-## T8        0.9960769 -207922.5       0.9988038            w3p
-## T9        0.9958861 -205571.5       0.9987166            w3p
-## T10       0.9960165 -206551.4       0.9987330            w3p</code></pre>
+## C1  -132768.3       0.9980126        NA              NA -126672.6
+## C2  -132632.7       0.9980198        NA              NA -126214.2
+## C3  -129887.8       0.9978081        NA              NA -123573.4
+## C4  -163056.5       0.9974321 -215684.3       0.9994825 -161064.1
+## C5  -161315.0       0.9971729 -215393.7       0.9994408 -158776.5
+## T1  -166483.8       0.9971576 -218420.0       0.9993635 -161465.2
+## T2  -165445.6       0.9971383 -220181.1       0.9994108 -161229.2
+## T3  -168287.5       0.9972928 -221375.7       0.9994157 -164386.1
+## T4  -166516.8       0.9971732 -219456.9       0.9993852 -162408.2
+## T5  -165260.3       0.9970847 -221789.7       0.9994261 -160805.5
+## T6  -172034.4       0.9970991 -225618.5       0.9993335 -165809.7
+## T7  -169688.4       0.9969227 -224064.1       0.9993151 -163735.0
+## T8  -170538.0       0.9970137 -225983.1       0.9993464 -164098.5
+## T9  -168923.3       0.9968719 -222512.5       0.9992872 -162629.7
+## T10 -169803.5       0.9969153 -223777.4       0.9993051 -164034.0
+##     g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val bestModel
+## C1        0.9974143       Inf       0.0000000       w2p
+## C2        0.9973081       Inf       0.0000000       w2p
+## C3        0.9969977       Inf       0.0000000       w2p
+## C4        0.9970526 -200045.9       0.9990363       w3p
+## C5        0.9966871 -199751.0       0.9989735       w3p
+## T1        0.9963972 -200000.1       0.9987652       w3p
+## T2        0.9964727 -201382.2       0.9988453       w3p
+## T3        0.9966877 -203604.6       0.9988821       w3p
+## T4        0.9965189 -201153.6       0.9988103       w3p
+## T5        0.9963896 -202720.1       0.9988737       w3p
+## T6        0.9962185 -206626.3       0.9987457       w3p
+## T7        0.9960185 -205333.6       0.9987030       w3p
+## T8        0.9961035 -206217.4       0.9987499       w3p
+## T9        0.9959053 -203604.1       0.9986530       w3p
+## T10       0.9960178 -204801.3       0.9986763       w3p</code></pre>
 </div>
 <div id="estimation-of-an-optimal-cutpoint-to-discriminate-the-signal-induced-by-the-treatment" class="section level1">
 <h1 class="hasAnchor">
 <a href="#estimation-of-an-optimal-cutpoint-to-discriminate-the-signal-induced-by-the-treatment" class="anchor"></a>Estimation of an optimal cutpoint to discriminate the signal induced by the treatment</h1>
 <p>The above statistical description of the dataset (evidently) suggests that there two main groups: control and treatments, while treatment group would split into two subgroups of samples. In the current case, to search for a good cutpoint, we do not need to use all the samples. The critical value <span class="math inline">\(H_{\alpha=0.05}=33.51223\)</span> suggests that any optimal cutpoint for the subset of samples T1 to T5 will be optimal for the samples T6 to T10 as well.</p>
 <p>Below, we are letting the PCA+LDA model classifier to take the decision on whether a differentially methylated cytosine position is a treatment DMP. To do it, Methyl-IT function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/getPotentialDIMP.html">getPotentialDIMP</a> is used to get methylation signal probabilities of the observed <span class="math inline">\(H\)</span> values for all cytosine site (alpha = 1), in accordance with the 2-parameter Weibull distribution model. Next, this information will be used to identify DMPs using Methyl-IT function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/estimateCutPoint.html">estimateCutPoint</a>. Cytosine positions with <span class="math inline">\(H\)</span> values above the cutpoint are considered DMPs. Finally, a PCA + QDA model classifier will be fitted to classify DMPs into two classes: DMPs from control and those from treatment.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">divs</span>,
-                         <span class="kw">nlms</span> <span class="kw">=</span> <span class="no">gof</span>$<span class="no">nlms</span>,  <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9L</span>,
-                         <span class="kw">tv.cut</span> <span class="kw">=</span> <span class="fl">0.461</span>, <span class="kw">tv.col</span> <span class="kw">=</span> <span class="fl">8</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.05</span>,
-                         <span class="kw">dist.name</span> <span class="kw">=</span> <span class="no">gof</span>$<span class="no">bestModel</span>)
-<span class="no">cutp</span> <span class="kw">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">dmps</span>, <span class="kw">simple</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-                        <span class="kw">column</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">hdiv</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">TV</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                                   <span class="kw">wprob</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">pos</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-                        <span class="kw">classifier1</span> <span class="kw">=</span> <span class="st">"pca.lda"</span>,
-                        <span class="kw">classifier2</span> <span class="kw">=</span> <span class="st">"pca.qda"</span>, <span class="kw">tv.cut</span> <span class="kw">=</span> <span class="fl">0.461</span>,
-                        <span class="kw">control.names</span> <span class="kw">=</span> <span class="no">control.nam</span>,
-                        <span class="kw">treatment.names</span> <span class="kw">=</span> <span class="no">treatment.nam1</span>,
-                        <span class="kw">post.cut</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">cut.values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">15</span>, <span class="fl">38</span>, <span class="fl">1</span>),
-                        <span class="kw">clas.perf</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">prop</span> <span class="kw">=</span> <span class="fl">0.6</span>,
-                        <span class="kw">center</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-                        <span class="kw">n.pc</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9L</span>, <span class="kw">stat</span> <span class="kw">=</span> <span class="fl">0</span>)
-<span class="no">cutp</span></pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>,
+                         nlms <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">nlms</span>,  div.col <span class="op">=</span> <span class="fl">9L</span>, 
+                         tv.cut <span class="op">=</span> <span class="fl">0.461</span>, tv.col <span class="op">=</span> <span class="fl">8</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, 
+                         dist.name <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span><span class="op">)</span>
+<span class="va">cutp</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">dmps</span>, simple <span class="op">=</span> <span class="cn">FALSE</span>,
+                        column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                                   wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                        classifier1 <span class="op">=</span> <span class="st">"pca.lda"</span>, 
+                        classifier2 <span class="op">=</span> <span class="st">"pca.qda"</span>, tv.cut <span class="op">=</span> <span class="fl">0.461</span>,
+                        control.names <span class="op">=</span> <span class="va">control.nam</span>, 
+                        treatment.names <span class="op">=</span> <span class="va">treatment.nam1</span>,
+                        post.cut <span class="op">=</span> <span class="fl">0.5</span>, cut.values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">38</span>, <span class="fl">1</span><span class="op">)</span>,
+                        clas.perf <span class="op">=</span> <span class="cn">TRUE</span>, prop <span class="op">=</span> <span class="fl">0.6</span>,
+                        center <span class="op">=</span> <span class="cn">FALSE</span>, scale <span class="op">=</span> <span class="cn">FALSE</span>,
+                        n.pc <span class="op">=</span> <span class="fl">4</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, stat <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+<span class="va">cutp</span></code></pre></div>
 <pre><code>## Cutpoint estimation with 'pca.lda' classifier 
 ## Cutpoint search performed using model posterior probabilities 
 ## 
 ## Posterior probability used to get the cutpoint = 0.5 
 ## Cytosine sites with treatment PostProbCut &gt;= 0.5 have a 
-## divergence value &gt;= 92.13839 
+## divergence value &gt;= 87.7777 
 ## 
-## Optimized statistic: Accuracy = 1 
-## Cutpoint = 92.138 
+## Optimized statistic: Accuracy = 0.89435 
+## Cutpoint = 94.543 
 ## 
 ## Model classifier 'pca.qda' 
 ## 
@@ -393,83 +400,88 @@ pre { /* Code block - determines code spacing between lines */
 ## cutpData           1      -none-          logical</code></pre>
 <p>In this case, the cutpoint <span class="math inline">\(H_{cutpoint}=92.138\)</span> is lower from what is expected from the higher treatment empirical <span class="math inline">\(H_{\alpha = 0.05}^{TT_{Emp}}=120.45119\)</span> critical value: <span class="math inline">\(H_{cutpoint} &lt; H_{\alpha = 0.05}^{TT_{Emp}}\)</span>.</p>
 <p>The model performance in in the test dataset is:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">cutp</span>$<span class="no">testSetPerformance</span></pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cutp</span><span class="op">$</span><span class="va">testSetPerformance</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT 2464    0
-##         TT    0 5278
-##                                      
-##                Accuracy : 1          
-##                  95% CI : (0.9995, 1)
-##     No Information Rate : 0.6817     
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
-##                                      
-##                   Kappa : 1          
-##                                      
-##  Mcnemar's Test P-Value : NA         
-##                                      
-##             Sensitivity : 1.0000     
-##             Specificity : 1.0000     
-##          Pos Pred Value : 1.0000     
-##          Neg Pred Value : 1.0000     
-##              Prevalence : 0.6817     
-##          Detection Rate : 0.6817     
-##    Detection Prevalence : 0.6817     
-##       Balanced Accuracy : 1.0000     
-##                                      
-##        'Positive' Class : TT         
+##         CT 2662  181
+##         TT  750 5219
+##                                           
+##                Accuracy : 0.8943          
+##                  95% CI : (0.8877, 0.9007)
+##     No Information Rate : 0.6128          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.7703          
+##                                           
+##  Mcnemar's Test P-Value : &lt; 2.2e-16       
+##                                           
+##             Sensitivity : 0.9665          
+##             Specificity : 0.7802          
+##          Pos Pred Value : 0.8744          
+##          Neg Pred Value : 0.9363          
+##              Prevalence : 0.6128          
+##          Detection Rate : 0.5923          
+##    Detection Prevalence : 0.6774          
+##       Balanced Accuracy : 0.8733          
+##                                           
+##        'Positive' Class : TT              
 ## </code></pre>
 </div>
 <div id="representing-individual-samples-as-vectors-from-the-n-dimensional-space" class="section level1">
 <h1 class="hasAnchor">
 <a href="#representing-individual-samples-as-vectors-from-the-n-dimensional-space" class="anchor"></a>Representing individual samples as vectors from the <em>N</em>-dimensional space</h1>
 <p>The above cutpoint can be used to identify DMPs from control and treatment. The PCA+QDA model classifier can be used any time to discriminate control DMPs from those treatment. DMPs are retrieved using <a href="https://genomaths.github.io/MethylIT_HTML_Manual/selectDIMP.html">selectDIMP</a> function (<code>selectDIMP</code>):</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">divs</span>, <span class="kw">div.col</span> <span class="kw">=</span> <span class="fl">9L</span>, <span class="kw">cutpoint</span> <span class="kw">=</span> <span class="no">cutp</span>$<span class="no">cutpoint</span>,
-                   <span class="kw">tv.cut</span> <span class="kw">=</span> <span class="fl">0.34</span>, <span class="kw">tv.col</span> <span class="kw">=</span> <span class="fl">7</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">dmps</span>,<span class="no">length</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, cutpoint <span class="op">=</span> <span class="va">cutp</span><span class="op">$</span><span class="va">cutpoint</span>,
+                   tv.cut <span class="op">=</span> <span class="fl">0.34</span>, tv.col <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dmps</span>,<span class="va">length</span><span class="op">)</span></code></pre></div>
 <pre><code>##   C1   C2   C3   C4   C5   T1   T2   T3   T4   T5   T6   T7   T8   T9  T10 
-##  450  428  410  522  578 2808 2651 2632 2735 2768 3170 3233 3210 3318 3239</code></pre>
+##  428  408  447 2294 2421 2865 2715 2696 2777 2776 3171 3272 3189 3328 3255</code></pre>
 <p>Next, to represent individual samples as vectors from the <em>N</em>-dimensional space, we can use <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/getGRegionsStat-methods.html">getGRegionsStat</a> function from <a href="https://github.com/genomaths/MethylIT.utils">MethylIT.utils</a> R package. Here, the simulated “chromosome” is split into regions of 450bp non-overlapping windows. and the <em>density</em> of Hellinger divergences values is taken for each windows.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">ns</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmps</span>)
-<span class="no">DMRs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/getGRegionsStat-methods.html">getGRegionsStat</a></span>(<span class="kw">GR</span> <span class="kw">=</span> <span class="no">dmps</span>, <span class="kw">win.size</span> <span class="kw">=</span> <span class="fl">150</span>, <span class="kw">step.size</span> <span class="kw">=</span> <span class="fl">150</span>,
-                        <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"density"</span>, <span class="kw">column</span> <span class="kw">=</span> <span class="fl">9L</span>, <span class="kw">scaling</span> <span class="kw">=</span> <span class="fl">1</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">DMRs</span>) <span class="kw">&lt;-</span> <span class="no">ns</span>
-<span class="fu">as</span>(<span class="no">DMRs</span>, <span class="st">"GRangesList"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
+<span class="va">DMRs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/getGRegionsStat-methods.html">getGRegionsStat</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, win.size <span class="op">=</span> <span class="fl">150</span>, step.size <span class="op">=</span> <span class="fl">150</span>,
+                        stat <span class="op">=</span> <span class="st">"density"</span>, column <span class="op">=</span> <span class="fl">9L</span>, scaling <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">DMRs</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ns</span>
+<span class="fu">as</span><span class="op">(</span><span class="va">DMRs</span>, <span class="st">"GRangesList"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="hierarchical-clustering" class="section level1">
 <h1 class="hasAnchor">
 <a href="#hierarchical-clustering" class="anchor"></a>Hierarchical Clustering</h1>
 <p>Hierarchical clustering (HC) is an unsupervised machine learning approach. HC can provide an initial estimation of the number of possible groups and information on their members. However, the effectivity of HC will depend on the experimental dataset, the metric used, and the agglomeration algorithm applied. For an unknown reason (and based on the personal experience of the author working in numerical taxonomy), Ward’s agglomeration algorithm performs much better on biological experimental datasets than the rest of the available algorithms like UPGMA, UPGMC, etc.</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">dmgm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span>(<span class="no">DMRs</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="no">dmgm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="fu">mcols</span>(<span class="no">dmgm</span>)))
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">dmgm</span>) <span class="kw">&lt;-</span> <span class="no">ns</span>
-<span class="no">sampleNames</span> <span class="kw">&lt;-</span> <span class="no">ns</span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dmgm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">DMRs</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">dmgm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ns</span>
+<span class="va">sampleNames</span> <span class="op">&lt;-</span> <span class="va">ns</span>
 
-<span class="no">hc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>( <span class="no">dmgm</span> ))^<span class="fl">2</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">'ward.D'</span>)
-<span class="no">hc.rsq</span> <span class="kw">=</span> <span class="no">hc</span>
-<span class="no">hc.rsq</span>$<span class="no">height</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>( <span class="no">hc</span>$<span class="no">height</span> )</pre></body></html></div>
+<span class="va">hc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="va">dmgm</span> <span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, method <span class="op">=</span> <span class="st">'ward.D'</span><span class="op">)</span>
+<span class="va">hc.rsq</span> <span class="op">=</span> <span class="va">hc</span>
+<span class="va">hc.rsq</span><span class="op">$</span><span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span> <span class="va">hc</span><span class="op">$</span><span class="va">height</span> <span class="op">)</span></code></pre></div>
 <div id="dendrogram" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dendrogram" class="anchor"></a>Dendrogram</h2>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">colors</span> <span class="kw">=</span> <span class="no">sampleNames</span>
-<span class="no">colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="st">"C"</span>, <span class="no">colors</span>)] <span class="kw">&lt;-</span> <span class="st">"green4"</span>
-<span class="no">colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="st">"T[6-9]{1}"</span>, <span class="no">colors</span>)] <span class="kw">&lt;-</span> <span class="st">"red"</span>
-<span class="no">colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="st">"T10"</span>, <span class="no">colors</span>)] <span class="kw">&lt;-</span> <span class="st">"red"</span>
-<span class="no">colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="st">"T[1-5]"</span>, <span class="no">colors</span>)] <span class="kw">&lt;-</span> <span class="st">"blue"</span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">colors</span> <span class="op">=</span> <span class="va">sampleNames</span> 
+<span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"green4"</span>
+<span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"T[6-9]{1}"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"red"</span>
+<span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"T10"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"red"</span>
+<span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"T[1-5]"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"blue"</span>
 
 <span class="co"># rgb(red, green, blue, alpha, names = NULL, maxColorValue = 1)</span>
-<span class="no">clusters.color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span>(<span class="fl">0</span>, <span class="fl">0.7</span>, <span class="fl">0</span>, <span class="fl">0.1</span>), <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span>), <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span>(<span class="fl">1</span>, <span class="fl">0.2</span>, <span class="fl">0</span>, <span class="fl">0.1</span>))
+<span class="va">clusters.color</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.7</span>, <span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.2</span>, <span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">font.lab</span><span class="kw">=</span><span class="fl">2</span>,<span class="kw">font</span><span class="kw">=</span><span class="fl">3</span>,<span class="kw">font.axis</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">mar</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">0</span>), <span class="kw">family</span><span class="kw">=</span><span class="st">"serif"</span> , <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.4</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/ape/man/as.phylo.html">as.phylo</a></span>(<span class="no">hc.rsq</span>), <span class="kw">tip.color</span> <span class="kw">=</span> <span class="no">colors</span>, <span class="kw">label.offset</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.9</span>,
-     <span class="kw">edge.width</span>  <span class="kw">=</span> <span class="fl">0.4</span>, <span class="kw">direction</span> <span class="kw">=</span> <span class="st">"downwards"</span>, <span class="kw">no.margin</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-     <span class="kw">align.tip.label</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">adj</span> <span class="kw">=</span> <span class="fl">0</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/ape/man/axisPhylo.html">axisPhylo</a></span>( <span class="fl">2</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.4</span>, <span class="kw">cex.axis</span> <span class="kw">=</span> <span class="fl">1.4</span>, <span class="kw">hadj</span> <span class="kw">=</span> <span class="fl">0.8</span>, <span class="kw">tck</span> <span class="kw">=</span> -<span class="fl">0.01</span> )
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>font.lab<span class="op">=</span><span class="fl">2</span>,font<span class="op">=</span><span class="fl">3</span>,font.axis<span class="op">=</span><span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">0</span><span class="op">)</span>, family<span class="op">=</span><span class="st">"serif"</span> , lwd <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/as.phylo.html">as.phylo</a></span><span class="op">(</span><span class="va">hc.rsq</span><span class="op">)</span>, tip.color <span class="op">=</span> <span class="va">colors</span>, label.offset <span class="op">=</span> <span class="fl">0.5</span>, font <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">0.9</span>,
+     edge.width  <span class="op">=</span> <span class="fl">0.4</span>, direction <span class="op">=</span> <span class="st">"downwards"</span>, no.margin <span class="op">=</span> <span class="cn">FALSE</span>,
+     align.tip.label <span class="op">=</span> <span class="cn">TRUE</span>, adj <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ape/man/axisPhylo.html">axisPhylo</a></span><span class="op">(</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">0.4</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, hadj <span class="op">=</span> <span class="fl">0.8</span>, tck <span class="op">=</span> <span class="op">-</span><span class="fl">0.01</span> <span class="op">)</span>
 <span class="co">## cuts = c(xleft, ybottom, xright, ytop)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/hclust_rect.html">hclust_rect</a></span>(<span class="no">hc.rsq</span>, <span class="kw">k</span> <span class="kw">=</span> <span class="fl">3L</span>, <span class="kw">border</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green4"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span>),
-            <span class="kw">color</span> <span class="kw">=</span> <span class="no">clusters.color</span>, <span class="kw">cuts</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.56</span>, <span class="fl">1.4</span>, <span class="fl">0.41</span>, <span class="fl">106</span>))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/hclust_rect.html">hclust_rect</a></span><span class="op">(</span><span class="va">hc.rsq</span>, k <span class="op">=</span> <span class="fl">3L</span>, border <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green4"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, 
+            color <span class="op">=</span> <span class="va">clusters.color</span>, cuts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.56</span>, <span class="fl">1.4</span>, <span class="fl">0.41</span>, <span class="fl">106</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="pca_lda_with_methylit_files/figure-html/dendrogram-1.png" width="700"></p>
 <p>Here, we have use function <a href="https://www.rdocumentation.org/packages/ape/versions/5.3/topics/as.phylo">as.phylo</a> from the R package <a href="https://www.rdocumentation.org/packages/ape/versions/5.3">ape</a> for better dendrogram visualization and function <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/hclust_rect.html">hclust_rect</a> from <a href="https://github.com/genomaths/MethylIT.utils">MethylIT.utils</a> R package to draw rectangles with background colors around the branches of a dendrogram highlighting the corresponding clusters.</p>
 </div>
@@ -477,148 +489,155 @@ pre { /* Code block - determines code spacing between lines */
 <div id="pca-lda" class="section level1">
 <h1 class="hasAnchor">
 <a href="#pca-lda" class="anchor"></a>PCA + LDA</h1>
-<p>MethylIT function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/pcaLDA.html">pcaLDA</a> will be used to perform the PCA and PCA + LDA analyses. The function returns a list of two objects: 1) ‘lda’: an object of class ‘lda’ from package ‘MASS’. 2) ‘pca’: an object of class ‘prcomp’ from package ‘stats’. For information on how to use these objects see ?lda and ?prcomp.</p>
+<p>MethylIT function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/pcaLDA.html">pcaLDA</a> will be used to perform the PCA and PCA + LDA analyses. The function returns a list of two objects: 1) ‘lda’: an object of class ‘lda’ from package ‘MASS.’ 2) ‘pca’: an object of class ‘prcomp’ from package ‘stats.’ For information on how to use these objects see ?lda and ?prcomp.</p>
 <p>Unlike hierarchical clustering (HC), LDA is a supervised machine learning approach. So, we must provide a prior classification of the individuals, which can be derived, for example, from the HC, or from a previous exploratory analysis with PCA.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co"># A prior classification derived from HC</span>
-<span class="no">grps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html">cutree</a></span>(<span class="no">hc</span>, <span class="kw">k</span> <span class="kw">=</span> <span class="fl">3</span>)
-<span class="no">grps</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="fl">1</span>, <span class="no">grps</span>)] <span class="kw">&lt;-</span> <span class="st">"CT"</span>
-<span class="no">grps</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="fl">2</span>, <span class="no">grps</span>)] <span class="kw">&lt;-</span> <span class="st">"T1"</span>
-<span class="no">grps</span>[<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span>(<span class="fl">3</span>, <span class="no">grps</span>)] <span class="kw">&lt;-</span> <span class="st">"T2"</span>
-<span class="no">grps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">grps</span>)
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># A prior classification derived from HC</span>
+<span class="va">grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html">cutree</a></span><span class="op">(</span><span class="va">hc</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"CT"</span>
+<span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"T1"</span>
+<span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="fl">3</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"T2"</span>
+<span class="va">grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">grps</span><span class="op">)</span>
 
-<span class="no">ld</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/pcaLDA.html">pcaLDA</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">dmgm</span>), <span class="kw">grouping</span> <span class="kw">=</span> <span class="no">grps</span>, <span class="kw">n.pc</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">max.pc</span> <span class="kw">=</span> <span class="fl">3</span>,
-             <span class="kw">scale</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">center</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">tol</span> <span class="kw">=</span> <span class="fl">1e-6</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">ld</span>$<span class="no">pca</span>)</pre></body></html></div>
+<span class="va">ld</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pcaLDA.html">pcaLDA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span>, grouping <span class="op">=</span> <span class="va">grps</span>, n.pc <span class="op">=</span> <span class="fl">3</span>, max.pc <span class="op">=</span> <span class="fl">3</span>,
+             scale <span class="op">=</span> <span class="cn">FALSE</span>, center <span class="op">=</span> <span class="cn">FALSE</span>, tol <span class="op">=</span> <span class="fl">1e-6</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ld</span><span class="op">$</span><span class="va">pca</span><span class="op">)</span></code></pre></div>
 <pre><code>## Importance of first k=3 (out of 15) components:
 ##                             PC1      PC2      PC3
-## Standard deviation     301.3440 56.94793 55.39186
-## Proportion of Variance   0.7817  0.02792  0.02641
-## Cumulative Proportion    0.7817  0.80964  0.83606</code></pre>
+## Standard deviation     344.5584 61.66656 59.91694
+## Proportion of Variance   0.7797  0.02498  0.02358
+## Cumulative Proportion    0.7797  0.80472  0.82830</code></pre>
 <p>We may retain enough components so that the cumulative percent of variance accounted for at least 70 to 80%. By setting <span class="math inline">\(scale=TRUE\)</span> and <span class="math inline">\(center=TRUE\)</span>, we could have different results and would improve or not our results. In particular, these settings are essentials if the <em>N</em>-dimensional space is integrated by variables from different measurement scales/units, for example, Kg and g, or Kg and Km.</p>
 <div id="pca" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pca" class="anchor"></a>PCA</h2>
 <p>The individual coordinates in the principal components (PCs) are returned by function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/pcaLDA.html">pcaLDA</a>. In the current case, based on the cumulative proportion of variance, the two firsts PCs carried about the 84% of the total sample variance and could split the sample into meaningful groups.</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">pca.coord</span> <span class="kw">&lt;-</span> <span class="no">ld</span>$<span class="no">pca</span>$<span class="no">x</span>
-<span class="no">pca.coord</span></pre></body></html></div>
-<pre><code>##            PC1          PC2         PC3
-## C1   -63.94820    2.6773997  -2.0772261
-## C2   -59.14588    0.3494248   2.9216406
-## C3   -55.92878   -1.1138205  -0.4042085
-## C4   -72.35580    0.6619679  -0.5541555
-## C5   -85.67651    0.5268261   4.4506433
-## T1  -330.24164   17.2511606 -16.7093598
-## T2  -312.19387  -22.6638714 -21.9071693
-## T3  -317.49366   27.0910087 -32.7557444
-## T4  -324.52502    6.9421313 -30.1602641
-## T5  -325.93819   12.7211961 -18.6529162
-## T6  -372.08875   27.8938888 -67.5314185
-## T7  -384.96008 -118.5328081  91.6230364
-## T8  -377.15782   84.4173789 -46.8876766
-## T9  -389.99841   89.0206347 152.9284288
-## T10 -384.90662 -117.3005955 -35.9445392</code></pre>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pca.coord</span> <span class="op">&lt;-</span> <span class="va">ld</span><span class="op">$</span><span class="va">pca</span><span class="op">$</span><span class="va">x</span>
+<span class="va">pca.coord</span></code></pre></div>
+<pre><code>##            PC1          PC2        PC3
+## C1   -66.02831    2.5761286  -2.497186
+## C2   -60.72361    0.4641290   3.716630
+## C3   -64.70796    0.1604416   1.250952
+## C4  -296.43680    1.1973841 -14.429833
+## C5  -316.04330   28.6387273  17.169950
+## T1  -362.55163    8.6853668 -28.309850
+## T2  -344.10934  -36.5981863 -37.008931
+## T3  -346.99759   25.6574405 -49.247238
+## T4  -354.63542    2.0259927 -36.936096
+## T5  -354.55213    7.4700821 -19.961333
+## T6  -397.99592   29.6061097 -72.443955
+## T7  -417.14171 -113.7180685 110.536823
+## T8  -399.89678   74.5749572 -50.264971
+## T9  -419.69586  115.3299593 152.813242
+## T10 -414.59506 -132.6891124  -5.639991</code></pre>
 </div>
 <div id="graphic-pc1-vs-pc2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#graphic-pc1-vs-pc2" class="anchor"></a>Graphic PC1 vs PC2</h2>
 <p>Next, the graphic for individual coordinates in the two firsts PCs can be easily visualized now:</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">dt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">pca.coord</span>[, <span class="fl">1</span>:<span class="fl">2</span>], <span class="kw">subgrp</span> <span class="kw">=</span> <span class="no">grps</span>)
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">pca.coord</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, subgrp <span class="op">=</span> <span class="va">grps</span><span class="op">)</span>
 
-<span class="no">p0</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
-  <span class="kw">axis.text.x</span>  <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>( <span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>,
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+  axis.text.x  <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span> face <span class="op">=</span> <span class="st">"bold"</span>, size <span class="op">=</span> <span class="fl">18</span>, color<span class="op">=</span><span class="st">"black"</span>,
                                <span class="co"># hjust = 0.5, vjust = 0.5, </span>
-                               <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">angle</span> <span class="kw">=</span> <span class="fl">0</span>,
-                               <span class="kw">margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>, <span class="kw">unit</span> <span class="kw">=</span> <span class="st">"pt"</span> )),
-  <span class="kw">axis.text.y</span>  <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>( <span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>,
-                               <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>,
-                               <span class="kw">margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>( <span class="fl">0</span>,<span class="fl">0.1</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="kw">unit</span> <span class="kw">=</span> <span class="st">"mm"</span> )),
-  <span class="kw">axis.title.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>,
-                              <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>, <span class="kw">vjust</span> <span class="kw">=</span> <span class="fl">0</span> ),
-  <span class="kw">axis.title.y</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>,
-                              <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>,
-                              <span class="kw">margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>( <span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="kw">unit</span> <span class="kw">=</span> <span class="st">"mm"</span> ) ),
-  <span class="kw">legend.title</span><span class="kw">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
-  <span class="kw">legend.text</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>),
-  <span class="kw">legend.position</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.88</span>, <span class="fl">0.14</span>),
+                               family <span class="op">=</span> <span class="st">"serif"</span>, angle <span class="op">=</span> <span class="fl">0</span>,
+                               margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>, unit <span class="op">=</span> <span class="st">"pt"</span> <span class="op">)</span><span class="op">)</span>,
+  axis.text.y  <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span> face <span class="op">=</span> <span class="st">"bold"</span>, size <span class="op">=</span> <span class="fl">18</span>, color<span class="op">=</span><span class="st">"black"</span>, 
+                               family <span class="op">=</span> <span class="st">"serif"</span>,
+                               margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span> <span class="fl">0</span>,<span class="fl">0.1</span>,<span class="fl">0</span>,<span class="fl">0</span>, unit <span class="op">=</span> <span class="st">"mm"</span> <span class="op">)</span><span class="op">)</span>,
+  axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, family <span class="op">=</span> <span class="st">"serif"</span>, size <span class="op">=</span> <span class="fl">18</span>,
+                              color<span class="op">=</span><span class="st">"black"</span>, vjust <span class="op">=</span> <span class="fl">0</span> <span class="op">)</span>,
+  axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, family <span class="op">=</span> <span class="st">"serif"</span>, size <span class="op">=</span> <span class="fl">18</span>,
+                              color<span class="op">=</span><span class="st">"black"</span>, 
+                              margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span> <span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span>, unit <span class="op">=</span> <span class="st">"mm"</span> <span class="op">)</span> <span class="op">)</span>,
+  legend.title<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+  legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span>, face <span class="op">=</span> <span class="st">"bold"</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>,
+  legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.88</span>, <span class="fl">0.14</span><span class="op">)</span>,
+  
+  panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill<span class="op">=</span><span class="cn">NA</span>, colour <span class="op">=</span> <span class="st">"black"</span>,size<span class="op">=</span><span class="fl">0.07</span><span class="op">)</span>,
+  panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color<span class="op">=</span> <span class="st">"white"</span>,size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,
+  axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>, axis.ticks.length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="st">"mm"</span><span class="op">)</span>,
+  plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="st">"lines"</span><span class="op">)</span><span class="op">)</span> 
 
-  <span class="kw">panel.border</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(<span class="kw">fill</span><span class="kw">=</span><span class="fl">NA</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="st">"black"</span>,<span class="kw">size</span><span class="kw">=</span><span class="fl">0.07</span>),
-  <span class="kw">panel.grid.minor</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="kw">color</span><span class="kw">=</span> <span class="st">"white"</span>,<span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.2</span>),
-  <span class="kw">axis.ticks</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.1</span>), <span class="kw">axis.ticks.length</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">unit</a></span>(<span class="fl">0.5</span>, <span class="st">"mm"</span>),
-  <span class="kw">plot.margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">unit</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>), <span class="st">"lines"</span>))
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">dt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">PC1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">PC2</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">grps</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="kw">xintercept</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">6</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html">stat_ellipse</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">PC1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">PC2</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">subgrp</span>), <span class="kw">data</span> <span class="kw">=</span> <span class="no">dt</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"norm"</span>,
-               <span class="kw">geom</span> <span class="kw">=</span> <span class="st">"polygon"</span>, <span class="kw">level</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">alpha</span><span class="kw">=</span><span class="fl">0.2</span>, <span class="kw">show.legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span>)) + <span class="no">p0</span></pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span>, colour <span class="op">=</span> <span class="va">grps</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html">stat_ellipse</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span>, fill <span class="op">=</span> <span class="va">subgrp</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dt</span>, type <span class="op">=</span> <span class="st">"norm"</span>,
+               geom <span class="op">=</span> <span class="st">"polygon"</span>, level <span class="op">=</span> <span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="va">p0</span></code></pre></div>
+<pre><code>## Too few points to calculate an ellipse</code></pre>
 <p><img src="pca_lda_with_methylit_files/figure-html/pcaGraphic-1.png" width="700"></p>
 </div>
 <div id="graphic-ld1-vs-ld2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#graphic-ld1-vs-ld2" class="anchor"></a>Graphic LD1 vs LD2</h2>
 <p>In the current case, better resolution is obtained with the linear discriminant functions, which is based on the three firsts PCs. Notice that the number principal components used the LDA step must be lower than the number of individuals (<span class="math inline">\(N\)</span>) divided by 3: <span class="math inline">\(N/3\)</span>.</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">ind.coord</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">ld</span>, <span class="kw">newdata</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">dmgm</span>), <span class="kw">type</span> <span class="kw">=</span> <span class="st">"scores"</span>)
-<span class="no">dt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="no">ind.coord</span>, <span class="kw">subgrp</span> <span class="kw">=</span> <span class="no">grps</span>)
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ind.coord</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">ld</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"scores"</span><span class="op">)</span>
+<span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">ind.coord</span>, subgrp <span class="op">=</span> <span class="va">grps</span><span class="op">)</span>
 
-<span class="no">p0</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
-  <span class="kw">axis.text.x</span>  <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>( <span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>,
+<span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+  axis.text.x  <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span> face <span class="op">=</span> <span class="st">"bold"</span>, size <span class="op">=</span> <span class="fl">18</span>, color<span class="op">=</span><span class="st">"black"</span>,
                                <span class="co"># hjust = 0.5, vjust = 0.5, </span>
-                               <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">angle</span> <span class="kw">=</span> <span class="fl">0</span>,
-                               <span class="kw">margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>, <span class="kw">unit</span> <span class="kw">=</span> <span class="st">"pt"</span> )),
-  <span class="kw">axis.text.y</span>  <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>( <span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>,
-                               <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>,
-                               <span class="kw">margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>( <span class="fl">0</span>,<span class="fl">0.1</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="kw">unit</span> <span class="kw">=</span> <span class="st">"mm"</span> )),
-  <span class="kw">axis.title.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>,
-                              <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>, <span class="kw">vjust</span> <span class="kw">=</span> <span class="fl">0</span> ),
-  <span class="kw">axis.title.y</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">18</span>,
-                              <span class="kw">color</span><span class="kw">=</span><span class="st">"black"</span>,
-                              <span class="kw">margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>( <span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="kw">unit</span> <span class="kw">=</span> <span class="st">"mm"</span> ) ),
-  <span class="kw">legend.title</span><span class="kw">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
-  <span class="kw">legend.text</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">face</span> <span class="kw">=</span> <span class="st">"bold"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"serif"</span>),
-  <span class="kw">legend.position</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.15</span>, <span class="fl">0.83</span>),
+                               family <span class="op">=</span> <span class="st">"serif"</span>, angle <span class="op">=</span> <span class="fl">0</span>,
+                               margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>, unit <span class="op">=</span> <span class="st">"pt"</span> <span class="op">)</span><span class="op">)</span>,
+  axis.text.y  <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span> face <span class="op">=</span> <span class="st">"bold"</span>, size <span class="op">=</span> <span class="fl">18</span>, color<span class="op">=</span><span class="st">"black"</span>, 
+                               family <span class="op">=</span> <span class="st">"serif"</span>,
+                               margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span> <span class="fl">0</span>,<span class="fl">0.1</span>,<span class="fl">0</span>,<span class="fl">0</span>, unit <span class="op">=</span> <span class="st">"mm"</span> <span class="op">)</span><span class="op">)</span>,
+  axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, family <span class="op">=</span> <span class="st">"serif"</span>, size <span class="op">=</span> <span class="fl">18</span>,
+                              color<span class="op">=</span><span class="st">"black"</span>, vjust <span class="op">=</span> <span class="fl">0</span> <span class="op">)</span>,
+  axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, family <span class="op">=</span> <span class="st">"serif"</span>, size <span class="op">=</span> <span class="fl">18</span>,
+                              color<span class="op">=</span><span class="st">"black"</span>, 
+                              margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span> <span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span>, unit <span class="op">=</span> <span class="st">"mm"</span> <span class="op">)</span> <span class="op">)</span>,
+  legend.title<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+  legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span>, face <span class="op">=</span> <span class="st">"bold"</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>,
+  legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">0.83</span><span class="op">)</span>,
+  
+  panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill<span class="op">=</span><span class="cn">NA</span>, colour <span class="op">=</span> <span class="st">"black"</span>,size<span class="op">=</span><span class="fl">0.07</span><span class="op">)</span>,
+  panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color<span class="op">=</span> <span class="st">"white"</span>,size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,
+  axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>, axis.ticks.length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="st">"mm"</span><span class="op">)</span>,
+  plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="st">"lines"</span><span class="op">)</span><span class="op">)</span> 
 
-  <span class="kw">panel.border</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(<span class="kw">fill</span><span class="kw">=</span><span class="fl">NA</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="st">"black"</span>,<span class="kw">size</span><span class="kw">=</span><span class="fl">0.07</span>),
-  <span class="kw">panel.grid.minor</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="kw">color</span><span class="kw">=</span> <span class="st">"white"</span>,<span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.2</span>),
-  <span class="kw">axis.ticks</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.1</span>), <span class="kw">axis.ticks.length</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">unit</a></span>(<span class="fl">0.5</span>, <span class="st">"mm"</span>),
-  <span class="kw">plot.margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">unit</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>), <span class="st">"lines"</span>))
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">dt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">LD1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">LD2</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">grps</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="kw">xintercept</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">6</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html">stat_ellipse</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">LD1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">LD2</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">subgrp</span>), <span class="kw">data</span> <span class="kw">=</span> <span class="no">dt</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"norm"</span>,
-               <span class="kw">geom</span> <span class="kw">=</span> <span class="st">"polygon"</span>, <span class="kw">level</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">alpha</span><span class="kw">=</span><span class="fl">0.2</span>, <span class="kw">show.legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span>)) + <span class="no">p0</span></pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">LD1</span>, y <span class="op">=</span> <span class="va">LD2</span>, colour <span class="op">=</span> <span class="va">grps</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html">stat_ellipse</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">LD1</span>, y <span class="op">=</span> <span class="va">LD2</span>, fill <span class="op">=</span> <span class="va">subgrp</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dt</span>, type <span class="op">=</span> <span class="st">"norm"</span>,
+               geom <span class="op">=</span> <span class="st">"polygon"</span>, level <span class="op">=</span> <span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="va">p0</span></code></pre></div>
+<pre><code>## Too few points to calculate an ellipse</code></pre>
 <p><img src="pca_lda_with_methylit_files/figure-html/ldaGraphic-1.png" width="700"></p>
 </div>
 </div>
 <div id="references" class="section level1">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<div id="refs">
-<div id="ref-Liese2006">
-<p>Liese, Friedrich, and Igor Vajda. 2006. “On divergences and informations in statistics and information theory.” <em>IEEE Transactions on Information Theory</em> 52 (10): 4394–4412. <a href="https://doi.org/10.1109/TIT.2006.881731">https://doi.org/10.1109/TIT.2006.881731</a>.</p>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-Liese2006" class="csl-entry">
+<div class="csl-left-margin">1. </div>
+<div class="csl-right-inline">F. Liese, I. Vajda, <span class="nocase">On divergences and informations in statistics and information theory</span>. <em>IEEE Transactions on Information Theory</em> <strong>52</strong>, 4394–4412 (2006).</div>
 </div>
-<div id="ref-Stevens2009">
-<p>Stevens, James P. 2009. <em>Applied Multivariate Statistics for the Social Sciences</em>. Fifth Edit. Routledge Academic.</p>
+<div id="ref-Stevens2009" class="csl-entry">
+<div class="csl-left-margin">2. </div>
+<div class="csl-right-inline">J. P. Stevens, <em><span class="nocase">Applied Multivariate Statistics for the Social Sciences</span></em>, Fifth Edit (Routledge Academic, 2009).</div>
 </div>
 </div>
 </div>
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.7.3:</p>
-<pre><code>## R version 4.0.0 (2020-04-24)
+<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.11.4:</p>
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 18.04.4 LTS
+## Running under: CentOS Linux 7 (Core)
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.7.1
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.7.1
+## BLAS/LAPACK: /usr/lib64/libopenblasp-r0.3.3.so
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -633,65 +652,72 @@ pre { /* Code block - determines code spacing between lines */
 ## [8] methods   base     
 ## 
 ## other attached packages:
-##  [1] ape_5.4              ggplot2_3.3.1        MethylIT.utils_0.1  
-##  [4] MethylIT_0.3.2.1     rtracklayer_1.48.0   GenomicRanges_1.40.0
-##  [7] GenomeInfoDb_1.24.0  IRanges_2.22.2       S4Vectors_0.26.1    
-## [10] BiocGenerics_0.34.0 
+##  [1] ape_5.5              ggplot2_3.3.5        MethylIT.utils_0.1  
+##  [4] MethylIT_0.3.2.2     rtracklayer_1.52.0   GenomicRanges_1.44.0
+##  [7] GenomeInfoDb_1.28.1  IRanges_2.26.0       S4Vectors_0.30.0    
+## [10] BiocGenerics_0.38.0 
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] colorspace_1.4-1            ellipsis_0.3.1             
-##   [3] class_7.3-17                modeltools_0.2-23          
-##   [5] mclust_5.4.6                rprojroot_1.3-2            
-##   [7] XVector_0.28.0              ArgumentCheck_0.10.2       
-##   [9] fs_1.4.1                    rstudioapi_0.11            
-##  [11] farver_2.0.3                flexmix_2.3-15             
-##  [13] bit64_0.9-7                 AnnotationDbi_1.50.0       
-##  [15] prodlim_2019.11.13          lubridate_1.7.9            
-##  [17] codetools_0.2-16            splines_4.0.0              
-##  [19] knitr_1.28                  Formula_1.2-3              
-##  [21] pROC_1.16.2                 Rsamtools_2.4.0            
-##  [23] caret_6.0-86                annotate_1.66.0            
-##  [25] kernlab_0.9-29              compiler_4.0.0             
-##  [27] backports_1.1.7             assertthat_0.2.1           
-##  [29] Matrix_1.2-18               htmltools_0.4.0            
-##  [31] tools_4.0.0                 gtable_0.3.0               
-##  [33] glue_1.4.1                  GenomeInfoDbData_1.2.3     
-##  [35] reshape2_1.4.4              dplyr_1.0.0                
-##  [37] Rcpp_1.0.4.6                Biobase_2.48.0             
-##  [39] pkgdown_1.5.1               vctrs_0.3.1                
-##  [41] Biostrings_2.56.0           nlme_3.1-148               
-##  [43] iterators_1.0.12            betareg_3.1-3              
-##  [45] lmtest_0.9-37               timeDate_3043.102          
-##  [47] gower_0.2.1                 xfun_0.14                  
-##  [49] stringr_1.4.0               lifecycle_0.2.0            
-##  [51] XML_3.99-0.3                zlibbioc_1.34.0            
-##  [53] MASS_7.3-51.6               zoo_1.8-8                  
-##  [55] scales_1.1.1                ipred_0.9-9                
-##  [57] SummarizedExperiment_1.18.1 sandwich_2.5-1             
-##  [59] yaml_2.2.1                  memoise_1.1.0              
-##  [61] rpart_4.1-15                segmented_1.1-0            
-##  [63] stringi_1.4.6               RSQLite_2.2.0              
-##  [65] genefilter_1.70.0           desc_1.2.0                 
-##  [67] foreach_1.5.0               e1071_1.7-3                
-##  [69] BiocParallel_1.22.0         lava_1.6.7                 
-##  [71] rlang_0.4.6                 pkgconfig_2.0.3            
-##  [73] matrixStats_0.56.0          bitops_1.0-6               
-##  [75] evaluate_0.14               lattice_0.20-41            
-##  [77] purrr_0.3.4                 labeling_0.3               
-##  [79] GenomicAlignments_1.24.0    recipes_0.1.12             
-##  [81] bit_1.1-15.2                tidyselect_1.1.0           
-##  [83] plyr_1.8.6                  magrittr_1.5               
-##  [85] nls2_0.2                    R6_2.4.1                   
-##  [87] generics_0.0.2              DelayedArray_0.14.0        
-##  [89] DBI_1.1.0                   pillar_1.4.4               
-##  [91] withr_2.2.0                 mixtools_1.2.0             
-##  [93] survival_3.1-12             RCurl_1.98-1.2             
-##  [95] nnet_7.3-14                 tibble_3.0.1               
-##  [97] crayon_1.3.4                rmarkdown_2.2              
-##  [99] grid_4.0.0                  minpack.lm_1.2-1           
-## [101] data.table_1.12.8           blob_1.2.1                 
-## [103] ModelMetrics_1.2.2.2        digest_0.6.25              
-## [105] xtable_1.8-4                munsell_0.5.0</code></pre>
+##   [1] colorspace_2.0-2            rjson_0.2.20               
+##   [3] modeltools_0.2-23           ellipsis_0.3.2             
+##   [5] class_7.3-19                rprojroot_2.0.2            
+##   [7] XVector_0.32.0              fs_1.5.0                   
+##   [9] proxy_0.4-26                farver_2.1.0               
+##  [11] flexmix_2.3-17              bit64_4.0.5                
+##  [13] AnnotationDbi_1.54.1        prodlim_2019.11.13         
+##  [15] fansi_0.5.0                 lubridate_1.7.10           
+##  [17] codetools_0.2-18            splines_4.1.0              
+##  [19] cachem_1.0.5                knitr_1.33                 
+##  [21] Formula_1.2-4               jsonlite_1.7.2             
+##  [23] pROC_1.17.0.1               Rsamtools_2.8.0            
+##  [25] caret_6.0-88                annotate_1.70.0            
+##  [27] png_0.1-7                   compiler_4.1.0             
+##  [29] httr_1.4.2                  assertthat_0.2.1           
+##  [31] Matrix_1.3-4                fastmap_1.1.0              
+##  [33] htmltools_0.5.1.1           tools_4.1.0                
+##  [35] gtable_0.3.0                glue_1.4.2                 
+##  [37] GenomeInfoDbData_1.2.6      reshape2_1.4.4             
+##  [39] dplyr_1.0.7                 Rcpp_1.0.7                 
+##  [41] Biobase_2.52.0              jquerylib_0.1.4            
+##  [43] pkgdown_1.6.1               vctrs_0.3.8                
+##  [45] Biostrings_2.60.1           nlme_3.1-152               
+##  [47] betareg_3.1-4               iterators_1.0.13           
+##  [49] lmtest_0.9-38               timeDate_3043.102          
+##  [51] gower_0.2.2                 xfun_0.24                  
+##  [53] stringr_1.4.0               lifecycle_1.0.0            
+##  [55] restfulr_0.0.13             XML_3.99-0.6               
+##  [57] zoo_1.8-9                   zlibbioc_1.38.0            
+##  [59] MASS_7.3-54                 scales_1.1.1               
+##  [61] ipred_0.9-11                ragg_1.1.3                 
+##  [63] MatrixGenerics_1.4.0        sandwich_3.0-1             
+##  [65] SummarizedExperiment_1.22.0 yaml_2.2.1                 
+##  [67] memoise_2.0.0               sass_0.4.0                 
+##  [69] rpart_4.1-15                stringi_1.6.2              
+##  [71] RSQLite_2.2.7               highr_0.9                  
+##  [73] genefilter_1.74.0           BiocIO_1.2.0               
+##  [75] desc_1.3.0                  foreach_1.5.1              
+##  [77] e1071_1.7-7                 BiocParallel_1.26.1        
+##  [79] lava_1.6.9                  rlang_0.4.11               
+##  [81] pkgconfig_2.0.3             systemfonts_1.0.2          
+##  [83] matrixStats_0.59.0          bitops_1.0-7               
+##  [85] evaluate_0.14               lattice_0.20-44            
+##  [87] purrr_0.3.4                 labeling_0.4.2             
+##  [89] GenomicAlignments_1.28.0    recipes_0.1.16             
+##  [91] bit_4.0.4                   tidyselect_1.1.1           
+##  [93] plyr_1.8.6                  magrittr_2.0.1             
+##  [95] nls2_0.2                    R6_2.5.0                   
+##  [97] generics_0.1.0              DelayedArray_0.18.0        
+##  [99] DBI_1.1.1                   pillar_1.6.1               
+## [101] withr_2.4.2                 survival_3.2-11            
+## [103] KEGGREST_1.32.0             RCurl_1.98-1.3             
+## [105] nnet_7.3-16                 tibble_3.1.2               
+## [107] crayon_1.4.1                utf8_1.2.1                 
+## [109] rmarkdown_2.9               grid_4.1.0                 
+## [111] minpack.lm_1.2-1            data.table_1.14.0          
+## [113] blob_1.2.1                  ModelMetrics_1.2.2.2       
+## [115] digest_0.6.27               xtable_1.8-4               
+## [117] textshaping_0.3.5           munsell_0.5.0              
+## [119] bslib_0.2.5.1</code></pre>
 </div>
   </div>
 
@@ -710,7 +736,7 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
