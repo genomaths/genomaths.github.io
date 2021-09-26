@@ -4,7 +4,7 @@ Sanchez, Robersy, and Sally A Mackenzie. “Integrative Network Analysis of Diff
 and Expressed Genes for Biomarker Identification in Leukemia.” Scientific Reports 10, no. 1 (2020)
 https://doi.org/10.1038/s41598-020-58123-2. 
 
-The Integrated Genome Browser (IGB, https://bioviz.org) was used visualization for genome-scale data reported in Fig. 7 and 8
+The Integrated Genome Browser (IGB, https://bioviz.org) was used for the visualizations given in Fig. 7 and 8.
 The genomic coordinates correspond to the following human genome reference from 2009, as detailed below:
 
 H_sapiens_Feb_2009
