@@ -49,6 +49,7 @@
 <meta property="og:title" content="Unique GRanges of methylation read counts filtered by coverages — uniqueGRfilterByCov" />
 <meta property="og:description" content="Given two GRanges objects, samples '1' and '2', this function
 will filter by coverage each cytosine site from each GRanges object." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -80,7 +81,7 @@ will filter by coverage each cytosine site from each GRanges object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -88,7 +89,7 @@ will filter by coverage each cytosine site from each GRanges object." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +123,19 @@ will filter by coverage each cytosine site from each GRanges object." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -131,13 +144,13 @@ will filter by coverage each cytosine site from each GRanges object." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -167,22 +180,22 @@ will filter by coverage each cytosine site from each GRanges object." />
 will filter by coverage each cytosine site from each GRanges object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>uniqueGRfilterByCov</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>min.coverage</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>min.meth</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>min.umeth</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>min.sitecov</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>percentile</span> <span class='kw'>=</span> <span class='fl'>0.9999</span>,
-  <span class='kw'>high.coverage</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>mC</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fl'>2</span>),
-  <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>ignore.strand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>tasks</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>uniqueGRfilterByCov</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  min.coverage <span class='op'>=</span> <span class='fl'>4</span>,
+  min.meth <span class='op'>=</span> <span class='fl'>0</span>,
+  min.umeth <span class='op'>=</span> <span class='fl'>0</span>,
+  min.sitecov <span class='op'>=</span> <span class='fl'>4</span>,
+  percentile <span class='op'>=</span> <span class='fl'>0.9999</span>,
+  high.coverage <span class='op'>=</span> <span class='cn'>NULL</span>,
+  columns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>mC <span class='op'>=</span> <span class='fl'>1</span>, uC <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>,
+  num.cores <span class='op'>=</span> <span class='fl'>1L</span>,
+  ignore.strand <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  tasks <span class='op'>=</span> <span class='fl'>0L</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -251,7 +264,7 @@ and 2, respectively.
 higher coverage than this are discarded. Default is NULL. If
 <strong>high.coverage</strong> is not NULL, then the <strong>percentile</strong> argument is
 disregarded and <strong>high.coverage</strong> is used as threshold to remove the
-PCR bias.</p></td>
+PCR bias. If percentile is not null, then q = max(q, high.coverage).</p></td>
     </tr>
     <tr>
       <th>columns</th>
@@ -286,7 +299,7 @@ package).</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional parameters for 'uniqueGRanges' function.</p></td>
+      <td><p>Additional parameters for <code><a href='uniqueGRanges.html'>uniqueGRanges</a></code> function.</p></td>
     </tr>
     </table>
 
@@ -304,17 +317,19 @@ that the columns of methylated and unmethylated counts are given.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Create new data</span>
-<span class='no'>df1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>'chr1'</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>16</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>16</span>,
-                <span class='kw'>mC</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>10</span>,<span class='fl'>7</span>,<span class='fl'>9</span>,<span class='fl'>1</span>,<span class='fl'>10</span>), <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>30</span>,<span class='fl'>20</span>,<span class='fl'>4</span>,<span class='fl'>8</span>,<span class='fl'>0</span>,<span class='fl'>10</span>))
+<span class='va'>df1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>chr <span class='op'>=</span> <span class='st'>'chr1'</span>, start <span class='op'>=</span> <span class='fl'>11</span><span class='op'>:</span><span class='fl'>16</span>, end <span class='op'>=</span> <span class='fl'>11</span><span class='op'>:</span><span class='fl'>16</span>,
+                mC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>10</span>,<span class='fl'>7</span>,<span class='fl'>9</span>,<span class='fl'>1</span>,<span class='fl'>10</span><span class='op'>)</span>, uC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>30</span>,<span class='fl'>20</span>,<span class='fl'>4</span>,<span class='fl'>8</span>,<span class='fl'>0</span>,<span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='no'>df2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>'chr1'</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>12</span>:<span class='fl'>18</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>12</span>:<span class='fl'>18</span>,
-                <span class='kw'>mC2</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>7</span>, <span class='kw'>uC2</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>6</span>)
+<span class='va'>df2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>chr <span class='op'>=</span> <span class='st'>'chr1'</span>, start <span class='op'>=</span> <span class='fl'>12</span><span class='op'>:</span><span class='fl'>18</span>, end <span class='op'>=</span> <span class='fl'>12</span><span class='op'>:</span><span class='fl'>18</span>,
+                mC2 <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>7</span>, uC2 <span class='op'>=</span> <span class='fl'>0</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
 
-<span class='no'>gr1</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(<span class='no'>df1</span>, <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>gr2</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(<span class='no'>df2</span>, <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='va'>gr1</span> <span class='op'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span><span class='op'>(</span><span class='va'>df1</span>, keep.extra.columns <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>gr2</span> <span class='op'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span><span class='op'>(</span><span class='va'>df2</span>, keep.extra.columns <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'>## Filtering</span>
-<span class='no'>r1</span> <span class='kw'>&lt;-</span> <span class='fu'>uniqueGRfilterByCov</span>(<span class='no'>gr1</span>, <span class='no'>gr2</span>, <span class='kw'>ignore.strand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'> *** Building coordinates for the new GRanges object ...</span></div><div class='output co'>#&gt; <span class='message'> *** Setting strand information to * ...</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #1</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #2...</span></div><div class='output co'>#&gt; <span class='message'> *** Sorting by chromosomes and start positions...</span></div><div class='input'><span class='no'>r1</span></div><div class='output co'>#&gt; GRanges object with 3 ranges and 4 metadata columns:
+<span class='va'>r1</span> <span class='op'>&lt;-</span> <span class='fu'>uniqueGRfilterByCov</span><span class='op'>(</span><span class='va'>gr1</span>, <span class='va'>gr2</span>, ignore.strand <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'> *** Building coordinates for the new GRanges object ...</span></div><div class='output co'>#&gt; <span class='message'> *** Setting strand information to * ...</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #1</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #2...</span></div><div class='output co'>#&gt; <span class='message'> *** Sorting by chromosomes and start positions...</span></div><div class='input'><span class='va'>r1</span>
+</div><div class='output co'>#&gt; GRanges object with 3 ranges and 4 metadata columns:
 #&gt;       seqnames    ranges strand |        mC        uC       mC2       uC2
 #&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
 #&gt;   [1]     chr1        13      * |         7         4         2         1
@@ -325,7 +340,8 @@ that the columns of methylated and unmethylated counts are given.</p>
 <span class='co'>## Cytosine position with coordinate 15 (rows #2) can pass the</span>
 <span class='co'>## filtering conditions of min.coverage = 4 and lead to meaningless</span>
 <span class='co'>## situations with methylation levels p = 1/(1 + 0) = 1</span>
-<span class='no'>r1</span>[<span class='fl'>2</span>]</div><div class='output co'>#&gt; GRanges object with 1 range and 4 metadata columns:
+<span class='va'>r1</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; GRanges object with 1 range and 4 metadata columns:
 #&gt;       seqnames    ranges strand |        mC        uC       mC2       uC2
 #&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
 #&gt;   [1]     chr1        15      * |         1         0         4         3
@@ -333,7 +349,9 @@ that the columns of methylated and unmethylated counts are given.</p>
 #&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</div><div class='input'>
 <span class='co'>## The last situation can be prevent, in this case, by setting</span>
 <span class='co'>## min.meth = 1:</span>
-<span class='no'>r1</span> <span class='kw'>&lt;-</span> <span class='fu'>uniqueGRfilterByCov</span>(<span class='no'>gr1</span>, <span class='no'>gr2</span>, <span class='kw'>min.meth</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>ignore.strand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'> *** Building coordinates for the new GRanges object ...</span></div><div class='output co'>#&gt; <span class='message'> *** Setting strand information to * ...</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #1</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #2...</span></div><div class='output co'>#&gt; <span class='message'> *** Sorting by chromosomes and start positions...</span></div><div class='input'><span class='no'>r1</span></div><div class='output co'>#&gt; GRanges object with 2 ranges and 4 metadata columns:
+<span class='va'>r1</span> <span class='op'>&lt;-</span> <span class='fu'>uniqueGRfilterByCov</span><span class='op'>(</span><span class='va'>gr1</span>, <span class='va'>gr2</span>, min.meth <span class='op'>=</span> <span class='fl'>1</span>, ignore.strand <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'> *** Building coordinates for the new GRanges object ...</span></div><div class='output co'>#&gt; <span class='message'> *** Setting strand information to * ...</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #1</span></div><div class='output co'>#&gt; <span class='message'> *** Processing GRanges for sample: #2...</span></div><div class='output co'>#&gt; <span class='message'> *** Sorting by chromosomes and start positions...</span></div><div class='input'><span class='va'>r1</span>
+</div><div class='output co'>#&gt; GRanges object with 2 ranges and 4 metadata columns:
 #&gt;       seqnames    ranges strand |        mC        uC       mC2       uC2
 #&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
 #&gt;   [1]     chr1        13      * |         7         4         2         1
@@ -355,7 +373,7 @@ that the columns of methylated and unmethylated counts are given.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

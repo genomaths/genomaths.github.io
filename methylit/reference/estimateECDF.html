@@ -53,6 +53,7 @@ high amount of experimental values (several millions) could be
 computationally time consuming to perform a good-of-fit test and a
 non-linear regression estimation for a theoretical CDF based in such a
 big number of values." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -84,7 +85,7 @@ big number of values." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -92,7 +93,7 @@ big number of values." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +127,19 @@ big number of values." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -135,13 +148,13 @@ big number of values." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -175,7 +188,7 @@ non-linear regression estimation for a theoretical CDF based in such a
 big number of values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>estimateECDF</span>(<span class='no'>x</span>, <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
+    <pre class="usage"><span class='fu'>estimateECDF</span><span class='op'>(</span><span class='va'>x</span>, npoints <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,8 +211,9 @@ big number of values.</p>
     <p>The histogram cell midpoints values are used to build estimateECDF.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>    <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>500</span>, <span class='fl'>50</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-    <span class='fu'>estimateECDF</span>(<span class='no'>x</span>, <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='fl'>15</span>)</div><div class='output co'>#&gt; Empirical CDF 
+    <pre class="examples"><div class='input'>    <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>500</span>, <span class='fl'>50</span>, replace<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+    <span class='fu'>estimateECDF</span><span class='op'>(</span><span class='va'>x</span>, npoints <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Empirical CDF 
 #&gt; Call: estimateECDF(x, npoints = 15)
 #&gt;  x[1:10] =     25,     75,    125,  ...,    425,    475</div><div class='input'>
 </div></pre>
@@ -218,7 +232,7 @@ big number of values.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

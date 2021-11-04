@@ -50,6 +50,7 @@
 <meta property="og:description" content="RangedGlmDataSet and glmDataSet are objects carrying the
 information on the experimental design for two group comparison of DMP
 counts by applying generalized linear regression." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -81,7 +82,7 @@ counts by applying generalized linear regression." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -89,7 +90,7 @@ counts by applying generalized linear regression." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -123,7 +124,19 @@ counts by applying generalized linear regression." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -132,13 +145,13 @@ counts by applying generalized linear regression." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -169,14 +182,14 @@ information on the experimental design for two group comparison of DMP
 counts by applying generalized linear regression.</p>
     </div>
 
-    <pre class="usage"><span class='no'>ds</span></pre>
+    <pre class="usage"><span class='va'>ds</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p><strong><em>ds</em></strong> is an <em>RangedGlmDataSet</em> with 125 regions
 and 4 columns (individuals) with factor levels 'A' and 'B'. The accessible
-objects in the dataset are:</p><dl'>
+objects in the dataset are:</p><dl>
 <dt><strong>GR</strong></dt><dd><p>A <code><a href='https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html'>GRanges-class</a></code> object of
 length(GR) = 125 with the count matrix of DMPs in the metacolumns.</p></dd>
 <dt><strong>counts</strong></dt><dd><p>Count matrix of DMPs with minimal
@@ -206,7 +219,7 @@ function.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

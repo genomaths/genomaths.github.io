@@ -83,7 +83,7 @@ from treatment samples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@ from treatment samples." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -146,13 +146,13 @@ from treatment samples." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -184,25 +184,26 @@ classification of DMPs into two clases: DMPS from control and DMPs
 from treatment samples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>evaluateDIMPclass</span>(
-  <span class='no'>LR</span>,
-  <span class='no'>control.names</span>,
-  <span class='no'>treatment.names</span>,
-  <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bay.TV</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>),
-  <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"logistic"</span>, <span class='st'>"pca.logistic"</span>, <span class='st'>"lda"</span>, <span class='st'>"qda"</span>, <span class='st'>"pca.lda"</span>, <span class='st'>"pca.qda"</span>),
-  <span class='kw'>pval.col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>interactions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"conf.mat"</span>,
-  <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
-  <span class='kw'>num.boot</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-  <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>tasks</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1234</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>evaluateDIMPclass</span><span class='op'>(</span>
+  <span class='va'>LR</span>,
+  <span class='va'>control.names</span>,
+  <span class='va'>treatment.names</span>,
+  column <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>hdiv <span class='op'>=</span> <span class='cn'>FALSE</span>, jdiv <span class='op'>=</span> <span class='cn'>FALSE</span>, jdiv.stat <span class='op'>=</span> <span class='cn'>FALSE</span>, TV <span class='op'>=</span> <span class='cn'>FALSE</span>, bay.TV <span class='op'>=</span> <span class='cn'>FALSE</span>,
+    wprob <span class='op'>=</span> <span class='cn'>FALSE</span>, pos <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>,
+  classifier <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"logistic"</span>, <span class='st'>"pca.logistic"</span>, <span class='st'>"lda"</span>, <span class='st'>"qda"</span>, <span class='st'>"pca.lda"</span>, <span class='st'>"pca.qda"</span><span class='op'>)</span>,
+  pval.col <span class='op'>=</span> <span class='cn'>NULL</span>,
+  n.pc <span class='op'>=</span> <span class='fl'>1</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  scale <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  interactions <span class='op'>=</span> <span class='cn'>NULL</span>,
+  output <span class='op'>=</span> <span class='st'>"conf.mat"</span>,
+  prop <span class='op'>=</span> <span class='fl'>0.6</span>,
+  num.boot <span class='op'>=</span> <span class='fl'>100</span>,
+  num.cores <span class='op'>=</span> <span class='fl'>1L</span>,
+  tasks <span class='op'>=</span> <span class='fl'>0L</span>,
+  seed <span class='op'>=</span> <span class='fl'>1234</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -347,30 +348,31 @@ does not induce a significant regulatory signal different from control.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Get a data set of DMPs</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dmps</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dmps</span>, package <span class='op'>=</span> <span class='st'>'MethylIT'</span><span class='op'>)</span>
 
 <span class='co'>## Classification of DMPs into two clases: DMPS from control and DMPs</span>
 <span class='co'>## from treatment samples and evaluation of the classifier performance</span>
 <span class='co'>## (for more details see ?evaluateDIMPclass).</span>
-<span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'>evaluateDIMPclass</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>dmps</span>,
-                        <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                                    <span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-                        <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='st'>'lda'</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4L</span>,
-                        <span class='kw'>control.names</span> <span class='kw'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>),
-                        <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>),
-                        <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)
+<span class='va'>perf</span> <span class='op'>&lt;-</span> <span class='fu'>evaluateDIMPclass</span><span class='op'>(</span>LR <span class='op'>=</span> <span class='va'>dmps</span>,
+                        column <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>hdiv <span class='op'>=</span> <span class='cn'>TRUE</span>, TV <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                                    wprob <span class='op'>=</span> <span class='cn'>TRUE</span>, pos <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+                        classifier <span class='op'>=</span> <span class='st'>'lda'</span>, n.pc <span class='op'>=</span> <span class='fl'>4L</span>,
+                        control.names <span class='op'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span><span class='op'>)</span>,
+                        treatment.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span><span class='op'>)</span>,
+                        center <span class='op'>=</span> <span class='cn'>TRUE</span>, scale <span class='op'>=</span> <span class='cn'>TRUE</span>, prop <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span>
 
 <span class='co'>## Model classification performance</span>
-<span class='no'>perf</span>$<span class='no'>Performance</span></div><div class='output co'>#&gt; Confusion Matrix and Statistics
+<span class='va'>perf</span><span class='op'>$</span><span class='va'>Performance</span>
+</div><div class='output co'>#&gt; Confusion Matrix and Statistics
 #&gt; 
 #&gt;           Reference
 #&gt; Prediction  CT  TT
-#&gt;         CT  60   0
-#&gt;         TT   0 616
+#&gt;         CT  53   0
+#&gt;         TT   0 610
 #&gt;                                      
 #&gt;                Accuracy : 1          
-#&gt;                  95% CI : (0.9946, 1)
-#&gt;     No Information Rate : 0.9112     
+#&gt;                  95% CI : (0.9945, 1)
+#&gt;     No Information Rate : 0.9201     
 #&gt;     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
 #&gt;                                      
 #&gt;                   Kappa : 1          
@@ -381,9 +383,9 @@ does not induce a significant regulatory signal different from control.</p>
 #&gt;             Specificity : 1.0000     
 #&gt;          Pos Pred Value : 1.0000     
 #&gt;          Neg Pred Value : 1.0000     
-#&gt;              Prevalence : 0.9112     
-#&gt;          Detection Rate : 0.9112     
-#&gt;    Detection Prevalence : 0.9112     
+#&gt;              Prevalence : 0.9201     
+#&gt;          Detection Rate : 0.9201     
+#&gt;    Detection Prevalence : 0.9201     
 #&gt;       Balanced Accuracy : 1.0000     
 #&gt;                                      
 #&gt;        'Positive' Class : TT         
@@ -404,7 +406,7 @@ does not induce a significant regulatory signal different from control.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

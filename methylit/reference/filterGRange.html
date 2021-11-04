@@ -50,6 +50,7 @@
 <meta property="og:description" content="The function is used to discard the cytosine positions with
 coverage values less than 'min.coverage' read counts or values greater
 than the specified 'percentile'." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -81,7 +82,7 @@ than the specified 'percentile'." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -89,7 +90,7 @@ than the specified 'percentile'." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -123,7 +124,19 @@ than the specified 'percentile'." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -132,13 +145,13 @@ than the specified 'percentile'." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -169,15 +182,15 @@ coverage values less than 'min.coverage' read counts or values greater
 than the specified 'percentile'.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>filterGRange</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>min.coverage</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>max.coverage</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
-  <span class='kw'>percentile</span> <span class='kw'>=</span> <span class='fl'>0.999</span>,
-  <span class='kw'>col.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>coverage</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mC</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='kw'>NULL</span>),
-  <span class='kw'>sample.name</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>filterGRange</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  min.coverage <span class='op'>=</span> <span class='fl'>4</span>,
+  max.coverage <span class='op'>=</span> <span class='cn'>Inf</span>,
+  percentile <span class='op'>=</span> <span class='fl'>0.999</span>,
+  col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>coverage <span class='op'>=</span> <span class='cn'>NULL</span>, mC <span class='op'>=</span> <span class='cn'>NULL</span>, uC <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>,
+  sample.name <span class='op'>=</span> <span class='st'>""</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,12 +242,13 @@ metacolumn table or the columns with methylated (mC) and unmethylated
 counts (uC).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>    <span class='no'>gr1</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(
-        <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>'chr1'</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>15</span>,
-                <span class='kw'>strand</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'+'</span>,<span class='st'>'-'</span>,<span class='st'>'+'</span>,<span class='st'>'*'</span>,<span class='st'>'.'</span>), <span class='kw'>mC</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>),
-        <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-    <span class='fu'>filterGRange</span>(<span class='no'>gr1</span>, <span class='kw'>min.coverage</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>max.coverage</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-                <span class='kw'>col.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>mC</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; GRanges object with 2 ranges and 2 metadata columns:
+    <pre class="examples"><div class='input'>    <span class='va'>gr1</span> <span class='op'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span><span class='op'>(</span>
+        <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>chr <span class='op'>=</span> <span class='st'>'chr1'</span>, start <span class='op'>=</span> <span class='fl'>11</span><span class='op'>:</span><span class='fl'>15</span>, end <span class='op'>=</span> <span class='fl'>11</span><span class='op'>:</span><span class='fl'>15</span>,
+                strand <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'+'</span>,<span class='st'>'-'</span>,<span class='st'>'+'</span>,<span class='st'>'*'</span>,<span class='st'>'.'</span><span class='op'>)</span>, mC <span class='op'>=</span> <span class='fl'>1</span>, uC <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>,
+        keep.extra.columns <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+    <span class='fu'>filterGRange</span><span class='op'>(</span><span class='va'>gr1</span>, min.coverage <span class='op'>=</span> <span class='fl'>1</span>, max.coverage <span class='op'>=</span> <span class='fl'>4</span>,
+                col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>mC <span class='op'>=</span> <span class='fl'>1</span>, uC <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; GRanges object with 2 ranges and 2 metadata columns:
 #&gt;       seqnames    ranges strand |        mC        uC
 #&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;integer&gt;
 #&gt;   [1]     chr1        11      + |         1         1
@@ -257,7 +271,7 @@ counts (uC).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

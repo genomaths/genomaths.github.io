@@ -84,7 +84,7 @@ linear model." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@ linear model." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -136,6 +136,10 @@ linear model." />
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -143,13 +147,13 @@ linear model." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -182,24 +186,24 @@ estimation of the prior weights used in Negative Binomial generalized
 linear model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>countTest2</span>(
-  <span class='no'>DS</span>,
-  <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>countFilter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>CountPerBp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>minCountPerIndv</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>maxGrpCV</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>FilterLog2FC</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>pAdjustMethod</span> <span class='kw'>=</span> <span class='st'>"BH"</span>,
-  <span class='kw'>pvalCutOff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>MVrate</span> <span class='kw'>=</span> <span class='fl'>0.98</span>,
-  <span class='kw'>Minlog2FC</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Wald"</span>, <span class='st'>"LRT"</span>),
-  <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>tasks</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>saveAll</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>countTest2</span><span class='op'>(</span>
+  <span class='va'>DS</span>,
+  num.cores <span class='op'>=</span> <span class='fl'>1</span>,
+  countFilter <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  CountPerBp <span class='op'>=</span> <span class='cn'>NULL</span>,
+  minCountPerIndv <span class='op'>=</span> <span class='fl'>3</span>,
+  maxGrpCV <span class='op'>=</span> <span class='cn'>NULL</span>,
+  FilterLog2FC <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  pAdjustMethod <span class='op'>=</span> <span class='st'>"BH"</span>,
+  pvalCutOff <span class='op'>=</span> <span class='fl'>0.05</span>,
+  MVrate <span class='op'>=</span> <span class='fl'>0.98</span>,
+  Minlog2FC <span class='op'>=</span> <span class='fl'>0.5</span>,
+  test <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Wald"</span>, <span class='st'>"LRT"</span><span class='op'>)</span>,
+  scaling <span class='op'>=</span> <span class='fl'>1L</span>,
+  tasks <span class='op'>=</span> <span class='fl'>0L</span>,
+  saveAll <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -318,30 +322,31 @@ The experimental design settings must be introduced using function
     <div class='dont-index'><p><code><a href='glmDataSet.html'>glmDataSet</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>133</span>) <span class='co'># Set a seed</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>133</span><span class='op'>)</span> <span class='co'># Set a seed</span>
 <span class='co'>## A GRanges object with the count matrix in the metacolumns is created</span>
-<span class='no'>countData</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>200</span>, <span class='fl'>500</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>4</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>countData</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'A1'</span>,<span class='st'>'A2'</span>,<span class='st'>'B1'</span>,<span class='st'>'B2'</span>)
+<span class='va'>countData</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span><span class='op'>(</span><span class='fl'>200</span>, <span class='fl'>500</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>countData</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'A1'</span>,<span class='st'>'A2'</span>,<span class='st'>'B1'</span>,<span class='st'>'B2'</span><span class='op'>)</span>
 
-<span class='no'>start</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>, <span class='fl'>25e4</span>, <span class='fl'>2000</span>)
-<span class='no'>end</span> <span class='kw'>&lt;-</span> <span class='no'>start</span> + <span class='fl'>1000</span>
-<span class='no'>chr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>'chr1'</span>, <span class='fl'>70</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>'chr2'</span>, <span class='fl'>55</span>))
-<span class='no'>GR</span> <span class='kw'>&lt;-</span> <span class='fu'>GRanges</span>(<span class='kw'>seqnames</span> <span class='kw'>=</span> <span class='no'>chr</span>, <span class='fu'>IRanges</span>(<span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>start</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='no'>end</span>))
-<span class='fu'>mcols</span>(<span class='no'>GR</span>) <span class='kw'>&lt;-</span> <span class='no'>countData</span>
+<span class='va'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>25e4</span>, <span class='fl'>2000</span><span class='op'>)</span>
+<span class='va'>end</span> <span class='op'>&lt;-</span> <span class='va'>start</span> <span class='op'>+</span> <span class='fl'>1000</span>
+<span class='va'>chr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>'chr1'</span>, <span class='fl'>70</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>'chr2'</span>, <span class='fl'>55</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>GR</span> <span class='op'>&lt;-</span> <span class='fu'>GRanges</span><span class='op'>(</span>seqnames <span class='op'>=</span> <span class='va'>chr</span>, <span class='fu'>IRanges</span><span class='op'>(</span>start <span class='op'>=</span> <span class='va'>start</span>, end <span class='op'>=</span> <span class='va'>end</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>mcols</span><span class='op'>(</span><span class='va'>GR</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>countData</span>
 
 <span class='co'>## Gene IDs</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>GR</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>'gene'</span>, <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>GR</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>GR</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>'gene'</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>GR</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'>## An experiment design is set.</span>
-<span class='no'>colData</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>condition</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'A'</span>,<span class='st'>'A'</span>,<span class='st'>'B'</span>,<span class='st'>'B'</span>)),
-                    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'A1'</span>,<span class='st'>'A2'</span>,<span class='st'>'B1'</span>,<span class='st'>'B2'</span>), <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='va'>colData</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>condition <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'A'</span>,<span class='st'>'A'</span>,<span class='st'>'B'</span>,<span class='st'>'B'</span><span class='op'>)</span><span class='op'>)</span>,
+                    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'A1'</span>,<span class='st'>'A2'</span>,<span class='st'>'B1'</span>,<span class='st'>'B2'</span><span class='op'>)</span>, row.names <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 
 <span class='co'>## A RangedGlmDataSet is created</span>
-<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glmDataSet.html'>glmDataSet</a></span>(<span class='kw'>GR</span> <span class='kw'>=</span> <span class='no'>GR</span>, <span class='kw'>colData</span> <span class='kw'>=</span> <span class='no'>colData</span>)
+<span class='va'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glmDataSet.html'>glmDataSet</a></span><span class='op'>(</span>GR <span class='op'>=</span> <span class='va'>GR</span>, colData <span class='op'>=</span> <span class='va'>colData</span><span class='op'>)</span>
 
 <span class='co'>## The gneralized linear model pairwise group comparison, group 'A'</span>
 <span class='co'>## ('control') versus 'B' (treatment) is performed.</span>
-<span class='fu'>countTest2</span>(<span class='no'>ds</span>, <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>maxGrpCV</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.4</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; GRanges object with 4 ranges and 12 metadata columns:
+<span class='fu'>countTest2</span><span class='op'>(</span><span class='va'>ds</span>, num.cores <span class='op'>=</span> <span class='fl'>1L</span>, maxGrpCV <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.4</span><span class='op'>)</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; GRanges object with 4 ranges and 12 metadata columns:
 #&gt;           seqnames        ranges strand |        A1        A2        B1
 #&gt;              &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;
 #&gt;    gene69     chr1 136001-137001      * |        57        67       117
@@ -378,7 +383,7 @@ The experimental design settings must be introduced using function
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

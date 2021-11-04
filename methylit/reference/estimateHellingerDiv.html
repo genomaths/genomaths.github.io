@@ -49,6 +49,7 @@
 <meta property="og:title" content="Hellinger divergence of methylation levels — estimateHellingerDiv" />
 <meta property="og:description" content="Given a the methylation levels of two individual, the function
 computes the information divergence between methylation levels." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -80,7 +81,7 @@ computes the information divergence between methylation levels." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -88,7 +89,7 @@ computes the information divergence between methylation levels." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +123,19 @@ computes the information divergence between methylation levels." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -131,13 +144,13 @@ computes the information divergence between methylation levels." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -167,7 +180,7 @@ computes the information divergence between methylation levels." />
 computes the information divergence between methylation levels.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>estimateHellingerDiv</span>(<span class='no'>p</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>estimateHellingerDiv</span><span class='op'>(</span><span class='va'>p</span>, n <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -203,6 +216,7 @@ information divergence is estimated according to the formula:</p>
 formula from Theorem 1 from reference 1. Otherwise:</p>
 <p>$$hdiv = (sqrt(p_1j) - sqrt(p_2j))^2 + (sqrt(1 - p_1j) -
 sqrt(1 - p_2j))^2$$</p>
+<p>Missing methylation levels, reported as NA or NaN, are replaced with zero.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>' 1. Basu  A., Mandal  A., Pardo L (2010) Hypothesis testing for
@@ -210,8 +224,9 @@ two discrete populations based on the Hellinger distance. Stat Probab
 Lett 80: 206-214.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.5</span>)
-    <span class='fu'>estimateHellingerDiv</span>(<span class='no'>p</span>)</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
+    <pre class="examples"><div class='input'>    <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>0.5</span><span class='op'>)</span>
+    <span class='fu'>estimateHellingerDiv</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -228,7 +243,7 @@ Lett 80: 206-214.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

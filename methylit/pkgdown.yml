@@ -1,8 +1,16 @@
-pandoc: 2.3.1
-pkgdown: 1.5.0
+pandoc: 2.11.4
+pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: []
-last_built: 2020-04-01T21:07Z
+articles:
+  Cutpoint_estimation_with_Methyl-IT: Cutpoint_estimation_with_Methyl-IT.html
+  GenExp_Methylation_association_hyper_down-regulated: GenExp_Methylation_association_hyper_down-regulated.html
+  MethylIT: MethylIT.html
+  Methylation_analysis_with_Methyl-IT: Methylation_analysis_with_Methyl-IT.html
+  cancer_example: cancer_example.html
+  dmr_at_memory: dmr_at_memory.html
+  pca_lda_with_methylit: pca_lda_with_methylit.html
+  some_tips_for_methylit_r_scripts: some_tips_for_methylit_r_scripts.html
+last_built: 2021-11-04T17:37Z
 urls:
   reference: https://genomaths.github.io/methylit//reference
   article: https://genomaths.github.io/methylit//articles

@@ -49,6 +49,7 @@
 <meta property="og:title" content="Apply a function over a list-like object preserving its attributes — lapply" />
 <meta property="og:description" content="lapply returns a list of the same length as 'x', each element of
 which is the result of applying FUN to the corresponding element of 'x'." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -80,7 +81,7 @@ which is the result of applying FUN to the corresponding element of 'x'." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -88,7 +89,7 @@ which is the result of applying FUN to the corresponding element of 'x'." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +123,19 @@ which is the result of applying FUN to the corresponding element of 'x'." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -131,13 +144,13 @@ which is the result of applying FUN to the corresponding element of 'x'." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -167,10 +180,10 @@ which is the result of applying FUN to the corresponding element of 'x'." />
 which is the result of applying FUN to the corresponding element of 'x'.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lapply</span>(<span class='no'>x</span>, <span class='no'>FUN</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>lapply</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>FUN</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>lapply</span>(<span class='no'>x</span>, <span class='no'>FUN</span>, <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>lapply</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>FUN</span>, keep.attr <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,13 +214,15 @@ Otherwise same values preserving original attributes from 'x'.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Create a list</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>(-<span class='fl'>3</span>:<span class='fl'>3</span>), <span class='kw'>logic</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>,<span class='fl'>FALSE</span>,<span class='fl'>FALSE</span>,<span class='fl'>TRUE</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>x</span>) <span class='kw'>&lt;-</span> <span class='st'>'nice'</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, beta <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>, logic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>,<span class='cn'>FALSE</span>,<span class='cn'>FALSE</span>,<span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>'nice'</span>
 
 <span class='co'># compute the list mean for each list element using 'base::lapply'</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='fu'>lapply</span>(<span class='no'>x</span>, <span class='no'>mean</span>))</div><div class='output co'>#&gt; [1] "list"</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='fu'>lapply</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>mean</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "list"</div><div class='input'>
 <span class='co'># To preserve attributes</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='fu'>lapply</span>(<span class='no'>x</span>, <span class='no'>mean</span>, <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; [1] "nice"</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='fu'>lapply</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>mean</span>, keep.attr <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "nice"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -223,7 +238,7 @@ Otherwise same values preserving original attributes from 'x'.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

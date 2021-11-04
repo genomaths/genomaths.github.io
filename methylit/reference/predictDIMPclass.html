@@ -49,6 +49,7 @@
 <meta property="og:title" content="Predict DIMP class — predictDIMPclass" />
 <meta property="og:description" content="This function classify each DMP as a control or a treatment
 DMP" />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -80,7 +81,7 @@ DMP" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -88,7 +89,7 @@ DMP" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +123,19 @@ DMP" />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -131,13 +144,13 @@ DMP" />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -167,13 +180,13 @@ DMP" />
 DMP</p>
     </div>
 
-    <pre class="usage"><span class='fu'>predictDIMPclass</span>(
-  <span class='no'>LR</span>,
-  <span class='no'>model</span>,
-  <span class='kw'>conf.matrix</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>control.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>predictDIMPclass</span><span class='op'>(</span>
+  <span class='va'>LR</span>,
+  <span class='va'>model</span>,
+  conf.matrix <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  control.names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  treatment.names <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -235,23 +248,24 @@ same condition set for the DMPs used to build the model.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cutpoint</span>, <span class='no'>PS</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'MethylIT'</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>cutpoint</span>, <span class='va'>PS</span>, package <span class='op'>=</span> <span class='st'>'MethylIT'</span><span class='op'>)</span>
 
 <span class='co'>## DMPs are selected using the cupoints</span>
-<span class='no'>DMPs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='selectDIMP.html'>selectDIMP</a></span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>,
-<span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='fl'>0.92</span>)
+<span class='va'>DMPs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='selectDIMP.html'>selectDIMP</a></span><span class='op'>(</span><span class='va'>PS</span>, div.col <span class='op'>=</span> <span class='fl'>9L</span>, cutpoint <span class='op'>=</span> <span class='va'>cutpoint</span><span class='op'>$</span><span class='va'>cutpoint</span>,
+tv.cut <span class='op'>=</span> <span class='fl'>0.92</span><span class='op'>)</span>
 
 <span class='co'>## Classification of DMPs into two clases: DMPS from control and DMPs from</span>
 <span class='co'>## treatment samples and evaluation of the classifier performance (for more</span>
 <span class='co'>## details see ?evaluateDIMPclass).</span>
-<span class='no'>perf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>hdiv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>TV</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-<span class='kw'>wprob</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>classifier</span> <span class='kw'>=</span> <span class='st'>'lda'</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>4L</span>,
-<span class='kw'>control.names</span> <span class='kw'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>), <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>),
-<span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)
+<span class='va'>perf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></span><span class='op'>(</span>LR <span class='op'>=</span> <span class='va'>DMPs</span>, column <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>hdiv <span class='op'>=</span> <span class='cn'>TRUE</span>, TV <span class='op'>=</span> <span class='cn'>TRUE</span>,
+wprob <span class='op'>=</span> <span class='cn'>TRUE</span>, pos <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, classifier <span class='op'>=</span> <span class='st'>'lda'</span>, n.pc <span class='op'>=</span> <span class='fl'>4L</span>,
+control.names <span class='op'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span><span class='op'>)</span>, treatment.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span><span class='op'>)</span>,
+center <span class='op'>=</span> <span class='cn'>TRUE</span>, scale <span class='op'>=</span> <span class='cn'>TRUE</span>, prop <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span>
 
 <span class='co'>## Now predictions of DMP for control and treament can be obtained</span>
-<span class='no'>pred</span> <span class='kw'>=</span> <span class='fu'>predictDIMPclass</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>DMPs</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='no'>perf</span>$<span class='no'>model</span>, <span class='kw'>conf.matrix</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-<span class='kw'>control.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span>), <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span>))</div></pre>
+<span class='va'>pred</span> <span class='op'>=</span> <span class='fu'>predictDIMPclass</span><span class='op'>(</span>LR <span class='op'>=</span> <span class='va'>DMPs</span>, model <span class='op'>=</span> <span class='va'>perf</span><span class='op'>$</span><span class='va'>model</span>, conf.matrix <span class='op'>=</span> <span class='cn'>TRUE</span>,
+control.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'C1'</span>, <span class='st'>'C2'</span>, <span class='st'>'C3'</span><span class='op'>)</span>, treatment.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'T1'</span>, <span class='st'>'T2'</span>, <span class='st'>'T3'</span><span class='op'>)</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -267,7 +281,7 @@ same condition set for the DMPs used to build the model.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

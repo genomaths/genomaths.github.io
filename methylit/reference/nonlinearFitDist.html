@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -133,6 +133,10 @@
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -140,13 +144,13 @@
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -176,26 +180,26 @@
 'fitGGammaDist' to operate on list of GRanges.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nonlinearFitDist</span>(
-  <span class='no'>LR</span>,
-  <span class='kw'>column</span> <span class='kw'>=</span> <span class='fl'>9</span>,
-  <span class='kw'>dist.name</span> <span class='kw'>=</span> <span class='st'>"Weibull"</span>,
-  <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>location.par</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>absolute</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
-  <span class='kw'>maxiter</span> <span class='kw'>=</span> <span class='fl'>1024</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>ftol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>ptol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>minFactor</span> <span class='kw'>=</span> <span class='fl'>10</span>^-<span class='fl'>6</span>,
-  <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tasks</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>maxfev</span> <span class='kw'>=</span> <span class='fl'>1e+05</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>nonlinearFitDist</span><span class='op'>(</span>
+  <span class='va'>LR</span>,
+  column <span class='op'>=</span> <span class='fl'>9</span>,
+  dist.name <span class='op'>=</span> <span class='st'>"Weibull"</span>,
+  sample.size <span class='op'>=</span> <span class='fl'>20</span>,
+  location.par <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  absolute <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  npoints <span class='op'>=</span> <span class='cn'>NULL</span>,
+  model <span class='op'>=</span> <span class='st'>"all"</span>,
+  maxiter <span class='op'>=</span> <span class='fl'>1024</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  ftol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  ptol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  minFactor <span class='op'>=</span> <span class='fl'>10</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>6</span>,
+  num.cores <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tasks <span class='op'>=</span> <span class='fl'>0L</span>,
+  maxfev <span class='op'>=</span> <span class='fl'>1e+05</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -352,27 +356,42 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='gofReport.html'>gofReport</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Robersy Sanchez 01/31/2018 <a href='https://github.com/genomaths'>https://github.com/genomaths</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Load a dataset with Hellinger Divergence of methylation levels on it.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>HD</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>HD</span><span class='op'>)</span>
 
 <span class='co'>## The nonlinear fit based on three-parameter GGamma distribution</span>
-<span class='no'>nlms2</span> <span class='kw'>&lt;-</span> <span class='fu'>nonlinearFitDist</span>(<span class='no'>HD</span>, <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>dist.name</span> <span class='kw'>=</span> <span class='st'>'GGamma3P'</span>,
-                            <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in (function (k, dist.name, column, sample.size, npoints, maxiter,     tol, ftol, ptol, minFactor, verbose) {    if (verbose)         message("* Processing sample #", k, " ", sn[k])    x &lt;- LR[[k]]    x &lt;- mcols(x[, column])[, 1]    if (absolute)         x = abs(x)    x &lt;- x[x &gt; 0]    x &lt;- switch(dist.name, LogNorm = fitLogNormDist(x, sample.size = sample.size,         npoints = npoints, maxiter = maxiter, ftol = ftol, ptol = ptol,         verbose = verbose), Weibull = weibull3P(x, sample.size = sample.size,         model = model, npoints = npoints, maxiter = maxiter,         tol = tol, ftol = ftol, ptol = ptol, minFactor = minFactor,         verbose = verbose, ...), Weibull2P = weibull3P(x, sample.size = sample.size,         model = "2P", npoints = npoints, maxiter = maxiter, tol = tol,         ftol = ftol, ptol = ptol, minFactor = minFactor, verbose = verbose,         ...), Weibull3P = weibull3P(x, sample.size = sample.size,         model = "3P", npoints = npoints, maxiter = maxiter, tol = tol,         ftol = ftol, ptol = ptol, minFactor = minFactor, verbose = verbose,         ...), Gamma2P = fitGammaDist(x, location.par = FALSE,         sample.size = sample.size, npoints = npoints, maxiter = maxiter,         ftol = ftol, ptol = ptol, verbose = verbose, ...), Gamma3P = fitGammaDist(x,         location.par = TRUE, sample.size = sample.size, npoints = npoints,         maxiter = maxiter, ftol = ftol, ptol = ptol, verbose = verbose,         ...), GGamma3P = fitGGammaDist(x, location.par = FALSE,         sample.size = sample.size, npoints = npoints, maxiter = maxiter,         ftol = ftol, ptol = ptol, verbose = verbose, ...), GGamma4P = fitGGammaDist(x,         location.par = TRUE, sample.size = sample.size, npoints = npoints,         maxiter = maxiter, ftol = ftol, ptol = ptol, verbose = verbose,         ...))    if (dist.name == "GGamma4P" &amp;&amp; sum(is.na(x)) == 15) {        x &lt;- fitGGammaDist(x, location.par = FALSE, sample.size = sample.size,             npoints = npoints, maxiter = maxiter, ftol = ftol,             ptol = ptol, verbose = verbose)    }    x &lt;- structure(x, class = c("ProbDistr", "data.frame"))    return(x)})(dots[[1L]][[1L]], dots[[2L]][[1L]], sample.size = 20, columnn = 9,     npoints = 100, maxiter = 1024, tol = 1e-12, ftol = 1e-12,     ptol = 1e-12, minFactor = 1e-06, verbose = FALSE): unused argument (columnn = 9)</span></div><div class='input'>
+<span class='va'>nlms2</span> <span class='op'>&lt;-</span> <span class='fu'>nonlinearFitDist</span><span class='op'>(</span><span class='va'>HD</span>, npoints <span class='op'>=</span> <span class='fl'>100</span>, dist.name <span class='op'>=</span> <span class='st'>'GGamma3P'</span>,
+                            verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
 <span class='co'>## Weilbull distribution is a particular case of GGamma.</span>
-<span class='no'>nlms</span> <span class='kw'>&lt;-</span> <span class='fu'>nonlinearFitDist</span>(<span class='no'>HD</span>, <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in (function (k, dist.name, column, sample.size, npoints, maxiter,     tol, ftol, ptol, minFactor, verbose) {    if (verbose)         message("* Processing sample #", k, " ", sn[k])    x &lt;- LR[[k]]    x &lt;- mcols(x[, column])[, 1]    if (absolute)         x = abs(x)    x &lt;- x[x &gt; 0]    x &lt;- switch(dist.name, LogNorm = fitLogNormDist(x, sample.size = sample.size,         npoints = npoints, maxiter = maxiter, ftol = ftol, ptol = ptol,         verbose = verbose), Weibull = weibull3P(x, sample.size = sample.size,         model = model, npoints = npoints, maxiter = maxiter,         tol = tol, ftol = ftol, ptol = ptol, minFactor = minFactor,         verbose = verbose, ...), Weibull2P = weibull3P(x, sample.size = sample.size,         model = "2P", npoints = npoints, maxiter = maxiter, tol = tol,         ftol = ftol, ptol = ptol, minFactor = minFactor, verbose = verbose,         ...), Weibull3P = weibull3P(x, sample.size = sample.size,         model = "3P", npoints = npoints, maxiter = maxiter, tol = tol,         ftol = ftol, ptol = ptol, minFactor = minFactor, verbose = verbose,         ...), Gamma2P = fitGammaDist(x, location.par = FALSE,         sample.size = sample.size, npoints = npoints, maxiter = maxiter,         ftol = ftol, ptol = ptol, verbose = verbose, ...), Gamma3P = fitGammaDist(x,         location.par = TRUE, sample.size = sample.size, npoints = npoints,         maxiter = maxiter, ftol = ftol, ptol = ptol, verbose = verbose,         ...), GGamma3P = fitGGammaDist(x, location.par = FALSE,         sample.size = sample.size, npoints = npoints, maxiter = maxiter,         ftol = ftol, ptol = ptol, verbose = verbose, ...), GGamma4P = fitGGammaDist(x,         location.par = TRUE, sample.size = sample.size, npoints = npoints,         maxiter = maxiter, ftol = ftol, ptol = ptol, verbose = verbose,         ...))    if (dist.name == "GGamma4P" &amp;&amp; sum(is.na(x)) == 15) {        x &lt;- fitGGammaDist(x, location.par = FALSE, sample.size = sample.size,             npoints = npoints, maxiter = maxiter, ftol = ftol,             ptol = ptol, verbose = verbose)    }    x &lt;- structure(x, class = c("ProbDistr", "data.frame"))    return(x)})(dots[[1L]][[1L]], dots[[2L]][[1L]], sample.size = 20, columnn = 9,     npoints = 100, maxiter = 1024, tol = 1e-12, ftol = 1e-12,     ptol = 1e-12, minFactor = 1e-06, verbose = FALSE): unused argument (columnn = 9)</span></div><div class='input'>
+<span class='va'>nlms</span> <span class='op'>&lt;-</span> <span class='fu'>nonlinearFitDist</span><span class='op'>(</span><span class='va'>HD</span>, npoints <span class='op'>=</span> <span class='fl'>100</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
 <span class='co'>## The goodness-of-fit indicators AIC suggests that the best fitted model</span>
 <span class='co'>## is obtained with GGamma distribution (in this example).</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mapply.html'>mapply</a></span>(<span class='kw'>function</span>(<span class='no'>m1</span>,<span class='no'>m2</span>) <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Weibull</span> <span class='kw'>=</span> <span class='no'>m1</span>$<span class='no'>AIC</span>[<span class='fl'>1</span>],
-                                        <span class='kw'>GGamma</span> <span class='kw'>=</span> <span class='no'>m2</span>$<span class='no'>AIC</span>[<span class='fl'>1</span>])),
-                <span class='no'>nlms</span>, <span class='no'>nlms2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(quote(list(...)), env): object 'nlms' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>res</span>) <span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'Weibull'</span>, <span class='st'>'GGamma'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in rownames(res) &lt;- c("Weibull", "GGamma"): object 'res' not found</span></div><div class='input'><span class='no'>res</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'res' not found</span></div><div class='input'>
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mapply.html'>mapply</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>m1</span>,<span class='va'>m2</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>Weibull <span class='op'>=</span> <span class='va'>m1</span><span class='op'>$</span><span class='va'>AIC</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+                                        GGamma <span class='op'>=</span> <span class='va'>m2</span><span class='op'>$</span><span class='va'>AIC</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>,
+                <span class='va'>nlms</span>, <span class='va'>nlms2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'Weibull'</span>, <span class='st'>'GGamma'</span><span class='op'>)</span>
+<span class='va'>res</span>
+</div><div class='output co'>#&gt;                  C1         C2          C3         T1          T2         T3
+#&gt; Weibull   -968.0722   -534.137   -965.3126  -1034.894   -731.7831  -1198.036
+#&gt; GGamma  -43154.2477 -42389.188 -43379.7577 -59597.946 -60093.1154 -61543.191</div><div class='input'>
 <span class='co'>## However, the Cross-validations correlation coefficient is saying that</span>
 <span class='co'>## the Weibull distribution would be a little better probability</span>
 <span class='co'>## predictor.</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mapply.html'>mapply</a></span>(<span class='kw'>function</span>(<span class='no'>m1</span>,<span class='no'>m2</span>) <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Weibull</span> <span class='kw'>=</span> <span class='no'>m1</span>$<span class='no'>R.Cross.val</span>[<span class='fl'>1</span>],
-                                        <span class='kw'>GGamma</span> <span class='kw'>=</span> <span class='no'>m2</span>$<span class='no'>R.Cross.val</span>[<span class='fl'>1</span>])),
-                <span class='no'>nlms</span>, <span class='no'>nlms2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(quote(list(...)), env): object 'nlms' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>res</span>) <span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'Weibull'</span>, <span class='st'>'GGamma'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in rownames(res) &lt;- c("Weibull", "GGamma"): object 'res' not found</span></div><div class='input'><span class='no'>res</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'res' not found</span></div><div class='input'>
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mapply.html'>mapply</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>m1</span>,<span class='va'>m2</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>Weibull <span class='op'>=</span> <span class='va'>m1</span><span class='op'>$</span><span class='va'>R.Cross.val</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+                                        GGamma <span class='op'>=</span> <span class='va'>m2</span><span class='op'>$</span><span class='va'>R.Cross.val</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>,
+                <span class='va'>nlms</span>, <span class='va'>nlms2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'Weibull'</span>, <span class='st'>'GGamma'</span><span class='op'>)</span>
+<span class='va'>res</span>
+</div><div class='output co'>#&gt;                C1        C2       C3        T1       T2        T3
+#&gt; Weibull 0.9997274 0.9963795 0.999484 0.9996667 0.999662 0.9997284
+#&gt; GGamma  0.9995088 0.9993758 0.999450 0.9978965 0.999194 0.9996908</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -389,7 +408,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

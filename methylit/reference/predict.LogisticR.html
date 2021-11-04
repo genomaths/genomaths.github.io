@@ -49,6 +49,7 @@
 <meta property="og:title" content="Predict function for logistic regression model from 'LogisticR' class — predict.LogisticR" />
 <meta property="og:description" content="Predict using a logistic model obtained from the output of
 function evaluateDIMPclass." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -80,7 +81,7 @@ function evaluateDIMPclass." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -88,7 +89,7 @@ function evaluateDIMPclass." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +123,19 @@ function evaluateDIMPclass." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -131,13 +144,13 @@ function evaluateDIMPclass." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -168,14 +181,14 @@ function <code><a href='evaluateDIMPclass.html'>evaluateDIMPclass</a></code>.</p
     </div>
 
     <pre class="usage"><span class='co'># S3 method for LogisticR</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(
-  <span class='no'>object</span>,
-  <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"all"</span>, <span class='st'>"class"</span>, <span class='st'>"posterior"</span>),
-  <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>tasks</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  newdata <span class='op'>=</span> <span class='cn'>NULL</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"all"</span>, <span class='st'>"class"</span>, <span class='st'>"posterior"</span><span class='op'>)</span>,
+  num.cores <span class='op'>=</span> <span class='fl'>1L</span>,
+  tasks <span class='op'>=</span> <span class='fl'>0L</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,7 +256,7 @@ obtained with 'glm' regression can be used directly with function
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -49,6 +49,7 @@
 <meta property="og:title" content="Nonlinear fit of Weibull CDF — weibull3P" />
 <meta property="og:description" content="This function performs the nonlinear fit of Weibull CDF of a
 variable x" />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -80,7 +81,7 @@ variable x" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -88,7 +89,7 @@ variable x" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +123,19 @@ variable x" />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -131,13 +144,13 @@ variable x" />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -167,20 +180,20 @@ variable x" />
 variable x</p>
     </div>
 
-    <pre class="usage"><span class='fu'>weibull3P</span>(
-  <span class='no'>X</span>,
-  <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"all"</span>, <span class='st'>"2P"</span>, <span class='st'>"3P"</span>, <span class='st'>"Weibull2P"</span>, <span class='st'>"Weibull3P"</span>),
-  <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>maxiter</span> <span class='kw'>=</span> <span class='fl'>1024</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>ftol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>ptol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>minFactor</span> <span class='kw'>=</span> <span class='fl'>10</span>^-<span class='fl'>6</span>,
-  <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>weibull3P</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  sample.size <span class='op'>=</span> <span class='fl'>20</span>,
+  model <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"all"</span>, <span class='st'>"2P"</span>, <span class='st'>"3P"</span>, <span class='st'>"Weibull2P"</span>, <span class='st'>"Weibull3P"</span><span class='op'>)</span>,
+  npoints <span class='op'>=</span> <span class='cn'>NULL</span>,
+  maxiter <span class='op'>=</span> <span class='fl'>1024</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  ftol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  ptol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  minFactor <span class='op'>=</span> <span class='fl'>10</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>6</span>,
+  nlms <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -273,25 +286,22 @@ predictive power (1).</p>
 Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </ol>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Robersy Sanchez - 06/03/2016 <a href='https://github.com/genomaths'>https://github.com/genomaths</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>rweibull</a></span>(<span class='fl'>1000</span>, <span class='kw'>shape</span><span class='kw'>=</span><span class='fl'>0.75</span>, <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='fu'>weibull3P</span>(<span class='no'>x</span>, <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; *** Non-linear regression </div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 2P model...</span></div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 3P model ...</span></div><div class='output co'>#&gt; <span class='message'>*** Weibull-3P is the best fitted model</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model crossvalidation...</div><div class='output co'>#&gt;           Estimate   Std. Error    t value  Pr(&gt;|t|))      Adj.R.Square
-#&gt; shape 0.7875709036 0.0008195326  961.00004 0.00000000 0.999756984316194
-#&gt; scale 1.0573752165 0.0008042537 1314.72851 0.00000000                  
-#&gt; mu    0.0006391158 0.0002643323    2.41785 0.01579094                  
-#&gt;                     rho      R.Cross.val                DEV               AIC
-#&gt; shape 0.999755272941102 0.99987861274228 0.0202107436159564 -7963.41916636027
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>rweibull</a></span><span class='op'>(</span><span class='fl'>1000</span>, shape<span class='op'>=</span><span class='fl'>0.75</span>, scale<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'>weibull3P</span><span class='op'>(</span><span class='va'>x</span>, sample.size <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; *** Non-linear regression </div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 2P model...</span></div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit a Weibull 3P model ...</span></div><div class='output co'>#&gt; <span class='message'>*** Weibull-2P is the best fitted model</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model crossvalidation...</div><div class='output co'>#&gt;       Estimate   Std. Error  t value Pr(&gt;|t|))     Adj.R.Square
+#&gt; shape 0.785109 0.0007679116 1022.395         0 0.99966640648701
+#&gt; scale 0.998828 0.0008097601 1233.486         0                 
+#&gt;                     rho       R.Cross.val                DEV              AIC
+#&gt; shape 0.999664731148226 0.999833935051084 0.0277716043574934 -7647.6194188588
 #&gt; scale                                                                        
-#&gt; mu                                                                           
-#&gt;                     BIC     COV.shape     COV.scale        COV.mu    n
-#&gt; shape -7943.78814524434  6.716337e-07  4.069389e-08 -1.308231e-07 1000
-#&gt; scale                    4.069389e-08  6.468239e-07 -8.982951e-08 1000
-#&gt; mu                      -1.308231e-07 -8.982951e-08  6.987154e-08 1000
-#&gt;           model
-#&gt; shape Weibull3P
-#&gt; scale          
-#&gt; mu             </div><div class='input'>
+#&gt;                     BIC     COV.shape     COV.scale COV.mu    n     model
+#&gt; shape -7632.89615302185  5.896883e-07 -1.680416e-07     NA 1000 Weibull2P
+#&gt; scale                   -1.680416e-07  6.557115e-07     NA 1000          </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -308,7 +318,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

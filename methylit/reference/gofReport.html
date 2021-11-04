@@ -110,7 +110,7 @@ can ultimately lead to a post-hoc decision on which the best model is." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@ can ultimately lead to a post-hoc decision on which the best model is." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -162,6 +162,10 @@ can ultimately lead to a post-hoc decision on which the best model is." />
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -169,13 +173,13 @@ can ultimately lead to a post-hoc decision on which the best model is." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -234,18 +238,22 @@ estimated with functions <code><a href='estimateCutPoint.html'>estimateCutPoint<
 can ultimately lead to a post-hoc decision on which the best model is.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gofReport</span>(
-  <span class='no'>HD</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Weibull2P"</span>, <span class='st'>"Weibull3P"</span>, <span class='st'>"Gamma2P"</span>, <span class='st'>"Gamma3P"</span>),
-  <span class='kw'>column</span> <span class='kw'>=</span> <span class='fl'>9</span>,
-  <span class='kw'>absolute</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"best.model"</span>, <span class='st'>"all"</span>),
-  <span class='kw'>confl_model</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>gofReport</span><span class='op'>(</span>
+  <span class='va'>HD</span>,
+  model <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Weibull2P"</span>, <span class='st'>"Weibull3P"</span>, <span class='st'>"Gamma2P"</span>, <span class='st'>"Gamma3P"</span><span class='op'>)</span>,
+  column <span class='op'>=</span> <span class='fl'>9</span>,
+  absolute <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  output <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"best.model"</span>, <span class='st'>"all"</span><span class='op'>)</span>,
+  alt_models <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  r.cv <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  npoints <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num.cores <span class='op'>=</span> <span class='fl'>1L</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for ProbDistrList</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -282,10 +290,15 @@ returned in a list together with the best fitted model and the
 corresponding statistics. Default is 'best.model'</p></td>
     </tr>
     <tr>
-      <th>confl_model</th>
-      <td><p>Logic. If TRUE, then the best model based on highest
+      <th>alt_models</th>
+      <td><p>logical(1). If TRUE, then the best model based on highest
 R.Cross.val is returned for those samples where the model(s) with lowest
 AIC has not the highest R.Cross.val.</p></td>
+    </tr>
+    <tr>
+      <th>r.cv</th>
+      <td><p>logical(1). Whether to select the best model based on the highest
+R.Cross.val (2) (see details section).</p></td>
     </tr>
     <tr>
       <th>npoints</th>
@@ -305,6 +318,10 @@ at most how many child processes will be run simultaneously (see
       <th>...</th>
       <td><p>Further arguments to pass to <code><a href='nonlinearFitDist.html'>nonlinearFitDist</a></code>.</p></td>
     </tr>
+    <tr>
+      <th>x</th>
+      <td><p>An object from 'ProbDistrList' class</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -314,16 +331,19 @@ best fitted model for each sample and model statistics, which can be used the
 next step to get the potential DMPs with function
 <code><a href='getPotentialDIMP.html'>getPotentialDIMP</a></code>. Otherwise, it will return a list with the
 table carrying the GoF values and the previously mentioned data.</p>
-<p>The best model selection is based on the lowest AIC. However, if 'confl_model
-= TRUE', then the returned list will contain a sublist named 'confl_model'
-with the best model selected based on the highest R.Cross.val. This sublist
-is returned only if at least there is one sample where the model with the
-lowest AIC has not the highest R.Cross.val. This report is useful to analyze
-any conflict between models. For example, some times the best model selected
+<p>The best model selection is based on the lowest AIC. However, if
+\(alt_models = TRUE\) and \(r.cv = FALSE\), then the returned list will
+contain two sublists named 'alt_models'  and 'alt_nlms' with the best model
+selected based on the highest R.Cross.val. If \(r.cv = TRUE\), best model
+selection is based on the highest R.Cross.val and sublist named 'alt_models'
+will carry the model selected based on the lowest AIC. This sublist is
+returned only if at least there is one sample where the model with the lowest
+AIC has not the highest R.Cross.val. This report is useful to analyze any
+conflict between models. For example, some times the best model selected
 based on AIC has a R.Cross.val = 0.99945, while the highest R.Cross.val is
 0.99950. In such a situation the model with lowest AIC is still fine.
 However, some times the model with the best AIC has some meaningless
-parameter value. For example,  scale = 0.0000000001 in 'GGamma3P' or in
+parameter value. For example, scale = 0.0000000001 in 'GGamma3P' or in
 'Weibull2P' models. This last situation can result from the numerical
 algorithm used in the parameter estimation. The numerical algorithms for
 nonlinear fit estimation are not perfect!</p>
@@ -346,37 +366,46 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='nonlinearFitDist.html'>nonlinearFitDist</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Robersy Sanchez 11/25/2019 <a href='https://github.com/genomaths'>https://github.com/genomaths</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Loading information divergence dataset</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>HD</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>HD</span><span class='op'>)</span>
 
 <span class='co'>## Subsetting object HD (for the sake of runnig a faster example)</span>
-<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lapply.html'>lapply</a></span>(<span class='no'>HD</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>100</span>)], <span class='kw'>keep.attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='va'>hd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>HD</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='va'>x</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span><span class='op'>]</span>, keep.attr <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'>## The GoF report</span>
-<span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>gofReport</span>(<span class='no'>hd</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
+<span class='va'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>gofReport</span><span class='op'>(</span><span class='va'>hd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
 #&gt; 
 #&gt;  *** Creating report ... </div><div class='output co'>#&gt; <span class='warning'>Warning: </span>
-#&gt; <span class='warning'> The best fitted model for sample(s) C2, T1, T3 require(s) for further analysis. </span>
+#&gt; <span class='warning'> The best fitted model for sample(s) C2 require(s) for further analysis. </span>
 #&gt; <span class='warning'>The model with the lowest AIC must have the highest R.Cross.val</span></div><div class='output co'>#&gt;      w2p_AIC w2p_R.Cross.val   w3p_AIC w3p_R.Cross.val   g2p_AIC
-#&gt; C1 -444.0596       0.9962152        NA              NA -441.8100
-#&gt; C2 -405.1273       0.9943017 -403.8039       0.9945712 -390.5325
-#&gt; C3 -491.5722       0.9978540        NA              NA -511.8597
-#&gt; T1 -479.9242       0.9973436 -484.5159       0.9971339 -448.9372
-#&gt; T2 -470.1731       0.9969376        NA              NA -473.6997
-#&gt; T3 -531.2913       0.9983133 -524.4815       0.9982653 -504.9354
+#&gt; C1 -444.9345       0.9963494        NA              NA -442.7779
+#&gt; C2 -404.4685       0.9942247 -402.6029       0.9940469 -390.2555
+#&gt; C3 -491.5246       0.9978235        NA              NA -512.3279
+#&gt; T1 -482.0144       0.9973647 -487.2492       0.9973930 -450.5389
+#&gt; T2 -469.6186       0.9969509        NA              NA -473.5559
+#&gt; T3 -529.6873       0.9983691 -523.4597       0.9983520 -503.6232
 #&gt;    g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val      bestModel
-#&gt; C1       0.9960348       Inf       0.0000000            w2p
-#&gt; C2       0.9940991 -387.5697       0.9942472 Needs revision
-#&gt; C3       0.9981279       Inf       0.0000000            g2p
-#&gt; T1       0.9966225 -474.4274       0.9971180 Needs revision
-#&gt; T2       0.9972262       Inf       0.0000000            g2p
-#&gt; T3       0.9979546 -524.5915       0.9983985 Needs revision
+#&gt; C1       0.9960281       Inf       0.0000000            w2p
+#&gt; C2       0.9940825 -387.3422       0.9942271 Needs revision
+#&gt; C3       0.9981350       Inf       0.0000000            g2p
+#&gt; T1       0.9966888 -477.7403       0.9972774            w3p
+#&gt; T2       0.9972196       Inf       0.0000000            g2p
+#&gt; T3       0.9979191 -513.8786       0.9981566            w2p
 #&gt; </div><div class='input'>
-<span class='co'>## To get the potential DMPs</span>
-<span class='no'>ps_dmp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='getPotentialDIMP.html'>getPotentialDIMP</a></span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>hd</span>, <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>nlms</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>,
-                            <span class='kw'>dist.name</span> <span class='kw'>=</span> <span class='no'>dt</span>$<span class='no'>bestModel</span>)</div></pre>
+<span class='co'>## Report the model where AIC and R.Cross.val are in conflict.</span>
+<span class='va'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>gofReport</span><span class='op'>(</span>HD <span class='op'>=</span> <span class='va'>hd</span>, output <span class='op'>=</span> <span class='st'>"all"</span>, alt_models <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
+#&gt; 
+#&gt;  *** Creating report ... </div><div class='output co'>#&gt; <span class='warning'>Warning: </span>
+#&gt; <span class='warning'> The best fitted model for sample(s) T3 require(s) for further analysis. </span>
+#&gt; <span class='warning'>The model with the lowest AIC must have the highest R.Cross.val</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -392,7 +421,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

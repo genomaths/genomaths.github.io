@@ -54,6 +54,7 @@ variables provided as input data. Next, the individual coordinates in
 the selected PCs are used as predictors in the logistic regression.
 Logistic regression using Principal Components from PCA as
 predictor variables" />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -85,7 +86,7 @@ predictor variables" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -93,7 +94,7 @@ predictor variables" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,7 +128,19 @@ predictor variables" />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -136,13 +149,13 @@ predictor variables" />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -176,30 +189,32 @@ the selected PCs are used as predictors in the logistic regression.</p>
 predictor variables</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pcaLogisticR</span>(
-  <span class='kw'>formula</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
-  <span class='kw'>max.pc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)
+    <pre class="usage"><span class='fu'>pcaLogisticR</span><span class='op'>(</span>
+  formula <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  n.pc <span class='op'>=</span> <span class='fl'>1</span>,
+  scale <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-04</span>,
+  max.pc <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for pcaLogisticR</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(
-  <span class='no'>object</span>,
-  <span class='no'>newdata</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"class"</span>, <span class='st'>"posterior"</span>, <span class='st'>"pca.ind.coord"</span>, <span class='st'>"all"</span>),
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>newdata</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"class"</span>, <span class='st'>"posterior"</span>, <span class='st'>"pca.ind.coord"</span>, <span class='st'>"all"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>formula</th>
-      <td><p>Same as in 'glm' from package 'stats'.</p></td>
+      <td><p>Same as in 'glm' from package 'stats'. One term carrying
+interaction between two variables can be introduced (with notation as
+indicated in <code><a href='https://rdrr.io/r/stats/formula.html'>formula</a></code> function).</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -255,22 +270,19 @@ Each element of this list can be requested independently using parameter
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<pre>Function 'pcaLogisticR' returns an object ('pcaLogisticR' class)
-containing a list of two objects:
-\enumerate{
-    \item 'logistic': an object of class 'glm' from package 'stats'.
-    \item 'pca': an object of class 'prcomp' from package 'stats'.
-    \item reference.level: response level used as reference.
-    \item positive.level: response level that corresponds to a 'positive'
-        result. When type = 'response', the probability vector returned
-        correspond to the probabilities of each individual to be a
-        result, i.e., the probability to belong to the class of positive
-        level.
-}
-For information on how to use these objects see ?glm and ?prcomp.
-</pre>
+    <p>Function 'pcaLogisticR' returns an object ('pcaLogisticR' class)
+containing a list of two objects:</p><ol>
+<li><p>'logistic': an object of class 'glm' from package 'stats'.</p></li>
+<li><p>'pca': an object of class 'prcomp' from package 'stats'.</p></li>
+<li><p>reference.level: response level used as reference.</p></li>
+<li><p>positive.level: response level that corresponds to a 'positive'
+result. When type = 'response', the probability vector returned
+correspond to the probabilities of each individual to be a
+result, i.e., the probability to belong to the class of positive
+level.</p></li>
+</ol>
 
+<p>For information on how to use these objects see ?glm and ?prcomp.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The principal components (PCs) are obtained using the function
@@ -281,16 +293,18 @@ mentioned functions. As shown in the example, 'pcaLogisticR' function
 can be used in general classification problems.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>[ <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>!=</span> <span class='st'>'virginica'</span>, ]
-<span class='no'>data</span>$<span class='no'>Species</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/droplevels.html'>droplevels</a></span>(<span class='no'>data</span>$<span class='no'>Species</span>)
-<span class='no'>formula</span> <span class='kw'>&lt;-</span> <span class='no'>Species</span> ~ <span class='no'>Petal.Length</span> + <span class='no'>Sepal.Length</span> + <span class='no'>Petal.Width</span>
-<span class='no'>pca.logistic</span> <span class='kw'>&lt;-</span> <span class='fu'>pcaLogisticR</span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>formula</span>,
-                            <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data</span>, <span class='kw'>n.pc</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                            <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max.pc</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
-<span class='no'>newdata</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>150</span>, <span class='fl'>40</span>), <span class='fl'>1</span>:<span class='fl'>4</span>]
-<span class='no'>newdata.prediction</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>pca.logistic</span>, <span class='no'>newdata</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'all'</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span> <span class='op'>!=</span> <span class='st'>'virginica'</span>, <span class='op'>]</span>
+<span class='va'>data</span><span class='op'>$</span><span class='va'>Species</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/droplevels.html'>droplevels</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span>
+<span class='va'>formula</span> <span class='op'>&lt;-</span> <span class='va'>Species</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='va'>Sepal.Length</span> <span class='op'>+</span> <span class='va'>Petal.Width</span>
+<span class='va'>pca.logistic</span> <span class='op'>&lt;-</span> <span class='fu'>pcaLogisticR</span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>formula</span>,
+                            data <span class='op'>=</span> <span class='va'>data</span>, n.pc <span class='op'>=</span> <span class='fl'>2</span>, scale <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                            center <span class='op'>=</span> <span class='cn'>TRUE</span>, max.pc <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
+<span class='va'>newdata</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span><span class='op'>(</span><span class='fl'>150</span>, <span class='fl'>40</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>
+<span class='va'>newdata.prediction</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>pca.logistic</span>, <span class='va'>newdata</span>, type <span class='op'>=</span> <span class='st'>'all'</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -306,7 +320,7 @@ can be used in general classification problems.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

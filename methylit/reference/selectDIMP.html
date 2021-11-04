@@ -51,6 +51,7 @@
 estimateCutPoint), 'selectDIMP' will return the differentially
 informative methylated positions (DMPs). DMPs are cytosine positions
 for which the divergence is greater than the cutpoint." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -82,7 +83,7 @@ for which the divergence is greater than the cutpoint." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -90,7 +91,7 @@ for which the divergence is greater than the cutpoint." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +125,19 @@ for which the divergence is greater than the cutpoint." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -133,13 +146,13 @@ for which the divergence is greater than the cutpoint." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -171,15 +184,24 @@ informative methylated positions (DMPs). DMPs are cytosine positions
 for which the divergence is greater than the cutpoint.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>selectDIMP</span>(
-  <span class='no'>LR</span>,
-  <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pval.col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>absolute</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>cutpoint</span>,
-  <span class='kw'>tv.col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>selectDIMP</span><span class='op'>(</span>
+  <span class='va'>LR</span>,
+  div.col <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pval.col <span class='op'>=</span> <span class='cn'>NULL</span>,
+  absolute <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>cutpoint</span>,
+  tv.col <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tv.cut <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for InfDiv</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for pDMP</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for testDMP</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,6 +247,10 @@ cytosine positions (if provided).</p></td>
       <td><p>If tv.cut and tv.col are provided, then cytosine sites \(k\)
 with \(|TV| &lt; tv.cut\) are removed.</p></td>
     </tr>
+    <tr>
+      <th>x</th>
+      <td><p>An object from 'pDMP_OR_InfDiv' class</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -255,11 +281,13 @@ circumstances where the uncertainty of methylation is present.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Get a dataset of potential signals and the estimated cutpoint from the</span>
 <span class='co'>## package</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PS</span>, <span class='no'>cutpoint</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PS</span>, <span class='va'>cutpoint</span><span class='op'>)</span>
 
 <span class='co'>## The estimated cutpoints are used to discriminate signals from the noise.</span>
 <span class='co'>## That is, DMPs are selected using the cupoints</span>
-<span class='no'>DMPs</span> <span class='kw'>&lt;-</span> <span class='fu'>selectDIMP</span>(<span class='no'>PS</span>, <span class='kw'>div.col</span> <span class='kw'>=</span> <span class='fl'>9L</span>, <span class='kw'>cutpoint</span> <span class='kw'>=</span> <span class='no'>cutpoint</span>$<span class='no'>cutpoint</span>)</div></pre>
+<span class='va'>DMPs</span> <span class='op'>&lt;-</span> <span class='fu'>selectDIMP</span><span class='op'>(</span><span class='va'>PS</span>, div.col <span class='op'>=</span> <span class='fl'>9L</span>, cutpoint <span class='op'>=</span> <span class='va'>cutpoint</span><span class='op'>$</span><span class='va'>cutpoint</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -275,7 +303,7 @@ circumstances where the uncertainty of methylation is present.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

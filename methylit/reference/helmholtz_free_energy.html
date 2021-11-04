@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • MethylIT</title>
+<title>Helmholtz Free Energy of Generalized Gamma Distribution — helmholtz_free_energy • MethylIT</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,20 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Helmholtz Free Energy of Generalized Gamma Distribution — helmholtz_free_energy" />
+<meta property="og:description" content="This function computes the Helmholtz Free Energy (HFE) for
+member of the Generalized Gamma (GG) Distribution family. The Helmholtz free
+energy  represents the driving force for NVT systems, the thermodynamic
+potential that measures the “useful” work obtainable from a closed
+thermodynamic system at a constant temperature and volume.
+GG density is given as:
+\(exp(-y^\alpha)*\alpha*y^(\alpha*\delta - 1)/(scale*\gamma(\delta))\)
+(see (Wikipedia))
+A list of the member of the GG distribution family with the corresponding
+parameter settings is provided in Table 1 from reference (1). For example, to
+compute the HFE of a Weibull distribution model, we just set: \(alpha &amp;gt; 0\)
+and \(delta = 1\) (notice that parameter are named different in reference
+(1))." />
 <meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
@@ -66,7 +79,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -168,96 +181,93 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/genomaths/MethylIT/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Helmholtz Free Energy of Generalized Gamma Distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/genomaths/MethylIT/blob/master/R/helmholtz_free_energy.R'><code>R/helmholtz_free_energy.R</code></a></small>
+    <div class="hidden name"><code>helmholtz_free_energy.Rd</code></div>
     </div>
 
-    <div id="methylit-0323" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.2.3">
-<a href="#methylit-0323" class="anchor"></a>MethylIT 0.3.2.3</h1>
-<ul>
-<li>Current version</li>
-<li>Actively used in methylome analysis</li>
-<li>In development
-<ul>
-<li>11-04-21:<br>
-1) Upgrading corresponding to R version 4.1.1.<br>
-- Improvement of parallel computation - Improvement on some non-linear algorithms.</li>
-</ul>
-</li>
-</ul>
-</div>
-    <div id="methylit-0322" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.2.2">
-<a href="#methylit-0322" class="anchor"></a>MethylIT 0.3.2.2</h1>
-<ul>
-<li>Actively used in methylome analysis</li>
-<li>In development
-<ul>
-<li>07-14-21:<br>
-1) Upgrading corresponding to R version 4.1.0.<br>
-- Prevent potential crash originated by changes in some R packages internally used by Methyl-IT.<br>
-- <em>J-Divergence</em> is now available in <em>estimateCutPoint</em> function</li>
-</ul>
-</li>
-</ul>
-</div>
-    <div id="methylit-0321" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.2.1">
-<a href="#methylit-0321" class="anchor"></a>MethylIT 0.3.2.1</h1>
-<ul>
-<li>Actively used in methylome analysis</li>
-<li>In development
-<ul>
-<li>06-09-20:<br>
-1) Upgrading corresponding to R version 4.0.0.<br>
-- Prevent potential crash originated by changes in some R packages internally used by Methyl-IT.</li>
-</ul>
-</li>
-</ul>
-</div>
-    <div id="methylit-032" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.2">
-<a href="#methylit-032" class="anchor"></a>MethylIT 0.3.2</h1>
-<ul>
-<li>04-17-20:<br>
-1) A new vignette added:<br>
-- DMR detection with Methyl-IT</li>
-<li>03-08-20:<br>
-1) Two new vignette added:<br>
-- Principal Components and Linear Discriminant Analyses with Methyl-IT<br>
-- Association Between Gene Expression and Cytosine DNA Methylation at gene-body<br>
-</li>
-<li>03-23-20:<br>
-1) Update documentation and code style reformatted</li>
-</ul>
-<div id="new-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
-<ul>
-<li><p>Improvement of the ‘<em>countTest</em>’ function applied for DMG identification. The new version was named ‘<em>countTest2</em>’</p></li>
-<li><p>Added function ‘gofReport’ search for the best fitted model between the set of models requested by the user.</p></li>
-<li><p>The functions using machine-learning algorithms were improved</p></li>
-<li><p>The documentation was notably improved</p></li>
-</ul>
-</div>
-</div>
-    <div id="methylit-031" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.1">
-<a href="#methylit-031" class="anchor"></a>MethylIT 0.3.1</h1>
-<ul>
-<li>Available at <a href="https://git.psu.edu/genomath/MethylIT" class="uri">https://git.psu.edu/genomath/MethylIT</a>
-</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>This function computes the Helmholtz Free Energy (HFE) for
+member of the Generalized Gamma (GG) Distribution family. The Helmholtz free
+energy  represents the driving force for NVT systems, the thermodynamic
+potential that measures the “useful” work obtainable from a closed
+thermodynamic system at a constant temperature and volume.</p>
+<p>GG density is given as:</p>
+<p>\(exp(-y^\alpha)*\alpha*y^(\alpha*\delta - 1)/(scale*\gamma(\delta))\)</p>
+<p>(see <a href='https://goo.gl/1n4kpW'>(Wikipedia)</a>)</p>
+<p>A list of the member of the GG distribution family with the corresponding
+parameter settings is provided in Table 1 from reference (1). For example, to
+compute the HFE of a Weibull distribution model, we just set: \(alpha &gt; 0\)
+and \(delta = 1\) (notice that parameter are named different in reference
+(1)).</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>helmholtz_free_energy</span><span class='op'>(</span><span class='va'>model</span>, R <span class='op'>=</span> <span class='fl'>8.31446261815324</span>, T.abs <span class='op'>=</span> <span class='fl'>310.15</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for missingORNULL</span>
+<span class='fu'>helmholtz_free_energy</span><span class='op'>(</span><span class='va'>model</span>, R <span class='op'>=</span> <span class='fl'>8.31446261815324</span>, T.abs <span class='op'>=</span> <span class='fl'>310.15</span>, <span class='va'>pars</span><span class='op'>)</span>
+
+<span class='co'># S4 method for cdfMODEL</span>
+<span class='fu'>helmholtz_free_energy</span><span class='op'>(</span><span class='va'>model</span>, R <span class='op'>=</span> <span class='fl'>8.31446261815324</span>, T.abs <span class='op'>=</span> <span class='fl'>310.15</span><span class='op'>)</span>
+
+<span class='co'># S4 method for cdfMODELlist</span>
+<span class='fu'>helmholtz_free_energy</span><span class='op'>(</span><span class='va'>model</span>, R <span class='op'>=</span> <span class='fl'>8.31446261815324</span>, T.abs <span class='op'>=</span> <span class='fl'>310.15</span><span class='op'>)</span>
+
+<span class='co'># S4 method for ProbDistrList</span>
+<span class='fu'>helmholtz_free_energy</span><span class='op'>(</span><span class='va'>model</span>, R <span class='op'>=</span> <span class='fl'>8.31446261815324</span>, T.abs <span class='op'>=</span> <span class='fl'>310.15</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>model</th>
+      <td><p>An object from any of the classes created in MethylIT
+pipeline: <strong><em>cdfMODEL</em></strong>, <em><strong>cdfMODELlist</strong></em>, or
+<em><strong>ProbDistrList</strong></em>. If given, then the parameter values are taken
+from the model.</p></td>
+    </tr>
+    <tr>
+      <th>R</th>
+      <td><p>A number or NULL. The gas constant is given as default values,
+which is proportionality constant that relates the energy scale in physics
+to the temperature scale and the scale used for amount of substance.</p></td>
+    </tr>
+    <tr>
+      <th>T.abs</th>
+      <td><p>Absolute temperature (in Kelvin units). Default is
+T.abs = 310.15.</p></td>
+    </tr>
+    <tr>
+      <th>pars</th>
+      <td><p>Optional. A numerical vector containing the model parameter
+values in the given in order: <strong><em>alpha, scale</em></strong>, and
+<strong><em>delta</em></strong>.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Helmholtz free energy of system according to the model.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The value of the constant R can be simply 1, which implies no
+physical interpretation, only carrying informational meaning, i.e.,
+only meaningful in the framework of information theory.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    
+<ol>
+<li><p>Crooks, Gavin E. (2015) The Amoroso Distribution.
+<a href='https://arxiv.org/pdf/1005.3274.pdf'>arXiv:1005.3274v2</a>.</p></li>
+</ol>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

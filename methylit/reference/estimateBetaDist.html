@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select the beta distribution that fit specified quantiles — .estimateBetaDist • MethylIT</title>
+<title>Select the beta distribution that fit specified quantiles — estimateBetaDist • MethylIT</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,10 @@
 
 
 
-<meta property="og:title" content="Select the beta distribution that fit specified quantiles — .estimateBetaDist" />
-<meta property="og:description" content="This function perform a rough estimation of the shape
+<meta property="og:title" content="Select the beta distribution that fit specified quantiles — estimateBetaDist" />
+<meta property="og:description" content="This function perform a nonlinear estimation of the shape
 parameters of beta distribution" />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -80,7 +81,7 @@ parameters of beta distribution" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -88,7 +89,7 @@ parameters of beta distribution" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +123,19 @@ parameters of beta distribution" />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -131,13 +144,13 @@ parameters of beta distribution" />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -163,11 +176,19 @@ parameters of beta distribution" />
     </div>
 
     <div class="ref-description">
-    <p>This function perform a rough estimation of the shape
+    <p>This function perform a nonlinear estimation of the shape
 parameters of beta distribution</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.estimateBetaDist</span>(<span class='no'>q</span>, <span class='kw'>init.pars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>))</pre>
+    <pre class="usage"><span class='fu'>estimateBetaDist</span><span class='op'>(</span>
+  <span class='va'>q</span>,
+  init.pars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  loss.fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"linear"</span>, <span class='st'>"huber"</span>, <span class='st'>"smooth"</span>, <span class='st'>"cauchy"</span>, <span class='st'>"arctg"</span><span class='op'>)</span>,
+  maxiter <span class='op'>=</span> <span class='fl'>1024</span>,
+  maxfev <span class='op'>=</span> <span class='fl'>1e+05</span>,
+  ftol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  ptol <span class='op'>=</span> <span class='fl'>1e-12</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,8 +199,30 @@ parameters of beta distribution</p>
     </tr>
     <tr>
       <th>init.pars</th>
-      <td><p>initial parameter values. Defaults to alpha = 1 &amp;
-beta = 1, which imply the parsimony pseudo-counts greater than zero.</p></td>
+      <td><p>initial parameter values. Defaults is NULL and an initial
+guess is estimated using <code><a href='https://rdrr.io/pkg/minpack.lm/man/nls.lm.html'>nls.lm</a></code> function.</p></td>
+    </tr>
+    <tr>
+      <th>loss.fun</th>
+      <td><p>Loss function(s) used in the regression (see
+<a href='https://en.wikipedia.org/wiki/Loss_function'>(Loss function)</a>). This
+fitting uses the approach followed in in the R package
+<a href='https://github.com/genomaths/usefr'>usefr</a>. After
+\(z =  1/2 * sum((f(x) - y)^2)\) we have:</p><ol>
+<li><p>"linear": linear function which gives a standard least squares:
+\(loss(z) = z\).</p></li>
+<li><p>"huber": Huber loss, \(loss(z) = ifelse(z &lt;= 1, z, sqrt(z) -1)\).</p></li>
+<li><p>"smooth": Smooth approximation to the sum of residues absolute
+values: \(loss(z) = 2*(sqrt(z + 1) - 1)\).</p></li>
+<li><p>"cauchy": Cauchy loss: \(loss(z) = log(z + 1)\).</p></li>
+<li><p>"arctg": arc-tangent loss function: \(loss(x) = atan(z)\).</p></li>
+</ol></td>
+    </tr>
+    <tr>
+      <th>maxiter, ftol, ptol, maxfev</th>
+      <td><p>Optional parameters for
+<code><a href='https://rdrr.io/pkg/minpack.lm/man/nlsLM.html'>nlsLM</a></code> and <code><a href='https://rdrr.io/pkg/minpack.lm/man/nls.lm.html'>nls.lm</a></code>
+functions.</p></td>
     </tr>
     </table>
 
@@ -189,12 +232,25 @@ beta = 1, which imply the parsimony pseudo-counts greater than zero.</p></td>
 distribution.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>In order to obtain the estimates for shape parameters of beta
-distribution, the squared of the difference between the empirical
-cumulative distribution function (ecdf) &amp; the theoretical cdf is
-minimized using the Non-Linear Minimization function of 'stats'
-package.</p>
+    <p>To obtain the estimates for shape parameters from the best fitted
+beta distribution model, a nonlinear regression Levenberg-Marquardt algorithm
+implemented in function <code><a href='https://rdrr.io/pkg/minpack.lm/man/nls.lm.html'>nls.lm</a></code> is applied. Several
+<a href='https://en.wikipedia.org/wiki/Loss_function'>(loss functions)</a>) are
+available to accomplish the model fitting to the data. If
+<code><a href='https://rdrr.io/pkg/minpack.lm/man/nls.lm.html'>nls.lm</a></code> function fails, then a new try will be
+accomplish with <code><a href='https://rdrr.io/pkg/minpack.lm/man/nlsLM.html'>nlsLM</a></code> function. If the previous
+algorithms fail, then the parameters will be estimated using BFGS" algorithm
+implemented in <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> function.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## ------ A simple example -----</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='va'>br</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span><span class='op'>(</span><span class='fl'>1e3</span>, shape1 <span class='op'>=</span> <span class='fl'>1</span>, shape2 <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>pars</span> <span class='op'>&lt;-</span> <span class='fu'>estimateBetaDist</span><span class='op'>(</span><span class='va'>br</span><span class='op'>)</span>
+<span class='va'>pars</span>
+</div><div class='output co'>#&gt;   shape1   shape2 
+#&gt; 1.066867 2.078225 </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -210,7 +266,7 @@ package.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

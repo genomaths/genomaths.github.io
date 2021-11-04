@@ -52,6 +52,7 @@
 (GG) distribution with 3 or 4 parameters: alpha, scale, mu, and psi. The
 function is reduced to GGamma distribution with 3 parameters by setting
 mu = 0." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -83,7 +84,7 @@ mu = 0." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -91,7 +92,7 @@ mu = 0." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -125,7 +126,19 @@ mu = 0." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -134,13 +147,13 @@ mu = 0." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -173,29 +186,29 @@ function is reduced to GGamma distribution with 3 parameters by setting
 mu = 0.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dggamma</span>(<span class='no'>q</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dggamma</span><span class='op'>(</span><span class='va'>q</span>, alpha <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, mu <span class='op'>=</span> <span class='fl'>0</span>, psi <span class='op'>=</span> <span class='fl'>1</span>, log.p <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>pggamma</span>(
-  <span class='no'>q</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+<span class='fu'>pggamma</span><span class='op'>(</span>
+  <span class='va'>q</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span>,
+  scale <span class='op'>=</span> <span class='fl'>1</span>,
+  mu <span class='op'>=</span> <span class='fl'>0</span>,
+  psi <span class='op'>=</span> <span class='fl'>1</span>,
+  lower.tail <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  log.p <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
-<span class='fu'>qggamma</span>(
-  <span class='no'>p</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+<span class='fu'>qggamma</span><span class='op'>(</span>
+  <span class='va'>p</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span>,
+  scale <span class='op'>=</span> <span class='fl'>1</span>,
+  mu <span class='op'>=</span> <span class='fl'>0</span>,
+  psi <span class='op'>=</span> <span class='fl'>1</span>,
+  lower.tail <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  log.p <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
-<span class='fu'>rggamma</span>(<span class='no'>n</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+<span class='fu'>rggamma</span><span class='op'>(</span><span class='va'>n</span>, alpha <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, mu <span class='op'>=</span> <span class='fl'>0</span>, psi <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -274,29 +287,31 @@ Methylation. PLoS One 11, e0150427 (2016).</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>q</span> <span class='kw'>&lt;-</span> (<span class='fl'>1</span>:<span class='fl'>9</span>)/<span class='fl'>10</span>
-<span class='fu'>pggamma</span>(<span class='no'>q</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-        <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] 0.09516258 0.18126925 0.25918178 0.32967995 0.39346934 0.45118836 0.50341470
+    <pre class="examples"><div class='input'><span class='va'>q</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span>
+<span class='fu'>pggamma</span><span class='op'>(</span><span class='va'>q</span>, alpha <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, mu <span class='op'>=</span> <span class='fl'>0</span>,
+        psi <span class='op'>=</span> <span class='fl'>1</span>, lower.tail <span class='op'>=</span> <span class='cn'>TRUE</span>, log.p <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.09516258 0.18126925 0.25918178 0.32967995 0.39346934 0.45118836 0.50341470
 #&gt; [8] 0.55067104 0.59343034</div><div class='input'>
 <span class='co'>## To fit random generated numbers</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rggamma</span>(<span class='fl'>2000</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1.03</span>, <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>2.1</span>)
-<span class='fu'><a href='fitGGammaDist.html'>fitGGammaDist</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 3P Gamma distribution model  values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
-#&gt; alpha 0.9673236 0.004522499 213.8914         0 0.999999987853079
-#&gt; scale 1.9144838 0.014958723 127.9844         0                  
-#&gt; psi   0.8336444 0.005740757 145.2151         0                  
-#&gt;                     rho       R.Cross.val                  DEV              AIC
-#&gt; alpha 0.999999987810436 0.999883699261168 2.02246091083126e-06 -16008.797746206
-#&gt; scale                                                                          
-#&gt; psi                                                                            
-#&gt;                     BIC     COV.alpha     COV.scale       COV.psi COV.mu    N
-#&gt; alpha -15986.3941363678  2.045299e-05  6.688155e-05 -2.580564e-05     NA 2000
-#&gt; scale                    6.688155e-05  2.237634e-04 -8.574600e-05     NA 2000
-#&gt; psi                     -2.580564e-05 -8.574600e-05  3.295629e-05     NA 2000
-#&gt;          model
-#&gt; alpha GGamma3P
-#&gt; scale         
-#&gt; psi           </div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>rggamma</span><span class='op'>(</span><span class='fl'>2000</span>, alpha <span class='op'>=</span> <span class='fl'>1.03</span>, psi <span class='op'>=</span> <span class='fl'>0.75</span>, scale <span class='op'>=</span> <span class='fl'>2.1</span><span class='op'>)</span>
+<span class='fu'><a href='fitGGammaDist.html'>fitGGammaDist</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 3P Gamma distribution model 2000 values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
+#&gt; alpha 0.9673238 0.004522504 213.8912         0 0.999999987853079
+#&gt; scale 1.9144845 0.014958734 127.9844         0                  
+#&gt; psi   0.8336441 0.005740759 145.2150         0                  
+#&gt;                     rho       R.Cross.val                  DEV
+#&gt; alpha 0.999999987810436 0.999883383770888 2.02246091084614e-06
+#&gt; scale                                                         
+#&gt; psi                                                           
+#&gt;                     AIC               BIC     COV.alpha     COV.scale
+#&gt; alpha -16008.7979299044 -15986.3943200662  2.045304e-05  6.688167e-05
+#&gt; scale                                      6.688167e-05  2.237637e-04
+#&gt; psi                                       -2.580568e-05 -8.574610e-05
+#&gt;             COV.psi COV.mu    N    model
+#&gt; alpha -2.580568e-05     NA 2000 GGamma3P
+#&gt; scale -8.574610e-05     NA 2000         
+#&gt; psi    3.295632e-05     NA 2000         </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -313,7 +328,7 @@ Methylation. PLoS One 11, e0150427 (2016).</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

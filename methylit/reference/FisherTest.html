@@ -50,6 +50,7 @@
 <meta property="og:description" content="Given a GRanges object with the methylated and unmethylated
 read counts for control and treatment in its metacolumn, Fisher's exact
 test is performed for each cytosine site." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -81,7 +82,7 @@ test is performed for each cytosine site." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -89,7 +90,7 @@ test is performed for each cytosine site." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -123,7 +124,19 @@ test is performed for each cytosine site." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -132,13 +145,13 @@ test is performed for each cytosine site." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -169,24 +182,24 @@ read counts for control and treatment in its metacolumn, Fisher's exact
 test is performed for each cytosine site.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>FisherTest</span>(
-  <span class='no'>LR</span>,
-  <span class='kw'>count.col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>),
-  <span class='kw'>control.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pooling.stat</span> <span class='kw'>=</span> <span class='st'>"sum"</span>,
-  <span class='kw'>tv.cut</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>hdiv.cut</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>hdiv.col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pAdjustMethod</span> <span class='kw'>=</span> <span class='st'>"BH"</span>,
-  <span class='kw'>pvalCutOff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>saveAll</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>tasks</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>progressbar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>FisherTest</span><span class='op'>(</span>
+  <span class='va'>LR</span>,
+  count.col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  control.names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  treatment.names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pooling.stat <span class='op'>=</span> <span class='st'>"sum"</span>,
+  tv.cut <span class='op'>=</span> <span class='cn'>NULL</span>,
+  hdiv.cut <span class='op'>=</span> <span class='cn'>NULL</span>,
+  hdiv.col <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pAdjustMethod <span class='op'>=</span> <span class='st'>"BH"</span>,
+  pvalCutOff <span class='op'>=</span> <span class='fl'>0.05</span>,
+  saveAll <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  num.cores <span class='op'>=</span> <span class='fl'>1L</span>,
+  tasks <span class='op'>=</span> <span class='fl'>0L</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  progressbar <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -317,37 +330,41 @@ built for range from GRanges object.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Get a dataset of Hellinger divergency of methylation levels</span>
 <span class='co'>## from the package</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>HD</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>HD</span><span class='op'>)</span>
 
 <span class='co'>### --- To get the read counts</span>
-<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lapply.html'>lapply</a></span>(<span class='no'>HD</span>, <span class='kw'>function</span>(<span class='no'>hd</span>) {
-<span class='no'>hd</span> <span class='kw'>=</span> <span class='no'>hd</span>[<span class='fl'>1</span>:<span class='fl'>10</span>,<span class='fl'>3</span>:<span class='fl'>4</span>]
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='fu'>mcols</span>(<span class='no'>hd</span>)) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'mC'</span>, <span class='st'>'uC'</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='no'>hd</span>)
-})
+<span class='va'>hd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>HD</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>hd</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>hd</span> <span class='op'>=</span> <span class='va'>hd</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,<span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='fu'>mcols</span><span class='op'>(</span><span class='va'>hd</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'mC'</span>, <span class='st'>'uC'</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>hd</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
 
-<span class='fu'>FisherTest</span>(<span class='kw'>LR</span> <span class='kw'>=</span> <span class='no'>hd</span>, <span class='kw'>pooling.stat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>control.names</span> <span class='kw'>=</span> <span class='st'>'C1'</span>,
-<span class='kw'>treatment.names</span> <span class='kw'>=</span> <span class='st'>'T1'</span>, <span class='kw'>pAdjustMethod</span><span class='kw'>=</span><span class='st'>'BH'</span>, <span class='kw'>pvalCutOff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-<span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======                                                                |   8%  |                                                                              |============                                                          |  17%  |                                                                              |==================                                                    |  25%  |                                                                              |=======================                                               |  33%  |                                                                              |=============================                                         |  42%  |                                                                              |===================================                                   |  50%  |                                                                              |=========================================                             |  58%  |                                                                              |===============================================                       |  67%  |                                                                              |====================================================                  |  75%  |                                                                              |==========================================================            |  83%  |                                                                              |================================================================      |  92%  |                                                                              |======================================================================| 100%
-#&gt; </div><div class='output co'>#&gt; $C1.T1
+<span class='fu'>FisherTest</span><span class='op'>(</span>LR <span class='op'>=</span> <span class='va'>hd</span>, pooling.stat <span class='op'>=</span> <span class='cn'>NULL</span>, control.names <span class='op'>=</span> <span class='st'>'C1'</span>,
+treatment.names <span class='op'>=</span> <span class='st'>'T1'</span>, pAdjustMethod<span class='op'>=</span><span class='st'>'BH'</span>, pvalCutOff <span class='op'>=</span> <span class='fl'>0.05</span>,
+num.cores <span class='op'>=</span> <span class='fl'>1L</span>, verbose<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======                                                                |   8%  |                                                                              |============                                                          |  17%  |                                                                              |==================                                                    |  25%  |                                                                              |=======================                                               |  33%  |                                                                              |=============================                                         |  42%  |                                                                              |===================================                                   |  50%  |                                                                              |=========================================                             |  58%  |                                                                              |===============================================                       |  67%  |                                                                              |====================================================                  |  75%  |                                                                              |==========================================================            |  83%  |                                                                              |================================================================      |  92%  |                                                                              |======================================================================| 100%
+#&gt; </div><div class='output co'>#&gt; list object of length: 1
+#&gt; ------- 
+#&gt; $C1.T1
 #&gt; GRanges object with 4 ranges and 7 metadata columns:
 #&gt;       seqnames    ranges strand |        c1        t1        c2        t2
 #&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
-#&gt;   [1]        1         1      * |        57         7        43        21
-#&gt;   [2]        1         6      * |        64        49         0       113
-#&gt;   [3]        1         7      * |        41         0        10        31
-#&gt;   [4]        1         9      * |         0       165       162         3
-#&gt;                       TV               pvalue             adj.pval
-#&gt;                &lt;numeric&gt;            &lt;numeric&gt;            &lt;numeric&gt;
-#&gt;   [1]           -0.21875  0.00484886958499694   0.0145466087549908
-#&gt;   [2] -0.566371681415929 3.16957271546157e-25 1.90174362927694e-24
-#&gt;   [3]  -0.75609756097561 6.01609024718737e-14 2.40643609887495e-13
-#&gt;   [4]  0.981818181818182 1.61718586228495e-92 1.94062303474194e-91
+#&gt;   [1]        1         1      + |        57         7        43        21
+#&gt;   [2]        1         6      - |        64        49         0       113
+#&gt;   [3]        1         7      - |        41         0        10        31
+#&gt;   [4]        1         9      - |         0       165       162         3
+#&gt;              TV      pvalue    adj.pval
+#&gt;       &lt;numeric&gt;   &lt;numeric&gt;   &lt;numeric&gt;
+#&gt;   [1] -0.218750 4.84887e-03 1.45466e-02
+#&gt;   [2] -0.566372 3.16957e-25 1.90174e-24
+#&gt;   [3] -0.756098 6.01609e-14 2.40644e-13
+#&gt;   [4]  0.981818 1.61719e-92 1.94062e-91
 #&gt;   -------
 #&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths
 #&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "list"    "testDMP"</div><div class='input'>
+#&gt; ...
+#&gt; &lt;0 more GRanges elements&gt;
+#&gt; ------- </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -364,7 +381,7 @@ built for range from GRanges object.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

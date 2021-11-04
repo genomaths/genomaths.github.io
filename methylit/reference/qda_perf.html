@@ -50,6 +50,7 @@
 <meta property="og:description" content="This data/object carries the information about the classification performance
 of a Quadratic Discriminant (&quot;QDA&quot;)) model on the set of
 dmps." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -81,7 +82,7 @@ dmps." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -89,7 +90,7 @@ dmps." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -123,7 +124,19 @@ dmps." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -132,13 +145,13 @@ dmps." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -169,12 +182,12 @@ of a Quadratic Discriminant (<em>"QDA"</em>)) model on the set of
 <code><a href='dmps.html'>dmps</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='no'>qda_perf</span></pre>
+    <pre class="usage"><span class='va'>qda_perf</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><em>qda_perf</em> is list object consisting of the following elements:</p><dl'>
+    <p><em>qda_perf</em> is list object consisting of the following elements:</p><dl>
 <dt><strong>Performance</strong></dt><dd><p>Classification performance of the
 <em>"LDA"</em> model on the set of <code><a href='dmps.html'>dmps</a></code></p></dd>.
 <dt><strong>FDR</strong></dt><dd><p>False discovery rate estimated for the <em>"QDA"</em>
@@ -203,7 +216,7 @@ of <code><a href='dmps.html'>dmps</a></code></p></dd>.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

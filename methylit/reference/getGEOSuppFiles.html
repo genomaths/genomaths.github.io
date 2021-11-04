@@ -48,6 +48,7 @@
 
 <meta property="og:title" content="Get Supplemental Files from GEO — getGEOSuppFiles" />
 <meta property="og:description" content="Decompress 'gzip' files." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -79,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -87,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -121,7 +122,19 @@
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -130,13 +143,13 @@
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -165,13 +178,13 @@
     <p>Decompress 'gzip' files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getGEOSuppFiles</span>(
-  <span class='no'>GEO</span>,
-  <span class='kw'>makeDirectory</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>baseDir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
-  <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>getGEOSuppFiles</span><span class='op'>(</span>
+  <span class='va'>GEO</span>,
+  makeDirectory <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  baseDir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  pattern <span class='op'>=</span> <span class='cn'>NULL</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,16 +228,21 @@ original function download all the supplemental files for a given GEO
 accession number. Herein small detail is added to permit only the download
 of the specified files and from several GEO accession numbers with only one
 call to the function.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Original author: Sean Davis <a href='mailto:sdavis2@mail.nih.gov'>sdavis2@mail.nih.gov</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Download supplementary files from GEO data set and store fullpath/name</span>
 <span class='co'>## in variable filename. The parameter 'pattern' permits us to download only</span>
 <span class='co'>## the specified filesCG, in this case, CG and CHG methylation contexts.</span>
 
-<span class='co'># \donttest{</span>
- <span class='no'>filenames</span> <span class='kw'>&lt;-</span> <span class='fu'>getGEOSuppFiles</span>(<span class='kw'>GEO</span> <span class='kw'>=</span> <span class='st'>'GSM881757'</span>,
-                <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>'G_cytosine.txt.gz'</span>)</div><div class='output co'>#&gt; *** Downloading files ...</div><div class='output co'>#&gt; <span class='message'>https://ftp.ncbi.nlm.nih.gov/geo/samples/GSM881nnn/GSM881757/suppl/</span></div><div class='output co'>#&gt; <span class='message'>OK</span></div><div class='input'>
- <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='no'>filenames</span>) <span class='co'>## Remove the downloaded file</span></div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'># }
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+ <span class='va'>filenames</span> <span class='op'>&lt;-</span> <span class='fu'>getGEOSuppFiles</span><span class='op'>(</span>GEO <span class='op'>=</span> <span class='st'>'GSM881757'</span>,
+                pattern <span class='op'>=</span> <span class='st'>'G_cytosine.txt.gz'</span><span class='op'>)</span>
+
+ <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span><span class='op'>(</span><span class='va'>filenames</span><span class='op'>)</span> <span class='co'>## Remove the downloaded file</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>
@@ -242,7 +260,7 @@ call to the function.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

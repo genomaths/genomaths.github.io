@@ -40,6 +40,12 @@
     <loc>https://genomaths.github.io/methylit//reference/dmpClusters.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit//reference/dmps.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/ds.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit//reference/estimateBayesianDivergence.html</loc>
   </url>
   <url>
@@ -91,6 +97,9 @@
     <loc>https://genomaths.github.io/methylit//reference/getDIMPatGenes.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit//reference/getDMPatRegions.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit//reference/getGEOSuppFiles.html</loc>
   </url>
   <url>
@@ -98,6 +107,9 @@
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/ggamma.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/gibb_entropy.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/glmDataSet.html</loc>
@@ -115,7 +127,19 @@
     <loc>https://genomaths.github.io/methylit//reference/gunzip.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit//reference/helmholtz_free_energy.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit//reference/lapply.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/lda_perf.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/logit_perf.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/meth_levels.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/mlCutpoint.html</loc>
@@ -127,10 +151,19 @@
     <loc>https://genomaths.github.io/methylit//reference/pcaLDA.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit//reference/pcaLda_perf.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit//reference/pcaLogisticR.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/pcaQDA.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/pcaQda_perf.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/pcalogit_perf.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/poolFromGRlist.html</loc>
@@ -148,13 +181,16 @@
     <loc>https://genomaths.github.io/methylit//reference/predictDIMPclass.html</loc>
   </url>
   <url>
-    <loc>https://genomaths.github.io/methylit//reference/print.ldaDMP.html</loc>
+    <loc>https://genomaths.github.io/methylit//reference/print.glmDataSet.html</loc>
   </url>
   <url>
-    <loc>https://genomaths.github.io/methylit//reference/print.qdaDMP.html</loc>
+    <loc>https://genomaths.github.io/methylit//reference/print.mlDMP.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/pweibull3P.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//reference/qda_perf.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//reference/readCounts2GRangesList.html</loc>
@@ -187,6 +223,9 @@
     <loc>https://genomaths.github.io/methylit//articles/Cutpoint_estimation_with_Methyl-IT.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit//articles/GenExp_Methylation_association_hyper_down-regulated.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit//articles/MethylIT.html</loc>
   </url>
   <url>
@@ -194,5 +233,14 @@
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit//articles/cancer_example.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//articles/dmr_at_memory.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//articles/pca_lda_with_methylit.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit//articles/some_tips_for_methylit_r_scripts.html</loc>
   </url>
 </urlset>

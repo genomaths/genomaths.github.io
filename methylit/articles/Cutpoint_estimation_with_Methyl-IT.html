@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -122,7 +122,7 @@
 
       
 
-      </header><script src="Cutpoint_estimation_with_Methyl-IT_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="Cutpoint_estimation_with_Methyl-IT_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Optimal cutpoint for the methylation signal</h1>
@@ -132,7 +132,7 @@ Mackenzie’s lab<br><br>
 Department of Biology.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 class="date">14 July 2021</h4>
+            <h4 class="date">04 November 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd"><code>vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd</code></a></small>
       <div class="hidden name"><code>Cutpoint_estimation_with_Methyl-IT.Rmd</code></div>
@@ -272,12 +272,12 @@ pre { /* Code block - determines code spacing between lines */
 <span class="op">}</span><span class="op">)</span><span class="op">)</span>
 <span class="va">critical.val</span></code></pre></div>
 <pre><code>##       tv.95%    hd.95%
-## C1 0.6842105  68.10693
-## C2 0.6800000  68.39022
-## C3 0.6777456  67.33024
-## T1 0.9397681 133.89470
-## T2 0.9478351 138.02840
-## T3 0.9466565 136.89728</code></pre>
+## C1 0.6842105  64.57356
+## C2 0.6800000  64.47083
+## C3 0.6777456  63.73616
+## T1 0.9397681 137.75421
+## T2 0.9478351 140.88252
+## T3 0.9466565 140.99837</code></pre>
 </div>
 <div id="estimation-of-potential-dmps-with-methyl-it" class="section level2">
 <h2 class="hasAnchor">
@@ -327,7 +327,7 @@ pre { /* Code block - determines code spacing between lines */
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">crit</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
 <span class="va">crit</span></code></pre></div>
 <pre><code>##        C1        C2        C3        T1        T2        T3 
-##  62.17849  61.66337  61.13399 108.84883 110.76214 111.19994</code></pre>
+##  57.20879  56.66313  56.43343 111.79492 113.31415 113.90074</code></pre>
 <p>As before the cutpoint is estimated based on ‘Youden Index’ <span class="citation">(8)</span>. A PCA+LDA model classifier (<em>classifier</em> = “pca.lda”) is applied. That is, a principal component analysis (PCA) is applied on the original raw matrix of data and the four possible component (<em>n.pc</em> = 4) derived from the analysis are used in a further linear discriminant analysis (LDA). A scaling step is applied to the raw matrix of data before the application of the mentioned procedure (<em>center</em> = TRUE, <em>scale</em> = TRUE). Here, PCA will yield new orthogonal (non-correlated) variables, the principal components, which prevent any potential bias effect originated by any correlation or association of the original variables.</p>
 <p>By using function <a href="https://is.gd/RR9iWY">estimateCutPoint</a>, we can estimate the cutpoint, based on <em>HD</em> (<em>div.col</em> = 9L) or on <span class="math inline">\(TV_d\)</span> (<em>div.col</em> = 7L):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -344,9 +344,9 @@ pre { /* Code block - determines code spacing between lines */
 <span class="va">cut.g2p</span></code></pre></div>
 <pre><code>## Cutpoint estimation with 'Youden Index' 
 ## Simple cutpoint estimation 
-## Cutpoint = 110.69 
+## Cutpoint = 112.19 
 ## 
-## Cytosine sites from treatment have divergence values &gt;= 110.69 
+## Cytosine sites from treatment have divergence values &gt;= 112.19 
 ## 
 ## The accessible objects in the output list are: 
 ##                     Length Class           Mode     
@@ -370,28 +370,28 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT  371    0
-##         TT    0 3523
-##                                      
-##                Accuracy : 1          
-##                  95% CI : (0.9991, 1)
-##     No Information Rate : 0.9047     
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
-##                                      
-##                   Kappa : 1          
-##                                      
-##  Mcnemar's Test P-Value : NA         
-##                                      
-##             Sensitivity : 1.0000     
-##             Specificity : 1.0000     
-##          Pos Pred Value : 1.0000     
-##          Neg Pred Value : 1.0000     
-##              Prevalence : 0.9047     
-##          Detection Rate : 0.9047     
-##    Detection Prevalence : 0.9047     
-##       Balanced Accuracy : 1.0000     
-##                                      
-##        'Positive' Class : TT         
+##         CT  300    0
+##         TT    0 3576
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.999, 1)
+##     No Information Rate : 0.9226    
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16 
+##                                     
+##                   Kappa : 1         
+##                                     
+##  Mcnemar's Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.9226    
+##          Detection Rate : 0.9226    
+##    Detection Prevalence : 0.9226    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        'Positive' Class : TT        
 ## </code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetModel.FDR</span></code></pre></div>
@@ -416,9 +416,9 @@ pre { /* Code block - determines code spacing between lines */
 <span class="va">cut.g3p</span></code></pre></div>
 <pre><code>## Cutpoint estimation with 'Youden Index' 
 ## Simple cutpoint estimation 
-## Cutpoint = 110.69 
+## Cutpoint = 115.2 
 ## 
-## Cytosine sites from treatment have divergence values &gt;= 110.69 
+## Cytosine sites from treatment have divergence values &gt;= 115.2 
 ## 
 ## The accessible objects in the output list are: 
 ##                     Length Class           Mode     
@@ -442,12 +442,12 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT  371    0
-##         TT    0 3503
+##         CT  271    0
+##         TT    0 3459
 ##                                     
 ##                Accuracy : 1         
 ##                  95% CI : (0.999, 1)
-##     No Information Rate : 0.9042    
+##     No Information Rate : 0.9273    
 ##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16 
 ##                                     
 ##                   Kappa : 1         
@@ -458,9 +458,9 @@ pre { /* Code block - determines code spacing between lines */
 ##             Specificity : 1.0000    
 ##          Pos Pred Value : 1.0000    
 ##          Neg Pred Value : 1.0000    
-##              Prevalence : 0.9042    
-##          Detection Rate : 0.9042    
-##    Detection Prevalence : 0.9042    
+##              Prevalence : 0.9273    
+##          Detection Rate : 0.9273    
+##    Detection Prevalence : 0.9273    
 ##       Balanced Accuracy : 1.0000    
 ##                                     
 ##        'Positive' Class : TT        
@@ -481,46 +481,46 @@ pre { /* Code block - determines code spacing between lines */
 <span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">cut.g3p</span><span class="op">$</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="va">randsampl</span><span class="op">)</span>
 <span class="va">pred</span></code></pre></div>
 <pre><code>## $class
-##  [1] CT TT TT TT TT TT TT TT TT TT
+##  [1] TT TT TT TT TT TT TT TT TT TT
 ## Levels: CT TT
 ## 
 ## $posterior
-##                 CT      TT
-##  [1,] 5.674900e-01 0.43251
-##  [2,] 4.931388e-39 1.00000
-##  [3,] 2.286905e-33 1.00000
-##  [4,] 9.140401e-36 1.00000
-##  [5,] 2.426839e-34 1.00000
-##  [6,] 3.857816e-34 1.00000
-##  [7,] 6.032318e-34 1.00000
-##  [8,] 2.834515e-33 1.00000
-##  [9,] 2.959727e-34 1.00000
-## [10,] 2.288406e-35 1.00000
+##                 CT TT
+##  [1,] 1.247716e-08  1
+##  [2,] 8.391535e-59  1
+##  [3,] 3.035941e-57  1
+##  [4,] 5.304487e-60  1
+##  [5,] 4.297543e-62  1
+##  [6,] 7.748959e-60  1
+##  [7,] 6.593181e-61  1
+##  [8,] 4.861701e-57  1
+##  [9,] 5.849832e-59  1
+## [10,] 9.639450e-62  1
 ## 
 ## $x
 ##              LD1
-##  [1,] -5.1760621
-##  [2,]  2.0195085
-##  [3,]  0.9584254
-##  [4,]  1.4075345
-##  [5,]  1.1408581
-##  [6,]  1.1031620
-##  [7,]  1.0668064
-##  [8,]  0.9409668
-##  [9,]  1.1247141
-## [10,]  1.3328976</code></pre>
+##  [1,] -5.9773267
+##  [2,]  1.1365560
+##  [3,]  0.9155845
+##  [4,]  1.3065892
+##  [5,]  1.6031303
+##  [6,]  1.2832507
+##  [7,]  1.4349861
+##  [8,]  0.8865893
+##  [9,]  1.1587741
+## [10,]  1.5533861</code></pre>
 <p>The variable <em>pred$posterior</em> provides the posterior classification probabilities that a DMP could belong to control (<em>CT</em>) or to treatment (<em>TT</em>) group. The variable ‘<em>x</em>’ provides the cytosine methylation changes in terms of its values in the linear discriminant function LD1. Notice that, for each row, the sum of posterior probabilities is equal 1. By default, individuals with <em>TT</em> posterior probabilities greater than 0.5 are predicted to belong to the treatment class. For example:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">classfiction</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"CT"</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="va">classfiction</span><span class="op">[</span><span class="va">pred</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"TT"</span>
 <span class="va">classfiction</span></code></pre></div>
-<pre><code>##  [1] "CT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</code></pre>
+<pre><code>##  [1] "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</code></pre>
 <p>We can be more strict increasing the posterior classification probability cutoff</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">classfiction</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"CT"</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="va">classfiction</span><span class="op">[</span><span class="va">pred</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.7</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"TT"</span>
 <span class="va">classfiction</span></code></pre></div>
-<pre><code>##  [1] "CT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</code></pre>
+<pre><code>##  [1] "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</code></pre>
 <p>The posterior classification probability cutoff can be controlled with parameter <em>post.cut</em> from <a href="https://is.gd/RR9iWY">estimateCutPoint</a> function (default: <span class="math inline">\(post.cut=0.5\)</span>).</p>
 </div>
 </div>
@@ -549,10 +549,10 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ## Posterior probability used to get the cutpoint = 0.5 
 ## Cytosine sites with treatment PostProbCut &gt;= 0.5 have a 
-## divergence value &gt;= 108.9316 
+## divergence value &gt;= 111.8613 
 ## 
 ## Optimized statistic: Accuracy = 1 
-## Cutpoint = 108.93 
+## Cutpoint = 111.86 
 ## 
 ## Model classifier 'pca.qda' 
 ## 
@@ -577,12 +577,12 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT 1228    0
-##         TT    0 3554
+##         CT 1246    0
+##         TT    0 3578
 ##                                      
 ##                Accuracy : 1          
 ##                  95% CI : (0.9992, 1)
-##     No Information Rate : 0.7432     
+##     No Information Rate : 0.7417     
 ##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
 ##                                      
 ##                   Kappa : 1          
@@ -593,9 +593,9 @@ pre { /* Code block - determines code spacing between lines */
 ##             Specificity : 1.0000     
 ##          Pos Pred Value : 1.0000     
 ##          Neg Pred Value : 1.0000     
-##              Prevalence : 0.7432     
-##          Detection Rate : 0.7432     
-##    Detection Prevalence : 0.7432     
+##              Prevalence : 0.7417     
+##          Detection Rate : 0.7417     
+##    Detection Prevalence : 0.7417     
 ##       Balanced Accuracy : 1.0000     
 ##                                      
 ##        'Positive' Class : TT         
@@ -607,12 +607,12 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT 3068    0
-##         TT    0 8884
+##         CT 3115    0
+##         TT    0 8945
 ##                                      
 ##                Accuracy : 1          
 ##                  95% CI : (0.9997, 1)
-##     No Information Rate : 0.7433     
+##     No Information Rate : 0.7417     
 ##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
 ##                                      
 ##                   Kappa : 1          
@@ -623,9 +623,9 @@ pre { /* Code block - determines code spacing between lines */
 ##             Specificity : 1.0000     
 ##          Pos Pred Value : 1.0000     
 ##          Neg Pred Value : 1.0000     
-##              Prevalence : 0.7433     
-##          Detection Rate : 0.7433     
-##    Detection Prevalence : 0.7433     
+##              Prevalence : 0.7417     
+##          Detection Rate : 0.7417     
+##    Detection Prevalence : 0.7417     
 ##       Balanced Accuracy : 1.0000     
 ##                                      
 ##        'Positive' Class : TT         
@@ -645,7 +645,7 @@ pre { /* Code block - determines code spacing between lines */
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">crit</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
 <span class="va">crit</span></code></pre></div>
 <pre><code>##        C1        C2        C3        T1        T2        T3 
-## 0.9945247 0.9947703 0.9950025 0.9500977 0.9478417 0.9473200</code></pre>
+## 0.9968127 0.9969715 0.9970556 0.9500754 0.9483484 0.9476795</code></pre>
 <p>In other words, most of the methylation changes are not (and should not be) considered DMPs. Notice that although the same <em>HD</em> value could be found in the same differentially methylated cytosine site in control and treatment, if the probabilities distributions of the information divergences (null hypotheses) from control and treatment are different, then these DMPs can be distinguished.</p>
 </div>
 <div id="ml-cutpoint-estimation-for-potential-dmps-based-on-gamma3p-model" class="section level3">
@@ -670,10 +670,10 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ## Posterior probability used to get the cutpoint = 0.5 
 ## Cytosine sites with treatment PostProbCut &gt;= 0.5 have a 
-## divergence value &gt;= 109.3396 
+## divergence value &gt;= 113.0279 
 ## 
 ## Optimized statistic: Accuracy = 1 
-## Cutpoint = 109.34 
+## Cutpoint = 113.03 
 ## 
 ## Model classifier 'pca.qda' 
 ## 
@@ -727,36 +727,36 @@ pre { /* Code block - determines code spacing between lines */
 <span class="op">)</span>
 <span class="va">g2p.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
 <pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
-##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9002  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9002  
-##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9002  
-##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9002  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9002  
-##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9002  
+##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9212  
+##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9212  
+##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9212  
+##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9212  
+##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9212  
+##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9212  
 ##                                                                         
 ##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value
-##  Min.   :5.438e-181   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
-##  1st Qu.:5.438e-181   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
-##  Median :5.438e-181   Median : NA   Median :1    Median :1    Median :1     
-##  Mean   :5.438e-181   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
-##  3rd Qu.:5.438e-181   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
-##  Max.   :5.438e-181   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
+##  Min.   :3.789e-139   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
+##  1st Qu.:3.789e-139   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
+##  Median :3.789e-139   Median : NA   Median :1    Median :1    Median :1     
+##  Mean   :3.789e-139   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
+##  3rd Qu.:3.789e-139   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
+##  Max.   :3.789e-139   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
 ##                       NA's   :300                                           
 ##  Neg Pred Value   Precision     Recall        F1      Prevalence    
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9002  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9002  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.9002  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9002  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9002  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9002  
+##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9212  
+##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9212  
+##  Median :1      Median :1   Median :1   Median :1   Median :0.9212  
+##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9212  
+##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9212  
+##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9212  
 ##                                                                     
 ##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.9002   Min.   :0.9002       Min.   :1        
-##  1st Qu.:0.9002   1st Qu.:0.9002       1st Qu.:1        
-##  Median :0.9002   Median :0.9002       Median :1        
-##  Mean   :0.9002   Mean   :0.9002       Mean   :1        
-##  3rd Qu.:0.9002   3rd Qu.:0.9002       3rd Qu.:1        
-##  Max.   :0.9002   Max.   :0.9002       Max.   :1        
+##  Min.   :0.9212   Min.   :0.9212       Min.   :1        
+##  1st Qu.:0.9212   1st Qu.:0.9212       1st Qu.:1        
+##  Median :0.9212   Median :0.9212       Median :1        
+##  Mean   :0.9212   Mean   :0.9212       Mean   :1        
+##  3rd Qu.:0.9212   3rd Qu.:0.9212       3rd Qu.:1        
+##  Max.   :0.9212   Max.   :0.9212       Max.   :1        
 ## </code></pre>
 </div>
 <div id="classification-performance-for-dmps-based-on-gamma3p-model" class="section level3">
@@ -773,37 +773,37 @@ pre { /* Code block - determines code spacing between lines */
                             output <span class="op">=</span> <span class="st">"all"</span>, prop <span class="op">=</span> <span class="fl">0.6</span>
 <span class="op">)</span>
 <span class="va">g3p.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
-<pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
-##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9011  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9011  
-##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9011  
-##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9011  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9011  
-##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9011  
-##                                                                         
-##  AccuracyPValue      McnemarPValue  Sensitivity  Specificity Pos Pred Value
-##  Min.   :1.07e-177   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
-##  1st Qu.:1.07e-177   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
-##  Median :1.07e-177   Median : NA   Median :1    Median :1    Median :1     
-##  Mean   :1.07e-177   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
-##  3rd Qu.:1.07e-177   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
-##  Max.   :1.07e-177   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
-##                      NA's   :300                                           
-##  Neg Pred Value   Precision     Recall        F1      Prevalence    
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9011  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9011  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.9011  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9011  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9011  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9011  
-##                                                                     
-##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.9011   Min.   :0.9011       Min.   :1        
-##  1st Qu.:0.9011   1st Qu.:0.9011       1st Qu.:1        
-##  Median :0.9011   Median :0.9011       Median :1        
-##  Mean   :0.9011   Mean   :0.9011       Mean   :1        
-##  3rd Qu.:0.9011   3rd Qu.:0.9011       3rd Qu.:1        
-##  Max.   :0.9011   Max.   :0.9011       Max.   :1        
+<pre><code>##     Accuracy     Kappa   AccuracyLower   AccuracyUpper  AccuracyNull  
+##  Min.   :1   Min.   :1   Min.   :0.999   Min.   :1     Min.   :0.922  
+##  1st Qu.:1   1st Qu.:1   1st Qu.:0.999   1st Qu.:1     1st Qu.:0.922  
+##  Median :1   Median :1   Median :0.999   Median :1     Median :0.922  
+##  Mean   :1   Mean   :1   Mean   :0.999   Mean   :1     Mean   :0.922  
+##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.999   3rd Qu.:1     3rd Qu.:0.922  
+##  Max.   :1   Max.   :1   Max.   :0.999   Max.   :1     Max.   :0.922  
+##                                                                       
+##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value
+##  Min.   :1.431e-134   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
+##  1st Qu.:1.431e-134   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
+##  Median :1.431e-134   Median : NA   Median :1    Median :1    Median :1     
+##  Mean   :1.431e-134   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
+##  3rd Qu.:1.431e-134   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
+##  Max.   :1.431e-134   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
+##                       NA's   :300                                           
+##  Neg Pred Value   Precision     Recall        F1      Prevalence   
+##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.922  
+##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.922  
+##  Median :1      Median :1   Median :1   Median :1   Median :0.922  
+##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.922  
+##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.922  
+##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.922  
+##                                                                    
+##  Detection Rate  Detection Prevalence Balanced Accuracy
+##  Min.   :0.922   Min.   :0.922        Min.   :1        
+##  1st Qu.:0.922   1st Qu.:0.922        1st Qu.:1        
+##  Median :0.922   Median :0.922        Median :1        
+##  Mean   :0.922   Mean   :0.922        Mean   :1        
+##  3rd Qu.:0.922   3rd Qu.:0.922        3rd Qu.:1        
+##  Max.   :0.922   Max.   :0.922        Max.   :1        
 ## </code></pre>
 <p>We do not have evidence to support statistical differences between the classification performances estimated for <em>‘Gamma2P’</em> and <em>‘Gamma3P’</em> probability distribution models. Hence, in this case we select the model that yield the lowest cutpoint</p>
 </div>
@@ -821,41 +821,41 @@ pre { /* Code block - determines code spacing between lines */
                             output <span class="op">=</span> <span class="st">"all"</span>, prop <span class="op">=</span> <span class="fl">0.6</span>
 <span class="op">)</span>
 <span class="va">ft.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
-<pre><code>##     Accuracy          Kappa           AccuracyLower    AccuracyUpper   
-##  Min.   :0.8076   Min.   :-0.007635   Min.   :0.8001   Min.   :0.8148  
-##  1st Qu.:0.8105   1st Qu.: 0.005355   1st Qu.:0.8031   1st Qu.:0.8177  
-##  Median :0.8110   Median : 0.007678   Median :0.8036   Median :0.8182  
-##  Mean   :0.8110   Mean   : 0.007553   Mean   :0.8036   Mean   :0.8182  
-##  3rd Qu.:0.8115   3rd Qu.: 0.009748   3rd Qu.:0.8041   3rd Qu.:0.8187  
-##  Max.   :0.8137   Max.   : 0.020669   Max.   :0.8064   Max.   :0.8209  
-##   AccuracyNull    AccuracyPValue   McnemarPValue  Sensitivity    
-##  Min.   :0.8188   Min.   :0.9205   Min.   :0     Min.   :0.9835  
-##  1st Qu.:0.8188   1st Qu.:0.9781   1st Qu.:0     1st Qu.:0.9857  
-##  Median :0.8188   Median :0.9847   Median :0     Median :0.9863  
-##  Mean   :0.8188   Mean   :0.9827   Mean   :0     Mean   :0.9863  
-##  3rd Qu.:0.8188   3rd Qu.:0.9888   3rd Qu.:0     3rd Qu.:0.9868  
-##  Max.   :0.8188   Max.   :0.9990   Max.   :0     Max.   :0.9893  
+<pre><code>##     Accuracy          Kappa         AccuracyLower    AccuracyUpper   
+##  Min.   :0.7952   Min.   :0.00999   Min.   :0.7877   Min.   :0.8027  
+##  1st Qu.:0.7994   1st Qu.:0.02203   1st Qu.:0.7918   1st Qu.:0.8067  
+##  Median :0.8005   Median :0.02591   Median :0.7930   Median :0.8079  
+##  Mean   :0.8006   Mean   :0.02588   Mean   :0.7931   Mean   :0.8079  
+##  3rd Qu.:0.8017   3rd Qu.:0.02955   3rd Qu.:0.7942   3rd Qu.:0.8091  
+##  Max.   :0.8055   Max.   :0.04246   Max.   :0.7981   Max.   :0.8128  
+##   AccuracyNull    AccuracyPValue   McnemarPValue         Sensitivity    
+##  Min.   :0.8188   Min.   :0.9999   Min.   : 0.000e+00   Min.   :0.9596  
+##  1st Qu.:0.8188   1st Qu.:1.0000   1st Qu.: 0.000e+00   1st Qu.:0.9647  
+##  Median :0.8188   Median :1.0000   Median : 0.000e+00   Median :0.9662  
+##  Mean   :0.8188   Mean   :1.0000   Mean   :1.728e-232   Mean   :0.9663  
+##  3rd Qu.:0.8188   3rd Qu.:1.0000   3rd Qu.: 0.000e+00   3rd Qu.:0.9678  
+##  Max.   :0.8188   Max.   :1.0000   Max.   :3.027e-230   Max.   :0.9736  
 ##   Specificity      Pos Pred Value   Neg Pred Value     Precision     
-##  Min.   :0.01134   Min.   :0.8181   Min.   :0.1337   Min.   :0.8181  
-##  1st Qu.:0.01726   1st Qu.:0.8193   1st Qu.:0.2150   1st Qu.:0.8193  
-##  Median :0.01874   Median :0.8196   Median :0.2318   Median :0.8196  
-##  Mean   :0.01858   Mean   :0.8196   Mean   :0.2304   Mean   :0.8196  
-##  3rd Qu.:0.02022   3rd Qu.:0.8198   3rd Qu.:0.2455   3rd Qu.:0.8198  
-##  Max.   :0.02663   Max.   :0.8208   Max.   :0.3187   Max.   :0.8208  
+##  Min.   :0.03945   Min.   :0.8199   Min.   :0.2111   Min.   :0.8199  
+##  1st Qu.:0.04832   1st Qu.:0.8212   1st Qu.:0.2423   1st Qu.:0.8212  
+##  Median :0.05178   Median :0.8216   Median :0.2528   Median :0.8216  
+##  Mean   :0.05156   Mean   :0.8216   Mean   :0.2530   Mean   :0.8216  
+##  3rd Qu.:0.05424   3rd Qu.:0.8220   3rd Qu.:0.2624   3rd Qu.:0.8220  
+##  Max.   :0.06312   Max.   :0.8234   Max.   :0.2958   Max.   :0.8234  
 ##      Recall             F1           Prevalence     Detection Rate  
-##  Min.   :0.9835   Min.   :0.8933   Min.   :0.8188   Min.   :0.8053  
-##  1st Qu.:0.9857   1st Qu.:0.8950   1st Qu.:0.8188   1st Qu.:0.8071  
-##  Median :0.9863   Median :0.8952   Median :0.8188   Median :0.8076  
-##  Mean   :0.9863   Mean   :0.8952   Mean   :0.8188   Mean   :0.8076  
-##  3rd Qu.:0.9868   3rd Qu.:0.8955   3rd Qu.:0.8188   3rd Qu.:0.8080  
-##  Max.   :0.9893   Max.   :0.8969   Max.   :0.8188   Max.   :0.8101  
+##  Min.   :0.9596   Min.   :0.8847   Min.   :0.8188   Min.   :0.7858  
+##  1st Qu.:0.9647   1st Qu.:0.8873   1st Qu.:0.8188   1st Qu.:0.7899  
+##  Median :0.9662   Median :0.8880   Median :0.8188   Median :0.7911  
+##  Mean   :0.9663   Mean   :0.8881   Mean   :0.8188   Mean   :0.7912  
+##  3rd Qu.:0.9678   3rd Qu.:0.8888   3rd Qu.:0.8188   3rd Qu.:0.7925  
+##  Max.   :0.9736   Max.   :0.8913   Max.   :0.8188   Max.   :0.7972  
 ##  Detection Prevalence Balanced Accuracy
-##  Min.   :0.9825       Min.   :0.4975   
-##  1st Qu.:0.9848       1st Qu.:0.5017   
-##  Median :0.9853       Median :0.5025   
-##  Mean   :0.9854       Mean   :0.5024   
-##  3rd Qu.:0.9860       3rd Qu.:0.5031   
-##  Max.   :0.9879       Max.   :0.5066</code></pre>
+##  Min.   :0.9566       Min.   :0.5034   
+##  1st Qu.:0.9616       1st Qu.:0.5076   
+##  Median :0.9630       Median :0.5089   
+##  Mean   :0.9631       Mean   :0.5089   
+##  3rd Qu.:0.9646       3rd Qu.:0.5102   
+##  Max.   :0.9701       Max.   :0.5147</code></pre>
 <p>A quite different story is found when information on the probability distribution of noise (null hypothesis) is added to the classifier:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ft.g2p.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.</span>, nlms <span class="op">=</span> <span class="va">nlms.g2p</span>,  div.col <span class="op">=</span> <span class="fl">9L</span>, 
@@ -872,12 +872,12 @@ pre { /* Code block - determines code spacing between lines */
 <span class="op">)</span>
 <span class="va">ft.g2p.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
 <pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
-##  Min.   :1   Min.   :1   Min.   :0.9992   Min.   :1     Min.   :0.7432  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9992   1st Qu.:1     1st Qu.:0.7432  
-##  Median :1   Median :1   Median :0.9992   Median :1     Median :0.7432  
-##  Mean   :1   Mean   :1   Mean   :0.9992   Mean   :1     Mean   :0.7432  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9992   3rd Qu.:1     3rd Qu.:0.7432  
-##  Max.   :1   Max.   :1   Max.   :0.9992   Max.   :1     Max.   :0.7432  
+##  Min.   :1   Min.   :1   Min.   :0.9992   Min.   :1     Min.   :0.7417  
+##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9992   1st Qu.:1     1st Qu.:0.7417  
+##  Median :1   Median :1   Median :0.9992   Median :1     Median :0.7417  
+##  Mean   :1   Mean   :1   Mean   :0.9992   Mean   :1     Mean   :0.7417  
+##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9992   3rd Qu.:1     3rd Qu.:0.7417  
+##  Max.   :1   Max.   :1   Max.   :0.9992   Max.   :1     Max.   :0.7417  
 ##                                                                         
 ##  AccuracyPValue McnemarPValue  Sensitivity  Specificity Pos Pred Value
 ##  Min.   :0      Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
@@ -888,20 +888,20 @@ pre { /* Code block - determines code spacing between lines */
 ##  Max.   :0      Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
 ##                 NA's   :300                                           
 ##  Neg Pred Value   Precision     Recall        F1      Prevalence    
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.7432  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.7432  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.7432  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.7432  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.7432  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.7432  
+##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.7417  
+##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.7417  
+##  Median :1      Median :1   Median :1   Median :1   Median :0.7417  
+##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.7417  
+##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.7417  
+##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.7417  
 ##                                                                     
 ##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.7432   Min.   :0.7432       Min.   :1        
-##  1st Qu.:0.7432   1st Qu.:0.7432       1st Qu.:1        
-##  Median :0.7432   Median :0.7432       Median :1        
-##  Mean   :0.7432   Mean   :0.7432       Mean   :1        
-##  3rd Qu.:0.7432   3rd Qu.:0.7432       3rd Qu.:1        
-##  Max.   :0.7432   Max.   :0.7432       Max.   :1        
+##  Min.   :0.7417   Min.   :0.7417       Min.   :1        
+##  1st Qu.:0.7417   1st Qu.:0.7417       1st Qu.:1        
+##  Median :0.7417   Median :0.7417       Median :1        
+##  Mean   :0.7417   Mean   :0.7417       Mean   :1        
+##  3rd Qu.:0.7417   3rd Qu.:0.7417       3rd Qu.:1        
+##  Max.   :0.7417   Max.   :0.7417       Max.   :1        
 ## </code></pre>
 <p>Now, we add additional information about the optimal cutpoint</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
@@ -919,36 +919,36 @@ pre { /* Code block - determines code spacing between lines */
 <span class="op">)</span>
 <span class="va">ft.g2p_cut.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
 <pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
-##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9002  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9002  
-##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9002  
-##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9002  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9002  
-##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9002  
+##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9212  
+##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9212  
+##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9212  
+##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9212  
+##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9212  
+##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9212  
 ##                                                                         
 ##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value
-##  Min.   :5.438e-181   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
-##  1st Qu.:5.438e-181   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
-##  Median :5.438e-181   Median : NA   Median :1    Median :1    Median :1     
-##  Mean   :5.438e-181   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
-##  3rd Qu.:5.438e-181   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
-##  Max.   :5.438e-181   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
+##  Min.   :3.789e-139   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
+##  1st Qu.:3.789e-139   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
+##  Median :3.789e-139   Median : NA   Median :1    Median :1    Median :1     
+##  Mean   :3.789e-139   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
+##  3rd Qu.:3.789e-139   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
+##  Max.   :3.789e-139   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
 ##                       NA's   :300                                           
 ##  Neg Pred Value   Precision     Recall        F1      Prevalence    
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9002  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9002  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.9002  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9002  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9002  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9002  
+##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9212  
+##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9212  
+##  Median :1      Median :1   Median :1   Median :1   Median :0.9212  
+##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9212  
+##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9212  
+##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9212  
 ##                                                                     
 ##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.9002   Min.   :0.9002       Min.   :1        
-##  1st Qu.:0.9002   1st Qu.:0.9002       1st Qu.:1        
-##  Median :0.9002   Median :0.9002       Median :1        
-##  Mean   :0.9002   Mean   :0.9002       Mean   :1        
-##  3rd Qu.:0.9002   3rd Qu.:0.9002       3rd Qu.:1        
-##  Max.   :0.9002   Max.   :0.9002       Max.   :1        
+##  Min.   :0.9212   Min.   :0.9212       Min.   :1        
+##  1st Qu.:0.9212   1st Qu.:0.9212       1st Qu.:1        
+##  Median :0.9212   Median :0.9212       Median :1        
+##  Mean   :0.9212   Mean   :0.9212       Mean   :1        
+##  3rd Qu.:0.9212   3rd Qu.:0.9212       3rd Qu.:1        
+##  Max.   :0.9212   Max.   :0.9212       Max.   :1        
 ## </code></pre>
 <p>In other words, information on the probability distributions of the natural spontaneous methylation variation in the control and treatment population are essential to discriminate the background noise from the treatment induced signal.</p>
 </div>
@@ -966,12 +966,12 @@ pre { /* Code block - determines code spacing between lines */
     <span class="op">)</span><span class="op">)</span>
 <span class="va">dt</span></code></pre></div>
 <pre><code>##     G2P  G3P   FT FT.G2P FT.SD
-## C1  302  301 1730   1018   302
-## C2  360  350 1682   1043   360
-## C3  321  315 1657   1007   321
-## T1 2916 2903 7589   2917  2916
-## T2 2998 2972 7646   2998  2998
-## T3 2969 2945 7679   2969  2969</code></pre>
+## C1  233  226 1730   1039   233
+## C2  277  264 1682   1047   277
+## C3  255  249 1657   1029   255
+## T1 2921 2871 7589   2922  2921
+## T2 3037 2946 7646   3037  3037
+## T3 2986 2925 7679   2986  2986</code></pre>
 <p>The comparison between the approaches FT.G2P and FT.SD (full signal detection on FT output) tells us that only 255, 306, and 281 cytosine sites detected with FT in the control samples C1, C2, and C3, respectively, carry methylation signals comparable (in magnitude) to those signals induced by the treatment.</p>
 <p>Classification performance data:</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">

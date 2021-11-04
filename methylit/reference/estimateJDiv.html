@@ -56,8 +56,7 @@ It is a symmetrised form of Kullback–Leibler divergence
 the divergence as: \(D_{KL}(P || Q) + D_{KL}(Q || P)\), which
 is symmetric and nonnegative, where the probability distributions
 P and Q are defined on the same probability space
-(see
-Wikipedia).
+(see reference (1) and Wikipedia).
 In general, JD is highly correlated with Hellinger
 divergence, which is the main divergence currently used in
 Methyl-IT (see examples for function
@@ -99,7 +98,7 @@ information-thermodynamics analyses.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -107,7 +106,7 @@ information-thermodynamics analyses.
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -151,6 +150,10 @@ information-thermodynamics analyses.
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -158,13 +161,13 @@ information-thermodynamics analyses.
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -199,8 +202,7 @@ cytosine site, this function computes the J information divergence
 the divergence as: \(D_{KL}(P || Q) + D_{KL}(Q || P)\), which
 is symmetric and nonnegative, where the probability distributions
 <em>P</em> and <em>Q</em> are defined on the same probability space
-(see
-<a href='https://is.gd/oS8Bwv'>Wikipedia</a>).</p></li>
+(see reference (1) and <a href='https://is.gd/oS8Bwv'>Wikipedia</a>).</p></li>
 <li><p>In general, <em>JD</em> is highly correlated with Hellinger
 divergence, which is the main divergence currently used in
 Methyl-IT (see examples for function
@@ -212,7 +214,13 @@ information-thermodynamics analyses.</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'>estimateJDiv</span>(<span class='no'>p</span>, <span class='kw'>logbase</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+    <pre class="usage"><span class='fu'>estimateJDiv</span><span class='op'>(</span>
+  <span class='va'>p</span>,
+  logbase <span class='op'>=</span> <span class='fl'>2</span>,
+  stat <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  output <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"single"</span>, <span class='st'>"all"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,6 +234,16 @@ individuals 1 and 2.</p></td>
       <th>logbase</th>
       <td><p>Logarithm base used to compute the JD. Logarithm base 2 is
 used as default. Use logbase = exp(1) for natural logarithm.</p></td>
+    </tr>
+    <tr>
+      <th>stat</th>
+      <td><p>logical(1). Whether to compute the statistic with asymptotic
+Chi-squared distribution with one degree of freedom (details).</p></td>
+    </tr>
+    <tr>
+      <th>output</th>
+      <td><p>Optional. If 'stat = TRUE', whether to return \(JD\) and its
+asymptotic chi-squared statistic.</p></td>
     </tr>
     </table>
 
@@ -244,10 +262,30 @@ probability vectors \(p^{ij}\) and \(q^i = (q_i, 1 - q_i)\). <em>JD</em>
 is computed as in reference (1-2):</p>
 <p>$$JD(p^{ij}, q^i) = ((p_{ij} - q_i) * log(p_{ij}/q_i) +
                         (q_i - p_{ij}) * log((1 - p_{ij})/(1 - q_i)))/2$$</p>
+<p>Missing methylation levels, reported as NA or NaN, are replaced with zero.</p>
+<p>The statistic with asymptotic Chi-squared distribution is based on the
+statistic suggested by Kupperman (1957) (2) for \(D_{KL}\) and commented in
+references (3-4). That is,</p>
+<p>$$ 2*(n_{1} + 1)*(n_{2} + 1)*JD(p^{ij}, q^i)/(n_1 + n_2 + 2)$$</p>
+<p>Where \(n_{1}\) and \(n_{2}\) are the total counts (coverage in the case
+of methylation) used to compute the probabilities \(p_{ij}\) and
+\(q_i\). A basic Bayesian correction is added to prevent zero counts.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
 <ol>
+<li><p>Kullback S, Leibler RA. On Information and Sufficiency.
+Ann Math Stat. 1951;22: 79–86. doi:10.1214/aoms/1177729694.</p></li>
+<li><p>Kupperman, M., 1957. Further application to information theory to
+multivariate analysis and statistical inference. Ph.D.
+Dissertation, George Washington University.</p></li>
+<li><p>Salicrú M, Morales D, Menéndez ML, Pardo L. On the applications of
+divergence type measures in testing statistical hypotheses.
+Journal of Multivariate Analysis. 1994. pp. 372–391.
+doi:10.1006/jmva.1994.1068.</p></li>
+<li><p>Basu A, Mandal A, Pardo L. Hypothesis testing for two discrete
+populations based on the Hellinger distance. Stat Probab Lett.
+Elsevier B.V.; 2010;80: 206–214. doi:10.1016/j.spl.2009.10.008.</p></li>
 <li><p>J. K. Chung, P. L. Kannappan, C. T. Ng, P. K. Sahoo, Measures of
 distance between probability distributions. J. Math. Anal. Appl.
 138, 280–292 (1989).</p></li>
@@ -262,16 +300,21 @@ DNA methylation. PLoS One, 2016, 11:e0150427.</p></li>
     <div class='dont-index'><p><a href='https://en.wikipedia.org/wiki/Kullback-Leibler_divergence'>https://en.wikipedia.org/wiki/Kullback-Leibler_divergence</a>
 for more details, and <code><a href='estimateDivergence.html'>estimateDivergence</a></code> for an example of
 using it.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Robersy Sanchez 11/27/2019 <a href='https://github.com/genomaths'>https://github.com/genomaths</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.5</span>)
-<span class='fu'>estimateJDiv</span>(<span class='no'>p</span>)</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>0.5</span><span class='op'>)</span>
+<span class='fu'>estimateJDiv</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
 <span class='co'>## A numerical trick is implemented. The J-divergence values are the</span>
 <span class='co'>## same for the following vectors:</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.9999999999999999</span>, <span class='fl'>0</span>)
-<span class='no'>q</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>)
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.9999999999999999</span>, <span class='fl'>0</span><span class='op'>)</span>
+<span class='va'>q</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>
 
-<span class='fu'>estimateJDiv</span>(<span class='no'>p</span>) <span class='kw'>==</span> <span class='fu'>estimateJDiv</span>(<span class='no'>q</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fu'>estimateJDiv</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span> <span class='op'>==</span> <span class='fu'>estimateJDiv</span><span class='op'>(</span><span class='va'>q</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -288,7 +331,7 @@ using it.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

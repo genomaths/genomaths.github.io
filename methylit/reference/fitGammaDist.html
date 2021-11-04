@@ -49,6 +49,7 @@
 <meta property="og:title" content="Nonlinear fit of Gamma CDF (Gamma) — fitGammaDist" />
 <meta property="og:description" content="This function performs the nonlinear fit of GGamma CDF of a
 variable x" />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -80,7 +81,7 @@ variable x" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -88,7 +89,7 @@ variable x" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +123,19 @@ variable x" />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -131,13 +144,13 @@ variable x" />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -167,20 +180,20 @@ variable x" />
 variable x</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fitGammaDist</span>(
-  <span class='no'>x</span>,
-  <span class='no'>probability.x</span>,
-  <span class='no'>parameter.values</span>,
-  <span class='kw'>location.par</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>maxiter</span> <span class='kw'>=</span> <span class='fl'>1024</span>,
-  <span class='kw'>ftol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>ptol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>maxfev</span> <span class='kw'>=</span> <span class='fl'>1e+05</span>,
-  <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>fitGammaDist</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>probability.x</span>,
+  <span class='va'>parameter.values</span>,
+  location.par <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  sample.size <span class='op'>=</span> <span class='fl'>20</span>,
+  npoints <span class='op'>=</span> <span class='cn'>NULL</span>,
+  maxiter <span class='op'>=</span> <span class='fl'>1024</span>,
+  ftol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  ptol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  maxfev <span class='op'>=</span> <span class='fl'>1e+05</span>,
+  nlms <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -280,15 +293,19 @@ a time consuming task. To reduce the computational time, the data can be
 Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </ol>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Robersy Sanchez - 06/03/2016</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>126</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/GammaDist.html'>rgamma</a></span>(<span class='fl'>1000</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1.03</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>2.1</span>)
-<span class='fu'>fitGammaDist</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a 2P Gamma distribution model ...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>126</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/GammaDist.html'>rgamma</a></span><span class='op'>(</span><span class='fl'>1000</span>, shape <span class='op'>=</span> <span class='fl'>1.03</span>, scale <span class='op'>=</span> <span class='fl'>2.1</span><span class='op'>)</span>
+<span class='fu'>fitGammaDist</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a 2P Gamma distribution model ...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
 #&gt; shape 0.9746242 0.001629900 597.9657         0 0.999999913159578
 #&gt; scale 2.0760284 0.005052791 410.8677         0                  
 #&gt;                     rho       R.Cross.val                 DEV               AIC
-#&gt; shape 0.999999912723457 0.999729046388015 7.2294506789453e-06 -7092.63101348447
+#&gt; shape 0.999999912723457 0.999728239113872 7.2294506789453e-06 -7092.63101348447
 #&gt; scale                                                                          
 #&gt;                     BIC     COV.shape     COV.scale COV.mu  df   model
 #&gt; shape -7072.99999236854  2.656574e-06 -7.735163e-06     NA 998 Gamma2P
@@ -309,7 +326,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

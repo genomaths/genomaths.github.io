@@ -67,6 +67,7 @@ position is hyper- or hypo-methylated.
 The option to compute the J-information divergence (JD) is currently
 provided. The motivation to introduce this divergence is given in the help of
 function estimateJDiv." />
+<meta property="og:image" content="https://genomaths.github.io/methylit/logo.png" />
 
 
 
@@ -98,7 +99,7 @@ function estimateJDiv." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -106,7 +107,7 @@ function estimateJDiv." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -140,7 +141,19 @@ function estimateJDiv." />
     </li>
     <li class="divider"></li>
     <li>
+      <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
 </li>
@@ -149,13 +162,13 @@ function estimateJDiv." />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -203,25 +216,28 @@ provided. The motivation to introduce this divergence is given in the help of
 function <code><a href='estimateJDiv.html'>estimateJDiv</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>estimateDivergence</span>(
-  <span class='no'>ref</span>,
-  <span class='no'>indiv</span>,
-  <span class='kw'>Bayesian</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>columns</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>min.coverage</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>min.meth</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>min.umeth</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>min.sitecov</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>high.coverage</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>percentile</span> <span class='kw'>=</span> <span class='fl'>0.999</span>,
-  <span class='kw'>JD</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>num.cores</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>tasks</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>meth.level</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>logbase</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>estimateDivergence</span><span class='op'>(</span>
+  <span class='va'>ref</span>,
+  <span class='va'>indiv</span>,
+  Bayesian <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  init.pars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  columns <span class='op'>=</span> <span class='cn'>NULL</span>,
+  min.coverage <span class='op'>=</span> <span class='fl'>4</span>,
+  min.meth <span class='op'>=</span> <span class='fl'>4</span>,
+  min.umeth <span class='op'>=</span> <span class='fl'>0</span>,
+  min.sitecov <span class='op'>=</span> <span class='fl'>4</span>,
+  high.coverage <span class='op'>=</span> <span class='cn'>NULL</span>,
+  percentile <span class='op'>=</span> <span class='fl'>0.999</span>,
+  JD <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  jd.stat <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  num.cores <span class='op'>=</span> <span class='fu'>detectCores</span><span class='op'>(</span><span class='op'>)</span>,
+  tasks <span class='op'>=</span> <span class='fl'>0L</span>,
+  meth.level <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  loss.fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"linear"</span>, <span class='st'>"huber"</span>, <span class='st'>"smooth"</span>, <span class='st'>"cauchy"</span>, <span class='st'>"arctg"</span><span class='op'>)</span>,
+  logbase <span class='op'>=</span> <span class='fl'>2</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,6 +256,13 @@ used in the estimation of the information divergence.</p></td>
       <th>Bayesian</th>
       <td><p>logical(1). Whether to perform the estimations based on
 posterior estimations of methylation levels.</p></td>
+    </tr>
+    <tr>
+      <th>init.pars</th>
+      <td><p>initial parameter values. Defaults is NULL and an initial
+guess is estimated using <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> function. If the initial
+guessing fails initial parameter values are to alpha = 1 &amp;
+beta = 1, which imply the parsimony pseudo-counts greater than zero.</p></td>
     </tr>
     <tr>
       <th>columns</th>
@@ -270,18 +293,18 @@ each sample. Default is min.meth = 4.</p></td>
     <tr>
       <th>min.umeth</th>
       <td><p>An integer or an integer vector of length 2
-(\(min.umeth = c(min.umeth1, min.umeth2)\)). Min number of
-reads to consider cytosine position. Specifically cytosine positions
-where (uC &lt;= min.umeth) &amp; (mC &gt; 0) &amp; (mC &lt;= min.meth) hold will be
-removed, where mC and uC stand for the numbers of methylated and
-unmethylated reads. Default is min.umeth = 0.</p></td>
+(\(min.umeth = c(min.umeth1, min.umeth2)\)). Min number of reads to
+consider cytosine position. Specifically cytosine positions where (uC &lt;=
+min.umeth) &amp; (mC &gt; 0) &amp; (mC &lt;= min.meth) hold will be removed, where mC and
+uC stand for the numbers of methylated and unmethylated reads. Default is
+min.umeth = 0.</p></td>
     </tr>
     <tr>
       <th>min.sitecov</th>
       <td><p>An integer. The minimum total coverage. Only sites where
-the total coverage (cov1 + cov2) is greater than 'min.sitecov' are
-considered for downstream analysis, where cov1 and cov2 are the coverages
-for samples 1 and 2, respectively.</p></td>
+the total coverage (cov1 + cov2) is greater than 'min.sitecov' are considered
+for downstream analysis, where cov1 and cov2 are the coverages for samples 1
+and 2, respectively.</p></td>
     </tr>
     <tr>
       <th>high.coverage</th>
@@ -296,8 +319,14 @@ files stacked.</p></td>
     <tr>
       <th>JD</th>
       <td><p>Logic (Default:FALSE). Option on whether to add a column with
-values of J-information divergence (see <code><a href='estimateJDiv.html'>estimateJDiv</a></code>).
-It is only compute if JD = TRUE and meth.level = FALSE.</p></td>
+values of J-information divergence (see <code><a href='estimateJDiv.html'>estimateJDiv</a></code>). It is
+only compute if JD = TRUE and meth.level = FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>jd.stat</th>
+      <td><p>logical(1). Whether to compute the \(JD\) statistic with
+asymptotic Chi-squared distribution with one degree of freedom (see
+<code><a href='estimateJDiv.html'>estimateJDiv</a></code>).</p></td>
     </tr>
     <tr>
       <th>num.cores</th>
@@ -308,11 +337,11 @@ BiocParallel package).</p></td>
     <tr>
       <th>tasks</th>
       <td><p>integer(1). The number of tasks per job. value must be a scalar
-integer &gt;= 0L. In this documentation a job is defined as a single call
-to a function, such as bplapply, bpmapply etc. A task is the division of
-the X argument into chunks. When tasks == 0 (default), X is divided as
-evenly as possible over the number of workers (see MulticoreParam from
-BiocParallel package).</p></td>
+integer &gt;= 0L. In this documentation a job is defined as a single call to a
+function, such as bplapply, bpmapply etc. A task is the division of the X
+argument into chunks. When tasks == 0 (default), X is divided as evenly as
+possible over the number of workers (see MulticoreParam from BiocParallel
+package).</p></td>
     </tr>
     <tr>
       <th>meth.level</th>
@@ -320,10 +349,28 @@ BiocParallel package).</p></td>
 counts. Default is FALSE.</p></td>
     </tr>
     <tr>
+      <th>loss.fun</th>
+      <td><p>Loss function(s) used in the estimation of the best fitted
+model to beta distribution (only applied when Bayesian=TRUE; see
+<a href='https://en.wikipedia.org/wiki/Loss_function'>(Loss function)</a>). This
+fitting uses the approach followed in in the R package
+<a href='https://github.com/genomaths/usefr'>usefr</a>. After
+\(z =  1/2 * sum((f(x) - y)^2)\) we have:</p><ol>
+<li><p>"linear": linear function which gives a standard least squares:
+\(loss(z) = z\).</p></li>
+<li><p>"huber": Huber loss, \(loss(z) = ifelse(z &lt;= 1, z, sqrt(z) -1)\).</p></li>
+<li><p>"smooth": Smooth approximation to the sum of residues absolute
+values: \(loss(z) = 2*(sqrt(z + 1) - 1)\).</p></li>
+<li><p>"cauchy": Cauchy loss: \(loss(z) = log(z + 1)\).</p></li>
+<li><p>"arctg": arc-tangent loss function: \(loss(x) = atan(z)\).</p></li>
+</ol><p>Loss 'linear' function works well for most of the methylation datasets with
+acceptable quality.</p></td>
+    </tr>
+    <tr>
       <th>logbase</th>
       <td><p>Logarithm base used to compute the JD (if JD = TRUE).
-Logarithm base 2 is used as default (bit unit). Use
-logbase = \(exp(1)\) for natural logarithm.</p></td>
+Logarithm base 2 is used as default (bit unit). Use logbase = \(exp(1)\)
+for natural logarithm.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -331,14 +378,14 @@ logbase = \(exp(1)\) for natural logarithm.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional parameters for 'uniqueGRanges' function.</p></td>
+      <td><p>Optional parameters for <code><a href='uniqueGRanges.html'>uniqueGRanges</a></code> function.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object from 'infDiv' class with the four columns of counts, the
-information divergence, and additional columns:</p><dl'>
+information divergence, and additional columns:</p><dl>
 <dt>1) <strong>A matrix:</strong></dt><dd><p>The original matrix of methylated
 \(c_{ij}\) and unmethylated \(t_{ij}\) read counts from control \(j=1\)
 and treatment \(j=2\) samples at positions \(i\).</p></dd>
@@ -425,37 +472,41 @@ Lett. 2010, 80: 206-214.</p></li>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='estimateBayesianDivergence.html'>estimateBayesianDivergence</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Robersy Sanchez (<a href='https://genomaths.com'>https://genomaths.com</a>)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## The read count data are created</span>
-<span class='no'>num.samples</span> <span class='kw'>&lt;-</span> <span class='fl'>250</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>'chr1'</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>num.samples</span>,
-                <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>num.samples</span>,<span class='kw'>strand</span> <span class='kw'>=</span> <span class='st'>'*'</span>,
-                <span class='kw'>mC</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>num.samples</span>, <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>500</span>),
-                <span class='kw'>uC</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>num.samples</span>, <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>500</span>))
+<span class='va'>num.samples</span> <span class='op'>&lt;-</span> <span class='fl'>250</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>chr <span class='op'>=</span> <span class='st'>'chr1'</span>, start <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>num.samples</span>,
+                end <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>num.samples</span>,strand <span class='op'>=</span> <span class='st'>'*'</span>,
+                mC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='va'>num.samples</span>, mu <span class='op'>=</span> <span class='fl'>4</span>, n <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span>,
+                uC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='va'>num.samples</span>, mu <span class='op'>=</span> <span class='fl'>4</span>, n <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='st'>'chr1'</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>num.samples</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>num.samples</span>,
-                <span class='kw'>strand</span> <span class='kw'>=</span> <span class='st'>'*'</span>, <span class='kw'>mC</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>num.samples</span>,
-                <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>500</span>),
-<span class='kw'>uC</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>num.samples</span>, <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>500</span>))
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>chr <span class='op'>=</span> <span class='st'>'chr1'</span>, start <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>num.samples</span>, end <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>num.samples</span>,
+                strand <span class='op'>=</span> <span class='st'>'*'</span>, mC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='va'>num.samples</span>,
+                mu <span class='op'>=</span> <span class='fl'>4</span>, n <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span>,
+uC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/NegBinomial.html'>rnbinom</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='va'>num.samples</span>, mu <span class='op'>=</span> <span class='fl'>4</span>, n <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(<span class='no'>x</span>, <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span>(<span class='no'>y</span>, <span class='kw'>keep.extra.columns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>hd</span> <span class='kw'>&lt;-</span> <span class='fu'>estimateDivergence</span>(<span class='kw'>ref</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>indiv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>y</span>), <span class='kw'>JD</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span><span class='op'>(</span><span class='va'>x</span>, keep.extra.columns <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>makeGRangesFromDataFrame</span><span class='op'>(</span><span class='va'>y</span>, keep.extra.columns <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>hd</span> <span class='op'>&lt;-</span> <span class='fu'>estimateDivergence</span><span class='op'>(</span>ref <span class='op'>=</span> <span class='va'>x</span>, indiv <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span>, JD <span class='op'>=</span> <span class='cn'>TRUE</span>,
+verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
 
 <span class='co'>## Keep in mind that Hellinger and J divergences are, in general,</span>
 <span class='co'>## correlated</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>hd</span>$<span class='no'>hdiv</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>hd</span>$<span class='no'>jdiv</span>),
-        <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>'kendall'</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>hd</span><span class='op'>$</span><span class='va'>hdiv</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>hd</span><span class='op'>$</span><span class='va'>jdiv</span><span class='op'>)</span>,
+        method <span class='op'>=</span> <span class='st'>'kendall'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; 	Kendall's rank correlation tau
 #&gt; 
 #&gt; data:  as.numeric(hd$hdiv) and as.numeric(hd$jdiv)
-#&gt; z = 18.941, p-value &lt; 2.2e-16
+#&gt; z = 19.057, p-value &lt; 2.2e-16
 #&gt; alternative hypothesis: true tau is not equal to 0
 #&gt; sample estimates:
 #&gt;       tau 
-#&gt; 0.8926499 
+#&gt; 0.8900355 
 #&gt; </div><div class='input'>
 </div></pre>
   </div>
@@ -473,7 +524,7 @@ Lett. 2010, 80: 206-214.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

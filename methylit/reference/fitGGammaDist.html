@@ -81,7 +81,7 @@ variable x" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ variable x" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -133,6 +133,10 @@ variable x" />
     <li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -140,13 +144,13 @@ variable x" />
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -176,20 +180,20 @@ variable x" />
 variable x</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fitGGammaDist</span>(
-  <span class='no'>x</span>,
-  <span class='no'>parameter.values</span>,
-  <span class='kw'>location.par</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>sample.size</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>npoints</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>maxiter</span> <span class='kw'>=</span> <span class='fl'>1024</span>,
-  <span class='kw'>ftol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>ptol</span> <span class='kw'>=</span> <span class='fl'>1e-12</span>,
-  <span class='kw'>maxfev</span> <span class='kw'>=</span> <span class='fl'>1e+05</span>,
-  <span class='kw'>nlms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>fitGGammaDist</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>parameter.values</span>,
+  location.par <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  sample.size <span class='op'>=</span> <span class='fl'>20</span>,
+  npoints <span class='op'>=</span> <span class='cn'>NULL</span>,
+  maxiter <span class='op'>=</span> <span class='fl'>1024</span>,
+  ftol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  ptol <span class='op'>=</span> <span class='fl'>1e-12</span>,
+  maxfev <span class='op'>=</span> <span class='fl'>1e+05</span>,
+  nlms <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -295,12 +299,16 @@ R.Cross.val are estimated based on all the original variable x values.</p>
 Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </ol>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Robersy Sanchez - 06/03/2016</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
 <span class='co'>## Fitting GGamma3P</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggamma.html'>rggamma</a></span>(<span class='fl'>3000</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1.03</span>, <span class='kw'>psi</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1.1</span>)
-<span class='fu'>fitGGammaDist</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 3P Gamma distribution model 3000 values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ggamma.html'>rggamma</a></span><span class='op'>(</span><span class='fl'>3000</span>, alpha <span class='op'>=</span> <span class='fl'>1.03</span>, psi <span class='op'>=</span> <span class='fl'>0.75</span>, scale <span class='op'>=</span> <span class='fl'>1.1</span><span class='op'>)</span>
+<span class='fu'>fitGGammaDist</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 3P Gamma distribution model 3000 values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square
 #&gt; alpha 1.0646011 0.001915538 555.7713         0 0.999999998182352
 #&gt; scale 1.1382887 0.002872487 396.2729         0                  
 #&gt; psi   0.7383895 0.001898632 388.9061         0                  
@@ -316,8 +324,9 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 #&gt; alpha -3.602364e-06     NA 3000 GGamma3P
 #&gt; scale -5.426154e-06     NA 3000         
 #&gt; psi    3.604802e-06     NA 3000         </div><div class='input'><span class='co'>## Fitting GGamma4P</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> + <span class='fl'>1</span>
-<span class='fu'>fitGGammaDist</span>(<span class='no'>x</span>, <span class='kw'>location.par</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 4P Gamma distribution model 3000 values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate   Std. Error    t value Pr(&gt;|t|))      Adj.R.Square
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>x</span> <span class='op'>+</span> <span class='fl'>1</span>
+<span class='fu'>fitGGammaDist</span><span class='op'>(</span><span class='va'>x</span>, location.par <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>*** Trying nonlinear fit to a generalized 4P Gamma distribution model 3000 values...</span></div><div class='output co'>#&gt; *** Performing nonlinear regression model  crossvalidation...</div><div class='output co'>#&gt;        Estimate   Std. Error    t value Pr(&gt;|t|))      Adj.R.Square
 #&gt; alpha 1.0322905 2.213370e-03   466.3886         0 0.999999998586538
 #&gt; scale 1.0778304 3.744287e-03   287.8600         0                  
 #&gt; mu    0.9981787 6.792419e-05 14695.4819         0                  
@@ -353,7 +362,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
