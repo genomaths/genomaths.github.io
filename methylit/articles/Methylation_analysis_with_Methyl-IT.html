@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -122,7 +122,7 @@
 
       
 
-      </header><script src="Methylation_analysis_with_Methyl-IT_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="Methylation_analysis_with_Methyl-IT_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Methylation analysis with Methyl-IT</h1>
@@ -133,7 +133,7 @@ Mackenzie’s lab<br><br>
 Department of Biology and Plant Science.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 class="date">14 July 2021</h4>
+            <h4 class="date">04 November 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/Methylation_analysis_with_Methyl-IT.Rmd"><code>vignettes/Methylation_analysis_with_Methyl-IT.Rmd</code></a></small>
       <div class="hidden name"><code>Methylation_analysis_with_Methyl-IT.Rmd</code></div>
@@ -282,7 +282,8 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 
 <span class="co"># Methylation level divergences</span>
 <span class="va">DIVs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimateDivergence.html">estimateDivergence</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="va">ref</span>, indiv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ctrl</span>, <span class="va">treat</span><span class="op">)</span>, Bayesian <span class="op">=</span> <span class="cn">TRUE</span>, 
-                            num.cores <span class="op">=</span> <span class="fl">6L</span>, percentile <span class="op">=</span> <span class="fl">1</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+                           num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span>, percentile <span class="op">=</span> <span class="fl">1</span>, 
+                           verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>The mean of methylation levels differences is:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">DIVs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">x</span><span class="op">[</span>, <span class="fl">7</span><span class="op">]</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -317,12 +318,12 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 
 <span class="va">critical.val</span></code></pre></div>
 <pre><code>##       tv.95%    hd.95%
-## C1 0.6689542  68.10693
-## C2 0.6663445  68.39022
-## C3 0.6608097  67.33024
-## T1 0.9101299 133.89470
-## T2 0.9187603 138.02840
-## T3 0.9171228 136.89728</code></pre>
+## C1 0.6660831  64.57356
+## C2 0.6641814  64.47083
+## C3 0.6588519  63.73616
+## T1 0.9218783 137.75421
+## T2 0.9308996 140.88252
+## T3 0.9293840 140.99837</code></pre>
 <p>The kernel density estimation yields the empirical density shown in the graphics:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span><span class="op">)</span>
@@ -403,7 +404,7 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ft</span> <span class="op">=</span> <span class="fu"><a href="../reference/FisherTest.html">FisherTest</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, tv.cut <span class="op">=</span> <span class="fl">0.67</span>,
                     pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,  pooling.stat <span class="op">=</span> <span class="st">"mean"</span>, 
-                    pvalCutOff <span class="op">=</span> <span class="fl">0.05</span>, num.cores <span class="op">=</span> <span class="fl">4L</span>,
+                    pvalCutOff <span class="op">=</span> <span class="fl">0.05</span>, num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
                     verbose <span class="op">=</span> <span class="cn">FALSE</span>, saveAll <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> 
 
 <span class="co"># TV column is the standard TV value (without Bayesian correction of methylation</span>
@@ -418,46 +419,46 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
                         tv.cut <span class="op">=</span> <span class="fl">0.674</span>, tv.col <span class="op">=</span> <span class="fl">8</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, 
                         dist.name <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span><span class="op">)</span>
 <span class="va">ft.hd</span><span class="op">$</span><span class="va">T1</span></code></pre></div>
-<pre><code>## GRanges object with 2385 ranges and 12 metadata columns:
+<pre><code>## GRanges object with 2216 ranges and 12 metadata columns:
 ##          seqnames    ranges strand |        c1        t1        c2        t2
 ##             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
 ##      [1]        1        29      * |         6       110       112         4
 ##      [2]        1        42      * |         0       112       112         0
 ##      [3]        1        70      * |         0        84        84         0
 ##      [4]        1       103      * |         0        94        91         3
-##      [5]        1       125      * |         1        82        83         0
+##      [5]        1       105      * |         0       168       118        50
 ##      ...      ...       ...    ... .       ...       ...       ...       ...
-##   [2381]        1     49928      * |        10       148       158         0
-##   [2382]        1     49974      * |        19       130       147         2
-##   [2383]        1     49980      * |        45       139       184         0
-##   [2384]        1     49981      * |        34       143       177         0
-##   [2385]        1     49996      * |        20       196       216         0
-##                 p1        p2        TV    bay.TV      hdiv       pvalue
-##          &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;    &lt;numeric&gt;
-##      [1] 0.0671629  0.961958  0.913793  0.894795   130.441  1.22001e-52
-##      [2] 0.0195242  0.996112  1.000000  0.976588   180.529  1.39309e-66
-##      [3] 0.0254465  0.994826  1.000000  0.969379   130.880  8.69664e-50
-##      [4] 0.0229592  0.963681  0.968085  0.940722   125.947  1.29337e-50
-##      [5] 0.0366770  0.994764  0.987952  0.958087   123.979  2.90468e-47
-##      ...       ...       ...       ...       ...       ...          ...
-##   [2381] 0.0742531  0.997239  0.936709  0.922986   215.390  1.25471e-78
-##   [2382] 0.1357136  0.983710  0.859060  0.847996   154.789  3.15691e-60
-##   [2383] 0.2462131  0.997628  0.755435  0.751415   170.978  1.01280e-61
-##   [2384] 0.1961534  0.997534  0.807910  0.801381   182.676  2.77686e-66
-##   [2385] 0.0996347  0.997978  0.907407  0.898343   278.630 2.42409e-100
-##             adj.pval     wprob
-##            &lt;numeric&gt; &lt;numeric&gt;
-##      [1] 4.86816e-52 0.0433307
-##      [2] 1.07813e-65 0.0189056
-##      [3] 3.03410e-49 0.0430002
-##      [4] 4.68846e-50 0.0468829
-##      [5] 9.18128e-47 0.0485420
-##      ...         ...       ...
-##   [2381] 1.67316e-77 0.0110697
-##   [2382] 1.80286e-59 0.0286571
-##   [2383] 6.21624e-61 0.0220103
-##   [2384] 2.11753e-65 0.0182765
-##   [2385] 9.74758e-99 0.0044701
+##   [2212]        1     49928      * |        10       148       158         0
+##   [2213]        1     49974      * |        19       130       147         2
+##   [2214]        1     49980      * |        45       139       184         0
+##   [2215]        1     49981      * |        34       143       177         0
+##   [2216]        1     49996      * |        20       196       216         0
+##                  p1        p2        TV    bay.TV      hdiv       pvalue
+##           &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;    &lt;numeric&gt;
+##      [1] 0.05767401  0.960383  0.913793  0.902709   133.716  1.22001e-52
+##      [2] 0.00828415  0.994390  1.000000  0.986106   188.631  1.39309e-66
+##      [3] 0.01089594  0.992542  1.000000  0.981646   137.720  8.69664e-50
+##      [4] 0.00979324  0.961735  0.968085  0.951942   134.576  1.29337e-50
+##      [5] 0.00559965  0.700322  0.702381  0.694722   132.322  2.02668e-50
+##      ...        ...       ...       ...       ...       ...          ...
+##   [2212]  0.0673643  0.996014  0.936709  0.928649   216.239  1.25471e-78
+##   [2213]  0.1298192  0.982438  0.859060  0.852618   155.775  3.15691e-60
+##   [2214]  0.2434580  0.996574  0.755435  0.753116   168.913  1.01280e-61
+##   [2215]  0.1923293  0.996439  0.807910  0.804110   181.062  2.77686e-66
+##   [2216]  0.0949574  0.997079  0.907407  0.902122   278.144 2.42409e-100
+##             adj.pval      wprob
+##            &lt;numeric&gt;  &lt;numeric&gt;
+##      [1] 4.86816e-52  0.0481724
+##      [2] 1.07813e-65  0.0218461
+##      [3] 3.03410e-49  0.0453074
+##      [4] 4.68846e-50  0.0475390
+##      [5] 7.31951e-50  0.0492197
+##      ...         ...        ...
+##   [2212] 1.67316e-77 0.01517910
+##   [2213] 1.80286e-59 0.03463233
+##   [2214] 6.21624e-61 0.02869006
+##   [2215] 2.11753e-65 0.02422311
+##   [2216] 9.74758e-99 0.00711868
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
 <p>The above result shows column ‘adj.pval’ with the FT’s p.values adjusted for multiple comparisons and column ‘wprob’ with the predicted probabilities: <span class="math inline">\(1 - P(H_k &gt;= H_{\alpha = 0.05})\)</span> from the best fitted model.</p>
@@ -467,12 +468,12 @@ p_{ir}})^2+(\sqrt{1-\hat p_{ij}} - \sqrt{1-\hat p_{ir}})^2\Big]\]</span> where <
             ft.hd <span class="op">=</span> <span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">ft.hd</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span>,
 BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">PS</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##      ft ft.hd BestModel
-## C1 1865  1043      1043
-## C2 1824  1065      1065
-## C3 1765  1033      1033
-## T1 7800  2385      2385
-## T2 7847  2315      2315
-## T3 7879  2333      2333</code></pre>
+## C1 1865  1007      1007
+## C2 1824  1033      1033
+## C3 1765   984       984
+## T1 7800  2216      2216
+## T2 7847  2160      2160
+## T3 7879  2181      2181</code></pre>
 <p>Notice that there are significant differences between the numbers of PSs detected by FT and other approaches. There at least about 7800 - 2226 = 5574 or more PSs in the treatment samples that are not induced by the treatment, which can naturally occurs in both groups, control and treatment. In other words, the best probabilistic distribution models suggest that those methylation events are resultant of the normal (non-stressful) biological processes. Any information divergence of methylation level below the critical value <span class="math inline">\(TV_{\alpha=0.05}\)</span> or <span class="math inline">\(H_{\alpha=0.05}\)</span> is a methylation event that can occur in normal conditions. <em>It does not matter how much significant a test like FT could be, since it is not about the signification of the test, but about how big is the probability to observe that methylation event in the control population as well</em>.</p>
 </div>
 <div id="critical-values-based-on-fitted-models" class="section level3">
@@ -485,12 +486,12 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
                                 dist.name <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span><span class="op">)</span><span class="op">)</span>
 <span class="va">q95</span></code></pre></div>
 <pre><code>##          q95
-## C1  60.16845
-## C2  59.48462
-## C3  59.05252
-## T1 122.31120
-## T2 127.93760
-## T3 127.11574</code></pre>
+## C1  57.72634
+## C2  57.00210
+## C3  57.01662
+## T1 131.30550
+## T2 137.27877
+## T3 135.89067</code></pre>
 </div>
 </div>
 </div>
@@ -517,19 +518,19 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
                             n.pc <span class="op">=</span> <span class="fl">4</span> , center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,
                             div.col <span class="op">=</span> <span class="fl">9</span>, clas.perf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span></code></pre></div>
-<pre><code>## [1] 122.3811</code></pre>
+<pre><code>## [1] 131.3256</code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cutpoint</span><span class="op">$</span><span class="va">testSetPerformance</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT  271    0
-##         TT    0 2813
+##         CT  167    0
+##         TT    0 2623
 ##                                      
 ##                Accuracy : 1          
-##                  95% CI : (0.9988, 1)
-##     No Information Rate : 0.9121     
+##                  95% CI : (0.9987, 1)
+##     No Information Rate : 0.9401     
 ##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
 ##                                      
 ##                   Kappa : 1          
@@ -540,9 +541,9 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
 ##             Specificity : 1.0000     
 ##          Pos Pred Value : 1.0000     
 ##          Neg Pred Value : 1.0000     
-##              Prevalence : 0.9121     
-##          Detection Rate : 0.9121     
-##    Detection Prevalence : 0.9121     
+##              Prevalence : 0.9401     
+##          Detection Rate : 0.9401     
+##    Detection Prevalence : 0.9401     
 ##       Balanced Accuracy : 1.0000     
 ##                                      
 ##        'Positive' Class : TT         
@@ -567,39 +568,39 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
                             div.col <span class="op">=</span> <span class="fl">9</span>, clas.perf <span class="op">=</span> <span class="cn">TRUE</span>,
                             post.cut <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>
 <span class="va">cutpoint2</span><span class="op">$</span><span class="va">cutpoint</span></code></pre></div>
-<pre><code>## [1] 97.83593</code></pre>
+<pre><code>## [1] 96.44128</code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cutpoint2</span><span class="op">$</span><span class="va">testSetPerformance</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT   10   41
-##         TT  537 4261
+##         CT   10   57
+##         TT  472 4503
 ##                                           
-##                Accuracy : 0.8808          
-##                  95% CI : (0.8713, 0.8898)
-##     No Information Rate : 0.8872          
-##     P-Value [Acc &gt; NIR] : 0.9228          
+##                Accuracy : 0.8951          
+##                  95% CI : (0.8863, 0.9034)
+##     No Information Rate : 0.9044          
+##     P-Value [Acc &gt; NIR] : 0.9878          
 ##                                           
-##                   Kappa : 0.0145          
+##                   Kappa : 0.0134          
 ##                                           
 ##  Mcnemar's Test P-Value : &lt;2e-16          
 ##                                           
-##             Sensitivity : 0.99047         
-##             Specificity : 0.01828         
-##          Pos Pred Value : 0.88808         
-##          Neg Pred Value : 0.19608         
-##              Prevalence : 0.88719         
-##          Detection Rate : 0.87874         
-##    Detection Prevalence : 0.98948         
-##       Balanced Accuracy : 0.50438         
+##             Sensitivity : 0.98750         
+##             Specificity : 0.02075         
+##          Pos Pred Value : 0.90513         
+##          Neg Pred Value : 0.14925         
+##              Prevalence : 0.90440         
+##          Detection Rate : 0.89310         
+##    Detection Prevalence : 0.98671         
+##       Balanced Accuracy : 0.50412         
 ##                                           
 ##        'Positive' Class : TT              
 ## </code></pre>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cutpoint2</span><span class="op">$</span><span class="va">testSetModel.FDR</span></code></pre></div>
-<pre><code>## [1] 0.1119216</code></pre>
+<pre><code>## [1] 0.09487437</code></pre>
 <p>Addition of information on the probability distribution of the methylation signal to potential signal identified with FT will emulate the results obtained with the Methyl-IT pipeline.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cutpoint3</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.hd</span>, 
@@ -613,19 +614,19 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
                             n.pc <span class="op">=</span> <span class="fl">4</span> , center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,
                             div.col <span class="op">=</span> <span class="fl">9</span>, clas.perf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">cutpoint3</span><span class="op">$</span><span class="va">cutpoint</span></code></pre></div>
-<pre><code>## [1] 122.3811</code></pre>
+<pre><code>## [1] 131.3256</code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cutpoint3</span><span class="op">$</span><span class="va">testSetPerformance</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT  271    0
-##         TT    0 2813
+##         CT  167    0
+##         TT    0 2623
 ##                                      
 ##                Accuracy : 1          
-##                  95% CI : (0.9988, 1)
-##     No Information Rate : 0.9121     
+##                  95% CI : (0.9987, 1)
+##     No Information Rate : 0.9401     
 ##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
 ##                                      
 ##                   Kappa : 1          
@@ -636,9 +637,9 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
 ##             Specificity : 1.0000     
 ##          Pos Pred Value : 1.0000     
 ##          Neg Pred Value : 1.0000     
-##              Prevalence : 0.9121     
-##          Detection Rate : 0.9121     
-##    Detection Prevalence : 0.9121     
+##              Prevalence : 0.9401     
+##          Detection Rate : 0.9401     
+##    Detection Prevalence : 0.9401     
 ##       Balanced Accuracy : 1.0000     
 ##                                      
 ##        'Positive' Class : TT         
@@ -671,37 +672,45 @@ BestModel <span class="op">=</span> <span class="fu"><a href="../reference/unlis
                             tasks <span class="op">=</span> <span class="fl">2L</span>
 <span class="op">)</span>
 <span class="va">class.perf</span></code></pre></div>
-<pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
-##  Min.   :1   Min.   :1   Min.   :0.9988   Min.   :1     Min.   :0.9121  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9988   1st Qu.:1     1st Qu.:0.9121  
-##  Median :1   Median :1   Median :0.9988   Median :1     Median :0.9121  
-##  Mean   :1   Mean   :1   Mean   :0.9988   Mean   :1     Mean   :0.9121  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9988   3rd Qu.:1     3rd Qu.:0.9121  
-##  Max.   :1   Max.   :1   Max.   :0.9988   Max.   :1     Max.   :0.9121  
-##                                                                         
-##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value
-##  Min.   :6.468e-124   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
-##  1st Qu.:6.468e-124   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
-##  Median :6.468e-124   Median : NA   Median :1    Median :1    Median :1     
-##  Mean   :6.468e-124   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
-##  3rd Qu.:6.468e-124   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
-##  Max.   :6.468e-124   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
-##                       NA's   :300                                           
-##  Neg Pred Value   Precision     Recall        F1      Prevalence    
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9121  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9121  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.9121  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9121  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9121  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9121  
+<pre><code>##     Accuracy          Kappa        AccuracyLower    AccuracyUpper   
+##  Min.   :0.9971   Min.   :0.9739   Min.   :0.9944   Min.   :0.9988  
+##  1st Qu.:1.0000   1st Qu.:1.0000   1st Qu.:0.9987   1st Qu.:1.0000  
+##  Median :1.0000   Median :1.0000   Median :0.9987   Median :1.0000  
+##  Mean   :1.0000   Mean   :0.9999   Mean   :0.9987   Mean   :1.0000  
+##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.9987   3rd Qu.:1.0000  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :0.9987   Max.   :1.0000  
 ##                                                                     
-##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.9121   Min.   :0.9121       Min.   :1        
-##  1st Qu.:0.9121   1st Qu.:0.9121       1st Qu.:1        
-##  Median :0.9121   Median :0.9121       Median :1        
-##  Mean   :0.9121   Mean   :0.9121       Mean   :1        
-##  3rd Qu.:0.9121   3rd Qu.:0.9121       3rd Qu.:1        
-##  Max.   :0.9121   Max.   :0.9121       Max.   :1        
+##   AccuracyNull    AccuracyPValue      McnemarPValue      Sensitivity
+##  Min.   :0.9401   Min.   :0.000e+00   Min.   :0.01333   Min.   :1   
+##  1st Qu.:0.9401   1st Qu.:0.000e+00   1st Qu.:0.01333   1st Qu.:1   
+##  Median :0.9401   Median :0.000e+00   Median :0.01333   Median :1   
+##  Mean   :0.9401   Mean   :1.382e-64   Mean   :0.01333   Mean   :1   
+##  3rd Qu.:0.9401   3rd Qu.:0.000e+00   3rd Qu.:0.01333   3rd Qu.:1   
+##  Max.   :0.9401   Max.   :4.147e-62   Max.   :0.01333   Max.   :1   
+##                                       NA's   :299                   
+##   Specificity     Pos Pred Value  Neg Pred Value   Precision         Recall 
+##  Min.   :0.9521   Min.   :0.997   Min.   :1      Min.   :0.997   Min.   :1  
+##  1st Qu.:1.0000   1st Qu.:1.000   1st Qu.:1      1st Qu.:1.000   1st Qu.:1  
+##  Median :1.0000   Median :1.000   Median :1      Median :1.000   Median :1  
+##  Mean   :0.9998   Mean   :1.000   Mean   :1      Mean   :1.000   Mean   :1  
+##  3rd Qu.:1.0000   3rd Qu.:1.000   3rd Qu.:1      3rd Qu.:1.000   3rd Qu.:1  
+##  Max.   :1.0000   Max.   :1.000   Max.   :1      Max.   :1.000   Max.   :1  
+##                                                                             
+##        F1           Prevalence     Detection Rate   Detection Prevalence
+##  Min.   :0.9985   Min.   :0.9401   Min.   :0.9401   Min.   :0.9401      
+##  1st Qu.:1.0000   1st Qu.:0.9401   1st Qu.:0.9401   1st Qu.:0.9401      
+##  Median :1.0000   Median :0.9401   Median :0.9401   Median :0.9401      
+##  Mean   :1.0000   Mean   :0.9401   Mean   :0.9401   Mean   :0.9402      
+##  3rd Qu.:1.0000   3rd Qu.:0.9401   3rd Qu.:0.9401   3rd Qu.:0.9401      
+##  Max.   :1.0000   Max.   :0.9401   Max.   :0.9401   Max.   :0.9430      
+##                                                                         
+##  Balanced Accuracy
+##  Min.   :0.9760   
+##  1st Qu.:1.0000   
+##  Median :1.0000   
+##  Mean   :0.9999   
+##  3rd Qu.:1.0000   
+##  Max.   :1.0000   
 ## </code></pre>
 </div>
 </div>

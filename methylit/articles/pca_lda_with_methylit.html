@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -122,7 +122,7 @@
 
       
 
-      </header><script src="pca_lda_with_methylit_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="pca_lda_with_methylit_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Principal Components and Linear Discriminant Analyses with Methyl-IT</h1>
@@ -136,7 +136,7 @@ Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div>
 </h4>
             
-            <h4 class="date">14 July 2021</h4>
+            <h4 class="date">04 November 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/pca_lda_with_methylit.Rmd"><code>vignettes/pca_lda_with_methylit.Rmd</code></a></small>
       <div class="hidden name"><code>pca_lda_with_methylit.Rmd</code></div>
@@ -281,21 +281,21 @@ pre { /* Code block - determines code spacing between lines */
 <span class="op">}</span><span class="op">)</span><span class="op">)</span>
 <span class="va">critical.val</span></code></pre></div>
 <pre><code>##        tv.95%    hd.95%
-## C1  0.6316890  63.94381
-## C2  0.6308368  62.39147
-## C3  0.6372794  64.57581
-## C4  0.9152682 117.69617
-## C5  0.9298600 119.94277
-## T1  0.9476171 131.70143
-## T2  0.9411354 125.97706
-## T3  0.9367599 126.56789
-## T4  0.9430966 130.05194
-## T5  0.9441060 129.00926
-## T6  0.9550471 135.98203
-## T7  0.9576300 140.06201
-## T8  0.9507792 134.73582
-## T9  0.9607266 139.48539
-## T10 0.9575098 138.32493</code></pre>
+## C1  0.6406672  59.58613
+## C2  0.6374645  58.41722
+## C3  0.6386189  59.09187
+## C4  0.7706766  92.49756
+## C5  0.8076015  99.44518
+## T1  0.8923509 118.55831
+## T2  0.8820082 113.92496
+## T3  0.8805118 114.88998
+## T4  0.8865382 117.41163
+## T5  0.8881189 117.81490
+## T6  0.9258356 128.28320
+## T7  0.9250543 129.49118
+## T8  0.9200787 126.41222
+## T9  0.9292491 129.89578
+## T10 0.9255575 129.07053</code></pre>
 </div>
 <div id="modeling-the-methylation-signal" class="section level1">
 <h1 class="hasAnchor">
@@ -309,7 +309,7 @@ pre { /* Code block - determines code spacing between lines */
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span></code></pre></div>
 <pre><code>##          C1          C2          C3          C4          C5          T1 
-## "Weibull2P" "Weibull2P" "Weibull2P" "Weibull3P" "Weibull3P" "Weibull3P" 
+## "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" 
 ##          T2          T3          T4          T5          T6          T7 
 ## "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" "Weibull3P" 
 ##          T8          T9         T10 
@@ -318,37 +318,37 @@ pre { /* Code block - determines code spacing between lines */
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gof</span><span class="op">$</span><span class="va">stats</span></code></pre></div>
 <pre><code>##       w2p_AIC w2p_R.Cross.val   w3p_AIC w3p_R.Cross.val   g2p_AIC
-## C1  -132768.3       0.9980126        NA              NA -126672.6
-## C2  -132632.7       0.9980198        NA              NA -126214.2
-## C3  -129887.8       0.9978081        NA              NA -123573.4
-## C4  -163056.5       0.9974321 -215684.3       0.9994825 -161064.1
-## C5  -161315.0       0.9971729 -215393.7       0.9994408 -158776.5
-## T1  -166483.8       0.9971576 -218420.0       0.9993635 -161465.2
-## T2  -165445.6       0.9971383 -220181.1       0.9994108 -161229.2
-## T3  -168287.5       0.9972928 -221375.7       0.9994157 -164386.1
-## T4  -166516.8       0.9971732 -219456.9       0.9993852 -162408.2
-## T5  -165260.3       0.9970847 -221789.7       0.9994261 -160805.5
-## T6  -172034.4       0.9970991 -225618.5       0.9993335 -165809.7
-## T7  -169688.4       0.9969227 -224064.1       0.9993151 -163735.0
-## T8  -170538.0       0.9970137 -225983.1       0.9993464 -164098.5
-## T9  -168923.3       0.9968719 -222512.5       0.9992872 -162629.7
-## T10 -169803.5       0.9969153 -223777.4       0.9993051 -164034.0
+## C1  -173343.1       0.9994740 -174151.8       0.9994889 -165487.2
+## C2  -176361.6       0.9995241 -176807.8       0.9995314 -168458.2
+## C3  -177857.3       0.9995495 -178351.4       0.9995577 -170455.8
+## C4  -176986.4       0.9982813 -241815.5       0.9997452 -170025.2
+## C5  -173024.7       0.9979755 -236166.5       0.9996815 -166396.9
+## T1  -171247.2       0.9974948 -229699.6       0.9995216 -163260.7
+## T2  -170395.2       0.9974948 -231191.4       0.9995552 -163066.8
+## T3  -173437.5       0.9976429 -231862.2       0.9995516 -166304.0
+## T4  -171910.8       0.9975559 -229519.1       0.9995241 -164696.9
+## T5  -170592.5       0.9974783 -231856.3       0.9995570 -163388.5
+## T6  -175158.9       0.9973222 -230950.5       0.9994177 -166927.9
+## T7  -172799.5       0.9971559 -230118.2       0.9994043 -164568.9
+## T8  -173332.4       0.9972197 -230830.2       0.9994207 -164912.2
+## T9  -172019.4       0.9971076 -229348.1       0.9993938 -163516.3
+## T10 -173248.1       0.9971756 -229839.4       0.9993964 -165184.0
 ##     g2p_R.Cross.val   g3p_AIC g3p_R.Cross.val bestModel
-## C1        0.9974143       Inf       0.0000000       w2p
-## C2        0.9973081       Inf       0.0000000       w2p
-## C3        0.9969977       Inf       0.0000000       w2p
-## C4        0.9970526 -200045.9       0.9990363       w3p
-## C5        0.9966871 -199751.0       0.9989735       w3p
-## T1        0.9963972 -200000.1       0.9987652       w3p
-## T2        0.9964727 -201382.2       0.9988453       w3p
-## T3        0.9966877 -203604.6       0.9988821       w3p
-## T4        0.9965189 -201153.6       0.9988103       w3p
-## T5        0.9963896 -202720.1       0.9988737       w3p
-## T6        0.9962185 -206626.3       0.9987457       w3p
-## T7        0.9960185 -205333.6       0.9987030       w3p
-## T8        0.9961035 -206217.4       0.9987499       w3p
-## T9        0.9959053 -203604.1       0.9986530       w3p
-## T10       0.9960178 -204801.3       0.9986763       w3p</code></pre>
+## C1        0.9994168 -166198.9       0.9994472       w3p
+## C2        0.9994744 -168881.1       0.9994902       w3p
+## C3        0.9995056 -170826.3       0.9995182       w3p
+## C4        0.9978091 -224251.9       0.9995298       w3p
+## C5        0.9974082 -217515.6       0.9993874       w3p
+## T1        0.9966440 -209442.6       0.9990548       w3p
+## T2        0.9967186 -211204.4       0.9991269       w3p
+## T3        0.9969232 -212608.4       0.9991339       w3p
+## T4        0.9967954 -209858.8       0.9990703       w3p
+## T5        0.9966969 -211370.3       0.9991181       w3p
+## T6        0.9963637 -210591.2       0.9988671       w3p
+## T7        0.9961477 -208990.3       0.9988197       w3p
+## T8        0.9962298 -209992.3       0.9988675       w3p
+## T9        0.9960448 -207860.2       0.9987920       w3p
+## T10       0.9961734 -208773.2       0.9988041       w3p</code></pre>
 </div>
 <div id="estimation-of-an-optimal-cutpoint-to-discriminate-the-signal-induced-by-the-treatment" class="section level1">
 <h1 class="hasAnchor">
@@ -377,10 +377,10 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ## Posterior probability used to get the cutpoint = 0.5 
 ## Cytosine sites with treatment PostProbCut &gt;= 0.5 have a 
-## divergence value &gt;= 87.7777 
+## divergence value &gt;= 76.33942 
 ## 
-## Optimized statistic: Accuracy = 0.89435 
-## Cutpoint = 94.543 
+## Optimized statistic: Accuracy = 0.9603 
+## Cutpoint = 88.733 
 ## 
 ## Model classifier 'pca.qda' 
 ## 
@@ -406,26 +406,26 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ##           Reference
 ## Prediction   CT   TT
-##         CT 2662  181
-##         TT  750 5219
+##         CT 3006  160
+##         TT  170 4977
 ##                                           
-##                Accuracy : 0.8943          
-##                  95% CI : (0.8877, 0.9007)
-##     No Information Rate : 0.6128          
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                Accuracy : 0.9603          
+##                  95% CI : (0.9559, 0.9644)
+##     No Information Rate : 0.6179          
+##     P-Value [Acc &gt; NIR] : &lt;2e-16          
 ##                                           
-##                   Kappa : 0.7703          
+##                   Kappa : 0.9159          
 ##                                           
-##  Mcnemar's Test P-Value : &lt; 2.2e-16       
+##  Mcnemar's Test P-Value : 0.6203          
 ##                                           
-##             Sensitivity : 0.9665          
-##             Specificity : 0.7802          
-##          Pos Pred Value : 0.8744          
-##          Neg Pred Value : 0.9363          
-##              Prevalence : 0.6128          
-##          Detection Rate : 0.5923          
-##    Detection Prevalence : 0.6774          
-##       Balanced Accuracy : 0.8733          
+##             Sensitivity : 0.9689          
+##             Specificity : 0.9465          
+##          Pos Pred Value : 0.9670          
+##          Neg Pred Value : 0.9495          
+##              Prevalence : 0.6179          
+##          Detection Rate : 0.5987          
+##    Detection Prevalence : 0.6192          
+##       Balanced Accuracy : 0.9577          
 ##                                           
 ##        'Positive' Class : TT              
 ## </code></pre>
@@ -439,7 +439,7 @@ pre { /* Code block - determines code spacing between lines */
                    tv.cut <span class="op">=</span> <span class="fl">0.34</span>, tv.col <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dmps</span>,<span class="va">length</span><span class="op">)</span></code></pre></div>
 <pre><code>##   C1   C2   C3   C4   C5   T1   T2   T3   T4   T5   T6   T7   T8   T9  T10 
-##  428  408  447 2294 2421 2865 2715 2696 2777 2776 3171 3272 3189 3328 3255</code></pre>
+##  431  405  395 1804 2032 2747 2586 2570 2670 2678 3174 3225 3216 3309 3249</code></pre>
 <p>Next, to represent individual samples as vectors from the <em>N</em>-dimensional space, we can use <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/getGRegionsStat-methods.html">getGRegionsStat</a> function from <a href="https://github.com/genomaths/MethylIT.utils">MethylIT.utils</a> R package. Here, the simulated “chromosome” is split into regions of 450bp non-overlapping windows. and the <em>density</em> of Hellinger divergences values is taken for each windows.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
@@ -504,9 +504,9 @@ pre { /* Code block - determines code spacing between lines */
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ld</span><span class="op">$</span><span class="va">pca</span><span class="op">)</span></code></pre></div>
 <pre><code>## Importance of first k=3 (out of 15) components:
 ##                             PC1      PC2      PC3
-## Standard deviation     344.5584 61.66656 59.91694
-## Proportion of Variance   0.7797  0.02498  0.02358
-## Cumulative Proportion    0.7797  0.80472  0.82830</code></pre>
+## Standard deviation     308.6113 57.35742 55.39723
+## Proportion of Variance   0.7802  0.02695  0.02514
+## Cumulative Proportion    0.7802  0.80718  0.83232</code></pre>
 <p>We may retain enough components so that the cumulative percent of variance accounted for at least 70 to 80%. By setting <span class="math inline">\(scale=TRUE\)</span> and <span class="math inline">\(center=TRUE\)</span>, we could have different results and would improve or not our results. In particular, these settings are essentials if the <em>N</em>-dimensional space is integrated by variables from different measurement scales/units, for example, Kg and g, or Kg and Km.</p>
 <div id="pca" class="section level2">
 <h2 class="hasAnchor">
@@ -515,22 +515,22 @@ pre { /* Code block - determines code spacing between lines */
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pca.coord</span> <span class="op">&lt;-</span> <span class="va">ld</span><span class="op">$</span><span class="va">pca</span><span class="op">$</span><span class="va">x</span>
 <span class="va">pca.coord</span></code></pre></div>
-<pre><code>##            PC1          PC2        PC3
-## C1   -66.02831    2.5761286  -2.497186
-## C2   -60.72361    0.4641290   3.716630
-## C3   -64.70796    0.1604416   1.250952
-## C4  -296.43680    1.1973841 -14.429833
-## C5  -316.04330   28.6387273  17.169950
-## T1  -362.55163    8.6853668 -28.309850
-## T2  -344.10934  -36.5981863 -37.008931
-## T3  -346.99759   25.6574405 -49.247238
-## T4  -354.63542    2.0259927 -36.936096
-## T5  -354.55213    7.4700821 -19.961333
-## T6  -397.99592   29.6061097 -72.443955
-## T7  -417.14171 -113.7180685 110.536823
-## T8  -399.89678   74.5749572 -50.264971
-## T9  -419.69586  115.3299593 152.813242
-## T10 -414.59506 -132.6891124  -5.639991</code></pre>
+<pre><code>##            PC1         PC2         PC3
+## C1   -61.67008  -2.3733213  -1.5740632
+## C2   -56.54666   0.4351670   1.9959339
+## C3   -52.62494   0.8906694   0.3794566
+## C4  -215.71556  -7.6261738  -3.1246417
+## C5  -246.76559  -9.5185006   7.7799157
+## T1  -320.91917  -7.1177724 -17.4973904
+## T2  -301.37699  17.6148347 -29.8832995
+## T3  -309.33731 -21.5161358 -16.7421341
+## T4  -314.15070 -11.5680851 -30.1647704
+## T5  -314.34414  -6.5664808 -12.5696682
+## T6  -373.21980 -49.8040838 -74.8479801
+## T7  -382.34810 135.0519574  79.5138524
+## T8  -376.60785 -86.0682721 -28.7369947
+## T9  -390.74442 -73.0496972 156.9317441
+## T10 -386.22396 106.9511328 -54.4206297</code></pre>
 </div>
 <div id="graphic-pc1-vs-pc2" class="section level2">
 <h2 class="hasAnchor">
@@ -632,7 +632,7 @@ pre { /* Code block - determines code spacing between lines */
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.11.4:</p>
-<pre><code>## R version 4.1.0 (2021-05-18)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: CentOS Linux 7 (Core)
 ## 
@@ -653,8 +653,8 @@ pre { /* Code block - determines code spacing between lines */
 ## 
 ## other attached packages:
 ##  [1] ape_5.5              ggplot2_3.3.5        MethylIT.utils_0.1  
-##  [4] MethylIT_0.3.2.2     rtracklayer_1.52.0   GenomicRanges_1.44.0
-##  [7] GenomeInfoDb_1.28.1  IRanges_2.26.0       S4Vectors_0.30.0    
+##  [4] MethylIT_0.3.2.3     rtracklayer_1.52.1   GenomicRanges_1.44.0
+##  [7] GenomeInfoDb_1.28.4  IRanges_2.26.0       S4Vectors_0.30.1    
 ## [10] BiocGenerics_0.38.0 
 ## 
 ## loaded via a namespace (and not attached):
@@ -666,21 +666,21 @@ pre { /* Code block - determines code spacing between lines */
 ##  [11] flexmix_2.3-17              bit64_4.0.5                
 ##  [13] AnnotationDbi_1.54.1        prodlim_2019.11.13         
 ##  [15] fansi_0.5.0                 lubridate_1.7.10           
-##  [17] codetools_0.2-18            splines_4.1.0              
+##  [17] codetools_0.2-18            splines_4.1.1              
 ##  [19] cachem_1.0.5                knitr_1.33                 
 ##  [21] Formula_1.2-4               jsonlite_1.7.2             
 ##  [23] pROC_1.17.0.1               Rsamtools_2.8.0            
 ##  [25] caret_6.0-88                annotate_1.70.0            
-##  [27] png_0.1-7                   compiler_4.1.0             
+##  [27] png_0.1-7                   compiler_4.1.1             
 ##  [29] httr_1.4.2                  assertthat_0.2.1           
 ##  [31] Matrix_1.3-4                fastmap_1.1.0              
-##  [33] htmltools_0.5.1.1           tools_4.1.0                
+##  [33] htmltools_0.5.1.1           tools_4.1.1                
 ##  [35] gtable_0.3.0                glue_1.4.2                 
 ##  [37] GenomeInfoDbData_1.2.6      reshape2_1.4.4             
 ##  [39] dplyr_1.0.7                 Rcpp_1.0.7                 
 ##  [41] Biobase_2.52.0              jquerylib_0.1.4            
 ##  [43] pkgdown_1.6.1               vctrs_0.3.8                
-##  [45] Biostrings_2.60.1           nlme_3.1-152               
+##  [45] Biostrings_2.60.2           nlme_3.1-153               
 ##  [47] betareg_3.1-4               iterators_1.0.13           
 ##  [49] lmtest_0.9-38               timeDate_3043.102          
 ##  [51] gower_0.2.2                 xfun_0.24                  
@@ -689,18 +689,18 @@ pre { /* Code block - determines code spacing between lines */
 ##  [57] zoo_1.8-9                   zlibbioc_1.38.0            
 ##  [59] MASS_7.3-54                 scales_1.1.1               
 ##  [61] ipred_0.9-11                ragg_1.1.3                 
-##  [63] MatrixGenerics_1.4.0        sandwich_3.0-1             
+##  [63] MatrixGenerics_1.4.3        sandwich_3.0-1             
 ##  [65] SummarizedExperiment_1.22.0 yaml_2.2.1                 
 ##  [67] memoise_2.0.0               sass_0.4.0                 
 ##  [69] rpart_4.1-15                stringi_1.6.2              
-##  [71] RSQLite_2.2.7               highr_0.9                  
+##  [71] RSQLite_2.2.8               highr_0.9                  
 ##  [73] genefilter_1.74.0           BiocIO_1.2.0               
 ##  [75] desc_1.3.0                  foreach_1.5.1              
-##  [77] e1071_1.7-7                 BiocParallel_1.26.1        
+##  [77] e1071_1.7-7                 BiocParallel_1.26.2        
 ##  [79] lava_1.6.9                  rlang_0.4.11               
 ##  [81] pkgconfig_2.0.3             systemfonts_1.0.2          
 ##  [83] matrixStats_0.59.0          bitops_1.0-7               
-##  [85] evaluate_0.14               lattice_0.20-44            
+##  [85] evaluate_0.14               lattice_0.20-45            
 ##  [87] purrr_0.3.4                 labeling_0.4.2             
 ##  [89] GenomicAlignments_1.28.0    recipes_0.1.16             
 ##  [91] bit_4.0.4                   tidyselect_1.1.1           
@@ -708,13 +708,13 @@ pre { /* Code block - determines code spacing between lines */
 ##  [95] nls2_0.2                    R6_2.5.0                   
 ##  [97] generics_0.1.0              DelayedArray_0.18.0        
 ##  [99] DBI_1.1.1                   pillar_1.6.1               
-## [101] withr_2.4.2                 survival_3.2-11            
+## [101] withr_2.4.2                 survival_3.2-13            
 ## [103] KEGGREST_1.32.0             RCurl_1.98-1.3             
 ## [105] nnet_7.3-16                 tibble_3.1.2               
 ## [107] crayon_1.4.1                utf8_1.2.1                 
-## [109] rmarkdown_2.9               grid_4.1.0                 
+## [109] rmarkdown_2.10              grid_4.1.1                 
 ## [111] minpack.lm_1.2-1            data.table_1.14.0          
-## [113] blob_1.2.1                  ModelMetrics_1.2.2.2       
+## [113] blob_1.2.2                  ModelMetrics_1.2.2.2       
 ## [115] digest_0.6.27               xtable_1.8-4               
 ## [117] textshaping_0.3.5           munsell_0.5.0              
 ## [119] bslib_0.2.5.1</code></pre>

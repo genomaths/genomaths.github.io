@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -101,13 +101,13 @@
 </li>
 <li>
   <a href="https://github.com/genomaths/MethylIT/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://twitter.com/robersysr">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+    <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="some_tips_for_methylit_r_scripts_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Some tips for Methyl-IT R scripts</h1>
@@ -132,7 +132,7 @@ Department of Biology and Plant Science.<br>
 Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div></h4>
             
-            <h4 class="date">09 June 2020</h4>
+            <h4 class="date">04 November 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/some_tips_for_methylit_r_scripts.Rmd"><code>vignettes/some_tips_for_methylit_r_scripts.Rmd</code></a></small>
       <div class="hidden name"><code>some_tips_for_methylit_r_scripts.Rmd</code></div>
@@ -209,33 +209,36 @@ pre { /* Code block - determines code spacing between lines */
 <h2 class="hasAnchor">
 <a href="#reading-data-sets" class="anchor"></a>Reading data sets</h2>
 <p>Let’s suppose that we have the following read-count data set obtained from Bismark ‘CX_report’ files:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">folder</span> <span class="kw">&lt;-</span> <span class="st">"~/data/"</span>
-<span class="no">files</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw">path</span> <span class="kw">=</span> <span class="no">folder</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">folder</span> <span class="op">&lt;-</span> <span class="st">"~/data/"</span>
+<span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">folder</span><span class="op">)</span>
 <span class="co"># [1] "~/data/Col_8-1a.fq_bismark_bt2.deduplicated.bismark.CX_report"</span>
 <span class="co"># [2] "~/data/Col_8-1b.fq_bismark_bt2.deduplicated.bismark.CX_report"</span>
-<span class="co"># [3] "~/data/Col_8-1c.fq_bismark_bt2.deduplicated.bismark.CX_report"</span></pre></body></html></div>
+<span class="co"># [3] "~/data/Col_8-1c.fq_bismark_bt2.deduplicated.bismark.CX_report"</span></code></pre></div>
 <p>This data set can be read with the following code:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MethylIT</span>)
-<span class="no">col0</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/readCounts2GRangesList.html">readCounts2GRangesList</a></span>(<span class="kw">filenames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">folder</span>, <span class="no">files</span>),
-                               <span class="kw">sample.id</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"col1"</span>, <span class="st">"col2"</span>, <span class="st">"col3"</span>),
-                               <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"^[1-5]"</span>,
-                               <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">seqnames</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">2</span>,
-                                           <span class="kw">strand</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">mC</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">uC</span> <span class="kw">=</span> <span class="fl">5</span>,
-                                           <span class="kw">context</span> <span class="kw">=</span> <span class="fl">6</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT">MethylIT</a></span><span class="op">)</span>
+<span class="va">col0</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readCounts2GRangesList.html">readCounts2GRangesList</a></span><span class="op">(</span>filenames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">folder</span>, <span class="va">files</span><span class="op">)</span>,
+                               sample.id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"col1"</span>, <span class="st">"col2"</span>, <span class="st">"col3"</span><span class="op">)</span>,
+                               pattern <span class="op">=</span> <span class="st">"^[1-5]"</span>,
+                               columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fl">1</span>, start <span class="op">=</span> <span class="fl">2</span>,
+                                           strand <span class="op">=</span> <span class="fl">3</span>, mC <span class="op">=</span> <span class="fl">4</span>, uC <span class="op">=</span> <span class="fl">5</span>,
+                                           context <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Since the methylome data are from Arabidopsis thaliana (a plant), we have added the column 6 from each Bismark ‘CX_report’ file, which for each cytosine site carries the information of its corresponding methylation context: CG, CHG, or CHH. Users familiar with Linux OS can easily check which is the number of each required column by using Linux command line ‘head’ function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">head</span> BS-10.CX_report.txt</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">1</span>       1       +       0       0       CHH     CCC</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ex">1</span>       2       +       0       0       CHH     CCT</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="ex">1</span>       3       +       0       0       CHH     CTA</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="ex">1</span>       8       +       0       0       CHH     CCC</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="ex">1</span>       9       +       0       0       CHH     CCT</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="ex">1</span>       10      +       0       0       CHH     CTA</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="ex">1</span>       15      +       0       0       CHH     CCC</span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="ex">1</span>       16      +       0       0       CHH     CCT</span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="ex">1</span>       17      +       0       0       CHH     CTA</span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="ex">1</span>       22      +       0       0       CHH     CCC</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> BS-10.CX_report.txt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       1       +       0       0       CHH     CCC</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       2       +       0       0       CHH     CCT</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       3       +       0       0       CHH     CTA</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       8       +       0       0       CHH     CCC</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       9       +       0       0       CHH     CCT</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       10      +       0       0       CHH     CTA</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       15      +       0       0       CHH     CCC</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       16      +       0       0       CHH     CCT</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       17      +       0       0       CHH     CTA</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       22      +       0       0       CHH     CCC</span></code></pre></div>
 <p>Plants methylome contains chloroplast and mitochondrial chromosomes, which are not included in methylome analysis. In the current case, we can exclude these chromosomes by setting:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">pattern</span> <span class="kw">=</span> <span class="st">"^[1-5]"</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pattern</span> <span class="op">=</span> <span class="st">"^[1-5]"</span></code></pre></div>
 <p>That is, only rows starting with any of the integer numbers from 1 to 5 are read. Notice that <a href="https://is.gd/5pyk1N">readCounts2GRangesList</a> function is able to deal with different file formats. The user just need to provide the number of the specified columns, which for different aligner programs can be different.</p>
 <p>It is very important to notice that Methyl-IT pipeline assumes that all the data provided have acceptable quality. It is up to the user to guaranty the quality of its methylome data set. For example, to include chloroplast chromosome, will artificially decrease the levels of noise in the treatment and control group of samples, which definitely will lead to a wrong estimation of the cutpoints in the signal detection step.</p>
 <div id="analysis-per-methylation-context" class="section level3">
@@ -243,35 +246,40 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#analysis-per-methylation-context" class="anchor"></a>Analysis per methylation context</h3>
 <p>Usually, in plant epigenomic field, the methylation analysis is performed by methylation context. After apply the script above, the three methylation contexts were included in each sample. The <a href="https://is.gd/5pyk1N">readCounts2GRangesList</a> function can be used to read only one specified methylation context, but it also increase the number of files per sample.</p>
 <p>The next code will select the methylation context that want, say “CHG”, from the above samples:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">col0_chg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span>(<span class="no">col0</span>, <span class="kw">function</span>(<span class="no">s</span>) <span class="no">s</span>[<span class="no">s</span>$<span class="no">context</span> <span class="kw">==</span> <span class="st">"CHG"</span>], <span class="kw">keep.attr</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">col0_chg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">col0</span>, <span class="kw">function</span><span class="op">(</span><span class="va">s</span><span class="op">)</span> <span class="va">s</span><span class="op">[</span><span class="va">s</span><span class="op">$</span><span class="va">context</span> <span class="op">==</span> <span class="st">"CHG"</span><span class="op">]</span>, keep.attr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>Next, to compute the reference sample, keep in mind that we have two columns carrying integer numbers and third column carrying a character vector, which will be not included in the computation. To prevent error we use ‘columns = 1:2’</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">ref_chg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span>(<span class="kw">LR</span> <span class="kw">=</span> <span class="no">col0_chg</span>, <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"sum"</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>,
-                          <span class="kw">num.cores</span> <span class="kw">=</span> <span class="fl">10L</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ref_chg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">col0_chg</span>, stat <span class="op">=</span> <span class="st">"sum"</span>, columns <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,
+                          num.cores <span class="op">=</span> <span class="fl">10L</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="dmps" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dmps" class="anchor"></a>DMPs</h2>
 <p>Let’s suppose that we have set of DMPs estimated for each methylation context: dmps_cg, dmp_chg, and dmps_chh. For DMG or DMR analyses we usually include all the methylation contexts.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">nams</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmps_cg</span>)
-<span class="no">dmps</span> <span class="kw">&lt;-</span> <span class="no">dmps_cg</span>
-<span class="kw">for</span> (<span class="no">k</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">nams</span>)) {
-  <span class="no">dmps</span><span class="kw">[[</span><span class="no">k</span>]] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">dmps_cg</span><span class="kw">[[</span><span class="no">k</span>]], <span class="no">dmps_chg</span><span class="kw">[[</span><span class="no">k</span>]], <span class="no">dmps_chh</span><span class="kw">[[</span><span class="no">k</span>]])
-}
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">dmps</span>) <span class="kw">&lt;-</span> <span class="no">nams</span></pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dmps_cg</span><span class="op">)</span>
+<span class="va">dmps</span> <span class="op">&lt;-</span> <span class="va">dmps_cg</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">k</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">nams</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">dmps</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dmps_cg</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span>, <span class="va">dmps_chg</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span>, <span class="va">dmps_chh</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></code></pre></div>
 </div>
 <div id="annotation-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#annotation-file" class="anchor"></a>Annotation file</h2>
 <p>Gene annotation is needed for DMG estimation. Some organisms (not well annotated yet) reports several “contig” sequences which are not included between the known chromosomes. In the most frequent case, as in the case of Arabidopsis, we do not include chloroplast and mitochondrial chromosomes. For Arabidopsis, following code does job when the “gtf” is used:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rtracklayer</span>)
-<span class="no">AG</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rtracklayer/man/export.html">import</a></span>(<span class="st">"~/data/TAIR10_gff3/Arabidopsis_thaliana.TAIR10.46.gtf.gz"</span>)
-<span class="no">gene</span> <span class="kw">=</span> <span class="no">AG</span>[ <span class="no">AG</span>$<span class="no">type</span> <span class="kw">==</span> <span class="st">"gene"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>( <span class="st">"gene_id"</span>, <span class="st">"gene_biotype"</span>, <span class="st">"gene_name"</span> ) ]
-<span class="no">gene</span> <span class="kw">=</span> <span class="no">gene</span>[ <span class="no">gene</span>$<span class="no">gene_biotype</span> <span class="kw">==</span> <span class="st">"protein_coding"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"gene_id"</span>, <span class="st">"gene_name"</span>) ]
-<span class="fu">seqlevels</span>(<span class="no">gene</span>, <span class="kw">pruning.mode</span> <span class="kw">=</span> <span class="st">"coarse"</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)
-<span class="no">gene</span> <span class="kw">=</span> <span class="fu"><a href="../reference/sortBySeqnameAndStart.html">sortBySeqnameAndStart</a></span>(<span class="no">gene</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span>
+<span class="va">AG</span> <span class="op">=</span> <span class="fu">import</span><span class="op">(</span><span class="st">"~/data/TAIR10_gff3/Arabidopsis_thaliana.TAIR10.46.gtf.gz"</span><span class="op">)</span>
+<span class="va">gene</span> <span class="op">=</span> <span class="va">AG</span><span class="op">[</span> <span class="va">AG</span><span class="op">$</span><span class="va">type</span> <span class="op">==</span> <span class="st">"gene"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="st">"gene_id"</span>, <span class="st">"gene_biotype"</span>, <span class="st">"gene_name"</span> <span class="op">)</span> <span class="op">]</span>
+<span class="va">gene</span> <span class="op">=</span> <span class="va">gene</span><span class="op">[</span> <span class="va">gene</span><span class="op">$</span><span class="va">gene_biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gene_id"</span>, <span class="st">"gene_name"</span><span class="op">)</span> <span class="op">]</span>
+<span class="fu">seqlevels</span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span>
+<span class="va">gene</span> <span class="op">=</span> <span class="fu"><a href="../reference/sortBySeqnameAndStart.html">sortBySeqnameAndStart</a></span><span class="op">(</span><span class="va">gene</span><span class="op">)</span></code></pre></div>
 <p>In fact, the critical step in the above code is:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu">seqlevels</span>(<span class="no">gene</span>, <span class="kw">pruning.mode</span> <span class="kw">=</span> <span class="st">"coarse"</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">seqlevels</span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="general-suggestions" class="section level2">
 <h2 class="hasAnchor">
@@ -298,7 +306,7 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

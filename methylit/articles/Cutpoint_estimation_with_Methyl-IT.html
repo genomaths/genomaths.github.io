@@ -261,7 +261,8 @@ pre { /* Code block - determines code spacing between lines */
 <p>Total variation distance and Hellinger divergence are computed with <a href="https://is.gd/0ViBO9">estimateDivergence</a> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">divs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimateDivergence.html">estimateDivergence</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="va">ref</span>, indiv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ctrl</span>, <span class="va">treat</span><span class="op">)</span>, Bayesian <span class="op">=</span> <span class="cn">TRUE</span>, 
-                            num.cores <span class="op">=</span> <span class="fl">6L</span>, percentile <span class="op">=</span> <span class="fl">1</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+                           num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, 
+                           percentile <span class="op">=</span> <span class="fl">1</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>To get some statistical description about the sample is useful. Here, empirical critical values for the probability distribution of <span class="math inline">\(H\)</span> and <span class="math inline">\(TV\)</span> can is obtained using <em>quantile</em> function from the R package <em>stats</em>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -288,7 +289,8 @@ pre { /* Code block - determines code spacing between lines */
 <h3 class="hasAnchor">
 <a href="#potential-dmps-estimated-with-2-parameter-gamma-distribution-model" class="anchor"></a>Potential DMPs estimated with 2-parameter gamma distribution model</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nlms.g2p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nonlinearFitDist.html">nonlinearFitDist</a></span><span class="op">(</span><span class="va">divs</span>, column <span class="op">=</span> <span class="fl">9L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, num.cores <span class="op">=</span> <span class="fl">6L</span>,
+<code class="sourceCode R"><span class="va">nlms.g2p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nonlinearFitDist.html">nonlinearFitDist</a></span><span class="op">(</span><span class="va">divs</span>, column <span class="op">=</span> <span class="fl">9L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, 
+                            num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
                             dist.name <span class="op">=</span> <span class="st">"Gamma2P"</span><span class="op">)</span>
 
 <span class="co"># Potential DMPs from 'Gamma2P' model</span>
@@ -300,7 +302,9 @@ pre { /* Code block - determines code spacing between lines */
 <h3 class="hasAnchor">
 <a href="#potential-dmps-estimated-with-3-parameter-gamma-distribution-model" class="anchor"></a>Potential DMPs estimated with 3-parameter gamma distribution model</h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nlms.g3p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nonlinearFitDist.html">nonlinearFitDist</a></span><span class="op">(</span><span class="va">divs</span>, column <span class="op">=</span> <span class="fl">9L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, num.cores <span class="op">=</span> <span class="fl">6L</span>,
+<code class="sourceCode R"><span class="va">nlms.g3p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nonlinearFitDist.html">nonlinearFitDist</a></span><span class="op">(</span><span class="va">divs</span>, column <span class="op">=</span> <span class="fl">9L</span>, 
+                            verbose <span class="op">=</span> <span class="cn">FALSE</span>, 
+                            num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
                             dist.name <span class="op">=</span> <span class="st">"Gamma3P"</span><span class="op">)</span>
 
 <span class="co"># Potential DMPs from 'Gamma2P' model</span>
@@ -702,9 +706,11 @@ pre { /* Code block - determines code spacing between lines */
 <a href="#dmps-estimated-with-fishers-exact-test-ft" class="anchor"></a>DMPs estimated with Fisher’s exact Test (FT)</h2>
 <p>For comparison purposes DMPs are estimated with Fisher’s exact test as well.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ft.</span> <span class="op">=</span> <span class="fu"><a href="../reference/FisherTest.html">FisherTest</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, tv.cut <span class="op">=</span> <span class="fl">0.68</span>, pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,
-                        pvalCutOff <span class="op">=</span> <span class="fl">0.05</span>, num.cores <span class="op">=</span> <span class="fl">4L</span>,
-                        verbose <span class="op">=</span> <span class="cn">FALSE</span>, saveAll <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> 
+<code class="sourceCode R"><span class="va">ft.</span> <span class="op">=</span> <span class="fu"><a href="../reference/FisherTest.html">FisherTest</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, tv.cut <span class="op">=</span> <span class="fl">0.68</span>, 
+                 pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,
+                 pvalCutOff <span class="op">=</span> <span class="fl">0.05</span>, 
+                 num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
+                 verbose <span class="op">=</span> <span class="cn">FALSE</span>, saveAll <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> 
 
 <span class="va">ft.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, dist.name <span class="op">=</span> <span class="st">"None"</span>,
                             tv.cut <span class="op">=</span> <span class="fl">0.68</span>, tv.col <span class="op">=</span> <span class="fl">7</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></code></pre></div>
@@ -867,8 +873,11 @@ pre { /* Code block - determines code spacing between lines */
                                 column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                             wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                                 classifier <span class="op">=</span> <span class="st">"pca.lda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>, 
-                                center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, num.boot <span class="op">=</span> <span class="fl">300</span>,
-                                output <span class="op">=</span> <span class="st">"all"</span>, prop <span class="op">=</span> <span class="fl">0.6</span>
+                                center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,
+                                num.boot <span class="op">=</span> <span class="fl">300</span>,
+                                num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
+                                output <span class="op">=</span> <span class="st">"all"</span>, 
+                                prop <span class="op">=</span> <span class="fl">0.6</span>
 <span class="op">)</span>
 <span class="va">ft.g2p.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
 <pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   

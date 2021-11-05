@@ -10,7 +10,7 @@ articles:
   dmr_at_memory: dmr_at_memory.html
   pca_lda_with_methylit: pca_lda_with_methylit.html
   some_tips_for_methylit_r_scripts: some_tips_for_methylit_r_scripts.html
-last_built: 2021-11-04T17:37Z
+last_built: 2021-11-05T00:31Z
 urls:
   reference: https://genomaths.github.io/methylit//reference
   article: https://genomaths.github.io/methylit//articles
