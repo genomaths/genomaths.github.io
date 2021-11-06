@@ -195,7 +195,7 @@ tested to identify differentially methylated regions (DMRs) with
   chromosomes <span class='op'>=</span> <span class='cn'>NULL</span>,
   columns <span class='op'>=</span> <span class='fl'>9L</span>,
   ignore.strand <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  num.cores <span class='op'>=</span> <span class='fl'>1L</span>,
+  num.cores <span class='op'>=</span> <span class='fu'>detectCores</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span>,
   tasks <span class='op'>=</span> <span class='fl'>0L</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>...</span>

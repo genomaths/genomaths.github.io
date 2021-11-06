@@ -279,7 +279,8 @@ fitting uses the approach followed in in the R package
 \(z =  1/2 * sum((f(x) - y)^2)\) we have:</p><ol>
 <li><p>"linear": linear function which gives a standard least squares:
 \(loss(z) = z\).</p></li>
-<li><p>"huber": Huber loss, \(loss(z) = ifelse(z &lt;= 1, z, sqrt(z) -1)\).</p></li>
+<li><p>"huber": Huber loss,
+\(loss(z) = ifelse(z \leq 1, z, sqrt(z) -1)\).</p></li>
 <li><p>"smooth": Smooth approximation to the sum of residues absolute
 values: \(loss(z) = 2*(sqrt(z + 1) - 1)\).</p></li>
 <li><p>"cauchy": Cauchy loss: \(loss(z) = log(z + 1)\).</p></li>
@@ -392,11 +393,11 @@ J. Mol Sci, 2019, 20:5343.</p></li>
 #&gt; 	Kendall's rank correlation tau
 #&gt; 
 #&gt; data:  as.numeric(hd$hdiv) and as.numeric(hd$jdiv)
-#&gt; z = 26.236, p-value &lt; 2.2e-16
+#&gt; z = 26.97, p-value &lt; 2.2e-16
 #&gt; alternative hypothesis: true tau is not equal to 0
 #&gt; sample estimates:
 #&gt;       tau 
-#&gt; 0.7889891 
+#&gt; 0.8097603 
 #&gt; </div><div class='input'>
 <span class='co'>## An example with methylation levels</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>

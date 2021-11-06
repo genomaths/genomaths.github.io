@@ -203,47 +203,46 @@ will filter by coverage each cytosine site from each GRanges object.</p>
     <tr>
       <th>x</th>
       <td><p>An object from the classes 'GRanges', 'InfDiv', or 'pDMP' with
-methylated and unmethylated counts in its meta-column. If the argument
-'y' is not given, then it is assumed that the first four columns of the
-GRanges metadata 'x' are counts: methylated and unmethylated counts for
-samples '1' and '2'.</p></td>
+methylated and unmethylated counts in its meta-column. If the argument 'y' is
+not given, then it is assumed that the first four columns of the GRanges
+metadata 'x' are counts: methylated and unmethylated counts for samples '1'
+and '2'.</p></td>
     </tr>
     <tr>
       <th>y</th>
       <td><p>A GRanges object with methylated and unmethylated counts in its
-meta-column. Default is NULL. If x is a 'InfDiv', or 'pDMP', then 'y' is
-not needed, since samples '1' and '2' are the first four columns of
-these objects.</p></td>
+meta-column. Default is NULL. If x is a 'InfDiv', or 'pDMP', then 'y' is not
+needed, since samples '1' and '2' are the first four columns of these
+objects.</p></td>
     </tr>
     <tr>
       <th>min.coverage</th>
       <td><p>An integer or an integer vector of length 2. Cytosine
 sites where the coverage in both samples, 'x' and 'y', are less than
-'min.coverage' are discarded. The cytosine site is preserved, however, if
-the coverage is greater than 'min.coverage' in at least one sample. If
+'min.coverage' are discarded. The cytosine site is preserved, however, if the
+coverage is greater than 'min.coverage' in at least one sample. If
 'min.coverage' is an integer vector, then the corresponding min coverage is
 applied to each sample.</p></td>
     </tr>
     <tr>
       <th>min.meth</th>
       <td><p>An integer or an integer vector of length 2. Cytosine sites
-where the numbers of read counts of methylated cytosine in both samples,
-'1' and '2', are less than 'min.meth' are discarded. If 'min.meth' is an
-integer vector, then the corresponding min number of reads is applied to
-each sample.</p></td>
+where the numbers of read counts of methylated cytosine in both samples, '1'
+and '2', are less than 'min.meth' are discarded. If 'min.meth' is an integer
+vector, then the corresponding min number of reads is applied to each sample.</p></td>
     </tr>
     <tr>
       <th>min.umeth</th>
       <td><p>An integer or an integer vector of length 2. Min number of
-reads to consider cytosine position. Specifically cytosine positions
-where (uC &lt;= min.umeth) &amp; (mC &gt; 0) &amp; (mC &lt; min.meth) hold will be
-removed, where mC and uC stand for the numbers of methylated and
-unmethylated reads. Default is min.umeth = 0.</p></td>
+reads to consider cytosine position. Specifically cytosine positions where
+\(uC \leq min.umeth and mC &gt; 0 and mC &lt; min.meth\) hold will be removed,
+where mC and uC stand for the numbers of methylated and unmethylated reads.
+Default is \(min.umeth = 0\).</p></td>
     </tr>
     <tr>
       <th>min.sitecov</th>
       <td><p>An integer. The minimum total coverage. Only sites where
-the total coverage (cov1 + cov2) is greater than 'min.sitecov' are
+the total coverage \(cov1 + cov2\) is greater than 'min.sitecov' are
 considered for downstream analysis, where cov1 and cov2 are the coverages
 for samples 1 and 2, respectively.</p></td>
     </tr>
@@ -269,9 +268,9 @@ PCR bias. If percentile is not null, then q = max(q, high.coverage).</p></td>
     <tr>
       <th>columns</th>
       <td><p>Vector of integer numbers of the columns (from each GRanges
-meta-column) where the methylated and unmethylated counts are provided.
-If not provided, then the methylated and unmethylated counts are assumed
-to be at columns 1 and 2, respectively.</p></td>
+meta-column) where the methylated and unmethylated counts are provided. If
+not provided, then the methylated and unmethylated counts are assumed to be
+at columns 1 and 2, respectively.</p></td>
     </tr>
     <tr>
       <th>num.cores</th>
@@ -287,9 +286,9 @@ the overlap calculations. Default value: TRUE</p></td>
     <tr>
       <th>tasks</th>
       <td><p>Integer(1). The number of tasks per job. value must be a scalar
-integer &gt;= 0L. In this documentation a job is defined as a single call to a
-function, such as bplapply, bpmapply etc. A task is the division of the X
-argument into chunks. When tasks == 0 (default), X is divided as evenly as
+\(integer &gt;= 0L\). In this documentation a job is defined as a single call
+to a function, such as bplapply, bpmapply etc. A task is the division of the
+X argument into chunks. When tasks == 0 (default), X is divided as evenly as
 possible over the number of workers (see MulticoreParam from BiocParallel
 package).</p></td>
     </tr>
@@ -310,10 +309,10 @@ counts filtered for each cytosine position.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Cytosine sites with 'coverage' &gt; 'min.coverage' in at least one of
-the samples are preserved. Positions with 'coverage' &lt; 'min.coverage' in
-both samples, 'x' and 'y', are removed. Positions with 'coverage' &gt;
-'percentile' (e.g., 99.9 percentile) are removed as well. It is expected
-that the columns of methylated and unmethylated counts are given.</p>
+the samples are preserved. Positions with 'coverage' &lt; 'min.coverage' in both
+samples, 'x' and 'y', are removed. Positions with 'coverage' &gt; 'percentile'
+(e.g., 99.9 percentile) are removed as well. It is expected that the columns
+of methylated and unmethylated counts are given.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Create new data</span>

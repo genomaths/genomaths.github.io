@@ -261,50 +261,49 @@ posterior estimations of methylation levels.</p></td>
       <th>init.pars</th>
       <td><p>initial parameter values. Defaults is NULL and an initial
 guess is estimated using <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> function. If the initial
-guessing fails initial parameter values are to alpha = 1 &amp;
+guessing fails initial parameter values are to alpha = 1 and
 beta = 1, which imply the parsimony pseudo-counts greater than zero.</p></td>
     </tr>
     <tr>
       <th>columns</th>
       <td><p>Vector of one or two integer numbers denoting the indexes of
-the columns where the methylated and unmethylated read counts are found
-or, if meth.level = TRUE, the columns corresponding to the methylation
-levels. If columns = NULL and meth.level = FALSE, then columns = c(1,2)
-is assumed. If columns = NULL and meth.level = TRUE, then columns = 1 is
-assumed.</p></td>
+the columns where the methylated and unmethylated read counts are found or,
+if meth.level = TRUE, the columns corresponding to the methylation levels. If
+columns = NULL and meth.level = FALSE, then columns = c(1,2) is assumed. If
+columns = NULL and meth.level = TRUE, then columns = 1 is assumed.</p></td>
     </tr>
     <tr>
       <th>min.coverage</th>
       <td><p>An integer or an integer vector of length 2. Cytosine
 sites where the coverage in both samples, 'x' and 'y', are less than
-'min.coverage' are discarded. The cytosine site is preserved, however, if
-the coverage is greater than 'min.coverage' in at least one sample. If
-'min.coverage' is an integer vector, then the corresponding min coverage
-is applied to each sample.</p></td>
+'min.coverage' are discarded. The cytosine site is preserved, however, if the
+coverage is greater than 'min.coverage' in at least one sample. If
+'min.coverage' is an integer vector, then the corresponding min coverage is
+applied to each sample.</p></td>
     </tr>
     <tr>
       <th>min.meth</th>
       <td><p>An integer or an integer vector of length 2. Cytosine sites
 where the numbers of read counts of methylated cytosine in both samples,
 '1' and '2', are less than 'min.meth' are discarded. If 'min.meth' is an
-integer vector, then the corresponding min number of reads is applied to
-each sample. Default is min.meth = 4.</p></td>
+integer vector, then the corresponding min number of reads is applied to each
+sample. Default is min.meth = 4.</p></td>
     </tr>
     <tr>
       <th>min.umeth</th>
       <td><p>An integer or an integer vector of length 2
 (\(min.umeth = c(min.umeth1, min.umeth2)\)). Min number of reads to
-consider cytosine position. Specifically cytosine positions where (uC &lt;=
-min.umeth) &amp; (mC &gt; 0) &amp; (mC &lt;= min.meth) hold will be removed, where mC and
-uC stand for the numbers of methylated and unmethylated reads. Default is
-min.umeth = 0.</p></td>
+consider cytosine position. Specifically cytosine positions where \((uC
+\leq min.umeth) and (mC &gt; 0) and (mC \leq min.meth)\) hold will be removed,
+where mC and uC stand for the numbers of methylated and unmethylated reads.
+Default is \(min.umeth = 0\).</p></td>
     </tr>
     <tr>
       <th>min.sitecov</th>
       <td><p>An integer. The minimum total coverage. Only sites where
-the total coverage (cov1 + cov2) is greater than 'min.sitecov' are considered
-for downstream analysis, where cov1 and cov2 are the coverages for samples 1
-and 2, respectively.</p></td>
+the total coverage \((cov1 + cov2)\) is greater than 'min.sitecov' are
+considered for downstream analysis, where cov1 and cov2 are the coverages for
+samples 1 and 2, respectively.</p></td>
     </tr>
     <tr>
       <th>high.coverage</th>
@@ -337,9 +336,9 @@ BiocParallel package).</p></td>
     <tr>
       <th>tasks</th>
       <td><p>integer(1). The number of tasks per job. value must be a scalar
-integer &gt;= 0L. In this documentation a job is defined as a single call to a
-function, such as bplapply, bpmapply etc. A task is the division of the X
-argument into chunks. When tasks == 0 (default), X is divided as evenly as
+\(integer &gt;= 0L\). In this documentation a job is defined as a single call
+to a function, such as bplapply, bpmapply etc. A task is the division of the
+X argument into chunks. When tasks == 0 (default), X is divided as evenly as
 possible over the number of workers (see MulticoreParam from BiocParallel
 package).</p></td>
     </tr>
@@ -358,7 +357,8 @@ fitting uses the approach followed in in the R package
 \(z =  1/2 * sum((f(x) - y)^2)\) we have:</p><ol>
 <li><p>"linear": linear function which gives a standard least squares:
 \(loss(z) = z\).</p></li>
-<li><p>"huber": Huber loss, \(loss(z) = ifelse(z &lt;= 1, z, sqrt(z) -1)\).</p></li>
+<li><p>"huber": Huber loss,
+\(loss(z) = ifelse(z \leq 1, z, sqrt(z) -1)\).</p></li>
 <li><p>"smooth": Smooth approximation to the sum of residues absolute
 values: \(loss(z) = 2*(sqrt(z + 1) - 1)\).</p></li>
 <li><p>"cauchy": Cauchy loss: \(loss(z) = log(z + 1)\).</p></li>
@@ -448,7 +448,7 @@ we try to remove bad quality data, which would be in the edge of the
 experimental error originated by the BS-seq sequencing. It is user
 responsibility to check whether cytosine positions used in the analysis are
 biological meaningful. For example, a cytosine position with counts mC1 = 10
-and uC1 = 20 in the 'ref' sample and mC2 = 1 &amp; uC2 = 0 in an 'indv' sample
+and uC1 = 20 in the 'ref' sample and mC2 = 1 and uC2 = 0 in an 'indv' sample
 will lead to methylation levels p1 = 0.333 and p2 = 1, respectively, and TV =
 p2 - p1 = 0.667, which apparently indicates a hypermethylated site. However,
 there are not enough reads supporting p2 = 1. A Bayesian estimation of TV
