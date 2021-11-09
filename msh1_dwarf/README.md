@@ -21,7 +21,7 @@ reads of 3 were used. Hellinger Divergence (HD) was calculated with a pool of co
 Cytosines with methylation level difference >20% in the treatment vs. reference comparison were selected and further 
 filtered by estimating the optimal cutoff for HD to obtain DMPs following a machine-learning approach as suggested in 
 MethylIT pipeline (also see https://genomaths.github.io/methylit/ and reference ([3](#3)) using 
-[estimateCutPoint](https://genomaths.github.io/methylit/reference/estimateCutPoint.html) function:
+[_estimateCutPoint_](https://genomaths.github.io/methylit/reference/estimateCutPoint.html) function:
 
 ```{r cuts}
 ## Cutpoint estimation for CG methylation context
