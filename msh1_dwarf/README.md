@@ -1,4 +1,4 @@
-# Differentially Methylated Position on _msh1_ TDNA Mutant with respect to its Wildtype Control
+# Differentially Methylated Positions on _msh1_ TDNA Mutant with respect to its Wildtype Control
 
 This dataset carries the DMPs on _msh1_ TDNA Mutant with respect to its Wildtype Control on WIG files format.
 The msh1 T-DNA mutant was obtained from Arabidopsis Biological Resource Center (SAIL_877_F01, stock number CS877617).
