@@ -1,12 +1,12 @@
-# Differentially Methylated Position on _mash1_ TDNA Mutant with respect to its Wildtype Control
+# Differentially Methylated Position on _msh1_ TDNA Mutant with respect to its Wildtype Control
 
-This dataset carries the DMPs on _mash1_ TDNA Mutant with respect to its Wildtype Control on WIG files format.
+This dataset carries the DMPs on _msh1_ TDNA Mutant with respect to its Wildtype Control on WIG files format.
 The msh1 T-DNA mutant was obtained from Arabidopsis Biological Resource Center (SAIL_877_F01, stock number CS877617).
 
-The  _mash1_ TDNA Mutant samples have _*dwarf*_ phenotype as described in reference ([1](#1)). Dwarf samples labeled 
+These _mash1_ TDNA Mutant samples have _*dwarf*_ phenotype as described in reference ([1](#1)). Dwarf samples labeled 
 dmps_dw1, dmps_dw2, and dmps_dw3 are second-generation siblings from a single first-generation msh1 (see Fig. 1 from
-[1](#1)); while dwarf samples labeled as dmps_dw_1 and dmps_dw_2 derive from seeds from the second generation [2] (
-which is the dwarf material used in reference (#2)).
+[1](#1)); while dwarf samples labeled as dmps_dw_1 and dmps_dw_2 derive from seeds from the second generation (
+which is the dwarf material used in reference [2](#2)).
 
 
 # Methylation analysis
@@ -27,5 +27,5 @@ levels as described in MethylIT pipeline (see https://genomaths.github.io/methyl
 # References
 1.<a name="1"></a> Virdi, K., Laurie, J., Xu, YZ. et al. Arabidopsis MSH1 mutation alters the epigenome and produces 
                    heritable changes in plant growth. Nat Commun 6, 6386 (2015). https://doi.org/10.1038/ncomms7386.    
-2.<a name="1"></a> Kenchanmane Raju SK, Shao MR, Wamboldt Y, Mackenzie S. Epigenomic plasticity of Arabidopsis msh1 
+2.<a name="2"></a> Kenchanmane Raju SK, Shao MR, Wamboldt Y, Mackenzie S. Epigenomic plasticity of Arabidopsis msh1 
                    mutants under prolonged cold stress. Plant direct. 2018 Aug;2(8):e00079.
