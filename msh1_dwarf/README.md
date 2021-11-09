@@ -5,8 +5,8 @@ The msh1 T-DNA mutant was obtained from Arabidopsis Biological Resource Center (
 
 These _mash1_ TDNA Mutant samples have _*dwarf*_ phenotype as described in reference ([1](#1)). Dwarf samples labeled 
 dmps_dw1, dmps_dw2, and dmps_dw3 are second-generation siblings from a single first-generation msh1 (see Fig. 1 from
-[1](#1)); while dwarf samples labeled as dmps_dw_1 and dmps_dw_2 derive from seeds from the second generation (
-which is the dwarf material used in reference [2](#2)).
+([1](#1))); while dwarf samples labeled as dmps_dw_1 and dmps_dw_2 derive from seeds from the second generation (
+which is the dwarf material used in reference ([2](#2))).
 
 
 # Methylation analysis
@@ -19,13 +19,34 @@ were identified using Methyl-IT (version 0.3.2; https://github.com/genomaths/Met
 with some parameters modified for this study. Briefly, cytosine with minimum read coverage of 4 and minimum methylated 
 reads of 3 were used. Hellinger Divergence (HD) was calculated with a pool of control (wild type) samples as reference. 
 Cytosines with methylation level difference >20% in the treatment vs. reference comparison were selected and further 
-filtered by estimating the optimal cutoff for HD based on Youden index to obtain DMPs.
+filtered by estimating the optimal cutoff for HD to obtain DMPs following a machine-learning approach as suggested in 
+MethylIT pipeline (also see https://genomaths.github.io/methylit/ and reference ([3](#3)):
 
-The WIG files only reports DMPs with methylation levels greater than 0.5, which are Bayesian corrected methylation 
+```{r cuts}
+## Cutpoint estimation for CG methylation context
+cut_cg = estimateCutPoint(LR = ps_cg, simple = FALSE,
+                          control.names = c( "col1", "col2", "col3",
+                                             "col_1", "col_2" ),
+                          treatment.names = c( "dw1", "dw2", "dw3",
+                                               "dw_1", "dw_2"),
+                          column = c(hdiv = TRUE, bay.TV = TRUE,
+                                     wprob = TRUE, pos = TRUE),
+                          div.col = 9,
+                          classifier1 = "pca.logistic",
+                          classifier2 = "pca.qda", n.pc = 4,
+                          center = TRUE, scale = TRUE,
+                          verbose = FALSE)
+```
+
+Only DMPs with methylation levels greater than 0.5 are reported in the WIG files, which are Bayesian corrected methylation 
 levels as described in MethylIT pipeline (see https://genomaths.github.io/methylit/). 
 
 # References
 1.<a name="1"></a> Virdi, K., Laurie, J., Xu, YZ. et al. Arabidopsis MSH1 mutation alters the epigenome and produces 
                    heritable changes in plant growth. Nat Commun 6, 6386 (2015). https://doi.org/10.1038/ncomms7386.    
 2.<a name="2"></a> Kenchanmane Raju SK, Shao MR, Wamboldt Y, Mackenzie S. Epigenomic plasticity of Arabidopsis msh1 
-                   mutants under prolonged cold stress. Plant direct. 2018 Aug;2(8):e00079.
+                   mutants under prolonged cold stress. Plant direct. 2018 Aug;2(8):e00079.             
+3.<a name="3"></a> Kundariya, H., Yang, X., Morton, K. et al. MSH1-induced heritable enhanced growth vigor through 
+                   grafting is associated with the RdDM pathway in plants. Nat Commun 11, 5343 (2020). 
+                   https://doi.org/10.1038/s41467-020-19140-x
+               
