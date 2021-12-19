@@ -39,7 +39,7 @@ cut_cg = estimateCutPoint(LR = ps_cg, simple = FALSE,
                           verbose = FALSE)
 ```
 
-Only DMPs with methylation levels greater than 0.5 are reported in the WIG files, which are Bayesian corrected methylation 
+Only DMPs with methylation levels greater than 0.3 are reported in the WIG files, which are Bayesian corrected methylation 
 levels as described in MethylIT pipeline (see https://genomaths.github.io/methylit/). 
 
 # References
