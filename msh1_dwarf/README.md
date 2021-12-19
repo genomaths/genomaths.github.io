@@ -18,8 +18,17 @@ computed based on chloroplast genome read counts for every sample, with conversi
 were identified using Methyl-IT (version 0.3.2; https://github.com/genomaths/MethylIT) R package as described previously
 with some parameters modified for this study. Briefly, cytosine with minimum read coverage of 4 and minimum methylated 
 reads of 3 were used. Hellinger Divergence (HD) was calculated with a pool of control (wild type) samples as reference. 
-Cytosines with methylation level difference >20% in the treatment vs. reference comparison were selected and further 
-filtered by estimating the optimal cutoff for HD to obtain DMPs following a machine-learning approach as suggested in 
+
+Only cytosines with methylation levels greater than 0.3 are reported in the WIG files, which are Bayesian corrected methylation 
+levels as described in MethylIT pipeline (see https://genomaths.github.io/methylit/). 
+
+Next, depending on the methylation context, cytosines site with the following methylation level difference were considere in 
+further downstream analysis:
+  1. CG: $\ge 0.34$
+  2. CHG: $\ge 0.33$
+  3. CHH: $\ge 0.28$
+   
+The optimal cutoff for HD to obtain DMPs was applied according to the machine-learning approach suggested in 
 MethylIT pipeline (also see https://genomaths.github.io/methylit/ and reference ([3](#3)) using MethylIT's
 [_estimateCutPoint_](https://genomaths.github.io/methylit/reference/estimateCutPoint.html) function:
 
@@ -38,9 +47,14 @@ cut_cg = estimateCutPoint(LR = ps_cg, simple = FALSE,
                           center = TRUE, scale = TRUE,
                           verbose = FALSE)
 ```
+DMGs were estimated with *countTest2* function:
 
-Only DMPs with methylation levels greater than 0.3 are reported in the WIG files, which are Bayesian corrected methylation 
-levels as described in MethylIT pipeline (see https://genomaths.github.io/methylit/). 
+```{r dmgs}
+dmgs <- countTest2(ds, num.cores = 4L, minCountPerIndv = 7,
+                   maxGrpCV = c(1, 1), Minlog2FC = 1, test = "LRT",
+                   CountPerBp = 0.001, verbose = TRUE)
+```
+
 
 # References
 1.<a name="1"></a> Virdi, K., Laurie, J., Xu, YZ. et al. Arabidopsis MSH1 mutation alters the epigenome and produces 
