@@ -24,9 +24,9 @@ levels as described in MethylIT pipeline (see https://genomaths.github.io/methyl
 
 Next, depending on the methylation context, cytosines site with the following methylation level difference were considere in 
 further downstream analysis:
-  1. CG: $\ge 0.34$
-  2. CHG: $\ge 0.33$
-  3. CHH: $\ge 0.28$
+  1. CG: <img src="https://render.githubusercontent.com/render/math?math=\ge0.34">
+  2. CHG: <img src="https://render.githubusercontent.com/render/math?math=\ge0.33">
+  3. CHH: <img src="https://render.githubusercontent.com/render/math?math=\ge0.28">
    
 The optimal cutoff for HD to obtain DMPs was applied according to the machine-learning approach suggested in 
 MethylIT pipeline (also see https://genomaths.github.io/methylit/ and reference ([3](#3)) using MethylIT's
