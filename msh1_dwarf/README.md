@@ -22,6 +22,7 @@ reads of 3 were used. Hellinger Divergence (HD) was calculated with a pool of co
 Only cytosines with methylation levels greater than 0.3 are reported in the WIG files, which are Bayesian corrected methylation 
 levels as described in MethylIT pipeline (see https://genomaths.github.io/methylit/). 
 
+## DMP estimation
 Next, depending on the methylation context, cytosines site with the following methylation level difference were considere in 
 further downstream analysis:
   1. CG: <img src="https://render.githubusercontent.com/render/math?math=\ge0.34">
@@ -47,7 +48,10 @@ cut_cg = estimateCutPoint(LR = ps_cg, simple = FALSE,
                           center = TRUE, scale = TRUE,
                           verbose = FALSE)
 ```
-DMGs were estimated with *countTest2* function:
+
+## DMG estimation
+
+DMGs were estimated with [_countTest2_](https://genomaths.github.io/methylit/reference/countTest2.html) function:
 
 ```{r dmgs}
 dmgs <- countTest2(ds, num.cores = 4L, minCountPerIndv = 7,
