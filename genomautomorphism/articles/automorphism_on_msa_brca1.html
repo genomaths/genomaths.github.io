@@ -296,8 +296,33 @@ code.r{
 <span class="co">#&gt; Two slots: 'DataList' &amp; 'SeqRanges'</span>
 <span class="co">#&gt; -------</span></code></pre></div>
 <p>An AutomorphismList class object is returned. The codon sequences (<em>seq1</em> and <em>seq2</em>) with their corresponding coordinates (left) are returned, as well as the coordinated representation on <span class="math inline">\(\mathbb{Z}_{64}\)</span> (<em>coord1</em> and <em>coord2</em>). Observe that two new columns were added, the automorphism coefficient <span class="math inline">\(k\)</span> (named as <em>brca1_autm</em>) and the genetic-code cube where the automorphism was found. By convention the DNA sequence is given for the positive strand. Since the <em>dual cube</em> of <strong>“ACGT”</strong> corresponds to the complementary base order <strong>TGCA</strong>, automorphisms described by the cube <strong>TGCA</strong> represent mutational events affecting the DNA negative strand (-).</p>
-<p>The last result can be summarized by gene regions as follow:</p>
+<div id="bar-plot-automorphism-distribution-by-cubes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bar-plot-automorphism-distribution-by-cubes" class="anchor"></a>Bar plot automorphism distribution by cubes</h2>
+<p>The automorphism distribution by cubes can be summarized in the bar-plot graphic</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/unlist.html">unlist</a></span><span class="op">(</span><span class="va">brca1_autm</span><span class="op">)</span>
+<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">autms</span><span class="op">$</span><span class="va">cube</span><span class="op">[</span> <span class="va">autms</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">autms</span><span class="op">$</span><span class="va">autm</span><span class="op">)</span> <span class="op">]</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">0.8</span>, font <span class="op">=</span> <span class="fl">2</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">counts</span>, <span class="co">#main="Automorphism distribution",</span>
+        xlab<span class="op">=</span><span class="st">"Genetic-code cube representation"</span>,
+        ylab<span class="op">=</span><span class="st">"Fixed mutational events"</span>,
+col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>,<span class="st">"red"</span>, <span class="st">"darkgreen"</span>, <span class="st">"magenta"</span>, <span class="st">"orange"</span><span class="op">)</span>, 
+        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">7000</span><span class="op">)</span>,
+        cex.lab <span class="op">=</span> <span class="fl">2</span>, cex.main <span class="op">=</span> <span class="fl">1.5</span>, cex.names <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">2</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2000</span>, <span class="fl">4000</span>, <span class="fl">6000</span><span class="op">)</span>, cex.axis <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">1</span>,line <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">1.9</span>, <span class="fl">3.1</span>, <span class="fl">4.3</span>, <span class="fl">5.5</span><span class="op">)</span>,
+      text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span> <span class="va">counts</span> <span class="op">)</span>, cex <span class="op">=</span> <span class="fl">1.4</span>,
+      col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"magenta"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="automorphism_on_msa_brca1_files/figure-html/barplot_1-1.png" width="576"></p>
+</div>
+<div id="bar-plot-automorphism-distribution-by-ranges-regions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bar-plot-automorphism-distribution-by-ranges-regions" class="anchor"></a>Bar plot automorphism distribution by ranges (regions)</h2>
+<p>The last result can be summarized by gene regions as follow:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">brca1_autm_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">brca1_autm</span>, 
                                   min.len <span class="op">=</span> <span class="fl">2</span>,
                                   num.cores <span class="op">=</span> <span class="fl">10L</span>,
@@ -347,11 +372,8 @@ code.r{
 <p>That is, function <em>automorphismByRanges</em> permits the classification of the pairwise alignment of protein-coding sub-regions based on the mutational events observed on it quantitatively represented as automorphisms on genetic-code cubes.</p>
 <p>Searching for automorphisms on <span class="math inline">\(\mathbb{Z}_{64}\)</span> permits us a quantitative differentiation between mutational events at different codon positions from a given DNA protein-encoding region. As shown in reference (<a href="#4">4</a>)) a set of different cubes can be applied to describe the best evolutionary aminoacid scale highly correlated with aminoacid physicochemical properties describing the observed evolutionary process in a given protein.</p>
 <p>More information about this subject can be found in the supporting material from reference (<a href="#4">4</a>)) at GitHub <a href="https://github.com/genomaths/GenomeAlgebra_SymmetricGroup">GenomeAlgebra_SymmetricGroup</a>, particularly by interacting with the Mathematica notebook <a href="https://github.com/genomaths/GenomeAlgebra_SymmetricGroup/blob/master/Genetic-Code-Scales_of_Amino-Acids.nb">Genetic-Code-Scales_of_Amino-Acids.nb</a>.</p>
-<div id="bar-plot-automorphism-distribution-by-cubes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bar-plot-automorphism-distribution-by-cubes" class="anchor"></a>Bar plot automorphism distribution by cubes</h2>
 <p>The automorphism distribution by cubes can be summarized in the bar-plot graphic</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/unlist.html">unlist</a></span><span class="op">(</span><span class="va">brca1_autm_range</span><span class="op">)</span>
 <span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">cts</span><span class="op">$</span><span class="va">cube</span><span class="op">)</span>
 
@@ -369,9 +391,12 @@ code.r{
 <h2 class="hasAnchor">
 <a href="#grouping-automorphism-by-automorphisms-coefficients" class="anchor"></a>Grouping automorphism by automorphism’s coefficients</h2>
 <p>Automorphisms with the same automorphism’s coefficients can be grouped.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span><span class="va">brca1_autm</span>, 
-                                 verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+                                 verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p>The result is provided with the package</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">autby_coef</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span>
 <span class="va">autby_coef</span>
 <span class="co">#&gt; AutomorphismByCoefList object of length 190:</span>
 <span class="co">#&gt; $human_1.human_2</span>
@@ -394,13 +419,25 @@ code.r{
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ...</span>
 <span class="co">#&gt; &lt;189 more elements&gt;</span></code></pre></div>
+<p>As a result of the evolutionary pressure on DNA protein-coding regions (addressed to preserve the aminoacid physicochemical properties and, consequently, the biological functions of the encoded proteins) the highest mutational rate is found in the third base of the codon, followed by the first base, and the lowest rate is found in the second one. DNA bases are classified based on the physicochemical criteria used to ordering the set of codons: number of hydrogen bonds (strong-weak, S-W), chemical type (purine-pyrimidine, Y-R), and chemical groups (amino versus keto, M-K) (see reference 4). Preserved codon positions are labeled with letter “H”. Preserved codon positions are labeled with letter “H” and insertion-mutations identified in the multiple sequence alignment are labeled as “—”.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/unlist.html">unlist</a></span><span class="op">(</span><span class="va">autby_coef</span><span class="op">)</span>
+<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">cts</span><span class="op">$</span><span class="va">mut_type</span><span class="op">[</span> <span class="va">cts</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="va">cts</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">]</span><span class="op">)</span>
+<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">counts</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, 
+    cex.main <span class="op">=</span> <span class="fl">1.4</span>, cex.lab <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">counts</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,
+        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, 
+        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>,las<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<p><img src="automorphism_on_msa_brca1_files/figure-html/barplot_2-1.png" width="1152"></p>
 </div>
 <div id="conserved-and-non-conserved-regions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conserved-and-non-conserved-regions" class="anchor"></a>Conserved and non-conserved regions</h2>
 <p>A specific function is provided to get the coordinates of conserved and non-conserved regions, which can be used in further downstream analyses.</p>
 <p>The conserved regions from each pairwise comparison are retrieved typing:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/conserved_regions.html">conserved_regions</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">autby_coef</span><span class="op">)</span>
 <span class="co">#&gt; AutomorphismByCoef object with 80625 ranges and 5 metadata columns:</span>
 <span class="co">#&gt;                                   seqnames    ranges strand |        seq1        seq2      autm    mut_type        cube</span>
@@ -419,7 +456,7 @@ code.r{
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>The non-conserved regions from each pairwise comparison are obtained with the same function but different settings:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ncs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conserved_regions.html">conserved_regions</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">autby_coef</span>, conserved <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">ncs</span>
 <span class="co">#&gt; AutomorphismByCoef object with 8956 ranges and 5 metadata columns:</span>
@@ -458,7 +495,7 @@ code.r{
 <a href="#subsetting-regions-of-interest" class="anchor"></a>Subsetting regions of interest</h1>
 <p>The application of some of the available bioinformatic tools is straightforward. For example, knowing the positions for the conserved and non-conserved regions, we can subset into the alignment region of potential interest.</p>
 <p>The coordinates carrying mutational events are:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/start.html">start</a></span><span class="op">(</span><span class="va">ncs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   [1]   4   6   7  11  15  20  25  29  45  52  60  63  71  74  77  85  86  91  94 100 101 104 113 122 124 128 132 138</span>
 <span class="co">#&gt;  [29] 139 142 143 146 148 151 152 155 159 161 164 167 170 172 175 176 181 182 190 191 193 194 196 205 214 216 225 227</span>
@@ -469,7 +506,7 @@ code.r{
 <span class="co">#&gt; [169] 552 554 560 564 568 569 572 576 578 584 585 590 597 601 602 605 623 647 653 654 659 660 665 669 678 681 683 685</span>
 <span class="co">#&gt; [197] 693 701 702 703 704 716 726 728 730 731 748 749 753 756</span></code></pre></div>
 <p>We will use function <a href="https://www.rdocumentation.org/packages/Biostrings/versions/2.40.2/topics/XStringSet-class">DNAStringSet</a> from the Bioconductor R package <a href="https://kasperdanielhansen.github.io/genbioconductor/html/Biostrings.html">Biostrings</a> to subset the MSA of primate cytochrome c. </p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">brca1_aln_region</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">DNAStringSet</a></span><span class="op">(</span><span class="va">brca1_aln</span>, start <span class="op">=</span> <span class="fl">37</span><span class="op">*</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">2</span>, end <span class="op">=</span> <span class="fl">42</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span>
 <span class="va">brca1_aln_region</span>
 <span class="co">#&gt; DNAStringSet object of length 20:</span>
@@ -486,12 +523,12 @@ code.r{
 <span class="co">#&gt; [19]    18 ACAAAGTGTGACCACATA                                                                       XM_025363316.1:14...</span>
 <span class="co">#&gt; [20]    18 ACAAAGTGTGACCACATA                                                                       XM_039475995.1:49...</span></code></pre></div>
 <p>Next, function <a href="https://rdrr.io/cran/ggseqlogo/man/ggseqlogo.html">ggseqlogo</a> from the R package <a href="https://rdrr.io/cran/ggseqlogo/">ggseqlogo</a> will be applied to get the logo sequence from the selected MSA region.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggseqlogo/man/ggseqlogo.html">ggseqlogo</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">brca1_aln_region</span><span class="op">)</span> <span class="op">)</span>
 <span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; = "none")` instead.</span></code></pre></div>
 <p><img src="automorphism_on_msa_brca1_files/figure-html/seqlogo-1.png" width="700"></p>
 <p>The corresponding aminoacid sequence will be</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">brca1_aln_region_aa</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/translate.html">translate</a></span><span class="op">(</span><span class="va">brca1_aln_region</span><span class="op">)</span>
 <span class="va">brca1_aln_region_aa</span>
 <span class="co">#&gt; AAStringSet object of length 20:</span>
@@ -508,7 +545,7 @@ code.r{
 <span class="co">#&gt; [19]     6 TKCDHI                                                                                   XM_025363316.1:14...</span>
 <span class="co">#&gt; [20]     6 TKCDHI                                                                                   XM_039475995.1:49...</span></code></pre></div>
 <p>And the corresponding aminoacid sequence logo will is</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggseqlogo/man/ggseqlogo.html">ggseqlogo</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">brca1_aln_region_aa</span><span class="op">)</span> <span class="op">)</span></code></pre></div>
 <p><img src="automorphism_on_msa_brca1_files/figure-html/aa_logo-1.png" width="700"></p>
 <p>That is, the first mutational event reported in the codon sequence correspond to a synonymous mutation.</p>
