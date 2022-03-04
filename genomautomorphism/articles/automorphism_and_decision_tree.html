@@ -122,7 +122,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 class="date">28 February 2022</h4>
+            <h4 class="date">04 March 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/master/vignettes/automorphism_and_decision_tree.Rmd"><code>vignettes/automorphism_and_decision_tree.Rmd</code></a></small>
       <div class="hidden name"><code>automorphism_and_decision_tree.Rmd</code></div>
@@ -399,6 +399,7 @@ code.r{
 <span class="co">#&gt;    human_2.bolivian_monkey        1       756      + |         CCC         CCT        59         HHY        ACGT</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
+<p>Every single base mutational event across the MSA was classified according IUPAC nomenclature: 1) According to the number of hydrogen bonds (on DNA/RNA double helix): strong S={C, G} (three hydrogen bonds) and weak W={A, U} (two hydrogen bonds). According to the chemical type: purines R={A, G} and pyrimidines Y={C, U}. 3). According to the presence of amino or keto groups on the base rings: amino M={C, A} and keto K={G, T}. Constant (hold) base positions were labeled with letter H. So, codon positions labeled as HKH means that the first and third bases remains constant and mutational events between bases G and T were found in the MSA.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">h_autby_coef</span><span class="op">)</span>

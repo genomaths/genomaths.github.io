@@ -122,7 +122,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 class="date">28 February 2022</h4>
+            <h4 class="date">04 March 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/master/vignettes/automorphism_on_msa_brca1.Rmd"><code>vignettes/automorphism_on_msa_brca1.Rmd</code></a></small>
       <div class="hidden name"><code>automorphism_on_msa_brca1.Rmd</code></div>
@@ -496,7 +496,7 @@ col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.h
 <p>The application of some of the available bioinformatic tools is straightforward. For example, knowing the positions for the conserved and non-conserved regions, we can subset into the alignment region of potential interest.</p>
 <p>The coordinates carrying mutational events are:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/start.html">start</a></span><span class="op">(</span><span class="va">ncs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/start.html">start</a></span><span class="op">(</span><span class="va">ncs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   [1]   4   6   7  11  15  20  25  29  45  52  60  63  71  74  77  85  86  91  94 100 101 104 113 122 124 128 132 138</span>
 <span class="co">#&gt;  [29] 139 142 143 146 148 151 152 155 159 161 164 167 170 172 175 176 181 182 190 191 193 194 196 205 214 216 225 227</span>
 <span class="co">#&gt;  [57] 231 233 234 239 240 241 244 245 247 251 252 253 254 267 269 270 275 276 279 281 282 286 287 292 293 299 300 301</span>

@@ -122,7 +122,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 class="date">28 February 2022</h4>
+            <h4 class="date">04 March 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/master/vignettes/GenomAutomorphism.Rmd"><code>vignettes/GenomAutomorphism.Rmd</code></a></small>
       <div class="hidden name"><code>GenomAutomorphism.Rmd</code></div>
@@ -335,13 +335,29 @@ code.r{
                     group <span class="op">=</span> <span class="st">"Z64"</span>,
                     cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,
                     cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,
-                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co">## This data is available with the package</span>
-<span class="co"># data(covid_autm, package = "GenomAutomorphism")</span>
-<span class="va">covid_autm</span></code></pre></div>
-<p>And the summary by range</p>
+                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p>This data is available with the package</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">covid_autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span>
+<span class="va">covid_autm</span>
+<span class="co">#&gt; Automorphism object with 9722 ranges and 6 metadata columns:</span>
+<span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2    coord1    coord2      autm        cube</span>
+<span class="co">#&gt;             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;character&gt;</span>
+<span class="co">#&gt;      [1]        1         1      + |         ATG         ATG        50        50         1        ACGT</span>
+<span class="co">#&gt;      [2]        1         2      + |         GAG         GAG        10        10         1        ACGT</span>
+<span class="co">#&gt;      [3]        1         3      + |         AGC         AGC        33        33         1        ACGT</span>
+<span class="co">#&gt;      [4]        1         4      + |         CTT         CTT        55        55         1        ACGT</span>
+<span class="co">#&gt;      [5]        1         5      + |         GTT         GTT        59        59         1        ACGT</span>
+<span class="co">#&gt;      ...      ...       ...    ... .         ...         ...       ...       ...       ...         ...</span>
+<span class="co">#&gt;   [9718]        1      9718      + |         TCA         TCA        28        28         1        ACGT</span>
+<span class="co">#&gt;   [9719]        1      9719      + |         ACT         ACT        19        19         1        ACGT</span>
+<span class="co">#&gt;   [9720]        1      9720      + |         CAG         CAG         6         6         1        ACGT</span>
+<span class="co">#&gt;   [9721]        1      9721      + |         GCA         GCA        24        24         1        ACGT</span>
+<span class="co">#&gt;   [9722]        1      9722      + |         TAA         TAA        12        12         1        ACGT</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
+<p>And the summary by range</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aut_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span>
 <span class="va">aut_range</span>
 <span class="co">#&gt; GRanges object with 460 ranges and 1 metadata column:</span>
@@ -361,7 +377,7 @@ code.r{
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>Regions no described by automorphism can be described as translations (labeled “Trnl”) and they can be shown as follow:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">idx</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">$</span><span class="va">cube</span> <span class="op">==</span> <span class="st">"Trnl"</span><span class="op">)</span>
 <span class="va">covid_autm</span><span class="op">[</span> <span class="va">idx</span> <span class="op">]</span>
 <span class="co">#&gt; Automorphism object with 19 ranges and 6 metadata columns:</span>
@@ -381,7 +397,7 @@ code.r{
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>These codon positions cover insertion-deletion (<em>indel</em>) mutational events. The wholes regions can be summarized typing:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">idx</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">aut_range</span><span class="op">$</span><span class="va">cube</span> <span class="op">==</span> <span class="st">"Trnl"</span><span class="op">)</span>
 <span class="va">aut_range</span><span class="op">[</span> <span class="va">idx</span> <span class="op">]</span>
 <span class="co">#&gt; GRanges object with 13 ranges and 1 metadata column:</span>
@@ -406,7 +422,7 @@ code.r{
 <h2 class="hasAnchor">
 <a href="#bar-plot-automorphism-distribution-by-cubes" class="anchor"></a>Bar plot automorphism distribution by cubes</h2>
 <p>The automorphism distribution by cubes can be summarized in the bar-plot graphic</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">$</span><span class="va">cube</span><span class="op">[</span> <span class="va">covid_autm</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">$</span><span class="va">autm</span><span class="op">)</span> <span class="op">]</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">0.9</span>, font <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
@@ -422,6 +438,37 @@ code.r{
       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>,<span class="st">"yellow"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="GenomAutomorphism_files/figure-html/barplot-1.png" width="576"></p>
 </div>
+<div id="grouping-automorphism-by-automorphisms-coefficients--types-of-mutations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#grouping-automorphism-by-automorphisms-coefficients--types-of-mutations" class="anchor"></a>Grouping automorphism by automorphism’s coefficients. Types of mutations</h2>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span>
+<span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="va">autby_coef</span><span class="op">[</span> <span class="va">autby_coef</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="va">autby_coef</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="op">-</span><span class="fl">1</span>  <span class="op">]</span></code></pre></div>
+<p>Barplot of frequency of mutation types greater than 2</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">autby_coef</span><span class="op">$</span><span class="va">mut_type</span><span class="op">)</span>
+<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">counts</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">count.</span> <span class="op">&lt;-</span> <span class="va">counts</span><span class="op">[</span> <span class="va">counts</span> <span class="op">&gt;</span> <span class="fl">2</span> <span class="op">]</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, 
+    cex.main <span class="op">=</span> <span class="fl">1.4</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">count.</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,
+        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, 
+        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>,las<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>,  cex.axis <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">1.8</span> <span class="op">)</span></code></pre></div>
+<p><img src="GenomAutomorphism_files/figure-html/barplot_2-1.png" width="1344"></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">counts</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; HHY HHR HHW YHH HHK HHM RHH HRH HYH --- HHS MHH WHH HMH KHH HYW YHW RHK RHY WHW YHM YHY HKH HMR HRR HRY HWH KHW RYY YHK </span>
+<span class="co">#&gt; 425 189  89  34  32  25  24  18  18  16  13  12  11   7   6   5   5   4   4   4   4   4   3   3   3   3   3   3   3   3 </span>
+<span class="co">#&gt; YHR HMW HYK KHY KSW MHK MHW MRH RHM RHR RHW RKW RMH RMW RRY RSW RYH RYW SHH SHW SRH WMH WMS WSY YWH HKK HKR HMK HMY HSR </span>
+<span class="co">#&gt;   3   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   1   1   1   1   1 </span>
+<span class="co">#&gt; HWS HWW HWY HYR HYY KHK KHR KKS KMH KMW KRK KRY KSH MHR MHS MKM MMM MRM MWH MWM MWS MWW MYY RMY RRK RRM RSK RYK SHM SHY </span>
+<span class="co">#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class="co">#&gt; SKY SMW SRM SWR SWY SYH WHY WRH WRY WWH WWK WWS WWY WYH WYM WYW YHS YKH YKY YRY YWM YWW YWY YYH YYR </span>
+<span class="co">#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></code></pre></div>
+</div>
 <div id="conserved-and-non-conserved-regions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conserved-and-non-conserved-regions" class="anchor"></a>Conserved and non-conserved regions</h2>
@@ -430,7 +477,7 @@ code.r{
 <a href="#conserved-regions" class="anchor"></a>Conserved regions</h3>
 <p>Conserved and non-conserved gene regions can be easily observed in most of MSA editing bioinformatic tools. However, here were interesting into get the regions coordinates for further downstream analysis.</p>
 <p>Conserved regions from pairwise comparisons are obtain with function conserved_regions:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">conserv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conserved_regions.html">conserved_regions</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span>
 <span class="va">conserv</span>
 <span class="co">#&gt; AutomorphismByCoef object with 6348 ranges and 5 metadata columns:</span>
@@ -449,8 +496,9 @@ code.r{
 <span class="co">#&gt;   [6348]        1 9683-9722      + |         TAA         TAA         1         HHH        ACGT</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
+<p>Every single base mutational event across the MSA was classified according IUPAC nomenclature: 1) According to the number of hydrogen bonds (on DNA/RNA double helix): strong S={C, G} (three hydrogen bonds) and weak W={A, U} (two hydrogen bonds). According to the chemical type: purines R={A, G} and pyrimidines Y={C, U}. 3). According to the presence of amino or keto groups on the base rings: amino M={C, A} and keto K={G, T}. Constant (hold) base positions were labeled with letter H. So, codon positions labeled as HKH means that the first and third bases remains constant and mutational events between bases G and T were found in the MSA.</p>
 <p>Several regions are similar for more than one comparison.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">conserv_unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conserved_regions.html">conserved_regions</a></span><span class="op">(</span><span class="va">covid_autm</span>, output <span class="op">=</span> <span class="st">"unique"</span><span class="op">)</span>
 <span class="va">conserv_unique</span>
 <span class="co">#&gt; GRanges object with 744 ranges and 2 metadata columns:</span>
@@ -474,8 +522,8 @@ code.r{
 <h3 class="hasAnchor">
 <a href="#the-best-fitted-cdf-model-for-the-sizes-of-conserved-regions" class="anchor"></a>The best fitted CDF model for the sizes of conserved regions</h3>
 <p>Next, function <a href="https://rdrr.io/github/genomaths/usefr/man/fitCDF.html">fitCDF</a> is applied to find the best fitted probability function to the the sizes of conserved regions.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">widths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode-methods.html">width</a></span><span class="op">(</span><span class="va">conserv</span><span class="op">)</span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">widths</span> <span class="op">&lt;-</span> <span class="fu">width</span><span class="op">(</span><span class="va">conserv</span><span class="op">)</span>
 <span class="va">dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitCDF.html">fitCDF</a></span><span class="op">(</span><span class="va">widths</span>, distNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">19</span>, <span class="fl">20</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, 
                loss.fun <span class="op">=</span> <span class="st">"cauchy"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -502,7 +550,7 @@ code.r{
 <span class="co">#&gt;  * Estimating Studentized residuals for Generalized 3P Gamma distribution</span>
 <span class="co">#&gt;  * Plots for Generalized 3P Gamma distribution...</span></code></pre></div>
 <p><img src="GenomAutomorphism_files/figure-html/dist-1.png" width="1152"></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dist</span>
 <span class="co">#&gt; ggamma CDF model</span>
 <span class="co">#&gt; ------</span>
@@ -520,8 +568,8 @@ code.r{
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Goodness of fit:</span>
 <span class="co">#&gt;     Adj.R.Square       rho R.Cross.val       AIC</span>
-<span class="co">#&gt; gof    0.9999998 0.9999998   0.9992046 -37955.95</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<span class="co">#&gt; gof    0.9999998 0.9999998   0.9992039 -37955.95</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
 family <span class="op">=</span> <span class="st">"serif"</span>, col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
@@ -536,7 +584,7 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
       col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="GenomAutomorphism_files/figure-html/hist-1.png" width="576"></p>
 <p>After apply Bootstrap test for Goodness of fit, tt seems to be that we have no reasons to reject the hypothesis that the sizes of conserved regions follows Generalized Gamma distribution.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html">mcgoftest</a></span><span class="op">(</span> 
           varobj <span class="op">=</span> <span class="va">widths</span>, 
           model <span class="op">=</span> <span class="va">dist</span>,
@@ -558,7 +606,7 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
 <span class="co">#&gt;    24.98844     1.00000  6348.00000   999.00000</span></code></pre></div>
 <p>Nevertheless, the data comes from only one pairwise DNA sequence alignment and the distribution would differ when consider a large DNA multiple sequence alignment.</p>
 <p>Short summary for the other CDFs analyzed are shown typing:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dist</span><span class="op">$</span><span class="va">fit</span>
 <span class="co">#&gt; $`Generalized 3P Gamma`</span>
 <span class="co">#&gt; Nonlinear regression via the Levenberg-Marquardt algorithm</span>
@@ -609,7 +657,7 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
 <a href="#automorphisms-on-mathbbz_125" class="anchor"></a>Automorphisms on <span class="math inline">\(\mathbb{Z}_{125}\)</span>
 </h1>
 <p>Alternatively, we can use the algebraic representation on on <span class="math inline">\(\mathbb{Z}_{125}\)</span>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">covid_autm_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism.html">automorphism</a></span><span class="op">(</span>
                       seq <span class="op">=</span> <span class="va">covid_aln</span>, 
                       group <span class="op">=</span> <span class="st">"Z125"</span>, 
@@ -634,7 +682,7 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>And the summary by range</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aut_range_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">covid_autm_2</span><span class="op">)</span>
 <span class="va">aut_range_2</span>
 <span class="co">#&gt; GRanges object with 21 ranges and 1 metadata column:</span>
@@ -654,7 +702,7 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>The whole genome can be described by automorphisms on <span class="math inline">\(\mathbb{Z}_{125}\)</span>.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">covid_autm_2</span><span class="op">$</span><span class="va">cube</span><span class="op">[</span> <span class="va">covid_autm_2</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">]</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">1</span>, font <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
