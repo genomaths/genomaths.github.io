@@ -126,7 +126,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 class="date">04 March 2022</h4>
+            <h4 class="date">05 March 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/master/vignettes/covid_19.Rmd"><code>vignettes/covid_19.Rmd</code></a></small>
       <div class="hidden name"><code>covid_19.Rmd</code></div>
@@ -188,43 +188,9 @@ code.r{
 </style>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: BiocGenerics</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'BiocGenerics'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     IQR, mad, sd, var, xtabs</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     anyDuplicated, append, as.data.frame, basename, cbind, colnames, dirname, do.call, duplicated, eval,</span>
-<span class="co">#&gt;     evalq, Filter, Find, get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget, order,</span>
-<span class="co">#&gt;     paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,</span>
-<span class="co">#&gt;     table, tapply, union, unique, unsplit, which.max, which.min</span>
-<span class="co">#&gt; Loading required package: S4Vectors</span>
-<span class="co">#&gt; Loading required package: stats4</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'S4Vectors'</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     expand.grid, I, unname</span>
-<span class="co">#&gt; Loading required package: IRanges</span>
-<span class="co">#&gt; Loading required package: XVector</span>
-<span class="co">#&gt; Loading required package: GenomeInfoDb</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'Biostrings'</span>
-<span class="co">#&gt; The following object is masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     strsplit</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/GenomAutomorphism">GenomAutomorphism</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">usefr</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'usefr'</span>
-<span class="co">#&gt; The following object is masked from 'package:BiocGenerics':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     unlist</span>
-<span class="co">#&gt; The following object is masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     unlist</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stefanom.io/latex2exp/">latex2exp</a></span><span class="op">)</span></code></pre></div>
 <div id="sars-coronavirus-gz02-vs-bat-sl-covzc45" class="section level1">
 <h1 class="hasAnchor">
 <a href="#sars-coronavirus-gz02-vs-bat-sl-covzc45" class="anchor"></a>SARS coronavirus GZ02 vs bat-SL-CoVZC45</h1>
@@ -343,20 +309,28 @@ code.r{
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Goodness of fit:</span>
 <span class="co">#&gt;     Adj.R.Square rho R.Cross.val       AIC</span>
-<span class="co">#&gt; gof            1   1   0.9998381 -29782.22</span></code></pre></div>
+<span class="co">#&gt; gof            1   1    0.999838 -29782.22</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, cex.lab <span class="op">=</span><span class="fl">1.4</span>,
+    cex.main <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
-family <span class="op">=</span> <span class="st">"serif"</span>, col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
+col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
 main <span class="op">=</span> <span class="st">"Histogram and best fitted CDF model for conserved region sizes"</span>,
-xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><span class="op">)</span>
+xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, yaxt <span class="op">=</span> <span class="st">"n"</span>, ylab<span class="op">=</span><span class="st">""</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, las <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Density"</span>, side <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, line <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span>
+
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">150</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html">TeX</a></span><span class="op">(</span><span class="st">r'($f(x) = \frac{\alpha}{\beta\Gamma(\gamma)}{(\frac{x}{\beta})}
+           ^{\alpha\delta-1}e^{(-\frac{x}{\beta})^\alpha}$)'</span><span class="op">)</span>
+
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ggamma.html">dggamma</a></span><span class="op">(</span><span class="va">x1</span>,
                   alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
                   scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,
                   psi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
                   <span class="op">)</span>,
-      col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+      col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="va">txt</span>, side <span class="op">=</span> <span class="fl">3</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, adj <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></code></pre></div>
 <p><img src="covid_19_files/figure-html/hist-1.png" width="576"></p>
 <p>After apply Bootstrap test for Goodness of fit, tt seems to be that we have no reasons to reject the hypothesis that the sizes of conserved regions follows Generalized Gamma distribution.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -368,9 +342,7 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
 <span class="co">#&gt;       KS.stat.D      mc_p.value KS.stat.p.value     sample.size       num.sampl </span>
 <span class="co">#&gt;       0.1671919       1.0000000       0.0000000    3813.0000000     999.0000000</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n===========================\n"</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ===========================</span>
+
 <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html">mcgoftest</a></span><span class="op">(</span>
           varobj <span class="op">=</span> <span class="va">widths</span>,
           model <span class="op">=</span> <span class="va">dist2</span>,
@@ -506,20 +478,28 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
 <span class="co">#&gt; Goodness of fit:</span>
 <span class="co">#&gt;     Adj.R.Square       rho R.Cross.val      AIC</span>
 <span class="co">#&gt; gof    0.9999999 0.9999999   0.9995317 -67874.9</span></code></pre></div>
-<p>Joining the datasets increases the sample size and improved predictions</p>
+<p>Joining the datasets increases the sample size and improved predictions in respect to the comparison SARS coronavirus GZ02 vs Bat SARS-like coronavirus alone.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, cex.lab <span class="op">=</span><span class="fl">1.4</span>,
+    cex.main <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
-family <span class="op">=</span> <span class="st">"serif"</span>, col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
+col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
 main <span class="op">=</span> <span class="st">"Histogram and best fitted CDF model for conserved region sizes"</span>,
-xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><span class="op">)</span>
+xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, yaxt <span class="op">=</span> <span class="st">"n"</span>, ylab<span class="op">=</span><span class="st">""</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, las <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Density"</span>, side <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, line <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span>
+
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">150</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html">TeX</a></span><span class="op">(</span><span class="st">r'($f(x) = \frac{\alpha}{\beta\Gamma(\gamma)}{(\frac{x}{\beta})}
+           ^{\alpha\delta-1}e^{(-\frac{x}{\beta})^\alpha}$)'</span><span class="op">)</span>
+
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ggamma.html">dggamma</a></span><span class="op">(</span><span class="va">x1</span>,
                   alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
                   scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,
                   psi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
                   <span class="op">)</span>,
-      col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+      col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="va">txt</span>, side <span class="op">=</span> <span class="fl">3</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, adj <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></code></pre></div>
 <p><img src="covid_19_files/figure-html/hist2-1.png" width="576"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html">mcgoftest</a></span><span class="op">(</span> 
@@ -555,11 +535,12 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
 <span class="va">count.</span> <span class="op">&lt;-</span> <span class="va">counts</span><span class="op">[</span> <span class="va">counts</span> <span class="op">&gt;</span> <span class="fl">9</span> <span class="op">]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, 
-    cex.main <span class="op">=</span> <span class="fl">1.4</span>, cex.lab <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+    cex.main <span class="op">=</span> <span class="fl">1.4</span>, cex.lab <span class="op">=</span> <span class="fl">2</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">count.</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,
         col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, 
-        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>,las<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="covid_19_files/figure-html/barplot_3-1.png" width="1344"></p>
+        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>,las<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>,  cex.axis <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">1.8</span> <span class="op">)</span></code></pre></div>
+<p><img src="covid_19_files/figure-html/barplot_3-1.png" width="1440"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span>
 <span class="co">#&gt; </span>
