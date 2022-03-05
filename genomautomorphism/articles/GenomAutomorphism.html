@@ -85,6 +85,10 @@
     <li>
       <a href="../articles/automorphism_and_decision_tree.html">A Short Introduction to Algebraic Taxonomy on Genes Regions</a>
     </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/covid_19.html">Automorphism analysis on COVID-19 data</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -122,7 +126,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 class="date">04 March 2022</h4>
+            <h4 class="date">05 March 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/master/vignettes/GenomAutomorphism.Rmd"><code>vignettes/GenomAutomorphism.Rmd</code></a></small>
       <div class="hidden name"><code>GenomAutomorphism.Rmd</code></div>
@@ -451,7 +455,7 @@ code.r{
 <span class="va">count.</span> <span class="op">&lt;-</span> <span class="va">counts</span><span class="op">[</span> <span class="va">counts</span> <span class="op">&gt;</span> <span class="fl">2</span> <span class="op">]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, 
-    cex.main <span class="op">=</span> <span class="fl">1.4</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
+    cex.main <span class="op">=</span> <span class="fl">1.4</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">count.</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,
         col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, 
         border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>,las<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
@@ -523,7 +527,7 @@ code.r{
 <a href="#the-best-fitted-cdf-model-for-the-sizes-of-conserved-regions" class="anchor"></a>The best fitted CDF model for the sizes of conserved regions</h3>
 <p>Next, function <a href="https://rdrr.io/github/genomaths/usefr/man/fitCDF.html">fitCDF</a> is applied to find the best fitted probability function to the the sizes of conserved regions.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">widths</span> <span class="op">&lt;-</span> <span class="fu">width</span><span class="op">(</span><span class="va">conserv</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">widths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode-methods.html">width</a></span><span class="op">(</span><span class="va">conserv</span><span class="op">)</span>
 <span class="va">dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitCDF.html">fitCDF</a></span><span class="op">(</span><span class="va">widths</span>, distNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">19</span>, <span class="fl">20</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, 
                loss.fun <span class="op">=</span> <span class="st">"cauchy"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -568,7 +572,7 @@ code.r{
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Goodness of fit:</span>
 <span class="co">#&gt;     Adj.R.Square       rho R.Cross.val       AIC</span>
-<span class="co">#&gt; gof    0.9999998 0.9999998   0.9992039 -37955.95</span></code></pre></div>
+<span class="co">#&gt; gof    0.9999998 0.9999998   0.9992044 -37955.95</span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
