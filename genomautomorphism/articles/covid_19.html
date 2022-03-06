@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="GenomAutomorphism">
 <title>Automorphism analysis on COVID-19 data • GenomAutomorphism</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -12,12 +13,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Automorphism analysis on COVID-19 data">
 <meta property="og:description" content="GenomAutomorphism">
 <meta property="og:image" content="https://genomaths.github.io/GenomAutomorphism/logo.png">
@@ -32,105 +32,92 @@
   gtag('config', 'UA-115082821-1');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">GenomAutomorphism</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
-<li>
-  <a href="../articles/GenomAutomorphism.html">Get started</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/GenomAutomorphism.html">Get started</a>
 </li>
-<li>
-  <a href="../reference/index.html">Package functions</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Package functions</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/GenomAutomorphism.html">GenomAutomorphism</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="../articles/automorphism_on_msa.html">Analysis of Automorphisms on a DNA Multiple Sequence Alignment</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="../articles/automorphism_on_msa_brca1.html">Analysis of Automorphisms on a MSA of Primate BRCA1 Gene</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="../articles/automorphism_and_decision_tree.html">A Short Introduction to Algebraic Taxonomy on Genes Regions</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="../articles/covid_19.html">Automorphism analysis on COVID-19 data</a>
-    </li>
-  </ul>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/GenomAutomorphism.html">GenomAutomorphism</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/automorphism_on_msa.html">Analysis of Automorphisms on a DNA Multiple Sequence Alignment</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/automorphism_on_msa_brca1.html">Analysis of Automorphisms on a MSA of Primate BRCA1 Gene</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/automorphism_and_decision_tree.html">A Short Introduction to Algebraic Taxonomy on Genes Regions</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/covid_19.html">Automorphism analysis on COVID-19 data</a>
+  </div>
 </li>
-<li>
-  <a href="../news/index.html">News</a>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
 </li>
-<li>
-  <a href="https://github.com/genomaths/GenomAutomorphism/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="http://twitter.com/robersysr">
-    <span class="fab fa-twitter fa-lg"></span>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/genomaths/GenomAutomorphism/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/genomaths/GenomAutomorphism/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><script src="covid_19_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Automorphism analysis on COVID-19 data</h1>
-                        <h4 class="author">Robersy Sanchez</h4>
+
+
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Automorphism analysis on COVID-19 data</h1>
+                        <h4 data-toc-skip class="author">Robersy Sanchez</h4>
             <address class="author_afil">
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 class="date">05 March 2022</h4>
+            <h4 data-toc-skip class="date">05 March 2022</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/master/vignettes/covid_19.Rmd"><code>vignettes/covid_19.Rmd</code></a></small>
-      <div class="hidden name"><code>covid_19.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/HEAD/vignettes/covid_19.Rmd" class="external-link"><code>vignettes/covid_19.Rmd</code></a></small>
+      <div class="d-none name"><code>covid_19.Rmd</code></div>
     </div>
 
     
@@ -187,24 +174,24 @@ code.r{
 }
 </style>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/GenomAutomorphism">GenomAutomorphism</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">usefr</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stefanom.io/latex2exp/">latex2exp</a></span><span class="op">)</span></code></pre></div>
-<div id="sars-coronavirus-gz02-vs-bat-sl-covzc45" class="section level1">
-<h1 class="hasAnchor">
-<a href="#sars-coronavirus-gz02-vs-bat-sl-covzc45" class="anchor"></a>SARS coronavirus GZ02 vs bat-SL-CoVZC45</h1>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings" class="external-link">Biostrings</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/GenomAutomorphism" class="external-link">GenomAutomorphism</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">usefr</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stefanom.io/latex2exp/" class="external-link">latex2exp</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="sars-coronavirus-gz02-vs-bat-sl-covzc45">SARS coronavirus GZ02 vs bat-SL-CoVZC45<a class="anchor" aria-label="anchor" href="#sars-coronavirus-gz02-vs-bat-sl-covzc45"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">URL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/seqalignments/raw/master/"</span>, 
+<code class="sourceCode R"><span class="va">URL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/seqalignments/raw/master/"</span>, 
         <span class="st">"COVID-19/AY390556.1_265-13398_13398-21485_RNA-POL_SARS_COVI_GZ02.fas"</span><span class="op">)</span>
 
-<span class="va">covid_aln2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html">readDNAMultipleAlignment</a></span><span class="op">(</span>filepath <span class="op">=</span> <span class="va">URL</span><span class="op">)</span></code></pre></div>
+<span class="va">covid_aln2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html" class="external-link">readDNAMultipleAlignment</a></span><span class="op">(</span>filepath <span class="op">=</span> <span class="va">URL</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">covid_aut</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism.html">automorphism</a></span><span class="op">(</span>
                     seq <span class="op">=</span> <span class="va">covid_aln2</span>,
                     group <span class="op">=</span> <span class="st">"Z64"</span>,
-                    cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,
-                    cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,
+                    cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,
+                    cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,
                     verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="va">covid_aut</span>
@@ -225,24 +212,24 @@ code.r{
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">covid_aut</span><span class="op">$</span><span class="va">cube</span><span class="op">[</span> <span class="va">covid_aut</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">covid_aut</span><span class="op">$</span><span class="va">autm</span><span class="op">)</span> <span class="op">]</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">covid_aut</span><span class="op">$</span><span class="va">cube</span><span class="op">[</span> <span class="va">covid_aut</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covid_aut</span><span class="op">$</span><span class="va">autm</span><span class="op">)</span> <span class="op">]</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">0.9</span>, font <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">counts</span>, main<span class="op">=</span><span class="st">"Automorphism distribution"</span>,
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">0.9</span>, font <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">counts</span>, main<span class="op">=</span><span class="st">"Automorphism distribution"</span>,
         xlab<span class="op">=</span><span class="st">"Genetic-code cube representation"</span>,
         ylab<span class="op">=</span><span class="st">"Fixed mutational events"</span>,
-        col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>,<span class="st">"red"</span>, <span class="st">"darkgreen"</span><span class="op">)</span>, 
+        col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>,<span class="st">"red"</span>, <span class="st">"darkgreen"</span><span class="op">)</span>, 
         border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co">#ylim = c(0, 2000), </span>
         cex.lab <span class="op">=</span> <span class="fl">2</span>, cex.main <span class="op">=</span> <span class="fl">1.5</span>, cex.names <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">2</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">500</span>, <span class="fl">1000</span>, <span class="fl">1500</span>, <span class="fl">2000</span><span class="op">)</span>, cex.axis <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">1</span>,line <span class="op">=</span> <span class="op">-</span><span class="fl">1.5</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">1.9</span>, <span class="fl">3.1</span>, <span class="fl">4.3</span>, <span class="fl">5.5</span><span class="op">)</span>,
-      text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span> <span class="va">counts</span> <span class="op">)</span>, cex <span class="op">=</span> <span class="fl">1.4</span>,
-      col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>,<span class="st">"yellow"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span><span class="fl">2</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">500</span>, <span class="fl">1000</span>, <span class="fl">1500</span>, <span class="fl">2000</span><span class="op">)</span>, cex.axis <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">1</span>,line <span class="op">=</span> <span class="op">-</span><span class="fl">1.5</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">1.9</span>, <span class="fl">3.1</span>, <span class="fl">4.3</span>, <span class="fl">5.5</span><span class="op">)</span>,
+      text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span> <span class="va">counts</span> <span class="op">)</span>, cex <span class="op">=</span> <span class="fl">1.4</span>,
+      col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>,<span class="st">"yellow"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="covid_19_files/figure-html/barplot-1.png" width="576"></p>
 </div>
-<div id="analysis-of-conserved-regions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#analysis-of-conserved-regions" class="anchor"></a>Analysis of conserved regions</h1>
+<div class="section level2">
+<h2 id="analysis-of-conserved-regions">Analysis of conserved regions<a class="anchor" aria-label="anchor" href="#analysis-of-conserved-regions"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">conserv2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conserved_regions.html">conserved_regions</a></span><span class="op">(</span><span class="va">covid_aut</span><span class="op">)</span>
 <span class="va">conserv2</span>
@@ -262,10 +249,10 @@ code.r{
 <span class="co">#&gt;   [3813]        1 7099-7100      + |         TAA         TAA         1         HHH        ACGT</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
-<p>Next, function <a href="https://rdrr.io/github/genomaths/usefr/man/fitCDF.html">fitCDF</a> is applied to find the best fitted probability function to the the sizes of conserved regions.</p>
+<p>Next, function <a href="https://rdrr.io/github/genomaths/usefr/man/fitCDF.html" class="external-link">fitCDF</a> is applied to find the best fitted probability function to the the sizes of conserved regions.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">widths</span> <span class="op">&lt;-</span> <span class="fu">width</span><span class="op">(</span><span class="va">conserv2</span><span class="op">)</span>
-<span class="va">dist2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitCDF.html">fitCDF</a></span><span class="op">(</span><span class="va">widths</span>, distNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">19</span>, <span class="fl">20</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, 
+<code class="sourceCode R"><span class="va">widths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/start.html" class="external-link">width</a></span><span class="op">(</span><span class="va">conserv2</span><span class="op">)</span>
+<span class="va">dist2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitCDF.html" class="external-link">fitCDF</a></span><span class="op">(</span><span class="va">widths</span>, distNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">19</span>, <span class="fl">20</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, 
                loss.fun <span class="op">=</span> <span class="st">"cauchy"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; *** Fitting Log-normal distribution ...</span>
@@ -311,30 +298,31 @@ code.r{
 <span class="co">#&gt;     Adj.R.Square rho R.Cross.val       AIC</span>
 <span class="co">#&gt; gof            1   1    0.999838 -29782.22</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, cex.lab <span class="op">=</span><span class="fl">1.4</span>,
-    cex.main <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, cex.lab <span class="op">=</span><span class="fl">1.4</span>,
+    cex.main <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
 col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
 main <span class="op">=</span> <span class="st">"Histogram and best fitted CDF model for conserved region sizes"</span>,
 xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, yaxt <span class="op">=</span> <span class="st">"n"</span>, ylab<span class="op">=</span><span class="st">""</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, las <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Density"</span>, side <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, line <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, las <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span><span class="st">"Density"</span>, side <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, line <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span>
 
-<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">150</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html">TeX</a></span><span class="op">(</span><span class="st">r'($f(x) = \frac{\alpha}{\beta\Gamma(\gamma)}{(\frac{x}{\beta})}
-           ^{\alpha\delta-1}e^{(-\frac{x}{\beta})^\alpha}$)'</span><span class="op">)</span>
+<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">150</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html" class="external-link">TeX</a></span><span class="op">(</span><span class="st">r'($\textit{f}(\textit{x}) = \frac{\alpha}{\beta\Gamma(\gamma)}
+  {(\frac{\textit{x}}{\beta})}^{\alpha\delta-1}
+  e^{(-\frac{\textit{x}}{\beta})^\alpha}$)'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ggamma.html">dggamma</a></span><span class="op">(</span><span class="va">x1</span>,
-                  alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-                  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,
-                  psi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ggamma.html" class="external-link">dggamma</a></span><span class="op">(</span><span class="va">x1</span>,
+                  alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
+                  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,
+                  psi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">dist2</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
                   <span class="op">)</span>,
       col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="va">txt</span>, side <span class="op">=</span> <span class="fl">3</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, adj <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></code></pre></div>
-<p><img src="covid_19_files/figure-html/hist-1.png" width="576"></p>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span><span class="va">txt</span>, side <span class="op">=</span> <span class="fl">3</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, adj <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></code></pre></div>
+<p><img src="covid_19_files/figure-html/hist-1.png" width="672"></p>
 <p>After apply Bootstrap test for Goodness of fit, tt seems to be that we have no reasons to reject the hypothesis that the sizes of conserved regions follows Generalized Gamma distribution.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html">mcgoftest</a></span><span class="op">(</span> 
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html" class="external-link">mcgoftest</a></span><span class="op">(</span> 
           varobj <span class="op">=</span> <span class="va">widths</span>, 
           model <span class="op">=</span> <span class="va">dist2</span>,
           stat <span class="op">=</span> <span class="st">"ks"</span><span class="op">)</span>
@@ -343,7 +331,7 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="co">#&gt;       0.1671919       1.0000000       0.0000000    3813.0000000     999.0000000</span>
 
 
-<span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html">mcgoftest</a></span><span class="op">(</span>
+<span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html" class="external-link">mcgoftest</a></span><span class="op">(</span>
           varobj <span class="op">=</span> <span class="va">widths</span>,
           model <span class="op">=</span> <span class="va">dist2</span>,
           stat <span class="op">=</span> <span class="st">"rmse"</span>,
@@ -351,24 +339,24 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="co">#&gt; *** Permutation GoF testing based on Root Mean Square statistic ( parametric approach )  ...</span>
 <span class="co">#&gt;        rmse  mc_p.value sample.size   num.sampl </span>
 <span class="co">#&gt;    13.75682     1.00000  3813.00000   999.00000</span></code></pre></div>
-<div id="grouping-automorphism-by-automorphisms-coefficients--types-of-mutations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#grouping-automorphism-by-automorphisms-coefficients--types-of-mutations" class="anchor"></a>Grouping automorphism by automorphism’s coefficients. Types of mutations</h2>
+<div class="section level3">
+<h3 id="grouping-automorphism-by-automorphisms-coefficients--types-of-mutations">Grouping automorphism by automorphism’s coefficients. Types of mutations<a class="anchor" aria-label="anchor" href="#grouping-automorphism-by-automorphisms-coefficients--types-of-mutations"></a>
+</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">autby_coef2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span><span class="va">covid_aut</span><span class="op">)</span>
 <span class="va">autby_coef2</span> <span class="op">&lt;-</span> <span class="va">autby_coef2</span><span class="op">[</span> <span class="va">autby_coef2</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="va">autby_coef2</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="op">-</span><span class="fl">1</span>  <span class="op">]</span></code></pre></div>
 <p>Alignment gaps denoting indel mutations are labeled as “—”.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">counts2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">autby_coef2</span><span class="op">$</span><span class="va">mut_type</span><span class="op">)</span>
-<span class="va">counts2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">counts2</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">counts2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">autby_coef2</span><span class="op">$</span><span class="va">mut_type</span><span class="op">)</span>
+<span class="va">counts2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">counts2</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">count.</span> <span class="op">&lt;-</span> <span class="va">counts2</span><span class="op">[</span> <span class="va">counts2</span> <span class="op">&gt;</span> <span class="fl">9</span> <span class="op">]</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, 
-    cex.main <span class="op">=</span> <span class="fl">1.4</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">count.</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,
-        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, 
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, 
+    cex.main <span class="op">=</span> <span class="fl">1.4</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">count.</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,
+        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, 
         border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>,las<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>,  cex.axis <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">1.8</span> <span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>,  cex.axis <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">1.8</span> <span class="op">)</span></code></pre></div>
 <p><img src="covid_19_files/figure-html/barplot2-1.png" width="1344"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts2</span>
@@ -389,11 +377,11 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="co">#&gt;   1</span></code></pre></div>
 </div>
 </div>
-<div id="sars-coronavirus-gz02-vs-bat-sl-covzc45-and-bat-sars-like-coronavirus-isolate-rs7327" class="section level1">
-<h1 class="hasAnchor">
-<a href="#sars-coronavirus-gz02-vs-bat-sl-covzc45-and-bat-sars-like-coronavirus-isolate-rs7327" class="anchor"></a>SARS coronavirus GZ02 vs bat-SL-CoVZC45 and Bat SARS-like coronavirus isolate Rs7327</h1>
+<div class="section level2">
+<h2 id="sars-coronavirus-gz02-vs-bat-sl-covzc45-and-bat-sars-like-coronavirus-isolate-rs7327">SARS coronavirus GZ02 vs bat-SL-CoVZC45 and Bat SARS-like coronavirus isolate Rs7327<a class="anchor" aria-label="anchor" href="#sars-coronavirus-gz02-vs-bat-sl-covzc45-and-bat-sars-like-coronavirus-isolate-rs7327"></a>
+</h2>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">covid_autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">covid_autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span>
 <span class="va">covid_autm</span>
 <span class="co">#&gt; Automorphism object with 9722 ranges and 6 metadata columns:</span>
 <span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2    coord1    coord2      autm        cube</span>
@@ -431,9 +419,9 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">consvr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">conserv</span>, <span class="va">conserv2</span><span class="op">)</span>
-<span class="va">widths</span> <span class="op">&lt;-</span> <span class="fu">width</span><span class="op">(</span><span class="va">consvr</span><span class="op">)</span>
-<span class="va">dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitCDF.html">fitCDF</a></span><span class="op">(</span><span class="va">widths</span>, distNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">19</span>, <span class="fl">20</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, 
+<code class="sourceCode R"><span class="va">consvr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">conserv</span>, <span class="va">conserv2</span><span class="op">)</span>
+<span class="va">widths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/start.html" class="external-link">width</a></span><span class="op">(</span><span class="va">consvr</span><span class="op">)</span>
+<span class="va">dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/fitCDF.html" class="external-link">fitCDF</a></span><span class="op">(</span><span class="va">widths</span>, distNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">19</span>, <span class="fl">20</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, 
                loss.fun <span class="op">=</span> <span class="st">"cauchy"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; *** Fitting Log-normal distribution ...</span>
@@ -480,29 +468,30 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="co">#&gt; gof    0.9999999 0.9999999   0.9995317 -67874.9</span></code></pre></div>
 <p>Joining the datasets increases the sample size and improved predictions in respect to the comparison SARS coronavirus GZ02 vs Bat SARS-like coronavirus alone.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, cex.lab <span class="op">=</span><span class="fl">1.4</span>,
-    cex.main <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, cex.lab <span class="op">=</span><span class="fl">1.4</span>,
+    cex.main <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
 col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
 main <span class="op">=</span> <span class="st">"Histogram and best fitted CDF model for conserved region sizes"</span>,
 xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, yaxt <span class="op">=</span> <span class="st">"n"</span>, ylab<span class="op">=</span><span class="st">""</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, las <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Density"</span>, side <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, line <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, las <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span><span class="st">"Density"</span>, side <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, line <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span>
 
-<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">150</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html">TeX</a></span><span class="op">(</span><span class="st">r'($f(x) = \frac{\alpha}{\beta\Gamma(\gamma)}{(\frac{x}{\beta})}
-           ^{\alpha\delta-1}e^{(-\frac{x}{\beta})^\alpha}$)'</span><span class="op">)</span>
+<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">150</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html" class="external-link">TeX</a></span><span class="op">(</span><span class="st">r'($\textit{f}(\textit{x}) = \frac{\alpha}{\beta\Gamma(\gamma)}
+  {(\frac{\textit{x}}{\beta})}^{\alpha\delta-1}
+  e^{(-\frac{\textit{x}}{\beta})^\alpha}$)'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ggamma.html">dggamma</a></span><span class="op">(</span><span class="va">x1</span>,
-                  alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-                  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,
-                  psi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/pkg/usefr/man/ggamma.html" class="external-link">dggamma</a></span><span class="op">(</span><span class="va">x1</span>,
+                  alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
+                  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,
+                  psi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">bestfit</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
                   <span class="op">)</span>,
       col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="va">txt</span>, side <span class="op">=</span> <span class="fl">3</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, adj <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span><span class="va">txt</span>, side <span class="op">=</span> <span class="fl">3</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, adj <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></code></pre></div>
 <p><img src="covid_19_files/figure-html/hist2-1.png" width="576"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html">mcgoftest</a></span><span class="op">(</span> 
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html" class="external-link">mcgoftest</a></span><span class="op">(</span> 
           varobj <span class="op">=</span> <span class="va">widths</span>, 
           model <span class="op">=</span> <span class="va">dist</span>,
           stat <span class="op">=</span> <span class="st">"ks"</span><span class="op">)</span>
@@ -510,10 +499,10 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="co">#&gt;       KS.stat.D      mc_p.value KS.stat.p.value     sample.size       num.sampl </span>
 <span class="co">#&gt;    8.707602e-02    1.000000e+00    0.000000e+00    1.016100e+04    9.990000e+02</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n===========================\n"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\n===========================\n"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ===========================</span>
-<span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html">mcgoftest</a></span><span class="op">(</span>
+<span class="fu"><a href="https://rdrr.io/pkg/usefr/man/mcgoftest.html" class="external-link">mcgoftest</a></span><span class="op">(</span>
           varobj <span class="op">=</span> <span class="va">widths</span>,
           model <span class="op">=</span> <span class="va">dist</span>,
           stat <span class="op">=</span> <span class="st">"rmse"</span>,
@@ -521,25 +510,25 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="co">#&gt; *** Permutation GoF testing based on Root Mean Square statistic ( parametric approach )  ...</span>
 <span class="co">#&gt;        rmse  mc_p.value sample.size   num.sampl </span>
 <span class="co">#&gt;    29.19551     1.00000 10161.00000   999.00000</span></code></pre></div>
-<div id="grouping-automorphism-by-automorphisms-coefficients" class="section level2">
-<h2 class="hasAnchor">
-<a href="#grouping-automorphism-by-automorphisms-coefficients" class="anchor"></a>Grouping automorphism by automorphism’s coefficients</h2>
+<div class="section level3">
+<h3 id="grouping-automorphism-by-automorphisms-coefficients">Grouping automorphism by automorphism’s coefficients<a class="anchor" aria-label="anchor" href="#grouping-automorphism-by-automorphisms-coefficients"></a>
+</h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span>
-<span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">autby_coef</span>, <span class="va">autby_coef2</span><span class="op">)</span>
+<span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">autby_coef</span>, <span class="va">autby_coef2</span><span class="op">)</span>
 <span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="va">autby_coef</span><span class="op">[</span> <span class="va">autby_coef</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="va">autby_coef</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="op">-</span><span class="fl">1</span>  <span class="op">]</span></code></pre></div>
 <p>Alignment gaps denoting indel mutations are labeled as “—”.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">autby_coef</span><span class="op">$</span><span class="va">mut_type</span><span class="op">)</span>
-<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">counts</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">autby_coef</span><span class="op">$</span><span class="va">mut_type</span><span class="op">)</span>
+<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">counts</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">count.</span> <span class="op">&lt;-</span> <span class="va">counts</span><span class="op">[</span> <span class="va">counts</span> <span class="op">&gt;</span> <span class="fl">9</span> <span class="op">]</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, 
-    cex.main <span class="op">=</span> <span class="fl">1.4</span>, cex.lab <span class="op">=</span> <span class="fl">2</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">count.</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,
-        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, 
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, 
+    cex.main <span class="op">=</span> <span class="fl">1.4</span>, cex.lab <span class="op">=</span> <span class="fl">2</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">count.</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,
+        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, 
         border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>,las<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>,  cex.axis <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">1.8</span> <span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>,  cex.axis <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">1.8</span> <span class="op">)</span></code></pre></div>
 <p><img src="covid_19_files/figure-html/barplot_3-1.png" width="1440"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span>
@@ -564,31 +553,28 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="co">#&gt;    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1</span></code></pre></div>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by <a href="https://genomaths.com">Robersy Sanchez</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by <a href="https://genomaths.com" class="external-link">Robersy Sanchez</a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
