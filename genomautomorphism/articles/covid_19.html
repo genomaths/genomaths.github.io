@@ -296,14 +296,14 @@ code.r{
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Goodness of fit:</span>
 <span class="co">#&gt;     Adj.R.Square rho R.Cross.val       AIC</span>
-<span class="co">#&gt; gof            1   1    0.999838 -29782.22</span></code></pre></div>
+<span class="co">#&gt; gof            1   1   0.9998381 -29782.22</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, cex.lab <span class="op">=</span><span class="fl">1.4</span>,
     cex.main <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
 col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
 main <span class="op">=</span> <span class="st">"Histogram and best fitted CDF model for conserved region sizes"</span>,
-xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, yaxt <span class="op">=</span> <span class="st">"n"</span>, ylab<span class="op">=</span><span class="st">""</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span>
+xlab <span class="op">=</span> <span class="st">"Conserved region size (bp)"</span>, yaxt <span class="op">=</span> <span class="st">"n"</span>, ylab<span class="op">=</span><span class="st">""</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, las <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span><span class="st">"Density"</span>, side <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, line <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span>
 
@@ -473,7 +473,7 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, 
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
 col <span class="op">=</span> <span class="st">"cyan1"</span>, cex.main <span class="op">=</span> <span class="fl">0.9</span>,
 main <span class="op">=</span> <span class="st">"Histogram and best fitted CDF model for conserved region sizes"</span>,
-xlab <span class="op">=</span> <span class="st">"Conserved region size"</span>, yaxt <span class="op">=</span> <span class="st">"n"</span>, ylab<span class="op">=</span><span class="st">""</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span>
+xlab <span class="op">=</span> <span class="st">"Conserved region size (bp)"</span>, yaxt <span class="op">=</span> <span class="st">"n"</span>, ylab<span class="op">=</span><span class="st">""</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, cex.axis <span class="op">=</span> <span class="fl">1.4</span>, las <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span><span class="st">"Density"</span>, side <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, line <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span>
 
