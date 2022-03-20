@@ -114,7 +114,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 data-toc-skip class="date">11 March 2022</h4>
+            <h4 data-toc-skip class="date">20 March 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/HEAD/vignettes/automorphism_and_decision_tree.Rmd" class="external-link"><code>vignettes/automorphism_and_decision_tree.Rmd</code></a></small>
       <div class="d-none name"><code>automorphism_and_decision_tree.Rmd</code></div>
@@ -123,7 +123,7 @@
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      <p>A short and simply introduction to Algebraic taxonomy of genomic/genes regions is presented here. Analysis of DNA mutational events on DNA Multiple Sequence Alignment (MSA) by means of automorphisms between pairwise DNA sequences algebraically represented as Abelian finite group. Herein, show a simple example on how the package can be applied.</p>
+      <p>Herein, we show a short and simply introduction to algebraic taxonomy of genomic/genes regions based on the nalysis of DNA mutational events on DNA Multiple Sequence Alignment (MSA) by means of automorphisms between pairwise DNA sequences algebraically represented as Abelian finite group.</p>
     </div>
     
 <style type="text/css">
@@ -192,8 +192,18 @@ code.r{
 <div class="section level2">
 <h2 id="automorphisms-on-mathbbz_64">Automorphisms on <span class="math inline">\(\mathbb{Z}_{64}\)</span><a class="anchor" aria-label="anchor" href="#automorphisms-on-mathbbz_64"></a>
 </h2>
-<p>First, we proceed to load the R package required for our analysis</p>
+<p>First, we proceed to load or install, if needed, the R packages required for our analysis. If needed the R package required for the current analysis can be installed as:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"party"</span>, <span class="st">"partykit"</span>, <span class="st">"data.table"</span>, <span class="st">"ggplot2"</span>,
+                   <span class="st">"ggparty"</span>, <span class="st">"dplyr"</span><span class="op">)</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>In particular, you might require to install the library <a href="https://r-forge.r-project.org/R/?group_id=343" class="external-link">CHAID</a> can be installed typing in R console:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"CHAID"</span>, repos<span class="op">=</span><span class="st">"http://R-Forge.R-project.org"</span><span class="op">)</span></code></pre></div>
+<p>You can install GenomAutomorphism package from GitHub</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_git</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/GenomAutomorphism.git"</span><span class="op">)</span></code></pre></div>
+<p>If all the required libraries all installed, then we proceed to load the libraries</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/GenomAutomorphism" class="external-link">GenomAutomorphism</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings" class="external-link">Biostrings</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://party.R-forge.R-project.org" class="external-link">party</a></span><span class="op">)</span>
@@ -203,16 +213,15 @@ code.r{
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/martin-borkovec/ggparty" class="external-link">ggparty</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CHAID</span><span class="op">)</span></code></pre></div>
-<p><a href="install.packages(%22CHAID%22,%20repos=%22http://R-Forge.R-project.org%22)" class="external-link">CHAID</a> can be download at: &lt;install.packages(“CHAID”, repos=“<a href="http://R-Forge.R-project.org" class="external-link uri">http://R-Forge.R-project.org</a>”)&gt;</p>
 <p>Next, we proceed to check the DNA multiple sequence alignment (MSA) file. This is a FASTA file carrying the MSA of primate BRCA1 DNA repair gene. Notice that we are familiar with the <em>FASTA</em> file, then it is better to directly read it with function automorphism. However, for the current example, this step can be bypassed, since the MSA is provided provided together with <em><em>GenomAutomorphism</em></em> R package</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Do not run it. This is included with package</span>
 <span class="va">URL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/seqalignments/raw/master/BRCA1/"</span>,
               <span class="st">"brca1_primates_dna_repair_20_sequences.fasta"</span><span class="op">)</span>
 
 <span class="va">brca1_aln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html" class="external-link">readDNAMultipleAlignment</a></span><span class="op">(</span>filepath <span class="op">=</span> <span class="va">URL</span><span class="op">)</span></code></pre></div>
 <p>Load MSA available in the package</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"brca1_aln"</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span>
 <span class="va">brca1_aln</span>
 <span class="co">#&gt; DNAMultipleAlignment with 20 rows and 2283 columns</span>
@@ -237,7 +246,7 @@ code.r{
 <span class="co">#&gt; [19] <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TTT</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">AAAA</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TT</span>...<span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CCCC</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CCCCC</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span> XM_025363316.1:14...</span>
 <span class="co">#&gt; [20] <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TTT</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">AAAA</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span>...<span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CCCC</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CCC</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span> XM_039475995.1:49...</span></code></pre></div>
 <p>The sequence names</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/strtrim.html" class="external-link">strtrim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">brca1_aln</span><span class="op">@</span><span class="va">unmasked</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "NM_007298.3:20-2299_Homo_sapiens_BRCA1_DNA_repair_associated_(BRCA1)_transcript_variant_4_mRNA"      </span>
 <span class="co">#&gt;  [2] "U64805.1:1-2280_Homo_sapiens_Brca1-delta11b_(Brca1)_mRNA_complete_cds"                               </span>
@@ -262,7 +271,7 @@ code.r{
 <p>Next, function automorphism will be applied to represent the codon sequence in the Abelian group <span class="math inline">\(\mathbb{Z}_{64}\)</span> (i.e., the set of integers remainder modulo 64). The codon coordinates are requested on the cube ACGT. Following reference (<a href="#4">4</a>)), cubes are labeled based on the order of DNA bases used to define the sum operation.</p>
 <p>In Z64, automorphisms are described as functions <span class="math inline">\(f(x) = k\,x \quad mod\,64\)</span>, where <span class="math inline">\(k\)</span> and <span class="math inline">\(x\)</span> are elements from the set of integers modulo 64. Below, in function <em>automorphism</em> three important arguments are given values: <em>group = “Z64”</em>, <em>cube = c(“ACGT”, “TGCA”)</em>, and <em>cube_alt = c(“CATG”, “GTAC”)</em>. Setting for group specifies on which group the automorphisms will be computed. These groups can be: “Z5”, “Z64”, “Z125”, and “Z5^3”.</p>
 <p>In groups “Z64” and “Z125” not all the mutational events can be described as automorphisms from a given cube. So, a character string denoting pairs of “dual” the genetic-code cubes, as given in references (<a href="#2">1-4</a>)), is given as argument for <em>cube</em>. That is, the base pairs from the given cubes must be complementary each other. Such a cube pair are call dual cubes and, as shown in reference (<a href="#4">4</a>)), each pair integrates group. If automorphisms are not found in first set of dual cubes, then the algorithm search for automorphism in a alternative set of dual cubes.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Do not run it. This is included with package</span>
 
 <span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"human_1"</span>,<span class="st">"human_2"</span>,<span class="st">"gorilla_1"</span>,<span class="st">"gorilla_2"</span>,<span class="st">"gorilla_3"</span>,
@@ -279,7 +288,7 @@ code.r{
                       nms <span class="op">=</span> <span class="va">nams</span>, 
                       verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Object <em>brca1_autm</em> is included with package and can be load typing:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">brca1_autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span>
 <span class="va">brca1_autm</span>
 <span class="co">#&gt; AutomorphismList object of length: 190</span>
@@ -309,12 +318,12 @@ code.r{
 <h3 id="grouping-automorphism-by-automorphisms-coefficients">Grouping automorphism by automorphism’s coefficients<a class="anchor" aria-label="anchor" href="#grouping-automorphism-by-automorphisms-coefficients"></a>
 </h3>
 <p>Automorphisms with the same automorphism’s coefficients can be grouped. This task can be accomplished with function automorphismByCoef. However, for the sake of time, its output is included in the package</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Not need to run it here</span>
 <span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">brca1_autm</span>,
                                  verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Object <em>brca1_autm</em> is included with package and can be load typing:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">autby_coef</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span>
 <span class="va">autby_coef</span>
 <span class="co">#&gt; AutomorphismByCoefList object of length 190:</span>
@@ -339,7 +348,7 @@ code.r{
 <span class="co">#&gt; ...</span>
 <span class="co">#&gt; &lt;189 more elements&gt;</span></code></pre></div>
 <p>In the next we are interested on mutational events in respect to human (as reference).</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">brca1_autm</span><span class="op">)</span>
 <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"human_1."</span>, <span class="va">nams</span><span class="op">)</span>
 <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"human_2."</span>, <span class="va">nams</span><span class="op">)</span>
@@ -370,7 +379,7 @@ code.r{
 <p>The automorphism distribution by cubes can be summarized in the bar-plot graphic.</p>
 <p>Object <em>autby_coef</em> carried all the pairwise comparisons, while it will be enough to use data from a single species as reference, e.g., humans.</p>
 <p>First the data must be reordered into a  object:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">h_autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">h_brca1_autm</span><span class="op">)</span>
 <span class="va">h_autby_coef</span>
 <span class="co">#&gt; AutomorphismByCoef object with 1395 ranges and 5 metadata columns:</span>
@@ -390,7 +399,7 @@ code.r{
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>Every single base mutational event across the MSA was classified according IUPAC nomenclature: 1) According to the number of hydrogen bonds (on DNA/RNA double helix): strong S={C, G} (three hydrogen bonds) and weak W={A, U} (two hydrogen bonds). According to the chemical type: purines R={A, G} and pyrimidines Y={C, U}. 3). According to the presence of amino or keto groups on the base rings: amino M={C, A} and keto K={G, T}. Constant (hold) base positions were labeled with letter H. So, codon positions labeled as HKH means that the first and third bases remains constant and mutational events between bases G and T were found in the MSA.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">h_autby_coef</span><span class="op">)</span>
 <span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"human[_][1-2][.]"</span>, <span class="st">""</span>, <span class="va">nams</span><span class="op">)</span>
@@ -415,13 +424,13 @@ code.r{
 <span class="co">#&gt; 1394       756        59 bolivian_monkey         HHY        ACGT</span>
 <span class="co">#&gt; 1395       756        59 bolivian_monkey         HHY        ACGT</span></code></pre></div>
 <p>Nominal variables are transformed into </p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dt</span><span class="op">$</span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">dt</span><span class="op">$</span><span class="va">start</span><span class="op">)</span>
 <span class="va">dt</span><span class="op">$</span><span class="va">autm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">dt</span><span class="op">$</span><span class="va">autm</span><span class="op">)</span>
 <span class="va">dt</span><span class="op">$</span><span class="va">cube</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">dt</span><span class="op">$</span><span class="va">cube</span><span class="op">)</span>
 <span class="va">dt</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">dt</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>
 <span class="va">dt</span><span class="op">$</span><span class="va">mut_type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">dt</span><span class="op">$</span><span class="va">mut_type</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">dt</span><span class="op">$</span><span class="va">cube</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">0.6</span>, font <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
@@ -441,9 +450,8 @@ code.r{
 <h3 id="classification-tree-chi-squared-automated-interaction-detection-chaid">Classification Tree Chi-squared Automated Interaction Detection (CHAID)<a class="anchor" aria-label="anchor" href="#classification-tree-chi-squared-automated-interaction-detection-chaid"></a>
 </h3>
 <p>The current CHAID implementation only accepts nominal or ordinal categorical predictors. When predictors are continuous, they have to be transformed into ordinal predictors before using the following algorithm. We create a ordinal variable <em>autms</em> from variable <em>autm</em>. <a href="install.packages(%22CHAID%22,%20repos=%22http://R-Forge.R-project.org%22)" class="external-link">CHAID</a> can be download at: &lt;install.packages(“CHAID”, repos=“<a href="http://R-Forge.R-project.org" class="external-link uri">http://R-Forge.R-project.org</a>”)&gt;</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">interval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">interval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">x</span> <span class="op">&gt;=</span> <span class="va">a</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="va">b</span>
 <span class="op">}</span>
 
@@ -491,13 +499,16 @@ code.r{
 <span class="co">#&gt; 1393       A4       R8      HHY     ACGT bonobos        </span>
 <span class="co">#&gt; 1394       A4       R8      HHY     ACGT bolivian_monkey</span>
 <span class="co">#&gt; 1395       A4       R8      HHY     ACGT bolivian_monkey</span></code></pre></div>
-<p>Fitting a classification tree with CHAID algorithm</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<p>A classification tree is estimated with CHAID algorithm:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ctrl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CHAID/man/chaid.html" class="external-link">chaid_control</a></span><span class="op">(</span>minsplit <span class="op">=</span> <span class="fl">200</span>, minprob <span class="op">=</span> <span class="fl">0.8</span>, alpha2 <span class="op">=</span> <span class="fl">0.01</span>, alpha4 <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
 <span class="va">chaid_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CHAID/man/chaid.html" class="external-link">chaid</a></span><span class="op">(</span><span class="va">species</span> <span class="op">~</span> <span class="va">autms</span> <span class="op">+</span> <span class="va">regions</span> <span class="op">+</span> <span class="va">mut_type</span> <span class="op">+</span> <span class="va">cube</span> , data <span class="op">=</span> <span class="va">datos</span>,
                    control <span class="op">=</span> <span class="va">ctrl</span><span class="op">)</span></code></pre></div>
+<div class="section level4">
+<h4 id="plotting-the-chaid-tree">Plotting the CHAID tree<a class="anchor" aria-label="anchor" href="#plotting-the-chaid-tree"></a>
+</h4>
 <p>Next, the data must be prepared for plotting the tree with <a href="https://rdrr.io/cran/ggparty/man/ggparty.html" class="external-link">ggparty</a>:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">##  Updating CHAID decision tree</span>
 <span class="va">dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party.html" class="external-link">data_party</a></span><span class="op">(</span><span class="va">chaid_res</span><span class="op">)</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"autms"</span>, <span class="st">"regions"</span>, <span class="st">"mut_type"</span>, <span class="st">"cube"</span><span class="op">)</span><span class="op">]</span>
@@ -526,7 +537,7 @@ code.r{
 <span class="co">## total counts on each</span>
 <span class="va">node.size</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">node.freq</span><span class="op">)</span></code></pre></div>
 <p>Plotting the tree with <a href="https://rdrr.io/cran/ggparty/man/ggparty.html" class="external-link">ggparty</a> (font size adjusted for html output)</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/ggparty.html" class="external-link">ggparty</a></span><span class="op">(</span><span class="va">chaid_tree</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/geom_edge.html" class="external-link">geom_edge</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">id</span>, size <span class="op">=</span> <span class="va">node.size</span><span class="op">[</span><span class="va">id</span><span class="op">]</span><span class="op">/</span><span class="fl">300</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/geom_edge_label.html" class="external-link">geom_edge_label</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, colour <span class="op">=</span> <span class="st">"red"</span>,
@@ -562,27 +573,31 @@ code.r{
                   vjust <span class="op">=</span> <span class="fl">1.</span>, size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span>,
         shared_axis_labels <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> </code></pre></div>
 <p><img src="automorphism_and_decision_tree_files/figure-html/chaid-tree-1.png" width="5280"></p>
+</div>
+<div class="section level4">
+<h4 id="stochastic-deterministic-logical-rules">Stochastic-deterministic logical rules<a class="anchor" aria-label="anchor" href="#stochastic-deterministic-logical-rules"></a>
+</h4>
 <p>Since only one mutational event human-to-human in region R1 from class A3 is reported in the right side of the tree, with high probability only non-humans hold the following rule:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rule</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">autms</span> <span class="op">==</span> <span class="st">"A4"</span> <span class="op">|</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">autms</span> <span class="op">==</span> <span class="st">"A3"</span> <span class="op">&amp;</span> <span class="va">dat</span><span class="op">$</span><span class="va">mut_type</span> <span class="op">!=</span> <span class="st">"HRH"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[</span><span class="va">rule</span>,<span class="op">]</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "bolivian_monkey" "golden_monkey"   "gelada_baboon"   "silvery_gibbon"  "chimpanzee"      "bonobos"        </span>
 <span class="co">#&gt; [7] "gorilla"</span></code></pre></div>
 <p>Only humans-to-human mutations hold the following rule:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">idx</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">autm</span> <span class="op">==</span> <span class="st">"A1"</span> <span class="op">&amp;</span> <span class="va">dat</span><span class="op">$</span><span class="va">regions</span> <span class="op">==</span> <span class="st">"R3"</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">mut_type</span> <span class="op">==</span> <span class="st">"HHY"</span> <span class="op">|</span> <span class="va">dat</span><span class="op">$</span><span class="va">mut_type</span> <span class="op">==</span> <span class="st">"YHH"</span><span class="op">)</span>
 <span class="va">dat</span><span class="op">[</span> <span class="va">idx</span>, <span class="op">]</span>
 <span class="co">#&gt;     autms regions mut_type cube species</span>
 <span class="co">#&gt; 632    A1      R3      YHH ACGT   human</span>
 <span class="co">#&gt; 687    A1      R3      HHY ACGT   human</span></code></pre></div>
 <p>Only non-humans hold the following rule</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rule</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">autms</span> <span class="op">==</span> <span class="st">"A4"</span> <span class="op">|</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">autms</span> <span class="op">==</span> <span class="st">"A3"</span> <span class="op">&amp;</span> <span class="va">dat</span><span class="op">$</span><span class="va">regions</span> <span class="op">!=</span> <span class="st">"R1"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[</span><span class="va">rule</span>,<span class="op">]</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "bolivian_monkey" "golden_monkey"   "gelada_baboon"   "silvery_gibbon"  "gorilla"         "chimpanzee"     </span>
 <span class="co">#&gt; [7] "bonobos"</span></code></pre></div>
 <p>A printing version in TIFF format could be:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tiff(filename = "~/home/chaid_tree.tiff",</span>
 <span class="co">#      width = 3000, height = 1800, units = "px", pointsize = 1,</span>
 <span class="co">#      compression = "lzw", bg = "white", res = 600)</span>
@@ -620,6 +635,7 @@ code.r{
 <span class="co"># </span>
 <span class="co"># </span>
 <span class="co"># dev.off()</span></code></pre></div>
+</div>
 </div>
 </div>
 <div class="section level2">
