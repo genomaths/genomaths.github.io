@@ -1,11 +1,12 @@
-# Information Hellinger and J-divergence of Methylation levels in four Arabidopsis Mutant Samples
+#  Hellinger and J Information Divergences of Methylation levels in four Arabidopsis Mutant Samples
 The data set includes the Hellinger and J-divergence of Methylation levels in four Arabidopsis Mutant Sample analyzed
 in (<a href="#1">1</a>): 
 1. MSH1
 2. MET1
 3. DDM1
 
-The methylation levels of mutant MET1 and DDM1 were reported in (<a href="#2">2</a>).
+The methylation levels of mutant MET1 and DDM1 were reported in (<a href="#2">2</a>). The information divergences were 
+computed with [MethylIT](https://genomaths.github.io/methylit/index.html) function: [estimateDivergence](https://genomaths.github.io/methylit/reference/estimateDivergence.html).
 
 
 ## Hellinger divergence
