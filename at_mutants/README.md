@@ -5,7 +5,7 @@ in (<a href="#1">1</a>):
 2. MET1
 3. DDM1
 
-The methylation levels of mutant MET1 and DDM1 were reported in (<a href="#2">2</a>)
+The methylation levels of mutant MET1 and DDM1 were reported in (<a href="#2">2</a>).
 
 
 ## Hellinger divergence
