@@ -8,6 +8,8 @@ in (<a href="#1">1</a>):
 The methylation levels of mutant MET1 and DDM1 were reported in (<a href="#2">2</a>). The information divergences were 
 computed with [MethylIT](https://genomaths.github.io/methylit/index.html) function: [estimateDivergence](https://genomaths.github.io/methylit/reference/estimateDivergence.html).
 
+The dataset is carried in RData file named [mutants_msh1-met1-ddm1_col-0_hd_cg_07-20-20.RData](https://git.psu.edu/genomath/datasets/-/blob/main/at_mutants/mutants_msh1-met1-ddm1_col-0_hd_cg_07-20-20.RData), which is 
+located at [PSU GitLab](https://git.psu.edu/genomath/datasets/-/tree/main/at_mutants), because GitHub does not permit files with more 25MB.
 
 ## Hellinger divergence
 
