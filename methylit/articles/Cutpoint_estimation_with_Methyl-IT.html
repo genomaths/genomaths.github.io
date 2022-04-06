@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
       </span>
     </div>
 
@@ -67,31 +69,38 @@
       <a href="../articles/MethylIT.html">MethylIT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
@@ -99,20 +108,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/genomaths/MethylIT/">
+  <a href="https://github.com/genomaths/MethylIT/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
-<li>
-  <a href="http://twitter.com/robersysr">
-    <span class="fab fa-twitter fa-lg"></span>
-     
-  </a>
-</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -122,19 +126,19 @@
 
       
 
-      </header><script src="Cutpoint_estimation_with_Methyl-IT_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Optimal cutpoint for the methylation signal</h1>
-            <h3 class="subtitle">Detection of the methylation signal with Methyl-IT</h3>
-                        <h4 class="author"><div class="line-block">Robersy Sanchez<br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br>
+            <h3 data-toc-skip class="subtitle">Detection of the methylation signal with Methyl-IT</h3>
+                        <h4 data-toc-skip class="author"><div class="line-block">Robersy Sanchez<br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br>
 Mackenzie’s lab<br><br>
 Department of Biology.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 class="date">05 November 2021</h4>
+            <h4 data-toc-skip class="date">05 April 2022</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd"><code>vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd" class="external-link"><code>vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd</code></a></small>
       <div class="hidden name"><code>Cutpoint_estimation_with_Methyl-IT.Rmd</code></div>
 
     </div>
@@ -209,23 +213,24 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 14px;
 }
 </style>
-<div id="motivation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#motivation" class="anchor"></a>Motivation</h2>
+<div class="section level3">
+<h3 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
+</h3>
 <p>The probability of extreme methylation changes occurring spontaneously in a control population by the stochastic fluctuations inherent to biochemical processes and DNA maintenance <span class="citation">(1)</span>, requires the discrimination of this background variation from a biological treatment signal. The stochasticity of the the methylation process derives from the stochasticity inherent to biochemical processes <span class="citation">(2, 3)</span>. There are fundamental physical reasons to acknowledge that biochemical processes are subject to noise and fluctuations <span class="citation">(4, 5)</span>. So, regardless constant environment, statistically significant methylation changes can be found in control population with probability greater than zero and proportional to a Boltzmann factor <span class="citation">(6)</span>.</p>
 <p>Natural signals and those generated by human technology are not free of noise and, as mentioned above, the methylation signal is no exception. Only signal detection based approaches are designed to filter out the signal from the noise , in natural and in human generated signals.</p>
 <p>The stochasticity of methylation regulatory machinery effects is presumed to reflect system heterogeneity; cells from the same tissue are not necessarily in the same state, and therefore, corresponding cytosine sites differ in their methylation status. Consequently, overall organismal response is conveyed as a statistical outcome that distinguishes the regulatory methylation signal from statistical background “noise.” Estimation of optimal cutoff value for the signal is an additional step to remove any remaining potential methylation background noise with probability <span class="math inline">\(0 ≤ \alpha ≤ 0.05\)</span>. We define as a methylation signal (DMP) each cytosine site with Hellinger Divergence values above the cutpoint (shown <span class="citation">(7)</span>.</p>
 <p>As a result, a differentially methylated position (DMP) as a cytosine position with high probability to be altered in methylation due to a treatment effect, distinct from spontaneous variation detected in the control population.</p>
-<p>Note: This example was made with the MethylIT version 0.3.2 available at <a href="https://github.com/genomaths/MethylIT" class="uri">https://github.com/genomaths/MethylIT</a>.</p>
+<p>Note: This example was made with the MethylIT version 0.3.2 available at <a href="https://github.com/genomaths/MethylIT" class="external-link uri">https://github.com/genomaths/MethylIT</a>.</p>
 </div>
-<div id="data-generation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-generation" class="anchor"></a>Data generation</h2>
-<p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read-count matrices of methylated and unmethylated cytosine are generated with MethylIT.utils function <em>simulateCounts</em>. A standard analysis of this dataset is given in the web page: <a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a></p>
+<div class="section level3">
+<h3 id="data-generation">Data generation<a class="anchor" aria-label="anchor" href="#data-generation"></a>
+</h3>
+<p>For the current example on methylation analysis with Methyl-IT we will use simulated data. Read-count matrices of methylated and unmethylated cytosine are generated with MethylIT.utils function <em>simulateCounts</em>. A standard analysis of this dataset is given in the web page: <a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html" class="external-link">Methylation analysis with Methyl-IT</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="op">{</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT">MethylIT</a></span><span class="op">)</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">MethylIT.utils</span><span class="op">)</span><span class="op">}</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT" class="external-link">MethylIT</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MethylIT.utils</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocParallel" class="external-link">BiocParallel</a></span><span class="op">)</span><span class="op">}</span>
 <span class="op">)</span>
 
 <span class="va">bmean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">beta</span><span class="op">)</span> <span class="va">alpha</span><span class="op">/</span><span class="op">(</span><span class="va">alpha</span> <span class="op">+</span> <span class="va">beta</span><span class="op">)</span>
@@ -235,62 +240,62 @@ pre { /* Code block - determines code spacing between lines */
 <span class="co"># The number of cytosine sites to generate</span>
 <span class="va">sites</span> <span class="op">=</span> <span class="fl">50000</span> 
 <span class="co"># Set a seed for pseudo-random number generation</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">124</span><span class="op">)</span>
-<span class="va">control.nam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span><span class="op">)</span>
-<span class="va">treatment.nam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">124</span><span class="op">)</span>
+<span class="va">control.nam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span><span class="op">)</span>
+<span class="va">treatment.nam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span><span class="op">)</span>
 
 <span class="co"># Reference group </span>
-<span class="va">ref0</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">4</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.ct</span>,
+<span class="va">ref0</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html" class="external-link">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">4</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.ct</span>,
                     beta <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">50</span>, theta <span class="op">=</span> <span class="fl">4.5</span>, 
-                    sample.ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"R1"</span>, <span class="st">"R2"</span>, <span class="st">"R3"</span>, <span class="st">"R4"</span><span class="op">)</span><span class="op">)</span>
+                    sample.ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R1"</span>, <span class="st">"R2"</span>, <span class="st">"R3"</span>, <span class="st">"R4"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># Control group</span>
-<span class="va">ctrl</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">3</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.ct</span>,
+<span class="va">ctrl</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html" class="external-link">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">3</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.ct</span>,
                     beta <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">50</span>, theta <span class="op">=</span> <span class="fl">4.5</span>, 
                     sample.ids <span class="op">=</span> <span class="va">control.nam</span><span class="op">)</span>
 <span class="co"># Treatment group</span>
-<span class="va">treat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">3</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.tt</span>,
+<span class="va">treat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/simulateCounts.html" class="external-link">simulateCounts</a></span><span class="op">(</span>num.samples <span class="op">=</span> <span class="fl">3</span>, sites <span class="op">=</span> <span class="va">sites</span>, alpha <span class="op">=</span> <span class="va">alpha.tt</span>,
                     beta <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">50</span>, theta <span class="op">=</span> <span class="fl">4.5</span>, 
                     sample.ids <span class="op">=</span> <span class="va">treatment.nam</span><span class="op">)</span>
 
 <span class="co"># Reference sample</span>
 <span class="va">ref</span> <span class="op">=</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span><span class="op">(</span><span class="va">ref0</span>, stat <span class="op">=</span> <span class="st">"mean"</span>, num.cores <span class="op">=</span> <span class="fl">4L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="methylation-level-divergences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#methylation-level-divergences" class="anchor"></a>Methylation level divergences</h2>
-<p>Total variation distance and Hellinger divergence are computed with <a href="https://is.gd/0ViBO9">estimateDivergence</a> function:</p>
+<div class="section level3">
+<h3 id="methylation-level-divergences">Methylation level divergences<a class="anchor" aria-label="anchor" href="#methylation-level-divergences"></a>
+</h3>
+<p>Total variation distance and Hellinger divergence are computed with <a href="https://is.gd/0ViBO9" class="external-link">estimateDivergence</a> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">divs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimateDivergence.html">estimateDivergence</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="va">ref</span>, indiv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ctrl</span>, <span class="va">treat</span><span class="op">)</span>, Bayesian <span class="op">=</span> <span class="cn">TRUE</span>, 
-                           num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, 
+<code class="sourceCode R"><span class="va">divs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimateDivergence.html">estimateDivergence</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="va">ref</span>, indiv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ctrl</span>, <span class="va">treat</span><span class="op">)</span>, Bayesian <span class="op">=</span> <span class="cn">TRUE</span>, 
+                           num.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">multicoreWorkers</a></span><span class="op">(</span><span class="op">)</span>, 
                            percentile <span class="op">=</span> <span class="fl">1</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>To get some statistical description about the sample is useful. Here, empirical critical values for the probability distribution of <span class="math inline">\(H\)</span> and <span class="math inline">\(TV\)</span> can is obtained using <em>quantile</em> function from the R package <em>stats</em>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span>
-    <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span>
-    <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>tv <span class="op">=</span> <span class="va">tv.95</span>, hd <span class="op">=</span> <span class="va">hd.95</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span>
+    <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>tv <span class="op">=</span> <span class="va">tv.95</span>, hd <span class="op">=</span> <span class="va">hd.95</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span><span class="op">)</span>
 <span class="va">critical.val</span></code></pre></div>
-<pre><code>##       tv.95%    hd.95%
-## C1 0.6842105  64.57356
-## C2 0.6800000  64.47083
-## C3 0.6777456  63.73616
-## T1 0.9397681 137.75421
-## T2 0.9478351 140.88252
-## T3 0.9466565 140.99837</code></pre>
+<pre><code><span class="co">##       tv.95%    hd.95%</span>
+<span class="co">## C1 0.6842105  66.76003</span>
+<span class="co">## C2 0.6800000  66.71971</span>
+<span class="co">## C3 0.6777456  65.98486</span>
+<span class="co">## T1 0.9397681 138.68200</span>
+<span class="co">## T2 0.9478351 141.72617</span>
+<span class="co">## T3 0.9466565 141.77236</span></code></pre>
 </div>
-<div id="estimation-of-potential-dmps-with-methyl-it" class="section level2">
-<h2 class="hasAnchor">
-<a href="#estimation-of-potential-dmps-with-methyl-it" class="anchor"></a>Estimation of potential DMPs with Methyl-IT</h2>
+<div class="section level3">
+<h3 id="estimation-of-potential-dmps-with-methyl-it">Estimation of potential DMPs with Methyl-IT<a class="anchor" aria-label="anchor" href="#estimation-of-potential-dmps-with-methyl-it"></a>
+</h3>
 <p>In Methyl-IT, DMP estimation requires for the knowledge of the probability distribution of the noise (plus signal), which is used as null hypothesis.</p>
-<p>The best fitted distribution model can be estimated with function <a href="https://genomaths.github.io/methylit/reference/gofReport.html">gofReport</a>. Here, for illustration purposes, we will use specific estimations based on 2- and 3-parameter gamma distribution models directly using function <a href="https://is.gd/0BLLkT">nonlinearFitDist</a>.</p>
-<div id="potential-dmps-estimated-with-2-parameter-gamma-distribution-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#potential-dmps-estimated-with-2-parameter-gamma-distribution-model" class="anchor"></a>Potential DMPs estimated with 2-parameter gamma distribution model</h3>
+<p>The best fitted distribution model can be estimated with function <a href="https://genomaths.github.io/methylit/reference/gofReport.html">gofReport</a>. Here, for illustration purposes, we will use specific estimations based on 2- and 3-parameter gamma distribution models directly using function <a href="https://is.gd/0BLLkT" class="external-link">nonlinearFitDist</a>.</p>
+<div class="section level4">
+<h4 id="potential-dmps-estimated-with-2-parameter-gamma-distribution-model">Potential DMPs estimated with 2-parameter gamma distribution model<a class="anchor" aria-label="anchor" href="#potential-dmps-estimated-with-2-parameter-gamma-distribution-model"></a>
+</h4>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nlms.g2p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nonlinearFitDist.html">nonlinearFitDist</a></span><span class="op">(</span><span class="va">divs</span>, column <span class="op">=</span> <span class="fl">9L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, 
-                            num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
+                            num.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">multicoreWorkers</a></span><span class="op">(</span><span class="op">)</span>,
                             dist.name <span class="op">=</span> <span class="st">"Gamma2P"</span><span class="op">)</span>
 
 <span class="co"># Potential DMPs from 'Gamma2P' model</span>
@@ -298,13 +303,13 @@ pre { /* Code block - determines code spacing between lines */
                             tv.cut <span class="op">=</span> <span class="fl">0.68</span>, tv.col <span class="op">=</span> <span class="fl">7</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, 
                             dist.name <span class="op">=</span> <span class="st">"Gamma2P"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="potential-dmps-estimated-with-3-parameter-gamma-distribution-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#potential-dmps-estimated-with-3-parameter-gamma-distribution-model" class="anchor"></a>Potential DMPs estimated with 3-parameter gamma distribution model</h3>
+<div class="section level4">
+<h4 id="potential-dmps-estimated-with-3-parameter-gamma-distribution-model">Potential DMPs estimated with 3-parameter gamma distribution model<a class="anchor" aria-label="anchor" href="#potential-dmps-estimated-with-3-parameter-gamma-distribution-model"></a>
+</h4>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nlms.g3p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nonlinearFitDist.html">nonlinearFitDist</a></span><span class="op">(</span><span class="va">divs</span>, column <span class="op">=</span> <span class="fl">9L</span>, 
                             verbose <span class="op">=</span> <span class="cn">FALSE</span>, 
-                            num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
+                            num.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">multicoreWorkers</a></span><span class="op">(</span><span class="op">)</span>,
                             dist.name <span class="op">=</span> <span class="st">"Gamma3P"</span><span class="op">)</span>
 
 <span class="co"># Potential DMPs from 'Gamma2P' model</span>
@@ -313,31 +318,31 @@ pre { /* Code block - determines code spacing between lines */
                             dist.name <span class="op">=</span> <span class="st">"Gamma3P"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="cutpoint-estimation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cutpoint-estimation" class="anchor"></a>Cutpoint estimation</h2>
+<div class="section level3">
+<h3 id="cutpoint-estimation">Cutpoint estimation<a class="anchor" aria-label="anchor" href="#cutpoint-estimation"></a>
+</h3>
 <p>As a result of the natural spontaneous variation, naturally occurring DMPs can be identified in samples from the control and treatment populations. Machine-learning algorithms implemented in Methyl-IT are applied to discriminate treatment-induced DMPs from those naturally generated.</p>
 <p>The simple cutpoint estimation available in Methyl-IT is based on the application of Youden index <span class="citation">(8)</span>. Although cutpoints are estimated for a single variable, the classification performance can be evaluated for several variables and applying different model classifiers.</p>
-<p>In the current example, the column carrying <em>TV</em> (<em>div.col</em> = 7L) will be used to estimate the cutpoint. The column values will be expressed in terms of <span class="math inline">\(TV_d=|p_{tt}-p_{ct}|\)</span>. A minimum cutpoint value for <em>TV</em> derived from the minimum 95% quantile (<em>tv.cut</em> = 0.92) found in the treatment group will be applied (see <a href="https://is.gd/gHrnCp">Methylation analysis with Methyl-IT</a>).</p>
-<p>Next, a logistic model classifier will be fitted with the 60% (<em>prop</em> = 0.6) of the raw data (training set) and then the resting 40% of individual samples will be used to evaluate the model performance. The predictor variable included in the model are specified with function parameter <em>column</em> (for more detail see <a href="https://is.gd/RR9iWY"><em>estimateCutPoint</em></a> or type ?estimateCutPoint in R console).</p>
-<div id="simple-cutpoint-estimation-for-gamma2p-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#simple-cutpoint-estimation-for-gamma2p-model" class="anchor"></a>Simple cutpoint estimation for Gamma2P model</h3>
+<p>In the current example, the column carrying <em>TV</em> (<em>div.col</em> = 7L) will be used to estimate the cutpoint. The column values will be expressed in terms of <span class="math inline">\(TV_d=|p_{tt}-p_{ct}|\)</span>. A minimum cutpoint value for <em>TV</em> derived from the minimum 95% quantile (<em>tv.cut</em> = 0.92) found in the treatment group will be applied (see <a href="https://is.gd/gHrnCp" class="external-link">Methylation analysis with Methyl-IT</a>).</p>
+<p>Next, a logistic model classifier will be fitted with the 60% (<em>prop</em> = 0.6) of the raw data (training set) and then the resting 40% of individual samples will be used to evaluate the model performance. The predictor variable included in the model are specified with function parameter <em>column</em> (for more detail see <a href="https://is.gd/RR9iWY" class="external-link"><em>estimateCutPoint</em></a> or type ?estimateCutPoint in R console).</p>
+<div class="section level4">
+<h4 id="simple-cutpoint-estimation-for-gamma2p-model">Simple cutpoint estimation for Gamma2P model<a class="anchor" aria-label="anchor" href="#simple-cutpoint-estimation-for-gamma2p-model"></a>
+</h4>
 <p>Here, we use the results of modeling the distribution of the Hellinger divergence (<em>HD</em>) of methylation levels through a 2-parameter gamma probability distribution model. The critical values for <span class="math inline">\(HD_{\alpha = 0.05}^{CT_{G2P}}\)</span> used to get potential DMPs were:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">nlms.g2p</span><span class="op">)</span>
-<span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">nlms.g2p</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">qgamma</a></span><span class="op">(</span><span class="fl">0.95</span>, shape <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Estimate</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
+<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">nlms.g2p</span><span class="op">)</span>
+<span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">nlms.g2p</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></span><span class="op">(</span><span class="fl">0.95</span>, shape <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Estimate</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
                                                     scale <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Estimate</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">crit</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">crit</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
 <span class="va">crit</span></code></pre></div>
-<pre><code>##        C1        C2        C3        T1        T2        T3 
-##  57.20879  56.66313  56.43343 111.79492 113.31415 113.90074</code></pre>
+<pre><code><span class="co">##        C1        C2        C3        T1        T2        T3 </span>
+<span class="co">##  58.59151  57.99945  57.80987 112.39982 113.92337 114.48812</span></code></pre>
 <p>As before the cutpoint is estimated based on ‘Youden Index’ <span class="citation">(8)</span>. A PCA+LDA model classifier (<em>classifier</em> = “pca.lda”) is applied. That is, a principal component analysis (PCA) is applied on the original raw matrix of data and the four possible component (<em>n.pc</em> = 4) derived from the analysis are used in a further linear discriminant analysis (LDA). A scaling step is applied to the raw matrix of data before the application of the mentioned procedure (<em>center</em> = TRUE, <em>scale</em> = TRUE). Here, PCA will yield new orthogonal (non-correlated) variables, the principal components, which prevent any potential bias effect originated by any correlation or association of the original variables.</p>
-<p>By using function <a href="https://is.gd/RR9iWY">estimateCutPoint</a>, we can estimate the cutpoint, based on <em>HD</em> (<em>div.col</em> = 9L) or on <span class="math inline">\(TV_d\)</span> (<em>div.col</em> = 7L):</p>
+<p>By using function <a href="https://is.gd/RR9iWY" class="external-link">estimateCutPoint</a>, we can estimate the cutpoint, based on <em>HD</em> (<em>div.col</em> = 9L) or on <span class="math inline">\(TV_d\)</span> (<em>div.col</em> = 7L):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Cutpoint estimation for the FT approach using the ECDF critical value</span>
 <span class="va">cut.g2p</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">pDMPs.g2p</span>, simple <span class="op">=</span> <span class="cn">TRUE</span>,
-                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                         wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                             classifier1 <span class="op">=</span> <span class="st">"pca.lda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>, 
                             control.names <span class="op">=</span> <span class="va">control.nam</span>,
@@ -346,70 +351,70 @@ pre { /* Code block - determines code spacing between lines */
                             clas.perf <span class="op">=</span> <span class="cn">TRUE</span>, prop <span class="op">=</span> <span class="fl">0.6</span>,
                             div.col <span class="op">=</span> <span class="fl">9L</span><span class="op">)</span>
 <span class="va">cut.g2p</span></code></pre></div>
-<pre><code>## Cutpoint estimation with 'Youden Index' 
-## Simple cutpoint estimation 
-## Cutpoint = 112.19 
-## 
-## Cytosine sites from treatment have divergence values &gt;= 112.19 
-## 
-## The accessible objects in the output list are: 
-##                     Length Class           Mode     
-## cutpoint            1      -none-          numeric  
-## testSetPerformance  6      confusionMatrix list     
-## testSetModel.FDR    1      -none-          numeric  
-## model               2      pcaLDA          list     
-## modelConfMatrix     6      confusionMatrix list     
-## initModel           1      -none-          character
-## postProbCut         1      -none-          logical  
-## postCut             1      -none-          logical  
-## classifier          1      -none-          character
-## statistic           1      -none-          logical  
-## optStatVal          1      -none-          logical  
-## cutpData            1      -none-          logical  
-## initModelConfMatrix 6      confusionMatrix list</code></pre>
+<pre><code><span class="co">## Cutpoint estimation with 'Youden Index' </span>
+<span class="co">## Simple cutpoint estimation </span>
+<span class="co">## Cutpoint = 114.22 </span>
+<span class="co">## </span>
+<span class="co">## Cytosine sites from treatment have divergence values &gt;= 114.22 </span>
+<span class="co">## </span>
+<span class="co">## The accessible objects in the output list are: </span>
+<span class="co">##                     Length Class           Mode     </span>
+<span class="co">## cutpoint            1      -none-          numeric  </span>
+<span class="co">## testSetPerformance  6      confusionMatrix list     </span>
+<span class="co">## testSetModel.FDR    1      -none-          numeric  </span>
+<span class="co">## model               2      pcaLDA          list     </span>
+<span class="co">## modelConfMatrix     6      confusionMatrix list     </span>
+<span class="co">## initModel           1      -none-          character</span>
+<span class="co">## postProbCut         1      -none-          logical  </span>
+<span class="co">## postCut             1      -none-          logical  </span>
+<span class="co">## classifier          1      -none-          character</span>
+<span class="co">## statistic           1      -none-          logical  </span>
+<span class="co">## optStatVal          1      -none-          logical  </span>
+<span class="co">## cutpData            1      -none-          logical  </span>
+<span class="co">## initModelConfMatrix 6      confusionMatrix list</span></code></pre>
 <p>As indicated above, the model classifier performance and its corresponding false discovery rate can be retrieved as:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetPerformance</span></code></pre></div>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction   CT   TT
-##         CT  300    0
-##         TT    0 3576
-##                                     
-##                Accuracy : 1         
-##                  95% CI : (0.999, 1)
-##     No Information Rate : 0.9226    
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16 
-##                                     
-##                   Kappa : 1         
-##                                     
-##  Mcnemar's Test P-Value : NA        
-##                                     
-##             Sensitivity : 1.0000    
-##             Specificity : 1.0000    
-##          Pos Pred Value : 1.0000    
-##          Neg Pred Value : 1.0000    
-##              Prevalence : 0.9226    
-##          Detection Rate : 0.9226    
-##    Detection Prevalence : 0.9226    
-##       Balanced Accuracy : 1.0000    
-##                                     
-##        'Positive' Class : TT        
-## </code></pre>
+<pre><code><span class="co">## Confusion Matrix and Statistics</span>
+<span class="co">## </span>
+<span class="co">##           Reference</span>
+<span class="co">## Prediction   CT   TT</span>
+<span class="co">##         CT  319    0</span>
+<span class="co">##         TT    0 3544</span>
+<span class="co">##                                     </span>
+<span class="co">##                Accuracy : 1         </span>
+<span class="co">##                  95% CI : (0.999, 1)</span>
+<span class="co">##     No Information Rate : 0.9174    </span>
+<span class="co">##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16 </span>
+<span class="co">##                                     </span>
+<span class="co">##                   Kappa : 1         </span>
+<span class="co">##                                     </span>
+<span class="co">##  Mcnemar's Test P-Value : NA        </span>
+<span class="co">##                                     </span>
+<span class="co">##             Sensitivity : 1.0000    </span>
+<span class="co">##             Specificity : 1.0000    </span>
+<span class="co">##          Pos Pred Value : 1.0000    </span>
+<span class="co">##          Neg Pred Value : 1.0000    </span>
+<span class="co">##              Prevalence : 0.9174    </span>
+<span class="co">##          Detection Rate : 0.9174    </span>
+<span class="co">##    Detection Prevalence : 0.9174    </span>
+<span class="co">##       Balanced Accuracy : 1.0000    </span>
+<span class="co">##                                     </span>
+<span class="co">##        'Positive' Class : TT        </span>
+<span class="co">## </span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetModel.FDR</span></code></pre></div>
-<pre><code>## [1] 0</code></pre>
+<pre><code><span class="co">## [1] 0</span></code></pre>
 <p>Here, DMP classification is modeled with PCA+QDA classifier (<em>classifier</em> = “pca.lda”). That is, principal component analysis (PCA) is applied on the original raw matrix of data and the four possible component (<em>n.pc</em> = 4) are used in a further linear discriminant analysis (LDA). A scaling step is applied to the raw matrix of data before the application of the mentioned procedure (<em>center</em> = TRUE, <em>scale</em> = TRUE). Next, a different model classifier can be applied to model the classification derived from the previous cutpoint estimation.</p>
 </div>
-<div id="simple-cutpoint-estimation-for-gamma3p-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#simple-cutpoint-estimation-for-gamma3p-model" class="anchor"></a>Simple cutpoint estimation for Gamma3P model</h3>
+<div class="section level4">
+<h4 id="simple-cutpoint-estimation-for-gamma3p-model">Simple cutpoint estimation for Gamma3P model<a class="anchor" aria-label="anchor" href="#simple-cutpoint-estimation-for-gamma3p-model"></a>
+</h4>
 <p>The same analyses for the cutpoint estimation can be performed for 3P gamma model</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Cutpoint estimation for the FT approach using the ECDF critical value</span>
 <span class="va">cut.g3p</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">pDMPs.g3p</span>, simple <span class="op">=</span> <span class="cn">TRUE</span>,
-                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                         wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                             classifier1 <span class="op">=</span> <span class="st">"pca.lda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>, 
                             control.names <span class="op">=</span> <span class="va">control.nam</span>,
@@ -418,450 +423,450 @@ pre { /* Code block - determines code spacing between lines */
                             clas.perf <span class="op">=</span> <span class="cn">TRUE</span>, prop <span class="op">=</span> <span class="fl">0.6</span>,
                             div.col <span class="op">=</span> <span class="fl">9L</span><span class="op">)</span>
 <span class="va">cut.g3p</span></code></pre></div>
-<pre><code>## Cutpoint estimation with 'Youden Index' 
-## Simple cutpoint estimation 
-## Cutpoint = 115.2 
-## 
-## Cytosine sites from treatment have divergence values &gt;= 115.2 
-## 
-## The accessible objects in the output list are: 
-##                     Length Class           Mode     
-## cutpoint            1      -none-          numeric  
-## testSetPerformance  6      confusionMatrix list     
-## testSetModel.FDR    1      -none-          numeric  
-## model               2      pcaLDA          list     
-## modelConfMatrix     6      confusionMatrix list     
-## initModel           1      -none-          character
-## postProbCut         1      -none-          logical  
-## postCut             1      -none-          logical  
-## classifier          1      -none-          character
-## statistic           1      -none-          logical  
-## optStatVal          1      -none-          logical  
-## cutpData            1      -none-          logical  
-## initModelConfMatrix 6      confusionMatrix list</code></pre>
+<pre><code><span class="co">## Cutpoint estimation with 'Youden Index' </span>
+<span class="co">## Simple cutpoint estimation </span>
+<span class="co">## Cutpoint = 115.24 </span>
+<span class="co">## </span>
+<span class="co">## Cytosine sites from treatment have divergence values &gt;= 115.24 </span>
+<span class="co">## </span>
+<span class="co">## The accessible objects in the output list are: </span>
+<span class="co">##                     Length Class           Mode     </span>
+<span class="co">## cutpoint            1      -none-          numeric  </span>
+<span class="co">## testSetPerformance  6      confusionMatrix list     </span>
+<span class="co">## testSetModel.FDR    1      -none-          numeric  </span>
+<span class="co">## model               2      pcaLDA          list     </span>
+<span class="co">## modelConfMatrix     6      confusionMatrix list     </span>
+<span class="co">## initModel           1      -none-          character</span>
+<span class="co">## postProbCut         1      -none-          logical  </span>
+<span class="co">## postCut             1      -none-          logical  </span>
+<span class="co">## classifier          1      -none-          character</span>
+<span class="co">## statistic           1      -none-          logical  </span>
+<span class="co">## optStatVal          1      -none-          logical  </span>
+<span class="co">## cutpData            1      -none-          logical  </span>
+<span class="co">## initModelConfMatrix 6      confusionMatrix list</span></code></pre>
 <p>As indicated above, the model classifier performance and its corresponding false discovery rate can be retrieved as:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g3p</span><span class="op">$</span><span class="va">testSetPerformance</span></code></pre></div>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction   CT   TT
-##         CT  271    0
-##         TT    0 3459
-##                                     
-##                Accuracy : 1         
-##                  95% CI : (0.999, 1)
-##     No Information Rate : 0.9273    
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16 
-##                                     
-##                   Kappa : 1         
-##                                     
-##  Mcnemar's Test P-Value : NA        
-##                                     
-##             Sensitivity : 1.0000    
-##             Specificity : 1.0000    
-##          Pos Pred Value : 1.0000    
-##          Neg Pred Value : 1.0000    
-##              Prevalence : 0.9273    
-##          Detection Rate : 0.9273    
-##    Detection Prevalence : 0.9273    
-##       Balanced Accuracy : 1.0000    
-##                                     
-##        'Positive' Class : TT        
-## </code></pre>
+<pre><code><span class="co">## Confusion Matrix and Statistics</span>
+<span class="co">## </span>
+<span class="co">##           Reference</span>
+<span class="co">## Prediction   CT   TT</span>
+<span class="co">##         CT  309    0</span>
+<span class="co">##         TT    0 3482</span>
+<span class="co">##                                     </span>
+<span class="co">##                Accuracy : 1         </span>
+<span class="co">##                  95% CI : (0.999, 1)</span>
+<span class="co">##     No Information Rate : 0.9185    </span>
+<span class="co">##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16 </span>
+<span class="co">##                                     </span>
+<span class="co">##                   Kappa : 1         </span>
+<span class="co">##                                     </span>
+<span class="co">##  Mcnemar's Test P-Value : NA        </span>
+<span class="co">##                                     </span>
+<span class="co">##             Sensitivity : 1.0000    </span>
+<span class="co">##             Specificity : 1.0000    </span>
+<span class="co">##          Pos Pred Value : 1.0000    </span>
+<span class="co">##          Neg Pred Value : 1.0000    </span>
+<span class="co">##              Prevalence : 0.9185    </span>
+<span class="co">##          Detection Rate : 0.9185    </span>
+<span class="co">##    Detection Prevalence : 0.9185    </span>
+<span class="co">##       Balanced Accuracy : 1.0000    </span>
+<span class="co">##                                     </span>
+<span class="co">##        'Positive' Class : TT        </span>
+<span class="co">## </span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g3p</span><span class="op">$</span><span class="va">testSetModel.FDR</span></code></pre></div>
-<pre><code>## [1] 0</code></pre>
+<pre><code><span class="co">## [1] 0</span></code></pre>
 </div>
-<div id="dmp-prediction-based-on-classification-models" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dmp-prediction-based-on-classification-models" class="anchor"></a>DMP prediction based on classification models</h3>
+<div class="section level4">
+<h4 id="dmp-prediction-based-on-classification-models">DMP prediction based on classification models<a class="anchor" aria-label="anchor" href="#dmp-prediction-based-on-classification-models"></a>
+</h4>
 <p>The model obtained in the previous step can be used for further prediction with function <a href="https://genomaths.github.io/methylit/reference/pcaLDA.html">predict</a>. For example, we would take a random sample and run:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">randsampl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="va">pDMPs.g3p</span><span class="op">)</span>
-<span class="va">randsampl</span> <span class="op">&lt;-</span> <span class="va">randsampl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">randsampl</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span><span class="op">]</span>
+<span class="va">randsampl</span> <span class="op">&lt;-</span> <span class="va">randsampl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">randsampl</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span><span class="op">]</span>
 
-<span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">cut.g3p</span><span class="op">$</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="va">randsampl</span><span class="op">)</span>
+<span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cut.g3p</span><span class="op">$</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="va">randsampl</span><span class="op">)</span>
 <span class="va">pred</span></code></pre></div>
-<pre><code>## $class
-##  [1] TT TT TT TT TT TT TT TT TT TT
-## Levels: CT TT
-## 
-## $posterior
-##                 CT TT
-##  [1,] 1.247716e-08  1
-##  [2,] 8.391535e-59  1
-##  [3,] 3.035941e-57  1
-##  [4,] 5.304487e-60  1
-##  [5,] 4.297543e-62  1
-##  [6,] 7.748959e-60  1
-##  [7,] 6.593181e-61  1
-##  [8,] 4.861701e-57  1
-##  [9,] 5.849832e-59  1
-## [10,] 9.639450e-62  1
-## 
-## $x
-##              LD1
-##  [1,] -5.9773267
-##  [2,]  1.1365560
-##  [3,]  0.9155845
-##  [4,]  1.3065892
-##  [5,]  1.6031303
-##  [6,]  1.2832507
-##  [7,]  1.4349861
-##  [8,]  0.8865893
-##  [9,]  1.1587741
-## [10,]  1.5533861</code></pre>
+<pre><code><span class="co">## $class</span>
+<span class="co">##  [1] CT TT TT TT TT TT TT TT TT TT</span>
+<span class="co">## Levels: CT TT</span>
+<span class="co">## </span>
+<span class="co">## $posterior</span>
+<span class="co">##                 CT           TT</span>
+<span class="co">##  [1,] 1.000000e+00 1.248881e-08</span>
+<span class="co">##  [2,] 4.581832e-47 1.000000e+00</span>
+<span class="co">##  [3,] 2.495917e-45 1.000000e+00</span>
+<span class="co">##  [4,] 1.619186e-50 1.000000e+00</span>
+<span class="co">##  [5,] 4.032500e-48 1.000000e+00</span>
+<span class="co">##  [6,] 2.254697e-49 1.000000e+00</span>
+<span class="co">##  [7,] 2.837285e-46 1.000000e+00</span>
+<span class="co">##  [8,] 2.018334e-46 1.000000e+00</span>
+<span class="co">##  [9,] 2.756793e-46 1.000000e+00</span>
+<span class="co">## [10,] 1.068549e-46 1.000000e+00</span>
+<span class="co">## </span>
+<span class="co">## $x</span>
+<span class="co">##              LD1</span>
+<span class="co">##  [1,] -7.4596995</span>
+<span class="co">##  [2,]  1.2172073</span>
+<span class="co">##  [3,]  0.9394771</span>
+<span class="co">##  [4,]  1.7693663</span>
+<span class="co">##  [5,]  1.3860450</span>
+<span class="co">##  [6,]  1.5863994</span>
+<span class="co">##  [7,]  1.0905366</span>
+<span class="co">##  [8,]  1.1141971</span>
+<span class="co">##  [9,]  1.0925360</span>
+<span class="co">## [10,]  1.1583793</span></code></pre>
 <p>The variable <em>pred$posterior</em> provides the posterior classification probabilities that a DMP could belong to control (<em>CT</em>) or to treatment (<em>TT</em>) group. The variable ‘<em>x</em>’ provides the cytosine methylation changes in terms of its values in the linear discriminant function LD1. Notice that, for each row, the sum of posterior probabilities is equal 1. By default, individuals with <em>TT</em> posterior probabilities greater than 0.5 are predicted to belong to the treatment class. For example:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">classfiction</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"CT"</span>, <span class="fl">10</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">classfiction</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"CT"</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="va">classfiction</span><span class="op">[</span><span class="va">pred</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"TT"</span>
 <span class="va">classfiction</span></code></pre></div>
-<pre><code>##  [1] "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</code></pre>
+<pre><code><span class="co">##  [1] "CT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</span></code></pre>
 <p>We can be more strict increasing the posterior classification probability cutoff</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">classfiction</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"CT"</span>, <span class="fl">10</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">classfiction</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"CT"</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="va">classfiction</span><span class="op">[</span><span class="va">pred</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.7</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"TT"</span>
 <span class="va">classfiction</span></code></pre></div>
-<pre><code>##  [1] "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</code></pre>
-<p>The posterior classification probability cutoff can be controlled with parameter <em>post.cut</em> from <a href="https://is.gd/RR9iWY">estimateCutPoint</a> function (default: <span class="math inline">\(post.cut=0.5\)</span>).</p>
+<pre><code><span class="co">##  [1] "CT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</span></code></pre>
+<p>The posterior classification probability cutoff can be controlled with parameter <em>post.cut</em> from <a href="https://is.gd/RR9iWY" class="external-link">estimateCutPoint</a> function (default: <span class="math inline">\(post.cut=0.5\)</span>).</p>
 </div>
 </div>
-<div id="machine-learning-ml-based-approach-to-search-for-an-optimal-cutpoint" class="section level2">
-<h2 class="hasAnchor">
-<a href="#machine-learning-ml-based-approach-to-search-for-an-optimal-cutpoint" class="anchor"></a>Machine-learning (ML) based approach to search for an optimal cutpoint</h2>
+<div class="section level3">
+<h3 id="machine-learning-ml-based-approach-to-search-for-an-optimal-cutpoint">Machine-learning (ML) based approach to search for an optimal cutpoint<a class="anchor" aria-label="anchor" href="#machine-learning-ml-based-approach-to-search-for-an-optimal-cutpoint"></a>
+</h3>
 <p>In the next example the cutpoint estimation for the Hellinger divergence of methylation levels (<em>div.col</em> = 9L) is accomplished. Function <em>estimateCutPoint</em> can be used to search for a cutpoint as well. Two model classifiers can be used. <em>classifiers1</em> will be used to estimate the posterior classification probabilities of DMP into those from control and those from treatment. These probabilities are then used to estimate the cutpoint in the range of values from, say, 0.5 to 0.8. Next, a <em>classifier2</em> will be used to evaluate the classification performance. In this case, the search for an optimal cutpoint is accomplished maximizing the accuracy (<em>stat</em> = 0) of <em>classifier2</em>.</p>
-<div id="ml-cutpoint-estimation-for-potential-dmps-based-on-gamma2p-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ml-cutpoint-estimation-for-potential-dmps-based-on-gamma2p-model" class="anchor"></a>ML cutpoint estimation for potential DMPs based on Gamma2P model</h3>
+<div class="section level4">
+<h4 id="ml-cutpoint-estimation-for-potential-dmps-based-on-gamma2p-model">ML cutpoint estimation for potential DMPs based on Gamma2P model<a class="anchor" aria-label="anchor" href="#ml-cutpoint-estimation-for-potential-dmps-based-on-gamma2p-model"></a>
+</h4>
 <p>The ML search for an optimal cutpoint is accomplished in the set of potential DMPs, which were identified using a Gamma2P probability distribution model as null hypothesis.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g2p</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">pDMPs.g2p</span>, simple <span class="op">=</span> <span class="cn">FALSE</span>,
-                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                         wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                             classifier1 <span class="op">=</span> <span class="st">"pca.lda"</span>, 
                             classifier2 <span class="op">=</span> <span class="st">"pca.qda"</span>, stat <span class="op">=</span> <span class="fl">0</span>,
                             control.names <span class="op">=</span> <span class="va">control.nam</span>, 
                             treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>, 
-                            cut.values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">114</span>, <span class="fl">1</span><span class="op">)</span>, post.cut <span class="op">=</span> <span class="fl">0.5</span>,
+                            cut.values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">114</span>, <span class="fl">1</span><span class="op">)</span>, post.cut <span class="op">=</span> <span class="fl">0.5</span>,
                             prop <span class="op">=</span> <span class="fl">0.6</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,
                             n.pc <span class="op">=</span> <span class="fl">4</span>, div.col <span class="op">=</span> <span class="fl">9L</span><span class="op">)</span>
 <span class="va">cut.g2p</span></code></pre></div>
-<pre><code>## Cutpoint estimation with 'pca.lda' classifier 
-## Cutpoint search performed using model posterior probabilities 
-## 
-## Posterior probability used to get the cutpoint = 0.5 
-## Cytosine sites with treatment PostProbCut &gt;= 0.5 have a 
-## divergence value &gt;= 111.8613 
-## 
-## Optimized statistic: Accuracy = 1 
-## Cutpoint = 111.86 
-## 
-## Model classifier 'pca.qda' 
-## 
-## The accessible objects in the output list are: 
-##                    Length Class           Mode     
-## cutpoint           1      -none-          numeric  
-## testSetPerformance 6      confusionMatrix list     
-## testSetModel.FDR   1      -none-          numeric  
-## model              2      pcaQDA          list     
-## modelConfMatrix    6      confusionMatrix list     
-## initModel          1      -none-          character
-## postProbCut        1      -none-          numeric  
-## postCut            1      -none-          numeric  
-## classifier         1      -none-          character
-## statistic          1      -none-          character
-## optStatVal         1      -none-          numeric  
-## cutpData           1      -none-          logical</code></pre>
+<pre><code><span class="co">## Cutpoint estimation with 'pca.lda' classifier </span>
+<span class="co">## Cutpoint search performed using model posterior probabilities </span>
+<span class="co">## </span>
+<span class="co">## Posterior probability used to get the cutpoint = 0.5 </span>
+<span class="co">## Cytosine sites with treatment PostProbCut &gt;= 0.5 have a </span>
+<span class="co">## divergence value &gt;= 112.4245 </span>
+<span class="co">## </span>
+<span class="co">## Optimized statistic: Accuracy = 1 </span>
+<span class="co">## Cutpoint = 112.42 </span>
+<span class="co">## </span>
+<span class="co">## Model classifier 'pca.qda' </span>
+<span class="co">## </span>
+<span class="co">## The accessible objects in the output list are: </span>
+<span class="co">##                    Length Class           Mode     </span>
+<span class="co">## cutpoint           1      -none-          numeric  </span>
+<span class="co">## testSetPerformance 6      confusionMatrix list     </span>
+<span class="co">## testSetModel.FDR   1      -none-          numeric  </span>
+<span class="co">## model              2      pcaQDA          list     </span>
+<span class="co">## modelConfMatrix    6      confusionMatrix list     </span>
+<span class="co">## initModel          1      -none-          character</span>
+<span class="co">## postProbCut        1      -none-          numeric  </span>
+<span class="co">## postCut            1      -none-          numeric  </span>
+<span class="co">## classifier         1      -none-          character</span>
+<span class="co">## statistic          1      -none-          character</span>
+<span class="co">## optStatVal         1      -none-          numeric  </span>
+<span class="co">## cutpData           1      -none-          logical</span></code></pre>
 <p>Model performance in the test dataset is:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetPerformance</span></code></pre></div>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction   CT   TT
-##         CT 1246    0
-##         TT    0 3578
-##                                      
-##                Accuracy : 1          
-##                  95% CI : (0.9992, 1)
-##     No Information Rate : 0.7417     
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
-##                                      
-##                   Kappa : 1          
-##                                      
-##  Mcnemar's Test P-Value : NA         
-##                                      
-##             Sensitivity : 1.0000     
-##             Specificity : 1.0000     
-##          Pos Pred Value : 1.0000     
-##          Neg Pred Value : 1.0000     
-##              Prevalence : 0.7417     
-##          Detection Rate : 0.7417     
-##    Detection Prevalence : 0.7417     
-##       Balanced Accuracy : 1.0000     
-##                                      
-##        'Positive' Class : TT         
-## </code></pre>
+<pre><code><span class="co">## Confusion Matrix and Statistics</span>
+<span class="co">## </span>
+<span class="co">##           Reference</span>
+<span class="co">## Prediction   CT   TT</span>
+<span class="co">##         CT 1274    0</span>
+<span class="co">##         TT    0 3580</span>
+<span class="co">##                                      </span>
+<span class="co">##                Accuracy : 1          </span>
+<span class="co">##                  95% CI : (0.9992, 1)</span>
+<span class="co">##     No Information Rate : 0.7375     </span>
+<span class="co">##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  </span>
+<span class="co">##                                      </span>
+<span class="co">##                   Kappa : 1          </span>
+<span class="co">##                                      </span>
+<span class="co">##  Mcnemar's Test P-Value : NA         </span>
+<span class="co">##                                      </span>
+<span class="co">##             Sensitivity : 1.0000     </span>
+<span class="co">##             Specificity : 1.0000     </span>
+<span class="co">##          Pos Pred Value : 1.0000     </span>
+<span class="co">##          Neg Pred Value : 1.0000     </span>
+<span class="co">##              Prevalence : 0.7375     </span>
+<span class="co">##          Detection Rate : 0.7375     </span>
+<span class="co">##    Detection Prevalence : 0.7375     </span>
+<span class="co">##       Balanced Accuracy : 1.0000     </span>
+<span class="co">##                                      </span>
+<span class="co">##        'Positive' Class : TT         </span>
+<span class="co">## </span></code></pre>
 <p>Model performance in in the whole dataset is:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g2p</span><span class="op">$</span><span class="va">modelConfMatrix</span></code></pre></div>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction   CT   TT
-##         CT 3115    0
-##         TT    0 8945
-##                                      
-##                Accuracy : 1          
-##                  95% CI : (0.9997, 1)
-##     No Information Rate : 0.7417     
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
-##                                      
-##                   Kappa : 1          
-##                                      
-##  Mcnemar's Test P-Value : NA         
-##                                      
-##             Sensitivity : 1.0000     
-##             Specificity : 1.0000     
-##          Pos Pred Value : 1.0000     
-##          Neg Pred Value : 1.0000     
-##              Prevalence : 0.7417     
-##          Detection Rate : 0.7417     
-##    Detection Prevalence : 0.7417     
-##       Balanced Accuracy : 1.0000     
-##                                      
-##        'Positive' Class : TT         
-## </code></pre>
+<pre><code><span class="co">## Confusion Matrix and Statistics</span>
+<span class="co">## </span>
+<span class="co">##           Reference</span>
+<span class="co">## Prediction   CT   TT</span>
+<span class="co">##         CT 3184    0</span>
+<span class="co">##         TT    0 8948</span>
+<span class="co">##                                      </span>
+<span class="co">##                Accuracy : 1          </span>
+<span class="co">##                  95% CI : (0.9997, 1)</span>
+<span class="co">##     No Information Rate : 0.7376     </span>
+<span class="co">##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  </span>
+<span class="co">##                                      </span>
+<span class="co">##                   Kappa : 1          </span>
+<span class="co">##                                      </span>
+<span class="co">##  Mcnemar's Test P-Value : NA         </span>
+<span class="co">##                                      </span>
+<span class="co">##             Sensitivity : 1.0000     </span>
+<span class="co">##             Specificity : 1.0000     </span>
+<span class="co">##          Pos Pred Value : 1.0000     </span>
+<span class="co">##          Neg Pred Value : 1.0000     </span>
+<span class="co">##              Prevalence : 0.7376     </span>
+<span class="co">##          Detection Rate : 0.7376     </span>
+<span class="co">##    Detection Prevalence : 0.7376     </span>
+<span class="co">##       Balanced Accuracy : 1.0000     </span>
+<span class="co">##                                      </span>
+<span class="co">##        'Positive' Class : TT         </span>
+<span class="co">## </span></code></pre>
 <p>The False discovery rate is:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetModel.FDR</span></code></pre></div>
-<pre><code>## [1] 0</code></pre>
+<pre><code><span class="co">## [1] 0</span></code></pre>
 <p>The model classifier <em>PCA+LDA</em> has enough discriminatory power to discriminate control DMP from those induced by the treatment for <em>HD</em> values <span class="math inline">\(112.4247 \le HD\)</span>.</p>
 <p>The probabilities <span class="math inline">\(P(HD \le 122.43)\)</span> to observe a cytosine site with <span class="math inline">\(HD \le 112.4247\)</span> on each individual is:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">nlms.g2p</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">nlms.g2p</span><span class="op">)</span>
 <span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">nlms.g2p</span>, 
                     <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> 
-                        <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">pgamma</a></span><span class="op">(</span><span class="va">cut.g2p</span><span class="op">$</span><span class="va">cutpoint</span>, shape <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Estimate</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
+                        <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">pgamma</a></span><span class="op">(</span><span class="va">cut.g2p</span><span class="op">$</span><span class="va">cutpoint</span>, shape <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Estimate</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
                                 scale <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Estimate</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">crit</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">crit</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
 <span class="va">crit</span></code></pre></div>
-<pre><code>##        C1        C2        C3        T1        T2        T3 
-## 0.9968127 0.9969715 0.9970556 0.9500754 0.9483484 0.9476795</code></pre>
+<pre><code><span class="co">##        C1        C2        C3        T1        T2        T3 </span>
+<span class="co">## 0.9964705 0.9966560 0.9967314 0.9500280 0.9483024 0.9476607</span></code></pre>
 <p>In other words, most of the methylation changes are not (and should not be) considered DMPs. Notice that although the same <em>HD</em> value could be found in the same differentially methylated cytosine site in control and treatment, if the probabilities distributions of the information divergences (null hypotheses) from control and treatment are different, then these DMPs can be distinguished.</p>
 </div>
-<div id="ml-cutpoint-estimation-for-potential-dmps-based-on-gamma3p-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ml-cutpoint-estimation-for-potential-dmps-based-on-gamma3p-model" class="anchor"></a>ML cutpoint estimation for potential DMPs based on Gamma3P model</h3>
+<div class="section level4">
+<h4 id="ml-cutpoint-estimation-for-potential-dmps-based-on-gamma3p-model">ML cutpoint estimation for potential DMPs based on Gamma3P model<a class="anchor" aria-label="anchor" href="#ml-cutpoint-estimation-for-potential-dmps-based-on-gamma3p-model"></a>
+</h4>
 <p>Likewise, for the 3-parameter gamma model we can search for an optimal cutpoint:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cut.g3p</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">pDMPs.g3p</span>, simple <span class="op">=</span> <span class="cn">FALSE</span>,
-                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                         wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                             classifier1 <span class="op">=</span> <span class="st">"pca.lda"</span>, 
                             classifier2 <span class="op">=</span> <span class="st">"pca.qda"</span>, stat <span class="op">=</span> <span class="fl">0</span>,
                             control.names <span class="op">=</span> <span class="va">control.nam</span>, 
                             treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>, 
-                            cut.values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">114</span>, <span class="fl">1</span><span class="op">)</span>, post.cut <span class="op">=</span> <span class="fl">0.5</span>,
+                            cut.values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">114</span>, <span class="fl">1</span><span class="op">)</span>, post.cut <span class="op">=</span> <span class="fl">0.5</span>,
                             clas.perf <span class="op">=</span> <span class="cn">TRUE</span>, prop <span class="op">=</span> <span class="fl">0.6</span>,
                             center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,
                             n.pc <span class="op">=</span> <span class="fl">4</span>, div.col <span class="op">=</span> <span class="fl">9L</span><span class="op">)</span>
 <span class="va">cut.g3p</span></code></pre></div>
-<pre><code>## Cutpoint estimation with 'pca.lda' classifier 
-## Cutpoint search performed using model posterior probabilities 
-## 
-## Posterior probability used to get the cutpoint = 0.5 
-## Cytosine sites with treatment PostProbCut &gt;= 0.5 have a 
-## divergence value &gt;= 113.0279 
-## 
-## Optimized statistic: Accuracy = 1 
-## Cutpoint = 113.03 
-## 
-## Model classifier 'pca.qda' 
-## 
-## The accessible objects in the output list are: 
-##                    Length Class           Mode     
-## cutpoint           1      -none-          numeric  
-## testSetPerformance 6      confusionMatrix list     
-## testSetModel.FDR   1      -none-          numeric  
-## model              2      pcaQDA          list     
-## modelConfMatrix    6      confusionMatrix list     
-## initModel          1      -none-          character
-## postProbCut        1      -none-          numeric  
-## postCut            1      -none-          numeric  
-## classifier         1      -none-          character
-## statistic          1      -none-          character
-## optStatVal         1      -none-          numeric  
-## cutpData           1      -none-          logical</code></pre>
-<p>DMPs are identified with function <a href="https://is.gd/7cVEEd">selectDIMP</a></p>
+<pre><code><span class="co">## Cutpoint estimation with 'pca.lda' classifier </span>
+<span class="co">## Cutpoint search performed using model posterior probabilities </span>
+<span class="co">## </span>
+<span class="co">## Posterior probability used to get the cutpoint = 0.5 </span>
+<span class="co">## Cytosine sites with treatment PostProbCut &gt;= 0.5 have a </span>
+<span class="co">## divergence value &gt;= 113.4968 </span>
+<span class="co">## </span>
+<span class="co">## Optimized statistic: Accuracy = 1 </span>
+<span class="co">## Cutpoint = 113.5 </span>
+<span class="co">## </span>
+<span class="co">## Model classifier 'pca.qda' </span>
+<span class="co">## </span>
+<span class="co">## The accessible objects in the output list are: </span>
+<span class="co">##                    Length Class           Mode     </span>
+<span class="co">## cutpoint           1      -none-          numeric  </span>
+<span class="co">## testSetPerformance 6      confusionMatrix list     </span>
+<span class="co">## testSetModel.FDR   1      -none-          numeric  </span>
+<span class="co">## model              2      pcaQDA          list     </span>
+<span class="co">## modelConfMatrix    6      confusionMatrix list     </span>
+<span class="co">## initModel          1      -none-          character</span>
+<span class="co">## postProbCut        1      -none-          numeric  </span>
+<span class="co">## postCut            1      -none-          numeric  </span>
+<span class="co">## classifier         1      -none-          character</span>
+<span class="co">## statistic          1      -none-          character</span>
+<span class="co">## optStatVal         1      -none-          numeric  </span>
+<span class="co">## cutpData           1      -none-          logical</span></code></pre>
+<p>DMPs are identified with function <a href="https://is.gd/7cVEEd" class="external-link">selectDIMP</a></p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g2p.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">pDMPs.g2p</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, cutpoint <span class="op">=</span> <span class="va">cut.g2p</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span>
 <span class="va">g3p.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">pDMPs.g3p</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, cutpoint <span class="op">=</span> <span class="va">cut.g3p</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="dmps-estimated-with-fishers-exact-test-ft" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dmps-estimated-with-fishers-exact-test-ft" class="anchor"></a>DMPs estimated with Fisher’s exact Test (FT)</h2>
+<div class="section level3">
+<h3 id="dmps-estimated-with-fishers-exact-test-ft">DMPs estimated with Fisher’s exact Test (FT)<a class="anchor" aria-label="anchor" href="#dmps-estimated-with-fishers-exact-test-ft"></a>
+</h3>
 <p>For comparison purposes DMPs are estimated with Fisher’s exact test as well.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ft.</span> <span class="op">=</span> <span class="fu"><a href="../reference/FisherTest.html">FisherTest</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, tv.cut <span class="op">=</span> <span class="fl">0.68</span>, 
                  pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,
                  pvalCutOff <span class="op">=</span> <span class="fl">0.05</span>, 
-                 num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
+                 num.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">multicoreWorkers</a></span><span class="op">(</span><span class="op">)</span>,
                  verbose <span class="op">=</span> <span class="cn">FALSE</span>, saveAll <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> 
 
 <span class="va">ft.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, dist.name <span class="op">=</span> <span class="st">"None"</span>,
                             tv.cut <span class="op">=</span> <span class="fl">0.68</span>, tv.col <span class="op">=</span> <span class="fl">7</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="classification-performance-of-dmp-classification" class="section level2">
-<h2 class="hasAnchor">
-<a href="#classification-performance-of-dmp-classification" class="anchor"></a>Classification performance of DMP classification</h2>
-<p>After the cutpoint application to select DMPs, a Monte Carlo (bootstrap) analysis reporting several classifier performance indicators can be accomplished by using function <a href="https://is.gd/nzy9j3"><em>evaluateDIMPclass</em></a> and its settings <em>output = “mc.val”</em> and <em>num.boot</em>.</p>
-<div id="classification-performance-for-dmps-based-on-gamma2p-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#classification-performance-for-dmps-based-on-gamma2p-model" class="anchor"></a>Classification performance for DMPs based on Gamma2P model</h3>
+<div class="section level3">
+<h3 id="classification-performance-of-dmp-classification">Classification performance of DMP classification<a class="anchor" aria-label="anchor" href="#classification-performance-of-dmp-classification"></a>
+</h3>
+<p>After the cutpoint application to select DMPs, a Monte Carlo (bootstrap) analysis reporting several classifier performance indicators can be accomplished by using function <a href="https://is.gd/nzy9j3" class="external-link"><em>evaluateDIMPclass</em></a> and its settings <em>output = “mc.val”</em> and <em>num.boot</em>.</p>
+<div class="section level4">
+<h4 id="classification-performance-for-dmps-based-on-gamma2p-model">Classification performance for DMPs based on Gamma2P model<a class="anchor" aria-label="anchor" href="#classification-performance-for-dmps-based-on-gamma2p-model"></a>
+</h4>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g2p.class</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">g2p.dmps</span>, control.names <span class="op">=</span> <span class="va">control.nam</span>,
                             treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>,
-                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>,
+                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>,
                                     wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                             classifier <span class="op">=</span> <span class="st">"pca.qda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>, 
                             center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, num.boot <span class="op">=</span> <span class="fl">300</span>,
                             output <span class="op">=</span> <span class="st">"all"</span>, prop <span class="op">=</span> <span class="fl">0.6</span>
 <span class="op">)</span>
 <span class="va">g2p.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
-<pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
-##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9212  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9212  
-##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9212  
-##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9212  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9212  
-##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9212  
-##                                                                         
-##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value
-##  Min.   :3.789e-139   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
-##  1st Qu.:3.789e-139   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
-##  Median :3.789e-139   Median : NA   Median :1    Median :1    Median :1     
-##  Mean   :3.789e-139   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
-##  3rd Qu.:3.789e-139   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
-##  Max.   :3.789e-139   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
-##                       NA's   :300                                           
-##  Neg Pred Value   Precision     Recall        F1      Prevalence    
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9212  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9212  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.9212  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9212  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9212  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9212  
-##                                                                     
-##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.9212   Min.   :0.9212       Min.   :1        
-##  1st Qu.:0.9212   1st Qu.:0.9212       1st Qu.:1        
-##  Median :0.9212   Median :0.9212       Median :1        
-##  Mean   :0.9212   Mean   :0.9212       Mean   :1        
-##  3rd Qu.:0.9212   3rd Qu.:0.9212       3rd Qu.:1        
-##  Max.   :0.9212   Max.   :0.9212       Max.   :1        
-## </code></pre>
+<pre><code><span class="co">##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   </span>
+<span class="co">##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9139  </span>
+<span class="co">##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9139  </span>
+<span class="co">##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9139  </span>
+<span class="co">##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9139  </span>
+<span class="co">##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9139  </span>
+<span class="co">##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9139  </span>
+<span class="co">##                                                                         </span>
+<span class="co">##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value</span>
+<span class="co">##  Min.   :9.096e-154   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     </span>
+<span class="co">##  1st Qu.:9.096e-154   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     </span>
+<span class="co">##  Median :9.096e-154   Median : NA   Median :1    Median :1    Median :1     </span>
+<span class="co">##  Mean   :9.096e-154   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     </span>
+<span class="co">##  3rd Qu.:9.096e-154   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     </span>
+<span class="co">##  Max.   :9.096e-154   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     </span>
+<span class="co">##                       NA's   :300                                           </span>
+<span class="co">##  Neg Pred Value   Precision     Recall        F1      Prevalence    </span>
+<span class="co">##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9139  </span>
+<span class="co">##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9139  </span>
+<span class="co">##  Median :1      Median :1   Median :1   Median :1   Median :0.9139  </span>
+<span class="co">##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9139  </span>
+<span class="co">##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9139  </span>
+<span class="co">##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9139  </span>
+<span class="co">##                                                                     </span>
+<span class="co">##  Detection Rate   Detection Prevalence Balanced Accuracy</span>
+<span class="co">##  Min.   :0.9139   Min.   :0.9139       Min.   :1        </span>
+<span class="co">##  1st Qu.:0.9139   1st Qu.:0.9139       1st Qu.:1        </span>
+<span class="co">##  Median :0.9139   Median :0.9139       Median :1        </span>
+<span class="co">##  Mean   :0.9139   Mean   :0.9139       Mean   :1        </span>
+<span class="co">##  3rd Qu.:0.9139   3rd Qu.:0.9139       3rd Qu.:1        </span>
+<span class="co">##  Max.   :0.9139   Max.   :0.9139       Max.   :1        </span>
+<span class="co">## </span></code></pre>
 </div>
-<div id="classification-performance-for-dmps-based-on-gamma3p-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#classification-performance-for-dmps-based-on-gamma3p-model" class="anchor"></a>Classification performance for DMPs based on Gamma3P model</h3>
+<div class="section level4">
+<h4 id="classification-performance-for-dmps-based-on-gamma3p-model">Classification performance for DMPs based on Gamma3P model<a class="anchor" aria-label="anchor" href="#classification-performance-for-dmps-based-on-gamma3p-model"></a>
+</h4>
 <p>Likewise the evaluation of the DMP classification performance can be accomplished for DMPs estimated based on the <span class="math inline">\('Gamma3P'\)</span> model:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g3p.class</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">g3p.dmps</span>, control.names <span class="op">=</span> <span class="va">control.nam</span>,
                             treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>,
-                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                     wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                             classifier <span class="op">=</span> <span class="st">"pca.qda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>, 
                             center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, num.boot <span class="op">=</span> <span class="fl">300</span>,
                             output <span class="op">=</span> <span class="st">"all"</span>, prop <span class="op">=</span> <span class="fl">0.6</span>
 <span class="op">)</span>
 <span class="va">g3p.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
-<pre><code>##     Accuracy     Kappa   AccuracyLower   AccuracyUpper  AccuracyNull  
-##  Min.   :1   Min.   :1   Min.   :0.999   Min.   :1     Min.   :0.922  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.999   1st Qu.:1     1st Qu.:0.922  
-##  Median :1   Median :1   Median :0.999   Median :1     Median :0.922  
-##  Mean   :1   Mean   :1   Mean   :0.999   Mean   :1     Mean   :0.922  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.999   3rd Qu.:1     3rd Qu.:0.922  
-##  Max.   :1   Max.   :1   Max.   :0.999   Max.   :1     Max.   :0.922  
-##                                                                       
-##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value
-##  Min.   :1.431e-134   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
-##  1st Qu.:1.431e-134   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
-##  Median :1.431e-134   Median : NA   Median :1    Median :1    Median :1     
-##  Mean   :1.431e-134   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
-##  3rd Qu.:1.431e-134   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
-##  Max.   :1.431e-134   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
-##                       NA's   :300                                           
-##  Neg Pred Value   Precision     Recall        F1      Prevalence   
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.922  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.922  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.922  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.922  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.922  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.922  
-##                                                                    
-##  Detection Rate  Detection Prevalence Balanced Accuracy
-##  Min.   :0.922   Min.   :0.922        Min.   :1        
-##  1st Qu.:0.922   1st Qu.:0.922        1st Qu.:1        
-##  Median :0.922   Median :0.922        Median :1        
-##  Mean   :0.922   Mean   :0.922        Mean   :1        
-##  3rd Qu.:0.922   3rd Qu.:0.922        3rd Qu.:1        
-##  Max.   :0.922   Max.   :0.922        Max.   :1        
-## </code></pre>
+<pre><code><span class="co">##     Accuracy     Kappa   AccuracyLower   AccuracyUpper  AccuracyNull  </span>
+<span class="co">##  Min.   :1   Min.   :1   Min.   :0.999   Min.   :1     Min.   :0.914  </span>
+<span class="co">##  1st Qu.:1   1st Qu.:1   1st Qu.:0.999   1st Qu.:1     1st Qu.:0.914  </span>
+<span class="co">##  Median :1   Median :1   Median :0.999   Median :1     Median :0.914  </span>
+<span class="co">##  Mean   :1   Mean   :1   Mean   :0.999   Mean   :1     Mean   :0.914  </span>
+<span class="co">##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.999   3rd Qu.:1     3rd Qu.:0.914  </span>
+<span class="co">##  Max.   :1   Max.   :1   Max.   :0.999   Max.   :1     Max.   :0.914  </span>
+<span class="co">##                                                                       </span>
+<span class="co">##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value</span>
+<span class="co">##  Min.   :1.387e-150   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     </span>
+<span class="co">##  1st Qu.:1.387e-150   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     </span>
+<span class="co">##  Median :1.387e-150   Median : NA   Median :1    Median :1    Median :1     </span>
+<span class="co">##  Mean   :1.387e-150   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     </span>
+<span class="co">##  3rd Qu.:1.387e-150   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     </span>
+<span class="co">##  Max.   :1.387e-150   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     </span>
+<span class="co">##                       NA's   :300                                           </span>
+<span class="co">##  Neg Pred Value   Precision     Recall        F1      Prevalence   </span>
+<span class="co">##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.914  </span>
+<span class="co">##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.914  </span>
+<span class="co">##  Median :1      Median :1   Median :1   Median :1   Median :0.914  </span>
+<span class="co">##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.914  </span>
+<span class="co">##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.914  </span>
+<span class="co">##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.914  </span>
+<span class="co">##                                                                    </span>
+<span class="co">##  Detection Rate  Detection Prevalence Balanced Accuracy</span>
+<span class="co">##  Min.   :0.914   Min.   :0.914        Min.   :1        </span>
+<span class="co">##  1st Qu.:0.914   1st Qu.:0.914        1st Qu.:1        </span>
+<span class="co">##  Median :0.914   Median :0.914        Median :1        </span>
+<span class="co">##  Mean   :0.914   Mean   :0.914        Mean   :1        </span>
+<span class="co">##  3rd Qu.:0.914   3rd Qu.:0.914        3rd Qu.:1        </span>
+<span class="co">##  Max.   :0.914   Max.   :0.914        Max.   :1        </span>
+<span class="co">## </span></code></pre>
 <p>We do not have evidence to support statistical differences between the classification performances estimated for <em>‘Gamma2P’</em> and <em>‘Gamma3P’</em> probability distribution models. Hence, in this case we select the model that yield the lowest cutpoint</p>
 </div>
-<div id="classification-performance-for-dmps-based-on-fishers-exact-test" class="section level3">
-<h3 class="hasAnchor">
-<a href="#classification-performance-for-dmps-based-on-fishers-exact-test" class="anchor"></a>Classification performance for DMPs based on Fisher’s exact test</h3>
+<div class="section level4">
+<h4 id="classification-performance-for-dmps-based-on-fishers-exact-test">Classification performance for DMPs based on Fisher’s exact test<a class="anchor" aria-label="anchor" href="#classification-performance-for-dmps-based-on-fishers-exact-test"></a>
+</h4>
 <p>Classification performance results obtained with Monte Carlos sampling for the <span class="math inline">\(Gamma2P\)</span> and <span class="math inline">\(Gamma3P\)</span> models are quite different from those obtained with FT:</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ft.class</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.dmps</span>, control.names <span class="op">=</span> <span class="va">control.nam</span>,
                             treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>, 
-                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                     wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                             classifier <span class="op">=</span> <span class="st">"pca.lda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>, 
                             center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, num.boot <span class="op">=</span> <span class="fl">300</span>,
                             output <span class="op">=</span> <span class="st">"all"</span>, prop <span class="op">=</span> <span class="fl">0.6</span>
 <span class="op">)</span>
 <span class="va">ft.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
-<pre><code>##     Accuracy          Kappa         AccuracyLower    AccuracyUpper   
-##  Min.   :0.7952   Min.   :0.00999   Min.   :0.7877   Min.   :0.8027  
-##  1st Qu.:0.7994   1st Qu.:0.02203   1st Qu.:0.7918   1st Qu.:0.8067  
-##  Median :0.8005   Median :0.02591   Median :0.7930   Median :0.8079  
-##  Mean   :0.8006   Mean   :0.02588   Mean   :0.7931   Mean   :0.8079  
-##  3rd Qu.:0.8017   3rd Qu.:0.02955   3rd Qu.:0.7942   3rd Qu.:0.8091  
-##  Max.   :0.8055   Max.   :0.04246   Max.   :0.7981   Max.   :0.8128  
-##   AccuracyNull    AccuracyPValue   McnemarPValue         Sensitivity    
-##  Min.   :0.8188   Min.   :0.9999   Min.   : 0.000e+00   Min.   :0.9596  
-##  1st Qu.:0.8188   1st Qu.:1.0000   1st Qu.: 0.000e+00   1st Qu.:0.9647  
-##  Median :0.8188   Median :1.0000   Median : 0.000e+00   Median :0.9662  
-##  Mean   :0.8188   Mean   :1.0000   Mean   :1.728e-232   Mean   :0.9663  
-##  3rd Qu.:0.8188   3rd Qu.:1.0000   3rd Qu.: 0.000e+00   3rd Qu.:0.9678  
-##  Max.   :0.8188   Max.   :1.0000   Max.   :3.027e-230   Max.   :0.9736  
-##   Specificity      Pos Pred Value   Neg Pred Value     Precision     
-##  Min.   :0.03945   Min.   :0.8199   Min.   :0.2111   Min.   :0.8199  
-##  1st Qu.:0.04832   1st Qu.:0.8212   1st Qu.:0.2423   1st Qu.:0.8212  
-##  Median :0.05178   Median :0.8216   Median :0.2528   Median :0.8216  
-##  Mean   :0.05156   Mean   :0.8216   Mean   :0.2530   Mean   :0.8216  
-##  3rd Qu.:0.05424   3rd Qu.:0.8220   3rd Qu.:0.2624   3rd Qu.:0.8220  
-##  Max.   :0.06312   Max.   :0.8234   Max.   :0.2958   Max.   :0.8234  
-##      Recall             F1           Prevalence     Detection Rate  
-##  Min.   :0.9596   Min.   :0.8847   Min.   :0.8188   Min.   :0.7858  
-##  1st Qu.:0.9647   1st Qu.:0.8873   1st Qu.:0.8188   1st Qu.:0.7899  
-##  Median :0.9662   Median :0.8880   Median :0.8188   Median :0.7911  
-##  Mean   :0.9663   Mean   :0.8881   Mean   :0.8188   Mean   :0.7912  
-##  3rd Qu.:0.9678   3rd Qu.:0.8888   3rd Qu.:0.8188   3rd Qu.:0.7925  
-##  Max.   :0.9736   Max.   :0.8913   Max.   :0.8188   Max.   :0.7972  
-##  Detection Prevalence Balanced Accuracy
-##  Min.   :0.9566       Min.   :0.5034   
-##  1st Qu.:0.9616       1st Qu.:0.5076   
-##  Median :0.9630       Median :0.5089   
-##  Mean   :0.9631       Mean   :0.5089   
-##  3rd Qu.:0.9646       3rd Qu.:0.5102   
-##  Max.   :0.9701       Max.   :0.5147</code></pre>
+<pre><code><span class="co">##     Accuracy          Kappa           AccuracyLower    AccuracyUpper   </span>
+<span class="co">##  Min.   :0.8082   Min.   :-0.004197   Min.   :0.8008   Min.   :0.8155  </span>
+<span class="co">##  1st Qu.:0.8104   1st Qu.: 0.004858   1st Qu.:0.8030   1st Qu.:0.8177  </span>
+<span class="co">##  Median :0.8110   Median : 0.007917   Median :0.8036   Median :0.8182  </span>
+<span class="co">##  Mean   :0.8110   Mean   : 0.007573   Mean   :0.8036   Mean   :0.8182  </span>
+<span class="co">##  3rd Qu.:0.8115   3rd Qu.: 0.010074   3rd Qu.:0.8042   3rd Qu.:0.8187  </span>
+<span class="co">##  Max.   :0.8131   Max.   : 0.017339   Max.   :0.8058   Max.   :0.8203  </span>
+<span class="co">##   AccuracyNull    AccuracyPValue   McnemarPValue  Sensitivity    </span>
+<span class="co">##  Min.   :0.8188   Min.   :0.9428   Min.   :0     Min.   :0.9831  </span>
+<span class="co">##  1st Qu.:0.8188   1st Qu.:0.9778   1st Qu.:0     1st Qu.:0.9857  </span>
+<span class="co">##  Median :0.8188   Median :0.9847   Median :0     Median :0.9864  </span>
+<span class="co">##  Mean   :0.8188   Mean   :0.9824   Mean   :0     Mean   :0.9863  </span>
+<span class="co">##  3rd Qu.:0.8188   3rd Qu.:0.9895   3rd Qu.:0     3rd Qu.:0.9869  </span>
+<span class="co">##  Max.   :0.8188   Max.   :0.9982   Max.   :0     Max.   :0.9888  </span>
+<span class="co">##   Specificity      Pos Pred Value   Neg Pred Value     Precision     </span>
+<span class="co">##  Min.   :0.01085   Min.   :0.8184   Min.   :0.1507   Min.   :0.8184  </span>
+<span class="co">##  1st Qu.:0.01677   1st Qu.:0.8193   1st Qu.:0.2138   1st Qu.:0.8193  </span>
+<span class="co">##  Median :0.01874   Median :0.8196   Median :0.2326   Median :0.8196  </span>
+<span class="co">##  Mean   :0.01855   Mean   :0.8196   Mean   :0.2305   Mean   :0.8196  </span>
+<span class="co">##  3rd Qu.:0.02022   3rd Qu.:0.8198   3rd Qu.:0.2471   3rd Qu.:0.8198  </span>
+<span class="co">##  Max.   :0.02515   Max.   :0.8205   Max.   :0.2895   Max.   :0.8205  </span>
+<span class="co">##      Recall             F1           Prevalence     Detection Rate  </span>
+<span class="co">##  Min.   :0.9831   Min.   :0.8935   Min.   :0.8188   Min.   :0.8050  </span>
+<span class="co">##  1st Qu.:0.9857   1st Qu.:0.8949   1st Qu.:0.8188   1st Qu.:0.8071  </span>
+<span class="co">##  Median :0.9864   Median :0.8953   Median :0.8188   Median :0.8077  </span>
+<span class="co">##  Mean   :0.9863   Mean   :0.8952   Mean   :0.8188   Mean   :0.8076  </span>
+<span class="co">##  3rd Qu.:0.9869   3rd Qu.:0.8956   3rd Qu.:0.8188   3rd Qu.:0.8081  </span>
+<span class="co">##  Max.   :0.9888   Max.   :0.8965   Max.   :0.8188   Max.   :0.8096  </span>
+<span class="co">##  Detection Prevalence Balanced Accuracy</span>
+<span class="co">##  Min.   :0.9829       Min.   :0.4987   </span>
+<span class="co">##  1st Qu.:0.9848       1st Qu.:0.5016   </span>
+<span class="co">##  Median :0.9855       Median :0.5025   </span>
+<span class="co">##  Mean   :0.9854       Mean   :0.5024   </span>
+<span class="co">##  3rd Qu.:0.9860       3rd Qu.:0.5032   </span>
+<span class="co">##  Max.   :0.9878       Max.   :0.5056</span></code></pre>
 <p>A quite different story is found when information on the probability distribution of noise (null hypothesis) is added to the classifier:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ft.g2p.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.</span>, nlms <span class="op">=</span> <span class="va">nlms.g2p</span>,  div.col <span class="op">=</span> <span class="fl">9L</span>, 
@@ -870,48 +875,48 @@ pre { /* Code block - determines code spacing between lines */
 
 <span class="va">ft.g2p.class</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.g2p.dmps</span>, control.names <span class="op">=</span> <span class="va">control.nam</span>,
                                 treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>,
-                                column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                                column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                             wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                                 classifier <span class="op">=</span> <span class="st">"pca.lda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>, 
                                 center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,
                                 num.boot <span class="op">=</span> <span class="fl">300</span>,
-                                num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
+                                num.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">multicoreWorkers</a></span><span class="op">(</span><span class="op">)</span>,
                                 output <span class="op">=</span> <span class="st">"all"</span>, 
                                 prop <span class="op">=</span> <span class="fl">0.6</span>
 <span class="op">)</span>
 <span class="va">ft.g2p.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
-<pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
-##  Min.   :1   Min.   :1   Min.   :0.9992   Min.   :1     Min.   :0.7417  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9992   1st Qu.:1     1st Qu.:0.7417  
-##  Median :1   Median :1   Median :0.9992   Median :1     Median :0.7417  
-##  Mean   :1   Mean   :1   Mean   :0.9992   Mean   :1     Mean   :0.7417  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9992   3rd Qu.:1     3rd Qu.:0.7417  
-##  Max.   :1   Max.   :1   Max.   :0.9992   Max.   :1     Max.   :0.7417  
-##                                                                         
-##  AccuracyPValue McnemarPValue  Sensitivity  Specificity Pos Pred Value
-##  Min.   :0      Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
-##  1st Qu.:0      1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
-##  Median :0      Median : NA   Median :1    Median :1    Median :1     
-##  Mean   :0      Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
-##  3rd Qu.:0      3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
-##  Max.   :0      Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
-##                 NA's   :300                                           
-##  Neg Pred Value   Precision     Recall        F1      Prevalence    
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.7417  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.7417  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.7417  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.7417  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.7417  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.7417  
-##                                                                     
-##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.7417   Min.   :0.7417       Min.   :1        
-##  1st Qu.:0.7417   1st Qu.:0.7417       1st Qu.:1        
-##  Median :0.7417   Median :0.7417       Median :1        
-##  Mean   :0.7417   Mean   :0.7417       Mean   :1        
-##  3rd Qu.:0.7417   3rd Qu.:0.7417       3rd Qu.:1        
-##  Max.   :0.7417   Max.   :0.7417       Max.   :1        
-## </code></pre>
+<pre><code><span class="co">##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   </span>
+<span class="co">##  Min.   :1   Min.   :1   Min.   :0.9992   Min.   :1     Min.   :0.7375  </span>
+<span class="co">##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9992   1st Qu.:1     1st Qu.:0.7375  </span>
+<span class="co">##  Median :1   Median :1   Median :0.9992   Median :1     Median :0.7375  </span>
+<span class="co">##  Mean   :1   Mean   :1   Mean   :0.9992   Mean   :1     Mean   :0.7375  </span>
+<span class="co">##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9992   3rd Qu.:1     3rd Qu.:0.7375  </span>
+<span class="co">##  Max.   :1   Max.   :1   Max.   :0.9992   Max.   :1     Max.   :0.7375  </span>
+<span class="co">##                                                                         </span>
+<span class="co">##  AccuracyPValue McnemarPValue  Sensitivity  Specificity Pos Pred Value</span>
+<span class="co">##  Min.   :0      Min.   : NA   Min.   :1    Min.   :1    Min.   :1     </span>
+<span class="co">##  1st Qu.:0      1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     </span>
+<span class="co">##  Median :0      Median : NA   Median :1    Median :1    Median :1     </span>
+<span class="co">##  Mean   :0      Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     </span>
+<span class="co">##  3rd Qu.:0      3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     </span>
+<span class="co">##  Max.   :0      Max.   : NA   Max.   :1    Max.   :1    Max.   :1     </span>
+<span class="co">##                 NA's   :300                                           </span>
+<span class="co">##  Neg Pred Value   Precision     Recall        F1      Prevalence    </span>
+<span class="co">##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.7375  </span>
+<span class="co">##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.7375  </span>
+<span class="co">##  Median :1      Median :1   Median :1   Median :1   Median :0.7375  </span>
+<span class="co">##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.7375  </span>
+<span class="co">##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.7375  </span>
+<span class="co">##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.7375  </span>
+<span class="co">##                                                                     </span>
+<span class="co">##  Detection Rate   Detection Prevalence Balanced Accuracy</span>
+<span class="co">##  Min.   :0.7375   Min.   :0.7375       Min.   :1        </span>
+<span class="co">##  1st Qu.:0.7375   1st Qu.:0.7375       1st Qu.:1        </span>
+<span class="co">##  Median :0.7375   Median :0.7375       Median :1        </span>
+<span class="co">##  Mean   :0.7375   Mean   :0.7375       Mean   :1        </span>
+<span class="co">##  3rd Qu.:0.7375   3rd Qu.:0.7375       3rd Qu.:1        </span>
+<span class="co">##  Max.   :0.7375   Max.   :0.7375       Max.   :1        </span>
+<span class="co">## </span></code></pre>
 <p>Now, we add additional information about the optimal cutpoint</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ft.g2p_cutp.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">ft.g2p.dmps</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, 
@@ -920,138 +925,138 @@ pre { /* Code block - determines code spacing between lines */
 <span class="va">ft.g2p_cut.class</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.g2p_cutp.dmps</span>, 
                                 control.names <span class="op">=</span> <span class="va">control.nam</span>,
                                 treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>,
-                                column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
+                                column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, 
                                             wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                                 classifier <span class="op">=</span> <span class="st">"pca.lda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>, 
                                 center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, num.boot <span class="op">=</span> <span class="fl">300</span>,
                                 output <span class="op">=</span> <span class="st">"all"</span>, prop <span class="op">=</span> <span class="fl">0.6</span>
 <span class="op">)</span>
 <span class="va">ft.g2p_cut.class</span><span class="op">$</span><span class="va">mc.val</span></code></pre></div>
-<pre><code>##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   
-##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9212  
-##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9212  
-##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9212  
-##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9212  
-##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9212  
-##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9212  
-##                                                                         
-##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value
-##  Min.   :3.789e-139   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     
-##  1st Qu.:3.789e-139   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     
-##  Median :3.789e-139   Median : NA   Median :1    Median :1    Median :1     
-##  Mean   :3.789e-139   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     
-##  3rd Qu.:3.789e-139   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     
-##  Max.   :3.789e-139   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     
-##                       NA's   :300                                           
-##  Neg Pred Value   Precision     Recall        F1      Prevalence    
-##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9212  
-##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9212  
-##  Median :1      Median :1   Median :1   Median :1   Median :0.9212  
-##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9212  
-##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9212  
-##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9212  
-##                                                                     
-##  Detection Rate   Detection Prevalence Balanced Accuracy
-##  Min.   :0.9212   Min.   :0.9212       Min.   :1        
-##  1st Qu.:0.9212   1st Qu.:0.9212       1st Qu.:1        
-##  Median :0.9212   Median :0.9212       Median :1        
-##  Mean   :0.9212   Mean   :0.9212       Mean   :1        
-##  3rd Qu.:0.9212   3rd Qu.:0.9212       3rd Qu.:1        
-##  Max.   :0.9212   Max.   :0.9212       Max.   :1        
-## </code></pre>
+<pre><code><span class="co">##     Accuracy     Kappa   AccuracyLower    AccuracyUpper  AccuracyNull   </span>
+<span class="co">##  Min.   :1   Min.   :1   Min.   :0.9991   Min.   :1     Min.   :0.9139  </span>
+<span class="co">##  1st Qu.:1   1st Qu.:1   1st Qu.:0.9991   1st Qu.:1     1st Qu.:0.9139  </span>
+<span class="co">##  Median :1   Median :1   Median :0.9991   Median :1     Median :0.9139  </span>
+<span class="co">##  Mean   :1   Mean   :1   Mean   :0.9991   Mean   :1     Mean   :0.9139  </span>
+<span class="co">##  3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9991   3rd Qu.:1     3rd Qu.:0.9139  </span>
+<span class="co">##  Max.   :1   Max.   :1   Max.   :0.9991   Max.   :1     Max.   :0.9139  </span>
+<span class="co">##                                                                         </span>
+<span class="co">##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value</span>
+<span class="co">##  Min.   :9.096e-154   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     </span>
+<span class="co">##  1st Qu.:9.096e-154   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     </span>
+<span class="co">##  Median :9.096e-154   Median : NA   Median :1    Median :1    Median :1     </span>
+<span class="co">##  Mean   :9.096e-154   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     </span>
+<span class="co">##  3rd Qu.:9.096e-154   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     </span>
+<span class="co">##  Max.   :9.096e-154   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     </span>
+<span class="co">##                       NA's   :300                                           </span>
+<span class="co">##  Neg Pred Value   Precision     Recall        F1      Prevalence    </span>
+<span class="co">##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.9139  </span>
+<span class="co">##  1st Qu.:1      1st Qu.:1   1st Qu.:1   1st Qu.:1   1st Qu.:0.9139  </span>
+<span class="co">##  Median :1      Median :1   Median :1   Median :1   Median :0.9139  </span>
+<span class="co">##  Mean   :1      Mean   :1   Mean   :1   Mean   :1   Mean   :0.9139  </span>
+<span class="co">##  3rd Qu.:1      3rd Qu.:1   3rd Qu.:1   3rd Qu.:1   3rd Qu.:0.9139  </span>
+<span class="co">##  Max.   :1      Max.   :1   Max.   :1   Max.   :1   Max.   :0.9139  </span>
+<span class="co">##                                                                     </span>
+<span class="co">##  Detection Rate   Detection Prevalence Balanced Accuracy</span>
+<span class="co">##  Min.   :0.9139   Min.   :0.9139       Min.   :1        </span>
+<span class="co">##  1st Qu.:0.9139   1st Qu.:0.9139       1st Qu.:1        </span>
+<span class="co">##  Median :0.9139   Median :0.9139       Median :1        </span>
+<span class="co">##  Mean   :0.9139   Mean   :0.9139       Mean   :1        </span>
+<span class="co">##  3rd Qu.:0.9139   3rd Qu.:0.9139       3rd Qu.:1        </span>
+<span class="co">##  Max.   :0.9139   Max.   :0.9139       Max.   :1        </span>
+<span class="co">## </span></code></pre>
 <p>In other words, information on the probability distributions of the natural spontaneous methylation variation in the control and treatment population are essential to discriminate the background noise from the treatment induced signal.</p>
 </div>
 </div>
-<div id="graphics-of-dmp-classification-performance" class="section level2">
-<h2 class="hasAnchor">
-<a href="#graphics-of-dmp-classification-performance" class="anchor"></a>Graphics of DMP classification performance</h2>
+<div class="section level3">
+<h3 id="graphics-of-dmp-classification-performance">Graphics of DMP classification performance<a class="anchor" aria-label="anchor" href="#graphics-of-dmp-classification-performance"></a>
+</h3>
 <p>DMP count data:</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,
-            G3P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">g3p.dmps</span>, <span class="va">length</span><span class="op">)</span>,
-            FT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">ft.dmps</span>, <span class="va">length</span><span class="op">)</span>,
-            FT.G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">ft.g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,
-            FT.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">ft.g2p_cutp.dmps</span>, <span class="va">length</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">rbind</a></span><span class="op">(</span>G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,
+            G3P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">g3p.dmps</span>, <span class="va">length</span><span class="op">)</span>,
+            FT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.dmps</span>, <span class="va">length</span><span class="op">)</span>,
+            FT.G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,
+            FT.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.g2p_cutp.dmps</span>, <span class="va">length</span><span class="op">)</span>
     <span class="op">)</span><span class="op">)</span>
 <span class="va">dt</span></code></pre></div>
-<pre><code>##     G2P  G3P   FT FT.G2P FT.SD
-## C1  233  226 1730   1039   233
-## C2  277  264 1682   1047   277
-## C3  255  249 1657   1029   255
-## T1 2921 2871 7589   2922  2921
-## T2 3037 2946 7646   3037  3037
-## T3 2986 2925 7679   2986  2986</code></pre>
+<pre><code><span class="co">##     G2P  G3P   FT FT.G2P FT.SD</span>
+<span class="co">## C1  255  251 1730   1055   255</span>
+<span class="co">## C2  306  298 1682   1070   306</span>
+<span class="co">## C3  281  276 1657   1059   281</span>
+<span class="co">## T1 2925 2871 7589   2926  2925</span>
+<span class="co">## T2 3032 2961 7646   3032  3032</span>
+<span class="co">## T3 2990 2935 7679   2990  2990</span></code></pre>
 <p>The comparison between the approaches FT.G2P and FT.SD (full signal detection on FT output) tells us that only 255, 306, and 281 cytosine sites detected with FT in the control samples C1, C2, and C3, respectively, carry methylation signals comparable (in magnitude) to those signals induced by the treatment.</p>
 <p>Classification performance data:</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FT"</span>, <span class="st">"FT.G2P"</span>, <span class="st">"FT.SD"</span>, <span class="st">"G2P"</span>, <span class="st">"G3P"</span><span class="op">)</span>, 
-                <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">ft.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, 
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FT"</span>, <span class="st">"FT.G2P"</span>, <span class="st">"FT.SD"</span>, <span class="st">"G2P"</span>, <span class="st">"G3P"</span><span class="op">)</span>, 
+                <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">ft.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, 
                         FDR <span class="op">=</span> <span class="va">ft.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span>,
-                    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">ft.g2p.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>,
+                    <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">ft.g2p.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>,
                         FDR <span class="op">=</span> <span class="va">ft.g2p.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span>,
-                    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">ft.g2p_cut.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, 
+                    <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">ft.g2p_cut.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, 
                         FDR <span class="op">=</span> <span class="va">ft.g2p_cut.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span>,
-                    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">g2p.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, 
+                    <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">g2p.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, 
                         FDR <span class="op">=</span> <span class="va">g2p.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span>,
-                    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">g3p.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, 
+                    <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">g3p.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, 
                         FDR <span class="op">=</span> <span class="va">g3p.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span>
                 <span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Graphics:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"#147714FF"</span>, <span class="st">"#3D9F3DFF"</span>, <span class="st">"#66C666FF"</span>,  <span class="st">"#90EE90FF"</span><span class="op">)</span>
-<span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">dt</span>, sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">g2p.dmps</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"#147714FF"</span>, <span class="st">"#3D9F3DFF"</span>, <span class="st">"#66C666FF"</span>,  <span class="st">"#90EE90FF"</span><span class="op">)</span>
+<span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">dt</span>, sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">g2p.dmps</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">## ------------------------- DMP count graphic ---------------------------------</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, lwd <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">FT</span>, <span class="va">FT.G2P</span>, <span class="va">FT.SD</span>, <span class="va">G2P</span>, <span class="va">G3P</span><span class="op">)</span> <span class="op">~</span> <span class="va">sample</span>, 
-        panel.first<span class="op">=</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span>
-            <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>,
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, lwd <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/edgeR/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">FT</span>, <span class="va">FT.G2P</span>, <span class="va">FT.SD</span>, <span class="va">G2P</span>, <span class="va">G3P</span><span class="op">)</span> <span class="op">~</span> <span class="va">sample</span>, 
+        panel.first<span class="op">=</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span>
+            <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>,
         data <span class="op">=</span> <span class="va">dt</span>, beside <span class="op">=</span> <span class="cn">TRUE</span>,  legend.text <span class="op">=</span> <span class="cn">TRUE</span>, las <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">0.05</span>,
         yaxt <span class="op">=</span> <span class="st">"n"</span>, cex.names <span class="op">=</span> <span class="fl">1.4</span>, font <span class="op">=</span> <span class="fl">3</span>, xlab <span class="op">=</span> <span class="st">""</span>, col <span class="op">=</span> <span class="va">color</span>,
-        args.legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">10</span>, y<span class="op">=</span><span class="fl">6000</span>, text.font <span class="op">=</span> <span class="fl">2</span>, box.lwd <span class="op">=</span> <span class="fl">0</span>, 
+        args.legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">10</span>, y<span class="op">=</span><span class="fl">6000</span>, text.font <span class="op">=</span> <span class="fl">2</span>, box.lwd <span class="op">=</span> <span class="fl">0</span>, 
                         horiz <span class="op">=</span> <span class="cn">FALSE</span>, adj <span class="op">=</span> <span class="fl">0</span>, xjust <span class="op">=</span> <span class="fl">0.65</span>, yjust <span class="op">=</span> <span class="fl">0.8</span>, 
                         bty <span class="op">=</span> <span class="st">"n"</span>, cex <span class="op">=</span> <span class="fl">1.2</span>, x.intersp <span class="op">=</span> <span class="fl">0.2</span>, inset <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, 
                         ncol <span class="op">=</span> <span class="fl">1</span>, fill <span class="op">=</span> <span class="va">color</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">2</span>, hadj <span class="op">=</span> <span class="fl">0.9</span>, las <span class="op">=</span> <span class="fl">2</span>, lwd <span class="op">=</span> <span class="fl">0.4</span>, tck <span class="op">=</span> <span class="op">-</span><span class="fl">0.02</span>, cex.axis <span class="op">=</span> <span class="fl">1.2</span>, font <span class="op">=</span> <span class="fl">2</span>,
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span><span class="fl">2</span>, hadj <span class="op">=</span> <span class="fl">0.9</span>, las <span class="op">=</span> <span class="fl">2</span>, lwd <span class="op">=</span> <span class="fl">0.4</span>, tck <span class="op">=</span> <span class="op">-</span><span class="fl">0.02</span>, cex.axis <span class="op">=</span> <span class="fl">1.2</span>, font <span class="op">=</span> <span class="fl">2</span>,
     line <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, text <span class="op">=</span> <span class="st">"DMP count"</span>, line <span class="op">=</span> <span class="fl">3</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, font <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, text <span class="op">=</span> <span class="st">"DMP count"</span>, line <span class="op">=</span> <span class="fl">3</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, font <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="co">## ------------------ DMP classifiction performance graphic -------------------</span>
-<span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mediumblue"</span>, <span class="st">"#0000FFFF"</span>, <span class="st">"#3949F6FF"</span>, <span class="st">"#566CF2FF"</span>, <span class="st">"#7390EEFF"</span>,
+<span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mediumblue"</span>, <span class="st">"#0000FFFF"</span>, <span class="st">"#3949F6FF"</span>, <span class="st">"#566CF2FF"</span>, <span class="st">"#7390EEFF"</span>,
             <span class="st">"#90B3EAFF"</span>, <span class="st">"#ADD8E6FF"</span><span class="op">)</span>
 <span class="va">labs</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">method</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, lwd <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Accuracy</span>, <span class="va">Sensitivity</span>, <span class="va">Specificity</span>, <span class="va">Pos.Pred.Value</span>, 
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, lwd <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/edgeR/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Accuracy</span>, <span class="va">Sensitivity</span>, <span class="va">Specificity</span>, <span class="va">Pos.Pred.Value</span>, 
                     <span class="va">Neg.Pred.Value</span>, <span class="va">Balanced.Accuracy</span>, <span class="va">FDR</span><span class="op">)</span> <span class="op">~</span> <span class="va">method</span>, 
-            panel.first <span class="op">=</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span>
-                            <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>, 
+            panel.first <span class="op">=</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span>
+                            <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>, 
             data <span class="op">=</span> <span class="va">df</span>, beside <span class="op">=</span> <span class="cn">TRUE</span>,  legend.text <span class="op">=</span> <span class="cn">TRUE</span>, las <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">0.1</span>,
             yaxt <span class="op">=</span> <span class="st">"n"</span>, cex.names <span class="op">=</span> <span class="fl">1.4</span>, font <span class="op">=</span> <span class="fl">3</span>, xlab <span class="op">=</span> <span class="st">""</span>, col <span class="op">=</span> <span class="va">color</span>, 
-            ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, 
-            args.legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">52</span>, y <span class="op">=</span> <span class="fl">1.</span>, text.font <span class="op">=</span> <span class="fl">2</span>, box.lwd <span class="op">=</span> <span class="fl">0</span>, 
+            ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, 
+            args.legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">52</span>, y <span class="op">=</span> <span class="fl">1.</span>, text.font <span class="op">=</span> <span class="fl">2</span>, box.lwd <span class="op">=</span> <span class="fl">0</span>, 
                             horiz <span class="op">=</span> <span class="cn">FALSE</span>, adj <span class="op">=</span> <span class="fl">0</span>, xjust <span class="op">=</span> <span class="fl">0.65</span>, yjust <span class="op">=</span> <span class="fl">0.8</span>, 
                             bty <span class="op">=</span> <span class="st">"n"</span>, cex <span class="op">=</span> <span class="fl">1.2</span>, x.intersp <span class="op">=</span> <span class="fl">0.2</span>, inset <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, 
                             ncol <span class="op">=</span> <span class="fl">1</span>, fill <span class="op">=</span> <span class="va">color</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">2</span>, hadj <span class="op">=</span> <span class="fl">0.8</span>, las <span class="op">=</span> <span class="fl">2</span>, lwd <span class="op">=</span> <span class="fl">0.4</span>, tck <span class="op">=</span> <span class="op">-</span><span class="fl">0.02</span>, cex.axis <span class="op">=</span> <span class="fl">1.2</span>, font <span class="op">=</span> <span class="fl">2</span>,
+<span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span><span class="fl">2</span>, hadj <span class="op">=</span> <span class="fl">0.8</span>, las <span class="op">=</span> <span class="fl">2</span>, lwd <span class="op">=</span> <span class="fl">0.4</span>, tck <span class="op">=</span> <span class="op">-</span><span class="fl">0.02</span>, cex.axis <span class="op">=</span> <span class="fl">1.2</span>, font <span class="op">=</span> <span class="fl">2</span>,
     line <span class="op">=</span> <span class="op">-</span><span class="fl">0.4</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, text <span class="op">=</span> <span class="st">"Performance value"</span>, line <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, font <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, text <span class="op">=</span> <span class="st">"Performance value"</span>, line <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.4</span>, font <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="Cutpoint_estimation_with_Methyl-IT_files/figure-html/dmp_graph-1.png" width="1344"></p>
-<p>FT.G2P and FT.SD approaches lead to excellent classification performances on this data set. At this point, we can appeal the parsimony principle, follows from <a href="https://www.britannica.com/topic/Occams-razor">Occam’s razor</a> that states “among competing hypotheses, the hypothesis with the fewest assumptions should be selected. In other words, results indicates that the signal-detection and machine-learning approach is sufficient <span class="citation">(7, 9)</span>.</p>
+<p>FT.G2P and FT.SD approaches lead to excellent classification performances on this data set. At this point, we can appeal the parsimony principle, follows from <a href="https://www.britannica.com/topic/Occams-razor" class="external-link">Occam’s razor</a> that states “among competing hypotheses, the hypothesis with the fewest assumptions should be selected. In other words, results indicates that the signal-detection and machine-learning approach is sufficient <span class="citation">(7, 9)</span>.</p>
 </div>
-<div id="conclusions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#conclusions" class="anchor"></a>Conclusions</h1>
+<div class="section level2">
+<h2 id="conclusions">Conclusions<a class="anchor" aria-label="anchor" href="#conclusions"></a>
+</h2>
 <ol style="list-style-type: decimal">
 <li><p>A proper discrimination of the methylation signal from the stochastic methylation background requires for the knowledge of probability distributions of the methylation signal from control and treatment population. Such a knowledge permits a suitable estimation of the cutoff value to discriminate the methylation signal induced by the treatment from the stochastic methylation background detected in the control group.</p></li>
 <li><p>It does not matter how significant a differentially methylation event for a given cytosine position would be (after the application of some statistical test), but on how big the probability to be observed in the control group is. In simple words, if for a given DMP the probability of to be observed in the control is <em>big enough</em>, then such a DMP did not result from a treatment effect.</p></li>
 <li><p>A suitable evaluation on how much the mentioned probability can be <em>big enough</em> derives by estimating an optimal cutpoint. But a classification into two groups results from the cutpoint estimation and the problem on the estimation of such a cutpoint is equivalent to find a discriminatory function (as set by Fisher, <span class="citation">(10, 11)</span>). Cases with function values below some cutoff are classified in one group, while values above the cutoff are put in the other group.</p></li>
-<li><p>MethylIT function <a href="https://is.gd/RR9iWY">estimateCutPoint</a> permits the estimation and search for an optimal cutpoint by confronting the problem as in the spirit of the classical signal detection and as a classification problem. The best model classifier will depend on the dataset under study.So, uses must check for which is the model classifier with the best classification performance for his/her dataset.</p></li>
+<li><p>MethylIT function <a href="https://is.gd/RR9iWY" class="external-link">estimateCutPoint</a> permits the estimation and search for an optimal cutpoint by confronting the problem as in the spirit of the classical signal detection and as a classification problem. The best model classifier will depend on the dataset under study.So, uses must check for which is the model classifier with the best classification performance for his/her dataset.</p></li>
 </ol>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
+<div class="section level2">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-Ngo2016" class="csl-entry">
 <div class="csl-left-margin">1. </div>
@@ -1112,11 +1117,13 @@ pre { /* Code block - determines code spacing between lines */
 
 
       <footer><div class="copyright">
-  <p>Developed by Robersy Sanchez.</p>
+  <p></p>
+<p>Developed by Robersy Sanchez.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -1124,6 +1131,8 @@ pre { /* Code block - determines code spacing between lines */
 
   
 
+
+  
 
   </body>
 </html>

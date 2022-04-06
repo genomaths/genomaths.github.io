@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
       </span>
     </div>
 
@@ -67,31 +69,38 @@
       <a href="../articles/MethylIT.html">MethylIT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
@@ -99,20 +108,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/genomaths/MethylIT/">
+  <a href="https://github.com/genomaths/MethylIT/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
-<li>
-  <a href="http://twitter.com/robersysr">
-    <span class="fab fa-twitter fa-lg"></span>
-     
-  </a>
-</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -122,19 +126,19 @@
 
       
 
-      </header><script src="some_tips_for_methylit_r_scripts_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Some tips for Methyl-IT R scripts</h1>
-                        <h4 class="author"><div class="line-block">Robersy Sanchez<br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br>
+                        <h4 data-toc-skip class="author"><div class="line-block">Robersy Sanchez<br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br>
 Mackenzie’s lab<br><br>
 Department of Biology and Plant Science.<br>
 Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div></h4>
             
-            <h4 class="date">04 November 2021</h4>
+            <h4 data-toc-skip class="date">06 April 2022</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/some_tips_for_methylit_r_scripts.Rmd"><code>vignettes/some_tips_for_methylit_r_scripts.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/some_tips_for_methylit_r_scripts.Rmd" class="external-link"><code>vignettes/some_tips_for_methylit_r_scripts.Rmd</code></a></small>
       <div class="hidden name"><code>some_tips_for_methylit_r_scripts.Rmd</code></div>
 
     </div>
@@ -205,23 +209,23 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 14px;
 }
 </style>
-<div id="reading-data-sets" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reading-data-sets" class="anchor"></a>Reading data sets</h2>
+<div class="section level2">
+<h2 id="reading-data-sets">Reading data sets<a class="anchor" aria-label="anchor" href="#reading-data-sets"></a>
+</h2>
 <p>Let’s suppose that we have the following read-count data set obtained from Bismark ‘CX_report’ files:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">folder</span> <span class="op">&lt;-</span> <span class="st">"~/data/"</span>
-<span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">folder</span><span class="op">)</span>
+<span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">folder</span><span class="op">)</span>
 <span class="co"># [1] "~/data/Col_8-1a.fq_bismark_bt2.deduplicated.bismark.CX_report"</span>
 <span class="co"># [2] "~/data/Col_8-1b.fq_bismark_bt2.deduplicated.bismark.CX_report"</span>
 <span class="co"># [3] "~/data/Col_8-1c.fq_bismark_bt2.deduplicated.bismark.CX_report"</span></code></pre></div>
 <p>This data set can be read with the following code:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT">MethylIT</a></span><span class="op">)</span>
-<span class="va">col0</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readCounts2GRangesList.html">readCounts2GRangesList</a></span><span class="op">(</span>filenames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">folder</span>, <span class="va">files</span><span class="op">)</span>,
-                               sample.id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"col1"</span>, <span class="st">"col2"</span>, <span class="st">"col3"</span><span class="op">)</span>,
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT" class="external-link">MethylIT</a></span><span class="op">)</span>
+<span class="va">col0</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readCounts2GRangesList.html">readCounts2GRangesList</a></span><span class="op">(</span>filenames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">folder</span>, <span class="va">files</span><span class="op">)</span>,
+                               sample.id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"col1"</span>, <span class="st">"col2"</span>, <span class="st">"col3"</span><span class="op">)</span>,
                                pattern <span class="op">=</span> <span class="st">"^[1-5]"</span>,
-                               columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fl">1</span>, start <span class="op">=</span> <span class="fl">2</span>,
+                               columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fl">1</span>, start <span class="op">=</span> <span class="fl">2</span>,
                                            strand <span class="op">=</span> <span class="fl">3</span>, mC <span class="op">=</span> <span class="fl">4</span>, uC <span class="op">=</span> <span class="fl">5</span>,
                                            context <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Since the methylome data are from Arabidopsis thaliana (a plant), we have added the column 6 from each Bismark ‘CX_report’ file, which for each cytosine site carries the information of its corresponding methylation context: CG, CHG, or CHH. Users familiar with Linux OS can easily check which is the number of each required column by using Linux command line ‘head’ function.</p>
@@ -239,12 +243,12 @@ pre { /* Code block - determines code spacing between lines */
 <p>Plants methylome contains chloroplast and mitochondrial chromosomes, which are not included in methylome analysis. In the current case, we can exclude these chromosomes by setting:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pattern</span> <span class="op">=</span> <span class="st">"^[1-5]"</span></code></pre></div>
-<p>That is, only rows starting with any of the integer numbers from 1 to 5 are read. Notice that <a href="https://is.gd/5pyk1N">readCounts2GRangesList</a> function is able to deal with different file formats. The user just need to provide the number of the specified columns, which for different aligner programs can be different.</p>
+<p>That is, only rows starting with any of the integer numbers from 1 to 5 are read. Notice that <a href="https://is.gd/5pyk1N" class="external-link">readCounts2GRangesList</a> function is able to deal with different file formats. The user just need to provide the number of the specified columns, which for different aligner programs can be different.</p>
 <p>It is very important to notice that Methyl-IT pipeline assumes that all the data provided have acceptable quality. It is up to the user to guaranty the quality of its methylome data set. For example, to include chloroplast chromosome, will artificially decrease the levels of noise in the treatment and control group of samples, which definitely will lead to a wrong estimation of the cutpoints in the signal detection step.</p>
-<div id="analysis-per-methylation-context" class="section level3">
-<h3 class="hasAnchor">
-<a href="#analysis-per-methylation-context" class="anchor"></a>Analysis per methylation context</h3>
-<p>Usually, in plant epigenomic field, the methylation analysis is performed by methylation context. After apply the script above, the three methylation contexts were included in each sample. The <a href="https://is.gd/5pyk1N">readCounts2GRangesList</a> function can be used to read only one specified methylation context, but it also increase the number of files per sample.</p>
+<div class="section level3">
+<h3 id="analysis-per-methylation-context">Analysis per methylation context<a class="anchor" aria-label="anchor" href="#analysis-per-methylation-context"></a>
+</h3>
+<p>Usually, in plant epigenomic field, the methylation analysis is performed by methylation context. After apply the script above, the three methylation contexts were included in each sample. The <a href="https://is.gd/5pyk1N" class="external-link">readCounts2GRangesList</a> function can be used to read only one specified methylation context, but it also increase the number of files per sample.</p>
 <p>The next code will select the methylation context that want, say “CHG”, from the above samples:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">col0_chg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">col0</span>, <span class="kw">function</span><span class="op">(</span><span class="va">s</span><span class="op">)</span> <span class="va">s</span><span class="op">[</span><span class="va">s</span><span class="op">$</span><span class="va">context</span> <span class="op">==</span> <span class="st">"CHG"</span><span class="op">]</span>, keep.attr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -254,39 +258,39 @@ pre { /* Code block - determines code spacing between lines */
                           num.cores <span class="op">=</span> <span class="fl">10L</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="dmps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dmps" class="anchor"></a>DMPs</h2>
+<div class="section level2">
+<h2 id="dmps">DMPs<a class="anchor" aria-label="anchor" href="#dmps"></a>
+</h2>
 <p>Let’s suppose that we have set of DMPs estimated for each methylation context: dmps_cg, dmp_chg, and dmps_chh. For DMG or DMR analyses we usually include all the methylation contexts.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dmps_cg</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps_cg</span><span class="op">)</span>
 <span class="va">dmps</span> <span class="op">&lt;-</span> <span class="va">dmps_cg</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">k</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">nams</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">dmps</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dmps_cg</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span>, <span class="va">dmps_chg</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span>, <span class="va">dmps_chh</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">k</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">nams</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">dmps</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">dmps_cg</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span>, <span class="va">dmps_chg</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span>, <span class="va">dmps_chh</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></code></pre></div>
 </div>
-<div id="annotation-file" class="section level2">
-<h2 class="hasAnchor">
-<a href="#annotation-file" class="anchor"></a>Annotation file</h2>
+<div class="section level2">
+<h2 id="annotation-file">Annotation file<a class="anchor" aria-label="anchor" href="#annotation-file"></a>
+</h2>
 <p>Gene annotation is needed for DMG estimation. Some organisms (not well annotated yet) reports several “contig” sequences which are not included between the known chromosomes. In the most frequent case, as in the case of Arabidopsis, we do not include chloroplast and mitochondrial chromosomes. For Arabidopsis, following code does job when the “gtf” is used:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span>
 <span class="va">AG</span> <span class="op">=</span> <span class="fu">import</span><span class="op">(</span><span class="st">"~/data/TAIR10_gff3/Arabidopsis_thaliana.TAIR10.46.gtf.gz"</span><span class="op">)</span>
-<span class="va">gene</span> <span class="op">=</span> <span class="va">AG</span><span class="op">[</span> <span class="va">AG</span><span class="op">$</span><span class="va">type</span> <span class="op">==</span> <span class="st">"gene"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="st">"gene_id"</span>, <span class="st">"gene_biotype"</span>, <span class="st">"gene_name"</span> <span class="op">)</span> <span class="op">]</span>
-<span class="va">gene</span> <span class="op">=</span> <span class="va">gene</span><span class="op">[</span> <span class="va">gene</span><span class="op">$</span><span class="va">gene_biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gene_id"</span>, <span class="st">"gene_name"</span><span class="op">)</span> <span class="op">]</span>
-<span class="fu">seqlevels</span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span>
+<span class="va">gene</span> <span class="op">=</span> <span class="va">AG</span><span class="op">[</span> <span class="va">AG</span><span class="op">$</span><span class="va">type</span> <span class="op">==</span> <span class="st">"gene"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="st">"gene_id"</span>, <span class="st">"gene_biotype"</span>, <span class="st">"gene_name"</span> <span class="op">)</span> <span class="op">]</span>
+<span class="va">gene</span> <span class="op">=</span> <span class="va">gene</span><span class="op">[</span> <span class="va">gene</span><span class="op">$</span><span class="va">gene_biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gene_id"</span>, <span class="st">"gene_name"</span><span class="op">)</span> <span class="op">]</span>
+<span class="fu">seqlevels</span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span>
 <span class="va">gene</span> <span class="op">=</span> <span class="fu"><a href="../reference/sortBySeqnameAndStart.html">sortBySeqnameAndStart</a></span><span class="op">(</span><span class="va">gene</span><span class="op">)</span></code></pre></div>
 <p>In fact, the critical step in the above code is:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">seqlevels</span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">seqlevels</span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="general-suggestions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#general-suggestions" class="anchor"></a>General suggestions</h2>
+<div class="section level2">
+<h2 id="general-suggestions">General suggestions<a class="anchor" aria-label="anchor" href="#general-suggestions"></a>
+</h2>
 <ol style="list-style-type: decimal">
 <li><p>Theoretically, the nonlinear fit to estimate the probability distribution of the information divergence and the cutpoint estimation must be done per chromosome. However, for organisms with small methylome, as in the case of Arbidopsis, we have not detected significant differences, so far, when the methylome reprogramming is genome-wide. Nevertheless, if you suspect that the methylation reprogramming is affecting specific chromosomes, then we strongly suggest to perform the analysis per chromosome. In the case of human methylome, the analysis per chromosome is the right way to proceed.</p></li>
-<li><p>The cutpoint estimation step is critical. The evaluation of the classification performance is a very important step. Typically, a classification performance with accuracy below 95% would indicate that either something is wrong in some previous step (not necessarily in Methyl-IT steps) or that really there are not too much difference between your control and treatment groups, as would be the case, for example, in the analysis of different seed development stages. Please read and be familiar with the vignette:<br><a href="https://is.gd/WoYFUe">Optimal cutpoint for the methylation signal</a>.</p></li>
+<li><p>The cutpoint estimation step is critical. The evaluation of the classification performance is a very important step. Typically, a classification performance with accuracy below 95% would indicate that either something is wrong in some previous step (not necessarily in Methyl-IT steps) or that really there are not too much difference between your control and treatment groups, as would be the case, for example, in the analysis of different seed development stages. Please read and be familiar with the vignette:<br><a href="https://is.gd/WoYFUe" class="external-link">Optimal cutpoint for the methylation signal</a>.</p></li>
 </ol>
 </div>
   </div>
@@ -302,11 +306,13 @@ pre { /* Code block - determines code spacing between lines */
 
 
       <footer><div class="copyright">
-  <p>Developed by Robersy Sanchez.</p>
+  <p></p>
+<p>Developed by Robersy Sanchez.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -314,6 +320,8 @@ pre { /* Code block - determines code spacing between lines */
 
   
 
+
+  
 
   </body>
 </html>

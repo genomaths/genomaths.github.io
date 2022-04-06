@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
       </span>
     </div>
 
@@ -67,31 +69,38 @@
       <a href="../articles/MethylIT.html">MethylIT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/dmr_at_memory.html">DMR detection with Methyl-IT</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/some_tips_for_methylit_r_scripts.html">Some tips for Methyl-IT R scripts</a>
     </li>
   </ul>
@@ -99,20 +108,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/genomaths/MethylIT/">
+  <a href="https://github.com/genomaths/MethylIT/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
-<li>
-  <a href="http://twitter.com/robersysr">
-    <span class="fab fa-twitter fa-lg"></span>
-     
-  </a>
-</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -122,18 +126,18 @@
 
       
 
-      </header><script src="MethylIT_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get started-with Methyl-IT</h1>
-                        <h4 class="author">Robersy Sanchez</h4>
+                        <h4 data-toc-skip class="author">Robersy Sanchez</h4>
             <address class="author_afil">
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 class="date">04 November 2021</h4>
+            <h4 data-toc-skip class="date">05 April 2022</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/master/vignettes/MethylIT.Rmd"><code>vignettes/MethylIT.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/MethylIT.Rmd" class="external-link"><code>vignettes/MethylIT.Rmd</code></a></small>
       <div class="hidden name"><code>MethylIT.Rmd</code></div>
 
     </div>
@@ -152,96 +156,87 @@ text-indent: 0;
 }
 
 </style>
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelector("h1").className = "title";
-});
-</script><script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function() {
-  var links = document.links;  
-  for (var i = 0, linksLength = links.length; i < linksLength; i++)
-    if (links[i].hostname != window.location.hostname)
-      links[i].target = '_blank';
-});
-</script><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT">MethylIT</a></span><span class="op">)</span></code></pre></div>
-<div id="background" class="section level1">
-<h1 class="hasAnchor">
-<a href="#background" class="anchor"></a>Background</h1>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT" class="external-link">MethylIT</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
+</h2>
 <p>MethylIT is an R package for methylome analysis based on a signal-detection machine learning approach (SD-ML). This approach is postulated to provide greater sensitivity for resolving true signal from the methylation background within the methylome <span class="citation">(Sanchez and Mackenzie 2016; Sanchez et al. 2019)</span>. Because the biological signal created within the dynamic methylome environment characteristic of plants is not free from background noise, the approach, designated Methyl-IT, includes the application of signal detection theory <span class="citation">(Greiner, Pfeiffer, and Smith 2000; Carter et al. 2016; Harpaz et al. 2013; Kruspe et al. 2017)</span>. A basic requirement for the application of signal detection is the knowledge of the probability distribution of the background noise, which is used as null hypothesis in the detection of the methylation signal. This probability distribution is, in general, a member of generalized gamma distribution family, and it can be deduced on a statistical mechanical/thermodynamics basis from DNA methylation induced by thermal fluctuations <span class="citation">(Sanchez and Mackenzie 2016)</span>.</p>
 </div>
-<div id="data-sets" class="section level1">
-<h1 class="hasAnchor">
-<a href="#data-sets" class="anchor"></a>Data sets</h1>
+<div class="section level2">
+<h2 id="data-sets">Data sets<a class="anchor" aria-label="anchor" href="#data-sets"></a>
+</h2>
 <p>Methyl-IT uses the read counts of methylation called derived from whole-genome bisulfite sequencing (WGBS). Methylome datasets of WGBS are available at Gene Expression Omnibus (GEO DataSets). For the current example, we just load RData files containing the read-counts from several samples. Please, notice that we are using here just a toy data set, which permits us to move us fast on Methyl-IT pipeline.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## ===== Download methylation data from PSU's GitLab ========</span>
-<span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://git.psu.edu/genomath/MethylIT_examples"</span>,
+<span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://git.psu.edu/genomath/MethylIT_examples"</span>,
             <span class="st">"/raw/master/MethylIT_testing/"</span>,
             <span class="st">"memoryLine_100k_samples_cg.RData"</span><span class="op">)</span>
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".RData"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">url</span>, destfile <span class="op">=</span> <span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.remove</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">url</span><span class="op">)</span>
+<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".RData"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">url</span>, destfile <span class="op">=</span> <span class="va">temp</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">url</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">meth_samples</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">meth_samples</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "W_3_1" "W_3_2" "W_3_3" "W_3_4" "W_3_5" "M_3_1" "M_3_2" "M_3_3" "M_3_4"</span>
 <span class="co">#&gt; [10] "M_3_5"</span></code></pre></div>
-<div id="gene-annotation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#gene-annotation" class="anchor"></a>Gene annotation</h2>
+<div class="section level3">
+<h3 id="gene-annotation">Gene annotation<a class="anchor" aria-label="anchor" href="#gene-annotation"></a>
+</h3>
 <p>Download <em>Arabidopsis thaliana</em> TAIR10 gene annotation data</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://git.psu.edu/genomath/MethylIT_examples"</span>,
+<code class="sourceCode R"><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://git.psu.edu/genomath/MethylIT_examples"</span>,
             <span class="st">"/raw/master/MethylIT_testing/"</span>,
             <span class="st">"Arabidopsis_thaliana.TAIR10.38_only_genes.RData"</span><span class="op">)</span>
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".RData"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">url</span>, destfile <span class="op">=</span> <span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.remove</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">url</span><span class="op">)</span>
+<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".RData"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">url</span>, destfile <span class="op">=</span> <span class="va">temp</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">url</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
 </div>
-<div id="the-reference-sample" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-reference-sample" class="anchor"></a>The reference sample</h2>
-<p>To perform the comparison between the uncertainty of methylation levels from each group of individuals, control <span class="math inline">\((c)\)</span> and treatment <span class="math inline">\((t)\)</span>, we should estimate the uncertainty variation with respect to the same reference individual on the mentioned metric space. The reason to measure the uncertainty variation with respect to the same reference resides in that even sibling individuals follow an independent ontogenetic development and, consequently, their developments follow independent stochastic processes. The reference individual is estimated with function <a href="https://is.gd/qR79kW">poolFromGRlist</a>:</p>
-<p>The centroid (of methylation levels) of the group control is used as reference samples. Notice that <a href="https://is.gd/qR79kW">poolFromGRlist</a> function only uses numerical data. Hence, we must specify the columns carrying the read-count data.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"W"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">meth_samples</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/poolFromGRlist.html">poolFromGRlist</a></span><span class="op">(</span><span class="va">meth_samples</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>, stat <span class="op">=</span> <span class="st">"mean"</span>, num.cores <span class="op">=</span> <span class="fl">4L</span><span class="op">)</span>
-<span class="co">#&gt; *** Building a unique GRanges object from the list...</span>
-<span class="co">#&gt;  *** Building coordinates for the new GRanges object ...</span>
-<span class="co">#&gt;  *** Strand information is preserved ...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #1</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #2...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #3...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #4...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #5...</span>
-<span class="co">#&gt;  *** Sorting by chromosomes and start positions...</span>
-<span class="co">#&gt; *** Building a virtual methylome...</span></code></pre></div>
+<div class="section level3">
+<h3 id="the-reference-sample">The reference sample<a class="anchor" aria-label="anchor" href="#the-reference-sample"></a>
+</h3>
+<p>To perform the comparison between the uncertainty of methylation levels from each group of individuals, control <span class="math inline">\((c)\)</span> and treatment <span class="math inline">\((t)\)</span>, we should estimate the uncertainty variation with respect to the same reference individual on the mentioned metric space. The reason to measure the uncertainty variation with respect to the same reference resides in that even sibling individuals follow an independent ontogenetic development and, consequently, their developments follow independent stochastic processes. The reference individual is estimated with function <a href="https://is.gd/qR79kW" class="external-link">poolFromGRlist</a>:</p>
+<p>The centroid (of methylation levels) of the group control is used as reference samples. Notice that <a href="https://is.gd/qR79kW" class="external-link">poolFromGRlist</a> function only uses numerical data. Hence, we must specify the columns carrying the read-count data.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"W"</span>, <span class="fu">names</span>(meth_samples))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ref <span class="ot">&lt;-</span> <span class="fu">poolFromGRlist</span>(<span class="at">LR =</span> meth_samples[idx], <span class="at">stat =</span> <span class="st">"mean"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; *** Building a unique GRanges object from the list...</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *** Building coordinates for the new GRanges object ...</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *** Strand information is preserved ...</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *** Sorting by chromosomes and start positions...</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; *** Building a virtual methylome...</span></span></code></pre></div>
 </div>
 </div>
-<div id="estimation-of-information-divergences" class="section level1">
-<h1 class="hasAnchor">
-<a href="#estimation-of-information-divergences" class="anchor"></a>Estimation of information divergences</h1>
+<div class="section level2">
+<h2 id="estimation-of-information-divergences">Estimation of information divergences<a class="anchor" aria-label="anchor" href="#estimation-of-information-divergences"></a>
+</h2>
 <p>To perform the comparison between the uncertainty of methylation levels from each group of individuals, control <span class="math inline">\((c)\)</span> and treatment <span class="math inline">\((t)\)</span>, the divergence between the methylation levels of each individual is estimated with respect to the reference sample. This is the step with the highest consumption of computing time.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ptm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">ml_samples</span> <span class="op">&lt;-</span> <span class="va">meth_samples</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"W_3_1"</span>,<span class="st">"W_3_2"</span>,<span class="st">"W_3_3"</span>,<span class="st">"W_3_4"</span>,<span class="st">"W_3_5"</span>, 
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Tue Apr  5 17:06:48 2022"</span>
+<span class="va">ptm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">ml_samples</span> <span class="op">&lt;-</span> <span class="va">meth_samples</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"W_3_1"</span>,<span class="st">"W_3_2"</span>,<span class="st">"W_3_3"</span>,<span class="st">"W_3_4"</span>,<span class="st">"W_3_5"</span>, 
                              <span class="st">"M_3_1"</span>,<span class="st">"M_3_2"</span>,<span class="st">"M_3_3"</span>,<span class="st">"M_3_4"</span>,<span class="st">"M_3_5"</span><span class="op">)</span><span class="op">]</span>
 <span class="va">ml_hd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimateDivergence.html">estimateDivergence</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="va">ref</span>,
                             indiv <span class="op">=</span> <span class="va">ml_samples</span>,
                             Bayesian <span class="op">=</span> <span class="cn">TRUE</span>,
-                            min.coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>,
+                            min.coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>,
                             min.meth <span class="op">=</span> <span class="fl">1</span>,
                             high.coverage <span class="op">=</span> <span class="fl">500</span>,
                             percentile <span class="op">=</span> <span class="fl">0.999</span>,
-                            num.cores <span class="op">=</span> <span class="fl">4L</span>,
-                            tasks <span class="op">=</span> <span class="fl">0L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">ptm</span>
-<span class="co">#&gt;     user   system  elapsed </span>
-<span class="co">#&gt; 1888.982   26.121  246.073</span>
+                            verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">ptm</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">/</span><span class="fl">60</span> <span class="co"># in min</span>
+<span class="co">#&gt; elapsed </span>
+<span class="co">#&gt; 0.18355</span>
+<span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Tue Apr  5 17:06:59 2022"</span>
 <span class="va">ml_hd</span><span class="op">$</span><span class="va">M_3_1</span>
 <span class="co">#&gt; GRanges object with 17782 ranges and 9 metadata columns:</span>
 <span class="co">#&gt;           seqnames    ranges strand |        c1        t1        c2        t2</span>
@@ -259,20 +254,20 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="co">#&gt;   [17782]       Pt     84354      - |         1       194         0       164</span>
 <span class="co">#&gt;                   p1         p2          TV      bay.TV       hdiv</span>
 <span class="co">#&gt;            &lt;numeric&gt;  &lt;numeric&gt;   &lt;numeric&gt;   &lt;numeric&gt;  &lt;numeric&gt;</span>
-<span class="co">#&gt;       [1]   0.854097   0.625750    0.000000  -0.2283477 0.35904267</span>
-<span class="co">#&gt;       [2]   0.854097   0.625750    0.000000  -0.2283477 0.35904267</span>
-<span class="co">#&gt;       [3]   0.628828   0.597719    0.166667  -0.0311087 0.00803583</span>
-<span class="co">#&gt;       [4]   0.491763   0.229962   -0.250000  -0.2618003 1.17716504</span>
-<span class="co">#&gt;       [5]   0.275784   0.421825    0.350000   0.1460409 0.14567148</span>
+<span class="co">#&gt;       [1]   0.855530   0.626396    0.000000  -0.2291345 0.31665411</span>
+<span class="co">#&gt;       [2]   0.855530   0.626396    0.000000  -0.2291345 0.31665411</span>
+<span class="co">#&gt;       [3]   0.628985   0.598198    0.166667  -0.0307872 0.00699817</span>
+<span class="co">#&gt;       [4]   0.491634   0.230045   -0.250000  -0.2615884 1.12163729</span>
+<span class="co">#&gt;       [5]   0.274564   0.422201    0.350000   0.1476369 0.13205713</span>
 <span class="co">#&gt;       ...        ...        ...         ...         ...        ...</span>
-<span class="co">#&gt;   [17778] 0.00642202 0.01237307  0.00589896  0.00595105   0.196120</span>
-<span class="co">#&gt;   [17779] 0.01458022 0.00266902 -0.01242236 -0.01191120   0.711035</span>
-<span class="co">#&gt;   [17780] 0.00667394 0.01312932  0.00637333  0.00645538   0.208886</span>
-<span class="co">#&gt;   [17781] 0.00878465 0.00279224 -0.00649351 -0.00599241   0.237643</span>
-<span class="co">#&gt;   [17782] 0.00694643 0.00217349 -0.00512821 -0.00477294   0.244257</span>
+<span class="co">#&gt;   [17778] 0.00636821 0.01237291  0.00589896  0.00600470   0.199262</span>
+<span class="co">#&gt;   [17779] 0.01451081 0.00266827 -0.01242236 -0.01184254   0.699579</span>
+<span class="co">#&gt;   [17780] 0.00661804 0.01312918  0.00637333  0.00651113   0.211982</span>
+<span class="co">#&gt;   [17781] 0.00871135 0.00279145 -0.00649351 -0.00591989   0.231223</span>
+<span class="co">#&gt;   [17782] 0.00688828 0.00217286 -0.00512821 -0.00471543   0.238154</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 7 sequences from an unspecified genome; no seqlengths</span></code></pre></div>
-<p>Function <a href="https://is.gd/0ViBO9">estimateDivergence</a> returns a list of GRanges objects with the four columns of counts, the information divergence, and additional columns:</p>
+<p>Function <a href="https://is.gd/0ViBO9" class="external-link">estimateDivergence</a> returns a list of GRanges objects with the four columns of counts, the information divergence, and additional columns:</p>
 <ol style="list-style-type: decimal">
 <li>The original matrix of methylated (<span class="math inline">\(c_i\)</span>) and unmethylated (<span class="math inline">\(t_i\)</span>) read counts from control (<span class="math inline">\(i=1\)</span>) and treatment (<span class="math inline">\(i=2\)</span>) samples.</li>
 <li>“p1” and “p2”: methylation levels for control and treatment, respectively.</li>
@@ -281,58 +276,58 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>“hdiv”: Hellinger divergence.</li>
 </ol>
 <p>Observe that the absolute values <span class="math inline">\(|TV|\)</span> is an information divergence as well, which is known as total variation distance (widely used in information theory).</p>
-<div id="descriptive-statistical-analysis" class="section level2">
-<h2 class="hasAnchor">
-<a href="#descriptive-statistical-analysis" class="anchor"></a><em>Descriptive statistical analysis</em>
-</h2>
-<p>A descriptive analysis on the distribution of Hellinger divergences of methylation levels is recommended. After the raw data filtering introduced with <a href="https://is.gd/0ViBO9">estimateDivergence</a> function, some coverage issue could be detected. Notice that Methyl-IT pipeline assumes that the data quality is good enough.</p>
+<div class="section level3">
+<h3 id="descriptive-statistical-analysis">
+<em>Descriptive statistical analysis</em><a class="anchor" aria-label="anchor" href="#descriptive-statistical-analysis"></a>
+</h3>
+<p>A descriptive analysis on the distribution of Hellinger divergences of methylation levels is recommended. After the raw data filtering introduced with <a href="https://is.gd/0ViBO9" class="external-link">estimateDivergence</a> function, some coverage issue could be detected. Notice that Methyl-IT pipeline assumes that the data quality is good enough.</p>
 <p>Like in any other statistical analysis, descriptive statistical analysis help us to detect potential issues in the raw data. It is the user responsibility to perform quality check of his/her dataset before start to apply Methyl-IT. Nevertheless, the quality checking of the raw data is not perfect. So, it is healthy to sees for potential issues.</p>
 <p>This is an optional step not included in Methyl-IT. It is up to the user to verify the data quality.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Critical values</span>
-<span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">ml_hd</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span>
-    <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">bay.TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span>
-    <span class="va">btv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>tv <span class="op">=</span> <span class="va">tv.95</span>, hd <span class="op">=</span> <span class="va">hd.95</span>, bay.TV <span class="op">=</span> <span class="va">btv.95</span><span class="op">)</span>
+<span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">ml_hd</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span>
+    <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">bay.TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span>
+    <span class="va">btv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>tv <span class="op">=</span> <span class="va">tv.95</span>, hd <span class="op">=</span> <span class="va">hd.95</span>, bay.TV <span class="op">=</span> <span class="va">btv.95</span><span class="op">)</span>
     <span class="op">)</span><span class="op">}</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="va">critical.val</span>
 <span class="co">#&gt;          tv.95%   hd.95% bay.TV.95%</span>
-<span class="co">#&gt; W_3_1 0.3114574 1.123392  0.2410714</span>
-<span class="co">#&gt; W_3_2 0.3349617 1.214559  0.2500000</span>
-<span class="co">#&gt; W_3_3 0.2876811 1.092085  0.2142857</span>
-<span class="co">#&gt; W_3_4 0.3169897 1.159497  0.2380952</span>
-<span class="co">#&gt; W_3_5 0.2805973 1.149909  0.2090909</span>
-<span class="co">#&gt; M_3_1 0.3803852 1.816868  0.3201389</span>
-<span class="co">#&gt; M_3_2 0.3704751 1.805996  0.3000000</span>
-<span class="co">#&gt; M_3_3 0.4063782 1.968919  0.3333333</span>
-<span class="co">#&gt; M_3_4 0.2180793 1.523186  0.2803030</span>
-<span class="co">#&gt; M_3_5 0.2280428 1.240885  0.2976190</span></code></pre></div>
+<span class="co">#&gt; W_3_1 0.3119338 1.003136  0.2410714</span>
+<span class="co">#&gt; W_3_2 0.3359854 1.100139  0.2500000</span>
+<span class="co">#&gt; W_3_3 0.2881010 1.005780  0.2142857</span>
+<span class="co">#&gt; W_3_4 0.3177533 1.041646  0.2380952</span>
+<span class="co">#&gt; W_3_5 0.2813523 1.075218  0.2090909</span>
+<span class="co">#&gt; M_3_1 0.3806664 1.605878  0.3201389</span>
+<span class="co">#&gt; M_3_2 0.3711565 1.649375  0.3000000</span>
+<span class="co">#&gt; M_3_3 0.4058102 1.734889  0.3333333</span>
+<span class="co">#&gt; M_3_4 0.2175861 1.446732  0.2803030</span>
+<span class="co">#&gt; M_3_5 0.2281000 1.120914  0.2976190</span></code></pre></div>
 </div>
-<div id="quality-checking-of-the-coverage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quality-checking-of-the-coverage" class="anchor"></a>Quality checking of the coverage</h2>
-<p>After the raw data filtering introduced with <a href="https://is.gd/0ViBO9">estimateDivergence</a> function, some coverage issue could be detected.</p>
+<div class="section level3">
+<h3 id="quality-checking-of-the-coverage">Quality checking of the coverage<a class="anchor" aria-label="anchor" href="#quality-checking-of-the-coverage"></a>
+</h3>
+<p>After the raw data filtering introduced with <a href="https://is.gd/0ViBO9" class="external-link">estimateDivergence</a> function, some coverage issue could be detected.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">covr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">ml_hd</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
                 <span class="va">cov</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">c2</span> <span class="op">+</span> <span class="va">x</span><span class="op">$</span><span class="va">t2</span>
-                <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">cov</span><span class="op">)</span>
+                <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">cov</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">covr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">q60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.6</span><span class="op">)</span>
-    <span class="va">q9999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.9999</span><span class="op">)</span>
-    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span>
-    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span>
-    <span class="va">q95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.95</span><span class="op">)</span>
-    <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/setops-methods.html">intersect</a></span><span class="op">(</span><span class="va">idx1</span>, <span class="va">idx2</span><span class="op">)</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,
-        <span class="va">q60</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.95</span>, <span class="fl">0.99</span>, <span class="fl">0.999</span>, <span class="fl">0.9999</span><span class="op">)</span><span class="op">)</span>,
-        num.siteGreater_8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">8</span><span class="op">)</span>,
-        q60_to_500 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span><span class="op">)</span>,
-        num.siteGreater_500 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">500</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">covr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">q60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.6</span><span class="op">)</span>
+    <span class="va">q9999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.9999</span><span class="op">)</span>
+    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span>
+    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span>
+    <span class="va">q95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.95</span><span class="op">)</span>
+    <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">idx1</span>, <span class="va">idx2</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,
+        <span class="va">q60</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.95</span>, <span class="fl">0.99</span>, <span class="fl">0.999</span>, <span class="fl">0.9999</span><span class="op">)</span><span class="op">)</span>,
+        num.siteGreater_8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">8</span><span class="op">)</span>,
+        q60_to_500 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span><span class="op">)</span>,
+        num.siteGreater_500 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">500</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt;       Min. 1st Qu. Median Mean 3rd Qu. Max. 60%     95%     99%    99.9%</span>
@@ -359,34 +354,114 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="co">#&gt; M_3_5 3323.190             13105       2494                4771</span></code></pre></div>
 </div>
 </div>
-<div id="estimation-of-the-best-fitted-probability-distribution-model" class="section level1">
-<h1 class="hasAnchor">
-<a href="#estimation-of-the-best-fitted-probability-distribution-model" class="anchor"></a>Estimation of the best fitted probability distribution model</h1>
-<p>A basic requirement for the application of signal detection is the knowledge of the probability distribution of the background noise. Probability distribution, as a Weibull distribution model, can be deduced on a statistical mechanical/thermodynamics basis for DNA methylation induced by thermal fluctuations <span class="citation">(Sanchez and Mackenzie 2016)</span>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gofReport.html">gofReport</a></span><span class="op">(</span>HD <span class="op">=</span> <span class="va">ml_hd</span>,
-                model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>,
-                        <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span><span class="op">)</span>,
-                column <span class="op">=</span> <span class="fl">9</span>,
-                output <span class="op">=</span> <span class="st">"all"</span>,
-                confl_model <span class="op">=</span> <span class="cn">TRUE</span>,
-                num.cores <span class="op">=</span> <span class="fl">4L</span>,
-                task <span class="op">=</span> <span class="fl">2L</span>,
-                verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-<span class="va">gof</span><span class="op">$</span><span class="va">stats</span>
-<span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span></code></pre></div>
-</div>
-<div id="signal-detection" class="section level1">
-<h1 class="hasAnchor">
-<a href="#signal-detection" class="anchor"></a>Signal detection</h1>
-<p>The information thermodynamics-based approach is postulated to provide greater sensitivity for resolving true signal from the thermodynamic background within the methylome <span class="citation">(Sanchez and Mackenzie 2016)</span>. Since the biological signal created within the dynamic methylome environment characteristic of living organisms is not free from background noise, the approach, designated Methyl-IT, includes the application of signal detection theory <span class="citation">(Greiner, Pfeiffer, and Smith 2000; Carter et al. 2016; Harpaz et al. 2013; Kruspe et al. 2017)</span>. Signal detection is a critical step to increase sensitivity and resolution of methylation signal by reducing the signal-to-noise ratio and objectively controlling the false positive rate and prediction accuracy/risk.</p>
-<div id="potential-methylation-signal" class="section level2">
-<h2 class="hasAnchor">
-<a href="#potential-methylation-signal" class="anchor"></a><em>Potential methylation signal</em>
+<div class="section level2">
+<h2 id="estimation-of-the-best-fitted-probability-distribution-model">Estimation of the best fitted probability distribution model<a class="anchor" aria-label="anchor" href="#estimation-of-the-best-fitted-probability-distribution-model"></a>
 </h2>
-<p>The first estimation in our signal detection step is the identification of the cytosine sites carrying potential methylation signal <span class="math inline">\(PS\)</span>. The methylation regulatory signal does not hold the theoretical distribution and, consequently, for a given level of significance <span class="math inline">\(\alpha\)</span> (Type I error probability, e.g. <span class="math inline">\(\alpha = 0.05\)</span>), cytosine positions <span class="math inline">\(k\)</span> with information divergence <span class="math inline">\(H_k &gt;= H_{\alpha = 0.05}\)</span> can be selected as sites carrying potential signals <span class="math inline">\(PS\)</span>. The value of <span class="math inline">\(\alpha\)</span> can be specified. For example, potential signals with <span class="math inline">\(H_k &gt; H_{\alpha = 0.01}\)</span> can be selected. For each sample, cytosine sites are selected based on the corresponding fitted theoretical distribution model estimated in the previous step.</p>
+<p>A basic requirement for the application of signal detection is the knowledge of the probability distribution of the background noise. Probability distribution, as a Weibull distribution model, can be deduced on a statistical mechanical/thermodynamics basis for DNA methylation induced by thermal fluctuations <span class="citation">(Sanchez and Mackenzie 2016)</span>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gof <span class="ot">&lt;-</span> <span class="fu">gofReport</span>(<span class="at">HD =</span> ml_hd,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">column =</span> <span class="dv">9</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">output =</span> <span class="st">"all"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">alt_models =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">num.cores =</span> 4L,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">task =</span> 2L,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==================</span>                                                    <span class="er">|</span>  <span class="dv">25</span>%</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="er">|===================================</span>                                   <span class="er">|</span>  <span class="dv">50</span>%</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="er">|====================================================</span>                  <span class="er">|</span>  <span class="dv">75</span>%</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *** Creating report ...</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>gof<span class="sc">$</span>stats</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          w2p_AIC w2p_R.Cross.val w3p_AIC w3p_R.Cross.val   g2p_AIC</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_1  -92604.45       0.9983317     Inf               0 -107319.5</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_2  -94347.14       0.9985962     Inf               0 -109885.9</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_3  -96466.50       0.9986544     Inf               0 -114703.9</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_4  -96546.57       0.9986205     Inf               0 -114453.7</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_5  -97966.02       0.9985583     Inf               0 -109813.8</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_1 -106137.75       0.9992454     Inf               0 -127842.1</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_2 -108524.59       0.9993021     Inf               0 -132209.9</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_3 -107446.61       0.9993011     Inf               0 -132105.6</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_4 -124063.33       0.9997120     Inf               0 -119186.2</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_5 -114904.63       0.9994727     Inf               0 -129744.3</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       g2p_R.Cross.val g3p_AIC g3p_R.Cross.val bestModel</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_1       0.9992292     Inf               0       g2p</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_2       0.9993784     Inf               0       g2p</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_3       0.9995170     Inf               0       g2p</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_4       0.9994412     Inf               0       g2p</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_5       0.9991953     Inf               0       g2p</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_1       0.9997532     Inf               0       g2p</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_2       0.9997937     Inf               0       g2p</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_3       0.9998019     Inf               0       g2p</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_4       0.9995424     Inf               0       w2p</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_5       0.9997344     Inf               0       g2p</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>gof<span class="sc">$</span>bestModel</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       W_3_1       W_3_2       W_3_3       W_3_4       W_3_5       M_3_1 </span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P" </span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       M_3_2       M_3_3       M_3_4       M_3_5 </span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   "Gamma2P"   "Gamma2P" "Weibull2P"   "Gamma2P"</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="histogram-and-probability-density-distribution-plot">Histogram and probability density distribution plot<a class="anchor" aria-label="anchor" href="#histogram-and-probability-density-distribution-plot"></a>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">WT1</span> <span class="op">=</span> <span class="va">ml_hd</span><span class="op">$</span><span class="va">W_3_1</span><span class="op">$</span><span class="va">hdiv</span>
+<span class="va">pars</span> <span class="op">=</span> <span class="fu"><a href="../reference/coef.html">coef</a></span><span class="op">(</span><span class="va">gof</span><span class="op">$</span><span class="va">nlms</span><span class="op">$</span><span class="va">W_3_1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">WT1</span>, <span class="fl">90</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
+     panel.first<span class="op">=</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span>
+       <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>, family <span class="op">=</span> <span class="st">"serif"</span>, col <span class="op">=</span> <span class="st">"cyan1"</span>,
+     border <span class="op">=</span> <span class="st">"deepskyblue"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, by <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">x1</span>, shape <span class="op">=</span> <span class="va">pars</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, scale <span class="op">=</span> <span class="va">pars</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+
+<span class="va">WT2</span> <span class="op">=</span> <span class="va">ml_hd</span><span class="op">$</span><span class="va">W_3_2</span><span class="op">$</span><span class="va">hdiv</span>
+<span class="va">pars</span> <span class="op">=</span> <span class="fu"><a href="../reference/coef.html">coef</a></span><span class="op">(</span><span class="va">gof</span><span class="op">$</span><span class="va">nlms</span><span class="op">$</span><span class="va">W_3_2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">WT2</span>, <span class="fl">90</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
+     panel.first<span class="op">=</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span>
+       <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>, family <span class="op">=</span> <span class="st">"serif"</span>, col <span class="op">=</span> <span class="st">"cyan1"</span>,
+     border <span class="op">=</span> <span class="st">"deepskyblue"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, by <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">x1</span>, shape <span class="op">=</span> <span class="va">pars</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, scale <span class="op">=</span> <span class="va">pars</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+
+<span class="va">M1</span> <span class="op">=</span> <span class="va">ml_hd</span><span class="op">$</span><span class="va">M_3_1</span><span class="op">$</span><span class="va">hdiv</span>
+<span class="va">pars</span> <span class="op">=</span> <span class="fu"><a href="../reference/coef.html">coef</a></span><span class="op">(</span><span class="va">gof</span><span class="op">$</span><span class="va">nlms</span><span class="op">$</span><span class="va">M_3_1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">M1</span>, <span class="fl">90</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
+     panel.first<span class="op">=</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span>
+       <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>, family <span class="op">=</span> <span class="st">"serif"</span>, col <span class="op">=</span> <span class="st">"cyan1"</span>,
+     border <span class="op">=</span> <span class="st">"deepskyblue"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4.5</span>, by <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">x1</span>, shape <span class="op">=</span> <span class="va">pars</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, scale <span class="op">=</span> <span class="va">pars</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+
+<span class="va">M2</span> <span class="op">=</span> <span class="va">ml_hd</span><span class="op">$</span><span class="va">M_3_2</span><span class="op">$</span><span class="va">hdiv</span>
+<span class="va">pars</span> <span class="op">=</span> <span class="fu"><a href="../reference/coef.html">coef</a></span><span class="op">(</span><span class="va">gof</span><span class="op">$</span><span class="va">nlms</span><span class="op">$</span><span class="va">M_3_2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">M2</span>, <span class="fl">90</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
+     panel.first<span class="op">=</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span>
+       <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>, family <span class="op">=</span> <span class="st">"serif"</span>, col <span class="op">=</span> <span class="st">"cyan1"</span>,
+     border <span class="op">=</span> <span class="st">"deepskyblue"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span>, by <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">x1</span>, shape <span class="op">=</span> <span class="va">pars</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, scale <span class="op">=</span> <span class="va">pars</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<p><img src="MethylIT_files/figure-html/graph-1.png" width="1344"></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="signal-detection">Signal detection<a class="anchor" aria-label="anchor" href="#signal-detection"></a>
+</h2>
+<p>The information thermodynamics-based approach is postulated to provide greater sensitivity for resolving true signal from the thermodynamic background within the methylome <span class="citation">(Sanchez and Mackenzie 2016)</span>. Since the biological signal created within the dynamic methylome environment characteristic of living organisms is not free from background noise, the approach, designated Methyl-IT, includes the application of signal detection theory <span class="citation">(Greiner, Pfeiffer, and Smith 2000; Carter et al. 2016; Harpaz et al. 2013; Kruspe et al. 2017)</span>. Signal detection is a critical step to increase sensitivity and resolution of methylation signal by reducing the signal-to-noise ratio and objectively controlling the false positive rate and prediction accuracy/risk.</p>
+<div class="section level3">
+<h3 id="potential-methylation-signal">
+<em>Potential methylation signal</em><a class="anchor" aria-label="anchor" href="#potential-methylation-signal"></a>
+</h3>
+<p>The first estimation in our signal detection step is the identification of the cytosine sites carrying potential methylation signal <span class="math inline">\(PS\)</span>. The methylation regulatory signal does not hold the theoretical distribution and, consequently, for a given level of significance <span class="math inline">\(\alpha\)</span> (Type I error probability, e.g. <span class="math inline">\(\alpha = 0.05\)</span>), cytosine positions <span class="math inline">\(k\)</span> with information divergence <span class="math inline">\(H_k &gt;= H_{\alpha = 0.05}\)</span> can be selected as sites carrying potential signals <span class="math inline">\(PS\)</span>. The value of <span class="math inline">\(\alpha\)</span> can be specified. For example, potential signals with <span class="math inline">\(H_k &gt; H_{\alpha = 0.01}\)</span> can be selected. For each sample, cytosine sites are selected based on the corresponding fitted theoretical distribution model estimated in the previous step.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ml_hd</span>,
                         nlms <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">nlms</span>,
                         div.col <span class="op">=</span> <span class="fl">9L</span>,
@@ -394,7 +469,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         tv.cut <span class="op">=</span> <span class="fl">0.25</span>,
                         dist.name <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span><span class="op">)</span>
 <span class="va">ps</span><span class="op">$</span><span class="va">M_3_1</span>
-<span class="co">#&gt; GRanges object with 669 ranges and 10 metadata columns:</span>
+<span class="co">#&gt; GRanges object with 558 ranges and 10 metadata columns:</span>
 <span class="co">#&gt;         seqnames    ranges strand |        c1        t1        c2        t2</span>
 <span class="co">#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
 <span class="co">#&gt;     [1]        1       511      + |        10         5         4         8</span>
@@ -403,323 +478,310 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="co">#&gt;     [4]        1     18106      - |         9         0         2         1</span>
 <span class="co">#&gt;     [5]        1     24196      + |         6        14        16         0</span>
 <span class="co">#&gt;     ...      ...       ...    ... .       ...       ...       ...       ...</span>
-<span class="co">#&gt;   [665]        5     94024      + |         0        10         3         2</span>
-<span class="co">#&gt;   [666]        5     94054      + |         7         2         0         4</span>
-<span class="co">#&gt;   [667]        5     94055      - |         5         1         1         5</span>
-<span class="co">#&gt;   [668]        5     94057      + |         8         1         3         2</span>
-<span class="co">#&gt;   [669]        5     94058      - |         6         0         4         2</span>
+<span class="co">#&gt;   [554]        5     93916      - |         0         6         5         3</span>
+<span class="co">#&gt;   [555]        5     94024      + |         0        10         3         2</span>
+<span class="co">#&gt;   [556]        5     94054      + |         7         2         0         4</span>
+<span class="co">#&gt;   [557]        5     94055      - |         5         1         1         5</span>
+<span class="co">#&gt;   [558]        5     94058      - |         6         0         4         2</span>
 <span class="co">#&gt;                p1        p2        TV    bay.TV      hdiv       wprob</span>
 <span class="co">#&gt;         &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;</span>
-<span class="co">#&gt;     [1]  0.650199  0.291399 -0.333333 -0.358800   2.07040 3.38195e-02</span>
-<span class="co">#&gt;     [2]  0.711909  0.236948 -0.464286 -0.474961   2.28179 2.55315e-02</span>
-<span class="co">#&gt;     [3]  0.773019  0.228206 -0.500000 -0.544814   2.08634 3.31068e-02</span>
-<span class="co">#&gt;     [4]  0.942210  0.395646 -0.333333 -0.546564   3.03836 9.49905e-03</span>
-<span class="co">#&gt;     [5]  0.303845  0.862463  0.700000  0.558619   7.12842 5.62512e-05</span>
+<span class="co">#&gt;     [1]  0.650294  0.291535 -0.333333 -0.358759   1.91758 3.24985e-02</span>
+<span class="co">#&gt;     [2]  0.712218  0.237111 -0.464286 -0.475107   2.04140 2.70927e-02</span>
+<span class="co">#&gt;     [3]  0.773595  0.228468 -0.500000 -0.545127   1.64587 4.86429e-02</span>
+<span class="co">#&gt;     [4]  0.942954  0.396115 -0.333333 -0.546839   2.32267 1.79839e-02</span>
+<span class="co">#&gt;     [5]  0.303585  0.862793  0.700000  0.559208   6.73007 3.88975e-05</span>
 <span class="co">#&gt;     ...       ...       ...       ...       ...       ...         ...</span>
-<span class="co">#&gt;   [665] 0.0330173 0.4218248  0.600000  0.388807   2.48743 0.019467415</span>
-<span class="co">#&gt;   [666] 0.7409055 0.0520507 -0.777778 -0.688855   5.07347 0.000718865</span>
-<span class="co">#&gt;   [667] 0.7730194 0.1519024 -0.666667 -0.621117   3.44262 0.005647409</span>
-<span class="co">#&gt;   [668] 0.8415577 0.4218248 -0.288889 -0.419733   1.80485 0.048339888</span>
-<span class="co">#&gt;   [669] 0.9172112 0.4862648 -0.333333 -0.430946   1.98340 0.037997499</span>
+<span class="co">#&gt;   [554] 0.0505441 0.4890867  0.625000  0.438543   2.30405  0.01847590</span>
+<span class="co">#&gt;   [555] 0.0320215 0.4222008  0.600000  0.390179   2.10990  0.02450879</span>
+<span class="co">#&gt;   [556] 0.7412423 0.0520884 -0.777778 -0.689154   4.10998  0.00142952</span>
+<span class="co">#&gt;   [557] 0.7735955 0.1520139 -0.666667 -0.621582   3.06476  0.00620988</span>
+<span class="co">#&gt;   [558] 0.9182058 0.4866520 -0.333333 -0.431554   1.77271  0.04026507</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 7 sequences from an unspecified genome; no seqlengths</span></code></pre></div>
 </div>
-<div id="cutpoint-estimation--dmps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cutpoint-estimation--dmps" class="anchor"></a>Cutpoint estimation. DMPs</h2>
+<div class="section level3">
+<h3 id="cutpoint-estimation--dmps">Cutpoint estimation. DMPs<a class="anchor" aria-label="anchor" href="#cutpoint-estimation--dmps"></a>
+</h3>
 <p>Laws of statistical physics can account for background methylation, a response to thermal fluctuations that presumably functions in DNA stability <span class="citation">(Sanchez and Mackenzie 2016; Sanchez et al. 2019)</span>. True signal is detected based on the optimal cutpoint <span class="citation">(López-Ratón et al. 2014)</span>.</p>
-<p>The need for the application of (what is now known as) signal detection in cancer research was pointed out by Youden in the midst of the last century <span class="citation">(Youden 1950)</span>. In the next example, the simple cutpoint estimation available in Methyl-IT is based on the application of <a href="https://en.wikipedia.org/wiki/Youden%27s_J_statistic">Youden index</a> <span class="citation">(Youden 1950)</span>. Although cutpoints are estimated for a single variable, the classification performance can be evaluated for several variables and applying different model classifiers. A optimal cutpoint distinguishes disease stages from healthy individual. The performance of this classification is given in the output of function <a href="https://is.gd/RR9iWY">estimateCutPoint</a>.</p>
+<p>The need for the application of (what is now known as) signal detection in cancer research was pointed out by Youden in the midst of the last century <span class="citation">(Youden 1950)</span>. In the next example, the simple cutpoint estimation available in Methyl-IT is based on the application of <a href="https://en.wikipedia.org/wiki/Youden%27s_J_statistic" class="external-link">Youden index</a> <span class="citation">(Youden 1950)</span>. Although cutpoints are estimated for a single variable, the classification performance can be evaluated for several variables and applying different model classifiers. A optimal cutpoint distinguishes disease stages from healthy individual. The performance of this classification is given in the output of function <a href="https://is.gd/RR9iWY" class="external-link">estimateCutPoint</a>.</p>
 <p>A model classifier can be requested for further predictions and its classification performance is also provided. Below, the selected model classifier is a quadratic discriminant analysis (QDA) (<em>classifier1</em> = “qda,” <em>clas.perf</em> = TRUE). Four predictor variables are available: the Hellinger divergence of methylation levels (<em>hdiv</em>), total variation distance (<em>TV</em>, absolute difference of methylation levels), relative position of cytosine site in the chromosome (<em>pos</em>), and the logarithm base two of the probability to observe a Hellinger divergence value <span class="math inline">\(H\)</span> greater than the critical value <span class="math inline">\(H_{\alpha = 0.05}\)</span> (values given as probabilities in object PS, <em>wprob</em>).</p>
 <p>Notice that the cutpoint can be estimated for any of the two currently available information divergences: <em>Hellinger divergence</em> (<em>div.col</em> = 9) or the <em>total</em> <em>variation distance</em> (with Bayesian correction, <em>div.col</em> = 8).</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### Cutpoint estimated using a model classifier</span>
 <span class="va">cutpoint</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ps</span>,
                             simple <span class="op">=</span> <span class="cn">FALSE</span>,
                             div.col <span class="op">=</span> <span class="fl">9</span>,
-                            control.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"W_3_1"</span>,<span class="st">"W_3_2"</span>,<span class="st">"W_3_3"</span>,
+                            control.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"W_3_1"</span>,<span class="st">"W_3_2"</span>,<span class="st">"W_3_3"</span>,
                                               <span class="st">"W_3_4"</span>,<span class="st">"W_3_5"</span><span class="op">)</span>,
-                            treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"M_3_1"</span>,<span class="st">"M_3_2"</span>,<span class="st">"M_3_3"</span>,
+                            treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M_3_1"</span>,<span class="st">"M_3_2"</span>,<span class="st">"M_3_3"</span>,
                                                 <span class="st">"M_3_4"</span>,<span class="st">"M_3_5"</span><span class="op">)</span>,
-                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>,
+                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>,
                                         wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                            classifier1 <span class="op">=</span> <span class="st">"pca.qda"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>,
-                            classifier2 <span class="op">=</span> <span class="st">"pca.logistic"</span>,
+                            classifier1 <span class="op">=</span> <span class="st">"logistic"</span>, n.pc <span class="op">=</span> <span class="fl">4</span>,
+                            classifier2 <span class="op">=</span> <span class="st">"pca.qda"</span>,
                             center <span class="op">=</span> <span class="cn">TRUE</span>,
                             scale <span class="op">=</span> <span class="cn">TRUE</span>,
                             clas.perf <span class="op">=</span> <span class="cn">TRUE</span>,
                             verbose <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 <span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span>
-<span class="co">#&gt; [1] 1.106388</span>
+<span class="co">#&gt; [1] 1.17632</span>
 <span class="va">cutpoint</span><span class="op">$</span><span class="va">testSetPerformance</span>
 <span class="co">#&gt; Confusion Matrix and Statistics</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;           Reference</span>
 <span class="co">#&gt; Prediction  CT  TT</span>
-<span class="co">#&gt;         CT 427 117</span>
-<span class="co">#&gt;         TT  33 741</span>
+<span class="co">#&gt;         CT 354   0</span>
+<span class="co">#&gt;         TT  22 676</span>
 <span class="co">#&gt;                                           </span>
-<span class="co">#&gt;                Accuracy : 0.8862          </span>
-<span class="co">#&gt;                  95% CI : (0.8678, 0.9028)</span>
-<span class="co">#&gt;     No Information Rate : 0.651           </span>
+<span class="co">#&gt;                Accuracy : 0.9791          </span>
+<span class="co">#&gt;                  95% CI : (0.9685, 0.9868)</span>
+<span class="co">#&gt;     No Information Rate : 0.6426          </span>
 <span class="co">#&gt;     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       </span>
 <span class="co">#&gt;                                           </span>
-<span class="co">#&gt;                   Kappa : 0.7597          </span>
+<span class="co">#&gt;                   Kappa : 0.9539          </span>
 <span class="co">#&gt;                                           </span>
-<span class="co">#&gt;  Mcnemar's Test P-Value : 1.228e-11       </span>
+<span class="co">#&gt;  Mcnemar's Test P-Value : 7.562e-06       </span>
 <span class="co">#&gt;                                           </span>
-<span class="co">#&gt;             Sensitivity : 0.8636          </span>
-<span class="co">#&gt;             Specificity : 0.9283          </span>
-<span class="co">#&gt;          Pos Pred Value : 0.9574          </span>
-<span class="co">#&gt;          Neg Pred Value : 0.7849          </span>
-<span class="co">#&gt;              Prevalence : 0.6510          </span>
-<span class="co">#&gt;          Detection Rate : 0.5622          </span>
-<span class="co">#&gt;    Detection Prevalence : 0.5873          </span>
-<span class="co">#&gt;       Balanced Accuracy : 0.8959          </span>
+<span class="co">#&gt;             Sensitivity : 1.0000          </span>
+<span class="co">#&gt;             Specificity : 0.9415          </span>
+<span class="co">#&gt;          Pos Pred Value : 0.9685          </span>
+<span class="co">#&gt;          Neg Pred Value : 1.0000          </span>
+<span class="co">#&gt;              Prevalence : 0.6426          </span>
+<span class="co">#&gt;          Detection Rate : 0.6426          </span>
+<span class="co">#&gt;    Detection Prevalence : 0.6635          </span>
+<span class="co">#&gt;       Balanced Accuracy : 0.9707          </span>
 <span class="co">#&gt;                                           </span>
 <span class="co">#&gt;        'Positive' Class : TT              </span>
 <span class="co">#&gt; </span>
 <span class="va">cutpoint</span><span class="op">$</span><span class="va">testSetModel.FDR</span>
-<span class="co">#&gt; [1] 0.04263566</span></code></pre></div>
-<p>Differentially methylated positions (DMPs) can be now identified using <a href="https://is.gd/7cVEEd">selectDIMP</a> function</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">ps</span>, div.col <span class="op">=</span> <span class="fl">9</span>, cutpoint <span class="op">=</span> <span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>dmps <span class="op">=</span><span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">dmps</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;       dmps</span>
-<span class="co">#&gt; W_3_1  422</span>
-<span class="co">#&gt; W_3_2  414</span>
-<span class="co">#&gt; W_3_3  411</span>
-<span class="co">#&gt; W_3_4  450</span>
-<span class="co">#&gt; W_3_5  316</span>
-<span class="co">#&gt; M_3_1  669</span>
-<span class="co">#&gt; M_3_2  531</span>
-<span class="co">#&gt; M_3_3  569</span>
-<span class="co">#&gt; M_3_4  239</span>
-<span class="co">#&gt; M_3_5  332</span></code></pre></div>
-</div>
-</div>
-<div id="differentially-methylated-genes-dmgs" class="section level1">
-<h1 class="hasAnchor">
-<a href="#differentially-methylated-genes-dmgs" class="anchor"></a>Differentially methylated genes (DMGs)</h1>
-<p>Differentially methylated genes (DMGs) are estimated from group comparisons for the number of DMPs on gene-body regions between control and treatment.</p>
-<p>Function <a href="https://is.gd/WQzX5I">getDIMPatGenes</a> is used to count the number of DMPs at gene-body. Nevertheless, it can be used for any arbitrary specified genomic region as well. The operation of this function is based on the ‘<em>findOverlaps</em>’ function from the ‘<em>GenomicRanges</em>’ Bioconductor R package. The ‘<em>findOverlaps</em>’ function has several critical parameters like, for example, ‘<em>maxgap</em>,’ ‘<em>minoverlap</em>,’ and ‘<em>ignore.strand</em>.’ In our function <a href="https://is.gd/WQzX5I">getDIMPatGenes</a>, except for setting ignore.strand = TRUE and <em>type = “within”</em>, we preserve the rest of default ‘findOverlaps’ parameters. In this case, these are important parameter settings because the local mechanical effect of methylation changes on a DNA region where a gene is located is independent of the strand where the gene is encoded. That is, methylation changes located in any of the two DNA strands inside the gene-body region will affect the flexibility of the DNA molecule <span class="citation">(Choy et al. 2010; Severin et al. 2011)</span>.</p>
+<span class="co">#&gt; [1] 0</span></code></pre></div>
+<p>Differentially methylated positions (DMPs) can be now identified using <a href="https://is.gd/7cVEEd" class="external-link">selectDIMP</a> function</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">ps</span>, div.col <span class="op">=</span> <span class="fl">9</span>, cutpoint <span class="op">=</span> <span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>dmps <span class="op">=</span><span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">dmps</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;       dmps</span>
+<span class="co">#&gt; W_3_1  305</span>
+<span class="co">#&gt; W_3_2  342</span>
+<span class="co">#&gt; W_3_3  232</span>
+<span class="co">#&gt; W_3_4  339</span>
+<span class="co">#&gt; W_3_5  240</span>
+<span class="co">#&gt; M_3_1  558</span>
+<span class="co">#&gt; M_3_2  450</span>
+<span class="co">#&gt; M_3_3  471</span>
+<span class="co">#&gt; M_3_4  161</span>
+<span class="co">#&gt; M_3_5  203</span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="differentially-methylated-genes-dmgs">Differentially methylated genes (DMGs)<a class="anchor" aria-label="anchor" href="#differentially-methylated-genes-dmgs"></a>
+</h2>
+<p>Differentially methylated genes (DMGs) are estimated from group comparisons for the number of DMPs on gene-body regions between control and treatment.</p>
+<p>Function <a href="https://is.gd/WQzX5I" class="external-link">getDIMPatGenes</a> is used to count the number of DMPs at gene-body. Nevertheless, it can be used for any arbitrary specified genomic region as well. The operation of this function is based on the ‘<em>findOverlaps</em>’ function from the ‘<em>GenomicRanges</em>’ Bioconductor R package. The ‘<em>findOverlaps</em>’ function has several critical parameters like, for example, ‘<em>maxgap</em>,’ ‘<em>minoverlap</em>,’ and ‘<em>ignore.strand</em>.’ In our function <a href="https://is.gd/WQzX5I" class="external-link">getDIMPatGenes</a>, except for setting ignore.strand = TRUE and <em>type = “within”</em>, we preserve the rest of default ‘findOverlaps’ parameters. In this case, these are important parameter settings because the local mechanical effect of methylation changes on a DNA region where a gene is located is independent of the strand where the gene is encoded. That is, methylation changes located in any of the two DNA strands inside the gene-body region will affect the flexibility of the DNA molecule <span class="citation">(Choy et al. 2010; Severin et al. 2011)</span>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
 <span class="va">dmps_at_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, GENES <span class="op">=</span> <span class="va">genes</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">dmps_at_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_genes</span>, columns <span class="op">=</span> <span class="fl">2L</span>,
-                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">"equal"</span><span class="op">)</span>
-<span class="co">#&gt;  *** Building coordinates for the new GRanges object ...</span>
-<span class="co">#&gt;  *** Setting strand information to * ...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #1</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #2...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #3...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #4...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #5...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #6...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #7...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #8...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #9...</span>
-<span class="co">#&gt;  *** Processing GRanges for sample: #10...</span>
-<span class="co">#&gt;  *** Sorting by chromosomes and start positions...</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_genes</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
+                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">"equal"</span>,
+                               verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_genes</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
 <span class="va">dmps_at_genes</span>
-<span class="co">#&gt; GRanges object with 71 ranges and 10 metadata columns:</span>
+<span class="co">#&gt; GRanges object with 70 ranges and 10 metadata columns:</span>
 <span class="co">#&gt;        seqnames      ranges strand |     W_3_1     W_3_2     W_3_3     W_3_4</span>
 <span class="co">#&gt;           &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
 <span class="co">#&gt;    [1]        1   3631-5899      * |         0         0         0         1</span>
 <span class="co">#&gt;    [2]        1   6788-9130      * |         0         0         0         0</span>
-<span class="co">#&gt;    [3]        1 23121-31227      * |        12         8        21         5</span>
+<span class="co">#&gt;    [3]        1 23121-31227      * |        11         8        16         5</span>
 <span class="co">#&gt;    [4]        1 31170-33171      * |         2         0         2         0</span>
-<span class="co">#&gt;    [5]        1 33365-37871      * |         2         0         2         1</span>
+<span class="co">#&gt;    [5]        1 33365-37871      * |         2         0         1         1</span>
 <span class="co">#&gt;    ...      ...         ...    ... .       ...       ...       ...       ...</span>
-<span class="co">#&gt;   [67]        5 49891-51437      * |         0         0         1         0</span>
-<span class="co">#&gt;   [68]        5 53856-56052      * |         1         0        10         3</span>
-<span class="co">#&gt;   [69]        5 61017-63936      * |         2         0         1         0</span>
-<span class="co">#&gt;   [70]        5 84474-86275      * |         0         0         0         0</span>
-<span class="co">#&gt;   [71]        5 91838-95701      * |         6         1         3         1</span>
+<span class="co">#&gt;   [66]        5 49891-51437      * |         0         0         0         0</span>
+<span class="co">#&gt;   [67]        5 53856-56052      * |         1         0         8         3</span>
+<span class="co">#&gt;   [68]        5 61017-63936      * |         1         0         1         0</span>
+<span class="co">#&gt;   [69]        5 84474-86275      * |         0         0         0         0</span>
+<span class="co">#&gt;   [70]        5 91838-95701      * |         4         1         2         1</span>
 <span class="co">#&gt;            W_3_5     M_3_1     M_3_2     M_3_3     M_3_4     M_3_5</span>
 <span class="co">#&gt;        &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">#&gt;    [1]         0         1         2         1         3         1</span>
+<span class="co">#&gt;    [1]         0         1         2         1         2         0</span>
 <span class="co">#&gt;    [2]         0         0         0         1         0         1</span>
-<span class="co">#&gt;    [3]        15        12        13        15        11        10</span>
+<span class="co">#&gt;    [3]         9        11        14        16         9         8</span>
 <span class="co">#&gt;    [4]         2         1         0         0         0         0</span>
-<span class="co">#&gt;    [5]         1         2         0         2         0         1</span>
+<span class="co">#&gt;    [5]         0         2         0         1         0         0</span>
 <span class="co">#&gt;    ...       ...       ...       ...       ...       ...       ...</span>
-<span class="co">#&gt;   [67]         0         2         2         2         2         2</span>
-<span class="co">#&gt;   [68]         1         8         4         4         1         3</span>
-<span class="co">#&gt;   [69]         2         6         7         2         6         4</span>
-<span class="co">#&gt;   [70]         0         0         0         0         0         1</span>
-<span class="co">#&gt;   [71]         1         9         2         4         6         5</span>
+<span class="co">#&gt;   [66]         0         2         2         2         2         2</span>
+<span class="co">#&gt;   [67]         1         7         4         4         0         1</span>
+<span class="co">#&gt;   [68]         1         6         7         2         3         4</span>
+<span class="co">#&gt;   [69]         0         0         0         0         0         1</span>
+<span class="co">#&gt;   [70]         1         8         2         4         5         4</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre></div>
-<div id="setting-the-experiment-design" class="section level2">
-<h2 class="hasAnchor">
-<a href="#setting-the-experiment-design" class="anchor"></a><em>Setting the experiment design</em>
-</h2>
+<div class="section level3">
+<h3 id="setting-the-experiment-design">
+<em>Setting the experiment design</em><a class="anchor" aria-label="anchor" href="#setting-the-experiment-design"></a>
+</h3>
 <p>The experimental design is set with <a href="https://genomaths.github.io/methylit/reference/glmDataSet.html">glmDataSet</a> function</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>,
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>, <span class="st">"WT"</span>,
                                             <span class="st">"ML"</span>, <span class="st">"ML"</span>, <span class="st">"ML"</span>, <span class="st">"ML"</span>, <span class="st">"ML"</span><span class="op">)</span>,
-                                        levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WT"</span>, <span class="st">"ML"</span><span class="op">)</span><span class="op">)</span>,
+                                        levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WT"</span>, <span class="st">"ML"</span><span class="op">)</span><span class="op">)</span>,
                     <span class="va">nams</span>,
                     row.names <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">## A RangedGlmDataSet is created</span>
 <span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_genes</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="testing-for-dmgs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#testing-for-dmgs" class="anchor"></a>Testing for DMGs</h2>
+<div class="section level3">
+<h3 id="testing-for-dmgs">Testing for DMGs<a class="anchor" aria-label="anchor" href="#testing-for-dmgs"></a>
+</h3>
 <p>DMGs are detected using function <a href="https://genomaths.github.io/methylit/reference/countTest2.html">countTest2</a>.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dmgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds</span>, num.cores <span class="op">=</span> <span class="fl">4L</span>,
                     tasks <span class="op">=</span> <span class="fl">2L</span>,
                     minCountPerIndv <span class="op">=</span> <span class="fl">7</span>,
-                    maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-                    Minlog2FC <span class="op">=</span> <span class="fl">1</span>,
                     CountPerBp <span class="op">=</span> <span class="fl">0.001</span>,
                     test <span class="op">=</span> <span class="st">"LRT"</span>,
                     verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; *** Number of GR after filtering counts 7</span>
+<span class="co">#&gt; *** Number of GR after filtering counts 3</span>
 <span class="co">#&gt; *** GLM...</span>
 <span class="va">dmgs</span>
 <span class="co">#&gt; GRanges object with 1 range and 18 metadata columns:</span>
 <span class="co">#&gt;       seqnames      ranges strand |     W_3_1     W_3_2     W_3_3     W_3_4</span>
 <span class="co">#&gt;          &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">#&gt;   [1]        5 34538-37999      * |         1         1         2         0</span>
+<span class="co">#&gt;   [1]        3 31145-34670      * |         2         2         3         3</span>
 <span class="co">#&gt;           W_3_5     M_3_1     M_3_2     M_3_3     M_3_4     M_3_5    log2FC</span>
 <span class="co">#&gt;       &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">#&gt;   [1]         2         8         5         9         6         7   1.29098</span>
-<span class="co">#&gt;       scaled.deviance      pvalue        model    adj.pval CT.SignalDensity</span>
-<span class="co">#&gt;             &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span>
-<span class="co">#&gt;   [1]         47.0957 6.76022e-12 Neg.Binomial 6.76022e-12       0.00034662</span>
+<span class="co">#&gt;   [1]         3         6         8         9         6         7   1.01857</span>
+<span class="co">#&gt;       scaled.deviance      pvalue          model    adj.pval CT.SignalDensity</span>
+<span class="co">#&gt;             &lt;numeric&gt;   &lt;numeric&gt;    &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span>
+<span class="co">#&gt;   [1]         50.7473 1.05057e-12 Neg.Binomial.W 1.05057e-12      0.000737379</span>
 <span class="co">#&gt;       TT.SignalDensity SignalDensityVariation</span>
 <span class="co">#&gt;              &lt;numeric&gt;              &lt;numeric&gt;</span>
-<span class="co">#&gt;   [1]       0.00202195             0.00167533</span>
+<span class="co">#&gt;   [1]       0.00204197             0.00130459</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 </div>
 </div>
-<div id="references" class="section level1">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Carter2016" class="csl-entry">
-Carter, Jane V., Jianmin Pan, Shesh N. Rai, and Susan Galandiuk. 2016. <span>“<span class="nocase">ROC-ing along: Evaluation and interpretation of receiver operating characteristic curves</span>.”</span> <em>Surgery</em> 159 (6): 1638–45. <a href="https://doi.org/10.1016/j.surg.2015.12.029">https://doi.org/10.1016/j.surg.2015.12.029</a>.
+Carter, Jane V., Jianmin Pan, Shesh N. Rai, and Susan Galandiuk. 2016. <span>“<span class="nocase">ROC-ing along: Evaluation and interpretation of receiver operating characteristic curves</span>.”</span> <em>Surgery</em> 159 (6): 1638–45. <a href="https://doi.org/10.1016/j.surg.2015.12.029" class="external-link">https://doi.org/10.1016/j.surg.2015.12.029</a>.
 </div>
 <div id="ref-Choy2010" class="csl-entry">
-Choy, John S., Sijie Wei, Ju Yeon Lee, Song Tan, Steven Chu, and Tae Hee Lee. 2010. <span>“<span class="nocase">DNA methylation increases nucleosome compaction and rigidity</span>.”</span> <em>Journal of the American Chemical Society</em> 132 (6): 1782–83. <a href="https://doi.org/10.1021/ja910264z">https://doi.org/10.1021/ja910264z</a>.
+Choy, John S., Sijie Wei, Ju Yeon Lee, Song Tan, Steven Chu, and Tae Hee Lee. 2010. <span>“<span class="nocase">DNA methylation increases nucleosome compaction and rigidity</span>.”</span> <em>Journal of the American Chemical Society</em> 132 (6): 1782–83. <a href="https://doi.org/10.1021/ja910264z" class="external-link">https://doi.org/10.1021/ja910264z</a>.
 </div>
 <div id="ref-Greiner2000" class="csl-entry">
-Greiner, M, D Pfeiffer, and R D Smith. 2000. <span>“<span class="nocase">Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests</span>.”</span> <em>Preventive Veterinary Medicine</em> 45 (1-2): 23–41. <a href="https://doi.org/10.1016/S0167-5877(00)00115-X">https://doi.org/10.1016/S0167-5877(00)00115-X</a>.
+Greiner, M, D Pfeiffer, and R D Smith. 2000. <span>“<span class="nocase">Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests</span>.”</span> <em>Preventive Veterinary Medicine</em> 45 (1-2): 23–41. <a href="https://doi.org/10.1016/S0167-5877(00)00115-X" class="external-link">https://doi.org/10.1016/S0167-5877(00)00115-X</a>.
 </div>
 <div id="ref-Harpaz2013" class="csl-entry">
-Harpaz, Rave, William DuMouchel, Paea LePendu, Anna Bauer-Mehren, Patrick Ryan, and Nigam H Shah. 2013. <span>“<span class="nocase">Performance of Pharmacovigilance Signal Detection Algorithms for the FDA Adverse Event Reporting System</span>.”</span> <em>Clin Pharmacol Ther</em> 93 (6): 1–19. <a href="https://doi.org/10.1038/clpt.2013.24.Performance">https://doi.org/10.1038/clpt.2013.24.Performance</a>.
+Harpaz, Rave, William DuMouchel, Paea LePendu, Anna Bauer-Mehren, Patrick Ryan, and Nigam H Shah. 2013. <span>“<span class="nocase">Performance of Pharmacovigilance Signal Detection Algorithms for the FDA Adverse Event Reporting System</span>.”</span> <em>Clin Pharmacol Ther</em> 93 (6): 1–19. <a href="https://doi.org/10.1038/clpt.2013.24.Performance" class="external-link">https://doi.org/10.1038/clpt.2013.24.Performance</a>.
 </div>
 <div id="ref-Kruspe2017" class="csl-entry">
-Kruspe, Sven, David D. Dickey, Kevin T. Urak, Giselle N. Blanco, Matthew J. Miller, Karen C. Clark, Elliot Burghardt, et al. 2017. <span>“<span class="nocase">Rapid and Sensitive Detection of Breast Cancer Cells in Patient Blood with Nuclease-Activated Probe Technology</span>.”</span> <em>Molecular Therapy - Nucleic Acids</em> 8 (September): 542–57. <a href="https://doi.org/10.1016/j.omtn.2017.08.004">https://doi.org/10.1016/j.omtn.2017.08.004</a>.
+Kruspe, Sven, David D. Dickey, Kevin T. Urak, Giselle N. Blanco, Matthew J. Miller, Karen C. Clark, Elliot Burghardt, et al. 2017. <span>“<span class="nocase">Rapid and Sensitive Detection of Breast Cancer Cells in Patient Blood with Nuclease-Activated Probe Technology</span>.”</span> <em>Molecular Therapy - Nucleic Acids</em> 8 (September): 542–57. <a href="https://doi.org/10.1016/j.omtn.2017.08.004" class="external-link">https://doi.org/10.1016/j.omtn.2017.08.004</a>.
 </div>
 <div id="ref-lopez2014" class="csl-entry">
-López-Ratón, Mónica, Mar\backslash’\backslashia Xosé Rodríguez-Álvarez, Carmen Cadarso-Suárez, Francisco Gude-Sampedro, and Others. 2014. <span>“<span class="nocase">OptimalCutpoints: an R package for selecting optimal cutpoints in diagnostic tests</span>.”</span> <em>Journal of Statistical Software</em> 61 (8): 1–36. <a href="https://www.jstatsoft.org/article/view/v061i08">https://www.jstatsoft.org/article/view/v061i08</a>.
+López-Ratón, Mónica, Mar\backslash’\backslashia Xosé Rodríguez-Álvarez, Carmen Cadarso-Suárez, Francisco Gude-Sampedro, and Others. 2014. <span>“<span class="nocase">OptimalCutpoints: an R package for selecting optimal cutpoints in diagnostic tests</span>.”</span> <em>Journal of Statistical Software</em> 61 (8): 1–36. <a href="https://www.jstatsoft.org/article/view/v061i08" class="external-link">https://www.jstatsoft.org/article/view/v061i08</a>.
 </div>
 <div id="ref-Sanchez2016" class="csl-entry">
-Sanchez, Robersy, and Sally A. Mackenzie. 2016. <span>“<span class="nocase">Information Thermodynamics of Cytosine DNA Methylation</span>.”</span> Edited by Barbara Bardoni. <em>PLOS ONE</em> 11 (3): e0150427. <a href="https://doi.org/10.1371/journal.pone.0150427">https://doi.org/10.1371/journal.pone.0150427</a>.
+Sanchez, Robersy, and Sally A. Mackenzie. 2016. <span>“<span class="nocase">Information Thermodynamics of Cytosine DNA Methylation</span>.”</span> Edited by Barbara Bardoni. <em>PLOS ONE</em> 11 (3): e0150427. <a href="https://doi.org/10.1371/journal.pone.0150427" class="external-link">https://doi.org/10.1371/journal.pone.0150427</a>.
 </div>
 <div id="ref-Sanchez2019" class="csl-entry">
-Sanchez, Robersy, Xiaodong Yang, Thomas Maher, and Sally Mackenzie. 2019. <span>“<span class="nocase">Discrimination of DNA Methylation Signal from Background Variation for Clinical Diagnostics</span>.”</span> <em>Int. J. Mol. Sci.</em> 20 (21): 5343. https://doi.org/<a href="https://doi.org/10.3390/ijms20215343">https://doi.org/10.3390/ijms20215343</a>.
+Sanchez, Robersy, Xiaodong Yang, Thomas Maher, and Sally Mackenzie. 2019. <span>“<span class="nocase">Discrimination of DNA Methylation Signal from Background Variation for Clinical Diagnostics</span>.”</span> <em>Int. J. Mol. Sci.</em> 20 (21): 5343. https://doi.org/<a href="https://doi.org/10.3390/ijms20215343" class="external-link">https://doi.org/10.3390/ijms20215343</a>.
 </div>
 <div id="ref-Severin2011" class="csl-entry">
-Severin, Philip M D, Xueqing Zou, Hermann E Gaub, and Klaus Schulten. 2011. <span>“<span class="nocase">Cytosine methylation alters DNA mechanical properties</span>.”</span> <em>Nucleic Acids Research</em> 39 (20): 8740–51. <a href="https://doi.org/10.1093/nar/gkr578">https://doi.org/10.1093/nar/gkr578</a>.
+Severin, Philip M D, Xueqing Zou, Hermann E Gaub, and Klaus Schulten. 2011. <span>“<span class="nocase">Cytosine methylation alters DNA mechanical properties</span>.”</span> <em>Nucleic Acids Research</em> 39 (20): 8740–51. <a href="https://doi.org/10.1093/nar/gkr578" class="external-link">https://doi.org/10.1093/nar/gkr578</a>.
 </div>
 <div id="ref-Youden1950" class="csl-entry">
-Youden, W. J. 1950. <span>“<span class="nocase">Index for rating diagnostic tests</span>.”</span> <em>Cancer</em> 3 (1): 32–35. <a href="https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3">https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3</a>.
+Youden, W. J. 1950. <span>“<span class="nocase">Index for rating diagnostic tests</span>.”</span> <em>Cancer</em> 3 (1): 32–35. <a href="https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3" class="external-link">https://doi.org/10.1002/1097-0142(1950)3:1&lt;32::AID-CNCR2820030106&gt;3.0.CO;2-3</a>.
 </div>
 </div>
 </div>
-<div id="session-info" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#session-info" class="anchor"></a>Session info</h1>
-<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.11.4:</p>
-<pre><code>#&gt; R version 4.1.1 (2021-08-10)
-#&gt; Platform: x86_64-pc-linux-gnu (64-bit)
-#&gt; Running under: CentOS Linux 7 (Core)
-#&gt; 
-#&gt; Matrix products: default
-#&gt; BLAS/LAPACK: /usr/lib64/libopenblasp-r0.3.3.so
-#&gt; 
-#&gt; locale:
-#&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-#&gt;  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-#&gt;  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-#&gt;  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-#&gt; [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
-#&gt; 
-#&gt; attached base packages:
-#&gt; [1] parallel  stats4    stats     graphics  grDevices utils     datasets 
-#&gt; [8] methods   base     
-#&gt; 
-#&gt; other attached packages:
-#&gt; [1] MethylIT_0.3.2.3     rtracklayer_1.52.1   GenomicRanges_1.44.0
-#&gt; [4] GenomeInfoDb_1.28.4  IRanges_2.26.0       S4Vectors_0.30.1    
-#&gt; [7] BiocGenerics_0.38.0  BiocStyle_2.20.2    
-#&gt; 
-#&gt; loaded via a namespace (and not attached):
-#&gt;   [1] colorspace_2.0-2            rjson_0.2.20               
-#&gt;   [3] ellipsis_0.3.2              class_7.3-19               
-#&gt;   [5] rprojroot_2.0.2             XVector_0.32.0             
-#&gt;   [7] fs_1.5.0                    proxy_0.4-26               
-#&gt;   [9] bit64_4.0.5                 AnnotationDbi_1.54.1       
-#&gt;  [11] prodlim_2019.11.13          fansi_0.5.0                
-#&gt;  [13] lubridate_1.7.10            codetools_0.2-18           
-#&gt;  [15] splines_4.1.1               cachem_1.0.5               
-#&gt;  [17] knitr_1.33                  jsonlite_1.7.2             
-#&gt;  [19] pROC_1.17.0.1               Rsamtools_2.8.0            
-#&gt;  [21] caret_6.0-88                annotate_1.70.0            
-#&gt;  [23] png_0.1-7                   BiocManager_1.30.16        
-#&gt;  [25] compiler_4.1.1              httr_1.4.2                 
-#&gt;  [27] assertthat_0.2.1            Matrix_1.3-4               
-#&gt;  [29] fastmap_1.1.0               htmltools_0.5.1.1          
-#&gt;  [31] tools_4.1.1                 gtable_0.3.0               
-#&gt;  [33] glue_1.4.2                  GenomeInfoDbData_1.2.6     
-#&gt;  [35] reshape2_1.4.4              dplyr_1.0.7                
-#&gt;  [37] Rcpp_1.0.7                  Biobase_2.52.0             
-#&gt;  [39] jquerylib_0.1.4             pkgdown_1.6.1              
-#&gt;  [41] vctrs_0.3.8                 Biostrings_2.60.2          
-#&gt;  [43] nlme_3.1-153                iterators_1.0.13           
-#&gt;  [45] timeDate_3043.102           xfun_0.24                  
-#&gt;  [47] gower_0.2.2                 stringr_1.4.0              
-#&gt;  [49] lifecycle_1.0.0             restfulr_0.0.13            
-#&gt;  [51] XML_3.99-0.6                zlibbioc_1.38.0            
-#&gt;  [53] MASS_7.3-54                 scales_1.1.1               
-#&gt;  [55] ipred_0.9-11                ragg_1.1.3                 
-#&gt;  [57] MatrixGenerics_1.4.3        SummarizedExperiment_1.22.0
-#&gt;  [59] yaml_2.2.1                  memoise_2.0.0              
-#&gt;  [61] ggplot2_3.3.5               sass_0.4.0                 
-#&gt;  [63] rpart_4.1-15                stringi_1.6.2              
-#&gt;  [65] RSQLite_2.2.8               genefilter_1.74.0          
-#&gt;  [67] BiocIO_1.2.0                desc_1.3.0                 
-#&gt;  [69] foreach_1.5.1               e1071_1.7-7                
-#&gt;  [71] BiocParallel_1.26.2         lava_1.6.9                 
-#&gt;  [73] rlang_0.4.11                pkgconfig_2.0.3            
-#&gt;  [75] systemfonts_1.0.2           matrixStats_0.59.0         
-#&gt;  [77] bitops_1.0-7                evaluate_0.14              
-#&gt;  [79] lattice_0.20-45             purrr_0.3.4                
-#&gt;  [81] GenomicAlignments_1.28.0    recipes_0.1.16             
-#&gt;  [83] bit_4.0.4                   tidyselect_1.1.1           
-#&gt;  [85] nls2_0.2                    plyr_1.8.6                 
-#&gt;  [87] magrittr_2.0.1              bookdown_0.23              
-#&gt;  [89] R6_2.5.0                    generics_0.1.0             
-#&gt;  [91] DelayedArray_0.18.0         DBI_1.1.1                  
-#&gt;  [93] pillar_1.6.1                withr_2.4.2                
-#&gt;  [95] KEGGREST_1.32.0             survival_3.2-13            
-#&gt;  [97] RCurl_1.98-1.3              nnet_7.3-16                
-#&gt;  [99] tibble_3.1.2                crayon_1.4.1               
-#&gt; [101] utf8_1.2.1                  rmarkdown_2.10             
-#&gt; [103] grid_4.1.1                  minpack.lm_1.2-1           
-#&gt; [105] data.table_1.14.0           blob_1.2.2                 
-#&gt; [107] ModelMetrics_1.2.2.2        digest_0.6.27              
-#&gt; [109] xtable_1.8-4                textshaping_0.3.5          
-#&gt; [111] munsell_0.5.0               bslib_0.2.5.1</code></pre>
+<div class="section level2">
+<h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+</h2>
+<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.14.0.3:</p>
+<pre><code><span class="co">#&gt; R version 4.1.1 (2021-08-10)</span>
+<span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span>
+<span class="co">#&gt; Running under: CentOS Linux 7 (Core)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Matrix products: default</span>
+<span class="co">#&gt; BLAS/LAPACK: /usr/lib64/libopenblasp-r0.3.3.so</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; locale:</span>
+<span class="co">#&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span>
+<span class="co">#&gt;  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span>
+<span class="co">#&gt;  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   </span>
+<span class="co">#&gt;  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span>
+<span class="co">#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span>
+<span class="co">#&gt; [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attached base packages:</span>
+<span class="co">#&gt; [1] stats4    stats     graphics  grDevices utils     datasets  methods  </span>
+<span class="co">#&gt; [8] base     </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; other attached packages:</span>
+<span class="co">#&gt; [1] MethylIT_0.3.2.3     rmarkdown_2.11       rtracklayer_1.52.1  </span>
+<span class="co">#&gt; [4] GenomicRanges_1.44.0 GenomeInfoDb_1.30.0  IRanges_2.28.0      </span>
+<span class="co">#&gt; [7] S4Vectors_0.32.3     BiocGenerics_0.40.0  BiocStyle_2.20.2    </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; loaded via a namespace (and not attached):</span>
+<span class="co">#&gt;   [1] colorspace_2.0-2            rjson_0.2.21               </span>
+<span class="co">#&gt;   [3] ellipsis_0.3.2              class_7.3-20               </span>
+<span class="co">#&gt;   [5] rprojroot_2.0.2             XVector_0.34.0             </span>
+<span class="co">#&gt;   [7] fs_1.5.0                    proxy_0.4-26               </span>
+<span class="co">#&gt;   [9] bit64_4.0.5                 AnnotationDbi_1.56.2       </span>
+<span class="co">#&gt;  [11] prodlim_2019.11.13          fansi_0.5.0                </span>
+<span class="co">#&gt;  [13] lubridate_1.7.10            codetools_0.2-18           </span>
+<span class="co">#&gt;  [15] splines_4.1.1               cachem_1.0.5               </span>
+<span class="co">#&gt;  [17] knitr_1.33                  jsonlite_1.7.2             </span>
+<span class="co">#&gt;  [19] pROC_1.17.0.1               Rsamtools_2.8.0            </span>
+<span class="co">#&gt;  [21] caret_6.0-90                annotate_1.72.0            </span>
+<span class="co">#&gt;  [23] png_0.1-7                   BiocManager_1.30.16        </span>
+<span class="co">#&gt;  [25] compiler_4.1.1              httr_1.4.2                 </span>
+<span class="co">#&gt;  [27] assertthat_0.2.1            Matrix_1.4-1               </span>
+<span class="co">#&gt;  [29] fastmap_1.1.0               htmltools_0.5.2            </span>
+<span class="co">#&gt;  [31] tools_4.1.1                 gtable_0.3.0               </span>
+<span class="co">#&gt;  [33] glue_1.4.2                  GenomeInfoDbData_1.2.7     </span>
+<span class="co">#&gt;  [35] reshape2_1.4.4              dplyr_1.0.7                </span>
+<span class="co">#&gt;  [37] Rcpp_1.0.7                  Biobase_2.54.0             </span>
+<span class="co">#&gt;  [39] jquerylib_0.1.4             pkgdown_2.0.2              </span>
+<span class="co">#&gt;  [41] vctrs_0.3.8                 Biostrings_2.62.0          </span>
+<span class="co">#&gt;  [43] nlme_3.1-155                iterators_1.0.13           </span>
+<span class="co">#&gt;  [45] timeDate_3043.102           xfun_0.24                  </span>
+<span class="co">#&gt;  [47] gower_0.2.2                 stringr_1.4.0              </span>
+<span class="co">#&gt;  [49] lifecycle_1.0.0             restfulr_0.0.13            </span>
+<span class="co">#&gt;  [51] XML_3.99-0.6                zlibbioc_1.40.0            </span>
+<span class="co">#&gt;  [53] MASS_7.3-56                 scales_1.1.1               </span>
+<span class="co">#&gt;  [55] ipred_0.9-11                ragg_1.1.3                 </span>
+<span class="co">#&gt;  [57] MatrixGenerics_1.4.3        parallel_4.1.1             </span>
+<span class="co">#&gt;  [59] SummarizedExperiment_1.22.0 yaml_2.2.1                 </span>
+<span class="co">#&gt;  [61] memoise_2.0.0               ggplot2_3.3.5              </span>
+<span class="co">#&gt;  [63] sass_0.4.0                  rpart_4.1.16               </span>
+<span class="co">#&gt;  [65] stringi_1.6.2               RSQLite_2.2.11             </span>
+<span class="co">#&gt;  [67] highr_0.9                   genefilter_1.76.0          </span>
+<span class="co">#&gt;  [69] BiocIO_1.2.0                desc_1.3.0                 </span>
+<span class="co">#&gt;  [71] foreach_1.5.1               e1071_1.7-7                </span>
+<span class="co">#&gt;  [73] BiocParallel_1.28.3         lava_1.6.9                 </span>
+<span class="co">#&gt;  [75] rlang_0.4.11                pkgconfig_2.0.3            </span>
+<span class="co">#&gt;  [77] systemfonts_1.0.2           matrixStats_0.59.0         </span>
+<span class="co">#&gt;  [79] bitops_1.0-7                evaluate_0.14              </span>
+<span class="co">#&gt;  [81] lattice_0.20-45             purrr_0.3.4                </span>
+<span class="co">#&gt;  [83] GenomicAlignments_1.28.0    recipes_0.1.16             </span>
+<span class="co">#&gt;  [85] bit_4.0.4                   tidyselect_1.1.1           </span>
+<span class="co">#&gt;  [87] nls2_0.2                    plyr_1.8.6                 </span>
+<span class="co">#&gt;  [89] magrittr_2.0.1              bookdown_0.24              </span>
+<span class="co">#&gt;  [91] R6_2.5.0                    generics_0.1.0             </span>
+<span class="co">#&gt;  [93] DelayedArray_0.18.0         DBI_1.1.2                  </span>
+<span class="co">#&gt;  [95] pillar_1.6.1                withr_2.4.2                </span>
+<span class="co">#&gt;  [97] KEGGREST_1.34.0             survival_3.3-1             </span>
+<span class="co">#&gt;  [99] RCurl_1.98-1.5              nnet_7.3-17                </span>
+<span class="co">#&gt; [101] tibble_3.1.2                crayon_1.4.1               </span>
+<span class="co">#&gt; [103] utf8_1.2.2                  grid_4.1.1                 </span>
+<span class="co">#&gt; [105] minpack.lm_1.2-1            data.table_1.14.2          </span>
+<span class="co">#&gt; [107] blob_1.2.2                  ModelMetrics_1.2.2.2       </span>
+<span class="co">#&gt; [109] digest_0.6.27               xtable_1.8-4               </span>
+<span class="co">#&gt; [111] textshaping_0.3.5           munsell_0.5.0              </span>
+<span class="co">#&gt; [113] bslib_0.3.1</span></code></pre>
 </div>
   </div>
 
@@ -734,11 +796,13 @@ Youden, W. J. 1950. <span>“<span class="nocase">Index for rating diagnostic te
 
 
       <footer><div class="copyright">
-  <p>Developed by Robersy Sanchez.</p>
+  <p></p>
+<p>Developed by Robersy Sanchez.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -746,6 +810,8 @@ Youden, W. J. 1950. <span>“<span class="nocase">Index for rating diagnostic te
 
   
 
+
+  
 
   </body>
 </html>
