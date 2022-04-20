@@ -114,7 +114,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 data-toc-skip class="date">20 March 2022</h4>
+            <h4 data-toc-skip class="date">20 April 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/HEAD/vignettes/automorphism_and_decision_tree.Rmd" class="external-link"><code>vignettes/automorphism_and_decision_tree.Rmd</code></a></small>
       <div class="d-none name"><code>automorphism_and_decision_tree.Rmd</code></div>
@@ -194,7 +194,7 @@ code.r{
 </h2>
 <p>First, we proceed to load or install, if needed, the R packages required for our analysis. If needed the R package required for the current analysis can be installed as:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"party"</span>, <span class="st">"partykit"</span>, <span class="st">"data.table"</span>, <span class="st">"ggplot2"</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"party"</span>, <span class="st">"partykit"</span>, <span class="st">"data.table"</span>, <span class="st">"ggplot2"</span>,
                    <span class="st">"ggparty"</span>, <span class="st">"dplyr"</span><span class="op">)</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>In particular, you might require to install the library <a href="https://r-forge.r-project.org/R/?group_id=343" class="external-link">CHAID</a> can be installed typing in R console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -213,7 +213,7 @@ code.r{
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/martin-borkovec/ggparty" class="external-link">ggparty</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CHAID</span><span class="op">)</span></code></pre></div>
-<p>Next, we proceed to check the DNA multiple sequence alignment (MSA) file. This is a FASTA file carrying the MSA of primate BRCA1 DNA repair gene. Notice that we are familiar with the <em>FASTA</em> file, then it is better to directly read it with function automorphism. However, for the current example, this step can be bypassed, since the MSA is provided provided together with <em><em>GenomAutomorphism</em></em> R package</p>
+<p>Next, we proceed to check the DNA multiple sequence alignment (MSA) file. This is a FASTA file carrying the MSA of primate BRCA1 DNA repair gene. Notice that we are familiar with the <em>FASTA</em> file, then it is better to directly read it with function automorphisms. However, for the current example, this step can be bypassed, since the MSA is provided provided together with <em><em>GenomAutomorphism</em></em> R package</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Do not run it. This is included with package</span>
 <span class="va">URL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/seqalignments/raw/master/BRCA1/"</span>,
@@ -268,9 +268,9 @@ code.r{
 <span class="co">#&gt; [18] "XM_030923118.1:183-2465_PREDICTED:_Rhinopithecus_roxellana_BRCA1_DNA_repair_associated_(BRCA1)_trans"</span>
 <span class="co">#&gt; [19] "XM_025363316.1:147-2426_PREDICTED:_Theropithecus_gelada_BRCA1_DNA_repair_associated_(BRCA1)_transcri"</span>
 <span class="co">#&gt; [20] "XM_039475995.1:49-2328_PREDICTED:_Saimiri_boliviensis_boliviensis_BRCA1_DNA_repair_associated_(BRCA1"</span></code></pre></div>
-<p>Next, function automorphism will be applied to represent the codon sequence in the Abelian group <span class="math inline">\(\mathbb{Z}_{64}\)</span> (i.e., the set of integers remainder modulo 64). The codon coordinates are requested on the cube ACGT. Following reference (<a href="#4">4</a>)), cubes are labeled based on the order of DNA bases used to define the sum operation.</p>
-<p>In Z64, automorphisms are described as functions <span class="math inline">\(f(x) = k\,x \quad mod\,64\)</span>, where <span class="math inline">\(k\)</span> and <span class="math inline">\(x\)</span> are elements from the set of integers modulo 64. Below, in function <em>automorphism</em> three important arguments are given values: <em>group = “Z64”</em>, <em>cube = c(“ACGT”, “TGCA”)</em>, and <em>cube_alt = c(“CATG”, “GTAC”)</em>. Setting for group specifies on which group the automorphisms will be computed. These groups can be: “Z5”, “Z64”, “Z125”, and “Z5^3”.</p>
-<p>In groups “Z64” and “Z125” not all the mutational events can be described as automorphisms from a given cube. So, a character string denoting pairs of “dual” the genetic-code cubes, as given in references (<a href="#2">1-4</a>)), is given as argument for <em>cube</em>. That is, the base pairs from the given cubes must be complementary each other. Such a cube pair are call dual cubes and, as shown in reference (<a href="#4">4</a>)), each pair integrates group. If automorphisms are not found in first set of dual cubes, then the algorithm search for automorphism in a alternative set of dual cubes.</p>
+<p>Next, function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphism.html" class="external-link">automorphisms</a> will be applied to represent the codon sequence in the Abelian group <span class="math inline">\(\mathbb{Z}_{64}\)</span> (i.e., the set of integers remainder modulo 64). The codon coordinates are requested on the cube ACGT. Following reference (<a href="#4">4</a>)), cubes are labeled based on the order of DNA bases used to define the sum operation.</p>
+<p>In Z64, automorphisms are described as functions <span class="math inline">\(f(x) = k\,x \quad mod\,64\)</span>, where <span class="math inline">\(k\)</span> and <span class="math inline">\(x\)</span> are elements from the set of integers modulo 64. Below, in function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphism.html" class="external-link">automorphisms</a> three important arguments are given values: <em>group = “Z64”</em>, <em>cube = c(“ACGT”, “TGCA”)</em>, and <em>cube_alt = c(“CATG”, “GTAC”)</em>. Setting for group specifies on which group the automorphisms will be computed. These groups can be: “Z5”, “Z64”, “Z125”, and “Z5^3”.</p>
+<p>In groups “Z64” and “Z125” not all the mutational events can be described as automorphisms from a given cube. So, a character string denoting pairs of “dual” the genetic-code cubes, as given in references (<a href="#2">1-4</a>)), is given as argument for <em>cube</em>. That is, the base pairs from the given cubes must be complementary each other. Such a cube pair are call dual cubes and, as shown in reference (<a href="#4">4</a>)), each pair integrates group. If automorphisms are not found in first set of dual cubes, then the algorithm search for automorphisms in a alternative set of dual cubes.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Do not run it. This is included with package</span>
 
@@ -280,7 +280,7 @@ code.r{
         <span class="st">"silvery_gibbon_1"</span>,<span class="st">"silvery_gibbon_3"</span>,<span class="st">"golden_monkey_1"</span>,
         <span class="st">"golden_monkey_2"</span>,<span class="st">"gelada_baboon"</span>,<span class="st">"bolivian_monkey"</span><span class="op">)</span>
 
-<span class="va">brca1_autm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism.html">automorphism</a></span><span class="op">(</span>
+<span class="va">brca1_autm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphisms.html">automorphisms</a></span><span class="op">(</span>
                       seqs <span class="op">=</span> <span class="va">brca1_aln</span>, 
                       group <span class="op">=</span> <span class="st">"Z64"</span>, 
                       cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,
@@ -315,9 +315,9 @@ code.r{
 <span class="co">#&gt; Two slots: 'DataList' &amp; 'SeqRanges'</span>
 <span class="co">#&gt; -------</span></code></pre></div>
 <div class="section level3">
-<h3 id="grouping-automorphism-by-automorphisms-coefficients">Grouping automorphism by automorphism’s coefficients<a class="anchor" aria-label="anchor" href="#grouping-automorphism-by-automorphisms-coefficients"></a>
+<h3 id="grouping-automorphisms-by-automorphisms-coefficients">Grouping automorphisms by automorphism’s coefficients<a class="anchor" aria-label="anchor" href="#grouping-automorphisms-by-automorphisms-coefficients"></a>
 </h3>
-<p>Automorphisms with the same automorphism’s coefficients can be grouped. This task can be accomplished with function automorphismByCoef. However, for the sake of time, its output is included in the package</p>
+<p>Automorphisms with the same automorphism’s coefficients can be grouped. This task can be accomplished with function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphismByCoef.html" class="external-link">automorphismByCoef</a>. However, for the sake of time, its output is included in the package</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Not need to run it here</span>
 <span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">brca1_autm</span>,

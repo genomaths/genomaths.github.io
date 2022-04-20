@@ -114,7 +114,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 data-toc-skip class="date">05 March 2022</h4>
+            <h4 data-toc-skip class="date">20 April 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/HEAD/vignettes/automorphism_on_msa.Rmd" class="external-link"><code>vignettes/automorphism_on_msa.Rmd</code></a></small>
       <div class="d-none name"><code>automorphism_on_msa.Rmd</code></div>
@@ -182,7 +182,7 @@ code.r{
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/GenomAutomorphism" class="external-link">GenomAutomorphism</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings" class="external-link">Biostrings</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/omarwagih/ggseqlogo" class="external-link">ggseqlogo</a></span><span class="op">)</span></code></pre></div>
-<p>Next, we proceed to check the DNA multiple sequence alignment (MSA) file. This ia a FASTA file carrying the MSA of mammals (somatic) Cystocrome c. Notice that we are familiar with the <em>FASTA</em> file, then it is better to directly read it with function automorphism.</p>
+<p>Next, we proceed to check the DNA multiple sequence alignment (MSA) file. This ia a FASTA file carrying the MSA of mammals (somatic) Cystocrome c. Notice that we are familiar with the <em>FASTA</em> file, then it is better to directly read it with function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphism.html" class="external-link">automorphisms</a>.</p>
 <p>However, for the current example, this step can be bypassed, since the MSA is provided provided together with <em><em>GenomAutomorphism</em></em> R package</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Do not run it. This is included with package</span>
@@ -253,8 +253,8 @@ code.r{
 <span class="co">#&gt; [17]   106 MGDVEKGKKIFIMKCSQCHTVEKGGKHKTGPNLHGLFGRKTGQ...LMEYLENPKKYIPGTKMIFVGIKKKEERADLIAYLKKATNE* ref|XM_025380675....</span>
 <span class="co">#&gt; [18]   106 MGDVEKGKKIFIMKCSQCHTVEKGGKHKTGPNLHGLFGRKTGQ...LMEYLENPKKYIPGTKMIFVGIKKKEERADLIAYLKKATNE* ref|NM_001131167....</span>
 <span class="co">#&gt; [19]   106 MGDVEKGKKIFIMKCSQCHTVEKGGKHKTGPNLHGLFGRKTGQ...LMEYLENPKKYIPGTKMIFVGIKKKEERADLIAYLKKATNE* emb|CR857183.1|  ...</span></code></pre></div>
-<p>Next, function automorphism will be applied to represent the codon sequence in the Abelian group <span class="math inline">\(\mathbb{Z}_{64}\)</span> (i.e., the set of integers remainder modulo 64). The codon coordinates are requested on the cube ACGT. Following reference (<a href="#4">4</a>)), cubes are labeled based on the order of DNA bases used to define the sum operation.</p>
-<p>In Z64, automorphisms are described as functions <span class="math inline">\(f(x) = k\,x \quad mod\,64\)</span>, where <span class="math inline">\(k\)</span> and <span class="math inline">\(x\)</span> are elements from the set of integers modulo 64. Below, in function <em>automorphism</em> three important arguments are given values: <em>group = “Z64”</em>, <em>cube = c(“ACGT”, “TGCA”)</em>, and <em>cube_alt = c(“CATG”, “GTAC”)</em>. Setting for group specifies on which group the automorphisms will be computed. These groups can be: “Z5”, “Z64”, “Z125”, and “Z5^3”.</p>
+<p>Next, function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphism.html" class="external-link">automorphisms</a> will be applied to represent the codon sequence in the Abelian group <span class="math inline">\(\mathbb{Z}_{64}\)</span> (i.e., the set of integers remainder modulo 64). The codon coordinates are requested on the cube ACGT. Following reference (<a href="#4">4</a>)), cubes are labeled based on the order of DNA bases used to define the sum operation.</p>
+<p>In Z64, automorphisms are described as functions <span class="math inline">\(f(x) = k\,x \quad mod\,64\)</span>, where <span class="math inline">\(k\)</span> and <span class="math inline">\(x\)</span> are elements from the set of integers modulo 64. Below, in function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphism.html" class="external-link">automorphisms</a> three important arguments are given values: <em>group = “Z64”</em>, <em>cube = c(“ACGT”, “TGCA”)</em>, and <em>cube_alt = c(“CATG”, “GTAC”)</em>. Setting for group specifies on which group the automorphisms will be computed. These groups can be: “Z5”, “Z64”, “Z125”, and “Z5^3”.</p>
 <p>In groups “Z64” and “Z125” not all the mutational events can be described as automorphisms from a given cube. So, a character string denoting pairs of “dual” the genetic-code cubes, as given in references (<a href="#2">1-4</a>)), is given as argument for <em>cube</em>. That is, the base pairs from the given cubes must be complementary each other. Such a cube pair are call dual cubes and, as shown in reference (<a href="#4">4</a>)), each pair integrates group. If automorphisms are not found in first set of dual cubes, then the algorithm search for automorphism in a alternative set of dual cubes.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Do not run it. This is included with package</span>
@@ -265,7 +265,7 @@ code.r{
           <span class="st">"golden_monkey"</span>, <span class="st">"rhesus_monkeys_1"</span>, <span class="st">"rhesus_monkeys_2"</span>,
           <span class="st">"gelada_baboon_1"</span>, <span class="st">"gelada_baboon_2"</span>, <span class="st">"orangutan_1"</span>, <span class="st">"orangutan_2"</span><span class="op">)</span>
 
-<span class="va">cyc_autm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism.html">automorphism</a></span><span class="op">(</span>filepath <span class="op">=</span> <span class="va">URL</span>, 
+<span class="va">cyc_autm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphisms.html">automorphisms</a></span><span class="op">(</span>filepath <span class="op">=</span> <span class="va">URL</span>, 
                       group <span class="op">=</span> <span class="st">"Z64"</span>, 
                       cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,
                       cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,
