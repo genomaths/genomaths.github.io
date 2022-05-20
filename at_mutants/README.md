@@ -11,10 +11,15 @@ in (<a href="#1">1</a>):
 
 The Arabidopsis thaliana methylome datasets (with results reported in Table 1) from bisulfite (methylome) sequencing of msh1 memory line and non-memory (normal looking) sibling plants with isogenic Col-0 wild-type control in Arabidopsis was downloaded from the Gene Expression Omnibus (GEO) Series GSE129303a and GSE118874. Mutant and Grafted raw data is available with serie accession number GSE152570.
 
-The methylation levels of mutant MET1 and DDM1 were reported in (<a href="#6">6</a>). However, these data (for MET1 and DDM1) only cover one sample per individuals and the information divergence estimations are based on the reported methylation levels and not in read counts, which does not permit the application of Beyesian correction of methylation levels.
+The raw data for mutant MET1 was taken from GEO serie GSE122394:
+  1. Mutants: GSM3465886, GSM3465887, and GSM3465888
+  2. Wildtype: GSM3465878, GSM3465879, GSM3465880, and GSM3465881.
 
-Since GitHub does not permit files with more 25MB, these datasets are available at [PSU GitLab](https://git.psu.edu/genomath/datasets/-/tree/main/at_mutants). Hence,
-this repository at GItHub is only informative. 
+Information divergences RData files are in the folder named 'idiv', which were estimated with MethylIT function [estimateDivergence](https://genomaths.github.io/methylit/reference/estimateDivergence.html). 
+The best fitted models are in the folder 'gofs', which were estimated with MethylIT function [gofReport](https://genomaths.github.io/methylit/reference/gofReport.html). 
+
+**Since GitHub does not permit files with more 25MB, these datasets are available at [PSU GitLab](https://git.psu.edu/genomath/datasets/-/tree/main/at_mutants). Hence,
+this repository at GItHub is only informative**. You can see and download the data at: <https://git.psu.edu/genomath/datasets/-/tree/main/at_mutants>. 
 
 ## Hellinger divergence
 
@@ -87,5 +92,3 @@ are the total counts (coverage in the case of methylation) used to compute the p
 4. <a name="4-5"></a>Salicrú M, Morales D, Menéndez ML, Pardo L. On the applications of divergence type measures in testing statistical hypotheses. Journal of Multivariate Analysis. 1994. pp. 372–391. doi:10.1006/jmva.1994.1068</a>.
 5. <a name="4-5"></a>Basu  A., Mandal  A., Pardo L (2010) Hypothesis testing for two discrete populations based on the Hellinger distance. Stat Probab Lett 80: 206-214. 
 <a href="https://doi.org/10.1016/j.spl.2009.10.008">DOI: doi.org/10.1016/j.spl.2009.10.008</a>.
-6. <a name="6"></a>Stroud, H., et all (2012). DNA methyltransferases are required to induce heterochromatic re-replication in Arabidopsis. 
-<a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1002808">PLoS genetics</a>, 8(7), e1002808.
