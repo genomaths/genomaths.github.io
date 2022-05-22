@@ -18,7 +18,7 @@ alphabet and a genetic-code Abelian group as given in reference (1)."><meta prop
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,10 +98,10 @@ alphabet and a genetic-code Abelian group as given in reference (1).</p>
 <span class="fu">codon_coord</span><span class="op">(</span>
   codon <span class="op">=</span> <span class="cn">NULL</span>,
   filepath <span class="op">=</span> <span class="cn">NULL</span>,
-  cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"AGCT"</span>, <span class="st">"TCGA"</span>, <span class="st">"TGCA"</span>, <span class="st">"CATG"</span>, <span class="st">"GTAC"</span>, <span class="st">"CTAG"</span>, <span class="st">"GATC"</span>, <span class="st">"ACTG"</span>,
+  cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"AGCT"</span>, <span class="st">"TCGA"</span>, <span class="st">"TGCA"</span>, <span class="st">"CATG"</span>, <span class="st">"GTAC"</span>, <span class="st">"CTAG"</span>, <span class="st">"GATC"</span>, <span class="st">"ACTG"</span>,
     <span class="st">"ATCG"</span>, <span class="st">"GTCA"</span>, <span class="st">"GCTA"</span>, <span class="st">"CAGT"</span>, <span class="st">"TAGC"</span>, <span class="st">"TGAC"</span>, <span class="st">"CGAT"</span>, <span class="st">"AGTC"</span>, <span class="st">"ATGC"</span>, <span class="st">"CGTA"</span>,
     <span class="st">"CTGA"</span>, <span class="st">"GACT"</span>, <span class="st">"GCAT"</span>, <span class="st">"TACG"</span>, <span class="st">"TCAG"</span><span class="op">)</span>,
-  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Z4"</span>, <span class="st">"Z5"</span>, <span class="st">"Z64"</span>, <span class="st">"Z125"</span>, <span class="st">"Z4^3"</span>, <span class="st">"Z5^3"</span><span class="op">)</span>,
+  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Z4"</span>, <span class="st">"Z5"</span>, <span class="st">"Z64"</span>, <span class="st">"Z125"</span>, <span class="st">"Z4^3"</span>, <span class="st">"Z5^3"</span><span class="op">)</span>,
   start <span class="op">=</span> <span class="cn">NA</span>,
   end <span class="op">=</span> <span class="cn">NA</span>,
   chr <span class="op">=</span> <span class="fl">1L</span>,
@@ -111,10 +111,10 @@ alphabet and a genetic-code Abelian group as given in reference (1).</p>
 <span class="co"># S4 method for matrix_OR_data_frame</span>
 <span class="fu">codon_coord</span><span class="op">(</span>
   <span class="va">codon</span>,
-  cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"AGCT"</span>, <span class="st">"TCGA"</span>, <span class="st">"TGCA"</span>, <span class="st">"CATG"</span>, <span class="st">"GTAC"</span>, <span class="st">"CTAG"</span>, <span class="st">"GATC"</span>, <span class="st">"ACTG"</span>,
+  cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"AGCT"</span>, <span class="st">"TCGA"</span>, <span class="st">"TGCA"</span>, <span class="st">"CATG"</span>, <span class="st">"GTAC"</span>, <span class="st">"CTAG"</span>, <span class="st">"GATC"</span>, <span class="st">"ACTG"</span>,
     <span class="st">"ATCG"</span>, <span class="st">"GTCA"</span>, <span class="st">"GCTA"</span>, <span class="st">"CAGT"</span>, <span class="st">"TAGC"</span>, <span class="st">"TGAC"</span>, <span class="st">"CGAT"</span>, <span class="st">"AGTC"</span>, <span class="st">"ATGC"</span>, <span class="st">"CGTA"</span>,
     <span class="st">"CTGA"</span>, <span class="st">"GACT"</span>, <span class="st">"GCAT"</span>, <span class="st">"TACG"</span>, <span class="st">"TCAG"</span><span class="op">)</span>,
-  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Z64"</span>, <span class="st">"Z125"</span>, <span class="st">"Z4^3"</span>, <span class="st">"Z5^3"</span><span class="op">)</span>
+  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Z64"</span>, <span class="st">"Z125"</span>, <span class="st">"Z4^3"</span>, <span class="st">"Z5^3"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -125,6 +125,8 @@ alphabet and a genetic-code Abelian group as given in reference (1).</p>
 function <code><a href="base_coord.html">base_coord</a></code>), <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet</a></code> or
 from <code><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html" class="external-link">DNAMultipleAlignment</a></code> class carrying the DNA
 pairwise alignment of two sequences.</p></dd>
+<dt>...</dt>
+<dd><p>Not in use.</p></dd>
 <dt>group</dt>
 <dd><p>A character string denoting the group representation for the
 given base or codon as shown in reference (2-3).</p></dd>
@@ -183,7 +185,7 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Load a pairwise alignment </span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Load a pairwise alignment</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">aln</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">aln</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> DNAStringSet object of length 2:</span>
@@ -193,80 +195,117 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## DNA base representation in the Abelian group Z5</span></span>
 <span class="r-in"><span class="va">bs_cor</span> <span class="op">&lt;-</span> <span class="fu">codon_coord</span><span class="op">(</span></span>
-<span class="r-in">    codon <span class="op">=</span> <span class="va">aln</span>, </span>
+<span class="r-in">    codon <span class="op">=</span> <span class="va">aln</span>,</span>
 <span class="r-in">    cube <span class="op">=</span> <span class="st">"ACGT"</span>,</span>
-<span class="r-in">    group <span class="op">=</span> <span class="st">"Z5"</span><span class="op">)</span></span>
+<span class="r-in">    group <span class="op">=</span> <span class="st">"Z5"</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">bs_cor</span> <span class="co">## 3-D coordinates</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CodonGroup object with 17 ranges and 4 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2      coord1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         ACC         ATC       1,2,2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         TAT         TAT       4,1,4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         GTT         GTT       3,4,4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         GGT         GGT       3,3,4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ATT         ATT       1,4,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         A-G         AGG       1,0,3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         CGC         TAG       2,3,2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         CCT         CCT       2,2,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         TGC         TGC       4,3,2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ACT         ACC       1,2,4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ...      ...       ...    ... .         ...         ...         ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         TCT         TCC       4,2,4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         AGC         ---       1,3,2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TCA         ---       4,2,1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         CTA         CTC       2,4,1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         CAT         CTT       2,1,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         ACT         ACT       1,2,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         TCA         TCC       4,2,1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TTC         TTC       4,4,2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         -TA         ATT       0,4,1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         -GT         CGT       0,3,4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             coord2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]       1,4,2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]       4,1,4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]       3,4,4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]       3,3,4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]       1,4,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]       1,3,3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]       4,1,3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]       2,2,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]       4,3,2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]       1,2,2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ...         ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]       4,2,2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]       0,0,0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]       0,0,0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]       2,4,2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]       2,4,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]       1,2,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]       4,2,2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]       4,4,2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]       1,4,4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]       2,3,4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## DNA base representation in the Abelian group Z64</span></span>
 <span class="r-in"><span class="va">bs_cor</span> <span class="op">&lt;-</span> <span class="fu">codon_coord</span><span class="op">(</span></span>
-<span class="r-in">            codon <span class="op">=</span> <span class="va">aln</span>, </span>
-<span class="r-in">            cube <span class="op">=</span> <span class="st">"ACGT"</span>,</span>
-<span class="r-in">            group <span class="op">=</span> <span class="st">"Z64"</span><span class="op">)</span></span>
+<span class="r-in">    codon <span class="op">=</span> <span class="va">aln</span>,</span>
+<span class="r-in">    cube <span class="op">=</span> <span class="st">"ACGT"</span>,</span>
+<span class="r-in">    group <span class="op">=</span> <span class="st">"Z64"</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">bs_cor</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CodonGroup object with 17 ranges and 4 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2      coord1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         ACC         ATC          17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         TAT         TAT          15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         GTT         GTT          59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         GGT         GGT          43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ATT         ATT          51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         A-G         AGG        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         CGC         TAG          37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         CCT         CCT          23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         TGC         TGC          45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ACT         ACC          19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ...      ...       ...    ... .         ...         ...         ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         TCT         TCC          31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         AGC         ---          33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TCA         ---          28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         CTA         CTC          52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         CAT         CTT           7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         ACT         ACT          19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         TCA         TCC          28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TTC         TTC          61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         -TA         ATT        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         -GT         CGT        &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             coord2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]          49</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]          15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]          59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]          43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]          51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]          34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]          14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]          23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]          45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]          17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ...         ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]          29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]          53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]          55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]          19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]          29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]          61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]          51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]          39</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Giving a matrix of codons</span></span>
-<span class="r-in"><span class="fu">codon_coords</span><span class="op">(</span><span class="fu"><a href="base2codon.html">base2codon</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">aln</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in codon_coords(base2codon(x = aln)):</span> could not find function "codon_coords"</span>
+<span class="r-in"><span class="fu">codon_coord</span><span class="op">(</span><span class="fu"><a href="base2codon.html">base2codon</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">aln</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    seq1 seq2 coord1 coord2 NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   ACC  ATC     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   TAT  TAT     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   GTT  GTT     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   GGT  GGT     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   ATT  ATT     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   ---  ACG     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   GCG  ACG     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   CTC  CTC     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   CAA  CAA     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  CTC  TTC     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  CTT  CTT     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  GGC  GGG     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  TCT  TCC     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  AGC  ---     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  TCA  ---     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  CTA  CTC     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  CAT  CTT     17     49 15 15 59 59 43 43 51 51 NA 18 26 18 53 53  4  4 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14 61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17 61 55 55 41 42 31 29 33 NA 28 NA 52 53  7 55</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

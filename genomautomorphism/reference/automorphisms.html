@@ -24,7 +24,7 @@ for a specified Abelian group."><meta property="og:image" content="https://genom
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,13 +120,21 @@ for a specified Abelian group.</p>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>filepath</dt>
+    <dl><dt>seqs</dt>
+<dd><p>An object from a <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet</a></code> or
+<code><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html" class="external-link">DNAMultipleAlignment</a></code> class carrying the DNA
+pairwise alignment of two sequences. The pairwise alignment provided in
+argument <em><strong>seq</strong></em> or the 'fasta' file <em><strong>filepath</strong></em>
+must correspond to codon sequences.</p></dd>
+<dt>filepath</dt>
 <dd><p>A character vector containing the path to a file in
 <em><strong>fasta</strong></em> format to be read. This argument must be given if
 <em>codon &amp; base</em> arguments are not provided.</p></dd>
 <dt>group</dt>
 <dd><p>A character string denoting the group representation for the
 given base or codon as shown in reference (1).</p></dd>
+<dt>...</dt>
+<dd><p>Not in use.</p></dd>
 <dt>cube, cube_alt</dt>
 <dd><p>A character string denoting pairs of the 24 Genetic-code
 cubes, as given in references (2-3). That is, the base pairs from the given
@@ -149,57 +157,12 @@ i.e. at most how many child processes will be run simultaneously (see
 for Linux OS).</p></dd>
 <dt>verbose</dt>
 <dd><p>If TRUE, prints the progress bar.</p></dd>
-<dt>seq</dt>
-<dd><p>An object from a <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet</a></code> or
-<code><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html" class="external-link">DNAMultipleAlignment</a></code> class carrying the DNA
-pairwise alignment of two sequences. The pairwise alignment provided in
-argument <em><strong>seq</strong></em> or the 'fasta' file <em><strong>filepath</strong></em>
-must correspond to codon sequences.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>This function returns a <code><a href="Automorphism.html">Automorphism-class</a></code> object
 with four columns on its metacolumn named: <em>seq1</em>, <em>seq2</em>,
-<em>autm</em>, and <em>cube</em>.</p><div class="section">
-<h3 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h3>
-
-<div class="section">
-<h4 id="automorphismbyranges-"><code><a href="automorphismByRanges.html">automorphismByRanges</a></code>:<a class="anchor" aria-label="anchor" href="#automorphismbyranges-"></a></h4>
-
-
-<p>This function returns a <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object.
-Consecutive mutational events (on the codon sequence) described by
-automorphisms on a same cube are grouped in a range.</p>
-</div>
-
-<div class="section">
-<h4 id="automorphismbycoef"><code><a href="automorphismByCoef.html">automorphismByCoef</a></code><a class="anchor" aria-label="anchor" href="#automorphismbycoef"></a></h4>
-
-
-<p>This function returns a <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object.
-Consecutive mutational events (on the codon sequence) described by
-the same automorphisms coefficients are grouped in a range.</p>
-</div>
-
-<div class="section">
-<h4 id="getautomorphisms"><code><a href="getAutomorphisms.html">getAutomorphisms</a></code><a class="anchor" aria-label="anchor" href="#getautomorphisms"></a></h4>
-
-
-<p>This function returns an AutomorphismList-class object as a list of
-Automorphism-class objects, which inherits from
-<code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> objects.</p>
-</div>
-
-<div class="section">
-<h4 id="conserved-regions"><code><a href="conserved_regions.html">conserved_regions</a></code><a class="anchor" aria-label="anchor" href="#conserved-regions"></a></h4>
-
-
-<p>Returns a <code><a href="Automorphism.html">AutomorphismByCoef</a></code> class object containing the
-requested regions.</p>
-</div>
-
-
-</div>
+<em>autm</em>, and <em>cube</em>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -226,6 +189,46 @@ where A is diagonal matrix.</p>
 pairs of' dual cubes (see section 2.4 from reference 4).</p>
     </div>
     <div class="section level2">
+    <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
+    
+
+<div class="section">
+<h3 id="automorphismbyranges-"><code><a href="automorphismByRanges.html">automorphismByRanges</a></code>:<a class="anchor" aria-label="anchor" href="#automorphismbyranges-"></a></h3>
+
+
+<p>This function returns a <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object.
+Consecutive mutational events (on the codon sequence) described by
+automorphisms on a same cube are grouped in a range.</p>
+</div>
+
+<div class="section">
+<h3 id="automorphism-bycoef"><code><a href="automorphism_bycoef.html">automorphism_bycoef</a></code><a class="anchor" aria-label="anchor" href="#automorphism-bycoef"></a></h3>
+
+
+<p>This function returns a <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object.
+Consecutive mutational events (on the codon sequence) described by
+the same automorphisms coefficients are grouped in a range.</p>
+</div>
+
+<div class="section">
+<h3 id="getautomorphisms"><code><a href="getAutomorphisms.html">getAutomorphisms</a></code><a class="anchor" aria-label="anchor" href="#getautomorphisms"></a></h3>
+
+
+<p>This function returns an AutomorphismList-class object as a list of
+Automorphism-class objects, which inherits from
+<code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> objects.</p>
+</div>
+
+<div class="section">
+<h3 id="conserved-regions"><code><a href="conserved_regions.html">conserved_regions</a></code><a class="anchor" aria-label="anchor" href="#conserved-regions"></a></h3>
+
+
+<p>Returns a <code><a href="Automorphism.html">AutomorphismByCoef</a></code> class object containing the
+requested regions.</p>
+</div>
+
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     
 <ol><li><p>Sanchez R, Morgado E, Grau R. Gene algebra from a genetic code
@@ -246,6 +249,10 @@ Comput. Chem. 79 (2018) 527-560. <a href="https://bit.ly/2Z9mjM7" class="externa
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="autZ64.html">autZ64</a></code>.</p></div>
     </div>
+    <div class="section level2">
+    <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
+    <p>Robersy Sanchez (<a href="https://genomaths.com" class="external-link">https://genomaths.com</a>).</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -258,120 +265,132 @@ Comput. Chem. 79 (2018) 527-560. <a href="https://bit.ly/2Z9mjM7" class="externa
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2]    51 <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GGG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span>------<span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Automorphism on "Z5^3"</span></span>
-<span class="r-in"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">automorphisms</span><span class="op">(</span>seq <span class="op">=</span> <span class="va">aln</span>, group <span class="op">=</span> <span class="st">"Z5^3"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">automorphisms</span><span class="op">(</span>seqs <span class="op">=</span> <span class="va">aln</span>, group <span class="op">=</span> <span class="st">"Z5^3"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">autms</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Automorphism object with 17 ranges and 6 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2   coord1   coord2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;matrix&gt; &lt;matrix&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         ACC         ATC    1:2:2    1:4:2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         TAT         TAT    4:1:4    4:1:4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         GTT         GTT    3:4:4    3:4:4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         GGT         GGT    3:3:4    3:3:4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ATT         ATT    1:4:4    1:4:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         A-G         AGG    1:0:3    1:3:3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         CGC         TAG    2:3:2    4:1:3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         CCT         CCT    2:2:4    2:2:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         TGC         TGC    4:3:2    4:3:2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ACT         ACC    1:2:4    1:2:2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ...      ...       ...    ... .         ...         ...      ...      ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         TCT         TCC    4:2:4    4:2:2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         AGC         ---    1:3:2    0:0:0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TCA         ---    4:2:1    0:0:0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         CTA         CTC    2:4:1    2:4:2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         CAT         CTT    2:1:4    2:4:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         ACT         ACT    1:2:4    1:2:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         TCA         TCC    4:2:1    4:2:2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TTC         TTC    4:4:2    4:4:2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         -TA         ATT    0:4:1    1:4:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         -GT         CGT    0:3:4    2:3:4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               autm        cube</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;character&gt; &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]       1,2,1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]       1,1,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]           0        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]       2,2,4        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [3]       1,1,1        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [4]       1,1,1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]       1,1,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]       1,1,3        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ...         ...         ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]       1,1,3        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]           0        Trnl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]           0        Trnl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]       1,1,2        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]       1,4,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]       1,1,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]       1,1,2        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]       1,1,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]           0        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]           0        Trnl</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Automorphism on "Z64"</span></span>
-<span class="r-in"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">automorphisms</span><span class="op">(</span>seq <span class="op">=</span> <span class="va">aln</span>, group <span class="op">=</span> <span class="st">"Z64"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">automorphisms</span><span class="op">(</span>seqs <span class="op">=</span> <span class="va">aln</span>, group <span class="op">=</span> <span class="st">"Z64"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (nchar(x[1, idx[1]]) &gt;= 5) {    m &lt;- lapply(idx, function(k) {        m &lt;- do.call(rbind, strsplit(x[, k], ","))        m &lt;- apply(m, 2, as.numeric)    })} else {    m &lt;- lapply(idx, function(k) {        m &lt;- x[, k]        as.numeric(m)    })}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span class="va">autms</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Automorphism object with 17 ranges and 6 metadata columns:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2    coord1    coord2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         ACC         ATC        17        49</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         TAT         TAT        15        15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         GTT         GTT        59        59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         GGT         GGT        43        43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ATT         ATT        51        51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ...      ...       ...    ... .         ...         ...       ...       ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         TCT         TCC        31        29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         AGC         ---        33        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TCA         ---        28        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      - |         CTA         CTC        52        53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         CAT         CTT         7        55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             autm        cube</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;numeric&gt; &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        33        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]         1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]         1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]         1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]         1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ...       ...         ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]         3        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]         0        Trnl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]         0        Trnl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        30        TGCA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        17        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2   coord1   coord2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;matrix&gt; &lt;matrix&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         A-G         AGG    1:0:3    1:3:3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         CGC         TAG    2:3:2    4:1:3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         CCT         CCT    2:2:4    2:2:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         TGC         TGC    4:3:2    4:3:2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ACT         ACC    1:2:4    1:2:2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ...      ...       ...    ... .         ...         ...      ...      ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         ACT         ACT    1:2:4    1:2:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         TCA         TCC    4:2:1    4:2:2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TTC         TTC    4:4:2    4:4:2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         -TA         ATT    0:4:1    1:4:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         -GT         CGT    0:3:4    2:3:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               autm        cube</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;character&gt; &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]           0        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]       2,2,4        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]       1,1,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]       1,1,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]       1,1,3        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ...         ...         ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]       1,1,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]       1,1,2        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]       1,1,1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]           0        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]           0        Trnl</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co">## Grouping into ranges the automorphisms by cubes </span></span>
-<span class="r-in"><span class="fu"><a href="automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">autms</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(x, ...):</span> unused argument (verbose = FALSE)</span>
+<span class="r-in"><span class="co">## Grouping into ranges the automorphisms by cubes</span></span>
+<span class="r-in"><span class="fu"><a href="automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">autms</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 5 ranges and 1 metadata column:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |        cube</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        1         1      + |        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        1       2-5      + |        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]        1      6-11      + |        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]        1     12-15      + |        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [5]        1     16-17      + |        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Automorphism on "Z64" from position 1 to 33</span></span>
-<span class="r-in"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">automorphisms</span><span class="op">(</span>seq <span class="op">=</span> <span class="va">aln</span>,</span>
-<span class="r-in">                      group <span class="op">=</span> <span class="st">"Z64"</span>,</span>
-<span class="r-in">                      start <span class="op">=</span> <span class="fl">1</span>,</span>
-<span class="r-in">                      end <span class="op">=</span> <span class="fl">33</span>, </span>
-<span class="r-in">                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">automorphisms</span><span class="op">(</span></span>
+<span class="r-in">    seqs <span class="op">=</span> <span class="va">aln</span>,</span>
+<span class="r-in">    group <span class="op">=</span> <span class="st">"Z64"</span>,</span>
+<span class="r-in">    start <span class="op">=</span> <span class="fl">1</span>,</span>
+<span class="r-in">    end <span class="op">=</span> <span class="fl">33</span>,</span>
+<span class="r-in">    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">autms</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Automorphism object with 11 ranges and 6 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2    coord1    coord2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         ACC         ATC        17        49</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         TAT         TAT        15        15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         GTT         GTT        59        59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         GGT         GGT        43        43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ATT         ATT        51        51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [6]        1         6      + |         ---         ACG        NA        18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]        1         7      + |         GCG         ACG        26        18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]        1         8      + |         CTC         CTC        53        53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]        1         9      + |         CAA         CAA         4         4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]        1        10      + |         CTC         TTC        53        61</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [11]        1        11      + |         CTT         CTT        55        55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         ATT         ATT        51        51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         CAC         TAC         5        13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         CTC         CTC        53        53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         TTA         TTA        60        60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         A-A         AAA        NA         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [6]        1         6      + |         T-C         TCT        NA        31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]        1         7      + |         G-T         GGT        NA        43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]        1         8      + |         TGC         TAC        45        13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]        1         9      + |         TCC         TCC        29        29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]        1        10      + |         GGT         GGT        43        43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [11]        1        11      + |         GCT         GCT        27        27</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             autm        cube</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;numeric&gt; &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        33        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        41        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [3]         1        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [4]         1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]         0        Trnl</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [6]         0        Trnl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]        45        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]         0        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]        33        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [9]         1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]        41        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]         1        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [11]         1        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co">## Grouping into ranges the automorphisms by cubes </span></span>
+<span class="r-in"><span class="co">## Grouping into ranges the automorphisms by cubes</span></span>
 <span class="r-in"><span class="fu"><a href="automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">autms</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 3 ranges and 1 metadata column:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |        cube</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        1       1-5      + |        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        1         6      + |        Trnl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]        1      7-11      + |        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        1       1-4      + |        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        1       5-7      + |        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]        1      8-11      + |        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"></span>

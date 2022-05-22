@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,6 +104,8 @@
 <dd><p>A character string, <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet-class</a></code> or
 <code><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html" class="external-link">DNAMultipleAlignment-class</a></code> object carrying the a
 DNA sequence.</p></dd>
+<dt>...</dt>
+<dd><p>Not in use.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -127,13 +129,13 @@ codons is returned.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
 <span class="r-in"><span class="co">## Gaps are added at the sequence end.</span></span>
-<span class="r-in"><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACCT"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACCT"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">base2codon</span><span class="op">(</span>x <span class="op">=</span> <span class="va">seq</span><span class="op">)</span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>*** Base sequence of 'x' is not multiple of 3. Gaps '-' have been added at the end of the sequence.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ACC" "T--"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## This DNA sequence is multiple of 3</span></span>
-<span class="r-in"><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACCTCA"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACCTCA"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">base2codon</span><span class="op">(</span>x <span class="op">=</span> <span class="va">seq</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ACC" "TCA"</span>
 <span class="r-in"></span>
@@ -158,6 +160,7 @@ codons is returned.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [15,] "TCA" "---"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [16,] "CTA" "CTC"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [17,] "CAT" "CTT"</span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,7 +114,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 data-toc-skip class="date">20 April 2022</h4>
+            <h4 data-toc-skip class="date">21 May 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/HEAD/vignettes/automorphism_and_decision_tree.Rmd" class="external-link"><code>vignettes/automorphism_and_decision_tree.Rmd</code></a></small>
       <div class="d-none name"><code>automorphism_and_decision_tree.Rmd</code></div>
@@ -317,10 +317,10 @@ code.r{
 <div class="section level3">
 <h3 id="grouping-automorphisms-by-automorphisms-coefficients">Grouping automorphisms by automorphism’s coefficients<a class="anchor" aria-label="anchor" href="#grouping-automorphisms-by-automorphisms-coefficients"></a>
 </h3>
-<p>Automorphisms with the same automorphism’s coefficients can be grouped. This task can be accomplished with function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphismByCoef.html" class="external-link">automorphismByCoef</a>. However, for the sake of time, its output is included in the package</p>
+<p>Automorphisms with the same automorphism’s coefficients can be grouped. This task can be accomplished with function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphism_bycoef.html" class="external-link">automorphism_bycoef</a>. However, for the sake of time, its output is included in the package</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Not need to run it here</span>
-<span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">brca1_autm</span>,
+<span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism_bycoef.html">automorphism_bycoef</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">brca1_autm</span>,
                                  verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Object <em>brca1_autm</em> is included with package and can be load typing:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -380,9 +380,9 @@ code.r{
 <p>Object <em>autby_coef</em> carried all the pairwise comparisons, while it will be enough to use data from a single species as reference, e.g., humans.</p>
 <p>First the data must be reordered into a  object:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">h_autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">h_brca1_autm</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">h_autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism_bycoef.html">automorphism_bycoef</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">h_brca1_autm</span><span class="op">)</span>
 <span class="va">h_autby_coef</span>
-<span class="co">#&gt; AutomorphismByCoef object with 1395 ranges and 5 metadata columns:</span>
+<span class="co">#&gt; AutomorphismByCoef object with 1341 ranges and 5 metadata columns:</span>
 <span class="co">#&gt;                            seqnames    ranges strand |        seq1        seq2      autm    mut_type        cube</span>
 <span class="co">#&gt;                               &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;character&gt; &lt;character&gt;</span>
 <span class="co">#&gt;      human_1.gelada_baboon        1         4      + |         TCT         CCT         9         YHH        ACGT</span>
@@ -409,7 +409,7 @@ code.r{
 <span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">dt</span>, species <span class="op">=</span> <span class="va">nams</span><span class="op">)</span>
 <span class="va">dt</span> <span class="op">&lt;-</span> <span class="va">dt</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="st">"autm"</span>, <span class="st">"species"</span>, <span class="st">"mut_type"</span>, <span class="st">"cube"</span><span class="op">)</span><span class="op">]</span>
 <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/DataFrame-class.html" class="external-link">DataFrame</a></span><span class="op">(</span><span class="va">dt</span><span class="op">)</span>
-<span class="co">#&gt; DataFrame with 1395 rows and 5 columns</span>
+<span class="co">#&gt; DataFrame with 1341 rows and 5 columns</span>
 <span class="co">#&gt;          start      autm         species    mut_type        cube</span>
 <span class="co">#&gt;      &lt;integer&gt; &lt;numeric&gt;     &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
 <span class="co">#&gt; 1            4         9   gelada_baboon         YHH        ACGT</span>
@@ -418,11 +418,11 @@ code.r{
 <span class="co">#&gt; 4            6        29  silvery_gibbon         SHH        ACGT</span>
 <span class="co">#&gt; 5            6        29  silvery_gibbon         SHH        ACGT</span>
 <span class="co">#&gt; ...        ...       ...             ...         ...         ...</span>
-<span class="co">#&gt; 1391       753        59         bonobos         HHY        ACGT</span>
-<span class="co">#&gt; 1392       753        59         bonobos         HHY        ACGT</span>
-<span class="co">#&gt; 1393       753        59         bonobos         HHY        ACGT</span>
-<span class="co">#&gt; 1394       756        59 bolivian_monkey         HHY        ACGT</span>
-<span class="co">#&gt; 1395       756        59 bolivian_monkey         HHY        ACGT</span></code></pre></div>
+<span class="co">#&gt; 1337       753        59         bonobos         HHY        ACGT</span>
+<span class="co">#&gt; 1338       753        59         bonobos         HHY        ACGT</span>
+<span class="co">#&gt; 1339       753        59         bonobos         HHY        ACGT</span>
+<span class="co">#&gt; 1340       756        59 bolivian_monkey         HHY        ACGT</span>
+<span class="co">#&gt; 1341       756        59 bolivian_monkey         HHY        ACGT</span></code></pre></div>
 <p>Nominal variables are transformed into </p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dt</span><span class="op">$</span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">dt</span><span class="op">$</span><span class="va">start</span><span class="op">)</span>
@@ -485,7 +485,7 @@ code.r{
 <span class="va">datos</span><span class="op">$</span><span class="va">cube</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">datos</span><span class="op">$</span><span class="va">cube</span><span class="op">)</span>
 <span class="va">datos</span> <span class="op">&lt;-</span> <span class="va">datos</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span> <span class="st">"autms"</span>, <span class="st">"regions"</span>, <span class="st">"mut_type"</span>, <span class="st">"cube"</span>, <span class="st">"species"</span><span class="op">)</span><span class="op">]</span>
 <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/DataFrame-class.html" class="external-link">DataFrame</a></span><span class="op">(</span><span class="va">datos</span><span class="op">)</span>
-<span class="co">#&gt; DataFrame with 1395 rows and 5 columns</span>
+<span class="co">#&gt; DataFrame with 1341 rows and 5 columns</span>
 <span class="co">#&gt;         autms  regions mut_type     cube         species</span>
 <span class="co">#&gt;      &lt;factor&gt; &lt;factor&gt; &lt;factor&gt; &lt;factor&gt;        &lt;factor&gt;</span>
 <span class="co">#&gt; 1          A1       R0      YHH     ACGT  gelada_baboon </span>
@@ -494,11 +494,11 @@ code.r{
 <span class="co">#&gt; 4          A2       R0      SHH     ACGT  silvery_gibbon</span>
 <span class="co">#&gt; 5          A2       R0      SHH     ACGT  silvery_gibbon</span>
 <span class="co">#&gt; ...       ...      ...      ...      ...             ...</span>
-<span class="co">#&gt; 1391       A4       R8      HHY     ACGT bonobos        </span>
-<span class="co">#&gt; 1392       A4       R8      HHY     ACGT bonobos        </span>
-<span class="co">#&gt; 1393       A4       R8      HHY     ACGT bonobos        </span>
-<span class="co">#&gt; 1394       A4       R8      HHY     ACGT bolivian_monkey</span>
-<span class="co">#&gt; 1395       A4       R8      HHY     ACGT bolivian_monkey</span></code></pre></div>
+<span class="co">#&gt; 1337       A4       R8      HHY     ACGT bonobos        </span>
+<span class="co">#&gt; 1338       A4       R8      HHY     ACGT bonobos        </span>
+<span class="co">#&gt; 1339       A4       R8      HHY     ACGT bonobos        </span>
+<span class="co">#&gt; 1340       A4       R8      HHY     ACGT bolivian_monkey</span>
+<span class="co">#&gt; 1341       A4       R8      HHY     ACGT bolivian_monkey</span></code></pre></div>
 <p>A classification tree is estimated with CHAID algorithm:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ctrl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CHAID/man/chaid.html" class="external-link">chaid_control</a></span><span class="op">(</span>minsplit <span class="op">=</span> <span class="fl">200</span>, minprob <span class="op">=</span> <span class="fl">0.8</span>, alpha2 <span class="op">=</span> <span class="fl">0.01</span>, alpha4 <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
@@ -588,8 +588,8 @@ code.r{
 <code class="sourceCode R"><span class="va">idx</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">autm</span> <span class="op">==</span> <span class="st">"A1"</span> <span class="op">&amp;</span> <span class="va">dat</span><span class="op">$</span><span class="va">regions</span> <span class="op">==</span> <span class="st">"R3"</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">mut_type</span> <span class="op">==</span> <span class="st">"HHY"</span> <span class="op">|</span> <span class="va">dat</span><span class="op">$</span><span class="va">mut_type</span> <span class="op">==</span> <span class="st">"YHH"</span><span class="op">)</span>
 <span class="va">dat</span><span class="op">[</span> <span class="va">idx</span>, <span class="op">]</span>
 <span class="co">#&gt;     autms regions mut_type cube species</span>
-<span class="co">#&gt; 632    A1      R3      YHH ACGT   human</span>
-<span class="co">#&gt; 687    A1      R3      HHY ACGT   human</span></code></pre></div>
+<span class="co">#&gt; 606    A1      R3      YHH ACGT   human</span>
+<span class="co">#&gt; 661    A1      R3      HHY ACGT   human</span></code></pre></div>
 <p>Only non-humans hold the following rule</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rule</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">autms</span> <span class="op">==</span> <span class="st">"A4"</span> <span class="op">|</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">autms</span> <span class="op">==</span> <span class="st">"A3"</span> <span class="op">&amp;</span> <span class="va">dat</span><span class="op">$</span><span class="va">regions</span> <span class="op">!=</span> <span class="st">"R1"</span><span class="op">)</span><span class="op">)</span>

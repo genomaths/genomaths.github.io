@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,14 +92,14 @@
 <span class="fu">conserved_regions</span><span class="op">(</span>
   <span class="va">x</span>,
   conserved <span class="op">=</span> <span class="cn">TRUE</span>,
-  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_pairs"</span>, <span class="st">"unique_pairs"</span>, <span class="st">"unique"</span><span class="op">)</span>
+  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_pairs"</span>, <span class="st">"unique_pairs"</span>, <span class="st">"unique"</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># S4 method for AutomorphismList</span>
 <span class="fu">conserved_regions</span><span class="op">(</span>
   <span class="va">x</span>,
   conserved <span class="op">=</span> <span class="cn">TRUE</span>,
-  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_pairs"</span>, <span class="st">"unique_pairs"</span>, <span class="st">"unique"</span><span class="op">)</span>,
+  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_pairs"</span>, <span class="st">"unique_pairs"</span>, <span class="st">"unique"</span><span class="op">)</span>,
   num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
   tasks <span class="op">=</span> <span class="fl">0L</span>,
   verbose <span class="op">=</span> <span class="cn">FALSE</span>
@@ -109,26 +109,31 @@
 <span class="fu">conserved_regions</span><span class="op">(</span>
   <span class="va">x</span>,
   conserved <span class="op">=</span> <span class="cn">TRUE</span>,
-  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_pairs"</span>, <span class="st">"unique_pairs"</span>, <span class="st">"unique"</span><span class="op">)</span>
+  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_pairs"</span>, <span class="st">"unique_pairs"</span>, <span class="st">"unique"</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># S4 method for AutomorphismByCoefList</span>
 <span class="fu">conserved_regions</span><span class="op">(</span>
   <span class="va">x</span>,
   conserved <span class="op">=</span> <span class="cn">TRUE</span>,
-  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_pairs"</span>, <span class="st">"unique_pairs"</span>, <span class="st">"unique"</span><span class="op">)</span>
+  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_pairs"</span>, <span class="st">"unique_pairs"</span>, <span class="st">"unique"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
-<dd><p>A <code><a href="Automorphism.html">Automorphism</a></code>, a <code><a href="Automorphism.html">AutomorphismList</a></code>,
-a <code><a href="Automorphism.html">AutomorphismByCoef</a></code> or a <code><a href="Automorphism.html">AutomorphismByCoefList</a></code>
+<dd><p>A <code><a href="Automorphism.html">Automorphism-class</a></code>, a
+<code><a href="Automorphism.html">AutomorphismList-class</a></code>,
+a <code><a href="Automorphism.html">AutomorphismByCoef</a></code> or a <code><a href="AutomorphismByCoef.html">AutomorphismByCoefList</a></code>
 class object.</p></dd>
+<dt>...</dt>
+<dd><p>Not in use.</p></dd>
 <dt>conserved</dt>
 <dd><p>Logical, Whether to return the <em>conserved</em> or the
 <em>non-conserved regions</em>.</p></dd>
+<dt>output</dt>
+<dd><p>A character string. Type of output.</p></dd>
 <dt>num.cores, tasks</dt>
 <dd><p>Integers. Argument <em>num.cores</em> denotes the
 number of cores to use, i.e. at most how many child processes will be run
@@ -140,6 +145,8 @@ defined as a single call to a function, such as
 argument into chunks. When tasks == 0 (default), \(X\) is divided as evenly
 as possible over the number of workers (see
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">MulticoreParam</a></code> from BiocParallel package).</p></dd>
+<dt>verbose</dt>
+<dd><p>logic(1). If TRUE, enable progress bar.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -163,6 +170,23 @@ requested regions.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [3]        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<span class="r-in"><span class="co">## Load automorphism found COVID datatset</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span></span>
+<span class="r-in"><span class="co">## Conserved regions in the first 100 codons</span></span>
+<span class="r-in"><span class="va">conserv</span> <span class="op">&lt;-</span> <span class="fu">conserved_regions</span><span class="op">(</span><span class="va">covid_autm</span><span class="op">[</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span> <span class="op">]</span>, output<span class="op">=</span><span class="st">"unique"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">conserv</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 7 ranges and 2 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |      autm        cube</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        1      1-19      + |         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        1     21-44      + |         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]        1     47-52      + |         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]        1     54-60      + |         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [5]        1     62-80      + |         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [6]        1     83-91      + |         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7]        1    93-100      + |         1        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 </code></pre></div>

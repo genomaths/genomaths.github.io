@@ -20,7 +20,7 @@ Specified Abelian Group."><meta property="og:image" content="https://genomaths.g
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,10 @@ Specified Abelian Group.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">matrices</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
 
-<span class="co"># S4 method for CodonSeq_OR_MatrixList</span>
+<span class="co"># S4 method for MatrixList</span>
+<span class="fu">matrices</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+
+<span class="co"># S4 method for CodonSeq</span>
 <span class="fu">matrices</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 
 <span class="co"># S4 method for DNAStringSet_OR_NULL</span>
@@ -103,7 +106,7 @@ Specified Abelian Group.</p>
   base_seq <span class="op">=</span> <span class="cn">TRUE</span>,
   filepath <span class="op">=</span> <span class="cn">NULL</span>,
   cube <span class="op">=</span> <span class="st">"ACGT"</span>,
-  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Z4"</span>, <span class="st">"Z5"</span>, <span class="st">"Z64"</span>, <span class="st">"Z125"</span>, <span class="st">"Z4^3"</span>, <span class="st">"Z5^3"</span><span class="op">)</span>,
+  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Z4"</span>, <span class="st">"Z5"</span>, <span class="st">"Z64"</span>, <span class="st">"Z125"</span>, <span class="st">"Z4^3"</span>, <span class="st">"Z5^3"</span><span class="op">)</span>,
   start <span class="op">=</span> <span class="cn">NA</span>,
   end <span class="op">=</span> <span class="cn">NA</span>,
   chr <span class="op">=</span> <span class="fl">1L</span>,
@@ -117,6 +120,8 @@ Specified Abelian Group.</p>
 <dd><p>An object from a <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet</a></code> or
 <code><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html" class="external-link">DNAMultipleAlignment</a></code> class carrying the DNA
 pairwise alignment of two sequences.</p></dd>
+<dt>...</dt>
+<dd><p>Not in use.</p></dd>
 <dt>base_seq</dt>
 <dd><p>Logical. Whether to return the base or codon coordinates on
 the selected Abelian group. If codon coordinates are requested, then the
@@ -146,7 +151,7 @@ representation on the specified Abelian group.</p>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>These are alternative ways to get the list of matrices of base/codon
 coordinate and the information on the codon sequence from
-<code><a href="CodonSeq.html">CodonSeq</a></code> and <code><a href="allClasses.html">MatrixList</a></code> class objects. These
+<code><a href="CodonSeq.html">CodonSeq</a></code> and <code><a href="MatrixList.html">MatrixList</a></code> class objects. These
 functions can either take the output from functions <code><a href="base_coord.html">base_coord</a></code>
 and <code>matrices</code>  or to operate directly on a
 <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet</a></code> or to retrieve the a DNA sequence
@@ -198,7 +203,16 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 <span class="r-in">    cube <span class="op">=</span> <span class="st">"ACGT"</span>,</span>
 <span class="r-in">    group <span class="op">=</span> <span class="st">"Z4"</span>,</span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in (function (classes, fdef, mtable) {    methods &lt;- .findInheritedMethods(classes, fdef, mtable)    if (length(methods) == 1L)         return(methods[[1L]])    else if (length(methods) == 0L) {        cnames &lt;- paste0("\"", vapply(classes, as.character,             ""), "\"", collapse = ", ")        stop(gettextf("unable to find an inherited method for function %s for signature %s",             sQuote(fdef@generic), sQuote(cnames)), domain = NA)    }    else stop("Internal error in finding inherited methods; didn't return a unique method",         domain = NA)})(list(structure("MatrixList", package = "GenomAutomorphism")),     new("standardGeneric", .Data = function (x, ...)     standardGeneric("matrices"), generic = structure("matrices", package = "GenomAutomorphism"),         package = "GenomAutomorphism", group = list(), valueClass = character(0),         signature = "x", default = NULL, skeleton = (function (x,             ...)         stop("invalid call in method dispatch to 'matrices' (no default method)",             domain = NA))(x, ...)), &lt;environment&gt;):</span> unable to find an inherited method for function ‘matrices’ for signature ‘"MatrixList"’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $coord1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  0  1  1  3  0  3  2  3  3  2  2  3  0  3  3 NA NA NA  2  1  2  1  3  1  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [26]  0  0  1  3  1  1  3  3  2  2  1  3  1  3  0  2  1  3  1  0  1  3  0  1  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [51]  3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $coord2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  0  3  1  3  0  3  2  3  3  2  2  3  0  3  3  0  1  2  0  1  2  1  3  1  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [26]  0  0  3  3  1  1  3  3  2  2  2  3  1  1 NA NA NA NA NA NA  1  3  1  1  3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [51]  3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Coordinate representation of the aligned sequences on "Z4".</span></span>
 <span class="r-in"><span class="co">## A list of matrices</span></span>
@@ -209,9 +223,46 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 <span class="r-in">    cube <span class="op">=</span> <span class="st">"ACGT"</span>,</span>
 <span class="r-in">    group <span class="op">=</span> <span class="st">"Z5^3"</span>,</span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in validObject(.Object):</span> invalid class “CodonGroup” object: </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>     *** Argument 'x' is not a CodonGroup-class object.The slot 'group' is</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>     not present or wrong naming.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $coord1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1] [,2] [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]    1    0    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    2    3    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]    2    2    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]    4    3    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]    1    2    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]    4    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]    3    2    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]    4    2    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    4    1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]    3    1    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    3    2    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    4    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]    1    2    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]    4    2    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]    4    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]    0    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]    0    3    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $coord2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1] [,2] [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]    1    3    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    4    1    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]    2    2    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]    4    3    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]    1    2    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]    4    4    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]    3    2    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]    4    2    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    4    1    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]    3    1    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    3    4    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    4    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]    1    2    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]    4    2    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]    4    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]    1    4    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]    2    3    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

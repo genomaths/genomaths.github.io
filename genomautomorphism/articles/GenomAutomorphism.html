@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,7 +114,7 @@
       Department of Biology. Pennsylvania State University, University Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 data-toc-skip class="date">20 April 2022</h4>
+            <h4 data-toc-skip class="date">21 May 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/HEAD/vignettes/GenomAutomorphism.Rmd" class="external-link"><code>vignettes/GenomAutomorphism.Rmd</code></a></small>
       <div class="d-none name"><code>GenomAutomorphism.Rmd</code></div>
@@ -245,17 +245,17 @@ code.r{
 <span class="co">#&gt; CodonGroup object with 250 ranges and 4 metadata columns:</span>
 <span class="co">#&gt;         seqnames    ranges strand |        seq1        seq2      coord1      coord2</span>
 <span class="co">#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt;     [1]        1         1      + |         ATG         ATG          50          50</span>
-<span class="co">#&gt;     [2]        1         2      + |         GAG         GAG          10          10</span>
-<span class="co">#&gt;     [3]        1         3      + |         AGC         AGC          33          33</span>
-<span class="co">#&gt;     [4]        1         4      + |         CTT         CTT          55          55</span>
-<span class="co">#&gt;     [5]        1         5      + |         GTT         GTT          59          59</span>
+<span class="co">#&gt;     [1]        1         1      + |         AAT         AAT           3           3</span>
+<span class="co">#&gt;     [2]        1         2      + |         TGG         TGG          46          46</span>
+<span class="co">#&gt;     [3]        1         3      + |         GGG         GGG          42          42</span>
+<span class="co">#&gt;     [4]        1         4      + |         GTT         GTT          59          59</span>
+<span class="co">#&gt;     [5]        1         5      + |         ACG         ACG          18          18</span>
 <span class="co">#&gt;     ...      ...       ...    ... .         ...         ...         ...         ...</span>
-<span class="co">#&gt;   [246]        1       246      + |         GAT         GAT          11          11</span>
-<span class="co">#&gt;   [247]        1       247      + |         AAG         AAG           2           2</span>
-<span class="co">#&gt;   [248]        1       248      + |         AGC         AGC          33          33</span>
-<span class="co">#&gt;   [249]        1       249      + |         TAC         TAT          13          15</span>
-<span class="co">#&gt;   [250]        1       250      + |         GAG         GAG          10          10</span>
+<span class="co">#&gt;   [246]        1       246      + |         CGA         CGA          36          36</span>
+<span class="co">#&gt;   [247]        1       247      + |         CGC         CGT          37          39</span>
+<span class="co">#&gt;   [248]        1       248      + |         ACG         ACG          18          18</span>
+<span class="co">#&gt;   [249]        1       249      + |         CAA         CAA           4           4</span>
+<span class="co">#&gt;   [250]        1       250      + |         AGG         AGG          34          34</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>The codon sequences (<em>seq1</em> and <em>seq2</em>) with their corresponding coordinates (left) are returned, as well as the coordinated representation on <span class="math inline">\(\mathbb{Z}_{64}\)</span> (<em>coord1</em> and <em>coord2</em>).</p>
@@ -278,17 +278,17 @@ code.r{
 <span class="co">#&gt; Automorphism object with 250 ranges and 6 metadata columns:</span>
 <span class="co">#&gt;         seqnames    ranges strand |        seq1        seq2    coord1    coord2      autm        cube</span>
 <span class="co">#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;character&gt;</span>
-<span class="co">#&gt;     [1]        1         1      + |         ATG         ATG        50        50         1        ACGT</span>
-<span class="co">#&gt;     [2]        1         2      + |         GAG         GAG        10        10         1        ACGT</span>
-<span class="co">#&gt;     [3]        1         3      + |         AGC         AGC        33        33         1        ACGT</span>
-<span class="co">#&gt;     [4]        1         4      + |         CTT         CTT        55        55         1        ACGT</span>
-<span class="co">#&gt;     [5]        1         5      + |         GTT         GTT        59        59         1        ACGT</span>
+<span class="co">#&gt;     [1]        1         1      + |         AAT         AAT         3         3         1        ACGT</span>
+<span class="co">#&gt;     [2]        1         2      + |         TGG         TGG        46        46         1        ACGT</span>
+<span class="co">#&gt;     [3]        1         3      + |         GGG         GGG        42        42         1        ACGT</span>
+<span class="co">#&gt;     [4]        1         4      + |         GTT         GTT        59        59         1        ACGT</span>
+<span class="co">#&gt;     [5]        1         5      + |         ACG         ACG        18        18         1        ACGT</span>
 <span class="co">#&gt;     ...      ...       ...    ... .         ...         ...       ...       ...       ...         ...</span>
-<span class="co">#&gt;   [246]        1       246      + |         GAT         GAT        11        11         1        ACGT</span>
-<span class="co">#&gt;   [247]        1       247      + |         AAG         AAG         2         2         1        ACGT</span>
-<span class="co">#&gt;   [248]        1       248      + |         AGC         AGC        33        33         1        ACGT</span>
-<span class="co">#&gt;   [249]        1       249      + |         TAC         TAT        13        15        11        ACGT</span>
-<span class="co">#&gt;   [250]        1       250      + |         GAG         GAG        10        10         1        ACGT</span>
+<span class="co">#&gt;   [246]        1       246      + |         CGA         CGA        36        36         1        ACGT</span>
+<span class="co">#&gt;   [247]        1       247      + |         CGC         CGT        37        39        27        ACGT</span>
+<span class="co">#&gt;   [248]        1       248      + |         ACG         ACG        18        18         1        ACGT</span>
+<span class="co">#&gt;   [249]        1       249      + |         CAA         CAA         4         4         1        ACGT</span>
+<span class="co">#&gt;   [250]        1       250      + |         AGG         AGG        34        34         1        ACGT</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>Observe that two new columns were added, the automorphism coefficient <span class="math inline">\(k\)</span> (named as <em>autm</em>) and the genetic-code cube where the automorphism was found. By convention the DNA sequence is given for the positive strand. Since the <em>dual cube</em> of <strong>“ACGT”</strong> corresponds to the complementary base order <strong>TGCA</strong>, automorphisms described by the cube <strong>TGCA</strong> represent mutational events affecting the DNA negative strand (-).</p>
@@ -299,15 +299,15 @@ code.r{
 <span class="co">#&gt; GRanges object with 9 ranges and 1 metadata column:</span>
 <span class="co">#&gt;       seqnames    ranges strand |        cube</span>
 <span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
-<span class="co">#&gt;   [1]        1     1-102      + |        ACGT</span>
-<span class="co">#&gt;   [2]        1       103      - |        TGCA</span>
-<span class="co">#&gt;   [3]        1   104-105      + |        ACGT</span>
+<span class="co">#&gt;   [1]        1      1-43      + |        ACGT</span>
+<span class="co">#&gt;   [2]        1        44      - |        TGCA</span>
+<span class="co">#&gt;   [3]        1    45-105      + |        ACGT</span>
 <span class="co">#&gt;   [4]        1       106      - |        TGCA</span>
-<span class="co">#&gt;   [5]        1   107-201      + |        ACGT</span>
-<span class="co">#&gt;   [6]        1       202      - |        TGCA</span>
-<span class="co">#&gt;   [7]        1   203-205      + |        ACGT</span>
-<span class="co">#&gt;   [8]        1       206      - |        TGCA</span>
-<span class="co">#&gt;   [9]        1   207-250      + |        ACGT</span>
+<span class="co">#&gt;   [5]        1   107-117      + |        ACGT</span>
+<span class="co">#&gt;   [6]        1       118      + |        Trnl</span>
+<span class="co">#&gt;   [7]        1   119-211      + |        ACGT</span>
+<span class="co">#&gt;   [8]        1       212      - |        TGCA</span>
+<span class="co">#&gt;   [9]        1   213-250      + |        ACGT</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>That is, function <a href="https://genomaths.github.io/genomautomorphism/reference/automorphismByRanges.html" class="external-link">automorphismByRanges</a> permits the classification of the pairwise alignment of protein-coding sub-regions based on the mutational events observed on it quantitatively represented as automorphisms on genetic-code cubes.</p>
@@ -432,7 +432,7 @@ code.r{
 <h3 id="grouping-automorphism-by-automorphisms-coefficients--types-of-mutations">Grouping automorphism by automorphism’s coefficients. Types of mutations<a class="anchor" aria-label="anchor" href="#grouping-automorphism-by-automorphisms-coefficients--types-of-mutations"></a>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByCoef.html">automorphismByCoef</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism_bycoef.html">automorphism_bycoef</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span>
 <span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="va">autby_coef</span><span class="op">[</span> <span class="va">autby_coef</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="va">autby_coef</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="op">-</span><span class="fl">1</span>  <span class="op">]</span></code></pre></div>
 <p>Barplot of frequency of mutation types greater than 2</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -450,14 +450,14 @@ code.r{
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; HHY HHR HHW YHH HHK HHM RHH HRH HYH --- HHS MHH WHH HMH KHH HYW YHW RHK RHY WHW YHM YHY HKH HMR HRR HRY HWH KHW RYY YHK </span>
-<span class="co">#&gt; 425 189  89  34  32  25  24  18  18  16  13  12  11   7   6   5   5   4   4   4   4   4   3   3   3   3   3   3   3   3 </span>
-<span class="co">#&gt; YHR HMW HYK KHY KSW MHK MHW MRH RHM RHR RHW RKW RMH RMW RRY RSW RYH RYW SHH SHW SRH WMH WMS WSY YWH HKK HKR HMK HMY HSR </span>
-<span class="co">#&gt;   3   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   1   1   1   1   1 </span>
-<span class="co">#&gt; HWS HWW HWY HYR HYY KHK KHR KKS KMH KMW KRK KRY KSH MHR MHS MKM MMM MRM MWH MWM MWS MWW MYY RMY RRK RRM RSK RYK SHM SHY </span>
+<span class="co">#&gt; HHY HHR HHW YHH HHK HHM RHH HRH HYH HHS MHH WHH HMH KHH HYW YHW RHK RHY WHW YHM YHY HKH HMR HRR HRY HWH KHW RYY YHK YHR </span>
+<span class="co">#&gt; 425 189  88  34  32  24  24  18  18  13  12  11   7   6   5   5   4   4   4   4   4   3   3   3   3   3   3   3   3   3 </span>
+<span class="co">#&gt; HMW HYK KHY KSW MHK MHW MRH RHM RHR RHW RKW RMH RMW RRY RSW RYH RYW SHH SHW SRH WMH WMS WSY YWH HKR HMK HMY HSR HWS HWW </span>
+<span class="co">#&gt;   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   1   1   1   1   1   1 </span>
+<span class="co">#&gt; HWY HYR HYY KHK KHR KKS KMH KMW KRK KRY KSH MHR MHS MKM MMM MRM MWH MWM MWS MWW MYY RMY RRK RRM RSK RYK SHM SHY SKY SMW </span>
 <span class="co">#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
-<span class="co">#&gt; SKY SMW SRM SWR SWY SYH WHY WRH WRY WWH WWK WWS WWY WYH WYM WYW YHS YKH YKY YRY YWM YWW YWY YYH YYR </span>
-<span class="co">#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></code></pre></div>
+<span class="co">#&gt; SRM SWR SWY SYH WHY WRH WRY WWH WWK WWS WWY WYH WYM WYW YHS YKH YKY YRY YWM YWW YWY YYH YYR </span>
+<span class="co">#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="conserved-and-non-conserved-regions">Conserved and non-conserved regions<a class="anchor" aria-label="anchor" href="#conserved-and-non-conserved-regions"></a>
@@ -558,7 +558,7 @@ code.r{
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Goodness of fit:</span>
 <span class="co">#&gt;     Adj.R.Square       rho R.Cross.val       AIC</span>
-<span class="co">#&gt; gof    0.9999998 0.9999998   0.9992032 -37955.95</span></code></pre></div>
+<span class="co">#&gt; gof    0.9999998 0.9999998   0.9992045 -37955.95</span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">widths</span>, <span class="fl">14</span>, freq <span class="op">=</span> <span class="cn">FALSE</span>, las <span class="op">=</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="st">"serif"</span>,
@@ -657,37 +657,35 @@ xlab <span class="op">=</span> <span class="st">"Conserved region size"</span><s
 <span class="co">#&gt; Automorphism object with 9722 ranges and 6 metadata columns:</span>
 <span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2    coord1    coord2      autm        cube</span>
 <span class="co">#&gt;             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;character&gt;</span>
-<span class="co">#&gt;      [1]        1         1      + |         ATG         ATG       108       108         1        ACGT</span>
-<span class="co">#&gt;      [2]        1         2      + |         GAG         GAG        43        43         1        ACGT</span>
-<span class="co">#&gt;      [3]        1         3      + |         AGC         AGC        82        82         1        ACGT</span>
-<span class="co">#&gt;      [4]        1         4      + |         CTT         CTT       114       114         1        ACGT</span>
-<span class="co">#&gt;      [5]        1         5      + |         GTT         GTT       119       119         1        ACGT</span>
+<span class="co">#&gt;      [1]        1         1      + |         AGA         AGA        81        81         1        ACGT</span>
+<span class="co">#&gt;      [2]        1         2      + |         TAT         TAT        49        49         1        ACGT</span>
+<span class="co">#&gt;      [3]        1         3      + |         GGG         GGG        93        93         1        ACGT</span>
+<span class="co">#&gt;      [4]        1         4      + |         GTT         GTT       119       119         1        ACGT</span>
+<span class="co">#&gt;      [5]        1         5      + |         AGT         AGT        84        84         1        ACGT</span>
 <span class="co">#&gt;      ...      ...       ...    ... .         ...         ...       ...       ...       ...         ...</span>
-<span class="co">#&gt;   [9718]        1      9718      + |         TCA         TCA        71        71         1        ACGT</span>
-<span class="co">#&gt;   [9719]        1      9719      + |         ACT         ACT        59        59         1        ACGT</span>
-<span class="co">#&gt;   [9720]        1      9720      + |         CAG         CAG        38        38         1        ACGT</span>
-<span class="co">#&gt;   [9721]        1      9721      + |         GCA         GCA        66        66         1        ACGT</span>
-<span class="co">#&gt;   [9722]        1      9722      + |         TAA         TAA        46        46         1        ACGT</span>
+<span class="co">#&gt;   [9718]        1      9718      + |         CTC         CTC       112       112         1        ACGT</span>
+<span class="co">#&gt;   [9719]        1      9719      + |         TGA         TGA        96        96         1        ACGT</span>
+<span class="co">#&gt;   [9720]        1      9720      + |         GTT         GTT       119       119         1        ACGT</span>
+<span class="co">#&gt;   [9721]        1      9721      + |         CTA         CTA       111       111         1        ACGT</span>
+<span class="co">#&gt;   [9722]        1      9722      + |         AAA         AAA        31        31         1        ACGT</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>And the summary by range</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aut_range_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">covid_autm_2</span><span class="op">)</span>
 <span class="va">aut_range_2</span>
-<span class="co">#&gt; GRanges object with 21 ranges and 1 metadata column:</span>
-<span class="co">#&gt;        seqnames    ranges strand |        cube</span>
-<span class="co">#&gt;           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
-<span class="co">#&gt;    [1]        1     1-943      + |        ACGT</span>
-<span class="co">#&gt;    [2]        1       944      + |        Trnl</span>
-<span class="co">#&gt;    [3]        1   945-970      + |        ACGT</span>
-<span class="co">#&gt;    [4]        1       971      + |        Trnl</span>
-<span class="co">#&gt;    [5]        1  972-7076      + |        ACGT</span>
-<span class="co">#&gt;    ...      ...       ...    ... .         ...</span>
-<span class="co">#&gt;   [17]        1 9258-9276      + |        ACGT</span>
-<span class="co">#&gt;   [18]        1 9277-9279      + |        Trnl</span>
-<span class="co">#&gt;   [19]        1 9280-9294      + |        ACGT</span>
-<span class="co">#&gt;   [20]        1 9295-9296      + |        Trnl</span>
-<span class="co">#&gt;   [21]        1 9297-9722      + |        ACGT</span>
+<span class="co">#&gt; GRanges object with 9 ranges and 1 metadata column:</span>
+<span class="co">#&gt;       seqnames    ranges strand |        cube</span>
+<span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
+<span class="co">#&gt;   [1]        1    1-1784      + |        ACGT</span>
+<span class="co">#&gt;   [2]        1 1785-1787      + |        Trnl</span>
+<span class="co">#&gt;   [3]        1 1788-8117      + |        ACGT</span>
+<span class="co">#&gt;   [4]        1 8118-8123      + |        Trnl</span>
+<span class="co">#&gt;   [5]        1 8124-8255      + |        ACGT</span>
+<span class="co">#&gt;   [6]        1 8256-8261      + |        Trnl</span>
+<span class="co">#&gt;   [7]        1 8262-8285      + |        ACGT</span>
+<span class="co">#&gt;   [8]        1 8286-8291      + |        Trnl</span>
+<span class="co">#&gt;   [9]        1 8292-9722      + |        ACGT</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>The whole genome can be described by automorphisms on <span class="math inline">\(\mathbb{Z}_{125}\)</span>.</p>

@@ -20,7 +20,7 @@ this function computes the automorphisms describing codon mutational events."><m
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,8 +95,8 @@ this function computes the automorphisms describing codon mutational events.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">autZ125</span><span class="op">(</span>
   seq <span class="op">=</span> <span class="cn">NULL</span>,
   filepath <span class="op">=</span> <span class="cn">NULL</span>,
-  cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,
-  cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,
+  cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,
+  cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,
   start <span class="op">=</span> <span class="cn">NA</span>,
   end <span class="op">=</span> <span class="cn">NA</span>,
   chr <span class="op">=</span> <span class="fl">1L</span>,
@@ -136,9 +136,6 @@ i.e. at most how many child processes will be run simultaneously (see
 for Linux OS).</p></dd>
 <dt>verbose</dt>
 <dd><p>If TRUE, prints the progress bar.</p></dd>
-<dt>group</dt>
-<dd><p>A character string denoting the group representation for the
-given base or codon as shown in reference (1).</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -182,36 +179,36 @@ Comput. Chem. 79 (2018) 527-560. <a href="https://bit.ly/2Z9mjM7" class="externa
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Automorphism on Z125</span></span>
 <span class="r-in"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">autZ125</span><span class="op">(</span>seq <span class="op">=</span> <span class="va">aln</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |=======                                                               |  10%  |                                                                              |==============                                                        |  20%  |                                                                              |=====================                                                 |  30%  |                                                                              |============================                                          |  40%  |                                                                              |===================================                                   |  50%  |                                                                              |==========================================                            |  60%  |                                                                              |=================================================                     |  70%  |                                                                              |========================================================              |  80%  |                                                                              |===============================================================       |  90%  |                                                                              |======================================================================| 100%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |======                                                                |   8%  |                                                                              |============                                                          |  17%  |                                                                              |==================                                                    |  25%  |                                                                              |=======================                                               |  33%  |                                                                              |=============================                                         |  42%  |                                                                              |===================================                                   |  50%  |                                                                              |=========================================                             |  58%  |                                                                              |===============================================                       |  67%  |                                                                              |====================================================                  |  75%  |                                                                              |==========================================================            |  83%  |                                                                              |================================================================      |  92%  |                                                                              |======================================================================| 100%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="va">autms</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Automorphism object with 17 ranges and 6 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2    coord1    coord2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         ACC         ATC        57       107</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         TAT         TAT        49        49</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         GTT         GTT       119       119</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         GGT         GGT        94        94</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ATT         ATT       109       109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         A-G         AGG         8        83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         CGC         TAG        87        48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         CCT         CCT        64        64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         TGC         TGC        97        97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ACT         ACC        59        57</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ...      ...       ...    ... .         ...         ...       ...       ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         TCT         TCC        74        72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         AGC         ---        82         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TCA         ---        71         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         CTA         CTC       111       112</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         CAT         CTT        39       114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         ACT         ACT        59        59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         TCA         TCC        71        72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TTC         TTC       122       122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         -TA         ATT       101       109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         -GT         CGT        79        89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             autm        cube</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;numeric&gt; &lt;character&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        26        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]       104        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [3]         1        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [4]         1        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        73        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ...       ...         ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        28        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]         0        Trnl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]         0        Trnl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]       117        ACGT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        51        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        82        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        84        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        66        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"></span>
