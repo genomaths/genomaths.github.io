@@ -1,0 +1,14 @@
+pandoc: '2.18'
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  GenomAutomorphism: GenomAutomorphism.html
+  automorphism_and_decision_tree: automorphism_and_decision_tree.html
+  automorphism_on_msa: automorphism_on_msa.html
+  automorphism_on_msa_brca1: automorphism_on_msa_brca1.html
+  covid_19: covid_19.html
+last_built: 2022-07-20T16:56Z
+urls:
+  reference: https://genomaths.github.io/GenomAutomorphism/reference
+  article: https://genomaths.github.io/GenomAutomorphism/articles
+
