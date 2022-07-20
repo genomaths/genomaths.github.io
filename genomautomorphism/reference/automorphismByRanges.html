@@ -22,7 +22,11 @@ GRanges-class."><meta property="og:image" content="https://genomaths.github.io/G
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
+<<<<<<< HEAD
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.2</small>
+=======
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,6 +99,21 @@ can be grouped by ranges which inherits from
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
+<<<<<<< HEAD
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">automorphismByRanges</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Automorphism</span></span>
+<span><span class="fu">automorphismByRanges</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for AutomorphismList</span></span>
+<span><span class="fu">automorphismByRanges</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  min.len <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+=======
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">automorphismByRanges</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for Automorphism</span>
@@ -108,6 +127,7 @@ can be grouped by ranges which inherits from
   tasks <span class="op">=</span> <span class="fl">0L</span>,
   verbose <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
     </div>
 
     <div class="section level2">
@@ -115,10 +135,23 @@ can be grouped by ranges which inherits from
     <dl><dt>x</dt>
 <dd><p>An AutomorphismList-class object returned by function
 <code><a href="automorphisms.html">automorphisms</a></code>.</p></dd>
+<<<<<<< HEAD
+
+
+<dt>...</dt>
+<dd><p>Not in use.</p></dd>
+
+
+<dt>min.len</dt>
+<dd><p>Minimum length of a range to be reported.</p></dd>
+
+
+=======
 <dt>...</dt>
 <dd><p>Not in use.</p></dd>
 <dt>min.len</dt>
 <dd><p>Minimum length of a range to be reported.</p></dd>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <dt>num.cores, tasks</dt>
 <dd><p>Integers. Argument <em>num.cores</em> denotes the
 number of cores to use, i.e. at most how many child processes will be run
@@ -127,6 +160,22 @@ BiocParallel package). Argument <em>tasks</em> denotes the number of tasks per
 job. value must be a scalar integer &gt;= 0L. In this documentation a job is
 defined as a single call to a function, such as
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code>. A task is the division of the \(X\)
+<<<<<<< HEAD
+argument into chunks. When tasks == 0 (default), \(X\) is divided as
+evenly as possible over the number of workers (see
+<code><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">MulticoreParam</a></code> from BiocParallel package).</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>logic(1). If TRUE, enable progress bar.</p></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A  <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> or a
+=======
 argument into chunks. When tasks == 0 (default), \(X\) is divided as evenly
 as possible over the number of workers (see
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">MulticoreParam</a></code> from BiocParallel package).</p></dd>
@@ -136,6 +185,7 @@ as possible over the number of workers (see
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A  <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> or a
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRangesList-class.html" class="external-link">GRangesList-class</a></code>. Each
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object with a column
 named <em>cube</em>, which carries the type of <em>cube</em> automorphims.</p>
@@ -143,17 +193,28 @@ named <em>cube</em>, which carries the type of <em>cube</em> automorphims.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+<<<<<<< HEAD
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Load dataset</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">automorphismByRanges</span><span class="op">(</span>x <span class="op">=</span> <span class="va">autm</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
+=======
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Load dataset</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">automorphismByRanges</span><span class="op">(</span>x <span class="op">=</span> <span class="va">autm</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 1 range and 1 metadata column:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |        cube</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        1       1-4      + |        ACGT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<<<<<<< HEAD
+<span class="r-in"><span></span></span>
+=======
 <span class="r-in"></span>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -165,7 +226,11 @@ named <em>cube</em>, which carries the type of <em>cube</em> automorphims.</p>
 </div>
 
 <div class="pkgdown-footer-right">
+<<<<<<< HEAD
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+=======
   <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 
     </footer></div>

@@ -20,7 +20,11 @@ this function computes the automorphisms describing codon mutational events."><m
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
+<<<<<<< HEAD
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.2</small>
+=======
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,6 +96,21 @@ this function computes the automorphisms describing codon mutational events.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
+<<<<<<< HEAD
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">autZ64</span><span class="op">(</span></span>
+<span>  seq <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filepath <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,</span>
+<span>  cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,</span>
+<span>  start <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  end <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  chr <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  strand <span class="op">=</span> <span class="st">"+"</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+=======
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">autZ64</span><span class="op">(</span>
   seq <span class="op">=</span> <span class="cn">NULL</span>,
   filepath <span class="op">=</span> <span class="cn">NULL</span>,
@@ -105,6 +124,7 @@ this function computes the automorphisms describing codon mutational events.</p>
   tasks <span class="op">=</span> <span class="fl">0L</span>,
   verbose <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
     </div>
 
     <div class="section level2">
@@ -115,19 +135,57 @@ this function computes the automorphisms describing codon mutational events.</p>
 pairwise alignment of two sequences. The pairwise alignment provided in
 argument <em><strong>seq</strong></em> or the 'fasta' file <em><strong>filepath</strong></em>
 must correspond to codon sequences.</p></dd>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <dt>filepath</dt>
 <dd><p>A character vector containing the path to a file in
 <em><strong>fasta</strong></em> format to be read. This argument must be given if
 <em>codon &amp; base</em> arguments are not provided.</p></dd>
+<<<<<<< HEAD
+
+
+<dt>cube, cube_alt</dt>
+<dd><p>A character string denoting pairs of the 24
+Genetic-code cubes, as given in references (2-3). That is, the base pairs
+from the given cubes must be complementary each other. Such a cube pair are
+call dual cubes and, as shown in reference (3), each pair integrates group.</p></dd>
+
+
+=======
 <dt>cube, cube_alt</dt>
 <dd><p>A character string denoting pairs of the 24 Genetic-code
 cubes, as given in references (2-3). That is, the base pairs from the given
 cubes must be complementary each other. Such a cube pair are call dual cubes
 and, as shown in reference (3), each pair integrates group.</p></dd>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <dt>start, end, chr, strand</dt>
 <dd><p>Optional parameters required to build a
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code>. If not provided the default
 values given for the function definition will be used.</p></dd>
+<<<<<<< HEAD
+
+
+<dt>num.cores, tasks</dt>
+<dd><p>Parameters for parallel computation using package
+<code><a href="https://rdrr.io/pkg/BiocParallel/man/BiocParallel-package.html" class="external-link">BiocParallel-package</a></code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously (see
+<code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code> and the number of tasks per job (only
+for Linux OS).</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>If TRUE, prints the progress bar.</p></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>An object <code><a href="Automorphism.html">Automorphism-class</a></code> with four columns on its
+=======
 <dt>num.cores, tasks</dt>
 <dd><p>Parameters for parallel computation using package
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/BiocParallel-package.html" class="external-link">BiocParallel-package</a></code>: the number of cores to use,
@@ -140,6 +198,7 @@ for Linux OS).</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An object <code><a href="Automorphism.html">Automorphism-class</a></code> with four columns on its
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 metacolumn named: <em>seq1</em>, <em>seq2</em>, <em>autm</em>, and <em>cube</em>.</p>
     </div>
     <div class="section level2">
@@ -155,6 +214,17 @@ modulo 64.</p>
 algebraic structure. J Math Biol. 2005 Oct;51(4):431-57.
 doi: 10.1007/s00285-005-0332-8. Epub 2005 Jul 13. PMID: 16012800. (
 <a href="https://arxiv.org/pdf/q-bio/0412033.pdf" class="external-link">PDF</a>).</p></li>
+<<<<<<< HEAD
+<li><p>Robersy Sanchez, Jesus Barreto (2021) Genomic Abelian Finite
+Groups.
+<a href="https://doi.org/10.1101/2021.06.01.446543" class="external-link">doi:10.1101/2021.06.01.446543</a></p></li>
+<li><p>M. V Jose, E.R. Morgado, R. Sanchez, T. Govezensky, The 24 possible
+algebraic representations of the standard genetic code in six or in three
+dimensions, Adv. Stud. Biol. 4 (2012) 110-152.<a href="https://is.gd/na9eap" class="external-link">PDF</a>.</p></li>
+<li><p>R. Sanchez. Symmetric Group of the Genetic-Code Cubes. Effect of the
+Genetic-Code Architecture on the Evolutionary Process MATCH Commun. Math.
+Comput. Chem. 79 (2018) 527-560. <a href="https://bit.ly/2Z9mjM7" class="external-link">PDF</a></p></li>
+=======
 <li><p>Robersy Sanchez, Jesús Barreto (2021) Genomic Abelian Finite
 Groups.
 <a href="https://doi.org/10.1101/2021.06.01.446543" class="external-link">doi: 10.1101/2021.06.01.446543</a>.</p></li>
@@ -164,6 +234,7 @@ dimensions, Adv. Stud. Biol. 4 (2012) 119–152.<a href="https://is.gd/na9eap" c
 <li><p>R. Sanchez. Symmetric Group of the Genetic–Code Cubes. Effect of the
 Genetic–Code Architecture on the Evolutionary Process MATCH Commun. Math.
 Comput. Chem. 79 (2018) 527-560. <a href="https://bit.ly/2Z9mjM7" class="external-link">PDF</a>.</p></li>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </ol></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -172,13 +243,57 @@ Comput. Chem. 79 (2018) 527-560. <a href="https://bit.ly/2Z9mjM7" class="externa
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+<<<<<<< HEAD
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Load a pairwise alignment</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">aln</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">aln</span></span></span>
+=======
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Load a pairwise alignment</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">aln</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">aln</span></span>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <span class="r-out co"><span class="r-pr">#&gt;</span> DNAStringSet object of length 2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     width seq</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]    51 <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TT</span>---<span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2]    51 <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GGG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span>------<span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span></span>
+<<<<<<< HEAD
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Automorphism on Z64</span></span></span>
+<span class="r-in"><span><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">autZ64</span><span class="op">(</span>seq <span class="op">=</span> <span class="va">aln</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |============                                                          |  17%  |                                                                              |=======================                                               |  33%  |                                                                              |===================================                                   |  50%  |                                                                              |===============================================                       |  67%  |                                                                              |==========================================================            |  83%  |                                                                              |======================================================================| 100%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="va">autms</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Automorphism object with 17 ranges and 6 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2    coord1    coord2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         A-G         AGG        NA        34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         CGC         TAG        37        14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         CCT         CCT        23        23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         TGC         TGC        45        45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ACT         ACC        19        17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ...      ...       ...    ... .         ...         ...       ...       ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         ACT         ACT        19        19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      - |         TCA         TCC        28        29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TTC         TTC        61        61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         -TA         ATT        NA        51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         -GT         CGT        NA        39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             autm        cube</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;numeric&gt; &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]         0        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        54        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        11        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ...       ...         ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        54        TGCA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]         0        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]         0        Trnl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<span class="r-in"><span></span></span>
+=======
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Automorphism on Z64</span></span>
 <span class="r-in"><span class="va">autms</span> <span class="op">&lt;-</span> <span class="fu">autZ64</span><span class="op">(</span>seq <span class="op">=</span> <span class="va">aln</span><span class="op">)</span></span>
@@ -186,6 +301,7 @@ Comput. Chem. 79 (2018) 527-560. <a href="https://bit.ly/2Z9mjM7" class="externa
 <span class="r-in"><span class="va">autms</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'autms' not found</span>
 <span class="r-in"></span>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -197,7 +313,11 @@ Comput. Chem. 79 (2018) 527-560. <a href="https://bit.ly/2Z9mjM7" class="externa
 </div>
 
 <div class="pkgdown-footer-right">
+<<<<<<< HEAD
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+=======
   <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 
     </footer></div>

@@ -18,7 +18,11 @@ grouped."><meta property="og:image" content="https://genomaths.github.io/GenomAu
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
+<<<<<<< HEAD
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.2</small>
+=======
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,6 +93,22 @@ grouped.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
+<<<<<<< HEAD
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">automorphism_bycoef</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Automorphism</span></span>
+<span><span class="fu">automorphism_bycoef</span><span class="op">(</span><span class="va">x</span>, mut.type <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for AutomorphismList</span></span>
+<span><span class="fu">automorphism_bycoef</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  min.len <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  mut.type <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+=======
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">automorphism_bycoef</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for Automorphism</span>
@@ -103,6 +123,7 @@ grouped.</p>
   tasks <span class="op">=</span> <span class="fl">0L</span>,
   verbose <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
     </div>
 
     <div class="section level2">
@@ -110,6 +131,23 @@ grouped.</p>
     <dl><dt>x</dt>
 <dd><p>An automorphism-class object returned by function
 <code><a href="automorphisms.html">automorphisms</a></code>.</p></dd>
+<<<<<<< HEAD
+
+
+<dt>...</dt>
+<dd><p>Not in use.</p></dd>
+
+
+<dt>mut.type</dt>
+<dd><p>Logical. Whether to include the mutation type as given by
+function <code><a href="mut_type.html">mut_type</a></code>.</p></dd>
+
+
+<dt>min.len</dt>
+<dd><p>Minimum length of a range to be reported.</p></dd>
+
+
+=======
 <dt>...</dt>
 <dd><p>Not in use.</p></dd>
 <dt>mut.type</dt>
@@ -117,6 +155,7 @@ grouped.</p>
 function <code><a href="mut_type.html">mut_type</a></code>.</p></dd>
 <dt>min.len</dt>
 <dd><p>Minimum length of a range to be reported.</p></dd>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <dt>num.cores, tasks</dt>
 <dd><p>Integers. Argument <em>num.cores</em> denotes the
 number of cores to use, i.e. at most how many child processes will be run
@@ -125,6 +164,22 @@ BiocParallel package). Argument <em>tasks</em> denotes the number of tasks per
 job. value must be a scalar integer &gt;= 0L. In this documentation a job is
 defined as a single call to a function, such as
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code>. A task is the division of the \(X\)
+<<<<<<< HEAD
+argument into chunks. When tasks == 0 (default), \(X\) is divided as
+evenly as possible over the number of workers (see
+<code><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">MulticoreParam</a></code> from BiocParallel package).</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>logic(1). If TRUE, enable progress bar.</p></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>An <code><a href="AutomorphismByCoef.html">AutomorphismByCoef</a></code> class object. A coefficient with
+=======
 argument into chunks. When tasks == 0 (default), \(X\) is divided as evenly
 as possible over the number of workers (see
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">MulticoreParam</a></code> from BiocParallel package).</p></dd>
@@ -134,12 +189,24 @@ as possible over the number of workers (see
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An <code><a href="Automorphism.html">AutomorphismByCoef</a></code> class object. A coefficient with
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 0 value is assigned to mutational events that are not automorphisms, e.g.,
 indel mutations.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+<<<<<<< HEAD
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Load dataset</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">automorphism_bycoef</span><span class="op">(</span>x <span class="op">=</span> <span class="va">autm</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AutomorphismByCoef object with 2 ranges and 5 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |        seq1        seq2      autm    mut_type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        1         1      + |         ACC         ATC        33         HYH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        1         2      + |         TAT         TAT         1         HHH</span>
+=======
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Load dataset</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -149,6 +216,7 @@ indel mutations.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;character&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        1       1-2      + |         ATG         ATG         1         HHH</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        1       1-2      + |         GAG         GAG         1         HHH</span>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <span class="r-out co"><span class="r-pr">#&gt;</span>              cube</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;character&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        ACGT</span>
@@ -166,7 +234,11 @@ indel mutations.</p>
 </div>
 
 <div class="pkgdown-footer-right">
+<<<<<<< HEAD
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+=======
   <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 
     </footer></div>

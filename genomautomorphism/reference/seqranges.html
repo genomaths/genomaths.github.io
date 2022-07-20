@@ -20,7 +20,11 @@ alignment of codon/base sequences represented on a given Abelian group."><meta p
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
+<<<<<<< HEAD
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.2</small>
+=======
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,6 +96,24 @@ alignment of codon/base sequences represented on a given Abelian group.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
+<<<<<<< HEAD
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">seqranges</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CodonSeq</span></span>
+<span><span class="fu">seqranges</span><span class="op">(</span><span class="va">x</span>, granges <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for DNAStringSet_OR_NULL</span></span>
+<span><span class="fu">seqranges</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  granges <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  base_seq <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  filepath <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  start <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  end <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  chr <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  strand <span class="op">=</span> <span class="st">"+"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+=======
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">seqranges</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for CodonSeq</span>
@@ -108,6 +130,7 @@ alignment of codon/base sequences represented on a given Abelian group.</p>
   chr <span class="op">=</span> <span class="fl">1L</span>,
   strand <span class="op">=</span> <span class="st">"+"</span>
 <span class="op">)</span></code></pre></div>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
     </div>
 
     <div class="section level2">
@@ -116,24 +139,66 @@ alignment of codon/base sequences represented on a given Abelian group.</p>
 <dd><p>An object from a <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet</a></code> or
 <code><a href="https://rdrr.io/pkg/Biostrings/man/MultipleAlignment-class.html" class="external-link">DNAMultipleAlignment</a></code> class carrying the DNA
 pairwise alignment of two sequences.</p></dd>
+<<<<<<< HEAD
+
+
 <dt>...</dt>
 <dd><p>Not in use.</p></dd>
+
+
+=======
+<dt>...</dt>
+<dd><p>Not in use.</p></dd>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <dt>granges</dt>
 <dd><p>Logical. Whether to return a
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object or a
 <code><a href="https://rdrr.io/pkg/S4Vectors/man/DataFrame-class.html" class="external-link">DataFrame</a></code>.</p></dd>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <dt>base_seq</dt>
 <dd><p>Logical. Whether to return the base or codon coordinates on
 the selected Abelian group. If codon coordinates are requested, then the
 number of the DNA bases in the given sequences must be multiple of 3.</p></dd>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <dt>filepath</dt>
 <dd><p>A character vector containing the path to a file in
 <em><strong>fasta</strong></em> format to be read. This argument must be given if
 <em>codon &amp; base</em> arguments are not provided.</p></dd>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <dt>start, end, chr, strand</dt>
 <dd><p>Optional parameters required to build a
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code>. If not provided the default
 values given for the function definition will be used.</p></dd>
+<<<<<<< HEAD
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code></p>
+
+
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>This function provide an alternative way to get the codon
+coordinate and the information on the codon sequence from a
+<code><a href="CodonSeq.html">CodonSeq</a></code> class objects. The function can either take the
+output from functions <code><a href="codon_coord.html">codon_coord</a></code> or to operate directly on a
+=======
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -141,12 +206,23 @@ values given for the function definition will be used.</p></dd>
 and the information on the codon sequence from a <code><a href="CodonSeq.html">CodonSeq</a></code> class
 objects. The function can either take the output from functions
 <code><a href="codon_coord.html">codon_coord</a></code> or to operate directly on a
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet</a></code> or to retrieve the a DNA sequence
 alignment from a file.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     
+<<<<<<< HEAD
+<ol><li><p>Robersy Sanchez, Jesus Barreto (2021) Genomic Abelian Finite
+Groups.
+<a href="https://doi.org/10.1101/2021.06.01.446543" class="external-link">doi:10.1101/2021.06.01.446543</a></p></li>
+<li><p>M. V Jose, E.R. Morgado, R. Sanchez, T. Govezensky, The 24 possible
+algebraic representations of the standard genetic code in six or in three
+dimensions, Adv. Stud. Biol. 4 (2012) 119-152.<a href="https://is.gd/na9eap" class="external-link">PDF</a>.</p></li>
+<li><p>R. Sanchez. Symmetric Group of the Genetic-Code Cubes. Effect of the
+Genetic-Code Architecture on the Evolutionary Process MATCH Commun. Math.
+=======
 <ol><li><p>Robersy Sanchez, Jesús Barreto (2021) Genomic Abelian Finite
 Groups.
 <a href="https://doi.org/10.1101/2021.06.01.446543" class="external-link">doi: 10.1101/2021.06.01.446543</a>.</p></li>
@@ -155,6 +231,7 @@ algebraic representations of the standard genetic code in six or in three
 dimensions, Adv. Stud. Biol. 4 (2012) 119–152.<a href="https://is.gd/na9eap" class="external-link">PDF</a>.</p></li>
 <li><p>R. Sanchez. Symmetric Group of the Genetic–Code Cubes. Effect of the
 Genetic–Code Architecture on the Evolutionary Process MATCH Commun. Math.
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 Comput. Chem. 79 (2018) 527-560.</p></li>
 </ol></div>
     <div class="section level2">
@@ -169,13 +246,28 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+<<<<<<< HEAD
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Load a pairwise alignment</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">aln</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">aln</span></span></span>
+=======
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Load a pairwise alignment</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">aln</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">aln</span></span>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <span class="r-out co"><span class="r-pr">#&gt;</span> DNAStringSet object of length 2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     width seq</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]    51 <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TT</span>---<span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2]    51 <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GGG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span>------<span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span></span>
+<<<<<<< HEAD
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## A GRanges object carrying the aligned DNA sequence.</span></span></span>
+<span class="r-in"><span><span class="fu">seqranges</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    x <span class="op">=</span> <span class="va">aln</span>,</span></span>
+<span class="r-in"><span>    base_seq <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    filepath <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+=======
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## A GRanges object carrying the aligned DNA sequence.</span></span>
 <span class="r-in"><span class="fu">seqranges</span><span class="op">(</span></span>
@@ -183,6 +275,7 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 <span class="r-in">    base_seq <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span class="r-in">    filepath <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span class="r-in"><span class="op">)</span></span>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 51 ranges and 2 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt;</span>
@@ -199,6 +292,31 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [51]        1        51      + |           T           T</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<<<<<<< HEAD
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## A GRanges object carrying the aligned codon sequence.</span></span></span>
+<span class="r-in"><span><span class="fu">seqranges</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    x <span class="op">=</span> <span class="va">aln</span>,</span></span>
+<span class="r-in"><span>    base_seq <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>    filepath <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 17 ranges and 2 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        seq1        seq2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]        1         1      + |         A-G         AGG</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]        1         2      + |         CGC         TAG</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]        1         3      + |         CCT         CCT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]        1         4      + |         TGC         TGC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]        1         5      + |         ACT         ACC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ...      ...       ...    ... .         ...         ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [13]        1        13      + |         ACT         ACT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [14]        1        14      + |         TCA         TCC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]        1        15      + |         TTC         TTC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [16]        1        16      + |         -TA         ATT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]        1        17      + |         -GT         CGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+=======
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## A GRanges object carrying the aligned codon sequence.</span></span>
 <span class="r-in"><span class="fu">seqranges</span><span class="op">(</span></span>
@@ -208,6 +326,7 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (nchar(x[1, idx[1]]) &gt;= 5) {    m &lt;- lapply(idx, function(k) {        m &lt;- do.call(rbind, strsplit(x[, k], ","))        m &lt;- apply(m, 2, as.numeric)    })} else {    m &lt;- lapply(idx, function(k) {        m &lt;- x[, k]        as.numeric(m)    })}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"></span>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -219,7 +338,11 @@ Comput. Chem. 79 (2018) 527-560.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
+<<<<<<< HEAD
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+=======
   <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 
     </footer></div>

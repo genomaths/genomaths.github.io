@@ -40,7 +40,11 @@
     
     <a class="navbar-brand me-2" href="../index.html">GenomAutomorphism</a>
 
+<<<<<<< HEAD
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.2</small>
+=======
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,6 +111,18 @@
 
 
 <div class="row">
+<<<<<<< HEAD
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Get started-with GenomAutomorphism</h1>
+                        <h4 data-toc-skip class="author">Robersy
+Sanchez</h4>
+            <address class="author_afil">
+      Department of Biology. Pennsylvania State University, University
+Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
+      </address>
+                  
+            <h4 data-toc-skip class="date">19 July 2022</h4>
+=======
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get started-with GenomAutomorphism</h1>
                         <h4 data-toc-skip class="author">Robersy Sanchez</h4>
@@ -115,6 +131,7 @@
       </address>
                   
             <h4 data-toc-skip class="date">24 May 2022</h4>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/HEAD/vignettes/GenomAutomorphism.Rmd" class="external-link"><code>vignettes/GenomAutomorphism.Rmd</code></a></small>
       <div class="d-none name"><code>GenomAutomorphism.Rmd</code></div>
@@ -123,7 +140,13 @@
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
+<<<<<<< HEAD
+      <p>A fast introduction into the analysis of DNA mutational events
+      by means of automorphisms between two DNA sequences algebraically
+      represented as Abelian finite group.</p>
+=======
       <p>A fast introduction into the analysis of DNA mutational events by means of automorphisms between two DNA sequences algebraically represented as Abelian finite group.</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
     </div>
     
 <style type="text/css">
@@ -161,6 +184,45 @@ code.r{
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
+<<<<<<< HEAD
+<p>This is a R package to compute the autimorphisms between pairwise
+aligned DNA sequences represented as elements from a Genomic Abelian
+group as described in reference (<a href="#id_1">1</a>). In a general
+scenario, whole chromosomes or genomic regions from a population (from
+any species or close related species) can be algebraically represented
+as a direct sum of cyclic groups or more specifically Abelian
+<em>p</em>-groups. Basically, we propose the representation of multiple
+sequence alignments (MSA) of length <em>N</em> as a finite Abelian group
+created by the direct sum of Abelian group of <em>prime-power
+order</em>:</p>
+<p><span class="math display">\[
+\qquad G = (\mathbb{Z}_{p^{\alpha_{1}}_1})^{n_1} \oplus
+(\mathbb{Z}_{p^{\alpha_{2}}_1})^{n_2} \oplus \dots \oplus
+(\mathbb{Z}_{p^{\alpha_{k}}_k})^{n_k}
+\]</span></p>
+<p>Where, the <span class="math inline">\(p_i\)</span>’s are prime
+numbers, <span class="math inline">\(\alpha_i \in \mathbb{N}\)</span>
+and <span class="math inline">\(\mathbb{Z}_{p^{\alpha_{i}}_i}\)</span>
+is the group of integer modulo <span class="math inline">\(p^{\alpha_{i}}_i\)</span>.</p>
+<p>For the purpose of estimating the automorphism between two aligned
+DNA sequences, <span class="math inline">\(p^{\alpha_{i}}_i \in \{5,
+2^6, 5^3 \}\)</span>.</p>
+<div class="section level3">
+<h3 id="automorphisms">Automorphisms<a class="anchor" aria-label="anchor" href="#automorphisms"></a>
+</h3>
+<p>Herein, automorphisms are considered algebraic descriptions of
+mutational event observed in codon sequences represented on different
+Abelian groups. In particular, as described in references (<a href="#id_3">3-4</a>), for each representation of the codon set on a
+defined Abelian group there are 24 possible isomorphic Abelian groups.
+These Abelian groups can be labeled based on the DNA base-order used to
+generate them. The set of 24 Abelian groups can be described as a group
+isomorphic to the symmetric group of degree four (<span class="math inline">\(S_4\)</span>, see reference (<a href="#id_4">4</a>)).</p>
+<p>For further support about the symmetric group on the 24 Abelian group
+of genetic-code cubes, users can also see <a href="https://is.gd/pTl8Js" class="external-link">Symmetric Group of the
+Genetic-CodeCubes.</a>, specifically the Mathematica notebook
+<em>IntroductionToZ5GeneticCodeVectorSpace.nb</em> and interact with it
+using Wolfram Player, freely available (for Windows and Linux OS) at, <a href="https://www.wolfram.com/player/" class="external-link uri">https://www.wolfram.com/player/</a>.</p>
+=======
 <p>This is a R package to compute the autimorphisms between pairwise aligned DNA sequences represented as elements from a Genomic Abelian group as described in reference (<a href="#1">1</a>). In a general scenario, whole chromosomes or genomic regions from a population (from any species or close related species) can be algebraically represented as a direct sum of cyclic groups or more specifically Abelian <em>p</em>-groups. Basically, we propose the representation of multiple sequence alignments (MSA) of length <em>N</em> as a finite Abelian group created by the direct sum of Abelian group of <em>prime-power order</em>:</p>
 <p><span class="math display">\[
 \qquad G = (\mathbb{Z}_{p^{\alpha_{1}}_1})^{n_1} \oplus 
@@ -174,11 +236,16 @@ code.r{
 </h3>
 <p>Herein, automorphisms are considered algebraic descriptions of mutational event observed in codon sequences represented on different Abelian groups. In particular, as described in references (<a href="#3">3-4</a>), for each representation of the codon set on a defined Abelian group there are 24 possible isomorphic Abelian groups. These Abelian groups can be labeled based on the DNA base-order used to generate them. The set of 24 Abelian groups can be described as a group isomorphic to the symmetric group of degree four (<span class="math inline">\(S_4\)</span>, see reference (<a href="#4">4</a>)).</p>
 <p>For further support about the symmetric group on the 24 Abelian group of genetic-code cubes, users can also see <a href="https://is.gd/pTl8Js" class="external-link">Symmetric Group of the Genetic-CodeCubes.</a>, specifically the Mathematica notebook <em>IntroductionToZ5GeneticCodeVectorSpace.nb</em> and interact with it using Wolfram Player, freely available (for Windows and Linux OS) at, <a href="https://www.wolfram.com/player/" class="external-link uri">https://www.wolfram.com/player/</a>.</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 <div class="section level3">
 <h3 id="load-the-r-libraries">Load the R libraries<a class="anchor" aria-label="anchor" href="#load-the-r-libraries"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<<<<<<< HEAD
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings" class="external-link">Biostrings</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/GenomAutomorphism" class="external-link">GenomAutomorphism</a></span><span class="op">)</span></span></code></pre></div>
+=======
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings" class="external-link">Biostrings</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: BiocGenerics</span>
 <span class="co">#&gt; </span>
@@ -213,11 +280,165 @@ code.r{
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     end, start</span></code></pre></div>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 </div>
 <div class="section level2">
 <h2 id="read-the-alignment-fasta-and-encode-the-sequences">Read the alignment <em>FASTA</em> and encode the sequences<a class="anchor" aria-label="anchor" href="#read-the-alignment-fasta-and-encode-the-sequences"></a>
 </h2>
+<<<<<<< HEAD
+<p>A pairwise sequence alignment of protein coding regions SARS
+coronavirus GZ02 (GenBank: AY390556.1) and Bat SARS-like coronavirus
+isolate Rs7327 (GenBank: KY417151.1) is provided with the package.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">covid_aln</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span>
+<span><span class="va">covid_aln</span></span>
+<span><span class="co">#&gt; DNAMultipleAlignment with 2 rows and 29166 columns</span></span>
+<span><span class="co">#&gt;      aln                                                                                            names               </span></span>
+<span><span class="co">#&gt; [1] <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">AAAA</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFAF;">C</span>...<span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">AAAA</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">AA</span> lcl|AY390556.1_cd...</span></span>
+<span><span class="co">#&gt; [2] <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">AAAA</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFAF;">C</span>...<span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">AAAA</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">CC</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">TT</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">AA</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFFF;">GG</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #FFAFAF;">AA</span> lcl|KY417151.1_cd...</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="group-representations">Group representations<a class="anchor" aria-label="anchor" href="#group-representations"></a>
+</h2>
+<p>After the DNA sequence is read, the corresponding codon sequences can
+be represented in the Abelian group <span class="math inline">\(\mathbb{Z}_{64}\)</span> (i.e., the set of
+integers remainder modulo 64). The codon coordinates are requested on
+the cube ACGT. Following reference (<a href="#id_4">4</a>)), cubes are
+labeled based on the order of DNA bases used to define the sum
+operation.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">codons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/codon_coord.html">codon_coord</a></span><span class="op">(</span></span>
+<span>                    codon <span class="op">=</span> <span class="va">covid_aln</span>, </span>
+<span>                    cube <span class="op">=</span> <span class="st">"ACGT"</span>, </span>
+<span>                    group <span class="op">=</span> <span class="st">"Z64"</span>, </span>
+<span>                    chr <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>                    strand <span class="op">=</span> <span class="st">"+"</span>,</span>
+<span>                    start <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                    end <span class="op">=</span> <span class="fl">750</span><span class="op">)</span></span>
+<span><span class="va">codons</span></span>
+<span><span class="co">#&gt; CodonGroup object with 250 ranges and 4 metadata columns:</span></span>
+<span><span class="co">#&gt;         seqnames    ranges strand |        seq1        seq2      coord1      coord2</span></span>
+<span><span class="co">#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;     [1]        1         1      + |         AAT         AAT           3           3</span></span>
+<span><span class="co">#&gt;     [2]        1         2      + |         TGG         TGG          46          46</span></span>
+<span><span class="co">#&gt;     [3]        1         3      + |         GGG         GGG          42          42</span></span>
+<span><span class="co">#&gt;     [4]        1         4      + |         GTT         GTT          59          59</span></span>
+<span><span class="co">#&gt;     [5]        1         5      + |         ACG         ACG          18          18</span></span>
+<span><span class="co">#&gt;     ...      ...       ...    ... .         ...         ...         ...         ...</span></span>
+<span><span class="co">#&gt;   [246]        1       246      + |         CGA         CGA          36          36</span></span>
+<span><span class="co">#&gt;   [247]        1       247      + |         CGC         CGT          37          39</span></span>
+<span><span class="co">#&gt;   [248]        1       248      + |         ACG         ACG          18          18</span></span>
+<span><span class="co">#&gt;   [249]        1       249      + |         CAA         CAA           4           4</span></span>
+<span><span class="co">#&gt;   [250]        1       250      + |         AGG         AGG          34          34</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>The codon sequences (<em>seq1</em> and <em>seq2</em>) with their
+corresponding coordinates (left) are returned, as well as the
+coordinated representation on <span class="math inline">\(\mathbb{Z}_{64}\)</span> (<em>coord1</em> and
+<em>coord2</em>).</p>
+<div class="section level3">
+<h3 id="dual-genetic-code-cubes">
+<em>“Dual”</em> genetic-code cubes<a class="anchor" aria-label="anchor" href="#dual-genetic-code-cubes"></a>
+</h3>
+<p>The particular interest are the coordinate representation on
+<em>“dual”</em> genetic-code cubes. These are cubes where codons with
+complementary base pairs have the same coordinates in the corresponding
+cubes, as shown in reference (<a href="#id_4">4</a>)). Each pair of
+<em>“dual”</em> cubes integrates a group.</p>
+<p>For example, let’s consider the complementary codons “ACG” and “TGC”,
+with complementary base pairs: A::T, C:::G, and G:::C, where symbol “:”
+denotes the hydrogen bonds between the bases.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACG"</span>, <span class="st">"TGC"</span><span class="op">)</span></span>
+<span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html" class="external-link">DNAStringSet</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span></span>
+<span><span class="va">x1</span></span>
+<span><span class="co">#&gt; DNAStringSet object of length 2:</span></span>
+<span><span class="co">#&gt;     width seq</span></span>
+<span><span class="co">#&gt; [1]     3 <span style="color: #000000; background-color: #FFAFAF;">A</span><span style="color: #000000; background-color: #AFFFAF;">C</span><span style="color: #000000; background-color: #AFFFFF;">G</span></span></span>
+<span><span class="co">#&gt; [2]     3 <span style="color: #000000; background-color: #FFD7AF;">T</span><span style="color: #000000; background-color: #AFFFFF;">G</span><span style="color: #000000; background-color: #AFFFAF;">C</span></span></span></code></pre></div>
+<p>Their representations on the dual cubes “ACGT” and “TGCA” on <span class="math inline">\(\mathbb{Z}_{4}\)</span> are:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/base_coord.html">base_coord</a></span><span class="op">(</span><span class="va">x1</span>, cube <span class="op">=</span> <span class="st">"ACGT"</span><span class="op">)</span></span>
+<span><span class="va">x2</span></span>
+<span><span class="co">#&gt; BaseGroup object with 3 ranges and 4 metadata columns:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand |        seq1        seq2    coord1    coord2</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">#&gt;   [1]        1         1      + |           A           T         0         3</span></span>
+<span><span class="co">#&gt;   [2]        1         2      + |           C           G         1         2</span></span>
+<span><span class="co">#&gt;   [3]        1         3      + |           G           C         2         1</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span>
+<span></span>
+<span><span class="va">x2.</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/base_coord.html">base_coord</a></span><span class="op">(</span><span class="va">x1</span>, cube <span class="op">=</span> <span class="st">"TGCA"</span><span class="op">)</span></span>
+<span><span class="va">x2.</span></span>
+<span><span class="co">#&gt; BaseGroup object with 3 ranges and 4 metadata columns:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand |        seq1        seq2    coord1    coord2</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">#&gt;   [1]        1         1      + |           A           T         3         0</span></span>
+<span><span class="co">#&gt;   [2]        1         2      + |           C           G         2         1</span></span>
+<span><span class="co">#&gt;   [3]        1         3      + |           G           C         1         2</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>The sum of base coordinates modulo <span class="math inline">\(\mathbb{Z}_{4}\)</span> is 3.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## cube "ACGT"</span></span>
+<span><span class="op">(</span><span class="va">x2</span><span class="op">$</span><span class="va">coord1</span> <span class="op">+</span> <span class="va">x2</span><span class="op">$</span><span class="va">coord2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">4</span>   </span>
+<span><span class="co">#&gt; [1] 3 3 3</span></span>
+<span></span>
+<span><span class="co">## cube "TGCA"</span></span>
+<span><span class="op">(</span><span class="va">x2.</span><span class="op">$</span><span class="va">coord1</span> <span class="op">+</span> <span class="va">x2.</span><span class="op">$</span><span class="va">coord2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">4</span>   </span>
+<span><span class="co">#&gt; [1] 3 3 3</span></span></code></pre></div>
+<p>The same result for the same codon on different cubes</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Codon ACG</span></span>
+<span><span class="op">(</span><span class="va">x2</span><span class="op">$</span><span class="va">coord1</span> <span class="op">+</span> <span class="va">x2.</span><span class="op">$</span><span class="va">coord1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">4</span> </span>
+<span><span class="co">#&gt; [1] 3 3 3</span></span>
+<span></span>
+<span><span class="co">## Codon TGC</span></span>
+<span><span class="op">(</span><span class="va">x2</span><span class="op">$</span><span class="va">coord2</span> <span class="op">+</span> <span class="va">x2.</span><span class="op">$</span><span class="va">coord2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">4</span> </span>
+<span><span class="co">#&gt; [1] 3 3 3</span></span></code></pre></div>
+<p>Their codon representation on <span class="math inline">\(\mathbb{Z}_{64}\)</span> are:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## cube ACGT</span></span>
+<span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/codon_coord.html">codon_coord</a></span><span class="op">(</span>codon <span class="op">=</span> <span class="va">x2</span>, group <span class="op">=</span> <span class="st">"Z64"</span><span class="op">)</span> </span>
+<span><span class="va">x3</span></span>
+<span><span class="co">#&gt; CodonGroup object with 1 range and 4 metadata columns:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand |        seq1        seq2      coord1      coord2</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]        1         1      + |         ACG         TGC          18          45</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span>
+<span></span>
+<span><span class="co">## cube TGCA</span></span>
+<span><span class="va">x3.</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/codon_coord.html">codon_coord</a></span><span class="op">(</span>codon <span class="op">=</span> <span class="va">x2.</span>, group <span class="op">=</span> <span class="st">"Z64"</span><span class="op">)</span> </span>
+<span><span class="va">x3.</span></span>
+<span><span class="co">#&gt; CodonGroup object with 1 range and 4 metadata columns:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand |        seq1        seq2      coord1      coord2</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]        1         1      + |         ACG         TGC          45          18</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>The sum of base coordinates modulo <span class="math inline">\(\mathbb{Z}_{64}\)</span> is 63.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## cube "ACGT"</span></span>
+<span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x3</span><span class="op">$</span><span class="va">coord1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x3</span><span class="op">$</span><span class="va">coord2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">64</span>  </span>
+<span><span class="co">#&gt; [1] 63</span></span>
+<span></span>
+<span><span class="co">## cube "TGCA"</span></span>
+<span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x3.</span><span class="op">$</span><span class="va">coord1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x3.</span><span class="op">$</span><span class="va">coord2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">64</span>   </span>
+<span><span class="co">#&gt; [1] 63</span></span></code></pre></div>
+<p>The same result for the same codon on different cubes</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Codon ACG</span></span>
+<span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x3</span><span class="op">$</span><span class="va">coord1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x3.</span><span class="op">$</span><span class="va">coord1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">64</span> </span>
+<span><span class="co">#&gt; [1] 63</span></span>
+<span></span>
+<span><span class="co">## Codon TGC</span></span>
+<span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x3</span><span class="op">$</span><span class="va">coord2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x3.</span><span class="op">$</span><span class="va">coord2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">64</span> </span>
+<span><span class="co">#&gt; [1] 63</span></span></code></pre></div>
+</div>
+=======
 <p>The FASTA file carries the pairwise sequence alignment of protein coding regions SARS coronavirus GZ02 (GenBank: AY390556.1) and Bat SARS-like coronavirus isolate Rs7327 (GenBank: KY417151.1).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">URL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/seqalignments/raw/master/"</span>, 
@@ -258,10 +479,291 @@ code.r{
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
 <p>The codon sequences (<em>seq1</em> and <em>seq2</em>) with their corresponding coordinates (left) are returned, as well as the coordinated representation on <span class="math inline">\(\mathbb{Z}_{64}\)</span> (<em>coord1</em> and <em>coord2</em>).</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 <div class="section level2">
 <h2 id="automorphisms-on-mathbbz_64">Automorphisms on <span class="math inline">\(\mathbb{Z}_{64}\)</span><a class="anchor" aria-label="anchor" href="#automorphisms-on-mathbbz_64"></a>
 </h2>
+<<<<<<< HEAD
+<p>Automorphisms can be computed starting directly from the
+<em>FASTA</em> file. Notice that we can work only with genomic regions
+of our interest by giving the <em>start</em> and <em>end</em> alignment
+coordinates. In <span class="math inline">\(\mathbb{Z}_{64}\)</span>
+automorphisms are described as functions <span class="math inline">\(f(x) = k\,x\quad mod\,64\)</span>, where <span class="math inline">\(k\)</span> and <span class="math inline">\(x\)</span> are elements from the set of integers
+modulo 64. Below, in function <a href="https://is.gd/WMxUKz" class="external-link">automorphism</a> three important arguments
+are given values: <em>group = “Z64”</em>, <em>cube = c(“ACGT”,
+“TGCA”)</em>, and <em>cube_alt = c(“CATG”, “GTAC”)</em>.</p>
+<p>In groups “Z64” and “Z125” not all the mutational events can be
+described as automorphisms from a given cube. The analysis of
+automorphisms is then accomplished in the set of <em>dual</em>
+genetic-code cubes. A character string denoting pairs of <em>dual</em>
+genetic-code cubes, is given as argument for <em>cube</em>. Setting for
+group specifies on which group the automorphisms will be computed. These
+groups can be: “Z5”, “Z64”, “Z125”, and “Z5^3”.</p>
+<p>If automorphisms are not found in first set of dual cubes, then the
+algorithm search for automorphisms in a alternative set of dual
+cubes.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">autm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphisms.html">automorphisms</a></span><span class="op">(</span></span>
+<span>                    seqs <span class="op">=</span> <span class="va">covid_aln</span>,</span>
+<span>                    group <span class="op">=</span> <span class="st">"Z64"</span>,</span>
+<span>                    cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,</span>
+<span>                    cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,</span>
+<span>                    start <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                    end <span class="op">=</span> <span class="fl">750</span>, </span>
+<span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">autm</span></span>
+<span><span class="co">#&gt; Automorphism object with 250 ranges and 6 metadata columns:</span></span>
+<span><span class="co">#&gt;         seqnames    ranges strand |        seq1        seq2    coord1    coord2      autm        cube</span></span>
+<span><span class="co">#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;     [1]        1         1      + |         AAT         AAT         3         3         1        ACGT</span></span>
+<span><span class="co">#&gt;     [2]        1         2      + |         TGG         TGG        46        46         1        ACGT</span></span>
+<span><span class="co">#&gt;     [3]        1         3      + |         GGG         GGG        42        42         1        ACGT</span></span>
+<span><span class="co">#&gt;     [4]        1         4      + |         GTT         GTT        59        59         1        ACGT</span></span>
+<span><span class="co">#&gt;     [5]        1         5      + |         ACG         ACG        18        18         1        ACGT</span></span>
+<span><span class="co">#&gt;     ...      ...       ...    ... .         ...         ...       ...       ...       ...         ...</span></span>
+<span><span class="co">#&gt;   [246]        1       246      + |         CGA         CGA        36        36         1        ACGT</span></span>
+<span><span class="co">#&gt;   [247]        1       247      + |         CGC         CGT        37        39        27        ACGT</span></span>
+<span><span class="co">#&gt;   [248]        1       248      + |         ACG         ACG        18        18         1        ACGT</span></span>
+<span><span class="co">#&gt;   [249]        1       249      + |         CAA         CAA         4         4         1        ACGT</span></span>
+<span><span class="co">#&gt;   [250]        1       250      + |         AGG         AGG        34        34         1        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>Observe that two new columns were added, the automorphism coefficient
+<span class="math inline">\(k\)</span> (named as <em>autm</em>) and the
+genetic-code cube where the automorphism was found. By convention the
+DNA sequence is given for the positive strand. Since the <em>dual
+cube</em> of <strong>“ACGT”</strong> corresponds to the complementary
+base order <strong>TGCA</strong>, automorphisms described by the cube
+<strong>TGCA</strong> represent mutational events affecting the DNA
+negative strand (-).</p>
+<p>The last result can be summarized by gene regions as follow:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">aut_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">autm</span><span class="op">)</span></span>
+<span><span class="va">aut_range</span></span>
+<span><span class="co">#&gt; GRanges object with 9 ranges and 1 metadata column:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand |        cube</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]        1      1-43      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [2]        1        44      - |        TGCA</span></span>
+<span><span class="co">#&gt;   [3]        1    45-105      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [4]        1       106      - |        TGCA</span></span>
+<span><span class="co">#&gt;   [5]        1   107-117      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [6]        1       118      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [7]        1   119-211      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [8]        1       212      - |        TGCA</span></span>
+<span><span class="co">#&gt;   [9]        1   213-250      + |        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>That is, function <a href="https://is.gd/5RWHFF" class="external-link">automorphismByRanges</a> permits the
+classification of the pairwise alignment of protein-coding sub-regions
+based on the mutational events observed on it quantitatively represented
+as automorphisms on genetic-code cubes.</p>
+<p>Searching for automorphisms on <span class="math inline">\(\mathbb{Z}_{64}\)</span> permits us a quantitative
+differentiation between mutational events at different codon positions
+from a given DNA protein-encoding region. As shown in reference (<a href="#id_4">4</a>) a set of different cubes can be applied to describe
+the best evolutionary aminoacid scale highly correlated with aminoacid
+physicochemical properties describing the observed evolutionary process
+in a given protein.</p>
+<p>More information about this subject can be found in the supporting
+material from reference (<a href="#id_4">4</a>)) at GitHub <a href="https://is.gd/pTl8Js" class="external-link">GenomeAlgebra_SymmetricGroup</a>,
+particularly by interacting with the Mathematica notebook <a href="https://is.gd/LVd06G" class="external-link">Genetic-Code-Scales_of_Amino-Acids.nb</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="automorphisms-between-whole-genomes-of-sars-cov-2-related-coronaviruses">Automorphisms between whole genomes of SARS-CoV-2 related
+coronaviruses<a class="anchor" aria-label="anchor" href="#automorphisms-between-whole-genomes-of-sars-cov-2-related-coronaviruses"></a>
+</h2>
+<p>Next, the automorphism for the whole pairwise alignment of SARS-CoV-2
+related coronaviruses:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Do not need to run it. </span></span>
+<span><span class="va">covid_autm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphisms.html">automorphisms</a></span><span class="op">(</span></span>
+<span>                    seq <span class="op">=</span> <span class="va">covid_aln</span>,</span>
+<span>                    group <span class="op">=</span> <span class="st">"Z64"</span>,</span>
+<span>                    cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,</span>
+<span>                    cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,</span>
+<span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>This data is available with the package</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">covid_autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span>
+<span><span class="va">covid_autm</span></span>
+<span><span class="co">#&gt; Automorphism object with 9722 ranges and 6 metadata columns:</span></span>
+<span><span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2    coord1    coord2      autm        cube</span></span>
+<span><span class="co">#&gt;             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;      [1]        1         1      + |         ATG         ATG        50        50         1        ACGT</span></span>
+<span><span class="co">#&gt;      [2]        1         2      + |         GAG         GAG        10        10         1        ACGT</span></span>
+<span><span class="co">#&gt;      [3]        1         3      + |         AGC         AGC        33        33         1        ACGT</span></span>
+<span><span class="co">#&gt;      [4]        1         4      + |         CTT         CTT        55        55         1        ACGT</span></span>
+<span><span class="co">#&gt;      [5]        1         5      + |         GTT         GTT        59        59         1        ACGT</span></span>
+<span><span class="co">#&gt;      ...      ...       ...    ... .         ...         ...       ...       ...       ...         ...</span></span>
+<span><span class="co">#&gt;   [9718]        1      9718      + |         TCA         TCA        28        28         1        ACGT</span></span>
+<span><span class="co">#&gt;   [9719]        1      9719      + |         ACT         ACT        19        19         1        ACGT</span></span>
+<span><span class="co">#&gt;   [9720]        1      9720      + |         CAG         CAG         6         6         1        ACGT</span></span>
+<span><span class="co">#&gt;   [9721]        1      9721      + |         GCA         GCA        24        24         1        ACGT</span></span>
+<span><span class="co">#&gt;   [9722]        1      9722      + |         TAA         TAA        12        12         1        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>And the summary by range</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">aut_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span></span>
+<span><span class="va">aut_range</span></span>
+<span><span class="co">#&gt; GRanges object with 460 ranges and 1 metadata column:</span></span>
+<span><span class="co">#&gt;         seqnames    ranges strand |        cube</span></span>
+<span><span class="co">#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span></span>
+<span><span class="co">#&gt;     [1]        1     1-102      + |        ACGT</span></span>
+<span><span class="co">#&gt;     [2]        1       103      - |        TGCA</span></span>
+<span><span class="co">#&gt;     [3]        1   104-105      + |        ACGT</span></span>
+<span><span class="co">#&gt;     [4]        1       106      - |        TGCA</span></span>
+<span><span class="co">#&gt;     [5]        1   107-201      + |        ACGT</span></span>
+<span><span class="co">#&gt;     ...      ...       ...    ... .         ...</span></span>
+<span><span class="co">#&gt;   [456]        1 9577-9608      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [457]        1      9609      - |        TGCA</span></span>
+<span><span class="co">#&gt;   [458]        1 9610-9674      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [459]        1      9675      - |        TGCA</span></span>
+<span><span class="co">#&gt;   [460]        1 9676-9722      + |        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>Regions no described by automorphism can be described as translations
+(labeled “Trnl”) and they can be shown as follow:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">idx</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">$</span><span class="va">cube</span> <span class="op">==</span> <span class="st">"Trnl"</span><span class="op">)</span></span>
+<span><span class="va">covid_autm</span><span class="op">[</span> <span class="va">idx</span> <span class="op">]</span></span>
+<span><span class="co">#&gt; Automorphism object with 19 ranges and 6 metadata columns:</span></span>
+<span><span class="co">#&gt;        seqnames    ranges strand |        seq1        seq2    coord1    coord2      autm        cube</span></span>
+<span><span class="co">#&gt;           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;    [1]        1       916      + |         AAC         AAA         1         0         0        Trnl</span></span>
+<span><span class="co">#&gt;    [2]        1       944      + |         ---         CCG        NA        22         0        Trnl</span></span>
+<span><span class="co">#&gt;    [3]        1       971      + |         ACA         ---        16        NA         0        Trnl</span></span>
+<span><span class="co">#&gt;    [4]        1      7077      + |         ---         AAA        NA         0         0        Trnl</span></span>
+<span><span class="co">#&gt;    [5]        1      9109      + |         AAT         AAA         3         0         0        Trnl</span></span>
+<span><span class="co">#&gt;    ...      ...       ...    ... .         ...         ...       ...       ...       ...         ...</span></span>
+<span><span class="co">#&gt;   [15]        1      9277      + |         CTT         ---        55        NA         0        Trnl</span></span>
+<span><span class="co">#&gt;   [16]        1      9278      + |         CAT         ---         7        NA         0        Trnl</span></span>
+<span><span class="co">#&gt;   [17]        1      9279      + |         GAA         ---         8        NA         0        Trnl</span></span>
+<span><span class="co">#&gt;   [18]        1      9295      + |         AAA         ---         0        NA         0        Trnl</span></span>
+<span><span class="co">#&gt;   [19]        1      9296      + |         CGA         ---        36        NA         0        Trnl</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>These codon positions cover insertion-deletion (<em>indel</em>)
+mutational events. The wholes regions can be summarized typing:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">idx</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">aut_range</span><span class="op">$</span><span class="va">cube</span> <span class="op">==</span> <span class="st">"Trnl"</span><span class="op">)</span></span>
+<span><span class="va">aut_range</span><span class="op">[</span> <span class="va">idx</span> <span class="op">]</span></span>
+<span><span class="co">#&gt; GRanges object with 13 ranges and 1 metadata column:</span></span>
+<span><span class="co">#&gt;        seqnames    ranges strand |        cube</span></span>
+<span><span class="co">#&gt;           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span></span>
+<span><span class="co">#&gt;    [1]        1       916      + |        Trnl</span></span>
+<span><span class="co">#&gt;    [2]        1       944      + |        Trnl</span></span>
+<span><span class="co">#&gt;    [3]        1       971      + |        Trnl</span></span>
+<span><span class="co">#&gt;    [4]        1      7077      + |        Trnl</span></span>
+<span><span class="co">#&gt;    [5]        1      9109      + |        Trnl</span></span>
+<span><span class="co">#&gt;    ...      ...       ...    ... .         ...</span></span>
+<span><span class="co">#&gt;    [9]        1 9244-9245      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [10]        1      9247      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [11]        1      9257      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [12]        1 9277-9279      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [13]        1 9295-9296      + |        Trnl</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>Only one indel mutation was found in the region where the spike
+glycoprotein is located: 7076 - 8331. That is, the pairwise alignment of
+SARS coronavirus GZ02 and Bat SARS-like coronavirus (bat-SL-CoVZC45)
+reveals 8 single <em>indel</em> mutational events, four regions with two
+<em>indel</em> mutations and one region with 3 <em>indel</em>
+mutations.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">aut_range</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    seqnames start  end width strand cube</span></span>
+<span><span class="co">#&gt; 1         1   916  916     1      + Trnl</span></span>
+<span><span class="co">#&gt; 2         1   944  944     1      + Trnl</span></span>
+<span><span class="co">#&gt; 3         1   971  971     1      + Trnl</span></span>
+<span><span class="co">#&gt; 4         1  7077 7077     1      + Trnl</span></span>
+<span><span class="co">#&gt; 5         1  9109 9109     1      + Trnl</span></span>
+<span><span class="co">#&gt; 6         1  9188 9189     2      + Trnl</span></span>
+<span><span class="co">#&gt; 7         1  9230 9230     1      + Trnl</span></span>
+<span><span class="co">#&gt; 8         1  9234 9235     2      + Trnl</span></span>
+<span><span class="co">#&gt; 9         1  9244 9245     2      + Trnl</span></span>
+<span><span class="co">#&gt; 10        1  9247 9247     1      + Trnl</span></span>
+<span><span class="co">#&gt; 11        1  9257 9257     1      + Trnl</span></span>
+<span><span class="co">#&gt; 12        1  9277 9279     3      + Trnl</span></span>
+<span><span class="co">#&gt; 13        1  9295 9296     2      + Trnl</span></span>
+<span></span>
+<span><span class="co">## region width</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/start.html" class="external-link">width</a></span><span class="op">(</span><span class="va">aut_range</span><span class="op">[</span> <span class="va">idx</span> <span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] 1 1 1 1 1 2 1 2 2 1 1 3 2</span></span></code></pre></div>
+<p>In general, <em>indel</em> mutational event can be modeled as
+translations on <span class="math inline">\(\mathbb{Z}_{64}\)</span>.</p>
+<div class="section level3">
+<h3 id="bar-plot-automorphism-distribution-by-cubes">Bar plot automorphism distribution by cubes<a class="anchor" aria-label="anchor" href="#bar-plot-automorphism-distribution-by-cubes"></a>
+</h3>
+<p>The automorphism distribution by cubes can be summarized in the
+bar-plot graphic</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">$</span><span class="va">cube</span><span class="op">[</span> <span class="va">covid_autm</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">|</span> </span>
+<span>                                    <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">$</span><span class="va">autm</span><span class="op">)</span> <span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">0.9</span>, font <span class="op">=</span> <span class="fl">2</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">counts</span>, main<span class="op">=</span><span class="st">"Automorphism distribution"</span>,</span>
+<span>        xlab<span class="op">=</span><span class="st">"Genetic-code cube representation"</span>,</span>
+<span>        ylab<span class="op">=</span><span class="st">"Fixed mutational events"</span>,</span>
+<span>        col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>,<span class="st">"red"</span>, <span class="st">"darkgreen"</span><span class="op">)</span>, </span>
+<span>        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>        cex.lab <span class="op">=</span> <span class="fl">2</span>, cex.main <span class="op">=</span> <span class="fl">1.5</span>, cex.names <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span><span class="fl">2</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">200</span>, <span class="fl">400</span>, <span class="fl">600</span>, <span class="fl">800</span><span class="op">)</span>, cex.axis <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">1</span>,line <span class="op">=</span> <span class="op">-</span><span class="fl">1.5</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">1.9</span>, <span class="fl">3.1</span>, <span class="fl">4.3</span>, <span class="fl">5.5</span><span class="op">)</span>,</span>
+<span>    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span> <span class="va">counts</span> <span class="op">)</span>, cex <span class="op">=</span> <span class="fl">1.4</span>,</span>
+<span>    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>,<span class="st">"yellow"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="GenomAutomorphism_files/figure-html/barplot-1.png" width="576"></p>
+</div>
+<div class="section level3">
+<h3 id="grouping-automorphism-by-automorphisms-coefficients--types-of-mutations">Grouping automorphism by automorphism’s coefficients. Types of
+mutations<a class="anchor" aria-label="anchor" href="#grouping-automorphism-by-automorphisms-coefficients--types-of-mutations"></a>
+</h3>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism_bycoef.html">automorphism_bycoef</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span></span>
+<span><span class="va">autby_coef</span> <span class="op">&lt;-</span> <span class="va">autby_coef</span><span class="op">[</span> <span class="va">autby_coef</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="va">autby_coef</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="op">-</span><span class="fl">1</span>  <span class="op">]</span></span></code></pre></div>
+<p>Barplot of frequency of mutation types greater than 2.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">autby_coef</span><span class="op">$</span><span class="va">mut_type</span><span class="op">)</span></span>
+<span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">counts</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">count.</span> <span class="op">&lt;-</span> <span class="va">counts</span><span class="op">[</span> <span class="va">counts</span> <span class="op">&gt;</span> <span class="fl">2</span> <span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex.axis <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>    cex.main <span class="op">=</span> <span class="fl">1.4</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">count.</span>, main<span class="op">=</span><span class="st">"Automorphism distribution per Mutation type"</span>,</span>
+<span>        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">36</span><span class="op">)</span>, </span>
+<span>        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>,las<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>,  cex.axis <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">1.8</span> <span class="op">)</span></span></code></pre></div>
+<p><img src="GenomAutomorphism_files/figure-html/barplot_2-1.png" width="1344"></p>
+<p>Every single base mutational event across the MSA was classified
+according IUPAC nomenclature: 1) According to the number of hydrogen
+bonds (on DNA/RNA double helix): strong S={C, G} (three hydrogen bonds)
+and weak W={A, U} (two hydrogen bonds). According to the chemical type:
+purines R={A, G} and pyrimidines Y={C, U}. 3). According to the presence
+of amino or keto groups on the base rings: amino M={C, A} and keto K={G,
+T}. Constant (hold) base positions were labeled with letter H. So, codon
+positions labeled as HKH means that the first and third bases remains
+constant and mutational events between bases G and T were found in the
+MSA.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">counts</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; HHY HHR HHW YHH HHK HHM RHH HRH HYH HHS MHH WHH HMH KHH HYW YHW RHK RHY WHW YHM YHY HKH HMR HRR HRY HWH KHW RYY YHK YHR </span></span>
+<span><span class="co">#&gt; 425 189  88  34  32  24  24  18  18  13  12  11   7   6   5   5   4   4   4   4   4   3   3   3   3   3   3   3   3   3 </span></span>
+<span><span class="co">#&gt; HMW HYK KHY KSW MHK MHW MRH RHM RHR RHW RKW RMH RMW RRY RSW RYH RYW SHH SHW SRH WMH WMS WSY YWH HKR HMK HMY HSR HWS HWW </span></span>
+<span><span class="co">#&gt;   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   1   1   1   1   1   1 </span></span>
+<span><span class="co">#&gt; HWY HYR HYY KHK KHR KKS KMH KMW KRK KRY KSH MHR MHS MKM MMM MRM MWH MWM MWS MWW MYY RMY RRK RRM RSK RYK SHM SHY SKY SMW </span></span>
+<span><span class="co">#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span></span>
+<span><span class="co">#&gt; SRM SWR SWY SYH WHY WRH WRY WWH WWK WWS WWY WYH WYM WYW YHS YKH YKY YRY YWM YWW YWY YYH YYR </span></span>
+<span><span class="co">#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></span></code></pre></div>
+<p>The analysis of the frequency of mutational events (automorphisms,
+COVID: human SARS coronavirus GZ02 vs Bat SARS-like coronavirus isolate
+at-SL-CoVZC45) by mutation types is shown in the last figure. Results
+are consistent with the well-known observation highlighted by Crick: the
+highest mutational rate is found in the third base of the codon (HHY:
+425, HHR: 189, HHW: 88), followed by YHH: 34 in the first base, and the
+lowest rate is found in the second one (<a href="#id_5">5</a>).</p>
+=======
 <p>Automorphisms can be computed starting directly from the <em>FASTA</em> file. Notice that we can work only with genomic regions of our interest by giving the <em>start</em> and <em>end</em> alignment coordinates. In Z64 automorphisms are described as functions <span class="math inline">\(f(x) = k\,x \quad mod\,64\)</span>, where <span class="math inline">\(k\)</span> and <span class="math inline">\(x\)</span> are elements from the set of integers modulo 64. Below, in function <a href="https://is.gd/WMxUKz" class="external-link">automorphism</a> three important arguments are given values: <em>group = “Z64”</em>, <em>cube = c(“ACGT”, “TGCA”)</em>, and <em>cube_alt = c(“CATG”, “GTAC”)</em>. Setting for group specifies on which group the automorphisms will be computed. These groups can be: “Z5”, “Z64”, “Z125”, and “Z5^3”.</p>
 <p>In groups “Z64” and “Z125” not all the mutational events can be described as automorphisms from a given cube. So, a character string denoting pairs of “dual” the genetic-code cubes, as given in references (<a href="#2">1-4</a>)), is given as argument for <em>cube</em>. That is, the base pairs from the given cubes must be complementary each other. Such a cube pair are call dual cubes and, as shown in reference (<a href="#4">4</a>)), each pair integrates group. If automorphisms are not found in first set of dual cubes, then the algorithm search for automorphism in a alternative set of dual cubes.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -460,6 +962,7 @@ code.r{
 <span class="co">#&gt; SRM SWR SWY SYH WHY WRH WRY WWH WWK WWS WWY WYH WYM WYW YHS YKH YKY YRY YWM YWW YWY YYH YYR </span>
 <span class="co">#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></code></pre></div>
 <p>The analysis of the frequency of mutational events (automorphisms, COVID: human vs bat 610 strains) by mutation types is shown in Fig 8a. Results are consistent with the well-known observation highlighted by Crick: the highest mutational rate is found in the third base of the codon (HHY: 425, HHR: 189, HHW: 88), followed by YHH: 34 in the first base, and the lowest rate is found in the second one (<a href="#5">5</a>).</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 <div class="section level3">
 <h3 id="conserved-and-non-conserved-regions">Conserved and non-conserved regions<a class="anchor" aria-label="anchor" href="#conserved-and-non-conserved-regions"></a>
@@ -467,6 +970,52 @@ code.r{
 <div class="section level4">
 <h4 id="conserved-regions">Conserved regions<a class="anchor" aria-label="anchor" href="#conserved-regions"></a>
 </h4>
+<<<<<<< HEAD
+<p>Conserved and non-conserved gene regions can be easily observed in
+most of MSA editing bioinformatic tools. However, here were interesting
+into get the regions coordinates for further downstream analysis.</p>
+<p>Conserved regions from pairwise comparisons are obtain with function
+conserved_regions:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">conserv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conserved_regions.html">conserved_regions</a></span><span class="op">(</span><span class="va">covid_autm</span><span class="op">)</span></span>
+<span><span class="va">conserv</span></span>
+<span><span class="co">#&gt; AutomorphismByCoef object with 6348 ranges and 5 metadata columns:</span></span>
+<span><span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2      autm    mut_type        cube</span></span>
+<span><span class="co">#&gt;             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;      [1]        1      1-19      + |         ATG         ATG         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      [2]        1      1-19      + |         GAG         GAG         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      [3]        1      1-19      + |         AGC         AGC         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      [4]        1      1-19      + |         CTT         CTT         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      [5]        1      1-19      + |         GTT         GTT         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      ...      ...       ...    ... .         ...         ...       ...         ...         ...</span></span>
+<span><span class="co">#&gt;   [6344]        1 9683-9722      + |         GGA         GGA         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   [6345]        1 9683-9722      + |         TCT         TCT         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   [6346]        1 9683-9722      + |         TCA         TCA         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   [6347]        1 9683-9722      + |         GCA         GCA         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   [6348]        1 9683-9722      + |         TAA         TAA         1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>Several regions are similar for more than one comparison.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">conserv_unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conserved_regions.html">conserved_regions</a></span><span class="op">(</span><span class="va">covid_autm</span>, output <span class="op">=</span> <span class="st">"unique"</span><span class="op">)</span></span>
+<span><span class="va">conserv_unique</span></span>
+<span><span class="co">#&gt; GRanges object with 744 ranges and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;         seqnames    ranges strand |      autm        cube</span></span>
+<span><span class="co">#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;     [1]        1      1-19      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;     [2]        1     21-44      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;     [3]        1     47-52      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;     [4]        1     54-60      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;     [5]        1     62-80      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;     ...      ...       ...    ... .       ...         ...</span></span>
+<span><span class="co">#&gt;   [740]        1 9610-9614      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;   [741]        1 9616-9648      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;   [742]        1 9650-9674      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;   [743]        1 9676-9681      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;   [744]        1 9683-9722      + |         1        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+=======
 <p>Conserved and non-conserved gene regions can be easily observed in most of MSA editing bioinformatic tools. However, here were interesting into get the regions coordinates for further downstream analysis.</p>
 <p>Conserved regions from pairwise comparisons are obtain with function conserved_regions:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -508,6 +1057,7 @@ code.r{
 <span class="co">#&gt;   [744]        1 9683-9722      + |         1        ACGT</span>
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></code></pre></div>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 </div>
 </div>
@@ -515,6 +1065,169 @@ code.r{
 <h2 id="automorphisms-on-mathbbz_125">Automorphisms on <span class="math inline">\(\mathbb{Z}_{125}\)</span><a class="anchor" aria-label="anchor" href="#automorphisms-on-mathbbz_125"></a>
 </h2>
 <p>Alternatively, we can use the algebraic representation on on <span class="math inline">\(\mathbb{Z}_{125}\)</span>.</p>
+<<<<<<< HEAD
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">autm_z125</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphisms.html">automorphisms</a></span><span class="op">(</span></span>
+<span>                    seq <span class="op">=</span> <span class="va">covid_aln</span>, </span>
+<span>                    group <span class="op">=</span> <span class="st">"Z125"</span>, </span>
+<span>                    cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,</span>
+<span>                    cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,</span>
+<span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>For the sake of reducing computational time in this example,
+‘autm_z125’ is available with the package.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">autm_z125</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span>
+<span><span class="va">autm_z125</span></span>
+<span><span class="co">#&gt; Automorphism object with 9722 ranges and 6 metadata columns:</span></span>
+<span><span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2    coord1    coord2      autm        cube</span></span>
+<span><span class="co">#&gt;             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;      [1]        1         1      + |         AGA         AGA        81        81         1        ACGT</span></span>
+<span><span class="co">#&gt;      [2]        1         2      + |         TAT         TAT        49        49         1        ACGT</span></span>
+<span><span class="co">#&gt;      [3]        1         3      + |         GGG         GGG        93        93         1        ACGT</span></span>
+<span><span class="co">#&gt;      [4]        1         4      + |         GTT         GTT       119       119         1        ACGT</span></span>
+<span><span class="co">#&gt;      [5]        1         5      + |         AGT         AGT        84        84         1        ACGT</span></span>
+<span><span class="co">#&gt;      ...      ...       ...    ... .         ...         ...       ...       ...       ...         ...</span></span>
+<span><span class="co">#&gt;   [9718]        1      9718      + |         CTC         CTC       112       112         1        ACGT</span></span>
+<span><span class="co">#&gt;   [9719]        1      9719      + |         TGA         TGA        96        96         1        ACGT</span></span>
+<span><span class="co">#&gt;   [9720]        1      9720      + |         GTT         GTT       119       119         1        ACGT</span></span>
+<span><span class="co">#&gt;   [9721]        1      9721      + |         CTA         CTA       111       111         1        ACGT</span></span>
+<span><span class="co">#&gt;   [9722]        1      9722      + |         AAA         AAA        31        31         1        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>And the summary by range</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">aut_range_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphismByRanges.html">automorphismByRanges</a></span><span class="op">(</span><span class="va">autm_z125</span><span class="op">)</span></span>
+<span><span class="va">aut_range_2</span></span>
+<span><span class="co">#&gt; GRanges object with 9 ranges and 1 metadata column:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand |        cube</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]        1    1-1784      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [2]        1 1785-1787      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [3]        1 1788-8117      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [4]        1 8118-8123      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [5]        1 8124-8255      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [6]        1 8256-8261      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [7]        1 8262-8285      + |        ACGT</span></span>
+<span><span class="co">#&gt;   [8]        1 8286-8291      + |        Trnl</span></span>
+<span><span class="co">#&gt;   [9]        1 8292-9722      + |        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>The whole genome can be described by automorphisms on <span class="math inline">\(\mathbb{Z}_{125}\)</span>.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">autm_z125</span><span class="op">$</span><span class="va">cube</span><span class="op">[</span> <span class="va">autm_z125</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="fl">1</span> <span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">1</span>, font <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">counts</span>, main<span class="op">=</span><span class="st">"Automorphism distribution"</span>,</span>
+<span>        xlab<span class="op">=</span><span class="st">"Genetic-code cube representation"</span>,</span>
+<span>        ylab<span class="op">=</span><span class="st">"Fixed mutational events"</span>,</span>
+<span>        col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>,<span class="st">"red"</span><span class="op">)</span>, </span>
+<span>        ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1300</span><span class="op">)</span>,</span>
+<span>        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">1</span>,line <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">1.9</span>, <span class="fl">3.1</span><span class="op">)</span>,</span>
+<span>    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span> <span class="va">counts</span> <span class="op">)</span>, cex <span class="op">=</span> <span class="fl">1.4</span>,</span>
+<span>    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="GenomAutomorphism_files/figure-html/barplot_3-1.png" width="288"></p>
+</div>
+<div class="section level2">
+<h2 id="automorphisms-on-the-genetic-code-cube-representation-on-gf5">Automorphisms on the Genetic-code Cube Representation on GF(5)<a class="anchor" aria-label="anchor" href="#automorphisms-on-the-genetic-code-cube-representation-on-gf5"></a>
+</h2>
+<p>The Genetic-code Cube Representations on the Galois Field GF(5) were
+studied in (<a href="#id_4">4</a>). Each codon is represented by each
+coordinate in the 3D space.</p>
+<p>Automorphisms are represented by diagonal matrices, with elements
+<span class="math inline">\(x\)</span> in <span class="math inline">\(x
+\in \mathbb{Z}_5\)</span>.</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">autm_3d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphisms.html">automorphisms</a></span><span class="op">(</span></span>
+<span>                    seq <span class="op">=</span> <span class="va">covid_aln</span>, </span>
+<span>                    group <span class="op">=</span> <span class="st">"Z5^3"</span>, </span>
+<span>                    cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,</span>
+<span>                    cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span>,</span>
+<span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>The result is available with package</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">autm_3d</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span>
+<span><span class="va">autm_3d</span></span>
+<span><span class="co">#&gt; Automorphism object with 9722 ranges and 6 metadata columns:</span></span>
+<span><span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2   coord1   coord2        autm        cube</span></span>
+<span><span class="co">#&gt;             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;matrix&gt; &lt;matrix&gt; &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;      [1]        1         1      + |         AGA         AGA    1:3:1    1:3:1       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;      [2]        1         2      + |         TAT         TAT    4:1:4    4:1:4       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;      [3]        1         3      + |         GGG         GGG    3:3:3    3:3:3       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;      [4]        1         4      + |         GTT         GTT    3:4:4    3:4:4       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;      [5]        1         5      + |         AGT         AGT    1:3:4    1:3:4       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;      ...      ...       ...    ... .         ...         ...      ...      ...         ...         ...</span></span>
+<span><span class="co">#&gt;   [9718]        1      9718      + |         CTC         CTC    2:4:2    2:4:2       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;   [9719]        1      9719      + |         TGA         TGA    4:3:1    4:3:1       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;   [9720]        1      9720      + |         GTT         GTT    3:4:4    3:4:4       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;   [9721]        1      9721      + |         CTA         CTA    2:4:1    2:4:1       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;   [9722]        1      9722      + |         AAA         AAA    1:1:1    1:1:1       1,1,1        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="grouping-automorphism-by-automorphisms-coefficients">Grouping automorphism by automorphism’s coefficients<a class="anchor" aria-label="anchor" href="#grouping-automorphism-by-automorphisms-coefficients"></a>
+</h3>
+<p>Automorphisms that preserved codons (DNA base-triplets) are
+represented by the identity matrix, i.e., the matrix with diagonal
+elements “1,1,1”.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">autby_coef_3d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphism_bycoef.html">automorphism_bycoef</a></span><span class="op">(</span><span class="va">autm_3d</span><span class="op">)</span></span>
+<span><span class="va">autby_coef_3d</span> <span class="op">&lt;-</span> <span class="va">autby_coef_3d</span><span class="op">[</span> <span class="va">autby_coef_3d</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="st">"1,1,1"</span> <span class="op">]</span></span>
+<span><span class="va">autby_coef_3d</span></span>
+<span><span class="co">#&gt; AutomorphismByCoef object with 1249 ranges and 5 metadata columns:</span></span>
+<span><span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2        autm    mut_type        cube</span></span>
+<span><span class="co">#&gt;             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;      [1]        1        28      + |         GGG         GAG       1,2,1         HRH        ACGT</span></span>
+<span><span class="co">#&gt;      [2]        1        46      + |         CAC         CGC       1,3,1         HRH        ACGT</span></span>
+<span><span class="co">#&gt;      [3]        1        60      + |         CTC         TTC       2,1,1         YHH        ACGT</span></span>
+<span><span class="co">#&gt;      [4]        1        77      + |         TAT         TAC       1,1,3         HHY        ACGT</span></span>
+<span><span class="co">#&gt;      [5]        1        97      + |         GGT         GAT       1,2,1         HRH        ACGT</span></span>
+<span><span class="co">#&gt;      ...      ...       ...    ... .         ...         ...         ...         ...         ...</span></span>
+<span><span class="co">#&gt;   [1245]        1      9649      + |         ATC         ACC       1,3,1         HYH        ACGT</span></span>
+<span><span class="co">#&gt;   [1246]        1      9663      + |         CAT         TAT       2,1,1         YHH        ACGT</span></span>
+<span><span class="co">#&gt;   [1247]        1      9680      + |         TAA         TGA       1,3,1         HRH        ACGT</span></span>
+<span><span class="co">#&gt;   [1248]        1      9688      + |         CGT         CAT       1,2,1         HRH        ACGT</span></span>
+<span><span class="co">#&gt;   [1249]        1      9703      + |         ATC         ACC       1,3,1         HYH        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>Conserved regions from pairwise comparisons are obtain with function
+conserved_regions:</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">conserv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conserved_regions.html">conserved_regions</a></span><span class="op">(</span><span class="va">autm_3d</span><span class="op">)</span></span>
+<span><span class="va">conserv</span></span>
+<span><span class="co">#&gt; AutomorphismByCoef object with 6964 ranges and 5 metadata columns:</span></span>
+<span><span class="co">#&gt;          seqnames    ranges strand |        seq1        seq2        autm    mut_type        cube</span></span>
+<span><span class="co">#&gt;             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;      [1]        1      1-27      + |         AGA         AGA       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      [2]        1      1-27      + |         TAT         TAT       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      [3]        1      1-27      + |         GGG         GGG       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      [4]        1      1-27      + |         GTT         GTT       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      [5]        1      1-27      + |         AGT         AGT       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;      ...      ...       ...    ... .         ...         ...         ...         ...         ...</span></span>
+<span><span class="co">#&gt;   [6960]        1 9704-9722      + |         CTC         CTC       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   [6961]        1 9704-9722      + |         TGA         TGA       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   [6962]        1 9704-9722      + |         GTT         GTT       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   [6963]        1 9704-9722      + |         CTA         CTA       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   [6964]        1 9704-9722      + |         AAA         AAA       1,1,1         HHH        ACGT</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>The whole genome mutational events represented as automorphisms on
+the 3D space <span class="math inline">\(\mathbb{Z}_{5}^3\)</span>,
+specifically on the cube ACGT (see <a href="#id_4">4</a>).</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">autby_coef_3d</span><span class="op">$</span><span class="va">cube</span><span class="op">[</span> <span class="va">autby_coef_3d</span><span class="op">$</span><span class="va">autm</span> <span class="op">!=</span> <span class="st">"1,1,1"</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, cex <span class="op">=</span> <span class="fl">1</span>, font <span class="op">=</span> <span class="fl">2</span>, cex.main <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">counts</span>, main<span class="op">=</span><span class="st">"Automorphism distribution"</span>,</span>
+<span>        xlab<span class="op">=</span><span class="st">"Genetic-code cube representation"</span>,</span>
+<span>        ylab<span class="op">=</span><span class="st">"Fixed mutational events"</span>,</span>
+<span>        col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>,<span class="st">"red"</span><span class="op">)</span>, </span>
+<span>        ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1300</span><span class="op">)</span>, </span>
+<span>        border <span class="op">=</span> <span class="cn">NA</span>, axes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">1</span>,line <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">1.9</span><span class="op">)</span>,</span>
+<span>    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span> <span class="va">counts</span> <span class="op">)</span>, cex <span class="op">=</span> <span class="fl">1.4</span>,</span>
+<span>    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+=======
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">covid_autm_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/automorphisms.html">automorphisms</a></span><span class="op">(</span>
                     seq <span class="op">=</span> <span class="va">covid_aln</span>, 
@@ -660,6 +1373,7 @@ code.r{
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">1</span>,line <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">1.9</span><span class="op">)</span>,
     text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span> <span class="va">counts</span> <span class="op">)</span>, cex <span class="op">=</span> <span class="fl">1.4</span>,
     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 <p><img src="GenomAutomorphism_files/figure-html/barplot_4-1.png" width="288"></p>
 </div>
 </div>
@@ -669,6 +1383,18 @@ code.r{
 <pre><code>1. Sanchez R, Morgado E, Grau R. Gene algebra from a 
 genetic code algebraic structure. J Math Biol. 2005 Oct;51(4):431-57. 
 doi:10.1007/s00285-005-0332-8. Epub 2005 Jul 13. PMID: 16012800.
+<<<<<<< HEAD
+([PDF](https://arxiv.org/pdf/q-bio/0412033.pdf)).
+
+2. Robersy Sanchez, Jesus Barreto (2021) Genomic Abelian
+Finite Groups. 
+[doi:10.1101/2021.06.01.446543](https://doi.org/10.1101/2021.06.01.446543)
+
+3. M. V Jose, E.R. Morgado, R. Sanchez, T. Govezensky,
+The 24 possible algebraic representations of the standard genetic code in
+six or in three dimensions, Adv. Stud. Biol. 4 (2012) 119-152.
+[PDF](https://is.gd/na9eap).
+=======
 &lt;https://arxiv.org/pdf/q-bio/0412033.pdf&gt;.
 
 2. Robersy Sanchez, Jesus Barreto (2021) Genomic Abelian
@@ -679,11 +1405,16 @@ Finite Groups.
 24 possible algebraic representations of the standard genetic code in six
 or in three dimensions, Adv. Stud. Biol. 4 (2012) 119-152.
 &lt;https://is.gd/na9eap&gt;.
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 
 4. R. Sanchez. Symmetric Group of the Genetic-Code Cubes.
 Effect of the Genetic-Code Architecture on the Evolutionary Process MATCH
 Commun. Math. Comput. Chem. 79 (2018) 527-560. 
+<<<<<<< HEAD
+[PDF](https://bit.ly/2Z9mjM7).
+=======
 &lt;https://bit.ly/2Z9mjM7&gt;.
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 
 5. Crick FHC. The Origin of the Genetic Code. J Mol Biol.
 1968;38: 367–379.</code></pre>
@@ -691,6 +1422,44 @@ Commun. Math. Comput. Chem. 79 (2018) 527-560.
 <div class="section level2">
 <h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
+<<<<<<< HEAD
+<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
+which this document was compiled:</p>
+<pre><code><span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 20.04.4 LTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0</span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span></span>
+<span><span class="co">#&gt;  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8    LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span></span>
+<span><span class="co">#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats4    stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] GenomAutomorphism_0.99.2 Biostrings_2.64.0        GenomeInfoDb_1.32.2      XVector_0.36.0          </span></span>
+<span><span class="co">#&gt; [5] IRanges_2.30.0           S4Vectors_0.34.0         BiocGenerics_0.42.0      BiocStyle_2.24.0        </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] assertthat_0.2.1       rprojroot_2.0.3        digest_0.6.29          foreach_1.5.2          utf8_1.2.2            </span></span>
+<span><span class="co">#&gt;  [6] R6_2.5.1               evaluate_0.15          highr_0.9              pillar_1.8.0           zlibbioc_1.42.0       </span></span>
+<span><span class="co">#&gt; [11] rlang_1.0.4            rstudioapi_0.13        data.table_1.14.2      jquerylib_0.1.4        rmarkdown_2.14        </span></span>
+<span><span class="co">#&gt; [16] pkgdown_2.0.6          textshaping_0.3.6      desc_1.4.1             BiocParallel_1.30.3    stringr_1.4.0         </span></span>
+<span><span class="co">#&gt; [21] numbers_0.8-2          RCurl_1.98-1.7         compiler_4.2.1         xfun_0.30              pkgconfig_2.0.3       </span></span>
+<span><span class="co">#&gt; [26] systemfonts_1.0.4      htmltools_0.5.2        tidyselect_1.1.2       tibble_3.1.7           GenomeInfoDbData_1.2.8</span></span>
+<span><span class="co">#&gt; [31] bookdown_0.26          codetools_0.2-18       fansi_1.0.3            crayon_1.5.1           dplyr_1.0.9           </span></span>
+<span><span class="co">#&gt; [36] bitops_1.0-7           jsonlite_1.8.0         lifecycle_1.0.1        DBI_1.1.2              magrittr_2.0.3        </span></span>
+<span><span class="co">#&gt; [41] cli_3.3.0              stringi_1.7.6          cachem_1.0.6           fs_1.5.2               doParallel_1.0.17     </span></span>
+<span><span class="co">#&gt; [46] bslib_0.3.1            ellipsis_0.3.2         ragg_1.2.2             generics_0.1.3         vctrs_0.4.1           </span></span>
+<span><span class="co">#&gt; [51] iterators_1.0.14       tools_4.2.1            glue_1.6.2             purrr_0.3.4            parallel_4.2.1        </span></span>
+<span><span class="co">#&gt; [56] fastmap_1.1.0          yaml_2.3.5             BiocManager_1.30.17    GenomicRanges_1.48.0   memoise_2.0.1         </span></span>
+<span><span class="co">#&gt; [61] knitr_1.39             sass_0.4.1</span></span></code></pre>
+=======
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on which this document was compiled:</p>
 <pre><code><span class="co">#&gt; R version 4.1.1 (2021-08-10)</span>
 <span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span>
@@ -724,6 +1493,7 @@ Commun. Math. Comput. Chem. 79 (2018) 527-560.
 <span class="co">#&gt; [46] ragg_1.1.3             generics_0.1.0         vctrs_0.3.8            iterators_1.0.13       tools_4.1.1           </span>
 <span class="co">#&gt; [51] glue_1.4.2             purrr_0.3.4            parallel_4.1.1         fastmap_1.1.0          yaml_2.2.1            </span>
 <span class="co">#&gt; [56] BiocManager_1.30.16    GenomicRanges_1.44.0   memoise_2.0.0          knitr_1.33             sass_0.4.0</span></code></pre>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -738,7 +1508,11 @@ Commun. Math. Comput. Chem. 79 (2018) 527-560.
 
 <div class="pkgdown-footer-right">
   <p></p>
+<<<<<<< HEAD
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+=======
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
 </div>
 
     </footer>

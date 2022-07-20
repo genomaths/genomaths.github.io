@@ -70,7 +70,11 @@
     /* Search marking --------------------------*/
     var url = new URL(window.location.href);
     var toMark = url.searchParams.get("q");
+<<<<<<< HEAD
+    var mark = new Mark("main#main");
+=======
     var mark = new Mark("div.col-md-9");
+>>>>>>> 9c27ccb9811bea0cf895ece272f2ce70574f4858
     if (toMark) {
       mark.mark(toMark, {
         accuracy: {
