@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="
-            This is a R package to compute the autimorphisms between pairwise 
+            This is a R package to compute the automorphisms between pairwise 
             aligned DNA sequences represented as elements from a Genomic 
             Abelian group. In a general scenario, from genomic regions till 
             the whole genomes from a given population (from any species or 
@@ -30,7 +30,7 @@
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Compute the automorphisms between DNA's Abelian group representations ">
 <meta property="og:description" content="
-            This is a R package to compute the autimorphisms between pairwise 
+            This is a R package to compute the automorphisms between pairwise 
             aligned DNA sequences represented as elements from a Genomic 
             Abelian group. In a general scenario, from genomic regions till 
             the whole genomes from a given population (from any species or 
@@ -135,7 +135,7 @@ Pennsylvania State University, University Park, PA 16802<br><a href="mailto:rus5
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>This is a R package to compute the autimorphisms between pairwise aligned DNA sequences represented as elements from a Genomic Abelian group as described in the paper <a href="https://www.biorxiv.org/content/10.1101/2021.06.01.446543v2" class="external-link">Genomic Abelian Finite Groups</a>. In a general scenario, whole chromosomes or genomic regions from a population (from any species or close related species) can be algebraically represented as a direct sum of cyclic groups or more specifically Abelian <em>p</em>-groups. Basically, we propose the representation of multiple sequence alignments (MSA) of length <em>N</em> as a finite Abelian group created by the direct sum of homocyclic Abelian group of <em>prime-power order</em>:</p>
+<p>This is a R package to compute the automorphisms between pairwise aligned DNA sequences represented as elements from a Genomic Abelian group as described in the paper <a href="https://www.biorxiv.org/content/10.1101/2021.06.01.446543v2" class="external-link">Genomic Abelian Finite Groups</a>. In a general scenario, whole chromosomes or genomic regions from a population (from any species or close related species) can be algebraically represented as a direct sum of cyclic groups or more specifically Abelian <em>p</em>-groups. Basically, we propose the representation of multiple sequence alignments (MSA) of length <em>N</em> as a finite Abelian group created by the direct sum of homocyclic Abelian group of <em>prime-power order</em>:</p>
 <p>   <em>G</em> = (ℤ<sub><em>p</em><sub>1</sub><sup><em>α</em><sub>1</sub></sup></sub>)<sup><em>n</em><sub>1</sub></sup> ⊕ (ℤ<sub><em>p</em><sub>1</sub><sup><em>α</em><sub>2</sub></sup></sub>)<sup><em>n</em><sub>2</sub></sup> ⊕ … ⊕ (ℤ<sub><em>p</em><sub><em>k</em></sub><sup><em>α</em><sub><em>k</em></sub></sup></sub>)<sup><em>n</em><sub><em>k</em></sub></sup></p>
 <p>Where, the <em>p</em><sub><em>i</em></sub>’s are prime numbers, <em>α</em><sub><em>i</em></sub> ∈ ℕ and ℤ<sub><em>p</em><sub><em>i</em></sub><sup><em>α</em><sub><em>i</em></sub></sup></sub> is the group of integer modulo <em>p</em><sub><em>i</em></sub><sup><em>α</em><sub><em>i</em></sub></sup>.</p>
 <p>For the purpose of automorphism between two aligned DNA sequences, <em>p</em><sub><em>i</em></sub><sup><em>α</em><sub><em>i</em></sub></sup> ∈ {5, 2<sup>6</sup>, 5<sup>3</sup>}.</p>
@@ -144,7 +144,7 @@ Pennsylvania State University, University Park, PA 16802<br><a href="mailto:rus5
 <div class="section level2">
 <h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
 </h2>
-<p>This application is under development. Watch this repo or check for updates.</p>
+<p>This application has been submitted to Bioconductor. Watch this repo or check for updates. Follow the reviewing process at <a href="https://github.com/Bioconductor/Contributions/issues/2678" target="_blank" rel="noopener" class="external-link">Bioconductor/Contributions</a>.</p>
 <hr>
 </div>
 <div class="section level2">
@@ -152,11 +152,11 @@ Pennsylvania State University, University Park, PA 16802<br><a href="mailto:rus5
 </h2>
 <p>There are several tutorials on how to use the package at <a href="https://genomaths.github.io/genomautomorphism" class="external-link">GenomAutomorphism</a> website <a href="https://genomaths.github.io/genomautomorphism" class="external-link"><img src="reference/figures/logo.png" align="middle" width="32" height="32"></a></p>
 <ul>
-<li><a href="https://is.gd/zwRaUw" target="_blank" class="external-link">Get started-with GenomAutomorphism</a></li>
-<li><a href="https://is.gd/A03Fkl" target="_blank" class="external-link">Analysis of Automorphisms on a DNA Multiple Sequence Alignment</a></li>
-<li><a href="https://is.gd/gsZcuj" target="_blank" class="external-link">Analysis of Automorphisms on a MSA of Primate BRCA1 Gene</a></li>
-<li><a href="https://is.gd/87wlbL" target="_blank" class="external-link">A Short Introduction to Algebraic Taxonomy on Genes Regions</a></li>
-<li><a href="https://is.gd/836uas" target="_blank" class="external-link">Automorphism analysis on COVID-19 data</a></li>
+<li><a href="https://is.gd/zwRaUw" target="_blank" rel="noopener" class="external-link">Get started-with GenomAutomorphism</a></li>
+<li><a href="https://is.gd/A03Fkl" target="_blank" rel="noopener" class="external-link">Analysis of Automorphisms on a DNA Multiple Sequence Alignment</a></li>
+<li><a href="https://is.gd/gsZcuj" target="_blank" rel="noopener" class="external-link">Analysis of Automorphisms on a MSA of Primate BRCA1 Gene</a></li>
+<li><a href="https://is.gd/87wlbL" target="_blank" rel="noopener" class="external-link">A Short Introduction to Algebraic Taxonomy on Genes Regions</a></li>
+<li><a href="https://is.gd/836uas" target="_blank" rel="noopener" class="external-link">Automorphism analysis on COVID-19 data</a></li>
 </ul>
 </div>
 <div class="section level2">

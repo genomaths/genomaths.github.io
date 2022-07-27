@@ -111,22 +111,47 @@ pairwise DNA sequence alignment is available in the dataset named
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
     <p><code><a href="Automorphism.html">AutomorphismList</a></code> class object.</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The alignment of these DNA sequences is available at:
+<a href="https://github.com/genomaths/seqalignments/raw/master/COVID-19" class="external-link">https://github.com/genomaths/seqalignments/raw/master/COVID-19</a> in
+the fasta file
+'AY390556.1_265-13398_13398-21485_RNA-POL_SARS_COVI_GZ02.fas'</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span> <span class="co">## The alignment of these DNA sequences is available at:</span></span></span>
-<span class="r-in"><span> <span class="va">URL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/seqalignments/raw/master/"</span>, </span></span>
-<span class="r-in"><span> <span class="st">"COVID-19/AY390556.1_265-13398_13398-21485_RNA-POL_SARS_COVI_GZ02.fas"</span><span class="op">)</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span> <span class="co">## Automorphisms can be directly computed with function 'automorphism'</span></span></span>
-<span class="r-in"><span> <span class="va">autm</span> <span class="op">&lt;-</span> <span class="fu">automorphism</span><span class="op">(</span></span></span>
-<span class="r-in"><span> filepath <span class="op">=</span> <span class="va">URL</span>,</span></span>
-<span class="r-in"><span> group <span class="op">=</span> <span class="st">"Z64"</span>,</span></span>
-<span class="r-in"><span> cube <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ACGT"</span>, <span class="st">"TGCA"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span> cube_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CATG"</span>, <span class="st">"GTAC"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">autm</span>, package <span class="op">=</span> <span class="st">"GenomAutomorphism"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">autm</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Automorphism object with 7100 ranges and 6 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          seqnames    ranges strand |        seq1        seq2    coord1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [1]        1         1      + |         ACC         ATC        17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [2]        1         2      + |         TAT         TAT        15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [3]        1         3      + |         GTT         GTT        59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [4]        1         4      + |         GGT         GGT        43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [5]        1         5      + |         ATT         ATT        51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      ...      ...       ...    ... .         ...         ...       ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7096]        1      7096      + |         TTA         TTA        60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7097]        1      7097      + |         GGC         GGC        41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7098]        1      7098      + |         GTT         GTT        59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7099]        1      7099      + |         CTA         CAA        52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7100]        1      7100      + |         TCA         TCA        28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             coord2      autm        cube</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;numeric&gt; &lt;numeric&gt; &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [1]        49        33        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [2]        15         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [3]        59         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [4]        43         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [5]        51         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      ...       ...       ...         ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7096]        60         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7097]        41         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7098]        59         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7099]         4         5        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7100]        28         1        ACGT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
