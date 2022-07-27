@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -35,7 +35,7 @@
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -100,84 +100,84 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">meth_levels</span><span class="op">(</span>
-  <span class="va">GR</span>,
-  <span class="va">x</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="cn">NULL</span>, uC2 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,
-  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,
-  init.pars <span class="op">=</span> <span class="cn">NULL</span>,
-  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,
-  min.coverage <span class="op">=</span> <span class="fl">4</span>,
-  tv <span class="op">=</span> <span class="cn">FALSE</span>,
-  bay.tv <span class="op">=</span> <span class="cn">FALSE</span>,
-  filter <span class="op">=</span> <span class="cn">FALSE</span>,
-  preserve.dt <span class="op">=</span> <span class="cn">FALSE</span>,
-  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,
-  num.cores <span class="op">=</span> <span class="fl">1</span>,
-  tasks <span class="op">=</span> <span class="fl">0L</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S4 method for ANY,data.frame</span>
-<span class="fu">meth_levels</span><span class="op">(</span>
-  <span class="va">GR</span>,
-  <span class="va">x</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="cn">NULL</span>, uC2 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,
-  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,
-  init.pars <span class="op">=</span> <span class="cn">NULL</span>,
-  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,
-  min.coverage <span class="op">=</span> <span class="fl">4</span>,
-  tv <span class="op">=</span> <span class="cn">FALSE</span>,
-  bay.tv <span class="op">=</span> <span class="cn">FALSE</span>,
-  filter <span class="op">=</span> <span class="cn">FALSE</span>,
-  preserve.dt <span class="op">=</span> <span class="cn">FALSE</span>,
-  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,
-  num.cores <span class="op">=</span> <span class="fl">1</span>,
-  tasks <span class="op">=</span> <span class="fl">0L</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S4 method for GRanges,ANY</span>
-<span class="fu">meth_levels</span><span class="op">(</span>
-  <span class="va">GR</span>,
-  <span class="va">x</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="cn">NULL</span>, uC2 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,
-  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,
-  init.pars <span class="op">=</span> <span class="cn">NULL</span>,
-  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,
-  min.coverage <span class="op">=</span> <span class="fl">4</span>,
-  tv <span class="op">=</span> <span class="cn">FALSE</span>,
-  bay.tv <span class="op">=</span> <span class="cn">FALSE</span>,
-  filter <span class="op">=</span> <span class="cn">FALSE</span>,
-  preserve.dt <span class="op">=</span> <span class="cn">FALSE</span>,
-  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,
-  num.cores <span class="op">=</span> <span class="fl">1</span>,
-  tasks <span class="op">=</span> <span class="fl">0L</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S4 method for list,ANY</span>
-<span class="fu">meth_levels</span><span class="op">(</span>
-  <span class="va">GR</span>,
-  x <span class="op">=</span> <span class="cn">NULL</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="cn">NULL</span>, uC2 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,
-  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,
-  init.pars <span class="op">=</span> <span class="cn">NULL</span>,
-  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,
-  min.coverage <span class="op">=</span> <span class="fl">4</span>,
-  tv <span class="op">=</span> <span class="cn">FALSE</span>,
-  bay.tv <span class="op">=</span> <span class="cn">FALSE</span>,
-  filter <span class="op">=</span> <span class="cn">FALSE</span>,
-  preserve.dt <span class="op">=</span> <span class="cn">FALSE</span>,
-  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,
-  num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
-  tasks <span class="op">=</span> <span class="fl">0L</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">meth_levels</span><span class="op">(</span></span>
+<span>  <span class="va">GR</span>,</span>
+<span>  <span class="va">x</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="cn">NULL</span>, uC2 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  init.pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  min.coverage <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  tv <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  bay.tv <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  filter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve.dt <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for ANY,data.frame</span></span>
+<span><span class="fu">meth_levels</span><span class="op">(</span></span>
+<span>  <span class="va">GR</span>,</span>
+<span>  <span class="va">x</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="cn">NULL</span>, uC2 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  init.pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  min.coverage <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  tv <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  bay.tv <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  filter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve.dt <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for GRanges,ANY</span></span>
+<span><span class="fu">meth_levels</span><span class="op">(</span></span>
+<span>  <span class="va">GR</span>,</span>
+<span>  <span class="va">x</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="cn">NULL</span>, uC2 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  init.pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  min.coverage <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  tv <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  bay.tv <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  filter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve.dt <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list,ANY</span></span>
+<span><span class="fu">meth_levels</span><span class="op">(</span></span>
+<span>  <span class="va">GR</span>,</span>
+<span>  x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="cn">NULL</span>, uC2 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  init.pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  min.coverage <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  tv <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  bay.tv <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  filter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve.dt <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -187,6 +187,8 @@
 (<strong><em>GR</em></strong>) or 'data.frame' (<strong><em>x</em></strong>) with a matrix of
 counts in the meta-columns (methylated mC and unmethylated uC cytosines) or a
 list of <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> objects.</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>Vector of one or two integer numbers denoting the indexes of
 the columns where the methylated and unmethylated read counts are found.
@@ -194,19 +196,27 @@ Unless specified in the parameter 'columns', the methylation counts must be
 given in the first four columns: 'mC1' and 'uC1' methylated and unmethylated
 counts for control sample, and 'mC2' and 'uC2' methylated and unmethylated
 counts for treatment sample, respectively.</p></dd>
+
+
 <dt>Bayesian</dt>
 <dd><p>logical(1). Whether to perform the estimations based on
 posterior estimations of methylation levels.</p></dd>
+
+
 <dt>init.pars</dt>
 <dd><p>initial parameter values. Defaults is NULL and an initial
 guess is estimated using <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim</a></code> function. If the initial
 guessing fails initial parameter values are to alpha = 1 &amp;
 beta = 1, which imply the parsimony pseudo-counts greater than zero.</p></dd>
+
+
 <dt>via.optim</dt>
 <dd><p>Optional. Only used if <em>Bayesian = TRUE</em> Whether to
 estimate beta distribution parameters via <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim</a></code> or
 <code><a href="https://rdrr.io/pkg/minpack.lm/man/nls.lm.html" class="external-link">nls.lm</a></code>. If any of this approaches fail then
 parameters used <em>init.pars</em> will be returned.</p></dd>
+
+
 <dt>min.coverage</dt>
 <dd><p>An integer or an integer vector of length 2. Cytosine
 sites where the coverage in both samples, 'x' and 'y', are less than
@@ -214,32 +224,49 @@ min.coverage' are discarded. The cytosine site is preserved, however, if the
 coverage is greater than 'min.coverage' in at least one sample. If
 'min.coverage' is an integer vector, then the corresponding min coverage is
 applied to each sample.</p></dd>
+
+
 <dt>tv</dt>
 <dd><p>logical(1). Whether to compute the total variation distance at each
 cytosine site. That is, the difference of methylation levels.</p></dd>
+
+
 <dt>bay.tv</dt>
 <dd><p>logical(1). Whether to compute the total variation distance at
 each cytosine site based on Bayesian estimation of methylation levels.</p></dd>
+
+
 <dt>filter</dt>
 <dd><p>logical(1). Optional. If TRUE, then only cytosine sites with
 \(coverages &gt; min.coverage\) are including in the computation.</p></dd>
+
+
 <dt>preserve.dt</dt>
 <dd><p>logical(1). Option of whether to preserve all
 the metadata from the original 'data.frame' or
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object.</p></dd>
+
+
 <dt>loss.fun</dt>
 <dd><p>Described in <code><a href="estimateBetaDist.html">estimateBetaDist</a></code>.</p></dd>
+
+
 <dt>num.cores, tasks</dt>
 <dd><p>Parameters for parallel computation using package
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/BiocParallel-package.html" class="external-link">BiocParallel-package</a></code>: the number of cores to use,
 i.e. at most how many child processes will be run simultaneously (see
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code> and the number of tasks per job (only
 for Linux OS).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>if TRUE, prints the function log to stdout</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Optional parameter values for: maxiter, ftol, ptol, and gradtol
 from <code><a href="https://rdrr.io/pkg/minpack.lm/man/nlsLM.html" class="external-link">nlsLM</a></code> and <code><a href="https://rdrr.io/r/stats/nlm.html" class="external-link">nlm</a></code> functions.</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -248,24 +275,24 @@ from <code><a href="https://rdrr.io/pkg/minpack.lm/man/nlsLM.html" class="extern
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## The read count data are created</span></span>
-<span class="r-in"><span class="va">num.samples</span> <span class="op">&lt;-</span> <span class="fl">250</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="va">num.samples</span></span>
-<span class="r-in"><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="va">s</span>, end <span class="op">=</span> <span class="va">s</span>,</span>
-<span class="r-in">                strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+"</span>, <span class="st">"-"</span><span class="op">)</span>, <span class="va">num.samples</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">                mCc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span>
-<span class="r-in">                uCc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span>
-<span class="r-in">                mCt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span>
-<span class="r-in">                uCt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">gr</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">meth_levels</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">gr</span>,</span>
-<span class="r-in">                columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">                            mC2 <span class="op">=</span> <span class="fl">3</span>, uC2 <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">                preserve.dt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">                Bayesian <span class="op">=</span> <span class="cn">TRUE</span>, tv <span class="op">=</span> <span class="cn">TRUE</span>, bay.tv <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">                num.cores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## The read count data are created</span></span></span>
+<span class="r-in"><span><span class="va">num.samples</span> <span class="op">&lt;-</span> <span class="fl">250</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="va">num.samples</span></span></span>
+<span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="va">s</span>, end <span class="op">=</span> <span class="va">s</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+"</span>, <span class="st">"-"</span><span class="op">)</span>, <span class="va">num.samples</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                mCc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                uCc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                mCt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                uCt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">gr</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">meth_levels</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">gr</span>,</span></span>
+<span class="r-in"><span>                columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>                            mC2 <span class="op">=</span> <span class="fl">3</span>, uC2 <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                preserve.dt <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                Bayesian <span class="op">=</span> <span class="cn">TRUE</span>, tv <span class="op">=</span> <span class="cn">TRUE</span>, bay.tv <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                num.cores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *** Estimating betaBinomial-posteriors... </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -284,7 +311,7 @@ from <code><a href="https://rdrr.io/pkg/minpack.lm/man/nlsLM.html" class="extern
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

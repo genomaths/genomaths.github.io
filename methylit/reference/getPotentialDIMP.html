@@ -20,7 +20,7 @@ of signal detection."><meta property="og:image" content="https://genomaths.githu
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@ of signal detection."><meta property="og:image" content="https://genomaths.githu
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -106,21 +106,21 @@ of signal detection.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">getPotentialDIMP</span><span class="op">(</span>
-  <span class="va">LR</span>,
-  nlms <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">div.col</span>,
-  dist.name <span class="op">=</span> <span class="st">"Weibull2P"</span>,
-  absolute <span class="op">=</span> <span class="cn">FALSE</span>,
-  alpha <span class="op">=</span> <span class="fl">0.05</span>,
-  pval.col <span class="op">=</span> <span class="cn">NULL</span>,
-  tv.col <span class="op">=</span> <span class="cn">NULL</span>,
-  tv.cut <span class="op">=</span> <span class="cn">NULL</span>,
-  min.coverage <span class="op">=</span> <span class="cn">NULL</span>,
-  hdiv.col <span class="op">=</span> <span class="cn">NULL</span>,
-  hdiv.cut <span class="op">=</span> <span class="cn">NULL</span>,
-  pAdjustMethod <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">getPotentialDIMP</span><span class="op">(</span></span>
+<span>  <span class="va">LR</span>,</span>
+<span>  nlms <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">div.col</span>,</span>
+<span>  dist.name <span class="op">=</span> <span class="st">"Weibull2P"</span>,</span>
+<span>  absolute <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  pval.col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tv.col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tv.cut <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min.coverage <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hdiv.col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hdiv.cut <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pAdjustMethod <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -129,13 +129,19 @@ of signal detection.</p>
 <dd><p>An object from 'InfDiv' or 'testDMP' class. These objects are
 previously obtained with function <code><a href="estimateDivergence.html">estimateDivergence</a></code> or
 <code><a href="FisherTest.html">FisherTest</a></code>.</p></dd>
+
+
 <dt>nlms</dt>
 <dd><p>A list of distribution fitted models (output of
 <code><a href="gofReport.html">gofReport</a></code> function) or NULL. If NULL, then empirical
 cumulative distribution function is used to get the potential DMPs.</p></dd>
+
+
 <dt>div.col</dt>
 <dd><p>Column number for divergence variable is located in the
 meta-column.</p></dd>
+
+
 <dt>dist.name</dt>
 <dd><p>Name of the fitted distribution. This could be the name of
 one distribution or a characters vector of length(nlms). Default is the
@@ -168,6 +174,8 @@ are:</p><dl><dt><strong>"Weibull2P"</strong></dt>
 </dl><p>If <strong>dist.name != 'None'</strong>, and <strong>nlms != NULL</strong>, then a column
 named 'wprob' with a probability vector derived from the application of
 model 'nlms' will be returned.</p></dd>
+
+
 <dt>absolute</dt>
 <dd><p>Logic (default, FALSE). Total variation (TV, the difference
 of methylation levels) is normally an output in the downstream MethylIT
@@ -175,40 +183,59 @@ analysis. If 'absolute = TRUE', then TV is transformed into |TV|, which
 is an information divergence that can be fitted to Weibull or to
 Generalized Gamma distribution. So, if the nonlinear fit was performed
 for |TV|, then absolute must be set to TRUE.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>A numerical value (usually \(\alpha \leq 0.05\)) used to
 select cytosine sites \(k\) with information divergence (\(DIV_k\)) for
 which the the probabilities hold: \(P(DIV_k &gt; DIV(\alpha))\).</p></dd>
+
+
 <dt>pval.col</dt>
 <dd><p>An integer denoting a column from each GRanges object from
 LR where p-values are provided when <strong>dist.name == 'None'</strong> and
 <strong>nlms == NULL</strong>. Default is NULL. If NUll and
 <strong>dist.name == 'None'</strong> and <strong>nlms == NULL</strong>, then a column
 named <strong>adj.pval</strong> will used to select the potential DMPs.</p></dd>
+
+
 <dt>tv.col</dt>
 <dd><p>Column number for the total variation to be used for filtering
 cytosine positions (if provided).</p></dd>
+
+
 <dt>tv.cut</dt>
 <dd><p>If tv.cut and tv.col are provided, then cytosine sites k with
 \(abs(TV_k) &lt; tv.cut\) are removed before to perform the ROC analysis.</p></dd>
+
+
 <dt>min.coverage</dt>
 <dd><p>Cytosine sites with coverage less than min.coverage are
 discarded. Default: 0</p></dd>
+
+
 <dt>hdiv.col</dt>
 <dd><p>Optional. A column number for the Hellinger distance to be
 used for filtering cytosine positions. Default is NULL.</p></dd>
+
+
 <dt>hdiv.cut</dt>
 <dd><p>If hdiv.cut and hdiv.col are provided, then cytosine sites
 \(k\) with hdiv &lt; hdiv.cut are removed.</p></dd>
+
+
 <dt>pAdjustMethod</dt>
 <dd><p>method used to adjust the p-values from other
 approaches like Fisher's exact test, which involve multiple comparisons
 Default is NULL. Do not apply it when a probability distribution model
 is used (<strong>when nlms is given</strong>), since it makes not sense.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of GRanges objects, each GRanges object carrying the selected
+    
+
+<p>A list of GRanges objects, each GRanges object carrying the selected
 cytosine sites and the probabilities that the specified divergence values
 can be greater than the critical value specified by \(\alpha\):
 \(P(DIV_k &gt; DIV(\alpha))\).</p>
@@ -225,12 +252,12 @@ distribution model that has been supplied.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Get a dataset of Hellinger divergency of methylation levels and their</span></span>
-<span class="r-in"><span class="co">## corresponding best nonlinear fit distribution models from the package</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">HD</span>, <span class="va">gof</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">PS</span> <span class="op">&lt;-</span> <span class="fu">getPotentialDIMP</span><span class="op">(</span>LR <span class="op">=</span> <span class="va">HD</span>, nlms <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">nlms</span>, dist.name <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span>,</span>
-<span class="r-in">                    div.col <span class="op">=</span> <span class="fl">9L</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Get a dataset of Hellinger divergency of methylation levels and their</span></span></span>
+<span class="r-in"><span><span class="co">## corresponding best nonlinear fit distribution models from the package</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">HD</span>, <span class="va">gof</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">PS</span> <span class="op">&lt;-</span> <span class="fu">getPotentialDIMP</span><span class="op">(</span>LR <span class="op">=</span> <span class="va">HD</span>, nlms <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">nlms</span>, dist.name <span class="op">=</span> <span class="va">gof</span><span class="op">$</span><span class="va">bestModel</span>,</span></span>
+<span class="r-in"><span>                    div.col <span class="op">=</span> <span class="fl">9L</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -245,7 +272,7 @@ distribution model that has been supplied.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -1,5 +1,5 @@
-pandoc: 2.11.4
-pkgdown: 1.6.1
+pandoc: '2.18'
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   Cutpoint_estimation_with_Methyl-IT: Cutpoint_estimation_with_Methyl-IT.html
@@ -10,8 +10,8 @@ articles:
   dmr_at_memory: dmr_at_memory.html
   pca_lda_with_methylit: pca_lda_with_methylit.html
   some_tips_for_methylit_r_scripts: some_tips_for_methylit_r_scripts.html
-last_built: 2021-11-05T00:31Z
+last_built: 2022-07-21T19:52Z
 urls:
-  reference: https://genomaths.github.io/methylit//reference
-  article: https://genomaths.github.io/methylit//articles
+  reference: https://genomaths.github.io/methylit/reference
+  article: https://genomaths.github.io/methylit/articles
 

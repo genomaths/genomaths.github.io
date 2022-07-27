@@ -20,7 +20,7 @@ of GRanges objects"><meta property="og:image" content="https://genomaths.github.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@ of GRanges objects"><meta property="og:image" content="https://genomaths.github.
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -105,15 +105,16 @@ of GRanges objects</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">poolFromGRlist</span><span class="op">(</span>
-  <span class="va">LR</span>,
-  stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"jackmean"</span>, <span class="st">"sum"</span><span class="op">)</span>,
-  prob <span class="op">=</span> <span class="cn">FALSE</span>,
-  column <span class="op">=</span> <span class="fl">1L</span>,
-  jstat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sum"</span>, <span class="st">"mean"</span>, <span class="st">"median"</span><span class="op">)</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">poolFromGRlist</span><span class="op">(</span></span>
+<span>  <span class="va">LR</span>,</span>
+<span>  stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"jackmean"</span>, <span class="st">"sum"</span><span class="op">)</span>,</span>
+<span>  prob <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  column <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  jstat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sum"</span>, <span class="st">"mean"</span>, <span class="st">"median"</span><span class="op">)</span>,</span>
+<span>  columns <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -122,66 +123,83 @@ of GRanges objects</p>
 <dd><p>List of GRanges objects to build a virtual individual (methylation
 pool). It is assumed that the list of GRanges was obtained with
 <code><a href="readCounts2GRangesList.html">readCounts2GRangesList</a></code>. That is, the metacolumn from each
-GRanges object must contain the columns named 'mC' (number of reads
-signaling methylated cytosine) and 'uC' (number of reads signaling
-non-methylated cytosine). If more than two columns are carried on each
-GRanges object, then the parameter "columns" denoting the column numbers
-where "uC" and "mC" are located must be passed to
-<code><a href="uniqueGRanges.html">uniqueGRanges</a></code> function.</p></dd>
+GRanges object must contain the columns named 'mC' (number of reads signaling
+methylated cytosine) and 'uC' (number of reads signaling non-methylated
+cytosine). If more than two columns are carried on each GRanges object, then
+the parameter "columns" denoting the column numbers where "uC" and "mC" are
+located must be passed to <code><a href="uniqueGRanges.html">uniqueGRanges</a></code> function.</p></dd>
+
+
 <dt>stat</dt>
 <dd><p>statistic used to estimate the methylation pool: row 'mean', row
 'median', row 'sum', or Jacknife row mean ('jackmean') of methylated and
 unmethylated read counts across individuals. Notice that, for only two
 samples, 'jackmean' makes not sense. Since the centrality statistics are
-sensitive to extreme values, stat = 'sum' is an attractive option.
-However, in this last case, a further correction for the minimum coverage
-for the reference sample must be taken into account in a furhter
-estimation of the Hellinger divergence of methylation levels, which is
-explained in the detail section from the help of function
-<code><a href="estimateDivergence.html">estimateDivergence</a></code>. A conservative option is 'mean', which
-will return the group centroid.</p></dd>
+sensitive to extreme values, stat = 'sum' is an attractive option. However,
+in this last case, a further correction for the minimum coverage for the
+reference sample must be taken into account in a furhter estimation of the
+Hellinger divergence of methylation levels, which is explained in the detail
+section from the help of function <code><a href="estimateDivergence.html">estimateDivergence</a></code>. A
+conservative option is 'mean', which will return the group centroid.</p></dd>
+
+
 <dt>prob</dt>
 <dd><p>Logic. Whether the variable for pooling is between 0 and 1 (a
-probability), e.g., methylation levels. If TRUE, then Fisher's
-transformation is applied, the row mean is computed for each cytosine
-site and returned in the original measurement scale between 0 and 1 by
-using the inverse of Fisher's transformation.</p></dd>
+probability), e.g., methylation levels. If TRUE, then Fisher's transformation
+is applied, the row mean is computed for each cytosine site and returned in
+the original measurement scale between 0 and 1 by using the inverse of
+Fisher's transformation.</p></dd>
+
+
 <dt>column</dt>
 <dd><p>If prob == TRUE, then the 'column' from the LR metacolumns
 where the prob values are found must be provided. Otherwise, column = 1L.</p></dd>
+
+
 <dt>jstat</dt>
 <dd><p>If stat = 'jackmean', then any of the 'stat' possible values:
-'sum', 'mean', or 'median' can be used to compute, for each cytosine
-site, the Jacknife vector of the selected statistics and then to
-compute the corresponding mean. Default is jstat = 'sum'.</p></dd>
+'sum', 'mean', or 'median' can be used to compute, for each cytosine site,
+the Jacknife vector of the selected statistics and then to compute the
+corresponding mean. Default is jstat = 'sum'.</p></dd>
+
+
+<dt>columns</dt>
+<dd><p>A parameter to pass for <code><a href="uniqueGRanges.html">uniqueGRanges</a></code> function.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>If TRUE, prints the function log to stdout</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional parameters for <code><a href="uniqueGRanges.html">uniqueGRanges</a></code> function.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A GRanges object</p>
+    
+
+<p>A GRanges object</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>The list of GRanges objects (LR) provided to build a virtual
-methylome should be an output of the function 'readCounts2GRangesList' or
-at least each GRanges must have the columns named 'mC' and 'uC', for the
-read counts of methylated and unmethylated cytosines, respectively.</p>
+methylome should be an output of the function 'readCounts2GRangesList' or at
+least each GRanges must have the columns named 'mC' and 'uC', for the read
+counts of methylated and unmethylated cytosines, respectively.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, strand <span class="op">=</span> <span class="st">'*'</span>,</span>
-<span class="r-in">mC <span class="op">=</span> <span class="fl">1</span>, uC <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>,</span>
-<span class="r-in">strand <span class="op">=</span> <span class="st">'*'</span>, mC <span class="op">=</span> <span class="fl">1</span>, uC <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">answer</span> <span class="op">&lt;-</span> <span class="fu">poolFromGRlist</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span><span class="op">)</span>, stat <span class="op">=</span> <span class="st">'mean'</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, strand <span class="op">=</span> <span class="st">'*'</span>,</span></span>
+<span class="r-in"><span>mC <span class="op">=</span> <span class="fl">1</span>, uC <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>,</span></span>
+<span class="r-in"><span>strand <span class="op">=</span> <span class="st">'*'</span>, mC <span class="op">=</span> <span class="fl">1</span>, uC <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">answer</span> <span class="op">&lt;-</span> <span class="fu">poolFromGRlist</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span><span class="op">)</span>, stat <span class="op">=</span> <span class="st">'mean'</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -196,7 +214,7 @@ read counts of methylated and unmethylated cytosines, respectively.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

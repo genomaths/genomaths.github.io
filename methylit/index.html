@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@
   <a href="reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -143,11 +143,11 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>We have developed a novel methylome analysis procedure, Methyl-IT, based on signal detection and machine learning. Methylation analysis is confronted in Methyl-IT as a signal detection problem, and the method was designed to discriminate methylation regulatory signal from background noise induced by Brownian motion and thermal fluctuations. Our group has proposed an information thermodynamics approach to investigate genome-wide methylation patterning based on the statistical mechanical effect of methylation on DNA molecules (<a href="#1">1</a>-<a href="#3">3</a>). The information thermodynamics-based approach is postulated to provide greater sensitivity for resolving true signal from the thermodynamic background within the methylome (<a href="#1">1</a>). This theory provides the knowledge on the family of probability distributions that better fit the methylation signals when expressed in terms of information divergences of methylation levels. Because the biological signal created within the dynamic methylome environment characteristic of organisms is not free from background noise, the approach, designated Methyl-IT, includes an application of signal detection theory.</p>
-<p>A basic requirement for the application of signal detection is the knowledge of the background noise probability distribution. A generalized gamma (GG) probability distribution model can be deduced on a statistical mechanical/thermodynamics basis for DNA methylation induced by thermal fluctuations (<a href="#1">1</a>), which leads to the particular cases of members of GG probability distribution family. For example, assuming that this background methylation variation is consistent with a Poisson process, it can be distinguished from variation associated with methylation regulatory machinery, which is non-independent for all genomic regions (<a href="#1">1</a>). An information-theoretic divergence to express the variation in methylation induced by background thermal fluctuations will follow a probability distribution model, member of the GG family, provided that it is proportional to minimum energy dissipated per bit of information from methylation change. The information thermodynamics model was previously verified with more than 150 Arabidopsis and more than 90 human methylome datasets (<a href="#3">3</a>).</p>
-<p>With Methyl-IT R package we are providing the functions from the R scripts used in the manuscript (<a href="#1">1</a>), as well as, additional functions that will be used in further studies. The application of the information thermodynamics of cytosine DNA methylation is not limited to the current methylome analysis, which is only a particular application. The theory permits us the study of plant and animal methylomes in the framework of a communication system (<a href="#3">3</a>), where cytosine DNA methylation has the dual roles of stabilizing the DNA molecule and to carry the regulatory signals.</p>
-<p>The application of Methyl-T signal detection-machine learning approach to methylation analysis of whole genome bisulfite sequencing (WGBS) data permits a high level of methylation signal resolution in cancer-associated genes and pathways (<a href="#4">4</a>), as well as, treatment-associated genes and pathways in plants (<a href="#5">5</a>).</p>
-<p>Notice that MethylIT pipeline is not limited to bisulfite sequencing experimental data. Any experimental data set on summarized on <a href="https://rdrr.io/bioc/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a> or <a href="https://rdrr.io/bioc/GenomicRanges/man/GRangesList-class.html" class="external-link">GRangesList-class</a> objects carrying the counts of methylated (mC) and unmethylated (uC) cytosines in their metacolumns can be analyzed. As a matter of fact, since cell’s developmental stages in a tissue are not synchronized, but in different ontogenetic development stages, the methylation status at each cytosine site would dynamically vary from cell to cell. Therefore, at tissue level, the methylation status can be quantitaivally represented by a probability, i.e., a number between 0 and 1, also known as methylation level.</p>
+<p>We have developed a novel methylome analysis procedure, Methyl-IT, based on signal detection and machine learning. Methylation analysis is confronted in Methyl-IT as a signal detection problem, and the method was designed to discriminate methylation regulatory signal from background noise induced by Brownian motion and thermal fluctuations. Our group has proposed an information thermodynamics approach to investigate genome-wide methylation patterning based on the statistical mechanical effect of methylation on DNA molecules (<a href="#id_1">1</a>-<a href="#id_3">3</a>). The information thermodynamics-based approach is postulated to provide greater sensitivity for resolving true signal from the thermodynamic background within the methylome (<a href="#id_1">1</a>). This theory provides the knowledge on the family of probability distributions that better fit the methylation signals when expressed in terms of information divergences of methylation levels. Because the biological signal created within the dynamic methylome environment characteristic of organisms is not free from background noise, the approach, designated Methyl-IT, includes an application of signal detection theory.</p>
+<p>A basic requirement for the application of signal detection is the knowledge of the background noise probability distribution. A generalized gamma (GG) probability distribution model can be deduced on a statistical mechanical/thermodynamics basis for DNA methylation induced by thermal fluctuations (<a href="#id_1">1</a>), which leads to the particular cases of members of GG probability distribution family. For example, assuming that this background methylation variation is consistent with a Poisson process, it can be distinguished from variation associated with methylation regulatory machinery, which is non-independent for all genomic regions (<a href="#id_1">1</a>). An information-theoretic divergence to express the variation in methylation induced by background thermal fluctuations will follow a probability distribution model, member of the GG family, provided that it is proportional to minimum energy dissipated per bit of information from methylation change. The information thermodynamics model was previously verified with more than 150 Arabidopsis and more than 90 human methylome datasets (<a href="#id_3">3</a>).</p>
+<p>With Methyl-IT R package we are providing the functions from the R scripts used in the manuscript (<a href="#id_1">1</a>), as well as, additional functions that will be used in further studies. The application of the information thermodynamics of cytosine DNA methylation is not limited to the current methylome analysis, which is only a particular application. The theory permits us the study of plant and animal methylomes in the framework of a communication system (<a href="#id_3">3</a>), where cytosine DNA methylation has the dual roles of stabilizing the DNA molecule and to carry the regulatory signals.</p>
+<p>The application of Methyl-T signal detection-machine learning approach to methylation analysis of whole genome bisulfite sequencing (WGBS) data permits a high level of methylation signal resolution in cancer-associated genes and pathways (<a href="#id_4">4</a>), as well as, treatment-associated genes and pathways in plants (<a href="#id_5">5</a>).</p>
+<p>Notice that MethylIT pipeline is not limited to bisulfite sequencing experimental data. Any experimental data set on summarized <a href="https://rdrr.io/bioc/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a> or <a href="https://rdrr.io/bioc/GenomicRanges/man/GRangesList-class.html" class="external-link">GRangesList-class</a> objects carrying the counts of methylated (mC) and unmethylated (uC) cytosines in their metacolumns can be analyzed. As a matter of fact, since cell’s developmental stages in a tissue are not synchronized, but in different ontogenetic development stages, the methylation status at each cytosine site would dynamically vary from cell to cell. Therefore, at tissue level, the methylation status can be quantitaivally represented by a probability, i.e., a number between 0 and 1, also known as methylation level.</p>
 </div>
 <div class="section level2">
 <h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
@@ -166,17 +166,20 @@
 <p>Ubuntu</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sudo apt install libmysqlclient<span class="sc">-</span>dev libcurl4<span class="sc">-</span>openssl<span class="sc">-</span>dev libssl<span class="sc">-</span>dev libxml2<span class="sc">-</span>dev git build<span class="sc">-</span>essential</span></code></pre></div>
 <p>Install R dependencies:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"caret"</span>, <span class="st">"Epi"</span>, <span class="st">"e1071"</span>, <span class="st">"minpack.lm"</span>, <span class="st">"nls2"</span>, <span class="st">"caTools"</span>, <span class="st">"rmarkdown"</span>,   <span class="st">"RCurl"</span>),<span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">'GenomicRanges'</span>,<span class="st">'BiocParallel'</span>, <span class="st">'biovizBase'</span>, <span class="st">'genefilter'</span>, <span class="st">'GenomeInfoDb'</span>))</span></code></pre></div>
-<p>You can install MethylIT from GitHub or PSU’s GitLab:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Master stable version (0.3.2.3)</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_git</span>(<span class="st">"https://github.com/genomaths/MethylIT.git"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Beta (developing) version (0.3.2_beta):</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_git</span>(<span class="st">"https://github.com/genomaths/MethylIT.git"</span>, <span class="at">ref =</span> <span class="st">"MethylIT_0.3.2_beta"</span>) </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>   </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"caret"</span>, <span class="st">"Epi"</span>, <span class="st">"e1071"</span>, <span class="st">"minpack.lm"</span>, <span class="st">"nls2"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">"caTools"</span>,  <span class="st">"RCurl"</span>,<span class="st">'GenomicRanges'</span>,<span class="st">'BiocParallel'</span>, <span class="st">'biovizBase'</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">'genefilter'</span>, <span class="st">'GenomeInfoDb'</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<p>You can install MethylIT from GitHub:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Master stable version (0.3.2.4)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"genomaths/MethylIT"</span>)</span></code></pre></div>
+<p>The Beta (developing) version:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Beta (developing) version (0.3.2.4_beta):</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">""</span>devtools<span class="st">""</span>)) </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">""</span>devtools<span class="st">""</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_git</span>(<span class="st">"https://github.com/genomaths/MethylIT.git"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ref =</span> <span class="st">"MethylIT_0.3.2_beta"</span>) </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>   </span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="flow-diagram">Flow diagram<a class="anchor" aria-label="anchor" href="#flow-diagram"></a>
@@ -189,13 +192,17 @@
 <p><a href="https://genomaths.github.io/methylit/articles/MethylIT.html">Fast starting here</a></p>
 </div>
 <div class="section level2">
-<h2 id="some-simple-examples">Some simple examples<a class="anchor" aria-label="anchor" href="#some-simple-examples"></a>
+<h2 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
 </h2>
-<p><a href="https://genomaths.github.io/methylit/articles/cancer_example.html"><img src="reference/figures/cancer_example.png"></a></p>
-<p><a href="https://genomaths.github.io/methylit/articles/Methylation_analysis_with_Methyl-IT.html">An example with simulated datasets</a> to illustrate why a signal detection step is needed in methylation analysis.</p>
-<p><a href="https://genomaths.github.io/methylit/articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a>.</p>
-<p><a href="https://genomaths.github.io/pca_lda_with_methylit.html" class="external-link">Principal Components and Linear Discriminant Analyses with Methyl-IT</a></p>
-<hr>
+<ul>
+<li><a href="https://genomaths.github.io/methylit/articles/MethylIT.html">Get started-with Methyl-IT</a></li>
+<li><a href="https://genomaths.github.io/methylit/articles/Methylation_analysis_with_Methyl-IT.html">Methylation analysis with Methyl-IT</a></li>
+<li><a href="https://genomaths.github.io/methylit/articles/cancer_example.html">Example of Methylome Analysis with MethylIT using Cancer Datasets</a></li>
+<li><a href="https://genomaths.github.io/methylit/articles/Cutpoint_estimation_with_Methyl-IT.html">Optimal cutpoint for the methylation signal</a></li>
+<li><a href="https://genomaths.github.io/methylit/articles/pca_lda_with_methylit.html">Principal Components and Linear Discriminant Analyses with Methyl-IT</a></li>
+<li><a href="https://genomaths.github.io/methylit/articles/GenExp_Methylation_association_hyper_down-regulated.html">Association Between Gene Expression and Cytosine DNA Methylation at gene-body</a></li>
+<li><h2 id="dmr-detection-with-methyl-it"><a href="https://genomaths.github.io/methylit/articles/dmr_at_memory.html">DMR detection with Methyl-IT</a></h2></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="methyl-it-documentation">Methyl-IT documentation:<a class="anchor" aria-label="anchor" href="#methyl-it-documentation"></a>
@@ -274,7 +281,6 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Robersy Sanchez <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5246-1453" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -291,7 +297,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

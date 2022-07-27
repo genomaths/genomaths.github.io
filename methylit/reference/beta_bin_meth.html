@@ -20,7 +20,7 @@ a conjugate prior for Binomial distribution."><meta property="og:image" content=
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@ a conjugate prior for Binomial distribution."><meta property="og:image" content=
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -106,39 +106,39 @@ a conjugate prior for Binomial distribution.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">beta_bin_meth</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for matrix_OR_data.frame</span>
-<span class="fu">beta_bin_meth</span><span class="op">(</span>
-  <span class="va">x</span>,
-  init.pars <span class="op">=</span> <span class="cn">NULL</span>,
-  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,
-  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S4 method for GRanges</span>
-<span class="fu">beta_bin_meth</span><span class="op">(</span>
-  <span class="va">x</span>,
-  init.pars <span class="op">=</span> <span class="cn">NULL</span>,
-  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,
-  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S4 method for GRangesList</span>
-<span class="fu">beta_bin_meth</span><span class="op">(</span>
-  <span class="va">x</span>,
-  init.pars <span class="op">=</span> <span class="cn">NULL</span>,
-  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,
-  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,
-  num.cores <span class="op">=</span> <span class="fu">multicoreWorkers</span><span class="op">(</span><span class="op">)</span>,
-  tasks <span class="op">=</span> <span class="fl">0L</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">beta_bin_meth</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for matrix_OR_data.frame</span></span>
+<span><span class="fu">beta_bin_meth</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  init.pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for GRanges</span></span>
+<span><span class="fu">beta_bin_meth</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  init.pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for GRangesList</span></span>
+<span><span class="fu">beta_bin_meth</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  init.pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fu">multicoreWorkers</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -148,15 +148,21 @@ a conjugate prior for Binomial distribution.</p>
 counts on its metacolumn, with the counts of methylated (mC) and
 unmethylated (uC) cytosines for at least 10 or more cytosine sites.
 Alternatively, it can be just the 'matrix' or 'data.frame' of counts.</p></dd>
+
+
 <dt>init.pars</dt>
 <dd><p>initial parameter values. Defaults is NULL and an initial
 guess is estimated using <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim</a></code> function. If the initial
 guessing fails initial parameter values are to alpha = 1 &amp;
 beta = 1, which imply the parsimony pseudo-counts greater than zero.</p></dd>
+
+
 <dt>via.optim</dt>
 <dd><p>Logical. Whether to estimate beta distribution parameters
 via <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim</a></code> or <code><a href="https://rdrr.io/pkg/minpack.lm/man/nls.lm.html" class="external-link">nls.lm</a></code>. If any of
 this approaches fail then parameters used <em>init.pars</em> will be returned.</p></dd>
+
+
 <dt>loss.fun</dt>
 <dd><p>Loss function(s) used in the estimation of the best fitted
 model to beta distribution (only applied when Bayesian=TRUE; see
@@ -173,6 +179,7 @@ values: \(loss(z) = 2*(sqrt(z + 1) - 1)\).</p></li>
 <li><p>"arctg": arc-tangent loss function: \(loss(x) = atan(z)\).</p></li>
 </ol><p>Loss 'linear' function works well for most of the methylation datasets with
 acceptable quality.</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -191,7 +198,7 @@ acceptable quality.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

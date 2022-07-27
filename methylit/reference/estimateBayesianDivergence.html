@@ -20,7 +20,7 @@ reference (1). The Bayesian approach followed is described in reference (2)."><m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@ reference (1). The Bayesian approach followed is described in reference (2)."><m
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -106,21 +106,21 @@ reference (1). The Bayesian approach followed is described in reference (2).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">estimateBayesianDivergence</span><span class="op">(</span>
-  <span class="va">x</span>,
-  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,
-  init.pars <span class="op">=</span> <span class="cn">NULL</span>,
-  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,
-  JD <span class="op">=</span> <span class="cn">FALSE</span>,
-  jd.stat <span class="op">=</span> <span class="cn">FALSE</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="fl">3</span>, uC2 <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,
-  meth.level <span class="op">=</span> <span class="cn">FALSE</span>,
-  preserve.gr <span class="op">=</span> <span class="cn">FALSE</span>,
-  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,
-  logbase <span class="op">=</span> <span class="fl">2</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">estimateBayesianDivergence</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  Bayesian <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  init.pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  JD <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  jd.stat <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>, mC2 <span class="op">=</span> <span class="fl">3</span>, uC2 <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span>
+<span>  meth.level <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve.gr <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  loss.fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>, <span class="st">"huber"</span>, <span class="st">"smooth"</span>, <span class="st">"cauchy"</span>, <span class="st">"arctg"</span><span class="op">)</span>,</span>
+<span>  logbase <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -132,37 +132,55 @@ specified in the parameter 'columns', the methylation counts must be given in
 the first four columns: 'mC1' and 'uC1' methylated and unmethylated counts
 for control sample, and 'mC2' and 'uC2' methylated and unmethylated counts
 for treatment sample, respectively.</p></dd>
+
+
 <dt>Bayesian</dt>
 <dd><p>logical. Whether to perform the estimations based on
 posterior estimations of methylation levels.</p></dd>
+
+
 <dt>init.pars</dt>
 <dd><p>initial parameter values. Defaults is NULL and an initial
 guess is estimated using <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim</a></code> function. If the initial
 guessing fails initial parameter values are to alpha = 1 &amp;
 beta = 1, which imply the parsimony pseudo-counts greater than zero.</p></dd>
+
+
 <dt>via.optim</dt>
 <dd><p>Logical. Whether to estimate beta distribution parameters
 via <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim</a></code> or <code><a href="https://rdrr.io/pkg/minpack.lm/man/nls.lm.html" class="external-link">nls.lm</a></code>. If any of
 this approaches fail then parameters used <em>init.pars</em> will be returned.</p></dd>
+
+
 <dt>JD</dt>
 <dd><p>Logic (Default:FALSE). Option on whether to add a column with
 values of J-information divergence (see <code><a href="estimateJDiv.html">estimateJDiv</a></code>).
 It is only compute if JD = TRUE and meth.level = FALSE.</p></dd>
+
+
 <dt>jd.stat</dt>
 <dd><p>logical(1). Whether to compute the \(JD\) statistic with
 asymptotic Chi-squared distribution with one degree of freedom (see
 <code><a href="estimateJDiv.html">estimateJDiv</a></code>).</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>Vector of integer numbers of the columns where the counts
 'mC1', 'uC1', 'mC2', and 'uC2' are in the matrix (default 1 to 4). That is,
 the input could have more than 4 columns, but only 4 columns with the counts
 are used. if 'meth.level == TRUE', then columns = \(c('p1', 'p2')\).</p></dd>
+
+
 <dt>meth.level</dt>
 <dd><p>logical(1). Methylation levels can be provided in place of
 counts.</p></dd>
+
+
 <dt>preserve.gr</dt>
 <dd><p>logical(1). Option of whether to preserve all
 the metadata from the original GRanges object.</p></dd>
+
+
 <dt>loss.fun</dt>
 <dd><p>Loss function(s) used in the estimation of the best fitted
 model to beta distribution (only applied when Bayesian=TRUE; see
@@ -179,19 +197,29 @@ values: \(loss(z) = 2*(sqrt(z + 1) - 1)\).</p></li>
 <li><p>"arctg": arc-tangent loss function: \(loss(x) = atan(z)\).</p></li>
 </ol><p>Loss 'linear' function works well for most of the methylation datasets with
 acceptable quality.</p></dd>
+
+
 <dt>logbase</dt>
 <dd><p>Logarithm base used to compute the JD (if JD = TRUE).
 Logarithm base 2 is used as default (bit unit). Use logbase = exp(1) for
 natural logarithm.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>if TRUE, prints the function log to stdout</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Optional parameter values for: maxiter, ftol, ptol, and gradtol
 from <code><a href="https://rdrr.io/pkg/minpack.lm/man/nlsLM.html" class="external-link">nlsLM</a></code> and <code><a href="https://rdrr.io/r/stats/nlm.html" class="external-link">nlm</a></code> functions.</p></dd>
+
+
 <dt>num.cores</dt>
 <dd><p>The number of cores to use, i.e. at most how many child
 processes will be run simultaneously (see 'bplapply' function from
 BiocParallel package).</p></dd>
+
+
 <dt>tasks</dt>
 <dd><p>integer(1). The number of tasks per job. value must be a scalar
 integer &gt;= 0L. In this documentation a job is defined as a single call to a
@@ -199,10 +227,13 @@ function, such as bplapply, bpmapply etc. A task is the division of the
 \(X\) argument into chunks. When tasks == 0 (default), \(X\) is divided
 as evenly as possible over the number of workers (see MulticoreParam from
 BiocParallel package).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The input matrix or GRanges object with the four columns of counts
+    
+
+<p>The input matrix or GRanges object with the four columns of counts
 and additional columns. If Bayessian = TRUE, the results are based on
 the posterior estimations of methylation levels. The basic additional columns
 are:</p><dl><dt>1)</dt>
@@ -275,38 +306,38 @@ J. Mol Sci, 2019, 20:5343.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## The read count data are created</span></span>
-<span class="r-in"><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, end <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,</span>
-<span class="r-in">                strand <span class="op">=</span> <span class="st">'*'</span>,</span>
-<span class="r-in">                mC1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span>
-<span class="r-in">                uC1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span>
-<span class="r-in">                mC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span>
-<span class="r-in">                uC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">gr</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Estimation of the information divergences</span></span>
-<span class="r-in"><span class="va">hd</span> <span class="op">&lt;-</span> <span class="fu">estimateBayesianDivergence</span><span class="op">(</span><span class="va">gr</span>, JD <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## The read count data are created</span></span></span>
+<span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, end <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="st">'*'</span>,</span></span>
+<span class="r-in"><span>                mC1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                uC1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                mC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                uC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">gr</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Estimation of the information divergences</span></span></span>
+<span class="r-in"><span><span class="va">hd</span> <span class="op">&lt;-</span> <span class="fu">estimateBayesianDivergence</span><span class="op">(</span><span class="va">gr</span>, JD <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in estimateHellingerDiv(p = y[3:4], n = y[1:2]):</span> *** Vector p has values out of the range [0, 1]</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Keep in mind that Hellinger and J divergences are, in general,</span></span>
-<span class="r-in"><span class="co">## correlated</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">hd</span><span class="op">$</span><span class="va">hdiv</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">hd</span><span class="op">$</span><span class="va">jdiv</span><span class="op">)</span>,</span>
-<span class="r-in">        method <span class="op">=</span> <span class="st">'kendall'</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Keep in mind that Hellinger and J divergences are, in general,</span></span></span>
+<span class="r-in"><span><span class="co">## correlated</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">hd</span><span class="op">$</span><span class="va">hdiv</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">hd</span><span class="op">$</span><span class="va">jdiv</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        method <span class="op">=</span> <span class="st">'kendall'</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cor.test(x = as.numeric(hd$hdiv), y = as.numeric(hd$jdiv), method = "kendall"):</span> object 'hd' not found</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## An example with methylation levels</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sites</span> <span class="op">=</span> <span class="fl">10</span></span>
-<span class="r-in"><span class="va">dat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">sites</span>, end <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">sites</span>,strand <span class="op">=</span> <span class="st">'*'</span>,</span>
-<span class="r-in">                m1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">sites</span><span class="op">)</span>, m2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">sites</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">dat</span> <span class="op">=</span>  <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">dat</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Transforming the list of data frames into a GRanges object</span></span>
-<span class="r-in"><span class="va">hd</span> <span class="op">&lt;-</span> <span class="fu">estimateBayesianDivergence</span><span class="op">(</span>x <span class="op">=</span> <span class="va">dat</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>p1 <span class="op">=</span> <span class="fl">1</span>, p2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">                                meth.level <span class="op">=</span> <span class="cn">TRUE</span>, preserve.gr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'BPPARAM' in selecting a method for function 'bplapply': object 'bpparam' not found</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## An example with methylation levels</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sites</span> <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">sites</span>, end <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">sites</span>,strand <span class="op">=</span> <span class="st">'*'</span>,</span></span>
+<span class="r-in"><span>                m1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">sites</span><span class="op">)</span>, m2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">sites</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">=</span>  <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">dat</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Transforming the list of data frames into a GRanges object</span></span></span>
+<span class="r-in"><span><span class="va">hd</span> <span class="op">&lt;-</span> <span class="fu">estimateBayesianDivergence</span><span class="op">(</span>x <span class="op">=</span> <span class="va">dat</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>p1 <span class="op">=</span> <span class="fl">1</span>, p2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                meth.level <span class="op">=</span> <span class="cn">TRUE</span>, preserve.gr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in bplapply(seq_len(nrow(x)), function(i) {    estimateHellingerDiv(p = as.numeric(x[i, ]))}, BPPARAM = bpparam):</span> object 'bpparam' not found</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -321,7 +352,7 @@ J. Mol Sci, 2019, 20:5343.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

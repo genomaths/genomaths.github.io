@@ -21,7 +21,7 @@ countTest2 function."><meta property="og:image" content="https://genomaths.githu
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@ countTest2 function."><meta property="og:image" content="https://genomaths.githu
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -108,20 +108,20 @@ tested to identify differentially methylated regions (DMRs) with
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">dmpClusters</span><span class="op">(</span>
-  <span class="va">GR</span>,
-  maxDist <span class="op">=</span> <span class="fl">3</span>,
-  minNumDMPs <span class="op">=</span> <span class="fl">1</span>,
-  maxClustDist <span class="op">=</span> <span class="cn">NULL</span>,
-  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"relaxed"</span>, <span class="st">"fixed.int"</span><span class="op">)</span>,
-  chromosomes <span class="op">=</span> <span class="cn">NULL</span>,
-  columns <span class="op">=</span> <span class="fl">9L</span>,
-  ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,
-  num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,
-  tasks <span class="op">=</span> <span class="fl">0L</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dmpClusters</span><span class="op">(</span></span>
+<span>  <span class="va">GR</span>,</span>
+<span>  maxDist <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  minNumDMPs <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  maxClustDist <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"relaxed"</span>, <span class="st">"fixed.int"</span><span class="op">)</span>,</span>
+<span>  chromosomes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fl">9L</span>,</span>
+<span>  ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  num.cores <span class="op">=</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span>
+<span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -129,17 +129,25 @@ tested to identify differentially methylated regions (DMRs) with
     <dl><dt>GR</dt>
 <dd><p>An object from <strong><em>'pDMP'</em></strong> class, which is returned by
 <code><a href="selectDIMP.html">selectDIMP</a></code> function.</p></dd>
+
+
 <dt>maxDist</dt>
 <dd><p>maximum distance at which two reported bases sites from the
 same cluster can be separated. Default: \(maxDist = 3\).</p></dd>
+
+
 <dt>minNumDMPs</dt>
 <dd><p>Minimum number of DMPs inside of each cluster.
 Default: \(minNumDMPs = 1\).</p></dd>
+
+
 <dt>maxClustDist</dt>
 <dd><p>Clusters separated by a distance lesser than
 maxClustDist' positions are merged. Default: \(maxClustDist = NULL\). If
 \(0 &lt; maxClustDist &lt; maxDist\) or \(maxClustDist = NULL\), then
 maxClustDist will be recalculated as \(maxClustDist = maxDist + 1\).</p></dd>
+
+
 <dt>method</dt>
 <dd><p>Two different approaches are implemented to clustering DMPs:</p><dl><dt><strong>"relaxed":</strong></dt>
 <dd><p>DMP ranges which are separated by a distance
@@ -156,30 +164,45 @@ the first step.</p></dd>
 
 
 </dl></dd>
+
+
 <dt>chromosomes</dt>
 <dd><p>vector of characters labeling the chromosomes included in
 the analysis. Default: chromosomes = NULL (all chromosomes are included).</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>An integer number corresponding to the specific column(s) to
 use from the meta-column of each GRanges. Default values is 9 (the column
 carrying to the Hellinger divergence values).</p></dd>
+
+
 <dt>ignore.strand</dt>
 <dd><p>Same as in
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/findOverlaps-methods.html" class="external-link">findOverlaps-methods</a>.</code></p></dd>
+
+
 <dt>num.cores, tasks</dt>
 <dd><p>integer(1). The number of cores to use, i.e. at most
 how many child processes will be run simultaneously (see
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code> function from BiocParallel
 package).The number of tasks per job. value must be a scalar integer &gt;=
 0L (see MulticoreParam from BiocParallel package).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>if TRUE, prints the function log to stdout.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further parameters for <code><a href="uniqueGRanges.html">uniqueGRanges</a></code> function.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A GRanges object with the numbers of positions inside each cluster,
+    
+
+<p>A GRanges object with the numbers of positions inside each cluster,
 where DMPs were reported in at least one of the samples.</p>
     </div>
     <div id="details">
@@ -210,14 +233,14 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Get a dataset of dmps from the package</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Build clusters of DMPs taking into account the DNA strand</span></span>
-<span class="r-in"><span class="va">x1</span> <span class="op">=</span> <span class="fu">dmpClusters</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, maxDist <span class="op">=</span> <span class="fl">7</span>, minNumDMPs <span class="op">=</span> <span class="fl">6</span>,</span>
-<span class="r-in">                 method <span class="op">=</span> <span class="st">"fixed.int"</span>, ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">                 verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Get a dataset of dmps from the package</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Build clusters of DMPs taking into account the DNA strand</span></span></span>
+<span class="r-in"><span><span class="va">x1</span> <span class="op">=</span> <span class="fu">dmpClusters</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, maxDist <span class="op">=</span> <span class="fl">7</span>, minNumDMPs <span class="op">=</span> <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>                 method <span class="op">=</span> <span class="st">"fixed.int"</span>, ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                 verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    seqnames start  end width strand dmps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1         1  1208 1229    22      -    7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2         1  2142 2167    26      +    6</span>
@@ -233,46 +256,46 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12        1  7379 7405    27      +    6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13        1  9530 9557    28      +    8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14        1  9913 9935    23      +    6</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## Build clusters of DMPs ignoring DNA strand and maxClustDist = 7</span></span>
-<span class="r-in"><span class="va">x2</span> <span class="op">=</span> <span class="fu">dmpClusters</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, maxDist <span class="op">=</span> <span class="fl">7</span>, minNumDMPs <span class="op">=</span> <span class="fl">6</span>,</span>
-<span class="r-in">                  maxClustDist <span class="op">=</span> <span class="fl">7</span>, method <span class="op">=</span> <span class="st">"fixed.int"</span>,</span>
-<span class="r-in">                  num.cores<span class="op">=</span><span class="fl">2L</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">                  verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">DataFrame</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## The relaxed approach with method = "relaxed"</span></span>
-<span class="r-in"><span class="va">x3</span> <span class="op">=</span> <span class="fu">dmpClusters</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, minNumDMPs <span class="op">=</span> <span class="fl">6</span>, method <span class="op">=</span> <span class="st">"relaxed"</span>,</span>
-<span class="r-in">                  maxClustDist <span class="op">=</span> <span class="fl">10</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">                  verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">DataFrame</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span>
-<span class="r-in"><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dmps_at_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">x3</span>,</span>
-<span class="r-in">                                    ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dmps_at_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_clusters</span>, columns <span class="op">=</span> <span class="fl">2L</span>,</span>
-<span class="r-in">                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
-<span class="r-in">                                verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_clusters</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CT'</span>, <span class="st">'CT'</span>, <span class="st">'CT'</span>,</span>
-<span class="r-in">                                        <span class="st">'TT'</span>, <span class="st">'TT'</span>, <span class="st">'TT'</span><span class="op">)</span>,</span>
-<span class="r-in">                                        levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CT'</span>, <span class="st">'TT'</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">                    <span class="va">nams</span>, row.names <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Build a RangedGlmDataSet object</span></span>
-<span class="r-in"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_clusters</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## ================ Testing to detect DMRs ===========</span></span>
-<span class="r-in"><span class="va">dmrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds</span>, num.cores <span class="op">=</span> <span class="fl">4L</span>, minCountPerIndv <span class="op">=</span> <span class="fl">4</span>,</span>
-<span class="r-in">                maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, Minlog2FC <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span class="r-in">                CountPerBp <span class="op">=</span> <span class="fl">0.001</span>, test <span class="op">=</span> <span class="st">'LRT'</span>,</span>
-<span class="r-in">                verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dmrs</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## Build clusters of DMPs ignoring DNA strand and maxClustDist = 7</span></span></span>
+<span class="r-in"><span><span class="va">x2</span> <span class="op">=</span> <span class="fu">dmpClusters</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, maxDist <span class="op">=</span> <span class="fl">7</span>, minNumDMPs <span class="op">=</span> <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>                  maxClustDist <span class="op">=</span> <span class="fl">7</span>, method <span class="op">=</span> <span class="st">"fixed.int"</span>,</span></span>
+<span class="r-in"><span>                  num.cores<span class="op">=</span><span class="fl">2L</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                  verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">DataFrame</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## The relaxed approach with method = "relaxed"</span></span></span>
+<span class="r-in"><span><span class="va">x3</span> <span class="op">=</span> <span class="fu">dmpClusters</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, minNumDMPs <span class="op">=</span> <span class="fl">6</span>, method <span class="op">=</span> <span class="st">"relaxed"</span>,</span></span>
+<span class="r-in"><span>                  maxClustDist <span class="op">=</span> <span class="fl">10</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                  verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">DataFrame</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span></span>
+<span class="r-in"><span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dmps_at_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">x3</span>,</span></span>
+<span class="r-in"><span>                                    ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dmps_at_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_clusters</span>, columns <span class="op">=</span> <span class="fl">2L</span>,</span></span>
+<span class="r-in"><span>                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span></span>
+<span class="r-in"><span>                                verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_clusters</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CT'</span>, <span class="st">'CT'</span>, <span class="st">'CT'</span>,</span></span>
+<span class="r-in"><span>                                        <span class="st">'TT'</span>, <span class="st">'TT'</span>, <span class="st">'TT'</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                        levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CT'</span>, <span class="st">'TT'</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                    <span class="va">nams</span>, row.names <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Build a RangedGlmDataSet object</span></span></span>
+<span class="r-in"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_clusters</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ================ Testing to detect DMRs ===========</span></span></span>
+<span class="r-in"><span><span class="va">dmrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds</span>, num.cores <span class="op">=</span> <span class="fl">4L</span>, minCountPerIndv <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>                maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, Minlog2FC <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>                CountPerBp <span class="op">=</span> <span class="fl">0.001</span>, test <span class="op">=</span> <span class="st">'LRT'</span>,</span></span>
+<span class="r-in"><span>                verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dmrs</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -287,7 +310,7 @@ https://doi.org/10.1371/journal.pone.0150427</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

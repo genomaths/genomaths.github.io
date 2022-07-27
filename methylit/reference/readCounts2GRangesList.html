@@ -19,7 +19,7 @@ GEO database"><meta property="og:image" content="https://genomaths.github.io/met
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -37,7 +37,7 @@ GEO database"><meta property="og:image" content="https://genomaths.github.io/met
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -104,37 +104,44 @@ GEO database</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">readCounts2GRangesList</span><span class="op">(</span>
-  filenames <span class="op">=</span> <span class="cn">NULL</span>,
-  sample.id <span class="op">=</span> <span class="cn">NULL</span>,
-  pattern <span class="op">=</span> <span class="cn">NULL</span>,
-  remove <span class="op">=</span> <span class="cn">FALSE</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="cn">NULL</span>, start <span class="op">=</span> <span class="cn">NULL</span>, end <span class="op">=</span> <span class="cn">NULL</span>, strand <span class="op">=</span> <span class="cn">NULL</span>, fraction <span class="op">=</span>
-    <span class="cn">NULL</span>, percent <span class="op">=</span> <span class="cn">NULL</span>, mC <span class="op">=</span> <span class="cn">NULL</span>, uC <span class="op">=</span> <span class="cn">NULL</span>, coverage <span class="op">=</span> <span class="cn">NULL</span>, context <span class="op">=</span> <span class="cn">NULL</span>, signal <span class="op">=</span>
-    <span class="cn">NULL</span><span class="op">)</span>,
-  chromosome.names <span class="op">=</span> <span class="cn">NULL</span>,
-  chromosomes <span class="op">=</span> <span class="cn">NULL</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">readCounts2GRangesList</span><span class="op">(</span></span>
+<span>  filenames <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sample.id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pattern <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  remove <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="cn">NULL</span>, start <span class="op">=</span> <span class="cn">NULL</span>, end <span class="op">=</span> <span class="cn">NULL</span>, strand <span class="op">=</span> <span class="cn">NULL</span>, fraction <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    percent <span class="op">=</span> <span class="cn">NULL</span>, mC <span class="op">=</span> <span class="cn">NULL</span>, uC <span class="op">=</span> <span class="cn">NULL</span>, coverage <span class="op">=</span> <span class="cn">NULL</span>, context <span class="op">=</span> <span class="cn">NULL</span>, signal <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  chromosome.names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  chromosomes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>filenames</dt>
 <dd><p>Character vector with the file names</p></dd>
+
+
 <dt>sample.id</dt>
 <dd><p>Character vector with the names of the samples
 corresponding to each file</p></dd>
+
+
 <dt>pattern</dt>
 <dd><p>Chromosome name pattern. Users working on Linux OS can
 specify the reading of specific lines from each file by using regular
 expressions.</p></dd>
+
+
 <dt>remove</dt>
 <dd><p>Logic (TRUE). Usually the supplementary files from GEO
 datasets are 'gz' compressed. File datasets must be decompressed to be
 read. The decompressed files are removed after read if this is set
 'TRUE'.</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>Vector of integer numbers denoting the table columns that
 must be read. The numbers for 'seqnames' (chromosomes), 'start', and 'end'
@@ -145,6 +152,8 @@ cytosine), 'coverage', and 'context' (methylation context). These column
 headers are not required to be in the files. An optional column named
 <em>'signal'</em> can be used to include a relevant information about the
 methylation signal.</p></dd>
+
+
 <dt>chromosome.names</dt>
 <dd><p>If provided, for each GRanges object, chromosome
 names will be changed to those provided in 'chromosome.names' applying
@@ -152,18 +161,27 @@ seqlevels(x) &lt;- chromosome.names'. This option permits to use all the
 functionality of the function 'seqlevels' defined from package
 'GenomeInfoDb', which rename, add, and reorder the seqlevels all at once (see
 ?seqlevels).</p></dd>
+
+
 <dt>chromosomes</dt>
 <dd><p>If provided, it must be a character vector with the names
 of the chromosomes that you want to include in the final GRanges objects.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>If TRUE, prints the function log to stdout</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional parameters for 'fread' function from 'data.table'
 package</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of GRanges objects</p>
+    
+
+<p>A list of GRanges objects</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -174,26 +192,26 @@ GRanges objects with the information provided.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Create a cov file with it's file name including 'gz'</span></span>
-<span class="r-in"><span class="co">## 'gz' (tarball extension)</span></span>
-<span class="r-in"><span class="va">filename</span> <span class="op">&lt;-</span> <span class="st">'./file.cov'</span></span>
-<span class="r-in"><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'chr1'</span>, <span class="st">'chr1'</span><span class="op">)</span>, post <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">                strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'+'</span>, <span class="st">'-'</span><span class="op">)</span>, ratio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span class="r-in">                context <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CG'</span>, <span class="st">'CG'</span><span class="op">)</span>, CT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filename</span> <span class="op">&lt;-</span> <span class="st">'./file.cov'</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">gr1</span><span class="op">)</span>, file <span class="op">=</span> <span class="va">filename</span>,</span>
-<span class="r-in">            col.names <span class="op">=</span> <span class="cn">TRUE</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span>, quote <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Read the file. It does not work. Typing mistake: 'fractions'</span></span>
-<span class="r-in"><span class="va">LR</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">readCounts2GRangesList</span><span class="op">(</span>filenames <span class="op">=</span> <span class="va">filename</span>, remove <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">                            sample.id <span class="op">=</span> <span class="st">'test'</span>,</span>
-<span class="r-in">                            columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fl">1</span>, start <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">                                    strand <span class="op">=</span> <span class="fl">3</span>, fractions <span class="op">=</span> <span class="fl">4</span>,</span>
-<span class="r-in">                                    context <span class="op">=</span> <span class="fl">5</span>, coverage <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">                                    silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span> <span class="co"># Remove the file</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Create a cov file with it's file name including 'gz'</span></span></span>
+<span class="r-in"><span><span class="co">## 'gz' (tarball extension)</span></span></span>
+<span class="r-in"><span><span class="va">filename</span> <span class="op">&lt;-</span> <span class="st">'./file.cov'</span></span></span>
+<span class="r-in"><span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'chr1'</span>, <span class="st">'chr1'</span><span class="op">)</span>, post <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'+'</span>, <span class="st">'-'</span><span class="op">)</span>, ratio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                context <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CG'</span>, <span class="st">'CG'</span><span class="op">)</span>, CT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filename</span> <span class="op">&lt;-</span> <span class="st">'./file.cov'</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">gr1</span><span class="op">)</span>, file <span class="op">=</span> <span class="va">filename</span>,</span></span>
+<span class="r-in"><span>            col.names <span class="op">=</span> <span class="cn">TRUE</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span>, quote <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Read the file. It does not work. Typing mistake: 'fractions'</span></span></span>
+<span class="r-in"><span><span class="va">LR</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">readCounts2GRangesList</span><span class="op">(</span>filenames <span class="op">=</span> <span class="va">filename</span>, remove <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                            sample.id <span class="op">=</span> <span class="st">'test'</span>,</span></span>
+<span class="r-in"><span>                            columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fl">1</span>, start <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>                                    strand <span class="op">=</span> <span class="fl">3</span>, fractions <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>                                    context <span class="op">=</span> <span class="fl">5</span>, coverage <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                    silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span> <span class="co"># Remove the file</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -208,7 +226,7 @@ GRanges objects with the information provided.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

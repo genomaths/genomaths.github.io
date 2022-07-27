@@ -18,7 +18,7 @@ DMP"><meta property="og:image" content="https://genomaths.github.io/methylit/log
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
       </span>
     </div>
 
@@ -36,7 +36,7 @@ DMP"><meta property="og:image" content="https://genomaths.github.io/methylit/log
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,13 +102,13 @@ DMP</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">predictDIMPclass</span><span class="op">(</span>
-  <span class="va">LR</span>,
-  <span class="va">model</span>,
-  conf.matrix <span class="op">=</span> <span class="cn">FALSE</span>,
-  control.names <span class="op">=</span> <span class="cn">NULL</span>,
-  treatment.names <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predictDIMPclass</span><span class="op">(</span></span>
+<span>  <span class="va">LR</span>,</span>
+<span>  <span class="va">model</span>,</span>
+<span>  conf.matrix <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  control.names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  treatment.names <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -120,36 +120,51 @@ containing only differentially methylated position (DMPs). The metacolumn
 of each GRanges must contain the column: Hellinger divergence 'hdiv',
 total variation 'TV', the probability of potential DMP 'wprob', which
 naturally are added in the downstream analysis of MethylIT.</p></dd>
+
+
 <dt>model</dt>
 <dd><p>A classifier model obtained with the function
 'evaluateDIMPclass'.</p></dd>
+
+
 <dt>conf.matrix</dt>
 <dd><p>Optional. Logic, whether a confusion matrix should be
 returned (default, FALSE, see below).</p></dd>
+
+
 <dt>control.names</dt>
 <dd><p>Optional. Names/IDs of the control samples, which must
 be include in the variable LR (default, NULL).</p></dd>
+
+
 <dt>treatment.names</dt>
 <dd><p>Optional. Names/IDs of the treatment samples, which
 must be include in the variable LR (default, NULL).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The same LR object with tow new columns named 'class' and 'posterior'
+    
+
+<p>The same LR object with tow new columns named 'class' and 'posterior'
 added to each GRanges object from LR (default). Based on the model
 prediction each DMP is labeled as control 'CT' or as treatment 'TT' in
 column 'class'. Column 'posterior' provides, for each DMP, the posterior
 probability that the given DMP can be classified as induced by the
-'treatment' (a treatment DMP).</p><div class="sourceCode"><pre><code>Control DMPs classified as 'treatment' are false positives. However, if
-the same cytosine position is classified as 'treatment DMP' in both
-groups, control and treatment, but with higher posterior probability
-in the treatment group, then this would indicate a reinforcement of the
-methylation status in such a position induced by the treatment.
+'treatment' (a treatment DMP).</p>
 
-If 'conf.matrix' is TRUE and the arguments control.names and
-treatment.names are provided, then the overall confusion matrix is
-returned.
-</code></pre></div>
+
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Control DMPs classified as <span class="st">'treatment'</span> are false positives. However, <span class="cf">if</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>the same cytosine position is classified as <span class="st">'treatment DMP'</span> <span class="cf">in</span> both</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>groups, control and treatment, but with higher posterior probability</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">in</span> the treatment group, then this would indicate a reinforcement of the</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>methylation status <span class="cf">in</span> such a position induced by the treatment.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>If <span class="st">'conf.matrix'</span> is <span class="cn">TRUE</span> and the arguments control.names and</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>treatment.names are provided, then the overall confusion matrix is</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>returned.</span></code></pre><p></p></div>
+
+
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -160,27 +175,27 @@ same condition set for the DMPs used to build the model.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">### Load dataset from the package</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">logit_perf</span>, <span class="va">dmps</span>, package <span class="op">=</span> <span class="st">'MethylIT'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">### Select a random subset (70%) from each DMP sample</span></span>
-<span class="r-in"><span class="va">DMPs</span> <span class="op">&lt;-</span> <span class="fu"><a href="lapply.html">lapply</a></span><span class="op">(</span><span class="va">dmps</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">            <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.7</span></span>
-<span class="r-in">            <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="va">idx</span><span class="op">)</span>  <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span>, keep.attr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">### To accomplish the prediction for logistic model</span></span>
-<span class="r-in"><span class="va">predclass.dmps</span> <span class="op">&lt;-</span> <span class="fu">predictDIMPclass</span><span class="op">(</span></span>
-<span class="r-in">    LR <span class="op">=</span> <span class="va">DMPs</span>,</span>
-<span class="r-in">    model <span class="op">=</span> <span class="va">logit_perf</span><span class="op">$</span><span class="va">model</span>,</span>
-<span class="r-in">    conf.matrix <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">    control.names <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span><span class="op">)</span>,</span>
-<span class="r-in">    treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">predclass.dmps</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### Load dataset from the package</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">logit_perf</span>, <span class="va">dmps</span>, package <span class="op">=</span> <span class="st">'MethylIT'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### Select a random subset (70%) from each DMP sample</span></span></span>
+<span class="r-in"><span><span class="va">DMPs</span> <span class="op">&lt;-</span> <span class="fu"><a href="lapply.html">lapply</a></span><span class="op">(</span><span class="va">dmps</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.7</span></span></span>
+<span class="r-in"><span>            <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="va">idx</span><span class="op">)</span>  <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span>, keep.attr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### To accomplish the prediction for logistic model</span></span></span>
+<span class="r-in"><span><span class="va">predclass.dmps</span> <span class="op">&lt;-</span> <span class="fu">predictDIMPclass</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    LR <span class="op">=</span> <span class="va">DMPs</span>,</span></span>
+<span class="r-in"><span>    model <span class="op">=</span> <span class="va">logit_perf</span><span class="op">$</span><span class="va">model</span>,</span></span>
+<span class="r-in"><span>    conf.matrix <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    control.names <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">predclass.dmps</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Confusion Matrix and Statistics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Reference</span>
@@ -208,18 +223,18 @@ same condition set for the DMPs used to build the model.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        'Positive' Class : TT         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">### To accomplish the prediction PCA-QDA model</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pcaQda_perf"</span>, package <span class="op">=</span> <span class="st">'MethylIT'</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">predclass.dmps</span> <span class="op">&lt;-</span> <span class="fu">predictDIMPclass</span><span class="op">(</span></span>
-<span class="r-in">    LR <span class="op">=</span> <span class="va">DMPs</span>,</span>
-<span class="r-in">    model <span class="op">=</span> <span class="va">logit_perf</span><span class="op">$</span><span class="va">model</span>,</span>
-<span class="r-in">    conf.matrix <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">    control.names <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span><span class="op">)</span>,</span>
-<span class="r-in">    treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">predclass.dmps</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### To accomplish the prediction PCA-QDA model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pcaQda_perf"</span>, package <span class="op">=</span> <span class="st">'MethylIT'</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">predclass.dmps</span> <span class="op">&lt;-</span> <span class="fu">predictDIMPclass</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    LR <span class="op">=</span> <span class="va">DMPs</span>,</span></span>
+<span class="r-in"><span>    model <span class="op">=</span> <span class="va">logit_perf</span><span class="op">$</span><span class="va">model</span>,</span></span>
+<span class="r-in"><span>    conf.matrix <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    control.names <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">predclass.dmps</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Confusion Matrix and Statistics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Reference</span>
@@ -247,18 +262,18 @@ same condition set for the DMPs used to build the model.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        'Positive' Class : TT         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">### To accomplish the prediction PCA-LDA model</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pcaLda_perf"</span>, package <span class="op">=</span> <span class="st">'MethylIT'</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">predclass.dmps</span> <span class="op">&lt;-</span> <span class="fu">predictDIMPclass</span><span class="op">(</span></span>
-<span class="r-in">    LR <span class="op">=</span> <span class="va">DMPs</span>,</span>
-<span class="r-in">    model <span class="op">=</span> <span class="va">logit_perf</span><span class="op">$</span><span class="va">model</span>,</span>
-<span class="r-in">    conf.matrix <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">    control.names <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span><span class="op">)</span>,</span>
-<span class="r-in">    treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">predclass.dmps</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### To accomplish the prediction PCA-LDA model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pcaLda_perf"</span>, package <span class="op">=</span> <span class="st">'MethylIT'</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">predclass.dmps</span> <span class="op">&lt;-</span> <span class="fu">predictDIMPclass</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    LR <span class="op">=</span> <span class="va">DMPs</span>,</span></span>
+<span class="r-in"><span>    model <span class="op">=</span> <span class="va">logit_perf</span><span class="op">$</span><span class="va">model</span>,</span></span>
+<span class="r-in"><span>    conf.matrix <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    control.names <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">predclass.dmps</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Confusion Matrix and Statistics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Reference</span>
@@ -300,7 +315,7 @@ same condition set for the DMPs used to build the model.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
