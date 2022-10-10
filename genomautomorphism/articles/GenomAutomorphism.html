@@ -228,7 +228,7 @@ isolate Rs7327 (GenBank: KY417151.1) is provided with the package.</p>
 <div class="section level2">
 <h2 id="group-representations">Group representations<a class="anchor" aria-label="anchor" href="#group-representations"></a>
 </h2>
-<p>Group operations are defined on the sets of DNA bases and codons, are
+<p>Group operations defined on the sets of DNA bases and codons are
 associated to physicochemical or/and biophysical relationships between
 DNA bases and between codons and aminoacids. In other words, a proper
 definition of a group operation on the set of bases or on the set of
@@ -248,13 +248,14 @@ mathematically equivalent to a cube inserted in the 3D space (1). Each
 cube is denoted according to the corresponding base order.</p>
 <p>Given a base-order, say ‘ACGT’, the Abelian group defined on this
 ordered set is isomorphic to the Abelian group defined on the set of
-integers modulo 4 (‘Z4’). In practical terms, this is equivalent to
-replace each DNA base by the corresponding integer element. The base
-replacement in cube “ACGT and group”Z4” is:</p>
+integers modulo 4 (<span class="math inline">\(\mathbb{Z}_{4}\)</span>).
+In practical terms, this is equivalent to replace each DNA base by the
+corresponding integer element. The base replacement in cube “ACGT and
+group”Z4” (<span class="math inline">\(\mathbb{Z}_{4}\)</span>) is:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/base2int.html">base2int</a></span><span class="op">(</span><span class="st">"ACGT"</span>, group <span class="op">=</span> <span class="st">"Z4"</span>, cube <span class="op">=</span> <span class="st">"ACGT"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0 1 2 3</span></span></code></pre></div>
-<p>The base replacement in cube “ACGT and group”Z5”</p>
+<p>The base replacement in cube “ACGT and group ‘Z5’ (<span class="math inline">\(\mathbb{Z}_{5}\)</span>):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/base2int.html">base2int</a></span><span class="op">(</span><span class="st">"ACGT"</span>, group <span class="op">=</span> <span class="st">"Z5"</span>, cube <span class="op">=</span> <span class="st">"ACGT"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1 2 3 4</span></span></code></pre></div>
