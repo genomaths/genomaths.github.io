@@ -118,7 +118,7 @@ Sanchez</h4>
 Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 data-toc-skip class="date">20 November 2022</h4>
+            <h4 data-toc-skip class="date">21 November 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/GenomAutomorphism/blob/HEAD/vignettes/automorphism_and_decision_tree_II.Rmd" class="external-link"><code>vignettes/automorphism_and_decision_tree_II.Rmd</code></a></small>
       <div class="d-none name"><code>automorphism_and_decision_tree_II.Rmd</code></div>
@@ -652,7 +652,7 @@ effect</strong>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##  Updating CHAID decision tree</span></span>
 <span><span class="va">dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party.html" class="external-link">data_party</a></span><span class="op">(</span><span class="va">chaid_res</span><span class="op">)</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"autms"</span>, <span class="st">"regions"</span>, <span class="st">"mut_type"</span>, <span class="st">"cube"</span>, <span class="st">"mut_cost"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"autms"</span>, <span class="st">"regions"</span>, <span class="st">"mut_type"</span>, <span class="st">"mut_cost"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">dat</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="va">dp</span><span class="op">[</span>, <span class="st">"(response)"</span><span class="op">]</span></span>
 <span>    </span>
 <span>    </span>
@@ -760,6 +760,310 @@ probability only non-humans hold the following rule:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; silvery_gibbon </span></span>
 <span><span class="co">#&gt;            135</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="chaid-with-different-model">CHAID with different model<a class="anchor" aria-label="anchor" href="#chaid-with-different-model"></a>
+</h2>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ctrl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CHAID/man/chaid.html" class="external-link">chaid_control</a></span><span class="op">(</span>minsplit <span class="op">=</span> <span class="fl">200</span>, minprob <span class="op">=</span> <span class="fl">0.9</span>, alpha2 <span class="op">=</span> <span class="fl">0.01</span>, alpha4 <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">chaid_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CHAID/man/chaid.html" class="external-link">chaid</a></span><span class="op">(</span><span class="va">species</span> <span class="op">~</span> <span class="va">autms</span> <span class="op">+</span> <span class="va">regions</span> <span class="op">+</span> <span class="va">mut_type</span> <span class="op">+</span> <span class="va">mut_cost</span>, </span>
+<span>                   data <span class="op">=</span> <span class="va">datos</span>,  control <span class="op">=</span> <span class="va">ctrl</span><span class="op">)</span></span>
+<span><span class="va">chaid_res</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Model formula:</span></span>
+<span><span class="co">#&gt; species ~ autms + regions + mut_type + mut_cost</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fitted party:</span></span>
+<span><span class="co">#&gt; [1] root</span></span>
+<span><span class="co">#&gt; |   [2] mut_cost in 0.06</span></span>
+<span><span class="co">#&gt; |   |   [3] regions in R0, R5</span></span>
+<span><span class="co">#&gt; |   |   |   [4] autms in A1: silvery_gibbon (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [5] autms in A2: gorilla (n = 92, err = 25.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [6] autms in A3: human (n = 13, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [7] autms in A4: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [8] regions in R0.</span></span>
+<span><span class="co">#&gt; |   |   |   [9] autms in A1, A4: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [10] autms in A2: bolivian_monkey (n = 138, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [11] autms in A3: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [12] regions in R1</span></span>
+<span><span class="co">#&gt; |   |   |   [13] autms in A1, A4: golden_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [14] autms in A2: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   |   [15] autms in A3: silvery_gibbon (n = 115, err = 40.0%)</span></span>
+<span><span class="co">#&gt; |   |   [16] regions in R2: bolivian_monkey (n = 115, err = 40.0%)</span></span>
+<span><span class="co">#&gt; |   |   [17] regions in R3: gelada_baboon (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [18] regions in R4</span></span>
+<span><span class="co">#&gt; |   |   |   [19] autms in A1, A3: golden_monkey (n = 322, err = 57.1%)</span></span>
+<span><span class="co">#&gt; |   |   |   [20] autms in A2</span></span>
+<span><span class="co">#&gt; |   |   |   |   [21] mut_type in ---, HHH, HHK, HHM, HHR, HHS, HHW, HKH, HMH, HMR, HRH, HRR, HRW, HRY, HSH, HWH, HYH, HYS, KHH, KKH, KWH, KYH, MHH, RHH, RKH, RMH, RWH, RYH, SHH, SHM, WHH, WHK, YHH, YRH, YRY: golden_monkey (n = 253, err = 63.6%)</span></span>
+<span><span class="co">#&gt; |   |   |   |   [22] mut_type in HHY: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [23] autms in A4: gorilla (n = 92, err = 25.0%)</span></span>
+<span><span class="co">#&gt; |   |   [24] regions in R6: silvery_gibbon (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [25] regions in R7: silvery_gibbon (n = 187, err = 61.5%)</span></span>
+<span><span class="co">#&gt; |   |   [26] regions in R8: silvery_gibbon (n = 89, err = 25.8%)</span></span>
+<span><span class="co">#&gt; |   [27] mut_cost in 0.1</span></span>
+<span><span class="co">#&gt; |   |   [28] regions in R0, R2</span></span>
+<span><span class="co">#&gt; |   |   |   [29] autms in A1, A3: golden_monkey (n = 184, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [30] autms in A2: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [31] autms in A4: human (n = 36, err = 38.9%)</span></span>
+<span><span class="co">#&gt; |   |   [32] regions in R0.</span></span>
+<span><span class="co">#&gt; |   |   |   [33] mut_type in ---, HHH, HHK, HHM, HHW, HKH, HMH, HMR, HRH, HRR, HRW, HRY, HSH, HWH, HYH, HYS, KHH, KKH, KWH, KYH, MHH, RHH, RKH, RMH, RWH, RYH, SHH, SHM, WHH, WHK, YHH, YRH, YRY: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [34] mut_type in HHR: gelada_baboon (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [35] mut_type in HHS: silvery_gibbon (n = 92, err = 25.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [36] mut_type in HHY: bonobos (n = 184, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [37] regions in R1: gorilla (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [38] regions in R3: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [39] regions in R4</span></span>
+<span><span class="co">#&gt; |   |   |   [40] mut_type in ---, HHH, HHK, HHS, HHY, HKH, HMH, HMR, HRH, HRR, HRW, HRY, HSH, HWH, HYH, HYS, KHH, KKH, KWH, KYH, MHH, RHH, RKH, RMH, RWH, RYH, SHH, SHM, WHH, WHK, YHH, YRH, YRY: gelada_baboon (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [41] mut_type in HHM: golden_monkey (n = 85, err = 43.5%)</span></span>
+<span><span class="co">#&gt; |   |   |   [42] mut_type in HHR: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   |   [43] mut_type in HHW</span></span>
+<span><span class="co">#&gt; |   |   |   |   [44] autms in A1, A2, A3: silvery_gibbon (n = 161, err = 57.1%)</span></span>
+<span><span class="co">#&gt; |   |   |   |   [45] autms in A4: silvery_gibbon (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [46] regions in R5, R7: bolivian_monkey (n = 135, err = 31.1%)</span></span>
+<span><span class="co">#&gt; |   |   [47] regions in R6: bolivian_monkey (n = 138, err = 66.7%)</span></span>
+<span><span class="co">#&gt; |   |   [48] regions in R8</span></span>
+<span><span class="co">#&gt; |   |   |   [49] autms in A1, A2, A3: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [50] autms in A4: bonobos (n = 273, err = 66.3%)</span></span>
+<span><span class="co">#&gt; |   [51] mut_cost in 0.12, 0.35</span></span>
+<span><span class="co">#&gt; |   |   [52] regions in R0, R6, R7, R8</span></span>
+<span><span class="co">#&gt; |   |   |   [53] mut_type in ---, HHH, HHK, HHM, HHR, HHW, HKH, HMH, HMR, HRH, HRR, HRW, HRY, HSH, HWH, HYH, HYS, KHH, KKH, KWH, KYH, MHH, RHH, RKH, RMH, RWH, RYH, SHH, SHM, WHH, WHK, YHH, YRH, YRY: silvery_gibbon (n = 162, err = 57.4%)</span></span>
+<span><span class="co">#&gt; |   |   |   [54] mut_type in HHS: human (n = 39, err = 43.6%)</span></span>
+<span><span class="co">#&gt; |   |   |   [55] mut_type in HHY: bolivian_monkey (n = 22, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [56] regions in R0.: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [57] regions in R1, R5: silvery_gibbon (n = 135, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [58] regions in R2: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [59] regions in R3: human (n = 40, err = 45.0%)</span></span>
+<span><span class="co">#&gt; |   |   [60] regions in R4: bolivian_monkey (n = 115, err = 60.0%)</span></span>
+<span><span class="co">#&gt; |   [61] mut_cost in 0.22</span></span>
+<span><span class="co">#&gt; |   |   [62] regions in R0, R1, R3, R8: golden_monkey (n = 164, err = 70.7%)</span></span>
+<span><span class="co">#&gt; |   |   [63] regions in R0.: silvery_gibbon (n = 138, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [64] regions in R2: golden_monkey (n = 138, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [65] regions in R4: bolivian_monkey (n = 161, err = 42.9%)</span></span>
+<span><span class="co">#&gt; |   |   [66] regions in R5: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [67] regions in R6: golden_monkey (n = 92, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [68] regions in R7: gelada_baboon (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [69] mut_cost in 0.26</span></span>
+<span><span class="co">#&gt; |   |   [70] autms in A1, A2</span></span>
+<span><span class="co">#&gt; |   |   |   [71] regions in R0, R1, R2, R3, R4, R5, R6, R7, R8</span></span>
+<span><span class="co">#&gt; |   |   |   |   [72] regions in R0, R0., R1, R2, R3, R5, R6, R7, R8</span></span>
+<span><span class="co">#&gt; |   |   |   |   |   [73] mut_type in ---, HHH, HHK, HHM, HHR, HHS, HHY, HKH, HMH, HMR, HRH, HRR, HRW, HRY, HSH, HWH, HYH, HYS, KHH, KKH, KWH, KYH, MHH, RHH, RKH, RMH, RWH, RYH, SHH, SHM, WHH, WHK, YHH, YRH, YRY: human (n = 17, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   |   |   [74] mut_type in HHW: human (n = 338, err = 69.2%)</span></span>
+<span><span class="co">#&gt; |   |   |   |   [75] regions in R4: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [76] regions in R0.: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [77] autms in A3: silvery_gibbon (n = 93, err = 22.6%)</span></span>
+<span><span class="co">#&gt; |   |   [78] autms in A4: golden_monkey (n = 92, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [79] mut_cost in 0.28, 1.23</span></span>
+<span><span class="co">#&gt; |   |   [80] regions in R0, R3, R6, R7, R8</span></span>
+<span><span class="co">#&gt; |   |   |   [81] autms in A1, A2, A4: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [82] autms in A3</span></span>
+<span><span class="co">#&gt; |   |   |   |   [83] mut_type in ---, HHH, HHK, HHM, HHR, HHS, HHW, HHY, HKH, HMH, HMR, HRH, HRR, HRW, HRY, HSH, HWH, HYH, HYS, KHH, KKH, KWH, KYH, MHH, RHH, RKH, RMH, RWH, RYH, SHH, SHM, WHH, WHK, YHH, YRY: silvery_gibbon (n = 161, err = 57.1%)</span></span>
+<span><span class="co">#&gt; |   |   |   |   [84] mut_type in YRH: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [85] regions in R0.: bonobos (n = 115, err = 20.0%)</span></span>
+<span><span class="co">#&gt; |   |   [86] regions in R1: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [87] regions in R2: bonobos (n = 414, err = 77.8%)</span></span>
+<span><span class="co">#&gt; |   |   [88] regions in R4</span></span>
+<span><span class="co">#&gt; |   |   |   [89] autms in A1: golden_monkey (n = 162, err = 43.2%)</span></span>
+<span><span class="co">#&gt; |   |   |   [90] autms in A2: human (n = 42, err = 71.4%)</span></span>
+<span><span class="co">#&gt; |   |   |   [91] autms in A3: bonobos (n = 488, err = 81.1%)</span></span>
+<span><span class="co">#&gt; |   |   |   [92] autms in A4: human (n = 14, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [93] regions in R5: golden_monkey (n = 161, err = 42.9%)</span></span>
+<span><span class="co">#&gt; |   [94] mut_cost in 0.31: golden_monkey (n = 184, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   [95] mut_cost in 0.32</span></span>
+<span><span class="co">#&gt; |   |   [96] regions in R0, R0., R3: bonobos (n = 111, err = 20.7%)</span></span>
+<span><span class="co">#&gt; |   |   [97] regions in R1: chimpanzee (n = 326, err = 71.8%)</span></span>
+<span><span class="co">#&gt; |   |   [98] regions in R2: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [99] regions in R4: silvery_gibbon (n = 184, err = 62.5%)</span></span>
+<span><span class="co">#&gt; |   |   [100] regions in R5, R7: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [101] regions in R6: gorilla (n = 138, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [102] regions in R8: golden_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [103] mut_cost in 0.33</span></span>
+<span><span class="co">#&gt; |   |   [104] regions in R0, R4, R5, R8: human (n = 38, err = 47.4%)</span></span>
+<span><span class="co">#&gt; |   |   [105] regions in R0., R2: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [106] regions in R1: golden_monkey (n = 92, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [107] regions in R3: silvery_gibbon (n = 137, err = 49.6%)</span></span>
+<span><span class="co">#&gt; |   |   [108] regions in R6: golden_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [109] regions in R7: golden_monkey (n = 89, err = 48.3%)</span></span>
+<span><span class="co">#&gt; |   [110] mut_cost in 0.41: silvery_gibbon (n = 150, err = 54.0%)</span></span>
+<span><span class="co">#&gt; |   [111] mut_cost in 0.47, 0.81: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [112] mut_cost in 0.53</span></span>
+<span><span class="co">#&gt; |   |   [113] regions in R0, R0., R1, R2, R5, R6, R7, R8: gelada_baboon (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [114] regions in R3: silvery_gibbon (n = 92, err = 25.0%)</span></span>
+<span><span class="co">#&gt; |   |   [115] regions in R4</span></span>
+<span><span class="co">#&gt; |   |   |   [116] autms in A1, A2, A4: bolivian_monkey (n = 150, err = 68.7%)</span></span>
+<span><span class="co">#&gt; |   |   |   [117] autms in A3: gorilla (n = 73, err = 5.5%)</span></span>
+<span><span class="co">#&gt; |   [118] mut_cost in 0.58, 0.78, 1.02</span></span>
+<span><span class="co">#&gt; |   |   [119] regions in R0, R1, R2, R3, R5, R6, R8: human (n = 78, err = 46.2%)</span></span>
+<span><span class="co">#&gt; |   |   [120] regions in R0.: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [121] regions in R4</span></span>
+<span><span class="co">#&gt; |   |   |   [122] autms in A1, A2: silvery_gibbon (n = 165, err = 58.2%)</span></span>
+<span><span class="co">#&gt; |   |   |   [123] autms in A3: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [124] autms in A4: golden_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [125] regions in R7: golden_monkey (n = 119, err = 66.4%)</span></span>
+<span><span class="co">#&gt; |   [126] mut_cost in 0.63: golden_monkey (n = 109, err = 56.0%)</span></span>
+<span><span class="co">#&gt; |   [127] mut_cost in 0.67: golden_monkey (n = 109, err = 56.0%)</span></span>
+<span><span class="co">#&gt; |   [128] mut_cost in 0.73, 0.82, 1.52, 2.48</span></span>
+<span><span class="co">#&gt; |   |   [129] autms in A1: gelada_baboon (n = 28, err = 14.3%)</span></span>
+<span><span class="co">#&gt; |   |   [130] autms in A2: silvery_gibbon (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [131] autms in A3: golden_monkey (n = 92, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [132] autms in A4: silvery_gibbon (n = 111, err = 35.1%)</span></span>
+<span><span class="co">#&gt; |   [133] mut_cost in 0.89: bolivian_monkey (n = 184, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   [134] mut_cost in 0.94, 1.03</span></span>
+<span><span class="co">#&gt; |   |   [135] autms in A1, A2: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [136] autms in A3: golden_monkey (n = 184, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [137] autms in A4: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [138] mut_cost in 0.98</span></span>
+<span><span class="co">#&gt; |   |   [139] regions in R0, R0., R1, R2, R3, R5, R6, R7, R8: silvery_gibbon (n = 161, err = 57.1%)</span></span>
+<span><span class="co">#&gt; |   |   [140] regions in R4: bolivian_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [141] mut_cost in 0.99</span></span>
+<span><span class="co">#&gt; |   |   [142] regions in R0, R0., R6, R8: bonobos (n = 414, err = 77.8%)</span></span>
+<span><span class="co">#&gt; |   |   [143] regions in R1: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [144] regions in R2: golden_monkey (n = 92, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [145] regions in R3: human (n = 79, err = 45.6%)</span></span>
+<span><span class="co">#&gt; |   |   [146] regions in R4, R7</span></span>
+<span><span class="co">#&gt; |   |   |   [147] mut_type in ---, HHH, HHK, HHM, HHW, HKH, HMH, HMR, HRH, HRR, HRW, HRY, HSH, HWH, HYH, HYS, KHH, KKH, KWH, KYH, MHH, RHH, RKH, RMH, RWH, RYH, SHH, SHM, WHH, WHK, YHH, YRH, YRY: silvery_gibbon (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [148] mut_type in HHR: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [149] mut_type in HHS: golden_monkey (n = 46, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [150] mut_type in HHY: golden_monkey (n = 161, err = 42.9%)</span></span>
+<span><span class="co">#&gt; |   |   [151] regions in R5: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [152] mut_cost in 1.01</span></span>
+<span><span class="co">#&gt; |   |   [153] regions in R0, R0., R1, R2, R3, R5, R6, R7, R8: gorilla (n = 115, err = 40.0%)</span></span>
+<span><span class="co">#&gt; |   |   [154] regions in R4: golden_monkey (n = 92, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   [155] mut_cost in 1.11, 1.28: bolivian_monkey (n = 93, err = 49.5%)</span></span>
+<span><span class="co">#&gt; |   [156] mut_cost in 1.12, 1.89, 2.88</span></span>
+<span><span class="co">#&gt; |   |   [157] regions in R0, R1, R2, R5, R6, R7, R8: golden_monkey (n = 92, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [158] regions in R0.: gorilla (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [159] regions in R3: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [160] regions in R4: human (n = 40, err = 45.0%)</span></span>
+<span><span class="co">#&gt; |   [161] mut_cost in 1.18: bonobos (n = 256, err = 64.1%)</span></span>
+<span><span class="co">#&gt; |   [162] mut_cost in 1.19: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [163] mut_cost in 1.21</span></span>
+<span><span class="co">#&gt; |   |   [164] regions in R0, R0., R1, R2, R3, R5, R6, R8: golden_monkey (n = 129, err = 62.8%)</span></span>
+<span><span class="co">#&gt; |   |   [165] regions in R4: bonobos (n = 414, err = 77.8%)</span></span>
+<span><span class="co">#&gt; |   |   [166] regions in R7: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [167] mut_cost in 1.34</span></span>
+<span><span class="co">#&gt; |   |   [168] regions in R0, R0., R1, R2, R3, R5, R8: golden_monkey (n = 138, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [169] regions in R4: bonobos (n = 184, err = 50.0%)</span></span>
+<span><span class="co">#&gt; |   |   [170] regions in R6: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [171] regions in R7: silvery_gibbon (n = 92, err = 25.0%)</span></span>
+<span><span class="co">#&gt; |   [172] mut_cost in 1.36: gorilla (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [173] mut_cost in 1.58, 3.38: silvery_gibbon (n = 95, err = 27.4%)</span></span>
+<span><span class="co">#&gt; |   [174] mut_cost in 1.98</span></span>
+<span><span class="co">#&gt; |   |   [175] regions in R0, R0., R2, R3, R5, R8</span></span>
+<span><span class="co">#&gt; |   |   |   [176] autms in A1, A2, A3: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   |   [177] autms in A4: bonobos (n = 391, err = 76.5%)</span></span>
+<span><span class="co">#&gt; |   |   [178] regions in R1: silvery_gibbon (n = 161, err = 57.1%)</span></span>
+<span><span class="co">#&gt; |   |   [179] regions in R4</span></span>
+<span><span class="co">#&gt; |   |   |   [180] autms in A1, A4: silvery_gibbon (n = 138, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [181] autms in A2: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   |   [182] autms in A3: silvery_gibbon (n = 161, err = 57.1%)</span></span>
+<span><span class="co">#&gt; |   |   [183] regions in R6: golden_monkey (n = 69, err = 33.3%)</span></span>
+<span><span class="co">#&gt; |   |   [184] regions in R7: human (n = 35, err = 40.0%)</span></span>
+<span><span class="co">#&gt; |   [185] mut_cost in 2.12, 3.17: golden_monkey (n = 70, err = 34.3%)</span></span>
+<span><span class="co">#&gt; |   [186] mut_cost in 2.14</span></span>
+<span><span class="co">#&gt; |   |   [187] regions in R0, R0., R1, R2, R3, R5, R6, R7: gorilla (n = 69, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   [188] regions in R4: bolivian_monkey (n = 138, err = 66.7%)</span></span>
+<span><span class="co">#&gt; |   |   [189] regions in R8: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [190] mut_cost in 2.22, 2.23: bolivian_monkey (n = 70, err = 32.9%)</span></span>
+<span><span class="co">#&gt; |   [191] mut_cost in 2.92: golden_monkey (n = 80, err = 42.5%)</span></span>
+<span><span class="co">#&gt; |   [192] mut_cost in 2.99: bolivian_monkey (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   [193] mut_cost in 4</span></span>
+<span><span class="co">#&gt; |   |   [194] mut_type in ---, HHK, HHM, HHR, HHS, HHW, HHY, HKH, HMH, HMR, HRH, HRR, HRW, HRY, HSH, HWH, HYH, HYS, KHH, KKH, KWH, KYH, MHH, RHH, RKH, RMH, RWH, RYH, SHH, SHM, WHH, WHK, YHH, YRH, YRY</span></span>
+<span><span class="co">#&gt; |   |   |   [195] regions in R0, R0., R1, R3, R5, R6, R7, R8: silvery_gibbon (n = 253, err = 36.4%)</span></span>
+<span><span class="co">#&gt; |   |   |   [196] regions in R2: bonobos (n = 23, err = 0.0%)</span></span>
+<span><span class="co">#&gt; |   |   |   [197] regions in R4: bonobos (n = 299, err = 76.9%)</span></span>
+<span><span class="co">#&gt; |   |   [198] mut_type in HHH: human (n = 391, err = 35.3%)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of inner nodes:     45</span></span>
+<span><span class="co">#&gt; Number of terminal nodes: 153</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="plotting-the-chaid-tree-iii">Plotting the CHAID tree (III)<a class="anchor" aria-label="anchor" href="#plotting-the-chaid-tree-iii"></a>
+</h4>
+<p>Next, the data must be prepared for plotting the tree with <a href="https://rdrr.io/cran/ggparty/man/ggparty.html" class="external-link">ggparty</a>:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##  Updating CHAID decision tree</span></span>
+<span><span class="va">dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party.html" class="external-link">data_party</a></span><span class="op">(</span><span class="va">chaid_res</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"autms"</span>, <span class="st">"regions"</span>, <span class="st">"mut_type"</span>, <span class="st">"mut_cost"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="va">dp</span><span class="op">[</span>, <span class="st">"(response)"</span><span class="op">]</span></span>
+<span>    </span>
+<span>    </span>
+<span><span class="va">chaid_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party.html" class="external-link">party</a></span><span class="op">(</span>node <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party.html" class="external-link">node_party</a></span><span class="op">(</span><span class="va">chaid_res</span><span class="op">)</span>, </span>
+<span>                    data <span class="op">=</span> <span class="va">dat</span>,</span>
+<span>                    fitted <span class="op">=</span>  <span class="va">dp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(fitted)"</span>, <span class="st">"(response)"</span><span class="op">)</span><span class="op">]</span>, </span>
+<span>                    names <span class="op">=</span> <span class="fu"><a href="../reference/AutomorphismList.html">names</a></span><span class="op">(</span><span class="va">chaid_res</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Extract p-values</span></span>
+<span><span class="va">pvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/nodeapply.html" class="external-link">nodeapply</a></span><span class="op">(</span><span class="va">chaid_tree</span>, ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/nodeids.html" class="external-link">nodeids</a></span><span class="op">(</span><span class="va">chaid_tree</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">pvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">info_node</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">$</span><span class="va">adjpvals</span></span>
+<span>    <span class="va">pvals</span> <span class="op">&lt;</span> <span class="va">pvals</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.min.html" class="external-link">which.min</a></span><span class="op">(</span><span class="va">pvals</span><span class="op">)</span> <span class="op">]</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">pvals</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">pvals</span> <span class="op">&lt;-</span> <span class="va">pvals</span><span class="op">[</span> <span class="va">pvals</span> <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="op">]</span></span>
+<span></span>
+<span><span class="co">## Counts of event per spciees on each node</span></span>
+<span><span class="va">node.freq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">chaid_tree</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party.html" class="external-link">data_party</a></span><span class="op">(</span><span class="va">chaid_tree</span>, id <span class="op">=</span> <span class="va">id</span><span class="op">)</span></span>
+<span>    <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[[</span> <span class="st">"(response)"</span> <span class="op">]</span><span class="op">]</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">## total counts on each</span></span>
+<span><span class="va">node.size</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">node.freq</span><span class="op">)</span></span></code></pre></div>
+<p>Plotting the tree with <a href="https://rdrr.io/cran/ggparty/man/ggparty.html" class="external-link">ggparty</a> (font
+size adjusted for html output)</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/ggparty.html" class="external-link">ggparty</a></span><span class="op">(</span><span class="va">chaid_tree</span>, horizontal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/geom_edge.html" class="external-link">geom_edge</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">id</span>, size <span class="op">=</span> <span class="va">node.size</span><span class="op">[</span><span class="va">id</span><span class="op">]</span><span class="op">/</span><span class="fl">300</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/geom_edge_label.html" class="external-link">geom_edge_label</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, colour <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>                    fontface <span class="op">=</span> <span class="st">"bold"</span>, </span>
+<span>                    shift <span class="op">=</span> <span class="fl">0.64</span>, </span>
+<span>                    nudge_x <span class="op">=</span> <span class="op">-</span><span class="fl">0.01</span>,</span>
+<span>                    max_length <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>                    splitlevels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/geom_node_label.html" class="external-link">geom_node_label</a></span><span class="op">(</span>line_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Node "</span>, <span class="va">id</span>, <span class="st">": "</span>, <span class="va">splitvar</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"N="</span>, <span class="va">node.size</span><span class="op">[</span><span class="va">id</span><span class="op">]</span>, <span class="st">", p"</span>, </span>
+<span>                                 <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">pvals</span> <span class="op">&lt;</span> <span class="fl">.001</span>, <span class="st">"&lt;.001"</span>,</span>
+<span>                                        <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">pvals</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                    size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                    line_gpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>, </span>
+<span>                                     <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                ids <span class="op">=</span> <span class="st">"inner"</span>, fontface <span class="op">=</span> <span class="st">"bold"</span>, size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/geom_node_label.html" class="external-link">geom_node_info</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/geom_node_label.html" class="external-link">geom_node_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"N = "</span>, <span class="va">node.size</span><span class="op">)</span>, </span>
+<span>                        fontface <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>                    ids <span class="op">=</span> <span class="st">"terminal"</span>, nudge_y <span class="op">=</span> <span class="op">-</span><span class="fl">0.0</span>, nudge_x <span class="op">=</span> <span class="fl">0.01</span>, size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggparty/man/geom_node_plot.html" class="external-link">geom_node_plot</a></span><span class="op">(</span>gglist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.7</span>, width <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>                 position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html" class="external-link">position_fill</a></span><span class="op">(</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"arial"</span>, base_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.key.size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">2</span>, <span class="st">"cm"</span><span class="op">)</span>, </span>
+<span>              legend.key.width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">3.5</span>, <span class="st">'cm'</span><span class="op">)</span>,</span>
+<span>              legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>,</span>
+<span>              legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">52</span><span class="op">)</span>,</span>
+<span>              text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">44</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html" class="external-link">coord_flip</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gray50"</span>,<span class="st">"gray55"</span>,<span class="st">"gray60"</span>,</span>
+<span>                                     <span class="st">"gray70"</span>,<span class="st">"gray80"</span>,<span class="st">"gray85"</span>,</span>
+<span>                                     <span class="st">"dodgerblue"</span>,<span class="st">"gray95"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span>, </span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Probability"</span><span class="op">)</span>,  </span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, group <span class="op">=</span> <span class="va">species</span>, </span>
+<span>                      label <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                  stat <span class="op">=</span> <span class="st">"count"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html" class="external-link">position_fill</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>                  vjust <span class="op">=</span> <span class="fl">0.6</span>, hjust <span class="op">=</span> <span class="fl">1.5</span>, size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        shared_axis_labels <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span></span></code></pre></div>
+<p><img src="automorphism_and_decision_tree_II_files/figure-html/chaid-tree3-1.png" width="5280"></p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rule</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">mut_cost</span> <span class="op">==</span> <span class="fl">0.26</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">autm</span> <span class="op">==</span> <span class="st">"A1"</span> <span class="op">|</span> <span class="va">dat</span><span class="op">$</span><span class="va">autm</span> <span class="op">==</span> <span class="st">"A2"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="va">dat</span><span class="op">$</span><span class="va">regions</span> <span class="op">!=</span> <span class="st">"R4"</span> <span class="op">&amp;</span> <span class="va">dat</span><span class="op">$</span><span class="va">mut_type</span> <span class="op">!=</span> <span class="st">"HHW"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[</span> <span class="va">rule</span>, <span class="op">]</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; human </span></span>
+<span><span class="co">#&gt;    17</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rule</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">mut_cost</span> <span class="op">==</span> <span class="fl">0.99</span> <span class="op">&amp;</span> <span class="va">dat</span><span class="op">$</span><span class="va">mut_type</span> <span class="op">==</span> <span class="st">"HHS"</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">regions</span> <span class="op">==</span> <span class="st">"R7"</span> <span class="op">|</span> <span class="va">dat</span><span class="op">$</span><span class="va">regions</span> <span class="op">==</span> <span class="st">"R4"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[</span> <span class="va">rule</span>, <span class="op">]</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; golden_monkey </span></span>
+<span><span class="co">#&gt;            46</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
