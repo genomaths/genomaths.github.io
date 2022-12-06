@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -59,7 +59,7 @@
   <a href="../reference/index.html">Package functions</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -130,14 +130,15 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>DMR detection with Methyl-IT</h1>
-            <h3 data-toc-skip class="subtitle">Analysis for Arabidopsis MSH1-memory versus non-memory first generation</h3>
+            <h3 data-toc-skip class="subtitle">Analysis for Arabidopsis
+MSH1-memory versus non-memory first generation</h3>
                         <h4 data-toc-skip class="author"><div class="line-block">Robersy Sanchez<br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br>
 Mackenzie’s lab<br><br>
 Department of Biology and Plant Science.<br>
 Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div></h4>
             
-            <h4 data-toc-skip class="date">05 April 2022</h4>
+            <h4 data-toc-skip class="date">06 December 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/dmr_at_memory.Rmd" class="external-link"><code>vignettes/dmr_at_memory.Rmd</code></a></small>
       <div class="hidden name"><code>dmr_at_memory.Rmd</code></div>
@@ -147,7 +148,9 @@ Maintainer: Robersy Sanchez</div></h4>
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      <p>Herein, an example of Methyl-IT application to the detection of differential methylated regions (DMRs) on first generation MSH1 RNAi transgene segregants data set is presented.</p>
+      <p>Herein, an example of Methyl-IT application to the detection of
+      differential methylated regions (DMRs) on first generation MSH1
+      RNAi transgene segregants data set is presented.</p>
     </div>
     
 <style type="text/css">
@@ -217,661 +220,752 @@ pre { /* Code block - determines code spacing between lines */
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>MethylIT is an R package for methylome analysis based on a signal-detection machine learning approach (SD-ML). This approach is postulated to provide greater sensitivity for resolving true signal from the methylation background within the methylome <span class="citation">(1, 2)</span>. Because the biological signal created within the dynamic methylome environment characteristic of plants is not free from background noise, the approach, designated Methyl-IT, includes the application of signal detection theory <span class="citation">(3–6)</span>.</p>
-<p>A basic requirement for the application of signal detection is the knowledge of the probability distribution of the background noise, which is used as null hypothesis in the detection of the methylation signal. This probability distribution is, in general, a member of generalized gamma distribution family, and it can be deduced on a statistical mechanical/thermodynamics basis from DNA methylation induced by thermal fluctuations <span class="citation">(1)</span>.</p>
-<p>Herein, we provide an example of Methyl-IT application to DMR estimation on patients with PALL <span class="citation">(7)</span>. Due to the size of human methylome the current example only covers the analysis of chromosome 9. A full description of Methyl-IT application of methylome analysis for Clinical Diagnostics is given in the manuscript <span class="citation">(2)</span>. A wider analysis of PALL data set is given in <span class="citation">(8)</span>.</p>
-<p>The first step of DMR estimation follows the general step of Methyl-IT pipeline for the estimation of DMPs. In Methyl-IT, a DMP is a cytosine positions that, with high probability, carries a statistically significant methylation change in respect to the same position in a control population. Once DMPs are identified, a simple algorithm can be applied to identify clusters of DMPs using <a href="https://genomaths.github.io/methylit/reference/dmpClusters.html">dmpClusters</a> function. Next, <a href="https://is.gd/kltCXl" class="external-link">countTest2</a> is applied to test whether a given cluster of DMPs is a DMR.</p>
-<p>It is worthy to notices that any clustering algorithm will impose non-natural constraints on the methylation patterning, which not necessarily will be associated to the local DNA physico-chemical properties and to local molecular evolutionary features of every DMR detected. Every cytosine methylation has a concrete physical effect of the DNA, altering the DNA persistence length, i.e., altering the local DNA flexibility <span class="citation">(9–11)</span>. DNA flexibility was shown to affect the binding of proteins to methylated DNA and DNA-containing lesion <span class="citation">(12, 13)</span> and nucleosome mechanical stability <span class="citation">(14)</span>. In other words, the sizes of naturally occurrying methylation motifs are not arbitrarily set, but very well constrained under molecular evolutionary pressure, probably, particular for each species.</p>
+<p>MethylIT is an R package for methylome analysis based on a
+signal-detection machine learning approach (SD-ML). This approach is
+postulated to provide greater sensitivity for resolving true signal from
+the methylation background within the methylome <span class="citation">(1, 2)</span>. Because the biological signal created
+within the dynamic methylome environment characteristic of plants is not
+free from background noise, the approach, designated Methyl-IT, includes
+the application of signal detection theory <span class="citation">(3–6)</span>.</p>
+<p>A basic requirement for the application of signal detection is the
+knowledge of the probability distribution of the background noise, which
+is used as null hypothesis in the detection of the methylation signal.
+This probability distribution is, in general, a member of generalized
+gamma distribution family, and it can be deduced on a statistical
+mechanical/thermodynamics basis from DNA methylation induced by thermal
+fluctuations <span class="citation">(1)</span>.</p>
+<p>Herein, we provide an example of Methyl-IT application to DMR
+estimation on patients with PALL <span class="citation">(7)</span>. Due
+to the size of human methylome the current example only covers the
+analysis of chromosome 9. A full description of Methyl-IT application of
+methylome analysis for Clinical Diagnostics is given in the manuscript
+<span class="citation">(2)</span>. A wider analysis of PALL data set is
+given in <span class="citation">(8)</span>.</p>
+<p>The first step of DMR estimation follows the general step of
+Methyl-IT pipeline for the estimation of DMPs. In Methyl-IT, a DMP is a
+cytosine positions that, with high probability, carries a statistically
+significant methylation change in respect to the same position in a
+control population. Once DMPs are identified, a simple algorithm can be
+applied to identify clusters of DMPs using <a href="https://genomaths.github.io/methylit/reference/dmpClusters.html">dmpClusters</a>
+function. Next, <a href="https://is.gd/kltCXl" class="external-link">countTest2</a> is applied
+to test whether a given cluster of DMPs is a DMR.</p>
+<p>It is worthy to notices that any clustering algorithm will impose
+non-natural constraints on the methylation patterning, which not
+necessarily will be associated to the local DNA physico-chemical
+properties and to local molecular evolutionary features of every DMR
+detected. Every cytosine methylation has a concrete physical effect of
+the DNA, altering the DNA persistence length, i.e., altering the local
+DNA flexibility <span class="citation">(9–11)</span>. DNA flexibility
+was shown to affect the binding of proteins to methylated DNA and
+DNA-containing lesion <span class="citation">(12, 13)</span> and
+nucleosome mechanical stability <span class="citation">(14)</span>. In
+other words, the sizes of naturally occurrying methylation motifs are
+not arbitrarily set, but very well constrained under molecular
+evolutionary pressure, probably, particular for each species.</p>
 <p>The R packages required in this example are:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R">        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT" class="external-link">MethylIT</a></span><span class="op">)</span>
-        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MethylIT.utils</span><span class="op">)</span>
-        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span> <span class="co"># graphic</span>
-        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span> <span class="co"># For multiple plots</span>
-        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span> <span class="co"># For multiple plots</span>
-        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span> <span class="co"># To import gene annotation</span></code></pre></div>
+<code class="sourceCode R"><span>        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT" class="external-link">MethylIT</a></span><span class="op">)</span></span>
+<span>        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MethylIT.utils</span><span class="op">)</span></span>
+<span>        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span> <span class="co"># graphic</span></span>
+<span>        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span> <span class="co"># For multiple plots</span></span>
+<span>        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span> <span class="co"># For multiple plots</span></span>
+<span>        <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span> <span class="co"># To import gene annotation</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="estimation-of-differentially-methylated-regions-dmrs">Estimation of differentially methylated regions (DMRs)<a class="anchor" aria-label="anchor" href="#estimation-of-differentially-methylated-regions-dmrs"></a>
 </h2>
 <p>DMP data set is available for download.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ===== Download methylation data from Github ========</span>
-<span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/genomaths.github.io/raw/master/AT_memory/"</span>, 
-              <span class="st">"dmps_mm-vs-nm_all-context_gen1_nmRef_min-meth-3_cov-4_04-16-20.RData"</span><span class="op">)</span>
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".RData"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">url</span>, destfile <span class="op">=</span> <span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">url</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ===== Download methylation data from Github ========</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/genomaths.github.io/raw/master/AT_memory/"</span>, </span>
+<span>              <span class="st">"dmps_mm-vs-nm_all-context_gen1_nmRef_min-meth-3_cov-4_04-16-20.RData"</span><span class="op">)</span></span>
+<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".RData"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">url</span>, destfile <span class="op">=</span> <span class="va">temp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>The gene annotation</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ===== Download methylation data from GitHub ========</span>
-<span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/genomaths.github.io/raw/master/"</span>, 
-              <span class="st">"Annotation/Arabidopsis_thaliana_genes_TAIR10.38.gtf.RData"</span><span class="op">)</span>
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".RData"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">url</span>, destfile <span class="op">=</span> <span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">url</span><span class="op">)</span>;
-
-<span class="va">GENES</span> <span class="op">&lt;-</span> <span class="va">genes</span><span class="op">[</span><span class="va">genes</span><span class="op">$</span><span class="va">type</span> <span class="op">==</span> <span class="st">"gene"</span><span class="op">]</span>
-
-<span class="co">## To get exons and introns</span>
-<span class="va">exons</span> <span class="op">&lt;-</span> <span class="va">genes</span><span class="op">[</span><span class="va">genes</span><span class="op">$</span><span class="va">type</span> <span class="op">==</span> <span class="st">"exon"</span><span class="op">]</span>
-<span class="va">introns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/setops-methods.html" class="external-link">setdiff</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">genes</span>, y <span class="op">=</span> <span class="va">exons</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co">## To add the corresponding gene names to introns</span>
-<span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/findOverlaps-methods.html" class="external-link">findOverlaps</a></span><span class="op">(</span><span class="va">introns</span>, <span class="va">genes</span>, type <span class="op">=</span> <span class="st">"within"</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">introns</span> <span class="op">&lt;-</span> <span class="va">introns</span><span class="op">[</span><span class="fu">queryHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span>
-<span class="fu">mcols</span><span class="op">(</span><span class="va">introns</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">mcols</span><span class="op">(</span><span class="va">genes</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ===== Download methylation data from GitHub ========</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/genomaths/genomaths.github.io/raw/master/"</span>, </span>
+<span>              <span class="st">"Annotation/Arabidopsis_thaliana_genes_TAIR10.38.gtf.RData"</span><span class="op">)</span></span>
+<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".RData"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">url</span>, destfile <span class="op">=</span> <span class="va">temp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">url</span><span class="op">)</span>;</span>
+<span></span>
+<span><span class="va">GENES</span> <span class="op">&lt;-</span> <span class="va">genes</span><span class="op">[</span><span class="va">genes</span><span class="op">$</span><span class="va">type</span> <span class="op">==</span> <span class="st">"gene"</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co">## To get exons and introns</span></span>
+<span><span class="va">exons</span> <span class="op">&lt;-</span> <span class="va">genes</span><span class="op">[</span><span class="va">genes</span><span class="op">$</span><span class="va">type</span> <span class="op">==</span> <span class="st">"exon"</span><span class="op">]</span></span>
+<span><span class="va">introns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">setdiff</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">genes</span>, y <span class="op">=</span> <span class="va">exons</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## To add the corresponding gene names to introns</span></span>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">findOverlaps</a></span><span class="op">(</span><span class="va">introns</span>, <span class="va">genes</span>, type <span class="op">=</span> <span class="st">"within"</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">introns</span> <span class="op">&lt;-</span> <span class="va">introns</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">queryHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">introns</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">genes</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="cluster-of-dmps">Cluster of DMPs<a class="anchor" aria-label="anchor" href="#cluster-of-dmps"></a>
 </h3>
-<p>Function <a href="https://is.gd/K2cRgZ" class="external-link">dmpClusters</a> search for cluster of DMPs found from all the samples. The basic idea reside in that if a given cluster of DMP is a DMR, then it will be consistently differentially methylated in all treatment samples, and we can identify them applying function <a href="https://%20is.gd/kltCXl" class="external-link">countTest2</a>.</p>
-<p>There is not a unique approach to build DMP clusters, since several clustering criteria can be applied. Herein, we use the two approach implemented in <a href="https://is.gd/K2cRgZ" class="external-link">dmpClusters</a> function (follow the link or type ?dmpClusters to see the help for the function).</p>
+<p>Function <a href="https://is.gd/K2cRgZ" class="external-link">dmpClusters</a> search for
+cluster of DMPs found from all the samples. The basic idea reside in
+that if a given cluster of DMP is a DMR, then it will be consistently
+differentially methylated in all treatment samples, and we can identify
+them applying function <a href="https://%20is.gd/kltCXl" class="external-link">countTest2</a>.</p>
+<p>There is not a unique approach to build DMP clusters, since several
+clustering criteria can be applied. Herein, we use the two approach
+implemented in <a href="https://is.gd/K2cRgZ" class="external-link">dmpClusters</a> function
+(follow the link or type ?dmpClusters to see the help for the
+function).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">clust_50_100</span> <span class="op">=</span> <span class="fu"><a href="../reference/dmpClusters.html">dmpClusters</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, maxDist <span class="op">=</span> <span class="fl">50</span>, minNumDMPs <span class="op">=</span> <span class="fl">10</span>, 
-                           maxClustDist <span class="op">=</span> <span class="fl">100</span>, method <span class="op">=</span> <span class="st">"fixed.int"</span>,
-                           num.cores <span class="op">=</span> <span class="fl">1L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="va">clust_50_100</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 18035 ranges and 1 metadata column:</span>
-<span class="co">##           seqnames            ranges strand |      dmps</span>
-<span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span>
-<span class="co">##       [1]        1           183-330      * |        27</span>
-<span class="co">##       [2]        1           647-809      * |        10</span>
-<span class="co">##       [3]        1       18052-18224      * |        14</span>
-<span class="co">##       [4]        1       18643-18746      * |        12</span>
-<span class="co">##       [5]        1       42279-42423      * |        40</span>
-<span class="co">##       ...      ...               ...    ... .       ...</span>
-<span class="co">##   [18031]        5 26670460-26670651      * |        15</span>
-<span class="co">##   [18032]        5 26788467-26788575      * |        11</span>
-<span class="co">##   [18033]        5 26945319-26945446      * |        11</span>
-<span class="co">##   [18034]        5 26974071-26974175      * |        10</span>
-<span class="co">##   [18035]        5 26974820-26975362      * |        39</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
-<p>DMPs clusterization strongly depends on the maximum distance permitted between two consecutive DMPs that belong to the same cluster (parameter: <code>minNumDMPs</code>) and on the minimum number of DMPs that must be present on a detected agglomeration of DMPs to be considered a cluster (parameter: <code>maxDist</code>).</p>
+<code class="sourceCode R"><span><span class="va">clust_50_100</span> <span class="op">=</span> <span class="fu"><a href="../reference/dmpClusters.html">dmpClusters</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, maxDist <span class="op">=</span> <span class="fl">50</span>, minNumDMPs <span class="op">=</span> <span class="fl">10</span>, </span>
+<span>                           maxClustDist <span class="op">=</span> <span class="fl">100</span>, method <span class="op">=</span> <span class="st">"fixed.int"</span>,</span>
+<span>                           num.cores <span class="op">=</span> <span class="fl">1L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">clust_50_100</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 18035 ranges and 1 metadata column:</span></span>
+<span><span class="co">##           seqnames            ranges strand |      dmps</span></span>
+<span><span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span></span>
+<span><span class="co">##       [1]        1           183-330      * |        27</span></span>
+<span><span class="co">##       [2]        1           647-809      * |        10</span></span>
+<span><span class="co">##       [3]        1       18052-18224      * |        14</span></span>
+<span><span class="co">##       [4]        1       18643-18746      * |        12</span></span>
+<span><span class="co">##       [5]        1       42279-42423      * |        40</span></span>
+<span><span class="co">##       ...      ...               ...    ... .       ...</span></span>
+<span><span class="co">##   [18031]        5 26670460-26670651      * |        15</span></span>
+<span><span class="co">##   [18032]        5 26788467-26788575      * |        11</span></span>
+<span><span class="co">##   [18033]        5 26945319-26945446      * |        11</span></span>
+<span><span class="co">##   [18034]        5 26974071-26974175      * |        10</span></span>
+<span><span class="co">##   [18035]        5 26974820-26975362      * |        39</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
+<p>DMPs clusterization strongly depends on the maximum distance
+permitted between two consecutive DMPs that belong to the same cluster
+(parameter: <code>minNumDMPs</code>) and on the minimum number of DMPs
+that must be present on a detected agglomeration of DMPs to be
+considered a cluster (parameter: <code>maxDist</code>).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">.clust_50_100</span> <span class="op">=</span> <span class="fu"><a href="../reference/dmpClusters.html">dmpClusters</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, maxDist <span class="op">=</span> <span class="fl">50</span>, minNumDMPs <span class="op">=</span> <span class="fl">10</span>, 
-                           maxClustDist <span class="op">=</span> <span class="fl">100</span>, method <span class="op">=</span> <span class="st">"relaxed"</span>,
-                           num.cores <span class="op">=</span> <span class="fl">1L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">.clust_50_100</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 17528 ranges and 1 metadata column:</span>
-<span class="co">##           seqnames            ranges strand |      dmps</span>
-<span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span>
-<span class="co">##       [1]        1            94-330      * |        29</span>
-<span class="co">##       [2]        1           647-880      * |        13</span>
-<span class="co">##       [3]        1       17833-18512      * |        35</span>
-<span class="co">##       [4]        1       18643-18746      * |        12</span>
-<span class="co">##       [5]        1       42279-42423      * |        40</span>
-<span class="co">##       ...      ...               ...    ... .       ...</span>
-<span class="co">##   [17524]        5 26788399-26788575      * |        12</span>
-<span class="co">##   [17525]        5 26835058-26835302      * |        13</span>
-<span class="co">##   [17526]        5 26945319-26945446      * |        11</span>
-<span class="co">##   [17527]        5 26974071-26974329      * |        14</span>
-<span class="co">##   [17528]        5 26974728-26975362      * |        40</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
-<p>Alternatively, we can use function <em>dmpClustering</em> from MethylIT.utils R package. Notice that although <em>‘method’</em> parameter are named the same, on each function these stand for different approaches.</p>
+<code class="sourceCode R"><span><span class="va">.clust_50_100</span> <span class="op">=</span> <span class="fu"><a href="../reference/dmpClusters.html">dmpClusters</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, maxDist <span class="op">=</span> <span class="fl">50</span>, minNumDMPs <span class="op">=</span> <span class="fl">10</span>, </span>
+<span>                           maxClustDist <span class="op">=</span> <span class="fl">100</span>, method <span class="op">=</span> <span class="st">"relaxed"</span>,</span>
+<span>                           num.cores <span class="op">=</span> <span class="fl">1L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">.clust_50_100</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 17528 ranges and 1 metadata column:</span></span>
+<span><span class="co">##           seqnames            ranges strand |      dmps</span></span>
+<span><span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span></span>
+<span><span class="co">##       [1]        1            94-330      * |        29</span></span>
+<span><span class="co">##       [2]        1           647-880      * |        13</span></span>
+<span><span class="co">##       [3]        1       17833-18512      * |        35</span></span>
+<span><span class="co">##       [4]        1       18643-18746      * |        12</span></span>
+<span><span class="co">##       [5]        1       42279-42423      * |        40</span></span>
+<span><span class="co">##       ...      ...               ...    ... .       ...</span></span>
+<span><span class="co">##   [17524]        5 26788399-26788575      * |        12</span></span>
+<span><span class="co">##   [17525]        5 26835058-26835302      * |        13</span></span>
+<span><span class="co">##   [17526]        5 26945319-26945446      * |        11</span></span>
+<span><span class="co">##   [17527]        5 26974071-26974329      * |        14</span></span>
+<span><span class="co">##   [17528]        5 26974728-26975362      * |        40</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
+<p>Alternatively, we can use function <em>dmpClustering</em> from
+MethylIT.utils R package. Notice that although <em>‘method’</em>
+parameter are named the same, on each function these stand for different
+approaches.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">clust.50.100</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/dmpClustering.html" class="external-link">dmpClustering</a></span><span class="op">(</span>dmps <span class="op">=</span> <span class="va">dmps</span>, minNumDMPs <span class="op">=</span> <span class="fl">10</span>, win.size <span class="op">=</span> <span class="fl">50</span>,
-                            step.size <span class="op">=</span> <span class="fl">50</span>, method <span class="op">=</span> <span class="st">"fixed.int"</span>, 
-                            maxClustDist <span class="op">=</span> <span class="fl">100</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">clust.50.100</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 15521 ranges and 1 metadata column:</span>
-<span class="co">##           seqnames            ranges strand |      dmps</span>
-<span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span>
-<span class="co">##       [1]        1            94-330      * |        29</span>
-<span class="co">##       [2]        1           647-880      * |        13</span>
-<span class="co">##       [3]        1       17833-18746      * |        47</span>
-<span class="co">##       [4]        1       42279-42423      * |        40</span>
-<span class="co">##       [5]        1       44603-44848      * |        19</span>
-<span class="co">##       ...      ...               ...    ... .       ...</span>
-<span class="co">##   [15517]        5 26835058-26835302      * |        13</span>
-<span class="co">##   [15518]        5 26891628-26892012      * |        10</span>
-<span class="co">##   [15519]        5 26945319-26945446      * |        11</span>
-<span class="co">##   [15520]        5 26974071-26974329      * |        14</span>
-<span class="co">##   [15521]        5 26974728-26975362      * |        40</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">clust.50.100</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/dmpClustering.html" class="external-link">dmpClustering</a></span><span class="op">(</span>dmps <span class="op">=</span> <span class="va">dmps</span>, minNumDMPs <span class="op">=</span> <span class="fl">10</span>, win.size <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>                            step.size <span class="op">=</span> <span class="fl">50</span>, method <span class="op">=</span> <span class="st">"fixed.int"</span>, </span>
+<span>                            maxClustDist <span class="op">=</span> <span class="fl">100</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">clust.50.100</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 15521 ranges and 1 metadata column:</span></span>
+<span><span class="co">##           seqnames            ranges strand |      dmps</span></span>
+<span><span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span></span>
+<span><span class="co">##       [1]        1            94-330      * |        29</span></span>
+<span><span class="co">##       [2]        1           647-880      * |        13</span></span>
+<span><span class="co">##       [3]        1       17833-18746      * |        47</span></span>
+<span><span class="co">##       [4]        1       42279-42423      * |        40</span></span>
+<span><span class="co">##       [5]        1       44603-44848      * |        19</span></span>
+<span><span class="co">##       ...      ...               ...    ... .       ...</span></span>
+<span><span class="co">##   [15517]        5 26835058-26835302      * |        13</span></span>
+<span><span class="co">##   [15518]        5 26891628-26892012      * |        10</span></span>
+<span><span class="co">##   [15519]        5 26945319-26945446      * |        11</span></span>
+<span><span class="co">##   [15520]        5 26974071-26974329      * |        14</span></span>
+<span><span class="co">##   [15521]        5 26974728-26975362      * |        40</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">.clust.50.100</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/dmpClustering.html" class="external-link">dmpClustering</a></span><span class="op">(</span>dmps <span class="op">=</span> <span class="va">dmps</span>, minNumDMPs <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"relaxed"</span>, 
-                            maxClustDist <span class="op">=</span> <span class="fl">100</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">.clust.50.100</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 17647 ranges and 1 metadata column:</span>
-<span class="co">##           seqnames            ranges strand |      dmps</span>
-<span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span>
-<span class="co">##       [1]        1            94-330      * |        29</span>
-<span class="co">##       [2]        1           647-880      * |        13</span>
-<span class="co">##       [3]        1       17833-18512      * |        35</span>
-<span class="co">##       [4]        1       18643-18746      * |        12</span>
-<span class="co">##       [5]        1       42279-42423      * |        40</span>
-<span class="co">##       ...      ...               ...    ... .       ...</span>
-<span class="co">##   [17643]        5 26788399-26788575      * |        12</span>
-<span class="co">##   [17644]        5 26835058-26835302      * |        13</span>
-<span class="co">##   [17645]        5 26945319-26945446      * |        11</span>
-<span class="co">##   [17646]        5 26974071-26974329      * |        14</span>
-<span class="co">##   [17647]        5 26974728-26975362      * |        40</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">.clust.50.100</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/dmpClustering.html" class="external-link">dmpClustering</a></span><span class="op">(</span>dmps <span class="op">=</span> <span class="va">dmps</span>, minNumDMPs <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"relaxed"</span>, </span>
+<span>                            maxClustDist <span class="op">=</span> <span class="fl">100</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">.clust.50.100</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 17647 ranges and 1 metadata column:</span></span>
+<span><span class="co">##           seqnames            ranges strand |      dmps</span></span>
+<span><span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span></span>
+<span><span class="co">##       [1]        1            94-330      * |        29</span></span>
+<span><span class="co">##       [2]        1           647-880      * |        13</span></span>
+<span><span class="co">##       [3]        1       17833-18512      * |        35</span></span>
+<span><span class="co">##       [4]        1       18643-18746      * |        12</span></span>
+<span><span class="co">##       [5]        1       42279-42423      * |        40</span></span>
+<span><span class="co">##       ...      ...               ...    ... .       ...</span></span>
+<span><span class="co">##   [17643]        5 26788399-26788575      * |        12</span></span>
+<span><span class="co">##   [17644]        5 26835058-26835302      * |        13</span></span>
+<span><span class="co">##   [17645]        5 26945319-26945446      * |        11</span></span>
+<span><span class="co">##   [17646]        5 26974071-26974329      * |        14</span></span>
+<span><span class="co">##   [17647]        5 26974728-26975362      * |        40</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="dmr-detection">DMR detection<a class="anchor" aria-label="anchor" href="#dmr-detection"></a>
 </h3>
-<p>The count of the number of DMPs on each region will be accomplished with <a href="https://genomaths.github.io/methylit/reference/getDMPatRegions.html">getDMPatRegions</a> function. This function operates based on <a href="https://is.gd/zJ7U9l" class="external-link"><em>findOverlaps</em></a> function from the ‘<em>GenomicRanges</em>’ Bioconductor R package. The <a href="https://is.gd/zJ7U9l" class="external-link"><em>findOverlaps</em></a> function has several critical parameters like, for example, ‘<em>maxgap</em>,’ ‘<em>minoverlap</em>,’ and ‘<em>ignore.strand</em>.’ In our <a href="https://genomaths.github.io/methylit/reference/getDMPatRegions.html">getDMPatRegions</a> function, except for setting ignore.strand = TRUE and <em>type = “within”</em>, we preserve the rest of default ‘findOverlaps’ parameters.</p>
+<p>The count of the number of DMPs on each region will be accomplished
+with <a href="https://genomaths.github.io/methylit/reference/getDMPatRegions.html">getDMPatRegions</a>
+function. This function operates based on <a href="https://is.gd/zJ7U9l" class="external-link"><em>findOverlaps</em></a> function from the
+‘<em>GenomicRanges</em>’ Bioconductor R package. The <a href="https://is.gd/zJ7U9l" class="external-link"><em>findOverlaps</em></a> function has
+several critical parameters like, for example, ‘<em>maxgap</em>’,
+‘<em>minoverlap</em>’, and ‘<em>ignore.strand</em>’. In our <a href="https://genomaths.github.io/methylit/reference/getDMPatRegions.html">getDMPatRegions</a>
+function, except for setting ignore.strand = TRUE and <em>type =
+“within”</em>, we preserve the rest of default ‘findOverlaps’
+parameters.</p>
 <div class="section level4">
 <h4 id="experiment-design-for-each-clustering-approach">Experiment design for each clustering approach<a class="anchor" aria-label="anchor" href="#experiment-design-for-each-clustering-approach"></a>
 </h4>
 <p>Design for method = “fixed.int” from dmpClusters function</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span>
-<span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
-<span class="va">dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">clust_50_100</span>,
-                                       ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_clust_50_100</span>, columns <span class="op">=</span> <span class="fl">2L</span>,
-                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,
-                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_clust_50_100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
-
-<span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MM"</span>, <span class="st">"MM"</span>,<span class="st">"MM"</span>,<span class="st">"MM"</span>, <span class="st">"MM"</span>, 
-                                           <span class="st">"NM"</span>,<span class="st">"NM"</span>,<span class="st">"NM"</span>,<span class="st">"NM"</span><span class="op">)</span>,
-                                         levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NM"</span>, <span class="st">"MM"</span><span class="op">)</span><span class="op">)</span>,
-                      <span class="va">nams</span>,
-                      row.names <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-
-<span class="co">## Build a RangedGlmDataSet object</span>
-<span class="va">ds_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_clust_50_100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span>
+<span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
+<span><span class="va">dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">clust_50_100</span>,</span>
+<span>                                       ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_clust_50_100</span>, columns <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
+<span>                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmps_at_clust_50_100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span></span>
+<span><span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MM"</span>, <span class="st">"MM"</span>,<span class="st">"MM"</span>,<span class="st">"MM"</span>, <span class="st">"MM"</span>, </span>
+<span>                                           <span class="st">"NM"</span>,<span class="st">"NM"</span>,<span class="st">"NM"</span>,<span class="st">"NM"</span><span class="op">)</span>,</span>
+<span>                                         levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NM"</span>, <span class="st">"MM"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                      <span class="va">nams</span>,</span>
+<span>                      row.names <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Build a RangedGlmDataSet object</span></span>
+<span><span class="va">ds_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_clust_50_100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
 <p>The GRanges object with DMPs on it</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmps_at_clust_50_100</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 18035 ranges and 9 metadata columns:</span>
-<span class="co">##           seqnames            ranges strand |   M_1_105   M_1_168   M_1_179</span>
-<span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">##       [1]        1           183-330      * |         0        22         2</span>
-<span class="co">##       [2]        1           647-809      * |         0         3         4</span>
-<span class="co">##       [3]        1       18052-18224      * |         2         2         1</span>
-<span class="co">##       [4]        1       18643-18746      * |         2         1         0</span>
-<span class="co">##       [5]        1       42279-42423      * |        15        16         0</span>
-<span class="co">##       ...      ...               ...    ... .       ...       ...       ...</span>
-<span class="co">##   [18031]        5 26670460-26670651      * |         5         1         8</span>
-<span class="co">##   [18032]        5 26788467-26788575      * |         7         1         1</span>
-<span class="co">##   [18033]        5 26945319-26945446      * |         3         2         0</span>
-<span class="co">##   [18034]        5 26974071-26974175      * |         3         4         0</span>
-<span class="co">##   [18035]        5 26974820-26975362      * |         4        11         8</span>
-<span class="co">##              M_1_27     M_1_3   NM_1_12   NM_1_45   NM_1_70   NM_1_86</span>
-<span class="co">##           &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">##       [1]         3         1         0         0         2         0</span>
-<span class="co">##       [2]         2         1         0         0         0         0</span>
-<span class="co">##       [3]         3         7         0         0         0         0</span>
-<span class="co">##       [4]         3         0         0         2         1         3</span>
-<span class="co">##       [5]        13        27         0         0         0         0</span>
-<span class="co">##       ...       ...       ...       ...       ...       ...       ...</span>
-<span class="co">##   [18031]         3         0         0         0         0         0</span>
-<span class="co">##   [18032]         1         0         1         0         0         0</span>
-<span class="co">##   [18033]         2         2         2         1         0         1</span>
-<span class="co">##   [18034]         3         0         1         4         2         3</span>
-<span class="co">##   [18035]         3        11         2         3         0         0</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">dmps_at_clust_50_100</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 18035 ranges and 9 metadata columns:</span></span>
+<span><span class="co">##           seqnames            ranges strand |   M_1_105   M_1_168   M_1_179</span></span>
+<span><span class="co">##              &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">##       [1]        1           183-330      * |         0        22         2</span></span>
+<span><span class="co">##       [2]        1           647-809      * |         0         3         4</span></span>
+<span><span class="co">##       [3]        1       18052-18224      * |         2         2         1</span></span>
+<span><span class="co">##       [4]        1       18643-18746      * |         2         1         0</span></span>
+<span><span class="co">##       [5]        1       42279-42423      * |        15        16         0</span></span>
+<span><span class="co">##       ...      ...               ...    ... .       ...       ...       ...</span></span>
+<span><span class="co">##   [18031]        5 26670460-26670651      * |         5         1         8</span></span>
+<span><span class="co">##   [18032]        5 26788467-26788575      * |         7         1         1</span></span>
+<span><span class="co">##   [18033]        5 26945319-26945446      * |         3         2         0</span></span>
+<span><span class="co">##   [18034]        5 26974071-26974175      * |         3         4         0</span></span>
+<span><span class="co">##   [18035]        5 26974820-26975362      * |         4        11         8</span></span>
+<span><span class="co">##              M_1_27     M_1_3   NM_1_12   NM_1_45   NM_1_70   NM_1_86</span></span>
+<span><span class="co">##           &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">##       [1]         3         1         0         0         2         0</span></span>
+<span><span class="co">##       [2]         2         1         0         0         0         0</span></span>
+<span><span class="co">##       [3]         3         7         0         0         0         0</span></span>
+<span><span class="co">##       [4]         3         0         0         2         1         3</span></span>
+<span><span class="co">##       [5]        13        27         0         0         0         0</span></span>
+<span><span class="co">##       ...       ...       ...       ...       ...       ...       ...</span></span>
+<span><span class="co">##   [18031]         3         0         0         0         0         0</span></span>
+<span><span class="co">##   [18032]         1         0         1         0         0         0</span></span>
+<span><span class="co">##   [18033]         2         2         2         1         0         1</span></span>
+<span><span class="co">##   [18034]         3         0         1         4         2         3</span></span>
+<span><span class="co">##   [18035]         3        11         2         3         0         0</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 <p>The <a href="https://is.gd/VZaazz" class="external-link">glmDataSet</a> object.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_50_100</span></code></pre></div>
-<pre><code><span class="co">## RangedGlmDataSet with 18035 regions and 9 columns (individuals) with factor levels 'NM' and 'MM' </span>
-<span class="co">## The accessible objects in the dataset are: </span>
-<span class="co">##             Length Class      Mode     </span>
-<span class="co">## GR           18035 GRanges    S4       </span>
-<span class="co">## counts      162315 -none-     numeric  </span>
-<span class="co">## colData          1 data.frame list     </span>
-<span class="co">## sampleNames      9 -none-     character</span>
-<span class="co">## levels           2 -none-     character</span>
-<span class="co">## optionData       0 -none-     NULL</span></code></pre>
+<code class="sourceCode R"><span><span class="va">ds_50_100</span></span></code></pre></div>
+<pre><code><span><span class="co">## RangedGlmDataSet with 18035 regions and 9 columns (individuals) with factor levels 'NM' and 'MM' </span></span>
+<span><span class="co">## The accessible objects in the dataset are: </span></span>
+<span><span class="co">##             Length Class      Mode     </span></span>
+<span><span class="co">## GR           18035 GRanges    S4       </span></span>
+<span><span class="co">## counts      162315 -none-     numeric  </span></span>
+<span><span class="co">## colData          1 data.frame list     </span></span>
+<span><span class="co">## sampleNames      9 -none-     character</span></span>
+<span><span class="co">## levels           2 -none-     character</span></span>
+<span><span class="co">## optionData       0 -none-     NULL</span></span></code></pre>
 <p>Design for method = “relaxed” from dmpClusters function</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span>
-<span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
-<span class="va">.dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">.clust_50_100</span>,
-                                       ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">.dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">.dmps_at_clust_50_100</span>, columns <span class="op">=</span> <span class="fl">2L</span>,
-                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,
-                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">.dmps_at_clust_50_100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
-
-<span class="co">## Build a RangedGlmDataSet object</span>
-<span class="va">.ds_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">.dmps_at_clust_50_100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span>
+<span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
+<span><span class="va">.dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">.clust_50_100</span>,</span>
+<span>                                       ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">.dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">.dmps_at_clust_50_100</span>, columns <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
+<span>                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">.dmps_at_clust_50_100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span></span>
+<span><span class="co">## Build a RangedGlmDataSet object</span></span>
+<span><span class="va">.ds_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">.dmps_at_clust_50_100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
 <p>Design for method = “fixed.int” from dmpClustering function</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span>
-<span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
-<span class="va">dmps_at_clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">clust.50.100</span>,
-                                       ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">dmps_at_clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_clust.50.100</span>, columns <span class="op">=</span> <span class="fl">2L</span>,
-                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,
-                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_clust.50.100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
-
-<span class="co">## Build a RangedGlmDataSet object</span>
-<span class="va">ds.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_clust.50.100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span>
+<span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
+<span><span class="va">dmps_at_clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">clust.50.100</span>,</span>
+<span>                                       ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">dmps_at_clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_clust.50.100</span>, columns <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
+<span>                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmps_at_clust.50.100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span></span>
+<span><span class="co">## Build a RangedGlmDataSet object</span></span>
+<span><span class="va">ds.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_clust.50.100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
 <p>Design for method = “relaxed” from dmpClustering function</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span>
-<span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
-<span class="va">dmps_at.clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">.clust.50.100</span>,
-                                       ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">dmps_at.clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at.clust.50.100</span>, columns <span class="op">=</span> <span class="fl">2L</span>,
-                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,
-                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at.clust.50.100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span>
-
-<span class="co">## Build a RangedGlmDataSet object</span>
-<span class="va">ds_50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at.clust.50.100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span>
+<span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
+<span><span class="va">dmps_at.clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDMPatRegions.html">getDMPatRegions</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, regions <span class="op">=</span> <span class="va">.clust.50.100</span>,</span>
+<span>                                       ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">dmps_at.clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at.clust.50.100</span>, columns <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
+<span>                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmps_at.clust.50.100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span></span>
+<span><span class="co">## Build a RangedGlmDataSet object</span></span>
+<span><span class="va">ds_50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at.clust.50.100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="dmr-detection-1">DMR detection<a class="anchor" aria-label="anchor" href="#dmr-detection-1"></a>
 </h4>
-<p>Herein, we are requesting a minimum density DMP of 1/100 bp = 0.01/bp (CountPerBp = 0.01), minimum of logarithm of fold changes in the number of DMPs, treatment versus control samples, equal to 1 (Minlog2FC = 1). Also, it is requested a coefficient of variation, on each sample set, not greater than 1 (maxGrpCV = c(1, 1)).</p>
-<p>Notice that in the case of species with big genes, for example, human genes, we might want to use lower densities, e.g., CountPerBp = 0.001.</p>
+<p>Herein, we are requesting a minimum density DMP of 1/100 bp = 0.01/bp
+(CountPerBp = 0.01), minimum of logarithm of fold changes in the number
+of DMPs, treatment versus control samples, equal to 1 (Minlog2FC = 1).
+Also, it is requested a coefficient of variation, on each sample set,
+not greater than 1 (maxGrpCV = c(1, 1)).</p>
+<p>Notice that in the case of species with big genes, for example, human
+genes, we might want to use lower densities, e.g., CountPerBp =
+0.001.</p>
 <p>DMRs derived method = “fixed.int” from dmpClusters function</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs_fixed.int</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_50_100</span>, 
-                            minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,
-                            maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-                            Minlog2FC <span class="op">=</span> <span class="fl">1</span>,
-                            CountPerBp <span class="op">=</span> <span class="fl">0.01</span>, 
-                            test <span class="op">=</span> <span class="st">'LRT'</span>,
-                            num.cores <span class="op">=</span> <span class="fl">4L</span>, 
-                            verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">dmrs_fixed.int</span></code></pre></div>
-<p>The DMR associated genes at a <span class="math inline">\(distance \leq 1000\)</span>:</p>
+<code class="sourceCode R"><span><span class="va">dmrs_fixed.int</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_50_100</span>, </span>
+<span>                            minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                            maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                            Minlog2FC <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                            CountPerBp <span class="op">=</span> <span class="fl">0.01</span>, </span>
+<span>                            test <span class="op">=</span> <span class="st">'LRT'</span>,</span>
+<span>                            num.cores <span class="op">=</span> <span class="fl">4L</span>, </span>
+<span>                            verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dmrs_fixed.int</span></span></code></pre></div>
+<p>The DMR associated genes at a <span class="math inline">\(distance
+\leq 1000\)</span>:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs_fixed.int</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co">## DMR associated genes </span>
-<span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span>
-<span class="va">GENES</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 975 ranges and 4 metadata columns:</span>
-<span class="co">##         seqnames            ranges strand |     gene_id     type   gene_biotype</span>
-<span class="co">##            &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;    &lt;character&gt;</span>
-<span class="co">##     [1]        1       43087-43295      - |   AT1G04003     gene         lncRNA</span>
-<span class="co">##     [2]        1     239841-242703      - |   AT1G01660     gene protein_coding</span>
-<span class="co">##     [3]        1     258717-258963      - |   AT1G04037     gene         lncRNA</span>
-<span class="co">##     [4]        1     428650-430720      - |   AT1G02220     gene protein_coding</span>
-<span class="co">##     [5]        1   1194187-1196889      + |   AT1G04425     gene          ncRNA</span>
-<span class="co">##     ...      ...               ...    ... .         ...      ...            ...</span>
-<span class="co">##   [971]        5 23775891-23779855      + |   AT5G58880     gene protein_coding</span>
-<span class="co">##   [972]        5 25934568-25935612      + |   AT5G64890     gene protein_coding</span>
-<span class="co">##   [973]        5 25967824-25968638      + |   AT5G65005     gene protein_coding</span>
-<span class="co">##   [974]        5 26068112-26069652      + |   AT5G65230     gene protein_coding</span>
-<span class="co">##   [975]        5 26411796-26414609      - |   AT5G66050     gene protein_coding</span>
-<span class="co">##           gene_name</span>
-<span class="co">##         &lt;character&gt;</span>
-<span class="co">##     [1]        &lt;NA&gt;</span>
-<span class="co">##     [2]        &lt;NA&gt;</span>
-<span class="co">##     [3]        &lt;NA&gt;</span>
-<span class="co">##     [4]      NAC003</span>
-<span class="co">##     [5]        &lt;NA&gt;</span>
-<span class="co">##     ...         ...</span>
-<span class="co">##   [971]        &lt;NA&gt;</span>
-<span class="co">##   [972]        PEP2</span>
-<span class="co">##   [973]        &lt;NA&gt;</span>
-<span class="co">##   [974]     AtMYB53</span>
-<span class="co">##   [975]        &lt;NA&gt;</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs_fixed.int</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## DMR associated genes </span></span>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
+<span><span class="va">GENES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 975 ranges and 4 metadata columns:</span></span>
+<span><span class="co">##         seqnames            ranges strand |     gene_id     type   gene_biotype</span></span>
+<span><span class="co">##            &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;    &lt;character&gt;</span></span>
+<span><span class="co">##     [1]        1       43087-43295      - |   AT1G04003     gene         lncRNA</span></span>
+<span><span class="co">##     [2]        1     239841-242703      - |   AT1G01660     gene protein_coding</span></span>
+<span><span class="co">##     [3]        1     258717-258963      - |   AT1G04037     gene         lncRNA</span></span>
+<span><span class="co">##     [4]        1     428650-430720      - |   AT1G02220     gene protein_coding</span></span>
+<span><span class="co">##     [5]        1   1194187-1196889      + |   AT1G04425     gene          ncRNA</span></span>
+<span><span class="co">##     ...      ...               ...    ... .         ...      ...            ...</span></span>
+<span><span class="co">##   [971]        5 23775891-23779855      + |   AT5G58880     gene protein_coding</span></span>
+<span><span class="co">##   [972]        5 25934568-25935612      + |   AT5G64890     gene protein_coding</span></span>
+<span><span class="co">##   [973]        5 25967824-25968638      + |   AT5G65005     gene protein_coding</span></span>
+<span><span class="co">##   [974]        5 26068112-26069652      + |   AT5G65230     gene protein_coding</span></span>
+<span><span class="co">##   [975]        5 26411796-26414609      - |   AT5G66050     gene protein_coding</span></span>
+<span><span class="co">##           gene_name</span></span>
+<span><span class="co">##         &lt;character&gt;</span></span>
+<span><span class="co">##     [1]        &lt;NA&gt;</span></span>
+<span><span class="co">##     [2]        &lt;NA&gt;</span></span>
+<span><span class="co">##     [3]        &lt;NA&gt;</span></span>
+<span><span class="co">##     [4]      NAC003</span></span>
+<span><span class="co">##     [5]        &lt;NA&gt;</span></span>
+<span><span class="co">##     ...         ...</span></span>
+<span><span class="co">##   [971]        &lt;NA&gt;</span></span>
+<span><span class="co">##   [972]        PEP2</span></span>
+<span><span class="co">##   [973]        &lt;NA&gt;</span></span>
+<span><span class="co">##   [974]     AtMYB53</span></span>
+<span><span class="co">##   [975]        &lt;NA&gt;</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 <p>DMRs derived method = “relaxed” from dmpClusters function</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">.dmrs_relaxed</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">.ds_50_100</span>, 
-                           minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,
-                           maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-                           Minlog2FC <span class="op">=</span> <span class="fl">1</span>,
-                           CountPerBp <span class="op">=</span> <span class="fl">0.01</span>, 
-                           test <span class="op">=</span> <span class="st">'LRT'</span>,
-                           num.cores <span class="op">=</span> <span class="fl">4L</span>, 
-                           verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">.dmrs_relaxed</span></code></pre></div>
-<p>The DMR assciated genes at a <span class="math inline">\(distance \leq 1000\)</span>:</p>
+<code class="sourceCode R"><span><span class="va">.dmrs_relaxed</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">.ds_50_100</span>, </span>
+<span>                           minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                           maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                           Minlog2FC <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                           CountPerBp <span class="op">=</span> <span class="fl">0.01</span>, </span>
+<span>                           test <span class="op">=</span> <span class="st">'LRT'</span>,</span>
+<span>                           num.cores <span class="op">=</span> <span class="fl">4L</span>, </span>
+<span>                           verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">.dmrs_relaxed</span></span></code></pre></div>
+<p>The DMR assciated genes at a <span class="math inline">\(distance
+\leq 1000\)</span>:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">.dmrs_relaxed</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co">## DMR associated genes </span>
-<span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span>
-<span class="va">GENES</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 1215 ranges and 4 metadata columns:</span>
-<span class="co">##          seqnames            ranges strand |     gene_id     type</span>
-<span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span>
-<span class="co">##      [1]        1       43087-43295      - |   AT1G04003     gene</span>
-<span class="co">##      [2]        1     239841-242703      - |   AT1G01660     gene</span>
-<span class="co">##      [3]        1     258717-258963      - |   AT1G04037     gene</span>
-<span class="co">##      [4]        1     428650-430720      - |   AT1G02220     gene</span>
-<span class="co">##      [5]        1   1194187-1196889      + |   AT1G04425     gene</span>
-<span class="co">##      ...      ...               ...    ... .         ...      ...</span>
-<span class="co">##   [1211]        5 25934568-25935612      + |   AT5G64890     gene</span>
-<span class="co">##   [1212]        5 25967824-25968638      + |   AT5G65005     gene</span>
-<span class="co">##   [1213]        5 26068112-26069652      + |   AT5G65230     gene</span>
-<span class="co">##   [1214]        5 26161624-26169191      - |   AT5G65460     gene</span>
-<span class="co">##   [1215]        5 26411796-26414609      - |   AT5G66050     gene</span>
-<span class="co">##            gene_biotype   gene_name</span>
-<span class="co">##             &lt;character&gt; &lt;character&gt;</span>
-<span class="co">##      [1]         lncRNA        &lt;NA&gt;</span>
-<span class="co">##      [2] protein_coding        &lt;NA&gt;</span>
-<span class="co">##      [3]         lncRNA        &lt;NA&gt;</span>
-<span class="co">##      [4] protein_coding      NAC003</span>
-<span class="co">##      [5]          ncRNA        &lt;NA&gt;</span>
-<span class="co">##      ...            ...         ...</span>
-<span class="co">##   [1211] protein_coding        PEP2</span>
-<span class="co">##   [1212] protein_coding        &lt;NA&gt;</span>
-<span class="co">##   [1213] protein_coding     AtMYB53</span>
-<span class="co">##   [1214] protein_coding        KCA2</span>
-<span class="co">##   [1215] protein_coding        &lt;NA&gt;</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">.dmrs_relaxed</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## DMR associated genes </span></span>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
+<span><span class="va">GENES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 1215 ranges and 4 metadata columns:</span></span>
+<span><span class="co">##          seqnames            ranges strand |     gene_id     type</span></span>
+<span><span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span></span>
+<span><span class="co">##      [1]        1       43087-43295      - |   AT1G04003     gene</span></span>
+<span><span class="co">##      [2]        1     239841-242703      - |   AT1G01660     gene</span></span>
+<span><span class="co">##      [3]        1     258717-258963      - |   AT1G04037     gene</span></span>
+<span><span class="co">##      [4]        1     428650-430720      - |   AT1G02220     gene</span></span>
+<span><span class="co">##      [5]        1   1194187-1196889      + |   AT1G04425     gene</span></span>
+<span><span class="co">##      ...      ...               ...    ... .         ...      ...</span></span>
+<span><span class="co">##   [1211]        5 25934568-25935612      + |   AT5G64890     gene</span></span>
+<span><span class="co">##   [1212]        5 25967824-25968638      + |   AT5G65005     gene</span></span>
+<span><span class="co">##   [1213]        5 26068112-26069652      + |   AT5G65230     gene</span></span>
+<span><span class="co">##   [1214]        5 26161624-26169191      - |   AT5G65460     gene</span></span>
+<span><span class="co">##   [1215]        5 26411796-26414609      - |   AT5G66050     gene</span></span>
+<span><span class="co">##            gene_biotype   gene_name</span></span>
+<span><span class="co">##             &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">##      [1]         lncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      [2] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##      [3]         lncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      [4] protein_coding      NAC003</span></span>
+<span><span class="co">##      [5]          ncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      ...            ...         ...</span></span>
+<span><span class="co">##   [1211] protein_coding        PEP2</span></span>
+<span><span class="co">##   [1212] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##   [1213] protein_coding     AtMYB53</span></span>
+<span><span class="co">##   [1214] protein_coding        KCA2</span></span>
+<span><span class="co">##   [1215] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 <p>DMRs derived method = “fixed.int” from dmpClustering function</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs.fixed.int</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds.50.100</span>,
-                            minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,
-                            maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-                            Minlog2FC <span class="op">=</span> <span class="fl">1</span>,
-                            CountPerBp <span class="op">=</span> <span class="fl">0.01</span>,
-                            test <span class="op">=</span> <span class="st">'LRT'</span>,
-                            num.cores <span class="op">=</span> <span class="fl">4L</span>,
-                            verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">dmrs.fixed.int</span></code></pre></div>
-<p>The DMR assciated genes at a <span class="math inline">\(distance \leq 1000\)</span>:</p>
+<code class="sourceCode R"><span><span class="va">dmrs.fixed.int</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds.50.100</span>,</span>
+<span>                            minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                            maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                            Minlog2FC <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                            CountPerBp <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>                            test <span class="op">=</span> <span class="st">'LRT'</span>,</span>
+<span>                            num.cores <span class="op">=</span> <span class="fl">4L</span>,</span>
+<span>                            verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">dmrs.fixed.int</span></span></code></pre></div>
+<p>The DMR assciated genes at a <span class="math inline">\(distance
+\leq 1000\)</span>:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs.fixed.int</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co">## DMR associated genes </span>
-<span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span>
-<span class="va">GENES</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 1151 ranges and 4 metadata columns:</span>
-<span class="co">##          seqnames            ranges strand |     gene_id     type</span>
-<span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span>
-<span class="co">##      [1]        1       43087-43295      - |   AT1G04003     gene</span>
-<span class="co">##      [2]        1     258717-258963      - |   AT1G04037     gene</span>
-<span class="co">##      [3]        1     428650-430720      - |   AT1G02220     gene</span>
-<span class="co">##      [4]        1   1194187-1196889      + |   AT1G04425     gene</span>
-<span class="co">##      [5]        1   1431177-1433010      - |   AT1G05010     gene</span>
-<span class="co">##      ...      ...               ...    ... .         ...      ...</span>
-<span class="co">##   [1147]        5 25934568-25935612      + |   AT5G64890     gene</span>
-<span class="co">##   [1148]        5 25967824-25968638      + |   AT5G65005     gene</span>
-<span class="co">##   [1149]        5 26068112-26069652      + |   AT5G65230     gene</span>
-<span class="co">##   [1150]        5 26161624-26169191      - |   AT5G65460     gene</span>
-<span class="co">##   [1151]        5 26411796-26414609      - |   AT5G66050     gene</span>
-<span class="co">##            gene_biotype   gene_name</span>
-<span class="co">##             &lt;character&gt; &lt;character&gt;</span>
-<span class="co">##      [1]         lncRNA        &lt;NA&gt;</span>
-<span class="co">##      [2]         lncRNA        &lt;NA&gt;</span>
-<span class="co">##      [3] protein_coding      NAC003</span>
-<span class="co">##      [4]          ncRNA        &lt;NA&gt;</span>
-<span class="co">##      [5] protein_coding        ACO4</span>
-<span class="co">##      ...            ...         ...</span>
-<span class="co">##   [1147] protein_coding        PEP2</span>
-<span class="co">##   [1148] protein_coding        &lt;NA&gt;</span>
-<span class="co">##   [1149] protein_coding     AtMYB53</span>
-<span class="co">##   [1150] protein_coding        KCA2</span>
-<span class="co">##   [1151] protein_coding        &lt;NA&gt;</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs.fixed.int</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## DMR associated genes </span></span>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
+<span><span class="va">GENES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 1151 ranges and 4 metadata columns:</span></span>
+<span><span class="co">##          seqnames            ranges strand |     gene_id     type</span></span>
+<span><span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span></span>
+<span><span class="co">##      [1]        1       43087-43295      - |   AT1G04003     gene</span></span>
+<span><span class="co">##      [2]        1     258717-258963      - |   AT1G04037     gene</span></span>
+<span><span class="co">##      [3]        1     428650-430720      - |   AT1G02220     gene</span></span>
+<span><span class="co">##      [4]        1   1194187-1196889      + |   AT1G04425     gene</span></span>
+<span><span class="co">##      [5]        1   1431177-1433010      - |   AT1G05010     gene</span></span>
+<span><span class="co">##      ...      ...               ...    ... .         ...      ...</span></span>
+<span><span class="co">##   [1147]        5 25934568-25935612      + |   AT5G64890     gene</span></span>
+<span><span class="co">##   [1148]        5 25967824-25968638      + |   AT5G65005     gene</span></span>
+<span><span class="co">##   [1149]        5 26068112-26069652      + |   AT5G65230     gene</span></span>
+<span><span class="co">##   [1150]        5 26161624-26169191      - |   AT5G65460     gene</span></span>
+<span><span class="co">##   [1151]        5 26411796-26414609      - |   AT5G66050     gene</span></span>
+<span><span class="co">##            gene_biotype   gene_name</span></span>
+<span><span class="co">##             &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">##      [1]         lncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      [2]         lncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      [3] protein_coding      NAC003</span></span>
+<span><span class="co">##      [4]          ncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      [5] protein_coding        ACO4</span></span>
+<span><span class="co">##      ...            ...         ...</span></span>
+<span><span class="co">##   [1147] protein_coding        PEP2</span></span>
+<span><span class="co">##   [1148] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##   [1149] protein_coding     AtMYB53</span></span>
+<span><span class="co">##   [1150] protein_coding        KCA2</span></span>
+<span><span class="co">##   [1151] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 <p>DMRs derived method = “relaxed” from dmpClustering function</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs.relaxed</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_50.100</span>,
-                          minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,
-                          maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, 
-                          Minlog2FC <span class="op">=</span> <span class="fl">1</span>,
-                          CountPerBp <span class="op">=</span> <span class="fl">0.01</span>,
-                          test <span class="op">=</span> <span class="st">'LRT'</span>,
-                          num.cores <span class="op">=</span> <span class="fl">4L</span>,
-                          verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">dmrs.relaxed</span></code></pre></div>
-<p>The DMR assciated genes at a <span class="math inline">\(distance \leq 1000\)</span>:</p>
+<code class="sourceCode R"><span><span class="va">dmrs.relaxed</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_50.100</span>,</span>
+<span>                          minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                          maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>                          Minlog2FC <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                          CountPerBp <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>                          test <span class="op">=</span> <span class="st">'LRT'</span>,</span>
+<span>                          num.cores <span class="op">=</span> <span class="fl">4L</span>,</span>
+<span>                          verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">dmrs.relaxed</span></span></code></pre></div>
+<p>The DMR assciated genes at a <span class="math inline">\(distance
+\leq 1000\)</span>:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs.relaxed</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co">## DMR associated genes </span>
-<span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span>
-<span class="va">GENES</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 1214 ranges and 4 metadata columns:</span>
-<span class="co">##          seqnames            ranges strand |     gene_id     type</span>
-<span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span>
-<span class="co">##      [1]        1       43087-43295      - |   AT1G04003     gene</span>
-<span class="co">##      [2]        1     239841-242703      - |   AT1G01660     gene</span>
-<span class="co">##      [3]        1     258717-258963      - |   AT1G04037     gene</span>
-<span class="co">##      [4]        1     428650-430720      - |   AT1G02220     gene</span>
-<span class="co">##      [5]        1   1194187-1196889      + |   AT1G04425     gene</span>
-<span class="co">##      ...      ...               ...    ... .         ...      ...</span>
-<span class="co">##   [1210]        5 25934568-25935612      + |   AT5G64890     gene</span>
-<span class="co">##   [1211]        5 25967824-25968638      + |   AT5G65005     gene</span>
-<span class="co">##   [1212]        5 26068112-26069652      + |   AT5G65230     gene</span>
-<span class="co">##   [1213]        5 26161624-26169191      - |   AT5G65460     gene</span>
-<span class="co">##   [1214]        5 26411796-26414609      - |   AT5G66050     gene</span>
-<span class="co">##            gene_biotype   gene_name</span>
-<span class="co">##             &lt;character&gt; &lt;character&gt;</span>
-<span class="co">##      [1]         lncRNA        &lt;NA&gt;</span>
-<span class="co">##      [2] protein_coding        &lt;NA&gt;</span>
-<span class="co">##      [3]         lncRNA        &lt;NA&gt;</span>
-<span class="co">##      [4] protein_coding      NAC003</span>
-<span class="co">##      [5]          ncRNA        &lt;NA&gt;</span>
-<span class="co">##      ...            ...         ...</span>
-<span class="co">##   [1210] protein_coding        PEP2</span>
-<span class="co">##   [1211] protein_coding        &lt;NA&gt;</span>
-<span class="co">##   [1212] protein_coding     AtMYB53</span>
-<span class="co">##   [1213] protein_coding        KCA2</span>
-<span class="co">##   [1214] protein_coding        &lt;NA&gt;</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs.relaxed</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## DMR associated genes </span></span>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
+<span><span class="va">GENES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 1214 ranges and 4 metadata columns:</span></span>
+<span><span class="co">##          seqnames            ranges strand |     gene_id     type</span></span>
+<span><span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span></span>
+<span><span class="co">##      [1]        1       43087-43295      - |   AT1G04003     gene</span></span>
+<span><span class="co">##      [2]        1     239841-242703      - |   AT1G01660     gene</span></span>
+<span><span class="co">##      [3]        1     258717-258963      - |   AT1G04037     gene</span></span>
+<span><span class="co">##      [4]        1     428650-430720      - |   AT1G02220     gene</span></span>
+<span><span class="co">##      [5]        1   1194187-1196889      + |   AT1G04425     gene</span></span>
+<span><span class="co">##      ...      ...               ...    ... .         ...      ...</span></span>
+<span><span class="co">##   [1210]        5 25934568-25935612      + |   AT5G64890     gene</span></span>
+<span><span class="co">##   [1211]        5 25967824-25968638      + |   AT5G65005     gene</span></span>
+<span><span class="co">##   [1212]        5 26068112-26069652      + |   AT5G65230     gene</span></span>
+<span><span class="co">##   [1213]        5 26161624-26169191      - |   AT5G65460     gene</span></span>
+<span><span class="co">##   [1214]        5 26411796-26414609      - |   AT5G66050     gene</span></span>
+<span><span class="co">##            gene_biotype   gene_name</span></span>
+<span><span class="co">##             &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">##      [1]         lncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      [2] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##      [3]         lncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      [4] protein_coding      NAC003</span></span>
+<span><span class="co">##      [5]          ncRNA        &lt;NA&gt;</span></span>
+<span><span class="co">##      ...            ...         ...</span></span>
+<span><span class="co">##   [1210] protein_coding        PEP2</span></span>
+<span><span class="co">##   [1211] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##   [1212] protein_coding     AtMYB53</span></span>
+<span><span class="co">##   [1213] protein_coding        KCA2</span></span>
+<span><span class="co">##   [1214] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 </div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="naturally-ocurring-regions">Naturally ocurring regions<a class="anchor" aria-label="anchor" href="#naturally-ocurring-regions"></a>
 </h2>
-<p>As was mentioned in the introduction algorithmically identified DMRs do not necessarily will be associated to the local DNA physico-chemical properties and to local molecular evolutionary features of every DMR detected.</p>
-<p>All the weight of the evolutionary pressure lie down on naturally ocurrying methylation patternings inside, for example (but not limited to), exons and introns.</p>
+<p>As was mentioned in the introduction algorithmically identified DMRs
+do not necessarily will be associated to the local DNA physico-chemical
+properties and to local molecular evolutionary features of every DMR
+detected.</p>
+<p>All the weight of the evolutionary pressure lie down on naturally
+ocurrying methylation patternings inside, for example (but not limited
+to), exons and introns.</p>
 <p>For introns we have:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span>
-<span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
-<span class="va">dmps_at_exons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, GENES <span class="op">=</span> <span class="va">exons</span>,
-                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,
-                                output <span class="op">=</span> <span class="st">"GRanges"</span><span class="op">)</span>
-
-<span class="co">## Build a RangedGlmDataSet object</span>
-<span class="va">ds_exons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_exons</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span>
+<span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
+<span><span class="va">dmps_at_exons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, GENES <span class="op">=</span> <span class="va">exons</span>,</span>
+<span>                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                output <span class="op">=</span> <span class="st">"GRanges"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Build a RangedGlmDataSet object</span></span>
+<span><span class="va">ds_exons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_exons</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
 <p>Differentially methylated exons</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs_exons</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_exons</span>,
-                        minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,
-                        maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, 
-                        Minlog2FC <span class="op">=</span> <span class="fl">1</span>,
-                        CountPerBp <span class="op">=</span> <span class="fl">0.01</span>, 
-                        test <span class="op">=</span> <span class="st">'LRT'</span>,
-                        num.cores <span class="op">=</span> <span class="fl">4L</span>,
-                        verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## *** Number of GR after filtering counts 194</span></code></pre>
-<pre><code><span class="co">## *** GLM...</span></code></pre>
+<code class="sourceCode R"><span><span class="va">dmrs_exons</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_exons</span>,</span>
+<span>                        minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                        maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>                        Minlog2FC <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                        CountPerBp <span class="op">=</span> <span class="fl">0.01</span>, </span>
+<span>                        test <span class="op">=</span> <span class="st">'LRT'</span>,</span>
+<span>                        num.cores <span class="op">=</span> <span class="fl">4L</span>,</span>
+<span>                        verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## *** Number of GR after filtering counts 179</span></span></code></pre>
+<pre><code><span><span class="co">## *** GLM...</span></span></code></pre>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs_exons</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 140 ranges and 17 metadata columns:</span>
-<span class="co">##             seqnames            ranges strand |   M_1_105   M_1_168   M_1_179</span>
-<span class="co">##                &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">##   AT1G10745        1   3572879-3573173      * |         5         7        26</span>
-<span class="co">##   AT1G17150        1   5866658-5867176      * |         5         6        16</span>
-<span class="co">##   AT1G33030        1 11964776-11965351      * |         6        18        21</span>
-<span class="co">##   AT1G33720        1 12222407-12224108      * |        36        12         0</span>
-<span class="co">##   AT1G33720        1 12222407-12224108      * |        36        12         0</span>
-<span class="co">##         ...      ...               ...    ... .       ...       ...       ...</span>
-<span class="co">##   AT5G49010        5 19867969-19868877      * |        24        14        20</span>
-<span class="co">##   AT5G49010        5 19867969-19868877      * |        24        14        20</span>
-<span class="co">##   AT5G51930        5 21103008-21103568      * |         6        20         0</span>
-<span class="co">##   AT5G52090        5 21167432-21169462      * |        46        30        19</span>
-<span class="co">##   AT5G54700        5 22222886-22224526      * |        25        17        22</span>
-<span class="co">##                M_1_27     M_1_3   NM_1_12   NM_1_45   NM_1_70   NM_1_86</span>
-<span class="co">##             &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">##   AT1G10745         7         5         1         0         0         0</span>
-<span class="co">##   AT1G17150         8         6         0         0         1         0</span>
-<span class="co">##   AT1G33030         6        12         0         3         0         3</span>
-<span class="co">##   AT1G33720        20        24         4         8         0         0</span>
-<span class="co">##   AT1G33720        20        24         4         8         0         0</span>
-<span class="co">##         ...       ...       ...       ...       ...       ...       ...</span>
-<span class="co">##   AT5G49010         6        20         2         0         0         0</span>
-<span class="co">##   AT5G49010         6        20         2         0         0         0</span>
-<span class="co">##   AT5G51930         8        34         2         0         0         2</span>
-<span class="co">##   AT5G52090        27        27         8         4         6         9</span>
-<span class="co">##   AT5G54700        14        12         1         6         2         2</span>
-<span class="co">##                log2FC scaled.deviance      pvalue        model    adj.pval</span>
-<span class="co">##             &lt;numeric&gt;       &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;   &lt;numeric&gt;</span>
-<span class="co">##   AT1G10745   2.17475        17.49778 2.87643e-05 Neg.Binomial 4.57614e-05</span>
-<span class="co">##   AT1G17150   1.99606        24.10357 9.12911e-07 Neg.Binomial 1.85228e-06</span>
-<span class="co">##   AT1G33030   1.69378        19.38609 1.06782e-05 Neg.Binomial 1.82311e-05</span>
-<span class="co">##   AT1G33720   1.57898         6.53006 1.06066e-02 Neg.Binomial 1.06066e-02</span>
-<span class="co">##   AT1G33720   1.57898         6.53006 1.06066e-02 Neg.Binomial 1.06066e-02</span>
-<span class="co">##         ...       ...             ...         ...          ...         ...</span>
-<span class="co">##   AT5G49010   2.47373        42.93430 5.66094e-11 Neg.Binomial 1.72289e-10</span>
-<span class="co">##   AT5G49010   2.47373        42.93430 5.66094e-11 Neg.Binomial 1.72289e-10</span>
-<span class="co">##   AT5G51930   1.98787         9.76251 1.78107e-03 Neg.Binomial 2.13119e-03</span>
-<span class="co">##   AT5G52090   1.48497        41.38165 1.25228e-10 Neg.Binomial 3.65247e-10</span>
-<span class="co">##   AT5G54700   1.87877        45.37607 1.62609e-11 Neg.Binomial 5.69132e-11</span>
-<span class="co">##             CT.SignalDensity TT.SignalDensity SignalDensityVariation</span>
-<span class="co">##                    &lt;numeric&gt;        &lt;numeric&gt;              &lt;numeric&gt;</span>
-<span class="co">##   AT1G10745      0.000847458        0.0338983             0.03305085</span>
-<span class="co">##   AT1G17150      0.000481696        0.0157996             0.01531792</span>
-<span class="co">##   AT1G33030      0.002604167        0.0218750             0.01927083</span>
-<span class="co">##   AT1G33720      0.001762632        0.0108108             0.00904818</span>
-<span class="co">##   AT1G33720      0.001762632        0.0108108             0.00904818</span>
-<span class="co">##         ...              ...              ...                    ...</span>
-<span class="co">##   AT5G49010      0.000550055        0.0184818             0.01793179</span>
-<span class="co">##   AT5G49010      0.000550055        0.0184818             0.01793179</span>
-<span class="co">##   AT5G51930      0.001782531        0.0242424             0.02245989</span>
-<span class="co">##   AT5G52090      0.003323486        0.0146726             0.01134909</span>
-<span class="co">##   AT5G54700      0.001675807        0.0109689             0.00929311</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">dmrs_exons</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 149 ranges and 17 metadata columns:</span></span>
+<span><span class="co">##         seqnames            ranges strand |   M_1_105   M_1_168   M_1_179</span></span>
+<span><span class="co">##            &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">##     [1]        1     627482-628469      * |         0         0        30</span></span>
+<span><span class="co">##     [2]        1   1506117-1509152      * |        42         0        44</span></span>
+<span><span class="co">##     [3]        1   3572879-3573173      * |         5         7        26</span></span>
+<span><span class="co">##     [4]        1   3892580-3894677      * |        24        17        23</span></span>
+<span><span class="co">##     [5]        1   3979823-3981079      * |        25         9        13</span></span>
+<span><span class="co">##     ...      ...               ...    ... .       ...       ...       ...</span></span>
+<span><span class="co">##   [145]        5 19867969-19868877      * |        24        14        20</span></span>
+<span><span class="co">##   [146]        5 21103008-21103568      * |         6        20         0</span></span>
+<span><span class="co">##   [147]        5 21167432-21169462      * |        46        30        19</span></span>
+<span><span class="co">##   [148]        5 22222886-22224526      * |        25        17        22</span></span>
+<span><span class="co">##   [149]        5 22478712-22480498      * |        27         0        36</span></span>
+<span><span class="co">##            M_1_27     M_1_3   NM_1_12   NM_1_45   NM_1_70   NM_1_86    log2FC</span></span>
+<span><span class="co">##         &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">##     [1]        25        20         0         0         0         0   2.72579</span></span>
+<span><span class="co">##     [2]        35        58         0         0         0         0   3.60550</span></span>
+<span><span class="co">##     [3]         7         5         1         0         0         0   2.17475</span></span>
+<span><span class="co">##     [4]        22        23         0         7         5         0   1.74047</span></span>
+<span><span class="co">##     [5]        20        15         7         0         4         0   1.53471</span></span>
+<span><span class="co">##     ...       ...       ...       ...       ...       ...       ...       ...</span></span>
+<span><span class="co">##   [145]         6        20         2         0         0         0   2.47373</span></span>
+<span><span class="co">##   [146]         8        34         2         0         0         2   1.98787</span></span>
+<span><span class="co">##   [147]        27        27         8         4         6         9   1.48497</span></span>
+<span><span class="co">##   [148]        14        12         1         6         2         2   1.87877</span></span>
+<span><span class="co">##   [149]        18        27         0         0         0         0   3.11795</span></span>
+<span><span class="co">##         scaled.deviance      pvalue          model    adj.pval CT.SignalDensity</span></span>
+<span><span class="co">##               &lt;numeric&gt;   &lt;numeric&gt;    &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span></span>
+<span><span class="co">##     [1]         86.6123 1.32022e-20 Neg.Binomial.W 7.86853e-20      0.000000000</span></span>
+<span><span class="co">##     [2]        184.0775 6.24017e-42   Neg.Binomial 2.32446e-40      0.000000000</span></span>
+<span><span class="co">##     [3]         17.4978 2.87643e-05   Neg.Binomial 3.86115e-05      0.000847458</span></span>
+<span><span class="co">##     [4]         62.9822 2.08580e-15   Neg.Binomial 8.39957e-15      0.001429933</span></span>
+<span><span class="co">##     [5]         23.1115 1.52876e-06   Neg.Binomial 2.42325e-06      0.002187749</span></span>
+<span><span class="co">##     ...             ...         ...            ...         ...              ...</span></span>
+<span><span class="co">##   [145]        42.93430 5.66094e-11   Neg.Binomial 1.36045e-10      0.000550055</span></span>
+<span><span class="co">##   [146]         9.76251 1.78107e-03   Neg.Binomial 1.90920e-03      0.001782531</span></span>
+<span><span class="co">##   [147]        41.38165 1.25228e-10   Neg.Binomial 2.87060e-10      0.003323486</span></span>
+<span><span class="co">##   [148]        45.37607 1.62609e-11   Neg.Binomial 4.32657e-11      0.001675807</span></span>
+<span><span class="co">##   [149]       104.45853 1.60518e-24   Neg.Binomial 1.13892e-23      0.000000000</span></span>
+<span><span class="co">##         TT.SignalDensity SignalDensityVariation</span></span>
+<span><span class="co">##                &lt;numeric&gt;              &lt;numeric&gt;</span></span>
+<span><span class="co">##     [1]        0.0151822             0.01518219</span></span>
+<span><span class="co">##     [2]        0.0117918             0.01179183</span></span>
+<span><span class="co">##     [3]        0.0338983             0.03305085</span></span>
+<span><span class="co">##     [4]        0.0103908             0.00896092</span></span>
+<span><span class="co">##     [5]        0.0130469             0.01085919</span></span>
+<span><span class="co">##     ...              ...                    ...</span></span>
+<span><span class="co">##   [145]        0.0184818             0.01793179</span></span>
+<span><span class="co">##   [146]        0.0242424             0.02245989</span></span>
+<span><span class="co">##   [147]        0.0146726             0.01134909</span></span>
+<span><span class="co">##   [148]        0.0109689             0.00929311</span></span>
+<span><span class="co">##   [149]        0.0120873             0.01208730</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 <p>For introns we have:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span>
-<span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
-<span class="va">dmps_at_introns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, GENES <span class="op">=</span> <span class="va">introns</span>,
-                                 ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,
-                                 output <span class="op">=</span> <span class="st">"GRanges"</span><span class="op">)</span>
-
-<span class="co">## Build a RangedGlmDataSet object</span>
-<span class="va">ds_introns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_introns</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span>
+<span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
+<span><span class="va">dmps_at_introns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, GENES <span class="op">=</span> <span class="va">introns</span>,</span>
+<span>                                 ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                 output <span class="op">=</span> <span class="st">"GRanges"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Build a RangedGlmDataSet object</span></span>
+<span><span class="va">ds_introns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_introns</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
 <p>Differentially methylated introns</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs_introns</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_introns</span>,
-                          minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,
-                          maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, 
-                          Minlog2FC <span class="op">=</span> <span class="fl">1</span>,
-                          CountPerBp <span class="op">=</span> <span class="fl">0.01</span>,
-                          test <span class="op">=</span> <span class="st">'LRT'</span>,
-                          num.cores <span class="op">=</span> <span class="fl">4L</span>,
-                          verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## *** Number of GR after filtering counts 2</span></code></pre>
-<pre><code><span class="co">## *** GLM...</span></code></pre>
+<code class="sourceCode R"><span><span class="va">dmrs_introns</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_introns</span>,</span>
+<span>                          minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                          maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>                          Minlog2FC <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                          CountPerBp <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>                          test <span class="op">=</span> <span class="st">'LRT'</span>,</span>
+<span>                          num.cores <span class="op">=</span> <span class="fl">4L</span>,</span>
+<span>                          verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## *** Number of GR after filtering counts 5</span></span></code></pre>
+<pre><code><span><span class="co">## *** GLM...</span></span></code></pre>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs_introns</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 2 ranges and 17 metadata columns:</span>
-<span class="co">##             seqnames            ranges strand |   M_1_105   M_1_168   M_1_179</span>
-<span class="co">##                &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">##   AT2G14000        2   5885110-5885454      * |         4        12        10</span>
-<span class="co">##   AT5G52115        5 21174335-21175487      * |        12        19        13</span>
-<span class="co">##                M_1_27     M_1_3   NM_1_12   NM_1_45   NM_1_70   NM_1_86</span>
-<span class="co">##             &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">##   AT2G14000         5         9         5         1         1         1</span>
-<span class="co">##   AT5G52115        10         9         0         2         0         3</span>
-<span class="co">##                log2FC scaled.deviance      pvalue        model    adj.pval</span>
-<span class="co">##             &lt;numeric&gt;       &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;   &lt;numeric&gt;</span>
-<span class="co">##   AT2G14000   1.38629         14.2099 1.63508e-04 Neg.Binomial 1.63508e-04</span>
-<span class="co">##   AT5G52115   1.79914         38.9928 4.25375e-10 Neg.Binomial 8.50750e-10</span>
-<span class="co">##             CT.SignalDensity TT.SignalDensity SignalDensityVariation</span>
-<span class="co">##                    &lt;numeric&gt;        &lt;numeric&gt;              &lt;numeric&gt;</span>
-<span class="co">##   AT2G14000       0.00579710        0.0231884             0.01739130</span>
-<span class="co">##   AT5G52115       0.00108413        0.0109280             0.00984389</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">dmrs_introns</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 5 ranges and 17 metadata columns:</span></span>
+<span><span class="co">##       seqnames            ranges strand |   M_1_105   M_1_168   M_1_179</span></span>
+<span><span class="co">##          &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">##   [1]        1 13148737-13149481      * |        14        14         6</span></span>
+<span><span class="co">##   [2]        1 17534249-17534923      * |         6        14         7</span></span>
+<span><span class="co">##   [3]        2   5885110-5885454      * |         4        12        10</span></span>
+<span><span class="co">##   [4]        5 21161354-21162074      * |         0         0        10</span></span>
+<span><span class="co">##   [5]        5 21174335-21175487      * |        12        19        13</span></span>
+<span><span class="co">##          M_1_27     M_1_3   NM_1_12   NM_1_45   NM_1_70   NM_1_86    log2FC</span></span>
+<span><span class="co">##       &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">##   [1]        10        10         0         0         0         0   2.47751</span></span>
+<span><span class="co">##   [2]        11         7         2         0         0         2   1.60944</span></span>
+<span><span class="co">##   [3]         5         9         5         1         1         1   1.38629</span></span>
+<span><span class="co">##   [4]        23        10         0         0         2         0   1.85630</span></span>
+<span><span class="co">##   [5]        10         9         0         2         0         3   1.79914</span></span>
+<span><span class="co">##       scaled.deviance      pvalue          model    adj.pval CT.SignalDensity</span></span>
+<span><span class="co">##             &lt;numeric&gt;   &lt;numeric&gt;    &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span></span>
+<span><span class="co">##   [1]        85.35744 2.49023e-20 Neg.Binomial.W 1.24512e-19      0.000000000</span></span>
+<span><span class="co">##   [2]        25.21553 5.12678e-07   Neg.Binomial 8.54464e-07      0.001481481</span></span>
+<span><span class="co">##   [3]        14.20990 1.63508e-04   Neg.Binomial 2.04385e-04      0.005797101</span></span>
+<span><span class="co">##   [4]         6.92139 8.51706e-03   Neg.Binomial 8.51706e-03      0.000693481</span></span>
+<span><span class="co">##   [5]        38.99278 4.25375e-10   Neg.Binomial 1.06344e-09      0.001084128</span></span>
+<span><span class="co">##       TT.SignalDensity SignalDensityVariation</span></span>
+<span><span class="co">##              &lt;numeric&gt;              &lt;numeric&gt;</span></span>
+<span><span class="co">##   [1]        0.0144966             0.01449664</span></span>
+<span><span class="co">##   [2]        0.0133333             0.01185185</span></span>
+<span><span class="co">##   [3]        0.0231884             0.01739130</span></span>
+<span><span class="co">##   [4]        0.0119279             0.01123440</span></span>
+<span><span class="co">##   [5]        0.0109280             0.00984389</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 <div class="section level4">
 <h4 id="differentially-methylated-genes-dmgs">Differentially methylated genes DMGs<a class="anchor" aria-label="anchor" href="#differentially-methylated-genes-dmgs"></a>
 </h4>
-<p>The last results for introns and exons contrasts with the result for the whole gene-body.</p>
+<p>The last results for introns and exons contrasts with the result for
+the whole gene-body.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span>
-<span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span>
-<span class="va">dmps_at_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, GENES <span class="op">=</span> <span class="va">genes</span>,
-                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,
-                                output <span class="op">=</span> <span class="st">"GRanges"</span><span class="op">)</span>
-
-<span class="co">## Build a RangedGlmDataSet object</span>
-<span class="va">ds_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_genes</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## ==== Setting up the experiment design to test for DMRs ===</span></span>
+<span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
+<span><span class="va">dmps_at_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDIMPatGenes.html">getDIMPatGenes</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, GENES <span class="op">=</span> <span class="va">genes</span>,</span>
+<span>                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                output <span class="op">=</span> <span class="st">"GRanges"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Build a RangedGlmDataSet object</span></span>
+<span><span class="va">ds_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_genes</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
 <p>Differentically methylated genes</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs_genes</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_genes</span>, 
-                        minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,
-                        maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-                        Minlog2FC <span class="op">=</span> <span class="fl">1</span>,
-                        CountPerBp <span class="op">=</span> <span class="fl">0.01</span>,
-                        test <span class="op">=</span> <span class="st">'LRT'</span>,
-                        num.cores <span class="op">=</span> <span class="fl">4L</span>, 
-                        verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## *** Number of GR after filtering counts 970</span></code></pre>
-<pre><code><span class="co">## *** GLM...</span></code></pre>
+<code class="sourceCode R"><span><span class="va">dmrs_genes</span> <span class="op">=</span> <span class="fu"><a href="../reference/countTest2.html">countTest2</a></span><span class="op">(</span>DS <span class="op">=</span> <span class="va">ds_genes</span>, </span>
+<span>                        minCountPerIndv <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                        maxGrpCV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                        Minlog2FC <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                        CountPerBp <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>                        test <span class="op">=</span> <span class="st">'LRT'</span>,</span>
+<span>                        num.cores <span class="op">=</span> <span class="fl">4L</span>, </span>
+<span>                        verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## *** Number of GR after filtering counts 704</span></span></code></pre>
+<pre><code><span><span class="co">## *** GLM...</span></span></code></pre>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dmrs_genes</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 893 ranges and 17 metadata columns:</span>
-<span class="co">##             seqnames            ranges strand |   M_1_105   M_1_168   M_1_179</span>
-<span class="co">##                &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">##   AT1G05035        1   1444983-1446116      * |        11        15        12</span>
-<span class="co">##   AT1G07025        1   2157658-2158158      * |         8        10        18</span>
-<span class="co">##   AT1G07025        1   2157658-2158158      * |         8        10        18</span>
-<span class="co">##   AT1G09260        1   2993381-2993820      * |        10         6        24</span>
-<span class="co">##   AT1G09260        1   2993381-2993820      * |        10         6        24</span>
-<span class="co">##         ...      ...               ...    ... .       ...       ...       ...</span>
-<span class="co">##   AT5G52115        5 21174321-21175857      * |        18        27        17</span>
-<span class="co">##   AT5G54700        5 22222886-22225616      * |        42        28        36</span>
-<span class="co">##   AT5G56920        5 23024896-23025915      * |        19        38        17</span>
-<span class="co">##   AT5G60945        5 24526245-24526636      * |         4         8        14</span>
-<span class="co">##   AT5G60945        5 24526245-24526636      * |         4         8        14</span>
-<span class="co">##                M_1_27     M_1_3   NM_1_12   NM_1_45   NM_1_70   NM_1_86</span>
-<span class="co">##             &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="co">##   AT1G05035        22         9         7         2         2         7</span>
-<span class="co">##   AT1G07025        16         8         4         2         0         2</span>
-<span class="co">##   AT1G07025        16         8         4         2         0         2</span>
-<span class="co">##   AT1G09260         2         2         2         0         0         6</span>
-<span class="co">##   AT1G09260         2         2         2         0         0         6</span>
-<span class="co">##         ...       ...       ...       ...       ...       ...       ...</span>
-<span class="co">##   AT5G52115        12        23         0         2         0         3</span>
-<span class="co">##   AT5G54700        23        20         2        11         3         3</span>
-<span class="co">##   AT5G56920        19        33         2         4         6        14</span>
-<span class="co">##   AT5G60945         4        10         2         0         0         0</span>
-<span class="co">##   AT5G60945         4        10         2         0         0         0</span>
-<span class="co">##                log2FC scaled.deviance      pvalue        model    adj.pval</span>
-<span class="co">##             &lt;numeric&gt;       &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;   &lt;numeric&gt;</span>
-<span class="co">##   AT1G05035   1.12059        16.07033 6.10329e-05 Neg.Binomial 8.03869e-05</span>
-<span class="co">##   AT1G07025   1.46634        25.55214 4.30588e-07 Neg.Binomial 8.48819e-07</span>
-<span class="co">##   AT1G07025   1.46634        25.55214 4.30588e-07 Neg.Binomial 8.48819e-07</span>
-<span class="co">##   AT1G09260   1.18377         4.41686 3.55854e-02 Neg.Binomial 3.55854e-02</span>
-<span class="co">##   AT1G09260   1.18377         4.41686 3.55854e-02 Neg.Binomial 3.55854e-02</span>
-<span class="co">##         ...       ...             ...         ...          ...         ...</span>
-<span class="co">##   AT5G52115   2.20460         63.4528 1.64254e-15 Neg.Binomial 1.16411e-14</span>
-<span class="co">##   AT5G54700   1.83636         42.8798 5.82085e-11 Neg.Binomial 2.24053e-10</span>
-<span class="co">##   AT5G56920   1.35504         18.3625 1.82615e-05 Neg.Binomial 2.73616e-05</span>
-<span class="co">##   AT5G60945   1.79176         20.6233 5.59125e-06 Neg.Binomial 9.21215e-06</span>
-<span class="co">##   AT5G60945   1.79176         20.6233 5.59125e-06 Neg.Binomial 9.21215e-06</span>
-<span class="co">##             CT.SignalDensity TT.SignalDensity SignalDensityVariation</span>
-<span class="co">##                    &lt;numeric&gt;        &lt;numeric&gt;              &lt;numeric&gt;</span>
-<span class="co">##   AT1G05035       0.00396825        0.0121693             0.00820106</span>
-<span class="co">##   AT1G07025       0.00399202        0.0239521             0.01996008</span>
-<span class="co">##   AT1G07025       0.00399202        0.0239521             0.01996008</span>
-<span class="co">##   AT1G09260       0.00454545        0.0200000             0.01545455</span>
-<span class="co">##   AT1G09260       0.00454545        0.0200000             0.01545455</span>
-<span class="co">##         ...              ...              ...                    ...</span>
-<span class="co">##   AT5G52115      0.000813273        0.0126220             0.01180872</span>
-<span class="co">##   AT5G54700      0.001739290        0.0109118             0.00917246</span>
-<span class="co">##   AT5G56920      0.006372549        0.0247059             0.01833333</span>
-<span class="co">##   AT5G60945      0.001275510        0.0204082             0.01913265</span>
-<span class="co">##   AT5G60945      0.001275510        0.0204082             0.01913265</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></code></pre>
-<p>It seems to be that methylation patterning inside of gene-body forms a sort continuous regions simultaneously covering portions of exon and introns. In particular, this is true for genes experiencing alternative splicing, where some regions inside introns works as exons as well.</p>
+<code class="sourceCode R"><span><span class="va">dmrs_genes</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 646 ranges and 17 metadata columns:</span></span>
+<span><span class="co">##         seqnames            ranges strand |   M_1_105   M_1_168   M_1_179</span></span>
+<span><span class="co">##            &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">##     [1]        1   1444983-1446116      * |        11        15        12</span></span>
+<span><span class="co">##     [2]        1   2157658-2158158      * |         8        10        18</span></span>
+<span><span class="co">##     [3]        1   2993381-2993820      * |        10         6        24</span></span>
+<span><span class="co">##     [4]        1   3572674-3573173      * |        10        14        52</span></span>
+<span><span class="co">##     [5]        1   3892580-3894677      * |        49        37        48</span></span>
+<span><span class="co">##     ...      ...               ...    ... .       ...       ...       ...</span></span>
+<span><span class="co">##   [642]        5 21167432-21169462      * |        92        60        38</span></span>
+<span><span class="co">##   [643]        5 21174321-21175857      * |        18        27        17</span></span>
+<span><span class="co">##   [644]        5 22222886-22225616      * |        42        28        36</span></span>
+<span><span class="co">##   [645]        5 23024896-23025915      * |        19        38        17</span></span>
+<span><span class="co">##   [646]        5 24526245-24526636      * |         4         8        14</span></span>
+<span><span class="co">##            M_1_27     M_1_3   NM_1_12   NM_1_45   NM_1_70   NM_1_86    log2FC</span></span>
+<span><span class="co">##         &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">##     [1]        22         9         7         2         2         7   1.12059</span></span>
+<span><span class="co">##     [2]        16         8         4         2         0         2   1.46634</span></span>
+<span><span class="co">##     [3]         2         2         2         0         0         6   1.18377</span></span>
+<span><span class="co">##     [4]        14        10         2         0         0         0   2.63906</span></span>
+<span><span class="co">##     [5]        45        47         0        16        11         8   1.55571</span></span>
+<span><span class="co">##     ...       ...       ...       ...       ...       ...       ...       ...</span></span>
+<span><span class="co">##   [642]        54        54        16         8        12        18   1.48497</span></span>
+<span><span class="co">##   [643]        12        23         0         2         0         3   2.20460</span></span>
+<span><span class="co">##   [644]        23        20         2        11         3         3   1.83636</span></span>
+<span><span class="co">##   [645]        19        33         2         4         6        14   1.35504</span></span>
+<span><span class="co">##   [646]         4        10         2         0         0         0   1.79176</span></span>
+<span><span class="co">##         scaled.deviance      pvalue        model    adj.pval CT.SignalDensity</span></span>
+<span><span class="co">##               &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span></span>
+<span><span class="co">##     [1]        16.07033 6.10329e-05 Neg.Binomial 7.76127e-05       0.00396825</span></span>
+<span><span class="co">##     [2]        25.55214 4.30588e-07 Neg.Binomial 7.81348e-07       0.00399202</span></span>
+<span><span class="co">##     [3]         4.41686 3.55854e-02 Neg.Binomial 3.55854e-02       0.00454545</span></span>
+<span><span class="co">##     [4]        24.79981 6.36036e-07 Neg.Binomial 1.11956e-06       0.00100000</span></span>
+<span><span class="co">##     [5]       111.81692 3.91877e-26 Neg.Binomial 7.67128e-25       0.00417064</span></span>
+<span><span class="co">##     ...             ...         ...          ...         ...              ...</span></span>
+<span><span class="co">##   [642]         48.4620 3.36757e-12 Neg.Binomial 1.36821e-11      0.006646972</span></span>
+<span><span class="co">##   [643]         63.4528 1.64254e-15 Neg.Binomial 9.55926e-15      0.000813273</span></span>
+<span><span class="co">##   [644]         42.8798 5.82085e-11 Neg.Binomial 1.94833e-10      0.001739290</span></span>
+<span><span class="co">##   [645]         18.3625 1.82615e-05 Neg.Binomial 2.58138e-05      0.006372549</span></span>
+<span><span class="co">##   [646]         20.6233 5.59125e-06 Neg.Binomial 8.62040e-06      0.001275510</span></span>
+<span><span class="co">##         TT.SignalDensity SignalDensityVariation</span></span>
+<span><span class="co">##                &lt;numeric&gt;              &lt;numeric&gt;</span></span>
+<span><span class="co">##     [1]        0.0121693             0.00820106</span></span>
+<span><span class="co">##     [2]        0.0239521             0.01996008</span></span>
+<span><span class="co">##     [3]        0.0200000             0.01545455</span></span>
+<span><span class="co">##     [4]        0.0400000             0.03900000</span></span>
+<span><span class="co">##     [5]        0.0215443             0.01737369</span></span>
+<span><span class="co">##     ...              ...                    ...</span></span>
+<span><span class="co">##   [642]        0.0293452             0.02269818</span></span>
+<span><span class="co">##   [643]        0.0126220             0.01180872</span></span>
+<span><span class="co">##   [644]        0.0109118             0.00917246</span></span>
+<span><span class="co">##   [645]        0.0247059             0.01833333</span></span>
+<span><span class="co">##   [646]        0.0204082             0.01913265</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
+<p>It seems to be that methylation patterning inside of gene-body forms
+a sort continuous regions simultaneously covering portions of exon and
+introns. In particular, this is true for genes experiencing alternative
+splicing, where some regions inside introns works as exons as well.</p>
 </div>
 </div>
 <div class="section level2">
@@ -880,148 +974,202 @@ pre { /* Code block - determines code spacing between lines */
 <div id="refs" class="references csl-bib-body">
 <div id="ref-Sanchez2016" class="csl-entry">
 <div class="csl-left-margin">1. </div>
-<div class="csl-right-inline">R. Sanchez, S. A. Mackenzie, <span class="nocase">Information Thermodynamics of Cytosine DNA Methylation</span>. <em>PLOS ONE</em> <strong>11</strong>, e0150427 (2016).</div>
+<div class="csl-right-inline">R.
+Sanchez, S. A. Mackenzie, <a href="https://doi.org/10.1371/journal.pone.0150427" class="external-link"><span class="nocase">Information Thermodynamics of Cytosine DNA
+Methylation</span></a>. <em>PLOS ONE</em> <strong>11</strong>, e0150427
+(2016).</div>
 </div>
 <div id="ref-Sanchez2019" class="csl-entry">
 <div class="csl-left-margin">2. </div>
-<div class="csl-right-inline">R. Sanchez, X. Yang, T. Maher, S. Mackenzie, <span class="nocase">Discrimination of DNA Methylation Signal from Background Variation for Clinical Diagnostics</span>. <em>Int. J. Mol. Sci.</em> <strong>20</strong>, 5343 (2019).</div>
+<div class="csl-right-inline">R.
+Sanchez, X. Yang, T. Maher, S. Mackenzie, <a href="https://doi.org/10.3390/ijms20215343" class="external-link"><span class="nocase">Discrimination of DNA Methylation Signal from Background
+Variation for Clinical Diagnostics</span></a>. <em>Int. J. Mol.
+Sci.</em> <strong>20</strong>, 5343 (2019).</div>
 </div>
 <div id="ref-Greiner2000" class="csl-entry">
 <div class="csl-left-margin">3. </div>
-<div class="csl-right-inline">M. Greiner, D. Pfeiffer, R. D. Smith, <span class="nocase">Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests</span>. <em>Preventive Veterinary Medicine</em> <strong>45</strong>, 23–41 (2000).</div>
+<div class="csl-right-inline">M.
+Greiner, D. Pfeiffer, R. D. Smith, <a href="https://doi.org/10.1016/S0167-5877(00)00115-X" class="external-link"><span class="nocase">Principles and practical application of the
+receiver-operating characteristic analysis for diagnostic
+tests</span></a>. <em>Preventive Veterinary Medicine</em>
+<strong>45</strong>, 23–41 (2000).</div>
 </div>
 <div id="ref-Carter2016" class="csl-entry">
 <div class="csl-left-margin">4. </div>
-<div class="csl-right-inline">J. V. Carter, J. Pan, S. N. Rai, S. Galandiuk, <span class="nocase">ROC-ing along: Evaluation and interpretation of receiver operating characteristic curves</span>. <em>Surgery</em> <strong>159</strong>, 1638–1645 (2016).</div>
+<div class="csl-right-inline">J.
+V. Carter, J. Pan, S. N. Rai, S. Galandiuk, <a href="https://doi.org/10.1016/j.surg.2015.12.029" class="external-link"><span class="nocase">ROC-ing along: Evaluation and interpretation of receiver
+operating characteristic curves</span></a>. <em>Surgery</em>
+<strong>159</strong>, 1638–1645 (2016).</div>
 </div>
 <div id="ref-Harpaz2013" class="csl-entry">
 <div class="csl-left-margin">5. </div>
-<div class="csl-right-inline">R. Harpaz, <em>et al.</em>, <span class="nocase">Performance of Pharmacovigilance Signal Detection Algorithms for the FDA Adverse Event Reporting System</span>. <em>Clin Pharmacol ther</em> <strong>93</strong>, 1–19 (2013).</div>
+<div class="csl-right-inline">R.
+Harpaz, <em>et al.</em>, <a href="https://doi.org/10.1038/clpt.2013.24.Performance" class="external-link"><span class="nocase">Performance of Pharmacovigilance Signal Detection
+Algorithms for the FDA Adverse Event Reporting System</span></a>.
+<em>Clin Pharmacol ther</em> <strong>93</strong>, 1–19 (2013).</div>
 </div>
 <div id="ref-Kruspe2017" class="csl-entry">
 <div class="csl-left-margin">6. </div>
-<div class="csl-right-inline">S. Kruspe, <em>et al.</em>, <span class="nocase">Rapid and Sensitive Detection of Breast Cancer Cells in Patient Blood with Nuclease-Activated Probe Technology</span>. <em>Molecular Therapy - Nucleic Acids</em> <strong>8</strong>, 542–557 (2017).</div>
+<div class="csl-right-inline">S.
+Kruspe, <em>et al.</em>, <a href="https://doi.org/10.1016/j.omtn.2017.08.004" class="external-link"><span class="nocase">Rapid and Sensitive Detection of Breast Cancer Cells in
+Patient Blood with Nuclease-Activated Probe Technology</span></a>.
+<em>Molecular Therapy - Nucleic Acids</em> <strong>8</strong>, 542–557
+(2017).</div>
 </div>
 <div id="ref-Wahlberg2016" class="csl-entry">
 <div class="csl-left-margin">7. </div>
-<div class="csl-right-inline">P. Wahlberg, <em>et al.</em>, <span class="nocase">DNA methylome analysis of acute lymphoblastic leukemia cells reveals stochastic de novo DNA methylation in CpG islands</span>. <em>Epigenomics</em> <strong>8</strong>, 1367–1387 (2016).</div>
+<div class="csl-right-inline">P.
+Wahlberg, <em>et al.</em>, <a href="https://doi.org/10.2217/epi-2016-0052" class="external-link"><span class="nocase">DNA
+methylome analysis of acute lymphoblastic leukemia cells reveals
+stochastic de novo DNA methylation in CpG islands</span></a>.
+<em>Epigenomics</em> <strong>8</strong>, 1367–1387 (2016).</div>
 </div>
 <div id="ref-Sanchez2020" class="csl-entry">
 <div class="csl-left-margin">8. </div>
-<div class="csl-right-inline">R. Sanchez, S. A. Mackenzie, <span class="nocase">Integrative Network Analysis of Differentially Methylated and Expressed Genes for Biomarker Identification in Leukemia</span>. <em>Scientific Reports</em> <strong>10</strong>, 2123 (2020).</div>
+<div class="csl-right-inline">R.
+Sanchez, S. A. Mackenzie, <a href="https://doi.org/10.1038/s41598-020-58123-2" class="external-link"><span class="nocase">Integrative Network Analysis of Differentially Methylated
+and Expressed Genes for Biomarker Identification in Leukemia</span></a>.
+<em>Scientific Reports</em> <strong>10</strong>, 2123 (2020).</div>
 </div>
 <div id="ref-Severin2011" class="csl-entry">
 <div class="csl-left-margin">9. </div>
-<div class="csl-right-inline">P. M. D. Severin, X. Zou, H. E. Gaub, K. Schulten, <span class="nocase">Cytosine methylation alters DNA mechanical properties</span>. <em>Nucleic acids research</em> <strong>39</strong>, 8740–51 (2011).</div>
+<div class="csl-right-inline">P.
+M. D. Severin, X. Zou, H. E. Gaub, K. Schulten, <a href="https://doi.org/10.1093/nar/gkr578" class="external-link"><span class="nocase">Cytosine
+methylation alters DNA mechanical properties</span></a>. <em>Nucleic
+acids research</em> <strong>39</strong>, 8740–51 (2011).</div>
 </div>
 <div id="ref-Perez2012" class="csl-entry">
 <div class="csl-left-margin">10. </div>
-<div class="csl-right-inline">A. Pérez, <em>et al.</em>, <span class="nocase">Impact of methylation on the physical properties of DNA</span>. <em>Biophysical Journal</em> <strong>102</strong>, 2140–2148 (2012).</div>
+<div class="csl-right-inline">A.
+Pérez, <em>et al.</em>, <a href="https://doi.org/10.1016/j.bpj.2012.03.056" class="external-link"><span class="nocase">Impact of methylation on the physical properties of
+DNA</span></a>. <em>Biophysical Journal</em> <strong>102</strong>,
+2140–2148 (2012).</div>
 </div>
 <div id="ref-Yusufaly2013" class="csl-entry">
 <div class="csl-left-margin">11. </div>
-<div class="csl-right-inline">T. I. Yusufaly, Y. Li, W. K. Olson, <span class="nocase">5-Methylation of cytosine in CG:CG base-pair steps: a physicochemical mechanism for the epigenetic control of DNA nanomechanics.</span> <em>The journal of physical chemistry. B</em> <strong>117</strong>, 16436–42 (2013).</div>
+<div class="csl-right-inline">T.
+I. Yusufaly, Y. Li, W. K. Olson, <a href="https://doi.org/10.1021/jp409887t" class="external-link"><span class="nocase">5-Methylation of cytosine in CG:CG base-pair steps: a
+physicochemical mechanism for the epigenetic control of DNA
+nanomechanics.</span></a> <em>The journal of physical chemistry. B</em>
+<strong>117</strong>, 16436–42 (2013).</div>
 </div>
 <div id="ref-Teng2018" class="csl-entry">
 <div class="csl-left-margin">12. </div>
-<div class="csl-right-inline">X. Teng, W. Hwang, <span class="nocase">Effect of Methylation on Local Mechanics and Hydration Structure of DNA</span>. <em>Biophysical Journal</em> <strong>114</strong>, 1791–1803 (2018).</div>
+<div class="csl-right-inline">X.
+Teng, W. Hwang, <a href="https://doi.org/10.1016/j.bpj.2018.03.022" class="external-link"><span class="nocase">Effect of Methylation on Local Mechanics and Hydration
+Structure of DNA</span></a>. <em>Biophysical Journal</em>
+<strong>114</strong>, 1791–1803 (2018).</div>
 </div>
 <div id="ref-Hodges2020" class="csl-entry">
 <div class="csl-left-margin">13. </div>
-<div class="csl-right-inline">A. J. Hodges, N. O. Hudson, B. A. Buck-Koehntop, <span class="nocase">Cys2His2 Zinc Finger Methyl-CpG Binding Proteins: Getting a Handle on Methylated DNA</span>. <em>Journal of Molecular Biology</em> <strong>432</strong>, 1640–1660 (2020).</div>
+<div class="csl-right-inline">A.
+J. Hodges, N. O. Hudson, B. A. Buck-Koehntop, <a href="https://doi.org/10.1016/j.jmb.2019.09.012" class="external-link"><span class="nocase">Cys2His2 Zinc Finger Methyl-CpG Binding Proteins: Getting
+a Handle on Methylated DNA</span></a>. <em>Journal of Molecular
+Biology</em> <strong>432</strong>, 1640–1660 (2020).</div>
 </div>
 <div id="ref-Ngo2016" class="csl-entry">
 <div class="csl-left-margin">14. </div>
-<div class="csl-right-inline">T. T. M. Ngo, <em>et al.</em>, <span class="nocase">Effects of cytosine modifications on DNA flexibility and nucleosome mechanical stability</span>. <em>Nature Communications</em> <strong>7</strong>, 10813 (2016).</div>
+<div class="csl-right-inline">T.
+T. M. Ngo, <em>et al.</em>, <a href="https://doi.org/10.1038/ncomms10813" class="external-link"><span class="nocase">Effects
+of cytosine modifications on DNA flexibility and nucleosome mechanical
+stability</span></a>. <em>Nature Communications</em> <strong>7</strong>,
+10813 (2016).</div>
 </div>
 </div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on which this document was compiled running pandoc 2.14.0.3:</p>
-<pre><code><span class="co">## R version 4.1.1 (2021-08-10)</span>
-<span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span>
-<span class="co">## Running under: CentOS Linux 7 (Core)</span>
-<span class="co">## </span>
-<span class="co">## Matrix products: default</span>
-<span class="co">## BLAS/LAPACK: /usr/lib64/libopenblasp-r0.3.3.so</span>
-<span class="co">## </span>
-<span class="co">## locale:</span>
-<span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span>
-<span class="co">##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span>
-<span class="co">##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   </span>
-<span class="co">##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span>
-<span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span>
-<span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span>
-<span class="co">## </span>
-<span class="co">## attached base packages:</span>
-<span class="co">## [1] grid      stats4    stats     graphics  grDevices utils     datasets </span>
-<span class="co">## [8] methods   base     </span>
-<span class="co">## </span>
-<span class="co">## other attached packages:</span>
-<span class="co">##  [1] gridExtra_2.3        ggplot2_3.3.5        MethylIT.utils_0.1  </span>
-<span class="co">##  [4] MethylIT_0.3.2.3     rmarkdown_2.11       rtracklayer_1.52.1  </span>
-<span class="co">##  [7] GenomicRanges_1.44.0 GenomeInfoDb_1.30.0  IRanges_2.28.0      </span>
-<span class="co">## [10] S4Vectors_0.32.3     BiocGenerics_0.40.0  knitr_1.33          </span>
-<span class="co">## </span>
-<span class="co">## loaded via a namespace (and not attached):</span>
-<span class="co">##   [1] colorspace_2.0-2            rjson_0.2.21               </span>
-<span class="co">##   [3] modeltools_0.2-23           ellipsis_0.3.2             </span>
-<span class="co">##   [5] class_7.3-20                rprojroot_2.0.2            </span>
-<span class="co">##   [7] XVector_0.34.0              fs_1.5.0                   </span>
-<span class="co">##   [9] flexmix_2.3-17              bit64_4.0.5                </span>
-<span class="co">##  [11] AnnotationDbi_1.56.2        prodlim_2019.11.13         </span>
-<span class="co">##  [13] fansi_0.5.0                 lubridate_1.7.10           </span>
-<span class="co">##  [15] codetools_0.2-18            splines_4.1.1              </span>
-<span class="co">##  [17] cachem_1.0.5                Formula_1.2-4              </span>
-<span class="co">##  [19] jsonlite_1.7.2              pROC_1.17.0.1              </span>
-<span class="co">##  [21] Rsamtools_2.8.0             caret_6.0-90               </span>
-<span class="co">##  [23] annotate_1.72.0             png_0.1-7                  </span>
-<span class="co">##  [25] compiler_4.1.1              httr_1.4.2                 </span>
-<span class="co">##  [27] assertthat_0.2.1            Matrix_1.4-1               </span>
-<span class="co">##  [29] fastmap_1.1.0               htmltools_0.5.2            </span>
-<span class="co">##  [31] tools_4.1.1                 gtable_0.3.0               </span>
-<span class="co">##  [33] glue_1.4.2                  GenomeInfoDbData_1.2.7     </span>
-<span class="co">##  [35] reshape2_1.4.4              dplyr_1.0.7                </span>
-<span class="co">##  [37] Rcpp_1.0.7                  Biobase_2.54.0             </span>
-<span class="co">##  [39] jquerylib_0.1.4             pkgdown_2.0.2              </span>
-<span class="co">##  [41] vctrs_0.3.8                 Biostrings_2.62.0          </span>
-<span class="co">##  [43] nlme_3.1-155                betareg_3.1-4              </span>
-<span class="co">##  [45] iterators_1.0.13            lmtest_0.9-38              </span>
-<span class="co">##  [47] timeDate_3043.102           gower_0.2.2                </span>
-<span class="co">##  [49] xfun_0.24                   stringr_1.4.0              </span>
-<span class="co">##  [51] lifecycle_1.0.0             restfulr_0.0.13            </span>
-<span class="co">##  [53] XML_3.99-0.6                zoo_1.8-9                  </span>
-<span class="co">##  [55] zlibbioc_1.40.0             MASS_7.3-56                </span>
-<span class="co">##  [57] scales_1.1.1                ipred_0.9-11               </span>
-<span class="co">##  [59] ragg_1.1.3                  MatrixGenerics_1.4.3       </span>
-<span class="co">##  [61] sandwich_3.0-1              parallel_4.1.1             </span>
-<span class="co">##  [63] SummarizedExperiment_1.22.0 yaml_2.2.1                 </span>
-<span class="co">##  [65] memoise_2.0.0               sass_0.4.0                 </span>
-<span class="co">##  [67] rpart_4.1.16                stringi_1.6.2              </span>
-<span class="co">##  [69] RSQLite_2.2.11              genefilter_1.76.0          </span>
-<span class="co">##  [71] BiocIO_1.2.0                desc_1.3.0                 </span>
-<span class="co">##  [73] foreach_1.5.1               BiocParallel_1.28.3        </span>
-<span class="co">##  [75] lava_1.6.9                  rlang_0.4.11               </span>
-<span class="co">##  [77] pkgconfig_2.0.3             systemfonts_1.0.2          </span>
-<span class="co">##  [79] matrixStats_0.59.0          bitops_1.0-7               </span>
-<span class="co">##  [81] evaluate_0.14               lattice_0.20-45            </span>
-<span class="co">##  [83] purrr_0.3.4                 GenomicAlignments_1.28.0   </span>
-<span class="co">##  [85] recipes_0.1.16              bit_4.0.4                  </span>
-<span class="co">##  [87] tidyselect_1.1.1            plyr_1.8.6                 </span>
-<span class="co">##  [89] magrittr_2.0.1              nls2_0.2                   </span>
-<span class="co">##  [91] R6_2.5.0                    generics_0.1.0             </span>
-<span class="co">##  [93] DelayedArray_0.18.0         DBI_1.1.2                  </span>
-<span class="co">##  [95] pillar_1.6.1                withr_2.4.2                </span>
-<span class="co">##  [97] survival_3.3-1              KEGGREST_1.34.0            </span>
-<span class="co">##  [99] RCurl_1.98-1.5              nnet_7.3-17                </span>
-<span class="co">## [101] tibble_3.1.2                crayon_1.4.1               </span>
-<span class="co">## [103] utf8_1.2.2                  minpack.lm_1.2-1           </span>
-<span class="co">## [105] data.table_1.14.2           blob_1.2.2                 </span>
-<span class="co">## [107] ModelMetrics_1.2.2.2        digest_0.6.27              </span>
-<span class="co">## [109] xtable_1.8-4                textshaping_0.3.5          </span>
-<span class="co">## [111] munsell_0.5.0               bslib_0.3.1</span></code></pre>
+<p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
+which this document was compiled running pandoc 2.19.2:</p>
+<pre><code><span><span class="co">## R version 4.2.2 Patched (2022-11-10 r83330)</span></span>
+<span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
+<span><span class="co">## Running under: Ubuntu 22.04.1 LTS</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Matrix products: default</span></span>
+<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0</span></span>
+<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## locale:</span></span>
+<span><span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
+<span><span class="co">##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span></span>
+<span><span class="co">##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   </span></span>
+<span><span class="co">##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span></span>
+<span><span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
+<span><span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## attached base packages:</span></span>
+<span><span class="co">## [1] grid      stats4    stats     graphics  grDevices utils     datasets </span></span>
+<span><span class="co">## [8] methods   base     </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## other attached packages:</span></span>
+<span><span class="co">##  [1] gridExtra_2.3        ggplot2_3.4.0        MethylIT.utils_0.1  </span></span>
+<span><span class="co">##  [4] MethylIT_0.3.2.5     rtracklayer_1.56.1   GenomicRanges_1.48.0</span></span>
+<span><span class="co">##  [7] GenomeInfoDb_1.32.4  IRanges_2.30.1       S4Vectors_0.34.0    </span></span>
+<span><span class="co">## [10] BiocGenerics_0.42.0  knitr_1.41          </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## loaded via a namespace (and not attached):</span></span>
+<span><span class="co">##   [1] colorspace_2.0-3            rjson_0.2.21               </span></span>
+<span><span class="co">##   [3] modeltools_0.2-23           class_7.3-20               </span></span>
+<span><span class="co">##   [5] rprojroot_2.0.3             XVector_0.36.0             </span></span>
+<span><span class="co">##   [7] fs_1.5.2                    rstudioapi_0.14            </span></span>
+<span><span class="co">##   [9] listenv_0.8.0               flexmix_2.3-18             </span></span>
+<span><span class="co">##  [11] bit64_4.0.5                 AnnotationDbi_1.58.0       </span></span>
+<span><span class="co">##  [13] prodlim_2019.11.13          fansi_1.0.3                </span></span>
+<span><span class="co">##  [15] lubridate_1.9.0             codetools_0.2-18           </span></span>
+<span><span class="co">##  [17] splines_4.2.2               cachem_1.0.6               </span></span>
+<span><span class="co">##  [19] Formula_1.2-4               jsonlite_1.8.3             </span></span>
+<span><span class="co">##  [21] pROC_1.18.0                 Rsamtools_2.12.0           </span></span>
+<span><span class="co">##  [23] caret_6.0-93                annotate_1.74.0            </span></span>
+<span><span class="co">##  [25] png_0.1-8                   compiler_4.2.2             </span></span>
+<span><span class="co">##  [27] httr_1.4.4                  assertthat_0.2.1           </span></span>
+<span><span class="co">##  [29] Matrix_1.5-3                fastmap_1.1.0              </span></span>
+<span><span class="co">##  [31] cli_3.4.1                   htmltools_0.5.3            </span></span>
+<span><span class="co">##  [33] tools_4.2.2                 gtable_0.3.1               </span></span>
+<span><span class="co">##  [35] glue_1.6.2                  GenomeInfoDbData_1.2.8     </span></span>
+<span><span class="co">##  [37] reshape2_1.4.4              dplyr_1.0.10               </span></span>
+<span><span class="co">##  [39] Rcpp_1.0.9                  Biobase_2.56.0             </span></span>
+<span><span class="co">##  [41] jquerylib_0.1.4             pkgdown_2.0.6              </span></span>
+<span><span class="co">##  [43] vctrs_0.5.1                 Biostrings_2.64.1          </span></span>
+<span><span class="co">##  [45] nlme_3.1-160                betareg_3.1-4              </span></span>
+<span><span class="co">##  [47] iterators_1.0.14            lmtest_0.9-40              </span></span>
+<span><span class="co">##  [49] timeDate_4021.106           gower_1.0.0                </span></span>
+<span><span class="co">##  [51] xfun_0.35                   stringr_1.5.0              </span></span>
+<span><span class="co">##  [53] proto_1.0.0                 globals_0.16.2             </span></span>
+<span><span class="co">##  [55] timechange_0.1.1            lifecycle_1.0.3            </span></span>
+<span><span class="co">##  [57] restfulr_0.0.15             XML_3.99-0.13              </span></span>
+<span><span class="co">##  [59] future_1.29.0               zoo_1.8-11                 </span></span>
+<span><span class="co">##  [61] zlibbioc_1.42.0             MASS_7.3-58.1              </span></span>
+<span><span class="co">##  [63] scales_1.2.1                ipred_0.9-13               </span></span>
+<span><span class="co">##  [65] ragg_1.2.4                  MatrixGenerics_1.8.1       </span></span>
+<span><span class="co">##  [67] sandwich_3.0-2              parallel_4.2.2             </span></span>
+<span><span class="co">##  [69] SummarizedExperiment_1.26.1 yaml_2.3.6                 </span></span>
+<span><span class="co">##  [71] memoise_2.0.1               sass_0.4.4                 </span></span>
+<span><span class="co">##  [73] rpart_4.1.19                stringi_1.7.8              </span></span>
+<span><span class="co">##  [75] RSQLite_2.2.19              genefilter_1.78.0          </span></span>
+<span><span class="co">##  [77] BiocIO_1.6.0                desc_1.4.2                 </span></span>
+<span><span class="co">##  [79] foreach_1.5.2               hardhat_1.2.0              </span></span>
+<span><span class="co">##  [81] BiocParallel_1.30.4         lava_1.7.0                 </span></span>
+<span><span class="co">##  [83] rlang_1.0.6                 pkgconfig_2.0.3            </span></span>
+<span><span class="co">##  [85] systemfonts_1.0.4           matrixStats_0.63.0         </span></span>
+<span><span class="co">##  [87] bitops_1.0-7                evaluate_0.18              </span></span>
+<span><span class="co">##  [89] lattice_0.20-45             purrr_0.3.5                </span></span>
+<span><span class="co">##  [91] GenomicAlignments_1.32.1    recipes_1.0.3              </span></span>
+<span><span class="co">##  [93] bit_4.0.5                   tidyselect_1.2.0           </span></span>
+<span><span class="co">##  [95] parallelly_1.32.1           nls2_0.3-3                 </span></span>
+<span><span class="co">##  [97] plyr_1.8.8                  magrittr_2.0.3             </span></span>
+<span><span class="co">##  [99] R6_2.5.1                    generics_0.1.3             </span></span>
+<span><span class="co">## [101] DelayedArray_0.22.0         DBI_1.1.3                  </span></span>
+<span><span class="co">## [103] pillar_1.8.1                withr_2.5.0                </span></span>
+<span><span class="co">## [105] KEGGREST_1.36.3             survival_3.4-0             </span></span>
+<span><span class="co">## [107] RCurl_1.98-1.9              nnet_7.3-18                </span></span>
+<span><span class="co">## [109] tibble_3.1.8                future.apply_1.10.0        </span></span>
+<span><span class="co">## [111] crayon_1.5.2                utf8_1.2.2                 </span></span>
+<span><span class="co">## [113] rmarkdown_2.18              minpack.lm_1.2-2           </span></span>
+<span><span class="co">## [115] data.table_1.14.6           blob_1.2.3                 </span></span>
+<span><span class="co">## [117] ModelMetrics_1.2.2.2        digest_0.6.30              </span></span>
+<span><span class="co">## [119] xtable_1.8-4                textshaping_0.3.6          </span></span>
+<span><span class="co">## [121] munsell_0.5.0               bslib_0.4.1</span></span></code></pre>
 </div>
   </div>
 
@@ -1042,7 +1190,7 @@ pre { /* Code block - determines code spacing between lines */
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
