@@ -18,7 +18,7 @@ with Methyl-IT countTest2 function."><meta property="og:image" content="https://
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -116,14 +116,14 @@ leave parameter <em>'counts = NULL'</em>.</p></dd>
 <dt>counts</dt>
 <dd><p>Count matrix of DMPs with minimal dimensions 1 (row) x 4
 (columns). Column names must corresponds to the rownames from parameter
-'colData'.</p></dd>
+<em>colData</em>.</p></dd>
 
 
 <dt>colData</dt>
-<dd><p>A data frame with one columnn named 'condition', which must be
-a factor with exactly two levels. The rownames of <em>colData</em>
-individual samples. The row names of <em>colData</em> must correspond to
-th column names of the count matrix.</p></dd>
+<dd><p>A data frame with one column named 'condition', which must be
+a factor with exactly two levels. The rownames of <em>colData</em> individual
+samples. The row names of <em>colData</em> must correspond to th column names
+of the count matrix.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -131,11 +131,11 @@ th column names of the count matrix.</p></dd>
     
 
 <p>An object from 'RangedGlmDataSet' class containing these attributes:
-'GR': the GRanges of the object, 'counts': the counts for each sample
-at that genomic position, 'colData': the condition of each sample,
-treatment or control, 'sampleNames': the names of the samples, 'levels':
-the values (perhaps TT and CT for treatment and control)  permitted in
-the 'colData' attribute, optionData: additional metadata or NULL</p>
+'GR': the GRanges of the object, 'counts': the counts for each sample at
+that genomic position, 'colData': the condition of each sample, treatment or
+control, 'sampleNames': the names of the samples, 'levels': the values
+(perhaps TT and CT for treatment and control)  permitted in the
+<em>colData</em> attribute, optionData: additional metadata or NULL</p>
     </div>
     <div id="details">
     <h2>Details</h2>

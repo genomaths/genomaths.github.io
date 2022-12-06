@@ -20,7 +20,7 @@ reference (1). The Bayesian approach followed is described in reference (2)."><m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -317,13 +317,21 @@ J. Mol Sci, 2019, 20:5343.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Estimation of the information divergences</span></span></span>
 <span class="r-in"><span><span class="va">hd</span> <span class="op">&lt;-</span> <span class="fu">estimateBayesianDivergence</span><span class="op">(</span><span class="va">gr</span>, JD <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in estimateHellingerDiv(p = y[3:4], n = y[1:2]):</span> *** Vector p has values out of the range [0, 1]</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Keep in mind that Hellinger and J divergences are, in general,</span></span></span>
 <span class="r-in"><span><span class="co">## correlated</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">hd</span><span class="op">$</span><span class="va">hdiv</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">hd</span><span class="op">$</span><span class="va">jdiv</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>        method <span class="op">=</span> <span class="st">'kendall'</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cor.test(x = as.numeric(hd$hdiv), y = as.numeric(hd$jdiv), method = "kendall"):</span> object 'hd' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Kendall's rank correlation tau</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  as.numeric(hd$hdiv) and as.numeric(hd$jdiv)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> z = 26.237, p-value &lt; 2.2e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true tau is not equal to 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       tau </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.7889815 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## An example with methylation levels</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
@@ -336,7 +344,7 @@ J. Mol Sci, 2019, 20:5343.</p></li>
 <span class="r-in"><span><span class="co">## Transforming the list of data frames into a GRanges object</span></span></span>
 <span class="r-in"><span><span class="va">hd</span> <span class="op">&lt;-</span> <span class="fu">estimateBayesianDivergence</span><span class="op">(</span>x <span class="op">=</span> <span class="va">dat</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>p1 <span class="op">=</span> <span class="fl">1</span>, p2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                meth.level <span class="op">=</span> <span class="cn">TRUE</span>, preserve.gr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in bplapply(seq_len(nrow(x)), function(i) {    estimateHellingerDiv(p = as.numeric(x[i, ]))}, BPPARAM = bpparam):</span> object 'bpparam' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'BPPARAM' in selecting a method for function 'bplapply': object 'bpparam' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -21,7 +21,7 @@ countTest2 function."><meta property="og:image" content="https://genomaths.githu
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -159,8 +159,8 @@ than <em>'minNumDMPs'</em> are removed.</p></dd>
 distance between consecutive DMPs is not greater than
 <em>'maxDist'</em>. Ranges with less than <em>'minNumDMPs'</em> are
 removed. If, additionally, a value <em>maxClustDist &gt; 0 </em> is
-provided, then the "relaxed" approach is applied to the ranges from
-the first step.</p></dd>
+provided, then the "relaxed" approach is applied to the ranges
+from the first step.</p></dd>
 
 
 </dl></dd>
@@ -185,9 +185,9 @@ carrying to the Hellinger divergence values).</p></dd>
 <dt>num.cores, tasks</dt>
 <dd><p>integer(1). The number of cores to use, i.e. at most
 how many child processes will be run simultaneously (see
-<code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code> function from BiocParallel
-package).The number of tasks per job. value must be a scalar integer &gt;=
-0L (see MulticoreParam from BiocParallel package).</p></dd>
+<code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code> function from BiocParallel package).The
+number of tasks per job. value must be a scalar integer &gt;= 0L (see
+MulticoreParam from BiocParallel package).</p></dd>
 
 
 <dt>verbose</dt>
@@ -209,8 +209,8 @@ where DMPs were reported in at least one of the samples.</p>
     <h2>Details</h2>
     <p>Two algorithmic approaches are implemented, named: "relaxed" and
 "fixed.int" (see the description of parameter 'method'). The "fixed.int" is
-mostly addressed to find specific methylation patterns, but the price is
-the number of DMRs found is lower.</p>
+mostly addressed to find specific methylation patterns, but the price is the
+number of DMRs found is lower.</p>
 <p>The number of DMPs reported in each cluster corresponds to the numbers of
 sites inside the cluster where DMPs were found in at least one of the
 samples (from control or from treatment). That is, <strong>dmpClusters</strong> is

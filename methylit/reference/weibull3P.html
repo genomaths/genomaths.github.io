@@ -18,7 +18,7 @@ variable x"><meta property="og:image" content="https://genomaths.github.io/methy
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -217,20 +217,21 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html" class="external-link">rweibull</a></span><span class="op">(</span><span class="fl">1000</span>, shape<span class="op">=</span><span class="fl">0.75</span>, scale<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">weibull3P</span><span class="op">(</span><span class="va">x</span>, sample.size <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *** Non-linear regression </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> *** Trying nonlinear fit a Weibull 2P model...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> *** Trying nonlinear fit a Weibull 3P model ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> *** Weibull-2P is the best fitted model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *** Performing nonlinear regression model crossvalidation...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate   Std. Error   t value Pr(&gt;|t|))      Adj.R.Square</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape 0.7818339 0.0007938067  984.9173         0 0.999640338922439</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale 0.9961272 0.0008418785 1183.2197         0                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     rho       R.Cross.val               DEV               AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape 0.999638532669833 0.999820510943999 0.029941724763438 -7572.38050689342</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Estimate   Std. Error  t value Pr(&gt;|t|))     Adj.R.Square</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape 0.785109 0.0007679116 1022.395         0 0.99966640648701</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale 0.998828 0.0008097601 1233.486         0                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     rho       R.Cross.val                DEV              AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape 0.999664731148226 0.999833935051061 0.0277716043574934 -7647.6194188588</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> scale                                                                        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     BIC     COV.shape     COV.scale COV.mu    n     model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape -7557.65724105648  6.301290e-07 -1.803074e-07     NA 1000 Weibull2P</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale                   -1.803074e-07  7.087594e-07     NA 1000          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape -7632.89615302185  5.896883e-07 -1.680416e-07     NA 1000 Weibull2P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale                   -1.680416e-07  6.557115e-07     NA 1000          </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

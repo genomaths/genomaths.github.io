@@ -18,7 +18,7 @@ variable x"><meta property="og:image" content="https://genomaths.github.io/methy
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -225,17 +225,21 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">126</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">rgamma</a></span><span class="op">(</span><span class="fl">1000</span>, shape <span class="op">=</span> <span class="fl">1.03</span>, scale <span class="op">=</span> <span class="fl">2.1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fitGammaDist</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> *** Trying nonlinear fit to a 2P Gamma distribution model ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *** Performing nonlinear regression model  crossvalidation...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> shape 0.9746242 0.001629900 597.9657         0 0.999999913159578</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale 2.0760284 0.005052791 410.8677         0                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     rho       R.Cross.val                  DEV              AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape 0.999999912723457 0.999728239113689 7.22945067894528e-06 -7092.6310166965</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale                                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     BIC     COV.shape     COV.scale COV.mu  df   model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape -7072.99999558057  2.656574e-06 -7.735164e-06     NA 998 Gamma2P</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale                   -7.735164e-06  2.553070e-05     NA 998        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale 2.0760284 0.005052791 410.8676         0                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     rho       R.Cross.val                  DEV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape 0.999999912723457 0.999728239112834 7.22945067894529e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale                                                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     AIC               BIC     COV.shape     COV.scale COV.mu</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape -7092.63101078795 -7072.99998967202  2.656574e-06 -7.735164e-06     NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale                                     -7.735164e-06  2.553070e-05     NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        df   model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape 998 Gamma2P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale 998        </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

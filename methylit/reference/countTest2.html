@@ -21,7 +21,7 @@ linear model."><meta property="og:image" content="https://genomaths.github.io/me
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -279,24 +279,18 @@ The experimental design settings must be introduced using function
 <span class="r-out co"><span class="r-pr">#&gt;</span>    gene98     chr2 194001-195001      * |        34        39       116</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   gene101     chr2 200001-201001      * |       166       168       117</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   gene114     chr2 226001-227001      * |        33        34       111</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  B2            log2FC  scaled.deviance               pvalue</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;integer&gt;         &lt;numeric&gt;        &lt;numeric&gt;            &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    gene69       102 0.568790164211464 26.6591220187288 4.17022959612485e-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    gene98       151  1.29678921725186 82.6185278358369 9.57148294576089e-18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gene101        71 -0.57469903014675 13.0830465925071 0.000300075021226232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gene114       158  1.39001876021087 64.7083175344482   7.924210098014e-15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  model             adj.pval   CT.SignalDensity</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;factor&gt;            &lt;numeric&gt;          &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    gene69 Neg.Binomial 5.56030612816646e-07 0.0619380619380619</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    gene98 Neg.Binomial 3.82859317830436e-17 0.0364635364635365</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gene101 Neg.Binomial 0.000300075021226232  0.166833166833167</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gene114 Neg.Binomial  1.5848420196028e-14 0.0334665334665335</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             TT.SignalDensity SignalDensityVariation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    &lt;numeric&gt;              &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    gene69  0.109390609390609     0.0474525474525475</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    gene98  0.133366633366633     0.0969030969030969</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gene101 0.0939060939060939    -0.0729270729270729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gene114  0.134365634365634      0.100899100899101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  B2    log2FC scaled.deviance      pvalue        model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;integer&gt; &lt;numeric&gt;       &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    gene69       102  0.568790         26.6591 4.17025e-07 Neg.Binomial</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    gene98       151  1.296789         82.6185 9.57148e-18 Neg.Binomial</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   gene101        71 -0.574699         13.0830 3.00075e-04 Neg.Binomial</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   gene114       158  1.390019         64.7083 7.92421e-15 Neg.Binomial</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              adj.pval CT.SignalDensity TT.SignalDensity SignalDensityVariation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             &lt;numeric&gt;        &lt;numeric&gt;        &lt;numeric&gt;              &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    gene69 5.56034e-07        0.0619381        0.1093906              0.0474525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    gene98 3.82859e-17        0.0364635        0.1333666              0.0969031</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   gene101 3.00075e-04        0.1668332        0.0939061             -0.0729271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   gene114 1.58484e-14        0.0334665        0.1343656              0.1008991</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>

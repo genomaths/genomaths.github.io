@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@ Mackenzie’s lab<br><br>
 Department of Biology.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 data-toc-skip class="date">21 July 2022</h4>
+            <h4 data-toc-skip class="date">05 December 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd" class="external-link"><code>vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd</code></a></small>
       <div class="hidden name"><code>Cutpoint_estimation_with_Methyl-IT.Rmd</code></div>
@@ -269,11 +269,9 @@ unmethylated cytosine are generated with MethylIT.utils function
 the web page: <a href="https://genomaths.github.io/Methylation_analysis_with_Methyl-IT.html" class="external-link">Methylation
 analysis with Methyl-IT</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT" class="external-link">MethylIT</a></span><span class="op">)</span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MethylIT.utils</span><span class="op">)</span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocParallel" class="external-link">BiocParallel</a></span><span class="op">)</span><span class="op">}</span></span>
-<span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/MethylIT" class="external-link">MethylIT</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MethylIT.utils</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocParallel" class="external-link">BiocParallel</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bmean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">beta</span><span class="op">)</span> <span class="va">alpha</span><span class="op">/</span><span class="op">(</span><span class="va">alpha</span> <span class="op">+</span> <span class="va">beta</span><span class="op">)</span></span>
 <span><span class="va">alpha.ct</span> <span class="op">&lt;-</span> <span class="fl">0.09</span></span>
@@ -549,7 +547,7 @@ corresponding false discovery rate can be retrieved as:</p>
 <span><span class="co">##           Reference</span></span>
 <span><span class="co">## Prediction   CT   TT</span></span>
 <span><span class="co">##         CT  309    0</span></span>
-<span><span class="co">##         TT    0 3482</span></span>
+<span><span class="co">##         TT    0 3481</span></span>
 <span><span class="co">##                                     </span></span>
 <span><span class="co">##                Accuracy : 1         </span></span>
 <span><span class="co">##                  95% CI : (0.999, 1)</span></span>
@@ -594,29 +592,29 @@ For example, we would take a random sample and run:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## $posterior</span></span>
 <span><span class="co">##                 CT           TT</span></span>
-<span><span class="co">##  [1,] 1.000000e+00 9.510385e-09</span></span>
-<span><span class="co">##  [2,] 3.444655e-47 1.000000e+00</span></span>
-<span><span class="co">##  [3,] 1.460842e-45 1.000000e+00</span></span>
-<span><span class="co">##  [4,] 9.919554e-53 1.000000e+00</span></span>
-<span><span class="co">##  [5,] 5.055870e-47 1.000000e+00</span></span>
-<span><span class="co">##  [6,] 1.957422e-46 1.000000e+00</span></span>
-<span><span class="co">##  [7,] 2.206407e-46 1.000000e+00</span></span>
-<span><span class="co">##  [8,] 8.382345e-47 1.000000e+00</span></span>
-<span><span class="co">##  [9,] 1.972026e-46 1.000000e+00</span></span>
-<span><span class="co">## [10,] 8.628694e-47 1.000000e+00</span></span>
+<span><span class="co">##  [1,] 1.000000e+00 9.949362e-09</span></span>
+<span><span class="co">##  [2,] 1.323743e-46 1.000000e+00</span></span>
+<span><span class="co">##  [3,] 1.435707e-45 1.000000e+00</span></span>
+<span><span class="co">##  [4,] 2.648143e-46 1.000000e+00</span></span>
+<span><span class="co">##  [5,] 7.965328e-48 1.000000e+00</span></span>
+<span><span class="co">##  [6,] 1.108810e-46 1.000000e+00</span></span>
+<span><span class="co">##  [7,] 1.260233e-46 1.000000e+00</span></span>
+<span><span class="co">##  [8,] 8.773698e-47 1.000000e+00</span></span>
+<span><span class="co">##  [9,] 4.528686e-47 1.000000e+00</span></span>
+<span><span class="co">## [10,] 3.130172e-54 1.000000e+00</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $x</span></span>
 <span><span class="co">##              LD1</span></span>
-<span><span class="co">##  [1,] -7.4881477</span></span>
-<span><span class="co">##  [2,]  1.2098346</span></span>
-<span><span class="co">##  [3,]  0.9500257</span></span>
-<span><span class="co">##  [4,]  2.0943498</span></span>
-<span><span class="co">##  [5,]  1.1832304</span></span>
-<span><span class="co">##  [6,]  1.0893793</span></span>
-<span><span class="co">##  [7,]  1.0810778</span></span>
-<span><span class="co">##  [8,]  1.1481781</span></span>
-<span><span class="co">##  [9,]  1.0888640</span></span>
-<span><span class="co">## [10,]  1.1461699</span></span></code></pre>
+<span><span class="co">##  [1,] -7.4843076</span></span>
+<span><span class="co">##  [2,]  1.1181324</span></span>
+<span><span class="co">##  [3,]  0.9528444</span></span>
+<span><span class="co">##  [4,]  1.0700533</span></span>
+<span><span class="co">##  [5,]  1.3130110</span></span>
+<span><span class="co">##  [6,]  1.1304175</span></span>
+<span><span class="co">##  [7,]  1.1215415</span></span>
+<span><span class="co">##  [8,]  1.1466507</span></span>
+<span><span class="co">##  [9,]  1.1925061</span></span>
+<span><span class="co">## [10,]  2.3357223</span></span></code></pre>
 <p>The variable <em>pred$posterior</em> provides the posterior
 classification probabilities that a DMP could belong to control
 (<em>CT</em>) or to treatment (<em>TT</em>) group. The variable
@@ -934,12 +932,12 @@ accomplished for DMPs estimated based on the <span class="math inline">\('Gamma3
 <span><span class="co">##  Max.   :1   Max.   :1   Max.   :0.999   Max.   :1     Max.   :0.914  </span></span>
 <span><span class="co">##                                                                       </span></span>
 <span><span class="co">##  AccuracyPValue       McnemarPValue  Sensitivity  Specificity Pos Pred Value</span></span>
-<span><span class="co">##  Min.   :1.393e-150   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     </span></span>
-<span><span class="co">##  1st Qu.:1.393e-150   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     </span></span>
-<span><span class="co">##  Median :1.393e-150   Median : NA   Median :1    Median :1    Median :1     </span></span>
-<span><span class="co">##  Mean   :1.393e-150   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     </span></span>
-<span><span class="co">##  3rd Qu.:1.393e-150   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     </span></span>
-<span><span class="co">##  Max.   :1.393e-150   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     </span></span>
+<span><span class="co">##  Min.   :1.387e-150   Min.   : NA   Min.   :1    Min.   :1    Min.   :1     </span></span>
+<span><span class="co">##  1st Qu.:1.387e-150   1st Qu.: NA   1st Qu.:1    1st Qu.:1    1st Qu.:1     </span></span>
+<span><span class="co">##  Median :1.387e-150   Median : NA   Median :1    Median :1    Median :1     </span></span>
+<span><span class="co">##  Mean   :1.387e-150   Mean   :NaN   Mean   :1    Mean   :1    Mean   :1     </span></span>
+<span><span class="co">##  3rd Qu.:1.387e-150   3rd Qu.: NA   3rd Qu.:1    3rd Qu.:1    3rd Qu.:1     </span></span>
+<span><span class="co">##  Max.   :1.387e-150   Max.   : NA   Max.   :1    Max.   :1    Max.   :1     </span></span>
 <span><span class="co">##                       NA's   :300                                           </span></span>
 <span><span class="co">##  Neg Pred Value   Precision     Recall        F1      Prevalence   </span></span>
 <span><span class="co">##  Min.   :1      Min.   :1   Min.   :1   Min.   :1   Min.   :0.914  </span></span>
@@ -980,40 +978,40 @@ those obtained with FT:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">ft.class</span><span class="op">$</span><span class="va">mc.val</span></span></code></pre></div>
 <pre><code><span><span class="co">##     Accuracy          Kappa           AccuracyLower    AccuracyUpper   </span></span>
-<span><span class="co">##  Min.   :0.8076   Min.   :-0.007635   Min.   :0.8001   Min.   :0.8148  </span></span>
-<span><span class="co">##  1st Qu.:0.8105   1st Qu.: 0.005355   1st Qu.:0.8031   1st Qu.:0.8177  </span></span>
-<span><span class="co">##  Median :0.8110   Median : 0.007678   Median :0.8036   Median :0.8182  </span></span>
-<span><span class="co">##  Mean   :0.8110   Mean   : 0.007553   Mean   :0.8036   Mean   :0.8182  </span></span>
-<span><span class="co">##  3rd Qu.:0.8115   3rd Qu.: 0.009748   3rd Qu.:0.8041   3rd Qu.:0.8187  </span></span>
-<span><span class="co">##  Max.   :0.8137   Max.   : 0.020669   Max.   :0.8064   Max.   :0.8209  </span></span>
+<span><span class="co">##  Min.   :0.8085   Min.   :-0.004007   Min.   :0.8011   Min.   :0.8157  </span></span>
+<span><span class="co">##  1st Qu.:0.8104   1st Qu.: 0.004346   1st Qu.:0.8030   1st Qu.:0.8176  </span></span>
+<span><span class="co">##  Median :0.8109   Median : 0.007007   Median :0.8035   Median :0.8181  </span></span>
+<span><span class="co">##  Mean   :0.8109   Mean   : 0.007143   Mean   :0.8035   Mean   :0.8181  </span></span>
+<span><span class="co">##  3rd Qu.:0.8115   3rd Qu.: 0.010033   3rd Qu.:0.8041   3rd Qu.:0.8187  </span></span>
+<span><span class="co">##  Max.   :0.8131   Max.   : 0.018440   Max.   :0.8058   Max.   :0.8203  </span></span>
 <span><span class="co">##   AccuracyNull    AccuracyPValue   McnemarPValue  Sensitivity    </span></span>
-<span><span class="co">##  Min.   :0.8188   Min.   :0.9205   Min.   :0     Min.   :0.9835  </span></span>
+<span><span class="co">##  Min.   :0.8188   Min.   :0.9428   Min.   :0     Min.   :0.9831  </span></span>
 <span><span class="co">##  1st Qu.:0.8188   1st Qu.:0.9781   1st Qu.:0     1st Qu.:0.9857  </span></span>
-<span><span class="co">##  Median :0.8188   Median :0.9847   Median :0     Median :0.9863  </span></span>
-<span><span class="co">##  Mean   :0.8188   Mean   :0.9827   Mean   :0     Mean   :0.9863  </span></span>
-<span><span class="co">##  3rd Qu.:0.8188   3rd Qu.:0.9888   3rd Qu.:0     3rd Qu.:0.9868  </span></span>
-<span><span class="co">##  Max.   :0.8188   Max.   :0.9990   Max.   :0     Max.   :0.9893  </span></span>
+<span><span class="co">##  Median :0.8188   Median :0.9856   Median :0     Median :0.9863  </span></span>
+<span><span class="co">##  Mean   :0.8188   Mean   :0.9831   Mean   :0     Mean   :0.9863  </span></span>
+<span><span class="co">##  3rd Qu.:0.8188   3rd Qu.:0.9897   3rd Qu.:0     3rd Qu.:0.9869  </span></span>
+<span><span class="co">##  Max.   :0.8188   Max.   :0.9977   Max.   :0     Max.   :0.9885  </span></span>
 <span><span class="co">##   Specificity      Pos Pred Value   Neg Pred Value     Precision     </span></span>
-<span><span class="co">##  Min.   :0.01134   Min.   :0.8181   Min.   :0.1337   Min.   :0.8181  </span></span>
-<span><span class="co">##  1st Qu.:0.01726   1st Qu.:0.8193   1st Qu.:0.2150   1st Qu.:0.8193  </span></span>
-<span><span class="co">##  Median :0.01874   Median :0.8196   Median :0.2318   Median :0.8196  </span></span>
-<span><span class="co">##  Mean   :0.01858   Mean   :0.8196   Mean   :0.2304   Mean   :0.8196  </span></span>
-<span><span class="co">##  3rd Qu.:0.02022   3rd Qu.:0.8198   3rd Qu.:0.2455   3rd Qu.:0.8198  </span></span>
-<span><span class="co">##  Max.   :0.02663   Max.   :0.8208   Max.   :0.3187   Max.   :0.8208  </span></span>
+<span><span class="co">##  Min.   :0.01183   Min.   :0.8184   Min.   :0.1538   Min.   :0.8184  </span></span>
+<span><span class="co">##  1st Qu.:0.01677   1st Qu.:0.8193   1st Qu.:0.2102   1st Qu.:0.8193  </span></span>
+<span><span class="co">##  Median :0.01824   Median :0.8195   Median :0.2277   Median :0.8195  </span></span>
+<span><span class="co">##  Mean   :0.01830   Mean   :0.8195   Mean   :0.2279   Mean   :0.8195  </span></span>
+<span><span class="co">##  3rd Qu.:0.02022   3rd Qu.:0.8198   3rd Qu.:0.2469   3rd Qu.:0.8198  </span></span>
+<span><span class="co">##  Max.   :0.02465   Max.   :0.8206   Max.   :0.3025   Max.   :0.8206  </span></span>
 <span><span class="co">##      Recall             F1           Prevalence     Detection Rate  </span></span>
-<span><span class="co">##  Min.   :0.9835   Min.   :0.8933   Min.   :0.8188   Min.   :0.8053  </span></span>
-<span><span class="co">##  1st Qu.:0.9857   1st Qu.:0.8950   1st Qu.:0.8188   1st Qu.:0.8071  </span></span>
+<span><span class="co">##  Min.   :0.9831   Min.   :0.8937   Min.   :0.8188   Min.   :0.8050  </span></span>
+<span><span class="co">##  1st Qu.:0.9857   1st Qu.:0.8949   1st Qu.:0.8188   1st Qu.:0.8071  </span></span>
 <span><span class="co">##  Median :0.9863   Median :0.8952   Median :0.8188   Median :0.8076  </span></span>
 <span><span class="co">##  Mean   :0.9863   Mean   :0.8952   Mean   :0.8188   Mean   :0.8076  </span></span>
-<span><span class="co">##  3rd Qu.:0.9868   3rd Qu.:0.8955   3rd Qu.:0.8188   3rd Qu.:0.8080  </span></span>
-<span><span class="co">##  Max.   :0.9893   Max.   :0.8969   Max.   :0.8188   Max.   :0.8101  </span></span>
+<span><span class="co">##  3rd Qu.:0.9869   3rd Qu.:0.8955   3rd Qu.:0.8188   3rd Qu.:0.8081  </span></span>
+<span><span class="co">##  Max.   :0.9885   Max.   :0.8964   Max.   :0.8188   Max.   :0.8095  </span></span>
 <span><span class="co">##  Detection Prevalence Balanced Accuracy</span></span>
-<span><span class="co">##  Min.   :0.9825       Min.   :0.4975   </span></span>
-<span><span class="co">##  1st Qu.:0.9848       1st Qu.:0.5017   </span></span>
-<span><span class="co">##  Median :0.9853       Median :0.5025   </span></span>
-<span><span class="co">##  Mean   :0.9854       Mean   :0.5024   </span></span>
-<span><span class="co">##  3rd Qu.:0.9860       3rd Qu.:0.5031   </span></span>
-<span><span class="co">##  Max.   :0.9879       Max.   :0.5066</span></span></code></pre>
+<span><span class="co">##  Min.   :0.9827       Min.   :0.4987   </span></span>
+<span><span class="co">##  1st Qu.:0.9849       1st Qu.:0.5014   </span></span>
+<span><span class="co">##  Median :0.9854       Median :0.5022   </span></span>
+<span><span class="co">##  Mean   :0.9855       Mean   :0.5023   </span></span>
+<span><span class="co">##  3rd Qu.:0.9860       3rd Qu.:0.5032   </span></span>
+<span><span class="co">##  Max.   :0.9876       Max.   :0.5059</span></span></code></pre>
 <p>A quite different story is found when information on the probability
 distribution of noise (null hypothesis) is added to the classifier:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
@@ -1135,7 +1133,7 @@ treatment induced signal.</p>
 <span><span class="co">## C2  306  298 1682   1070   306</span></span>
 <span><span class="co">## C3  281  276 1657   1059   281</span></span>
 <span><span class="co">## T1 2925 2870 7589   2926  2925</span></span>
-<span><span class="co">## T2 3032 2963 7646   3032  3032</span></span>
+<span><span class="co">## T2 3032 2961 7646   3032  3032</span></span>
 <span><span class="co">## T3 2990 2935 7679   2990  2990</span></span></code></pre>
 <p>The comparison between the approaches FT.G2P and FT.SD (full signal
 detection on FT output) tells us that only 255, 306, and 281 cytosine

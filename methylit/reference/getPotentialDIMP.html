@@ -20,7 +20,7 @@ of signal detection."><meta property="og:image" content="https://genomaths.githu
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -116,6 +116,8 @@ of signal detection.</p>
 <span>  pval.col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tv.col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tv.cut <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  idv.col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  idv.cut <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min.coverage <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hdiv.col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hdiv.cut <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -179,10 +181,10 @@ model 'nlms' will be returned.</p></dd>
 <dt>absolute</dt>
 <dd><p>Logic (default, FALSE). Total variation (TV, the difference
 of methylation levels) is normally an output in the downstream MethylIT
-analysis. If 'absolute = TRUE', then TV is transformed into |TV|, which
-is an information divergence that can be fitted to Weibull or to
-Generalized Gamma distribution. So, if the nonlinear fit was performed
-for |TV|, then absolute must be set to TRUE.</p></dd>
+analysis. If 'absolute = TRUE', then TV is transformed into |TV|, which is
+an information divergence that can be fitted to Weibull or to Generalized
+Gamma distribution. So, if the nonlinear fit was performed for |TV|, then
+absolute must be set to TRUE.</p></dd>
 
 
 <dt>alpha</dt>
@@ -194,14 +196,14 @@ which the the probabilities hold: \(P(DIV_k &gt; DIV(\alpha))\).</p></dd>
 <dt>pval.col</dt>
 <dd><p>An integer denoting a column from each GRanges object from
 LR where p-values are provided when <strong>dist.name == 'None'</strong> and
-<strong>nlms == NULL</strong>. Default is NULL. If NUll and
-<strong>dist.name == 'None'</strong> and <strong>nlms == NULL</strong>, then a column
-named <strong>adj.pval</strong> will used to select the potential DMPs.</p></dd>
+<strong>nlms == NULL</strong>. Default is NULL. If NUll and <strong>dist.name ==
+'None'</strong> and <strong>nlms == NULL</strong>, then a column named <strong>adj.pval</strong>
+will used to select the potential DMPs.</p></dd>
 
 
 <dt>tv.col</dt>
-<dd><p>Column number for the total variation to be used for filtering
-cytosine positions (if provided).</p></dd>
+<dd><p>Column number for the total variation to be used for
+filtering cytosine positions (if provided).</p></dd>
 
 
 <dt>tv.cut</dt>
@@ -227,17 +229,28 @@ used for filtering cytosine positions. Default is NULL.</p></dd>
 <dt>pAdjustMethod</dt>
 <dd><p>method used to adjust the p-values from other
 approaches like Fisher's exact test, which involve multiple comparisons
-Default is NULL. Do not apply it when a probability distribution model
-is used (<strong>when nlms is given</strong>), since it makes not sense.</p></dd>
+Default is NULL. Do not apply it when a probability distribution model is
+used (<strong>when nlms is given</strong>), since it makes not sense.</p></dd>
+
+
+<dt>idiv.col</dt>
+<dd><p>Optional. A column number for any of the available
+information divergences: \(TV, bay.TV, hdiv, or jdiv\).
+used for filtering cytosine positions. Default is NULL.</p></dd>
+
+
+<dt>idiv.cut</dt>
+<dd><p>If hdiv.cut and hdiv.col are provided, then cytosine sites
+\(k\) with hdiv &lt; hdiv.cut are removed.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>A list of GRanges objects, each GRanges object carrying the selected
-cytosine sites and the probabilities that the specified divergence values
-can be greater than the critical value specified by \(\alpha\):
+<p>A list of GRanges objects, each GRanges object carrying the
+selected cytosine sites and the probabilities that the specified divergence
+values can be greater than the critical value specified by \(\alpha\):
 \(P(DIV_k &gt; DIV(\alpha))\).</p>
     </div>
     <div id="details">

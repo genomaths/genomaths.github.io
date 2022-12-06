@@ -18,7 +18,7 @@ variable x"><meta property="og:image" content="https://genomaths.github.io/methy
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
       </span>
     </div>
 
@@ -232,6 +232,7 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 <span class="r-in"><span><span class="co">## Fitting GGamma3P</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggamma.html">rggamma</a></span><span class="op">(</span><span class="fl">3000</span>, alpha <span class="op">=</span> <span class="fl">1.03</span>, psi <span class="op">=</span> <span class="fl">0.75</span>, scale <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fitGGammaDist</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> *** Trying nonlinear fit to a generalized 3P Gamma distribution model 3000 values...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *** Performing nonlinear regression model  crossvalidation...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate  Std. Error  t value Pr(&gt;|t|))      Adj.R.Square</span>
@@ -239,11 +240,11 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> scale 1.1382887 0.002872487 396.2729         0                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> psi   0.7383895 0.001898632 388.9061         0                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     rho       R.Cross.val                  DEV</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alpha 0.999999998178102 0.999951555969792 4.54108853939026e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alpha 0.999999998178102 0.999951555970568 4.54108853939111e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> scale                                                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> psi                                                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     AIC               BIC     COV.alpha     COV.scale</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alpha -26558.6966281472 -26534.6711578765  3.669287e-06  5.367186e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alpha -26558.6966173308 -26534.6711470602  3.669287e-06  5.367186e-06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> scale                                      5.367186e-06  8.251182e-06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> psi                                       -3.602364e-06 -5.426154e-06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             COV.psi COV.mu    N    model</span>
@@ -253,28 +254,29 @@ Sciences. Fifth Edit. Routledge Academic; 2009.</p></li>
 <span class="r-in"><span><span class="co">## Fitting GGamma4P</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span><span class="fu">fitGGammaDist</span><span class="op">(</span><span class="va">x</span>, location.par <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> *** Trying nonlinear fit to a generalized 4P Gamma distribution model 3000 values...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *** Performing nonlinear regression model  crossvalidation...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate   Std. Error    t value Pr(&gt;|t|))      Adj.R.Square</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alpha 1.0322905 0.0022133697   466.3886         0 0.999999998586538</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale 1.0778304 0.0037442876   287.8599         0                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mu    0.9981787 0.0000679242 14695.4800         0                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> psi   0.7795591 0.0026167688   297.9091         0                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alpha 1.0322905 0.0022133696   466.3887         0 0.999999998586538</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale 1.0778304 0.0037442874   287.8600         0                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mu    0.9981787 0.0000679242 14695.4801         0                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> psi   0.7795591 0.0026167686   297.9091         0                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     rho       R.Cross.val                  DEV</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alpha 0.999999998582287 0.999955221091168 3.53012009550007e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alpha 0.999999998582287 0.999955221091228 3.53012009550101e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> scale                                                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mu                                                            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> psi                                                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     AIC               BIC     COV.alpha     COV.scale</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alpha -26809.4739211825 -26779.4420833443  4.899006e-06  8.156175e-06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale                                      8.156175e-06  1.401969e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mu                                         8.893851e-08  1.675482e-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> psi                                       -5.736777e-06 -9.779602e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     AIC              BIC     COV.alpha     COV.scale</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alpha -26809.4738999022 -26779.442062064  4.899005e-06  8.156174e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale                                     8.156174e-06  1.401969e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mu                                        8.893850e-08  1.675482e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> psi                                      -5.736776e-06 -9.779601e-06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             COV.psi        COV.mu    N    model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alpha  8.893851e-08 -5.736777e-06 3000 GGamma4P</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale  1.675482e-07 -9.779602e-06 3000         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mu     4.613696e-09 -1.174773e-07 3000         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> psi   -1.174773e-07  6.847479e-06 3000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alpha  8.893850e-08 -5.736776e-06 3000 GGamma4P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scale  1.675482e-07 -9.779601e-06 3000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mu     4.613696e-09 -1.174772e-07 3000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> psi   -1.174772e-07  6.847478e-06 3000         </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
