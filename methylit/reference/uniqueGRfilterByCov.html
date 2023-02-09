@@ -23,7 +23,7 @@ object."><meta property="og:image" content="https://genomaths.github.io/methylit
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -115,13 +115,16 @@ object.</p>
 <span>  <span class="va">x</span>,</span>
 <span>  y <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min.coverage <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  and.min.cov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min.meth <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  min.umeth <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  min.sitecov <span class="op">=</span> <span class="fl">4</span>,</span>
 <span>  percentile <span class="op">=</span> <span class="fl">0.9999</span>,</span>
+<span>  min.percentile <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  high.coverage <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC <span class="op">=</span> <span class="fl">1</span>, uC <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
 <span>  ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  y.centroid <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num.cores <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -133,12 +136,14 @@ object.</p>
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An object from the classes 'GRanges', 'InfDiv', or 'pDMP' with
-methylated and unmethylated counts in its meta-column. If the argument 'y' is
-not given, then it is assumed that the first four columns of the
+methylated and unmethylated counts in its meta-column. If the argument 'y'
+is not given, then it is assumed that the first four columns of the
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> metadata 'x' are counts:
-methylated and unmethylated counts for samples '1' and '2'. If x is a
-'InfDiv', or 'pDMP', then 'y' is not needed, since samples '1' and '2' are
-the first four columns of these objects.</p></dd>
+methylated and unmethylated counts for samples '1' and '2'. If \(x\) is a
+'InfDiv', or 'pDMP', then \('y'\) is not needed, since samples '1' and '2'
+are the first four columns of these objects. In the context of MethylIT
+methylation analysis, \(x\) is considered a control sample or, more
+appropriated (if available) the centroide of control group.</p></dd>
 
 
 <dt>y</dt>
@@ -152,27 +157,30 @@ element from 'y'.</p></dd>
 
 
 <dt>min.coverage</dt>
-<dd><p>An integer or an integer vector of length 2. Cytosine
-sites where the coverage in both samples, 'x' and 'y', are less than
-'min.coverage' are discarded. The cytosine site is preserved, however, if the
-coverage is greater than 'min.coverage' in at least one sample. If
-'min.coverage' is an integer vector, then the corresponding min coverage is
-applied to each sample.</p></dd>
+<dd><p>An integer or an integer vector of length 2. If
+'min.coverage' is an integer vector, then the corresponding min coverage
+is applied to each sample. Default is 4, i.e., \(min.coverage = c(4,4)\).</p></dd>
+
+
+<dt>and.min.cov</dt>
+<dd><p>Logical. Whether to apply the logical AND to select the
+cytosine sites based on \(min.coverage\). If FALSE, then a logical OR is
+applied, and cytosine sites where at least one sample hold the
+\(min.coverage\) are preserved. Default is TRUE.</p></dd>
 
 
 <dt>min.meth</dt>
 <dd><p>An integer or an integer vector of length 2. Cytosine sites
 where the numbers of read counts of methylated cytosine in both samples, '1'
 and '2', are less than 'min.meth' are discarded. If 'min.meth' is an integer
-vector, then the corresponding min number of reads is applied to each sample.</p></dd>
+vector, then the corresponding min number of reads is applied to each
+sample. That is, \(min.meth\) implement a logical OR.</p></dd>
 
 
 <dt>min.umeth</dt>
-<dd><p>An integer or an integer vector of length 2. Min number of
-reads to consider cytosine position. Specifically cytosine positions where
-\(uC \leq min.umeth and mC &gt; 0 and mC &lt; min.meth\) hold will be removed,
-where mC and uC stand for the numbers of methylated and unmethylated reads.
-Default is \(min.umeth = 0\).</p></dd>
+<dd><p>An integer or an integer vector of length 2. Minimum number
+of reads to consider cytosine position. Specifically cytosine positions
+where \(uC \leq min.umeth\) are discarded. Default is \(min.umeth = 0\).</p></dd>
 
 
 <dt>min.sitecov</dt>
@@ -184,21 +192,23 @@ for samples 1 and 2, respectively.</p></dd>
 
 <dt>percentile</dt>
 <dd><p>Threshold to remove the outliers (PCR bias) from each file
-and all files stacked. If 'high.coverage = NULL', then the threshold
-\(q\) will be computed as:
-$$q1 = quantile(cov1, probs=percentile)$$
-$$q2 = quantile(cov2, probs=percentile)$$
-$$q = min(q1, q2)$$</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>where \eqn{cov1} and \eqn{cov2} are the coverage vectors from samples <span class="dv">1</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>and <span class="dv">2</span>, respectively.</span></code></pre><p></p></div></dd>
+and all files stacked. If 'high.coverage = NULL', then the threshold \(q\)
+will be computed as: $$q1 = quantile(cov1, probs=percentile)$$
+$$q2 = quantile(cov2, probs=percentile)$$.</p>
+<p>where \(cov1\) and \(cov2\) are the coverage vectors from samples 1
+and 2, respectively.</p></dd>
+
+
+<dt>min.percentile</dt>
+<dd><p>Logical. Each sample yield a percentile value. The
+user must decide whether to use the minimum or the maximum value from these
+percentile values. Default is TRUE. Hence, \(min.percentile = FALSE\)
+implies to use the maximum value.</p></dd>
 
 
 <dt>high.coverage</dt>
 <dd><p>An integer for read counts. Cytosine sites having
-higher coverage than this are discarded. Default is NULL. If
-<strong>high.coverage</strong> is not NULL, then the <strong>percentile</strong> argument is
-disregarded and <strong>high.coverage</strong> is used as threshold to remove the
-PCR bias. If percentile is not null, then q = max(q, high.coverage).</p></dd>
+higher coverage than this are discarded. Default is NULL.</p></dd>
 
 
 <dt>columns</dt>
@@ -215,10 +225,17 @@ parameter passed to <code><a href="uniqueGRanges.html">uniqueGRanges</a></code> 
 FALSE.</p></dd>
 
 
+<dt>y.centroid</dt>
+<dd><p>Optional. A <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code>
+object corresponding to the treatment/individual centroide. This information
+is applied to reduce the bias originated by missing cytosine sites. The
+centroide can be compute applying function <code><a href="poolFromGRlist.html">poolFromGRlist</a></code>.</p></dd>
+
+
 <dt>num.cores, tasks</dt>
 <dd><p>Parameters for parallel computation using package
-<code><a href="https://rdrr.io/pkg/BiocParallel/man/BiocParallel-package.html" class="external-link">BiocParallel-package</a></code>: the number of cores to use,
-i.e. at most how many child processes will be run simultaneously (see
+<code><a href="https://rdrr.io/pkg/BiocParallel/man/BiocParallel-package.html" class="external-link">BiocParallel-package</a></code>: the number of cores to
+use, i.e. at most how many child processes will be run simultaneously (see
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code> and the number of tasks per job (only
 for Linux OS).</p></dd>
 
@@ -235,8 +252,10 @@ for Linux OS).</p></dd>
     <h2>Value</h2>
     
 
-<p>if 'x' and 'y' are <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object,
-then a <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> with the columns
+<p>if 'x' and 'y' are <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code></p>
+
+
+<p>object, then a <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> with the columns
 of methylated and unmethylated counts filtered for each cytosine position.</p>
 
 
@@ -247,74 +266,191 @@ length as length(y) and named as names(y).</p>
     <div id="details">
     <h2>Details</h2>
     <p>Cytosine sites with 'coverage' &gt; 'min.coverage' in at least one of
-the samples are preserved. Positions with 'coverage' &lt; 'min.coverage' in both
-samples, 'x' and 'y', are removed. Positions with 'coverage' &gt; 'percentile'
-(e.g., 99.9 percentile) are removed as well. It is expected that the columns
-of methylated and unmethylated counts are given.</p>
+the samples are preserved. Positions with 'coverage' &lt; 'min.coverage' in
+both samples, 'x' and 'y', are removed. Positions with 'coverage' &gt;
+'percentile' (e.g., 99.9 percentile) are removed as well. It is expected
+that the columns of methylated and unmethylated counts are given.</p>
 <p>This function is addressed to create pair-wise
 <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> object with four metacolumns of
 count: samples '1' and '2', carrying the counts of methylated (mC) and
 unmethylated (uC) cytosines in their metacolumns, respectively. Counts from
 sample 1 are typically used as reference counts in computing information
 divergences in the downtstream analysis.</p>
+<p>The cut-off value to remove PCR bias is computed as:</p>
+<p>If <strong>high.coverage</strong> is NULL, then the cut-off point is:
+\(q = min(q1, q2)\) (if \(min.percentile\) = TRUE) or
+\(q = max(q1, q2)\). If <strong>high.coverage</strong> is not NULL, then
+$$q = max(q, high.coverage)$$.</p>
+<p>Another source of bias is originated by missing cytosine sites. Missing data
+are frequently found in experimental data sets and, in particular, in
+bisulfite genomic sequencing data. Typically, in statistical analyses, the
+bias originated by missing data (for given variable) is mitigated by using
+the mean of the known values for the corresponding variable. That is, in
+present case, if the reads for some cytosine site are missed in a sample
+from a set of, e.g., three individuals, then the means of reads (methylated
+and unmethylated) for such site are applied as an estimation of the best
+expected ("guessed") value of missed reads. Obviously, if the reads are
+missed in all the samples, then the site is discarded (see examples).</p>
+<p>The treatment centroide can be compute applying function
+<code><a href="poolFromGRlist.html">poolFromGRlist</a></code>. Also notice that, since the centroide
+correction is only available for the treat group, it is assumed that sample
+\(x\) carries reads for each (or almost all) cytosine sites are provide.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### Create new data</span></span></span>
-<span class="r-in"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">16</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">16</span>,</span></span>
-<span class="r-in"><span>                mC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">10</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">1</span>,<span class="fl">10</span><span class="op">)</span>, uC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">20</span>,<span class="fl">4</span>,<span class="fl">8</span>,<span class="fl">0</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Create new data. It is assumed that sample 'x' carries reads</span></span></span>
+<span class="r-in"><span><span class="co">## for each cytosine sites are provide.</span></span></span>
+<span class="r-in"><span><span class="va">strands</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"-"</span>, <span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">12</span><span class="op">:</span><span class="fl">18</span>, end <span class="op">=</span> <span class="fl">12</span><span class="op">:</span><span class="fl">18</span>,</span></span>
-<span class="r-in"><span>                mC2 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>, uC2 <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="va">pos</span>, end <span class="op">=</span> <span class="va">pos</span>,</span></span>
+<span class="r-in"><span>                mC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">11</span>,<span class="fl">4</span>,<span class="fl">10</span>,<span class="fl">7</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                uC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">30</span>,<span class="fl">20</span>,<span class="fl">4</span>,<span class="fl">8</span>,<span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">8</span>,<span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="va">strands</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">df1</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">df2</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">x</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 11 ranges and 2 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        mC        uC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]     chr1        10      + |         2         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]     chr1        11      - |         3        30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]     chr1        11      + |         2        20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]     chr1        12      - |         5         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]     chr1        13      + |        10         8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [6]     chr1        13      - |         7         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]     chr1        14      + |         9        10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]     chr1        15      + |        11         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]     chr1        16      + |         4         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]     chr1        17      + |        10         8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [11]     chr1        18      + |         7         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Filtering</span></span></span>
-<span class="r-in"><span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">uniqueGRfilterByCov</span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## sample y</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">18</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">18</span>,</span></span>
+<span class="r-in"><span>                mC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>, uC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">y</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 8 ranges and 2 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |       mC2       uC2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]     chr1        11      + |         4         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]     chr1        12      - |         1         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]     chr1        13      - |         2         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]     chr1        14      + |         1         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [5]     chr1        15      + |         4         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [6]     chr1        16      + |         5         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7]     chr1        17      + |         6         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [8]     chr1        18      + |         7         7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## The default settings. Sites where one of the samples has zero methylation</span></span></span>
+<span class="r-in"><span><span class="co">## calling or min.coverage is lesser than 4 in at least one sample are</span></span></span>
+<span class="r-in"><span><span class="co">## discarded. This setting implies a drastic decision and the amount of</span></span></span>
+<span class="r-in"><span><span class="co">## cytosine removed can be lead to strong biased conclusions in the</span></span></span>
+<span class="r-in"><span><span class="co">## downstream analysis.</span></span></span>
+<span class="r-in"><span><span class="fu">uniqueGRfilterByCov</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>,</span></span>
+<span class="r-in"><span>                    percentile <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                    ignore.strand <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  *** Building coordinates for the new GRanges object ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  *** Setting strand information to * ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  *** Strand information is preserved ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  *** Sorting by chromosomes and start positions...</span>
-<span class="r-in"><span><span class="va">r1</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 3 ranges and 4 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 4 ranges and 4 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |        mC        uC       mC2       uC2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]     chr1        13      * |         7         4         2         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]     chr1        15      * |         1         0         4         3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]     chr1        17      * |         0         0         6         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]     chr1        13      - |         7         0         2         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]     chr1        15      + |        11         3         4         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]     chr1        16      + |         4         0         5         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]     chr1        18      + |         7         1         7         7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Cytosine position with coordinate 15 (rows #2) can pass the</span></span></span>
-<span class="r-in"><span><span class="co">## filtering conditions of min.coverage = 4 and lead to meaningless</span></span></span>
-<span class="r-in"><span><span class="co">## situations with methylation levels p = 1/(1 + 0) = 1</span></span></span>
-<span class="r-in"><span><span class="va">r1</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 1 range and 4 metadata columns:</span>
+<span class="r-in"><span><span class="co">## Setting 'and.min.cov = FALSE' undesired cytosine sites are preseved. For</span></span></span>
+<span class="r-in"><span><span class="co">## example, meaningless situations with  methylation levels</span></span></span>
+<span class="r-in"><span><span class="co">## p = 1/(1 + 0) = 1.</span></span></span>
+<span class="r-in"><span><span class="fu">uniqueGRfilterByCov</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>,</span></span>
+<span class="r-in"><span>                    and.min.cov <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                    ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                    percentile <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 6 ranges and 4 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |        mC        uC       mC2       uC2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]     chr1        15      * |         1         0         4         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]     chr1        10      + |         2         2         0         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]     chr1        12      - |         5         4         1         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]     chr1        13      - |         7         0         2         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]     chr1        15      + |        11         3         4         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [5]     chr1        16      + |         4         0         5         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [6]     chr1        18      + |         7         1         7         7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## The last situation can be prevent, in this case, by setting</span></span></span>
-<span class="r-in"><span><span class="co">## min.meth = 1:</span></span></span>
-<span class="r-in"><span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">uniqueGRfilterByCov</span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span>, min.meth <span class="op">=</span> <span class="fl">1</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  *** Building coordinates for the new GRanges object ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  *** Setting strand information to * ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  *** Sorting by chromosomes and start positions...</span>
-<span class="r-in"><span><span class="va">r1</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 2 ranges and 4 metadata columns:</span>
+<span class="r-in"><span><span class="co">## Setting 'min.coverage = 8' does not solves the previous issue, but still</span></span></span>
+<span class="r-in"><span><span class="co">## it preserves cytosine sites with one of the samples with zero or small</span></span></span>
+<span class="r-in"><span><span class="co">## coverage:</span></span></span>
+<span class="r-in"><span><span class="fu">uniqueGRfilterByCov</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>,</span></span>
+<span class="r-in"><span>                    and.min.cov <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                    min.coverage <span class="op">=</span> <span class="fl">8</span>,</span></span>
+<span class="r-in"><span>                    percentile <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                    ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 4 ranges and 4 metadata columns:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       seqnames    ranges strand |        mC        uC       mC2       uC2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]     chr1        13      * |         7         4         2         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]     chr1        17      * |         0         0         6         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]     chr1        12      - |         5         4         1         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]     chr1        15      + |        11         3         4         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]     chr1        16      + |         4         0         5         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]     chr1        18      + |         7         1         7         7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## A centroid, a vector of means of methylation read for each cytosine site</span></span></span>
+<span class="r-in"><span><span class="co">## from the treatment group can be used as the best estimation to replace</span></span></span>
+<span class="r-in"><span><span class="co">## missing data: 'mC=0' and 'uC=0' or low coverage sites 'mC=1' and 'uC=0'.</span></span></span>
+<span class="r-in"><span><span class="va">y_centroid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>,</span></span>
+<span class="r-in"><span>                start <span class="op">=</span> <span class="va">pos</span>, end <span class="op">=</span> <span class="va">pos</span>,</span></span>
+<span class="r-in"><span>                mC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>,<span class="fl">7</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">5</span>,<span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, uC2 <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"-"</span>, <span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y_centroid</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">y_centroid</span>,</span></span>
+<span class="r-in"><span>                                      keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y_centroid</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 11 ranges and 2 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |       mC2       uC2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;integer&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]     chr1        10      + |         8         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]     chr1        11      - |         7         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]     chr1        11      + |         6         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]     chr1        12      - |         7         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]     chr1        13      + |         5         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [6]     chr1        13      - |         8         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]     chr1        14      + |         1         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]     chr1        15      + |         2         7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]     chr1        16      + |         3         8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]     chr1        17      + |         4         9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [11]     chr1        18      + |         5        10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## The cytosine sites with missing data or low coverage will be still,</span></span></span>
+<span class="r-in"><span><span class="co">## included, using the centroid of the centroinde of th sample group to</span></span></span>
+<span class="r-in"><span><span class="co">## which 'y' belong to.</span></span></span>
+<span class="r-in"><span><span class="fu">uniqueGRfilterByCov</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>,</span></span>
+<span class="r-in"><span>                    and.min.cov <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                    min.coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                    ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                    treat.centroid <span class="op">=</span> <span class="va">y_centroid</span>,</span></span>
+<span class="r-in"><span>                    min.percentile <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                    percentile <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in uniqueGRanges(list(x, y), ignore.strand = ignore.strand, num.cores = num.cores,     tasks = tasks, verbose = verbose, ...):</span> unused argument (treat.centroid = new("GRanges", seqnames = new("Rle", values = 1, lengths = 11, elementMetadata = NULL, metadata = list()), ranges = new("IRanges", start = c(10, 11, 11, 12, 13, 13, 14, 15, 16, 17, 18), width = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), NAMES = NULL, elementType = "ANY", elementMetadata = NULL, metadata = list()), strand = new("Rle", values = c(1, 2, 1, 2, 1, 2, 1), lengths = c(1, 1, 1, 1, 1, 1, 5), elementMetadata = NULL, metadata = list()), seqinfo = new("Seqinfo", seqnames = "chr1", </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>     seqlengths = NA, is_circular = NA, genome = NA), elementMetadata = new("DFrame", rownames = NULL, nrows = 11, elementType = "ANY", elementMetadata = NULL, metadata = list(), listData = list(c(8, 7, 6, 7, 5, 8, 1, 2, 3, 4, 5), 0:10)), elementType = "ANY", metadata = list()))</span>
 </code></pre></div>
     </div>
   </div>
@@ -329,7 +465,7 @@ divergences in the downtstream analysis.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

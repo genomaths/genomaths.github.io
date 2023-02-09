@@ -18,7 +18,7 @@ function evaluateDIMPclass."><meta property="og:image" content="https://genomath
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -102,8 +102,7 @@ function <code><a href="evaluateDIMPclass.html">evaluateDIMPclass</a></code>.</p
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for LogisticR</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict.LogisticR</span><span class="op">(</span></span>
 <span>  <span class="va">object</span>,</span>
 <span>  newdata <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"class"</span>, <span class="st">"posterior"</span><span class="op">)</span>,</span>
@@ -117,15 +116,14 @@ function <code><a href="evaluateDIMPclass.html">evaluateDIMPclass</a></code>.</p
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>To use with function 'predict'. An object from 'LogisticR'
-class. A logistic model given by function
-<code><a href="evaluateDIMPclass.html">evaluateDIMPclass</a></code>.</p></dd>
+class. A logistic model given by function <code><a href="evaluateDIMPclass.html">evaluateDIMPclass</a></code>.</p></dd>
 
 
 <dt>newdata</dt>
 <dd><p>To use with function 'predict'. New data for classification
-prediction. Optionally, an object from class 'GRanges', a list of
-GRanges, 'pDMP' or 'InfDIv', in which to look for variables with which to
-predict. If omitted, the fitted linear predictors are used.</p></dd>
+prediction. Optionally, an object from class 'GRanges', a list of GRanges,
+'pDMP' or 'InfDIv', in which to look for variables with which to predict. If
+omitted, the fitted linear predictors are used.</p></dd>
 
 
 <dt>type</dt>
@@ -136,9 +134,9 @@ predict. If omitted, the fitted linear predictors are used.</p></dd>
 <dt>num.cores, tasks</dt>
 <dd><p>Parameters for parallel computation using package
 <code><a href="https://rdrr.io/pkg/BiocParallel/man/BiocParallel-package.html" class="external-link">BiocParallel-package</a></code>: the number of cores to
-use, i.e. at most how many child processes will be run simultaneously
-(see <code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code> and the number of tasks per job
-(only for Linux OS).</p></dd>
+use, i.e. at most how many child processes will be run simultaneously (see
+<code><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></code> and the number of tasks per job (only
+for Linux OS).</p></dd>
 
 
 <dt>...</dt>
@@ -149,20 +147,20 @@ use, i.e. at most how many child processes will be run simultaneously
     <h2>Value</h2>
     
 
-<p>If type is set to 'all', then the original 'newdata' with two columns
-added, predicted classes and 'posterior' probabilities, in the
+<p>If type is set to 'all', then the original 'newdata' with two
+columns added, predicted classes and 'posterior' probabilities, in the
 meta-columns of each GRanges object are given. If 'newdata' is null, then
 the predictions given for the model by function
-<code><a href="https://rdrr.io/r/stats/predict.glm.html" class="external-link">predict.glm</a></code> are returned. if type is set to 'class'
-or to 'posterior', then the unlisted predicted classification or
-posterior classification probabilities are returned.</p>
+<code><a href="https://rdrr.io/r/stats/predict.glm.html" class="external-link">predict.glm</a></code> are returned. if type is set to 'class' or
+to 'posterior', then the unlisted predicted classification or posterior
+classification probabilities are returned.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>This function is specific for predictions based on a logistic model
 given by function <code><a href="evaluateDIMPclass.html">evaluateDIMPclass</a></code>. A logistic model is
-obtained with 'glm' regression can be used directly with function
-'predict' from 'stats' package.</p>
+obtained with 'glm' regression can be used directly with function 'predict'
+from 'stats' package.</p>
     </div>
 
   </div>
@@ -177,7 +175,7 @@ obtained with 'glm' regression can be used directly with function
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

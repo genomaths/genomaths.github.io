@@ -36,7 +36,7 @@ of function estimateJDiv."><meta property="og:image" content="https://genomaths.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -146,14 +146,16 @@ of function <code><a href="estimateJDiv.html">estimateJDiv</a></code>.</p>
 <span>  via.optim <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC <span class="op">=</span> <span class="fl">1</span>, uC <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
 <span>  min.coverage <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  and.min.cov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  min.meth <span class="op">=</span> <span class="fl">4</span>,</span>
 <span>  min.umeth <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  min.sitecov <span class="op">=</span> <span class="fl">4</span>,</span>
 <span>  high.coverage <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  percentile <span class="op">=</span> <span class="fl">0.999</span>,</span>
+<span>  percentile <span class="op">=</span> <span class="fl">0.9999</span>,</span>
 <span>  JD <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  jd.stat <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  y.centroid <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num.cores <span class="op">=</span> <span class="fu">multicoreWorkers</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tasks <span class="op">=</span> <span class="fl">0L</span>,</span>
 <span>  meth.level <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -212,6 +214,14 @@ the coverage is greater than 'min.coverage' in at least one sample. If
 applied to each sample.</p></dd>
 
 
+<dt>and.min.cov</dt>
+<dd><p>Logical. Whether to apply the logical AND to select the
+cytosine sites based on \(min.coverage\). If FALSE, then a logical OR is
+applied, and cytosine sites where at least one sample hold the
+\(min.coverage\) are preserved. Default is TRUE. To get the results with
+previous default parameter set: and.min.cov = FALSE.</p></dd>
+
+
 <dt>min.meth</dt>
 <dd><p>An integer or an integer vector of length 2. Cytosine sites
 where the numbers of read counts of methylated cytosine in both samples, '1'
@@ -263,6 +273,13 @@ asymptotic Chi-squared distribution with one degree of freedom (see
 the overlap of <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code> objects. This is a
 parameter passed to <code><a href="uniqueGRanges.html">uniqueGRanges</a></code> function. Default value:
 FALSE.</p></dd>
+
+
+<dt>y.centroid</dt>
+<dd><p>Optional. A <code><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges-class</a></code>
+object corresponding to the treatment/individual centroide. This information
+is applied to reduce the bias originated by missing cytosine sites. The
+centroide can be compute applying function <code><a href="poolFromGRlist.html">poolFromGRlist</a></code>.</p></dd>
 
 
 <dt>num.cores</dt>
@@ -374,9 +391,9 @@ compute a methylation pool, then 'min.coverage' parameter value must be used
 to prevent an over estimation of the divergence for low coverage cytosines
 sites. For example, if a reference sample is derived as the methylation pool
 of read count sum from 3 individuals and we want to consider only
-methylation sites with minimum coverage of 4, then we can set min.coverage =
-c(12, 4), where the number 12 (3 x 4) is the minimum coverage requested for
-the each cytosine site in the reference sample.</p>
+methylation sites with minimum coverage of 4, then we can set
+\(min.coverage = c(12, 4)\), where the number 12 (3 x 4) is the minimum
+coverage requested for the each cytosine site in the reference sample.</p>
 <p>If the methylation levels are provided in place of counts, then the
 Hellinger divergence is computed as:
 $$H = (\sqrt(p_1) - \sqrt(p_2))^2 + (\sqrt(1 - p_1) - \sqrt(1 - p_2))^2$$</p>
@@ -402,6 +419,24 @@ best practice will be the removing of sites like that. This particular case
 is removed under the default settings: min.coverage = 4, min.meth = 4, and
 min.umeth = 0 (see example for function <code><a href="uniqueGRfilterByCov.html">uniqueGRfilterByCov</a></code>,
 called by 'estimateDivergence').</p>
+<p>A source of bias is originated by missing cytosine sites. Missing data
+are frequently found in experimental data sets and, in particular, in
+bisulfite genomic sequencing data. Typically, in statistical analyses, the
+bias originated by missing data (for given variable) is mitigated by using
+the mean of the known values for the corresponding variable. That is, in
+present case, if the reads for some cytosine site are missed in a sample
+from a set of, e.g., three individuals, then the means of reads (methylated
+and unmethylated) for such site are applied as an estimation of the best
+expected ("guessed") value of missed reads. Obviously, if the reads are
+missed in all the samples, then the site is discarded. See examples from
+function <code><a href="uniqueGRfilterByCov.html">uniqueGRfilterByCov</a></code>.</p>
+<p>Notice that filtering the data sets to remove undesired cytosine sites is
+user responsibility. Here, for the sake of facilitating a smooth transition
+to MethylIT pipeline, we provide some filtering options. It is up to the
+user whether to apply them or not. For example, if the user wants no
+filtering at all, then just set: min.coverage = 0, and.min.cov = FALSE,
+min.meth = 0, min.umeth = 0, min.sitecov = 0, high.coverage = NULL,
+percentile = 1.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -546,6 +581,134 @@ Lett. 2010, 80: 206-214.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.8871664 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Next, using a data set from the example for function</span></span></span>
+<span class="r-in"><span><span class="co">## 'uniqueGRfilterByCov' and same filtering conditions.</span></span></span>
+<span class="r-in"><span><span class="co">## The reference sample:</span></span></span>
+<span class="r-in"><span><span class="va">strands</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"-"</span>, <span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="va">pos</span>, end <span class="op">=</span> <span class="va">pos</span>,</span></span>
+<span class="r-in"><span>                mC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">11</span>,<span class="fl">4</span>,<span class="fl">10</span>,<span class="fl">7</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                uC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">30</span>,<span class="fl">20</span>,<span class="fl">4</span>,<span class="fl">8</span>,<span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">8</span>,<span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="va">strands</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">x</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## The treatment sample and the centroide of treatment group:</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">18</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">18</span>,</span></span>
+<span class="r-in"><span>                mC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>, uC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">y</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">y_centroid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>                chr <span class="op">=</span> <span class="st">'chr1'</span>,</span></span>
+<span class="r-in"><span>                start <span class="op">=</span> <span class="va">pos</span>, end <span class="op">=</span> <span class="va">pos</span>,</span></span>
+<span class="r-in"><span>                mC2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>,<span class="fl">7</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">5</span>,<span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, uC2 <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"-"</span>, <span class="st">"+"</span>,<span class="st">"-"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span>,<span class="st">"+"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y_centroid</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">y_centroid</span>,</span></span>
+<span class="r-in"><span>                                      keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Estimation of the divergences whitout applying Bayesian correction of</span></span></span>
+<span class="r-in"><span><span class="co">## the methylation levels:</span></span></span>
+<span class="r-in"><span><span class="fu">estimateDivergence</span><span class="op">(</span>ref <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>                   indiv <span class="op">=</span> <span class="va">y</span>,</span></span>
+<span class="r-in"><span>                   and.min.cov <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                   min.coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                   y.centroid <span class="op">=</span> <span class="va">y_centroid</span>,</span></span>
+<span class="r-in"><span>                   min.percentile <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                   percentile <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                   verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> InfDiv object of length: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 11 ranges and 8 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        c1        t1        c2        t2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]     chr1        10      + |         2         2         8         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]     chr1        11      - |         3        30         7         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]     chr1        11      + |         2        20         6         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]     chr1        12      - |         5         4         7         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]     chr1        13      + |        10         8         5         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [6]     chr1        13      - |         7         0         8         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]     chr1        14      + |         9        10         1         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]     chr1        15      + |        11         3         4         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]     chr1        16      + |         4         0         5         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]     chr1        17      + |        10         8         6         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [11]     chr1        18      + |         7         1         7         7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               p1        p2         TV       hdiv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;numeric&gt; &lt;numeric&gt;  &lt;numeric&gt;  &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1] 0.5000000  1.000000  0.5000000  3.7657700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2] 0.0909091  0.875000  0.7840909 10.8412820</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3] 0.0909091  0.750000  0.6590909  6.7831887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4] 0.5555556  0.700000  0.1444444  0.2355480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5] 0.5555556  0.555556  0.0000000  0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [6] 1.0000000  0.615385 -0.3846154  4.3890857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7] 0.4736842  0.142857 -0.3308271  1.5590061</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8] 0.7857143  0.500000 -0.2857143  1.0325249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9] 1.0000000  0.500000 -0.5000000  4.0272818</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10] 0.5555556  0.500000 -0.0555556  0.0478316</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [11] 0.8750000  0.500000 -0.3750000  1.9926489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;0 more GRanges elements&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------- </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Estimation of the divergences applying Bayesian correction.</span></span></span>
+<span class="r-in"><span><span class="co">## Without Bayesian correction of the methylation levels, the Hellinger</span></span></span>
+<span class="r-in"><span><span class="co">## divergences values can be over estimated. The correction is introduced</span></span></span>
+<span class="r-in"><span><span class="co">## based on the assumption that the methylation levels follow Beta</span></span></span>
+<span class="r-in"><span><span class="co">## probability distribution.</span></span></span>
+<span class="r-in"><span><span class="fu">estimateDivergence</span><span class="op">(</span>ref <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>                   indiv <span class="op">=</span> <span class="va">y</span>,</span></span>
+<span class="r-in"><span>                   Bayesian <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                   and.min.cov <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                   min.coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                   y.centroid <span class="op">=</span> <span class="va">y_centroid</span>,</span></span>
+<span class="r-in"><span>                   min.percentile <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                   percentile <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                   verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> InfDiv object of length: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 11 ranges and 9 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        c1        t1        c2        t2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]     chr1        10      + |         2         2         8         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]     chr1        11      - |         3        30         7         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]     chr1        11      + |         2        20         6         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]     chr1        12      - |         5         4         7         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]     chr1        13      + |        10         8         5         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [6]     chr1        13      - |         7         0         8         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]     chr1        14      + |         9        10         1         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]     chr1        15      + |        11         3         4         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]     chr1        16      + |         4         0         5         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]     chr1        17      + |        10         8         6         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [11]     chr1        18      + |         7         1         7         7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               p1        p2         TV      bay.TV       hdiv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;numeric&gt; &lt;numeric&gt;  &lt;numeric&gt;   &lt;numeric&gt;  &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]  0.512885  0.807508  0.5000000  0.29462359 0.64589935</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]  0.128421  0.732692  0.7840909  0.60427045 5.99400265</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]  0.144870  0.657875  0.6590909  0.51300506 3.89142742</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]  0.548925  0.637327  0.1444444  0.08840153 0.08500909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]  0.551755  0.542473  0.0000000 -0.00928233 0.00113916</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [6]  0.856076  0.587671 -0.3846154 -0.26840507 0.95922062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]  0.481495  0.306742 -0.3308271 -0.17475254 0.36894253</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]  0.739457  0.508242 -0.2857143 -0.23121426 0.65275653</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]  0.795141  0.507169 -0.5000000 -0.28797127 0.64927842</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]  0.551755  0.506344 -0.0555556 -0.04541138 0.03195970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [11]  0.778853  0.505689 -0.3750000 -0.27316428 0.94029072</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;0 more GRanges elements&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------- </span>
 </code></pre></div>
     </div>
   </div>
@@ -560,7 +723,7 @@ Lett. 2010, 80: 206-214.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

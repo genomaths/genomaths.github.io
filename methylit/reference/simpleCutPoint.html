@@ -18,7 +18,7 @@ Youden Index."><meta property="og:image" content="https://genomaths.github.io/me
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -115,6 +115,10 @@ Youden Index.</p>
 <span>  interactions <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">n.pc</span>,</span>
 <span>  <span class="va">prop</span>,</span>
+<span>  post.cut <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  maxnodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ntree <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>  nsplit <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  cutp_data <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">num.cores</span>,</span>
 <span>  <span class="va">tasks</span>,</span>
@@ -140,8 +144,8 @@ Youden Index.</p>
 
 
 <dt>interactions</dt>
-<dd><p>If a logistic classifier is used. Variable interactions to
-consider in a logistic regression model. Any pairwise combination of the
+<dd><p>If a logistic classifier is used. Variable interactions
+to consider in a logistic regression model. Any pairwise combination of the
 variable 'hdiv', 'TV', 'wprob', and 'pos' can be provided. For example:
 'hdiv:TV', 'wprob:pos', 'wprob:TV', etc.</p></dd>
 
@@ -186,7 +190,7 @@ setting <em>simple = TRUE</em></p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cutpoint             1     -none-          numeric  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> testSetPerformance   6     confusionMatrix list     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> testSetModel.FDR     1     -none-          numeric  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model               10     qdaDMP          list     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model               13     qdaDMP          list     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> modelConfMatrix      6     confusionMatrix list     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> initModel            1     -none-          character</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> postProbCut          1     -none-          logical  </span>
@@ -211,7 +215,7 @@ setting <em>simple = TRUE</em></p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

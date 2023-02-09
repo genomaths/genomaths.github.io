@@ -35,7 +35,7 @@ information-thermodynamics analyses.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -145,8 +145,8 @@ information-thermodynamics analyses.</p></li>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>p</dt>
-<dd><p>A numerical vector of the methylation levels p = c(p1, p2) from
-individuals 1 and 2.</p></dd>
+<dd><p>A numerical vector of the methylation levels \(p = (p1, p2)\)
+from individuals 1 and 2.</p></dd>
 
 
 <dt>logbase</dt>
@@ -157,6 +157,14 @@ used as default. Use logbase = exp(1) for natural logarithm.</p></dd>
 <dt>stat</dt>
 <dd><p>logical(1). Whether to compute the statistic with asymptotic
 Chi-squared distribution with one degree of freedom (details).</p></dd>
+
+
+<dt>n</dt>
+<dd><p>An integer vector \(n = (n_1, n_2)\) carrying the coverage used
+in the computation of the methylation levels \(p = (p_1, p_2)\). Default
+is NULL. If provided, then the coverages are used to compute J divergence
+statistic as reported in reference (3), which follows Chi-squared probablity
+distribution.</p></dd>
 
 
 <dt>output</dt>
@@ -251,7 +259,7 @@ using it.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

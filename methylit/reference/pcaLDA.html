@@ -22,7 +22,7 @@ Predict using a PCA-LDA model built with function 'pcaLDA'"><meta property="og:i
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -123,8 +123,7 @@ selected PCs are used as predictors in the LDA</p>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for pcaLDA</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
+<span><span class="fu">predict.pcaLDA</span><span class="op">(</span></span>
 <span>  <span class="va">object</span>,</span>
 <span>  <span class="va">newdata</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lda.pred"</span>, <span class="st">"class"</span>, <span class="st">"posterior"</span>, <span class="st">"scores"</span>, <span class="st">"pca.ind.coord"</span>, <span class="st">"all"</span><span class="op">)</span>,</span>
@@ -183,10 +182,9 @@ prediction</p></dd>
 <dt>type</dt>
 <dd><p>To use with function 'predict'. The type of prediction
 required.  The default is 'all' basic predictions: classes and posterior
-classification probabilities. Option 'lda.pred' returns the
-object given by function 'predict.lda' from MASS package: 'class',
-'posterior', 'scores' (cases scores on discriminant variables,
-see <code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">lda</a></code>.</p></dd>
+classification probabilities. Option 'lda.pred' returns the object given by
+function 'predict.lda' from MASS package: 'class', 'posterior', 'scores'
+(cases scores on discriminant variables, see <code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">lda</a></code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -227,7 +225,7 @@ pcaLDA' function can be used in general classification problems.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">40</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span><span class="va">idx</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">newdata.prediction</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">ld2</span>, newdata <span class="op">=</span> <span class="va">newdata</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">newdata.prediction</span> <span class="op">&lt;-</span> <span class="fu"><a href="predict.html">predict</a></span><span class="op">(</span><span class="va">ld2</span>, newdata <span class="op">=</span> <span class="va">newdata</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## ==== The confusion matrix</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>TRUE.class <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>,</span></span>
@@ -253,7 +251,7 @@ pcaLDA' function can be used in general classification problems.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

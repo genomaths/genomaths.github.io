@@ -18,7 +18,7 @@ DMP"><meta property="og:image" content="https://genomaths.github.io/methylit/log
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -115,11 +115,11 @@ DMP</p>
     <h2>Arguments</h2>
     <dl><dt>LR</dt>
 <dd><p>A list of GRanges objects obtained through the through MethylIT
-downstream analysis. Basically, this object is a list of GRanges
-containing only differentially methylated position (DMPs). The metacolumn
-of each GRanges must contain the column: Hellinger divergence 'hdiv',
-total variation 'TV', the probability of potential DMP 'wprob', which
-naturally are added in the downstream analysis of MethylIT.</p></dd>
+downstream analysis. Basically, this object is a list of GRanges containing
+only differentially methylated position (DMPs). The metacolumn of each
+GRanges must contain the column: Hellinger divergence 'hdiv', total
+variation 'TV', the probability of potential DMP 'wprob', which naturally
+are added in the downstream analysis of MethylIT.</p></dd>
 
 
 <dt>model</dt>
@@ -154,17 +154,15 @@ probability that the given DMP can be classified as induced by the
 'treatment' (a treatment DMP).</p>
 
 
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Control DMPs classified as <span class="st">'treatment'</span> are false positives. However, <span class="cf">if</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>the same cytosine position is classified as <span class="st">'treatment DMP'</span> <span class="cf">in</span> both</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>groups, control and treatment, but with higher posterior probability</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">in</span> the treatment group, then this would indicate a reinforcement of the</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>methylation status <span class="cf">in</span> such a position induced by the treatment.</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>If <span class="st">'conf.matrix'</span> is <span class="cn">TRUE</span> and the arguments control.names and</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>treatment.names are provided, then the overall confusion matrix is</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>returned.</span></code></pre><p></p></div>
+<p>Control DMPs classified as 'treatment' are false positives. However, if the
+same cytosine position is classified as 'treatment DMP' in both groups,
+control and treatment, but with higher posterior probability in the
+treatment group, then this would indicate a reinforcement of the methylation
+status in such a position induced by the treatment.</p>
 
 
+<p>If 'conf.matrix' is TRUE and the arguments control.names and treatment.names
+are provided, then the overall confusion matrix is returned.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -194,35 +192,37 @@ same condition set for the DMPs used to build the model.</p>
 <span class="r-in"><span>    conf.matrix <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>    control.names <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Also defined by ‘MethylIT.utils’</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">predclass.dmps</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Confusion Matrix and Statistics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Reference</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Prediction   CT   TT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         CT   91    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         TT    0 1066</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                Accuracy : 1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  95% CI : (0.9968, 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     No Information Rate : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   Kappa : 1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mcnemar's Test P-Value : NA         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Sensitivity : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Specificity : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Pos Pred Value : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Neg Pred Value : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              Prevalence : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Detection Rate : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Detection Prevalence : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Balanced Accuracy : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        'Positive' Class : TT         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         CT   91 1066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         TT    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Accuracy : 0.0787          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  95% CI : (0.0638, 0.0957)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     No Information Rate : 0.9213          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     P-Value [Acc &gt; NIR] : 1               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   Kappa : 0               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mcnemar's Test P-Value : &lt;2e-16          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Sensitivity : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Specificity : 1.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Pos Pred Value :     NaN         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Neg Pred Value : 0.07865         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              Prevalence : 0.92135         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Detection Rate : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Detection Prevalence : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Balanced Accuracy : 0.50000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        'Positive' Class : TT              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">### To accomplish the prediction PCA-QDA model</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pcaQda_perf"</span>, package <span class="op">=</span> <span class="st">'MethylIT'</span><span class="op">)</span></span></span>
@@ -239,29 +239,29 @@ same condition set for the DMPs used to build the model.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Reference</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Prediction   CT   TT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         CT   91    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         TT    0 1066</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                Accuracy : 1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  95% CI : (0.9968, 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     No Information Rate : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   Kappa : 1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mcnemar's Test P-Value : NA         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Sensitivity : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Specificity : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Pos Pred Value : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Neg Pred Value : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              Prevalence : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Detection Rate : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Detection Prevalence : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Balanced Accuracy : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        'Positive' Class : TT         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         CT   91 1066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         TT    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Accuracy : 0.0787          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  95% CI : (0.0638, 0.0957)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     No Information Rate : 0.9213          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     P-Value [Acc &gt; NIR] : 1               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   Kappa : 0               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mcnemar's Test P-Value : &lt;2e-16          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Sensitivity : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Specificity : 1.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Pos Pred Value :     NaN         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Neg Pred Value : 0.07865         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              Prevalence : 0.92135         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Detection Rate : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Detection Prevalence : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Balanced Accuracy : 0.50000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        'Positive' Class : TT              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">### To accomplish the prediction PCA-LDA model</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pcaLda_perf"</span>, package <span class="op">=</span> <span class="st">'MethylIT'</span><span class="op">)</span></span></span>
@@ -278,29 +278,29 @@ same condition set for the DMPs used to build the model.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Reference</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Prediction   CT   TT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         CT   91    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         TT    0 1066</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                Accuracy : 1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  95% CI : (0.9968, 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     No Information Rate : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   Kappa : 1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mcnemar's Test P-Value : NA         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Sensitivity : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Specificity : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Pos Pred Value : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Neg Pred Value : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              Prevalence : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Detection Rate : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Detection Prevalence : 0.9213     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Balanced Accuracy : 1.0000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        'Positive' Class : TT         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         CT   91 1066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         TT    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Accuracy : 0.0787          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  95% CI : (0.0638, 0.0957)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     No Information Rate : 0.9213          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     P-Value [Acc &gt; NIR] : 1               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   Kappa : 0               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mcnemar's Test P-Value : &lt;2e-16          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Sensitivity : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Specificity : 1.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Pos Pred Value :     NaN         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Neg Pred Value : 0.07865         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              Prevalence : 0.92135         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Detection Rate : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Detection Prevalence : 0.00000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Balanced Accuracy : 0.50000         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        'Positive' Class : TT              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           </span>
 </code></pre></div>
     </div>
   </div>
@@ -315,7 +315,7 @@ same condition set for the DMPs used to build the model.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@ Sanchez</h4>
 Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 data-toc-skip class="date">06 December 2022</h4>
+            <h4 data-toc-skip class="date">08 February 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/MethylIT.Rmd" class="external-link"><code>vignettes/MethylIT.Rmd</code></a></small>
       <div class="hidden name"><code>MethylIT.Rmd</code></div>
@@ -269,7 +269,7 @@ reference sample. This is the step with the highest consumption of
 computing time.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Tue Dec  6 00:56:18 2022"</span></span>
+<span><span class="co">#&gt; [1] "Wed Feb  8 18:36:18 2023"</span></span>
 <span><span class="va">ptm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ml_samples</span> <span class="op">&lt;-</span> <span class="va">meth_samples</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"W_3_1"</span>,<span class="st">"W_3_2"</span>,<span class="st">"W_3_3"</span>,<span class="st">"W_3_4"</span>,<span class="st">"W_3_5"</span>, </span>
 <span>                             <span class="st">"M_3_1"</span>,<span class="st">"M_3_2"</span>,<span class="st">"M_3_3"</span>,<span class="st">"M_3_4"</span>,<span class="st">"M_3_5"</span><span class="op">)</span><span class="op">]</span></span>
@@ -277,15 +277,16 @@ computing time.</p>
 <span>                            indiv <span class="op">=</span> <span class="va">ml_samples</span>,</span>
 <span>                            Bayesian <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                            min.coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>,</span>
+<span>                            and.min.cov <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                            min.meth <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                            high.coverage <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>                            percentile <span class="op">=</span> <span class="fl">0.999</span>,</span>
 <span>                            verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">ptm</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">/</span><span class="fl">60</span> <span class="co"># in min</span></span>
-<span><span class="co">#&gt;   elapsed </span></span>
-<span><span class="co">#&gt; 0.1017167</span></span>
+<span><span class="co">#&gt; elapsed </span></span>
+<span><span class="co">#&gt; 0.15765</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Tue Dec  6 00:56:24 2022"</span></span>
+<span><span class="co">#&gt; [1] "Wed Feb  8 18:36:27 2023"</span></span>
 <span><span class="va">ml_hd</span><span class="op">$</span><span class="va">M_3_1</span></span>
 <span><span class="co">#&gt; GRanges object with 17782 ranges and 9 metadata columns:</span></span>
 <span><span class="co">#&gt;           seqnames    ranges strand |        c1        t1        c2        t2</span></span>
@@ -453,15 +454,15 @@ methylation induced by thermal fluctuations <span class="citation">(Sanchez and 
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>gof<span class="sc">$</span>stats</span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          w2p_AIC w2p_R.Cross.val w3p_AIC w3p_R.Cross.val   g2p_AIC</span></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_1  -92604.45       0.9983321     Inf               0 -107319.5</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_2  -94347.14       0.9985960     Inf               0 -109885.9</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_3  -96466.50       0.9986546     Inf               0 -114703.9</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_4  -96546.57       0.9986205     Inf               0 -114453.7</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_5  -97966.02       0.9985583     Inf               0 -109813.8</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_2  -94347.14       0.9985961     Inf               0 -109885.9</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_3  -96466.50       0.9986545     Inf               0 -114703.9</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_4  -96546.57       0.9986204     Inf               0 -114453.7</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_5  -97966.02       0.9985585     Inf               0 -109813.8</span></span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_1 -106137.75       0.9992455     Inf               0 -127842.1</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_2 -108524.59       0.9993021     Inf               0 -132209.9</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_3 -107446.61       0.9993010     Inf               0 -132105.6</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_2 -108524.59       0.9993022     Inf               0 -132209.9</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_3 -107446.61       0.9993008     Inf               0 -132105.6</span></span>
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_4 -124063.33       0.9997121     Inf               0 -119186.2</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_5 -114904.63       0.9994728     Inf               0 -129744.3</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_5 -114904.63       0.9994726     Inf               0 -129744.3</span></span>
 <span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       g2p_R.Cross.val g3p_AIC g3p_R.Cross.val bestModel</span></span>
 <span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_1       0.9992292     Inf               0       g2p</span></span>
 <span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_2       0.9993784     Inf               0       g2p</span></span>
@@ -645,32 +646,32 @@ divergence</em> (<em>div.col</em> = 9) or the <em>total</em>
 <span>                            verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span></span>
-<span><span class="co">#&gt; [1] 1.17632</span></span>
+<span><span class="co">#&gt; [1] 1.018108</span></span>
 <span><span class="va">cutpoint</span><span class="op">$</span><span class="va">testSetPerformance</span></span>
 <span><span class="co">#&gt; Confusion Matrix and Statistics</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;           Reference</span></span>
 <span><span class="co">#&gt; Prediction  CT  TT</span></span>
-<span><span class="co">#&gt;         CT 354   0</span></span>
-<span><span class="co">#&gt;         TT  22 676</span></span>
+<span><span class="co">#&gt;         CT 391   0</span></span>
+<span><span class="co">#&gt;         TT  22 696</span></span>
 <span><span class="co">#&gt;                                           </span></span>
-<span><span class="co">#&gt;                Accuracy : 0.9791          </span></span>
-<span><span class="co">#&gt;                  95% CI : (0.9685, 0.9868)</span></span>
-<span><span class="co">#&gt;     No Information Rate : 0.6426          </span></span>
+<span><span class="co">#&gt;                Accuracy : 0.9802          </span></span>
+<span><span class="co">#&gt;                  95% CI : (0.9701, 0.9875)</span></span>
+<span><span class="co">#&gt;     No Information Rate : 0.6276          </span></span>
 <span><span class="co">#&gt;     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       </span></span>
 <span><span class="co">#&gt;                                           </span></span>
-<span><span class="co">#&gt;                   Kappa : 0.9539          </span></span>
+<span><span class="co">#&gt;                   Kappa : 0.9571          </span></span>
 <span><span class="co">#&gt;                                           </span></span>
 <span><span class="co">#&gt;  Mcnemar's Test P-Value : 7.562e-06       </span></span>
 <span><span class="co">#&gt;                                           </span></span>
 <span><span class="co">#&gt;             Sensitivity : 1.0000          </span></span>
-<span><span class="co">#&gt;             Specificity : 0.9415          </span></span>
-<span><span class="co">#&gt;          Pos Pred Value : 0.9685          </span></span>
+<span><span class="co">#&gt;             Specificity : 0.9467          </span></span>
+<span><span class="co">#&gt;          Pos Pred Value : 0.9694          </span></span>
 <span><span class="co">#&gt;          Neg Pred Value : 1.0000          </span></span>
-<span><span class="co">#&gt;              Prevalence : 0.6426          </span></span>
-<span><span class="co">#&gt;          Detection Rate : 0.6426          </span></span>
-<span><span class="co">#&gt;    Detection Prevalence : 0.6635          </span></span>
-<span><span class="co">#&gt;       Balanced Accuracy : 0.9707          </span></span>
+<span><span class="co">#&gt;              Prevalence : 0.6276          </span></span>
+<span><span class="co">#&gt;          Detection Rate : 0.6276          </span></span>
+<span><span class="co">#&gt;    Detection Prevalence : 0.6474          </span></span>
+<span><span class="co">#&gt;       Balanced Accuracy : 0.9734          </span></span>
 <span><span class="co">#&gt;                                           </span></span>
 <span><span class="co">#&gt;        'Positive' Class : TT              </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -682,16 +683,16 @@ using <a href="https://is.gd/7cVEEd" class="external-link">selectDIMP</a> functi
 <code class="sourceCode R"><span><span class="va">dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">ps</span>, div.col <span class="op">=</span> <span class="fl">9</span>, cutpoint <span class="op">=</span> <span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>dmps <span class="op">=</span><span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">dmps</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       dmps</span></span>
-<span><span class="co">#&gt; W_3_1  305</span></span>
+<span><span class="co">#&gt; W_3_1  354</span></span>
 <span><span class="co">#&gt; W_3_2  342</span></span>
-<span><span class="co">#&gt; W_3_3  232</span></span>
-<span><span class="co">#&gt; W_3_4  339</span></span>
-<span><span class="co">#&gt; W_3_5  240</span></span>
+<span><span class="co">#&gt; W_3_3  303</span></span>
+<span><span class="co">#&gt; W_3_4  383</span></span>
+<span><span class="co">#&gt; W_3_5  277</span></span>
 <span><span class="co">#&gt; M_3_1  558</span></span>
 <span><span class="co">#&gt; M_3_2  450</span></span>
 <span><span class="co">#&gt; M_3_3  471</span></span>
 <span><span class="co">#&gt; M_3_4  161</span></span>
-<span><span class="co">#&gt; M_3_5  203</span></span></code></pre></div>
+<span><span class="co">#&gt; M_3_5  252</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -729,22 +730,22 @@ the flexibility of the DNA molecule <span class="citation">(Choy et al.
 <span><span class="co">#&gt;           &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
 <span><span class="co">#&gt;    [1]        1   3631-5899      * |         0         0         0         1</span></span>
 <span><span class="co">#&gt;    [2]        1   6788-9130      * |         0         0         0         0</span></span>
-<span><span class="co">#&gt;    [3]        1 23121-31227      * |        11         8        16         5</span></span>
+<span><span class="co">#&gt;    [3]        1 23121-31227      * |        12         8        17         5</span></span>
 <span><span class="co">#&gt;    [4]        1 31170-33171      * |         2         0         2         0</span></span>
 <span><span class="co">#&gt;    [5]        1 33365-37871      * |         2         0         1         1</span></span>
 <span><span class="co">#&gt;    ...      ...         ...    ... .       ...       ...       ...       ...</span></span>
-<span><span class="co">#&gt;   [66]        5 49891-51437      * |         0         0         0         0</span></span>
-<span><span class="co">#&gt;   [67]        5 53856-56052      * |         1         0         8         3</span></span>
-<span><span class="co">#&gt;   [68]        5 61017-63936      * |         1         0         1         0</span></span>
+<span><span class="co">#&gt;   [66]        5 49891-51437      * |         0         0         1         0</span></span>
+<span><span class="co">#&gt;   [67]        5 53856-56052      * |         1         0         9         3</span></span>
+<span><span class="co">#&gt;   [68]        5 61017-63936      * |         2         0         1         0</span></span>
 <span><span class="co">#&gt;   [69]        5 84474-86275      * |         0         0         0         0</span></span>
 <span><span class="co">#&gt;   [70]        5 91838-95701      * |         4         1         2         1</span></span>
 <span><span class="co">#&gt;            W_3_5     M_3_1     M_3_2     M_3_3     M_3_4     M_3_5</span></span>
 <span><span class="co">#&gt;        &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt;    [1]         0         1         2         1         2         0</span></span>
+<span><span class="co">#&gt;    [1]         0         1         2         1         2         1</span></span>
 <span><span class="co">#&gt;    [2]         0         0         0         1         0         1</span></span>
 <span><span class="co">#&gt;    [3]         9        11        14        16         9         8</span></span>
 <span><span class="co">#&gt;    [4]         2         1         0         0         0         0</span></span>
-<span><span class="co">#&gt;    [5]         0         2         0         1         0         0</span></span>
+<span><span class="co">#&gt;    [5]         1         2         0         1         0         0</span></span>
 <span><span class="co">#&gt;    ...       ...       ...       ...       ...       ...       ...</span></span>
 <span><span class="co">#&gt;   [66]         0         2         2         2         2         2</span></span>
 <span><span class="co">#&gt;   [67]         1         7         4         4         0         1</span></span>
@@ -785,16 +786,16 @@ function</p>
 <span><span class="co">#&gt; GRanges object with 1 range and 18 metadata columns:</span></span>
 <span><span class="co">#&gt;       seqnames      ranges strand |     W_3_1     W_3_2     W_3_3     W_3_4</span></span>
 <span><span class="co">#&gt;          &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt;   [1]        3 31145-34670      * |         2         2         3         3</span></span>
+<span><span class="co">#&gt;   [1]        3 31145-34670      * |         3         2         3         4</span></span>
 <span><span class="co">#&gt;           W_3_5     M_3_1     M_3_2     M_3_3     M_3_4     M_3_5    log2FC</span></span>
 <span><span class="co">#&gt;       &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt;   [1]         3         6         8         9         6         7   1.01857</span></span>
-<span><span class="co">#&gt;       scaled.deviance      pvalue        model    adj.pval CT.SignalDensity</span></span>
-<span><span class="co">#&gt;             &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt;   [1]         94.5466 2.39396e-22 Neg.Binomial 2.39396e-22      0.000737379</span></span>
+<span><span class="co">#&gt;   [1]         3         6         8         9         6         7  0.875469</span></span>
+<span><span class="co">#&gt;       scaled.deviance      pvalue          model    adj.pval CT.SignalDensity</span></span>
+<span><span class="co">#&gt;             &lt;numeric&gt;   &lt;numeric&gt;    &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span></span>
+<span><span class="co">#&gt;   [1]         67.8239 1.78768e-16 Neg.Binomial.W 1.78768e-16      0.000850822</span></span>
 <span><span class="co">#&gt;       TT.SignalDensity SignalDensityVariation</span></span>
 <span><span class="co">#&gt;              &lt;numeric&gt;              &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt;   [1]       0.00204197             0.00130459</span></span>
+<span><span class="co">#&gt;   [1]       0.00204197             0.00119115</span></span>
 <span><span class="co">#&gt;   -------</span></span>
 <span><span class="co">#&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span></span></code></pre></div>
 </div>
@@ -871,11 +872,11 @@ diagnostic tests</span>.”</span> <em>Cancer</em> 3 (1): 32–35. <a href="http
 which this document was compiled running pandoc 2.19.2:</p>
 <pre><code><span><span class="co">#&gt; R version 4.2.2 Patched (2022-11-10 r83330)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: Ubuntu 22.04.1 LTS</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 20.04.5 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
-<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0</span></span>
-<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0</span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; locale:</span></span>
 <span><span class="co">#&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
@@ -890,73 +891,73 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">#&gt; [8] base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] MethylIT_0.3.2.5     rtracklayer_1.56.1   GenomicRanges_1.48.0</span></span>
+<span><span class="co">#&gt; [1] MethylIT_0.3.2.6     rtracklayer_1.56.1   GenomicRanges_1.48.0</span></span>
 <span><span class="co">#&gt; [4] GenomeInfoDb_1.32.4  IRanges_2.30.1       S4Vectors_0.34.0    </span></span>
 <span><span class="co">#&gt; [7] BiocGenerics_0.42.0  BiocStyle_2.24.0    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;   [1] colorspace_2.0-3            rjson_0.2.21               </span></span>
-<span><span class="co">#&gt;   [3] class_7.3-20                rprojroot_2.0.3            </span></span>
-<span><span class="co">#&gt;   [5] XVector_0.36.0              fs_1.5.2                   </span></span>
+<span><span class="co">#&gt;   [1] colorspace_2.1-0            rjson_0.2.21               </span></span>
+<span><span class="co">#&gt;   [3] class_7.3-21                rprojroot_2.0.3            </span></span>
+<span><span class="co">#&gt;   [5] XVector_0.36.0              fs_1.6.1                   </span></span>
 <span><span class="co">#&gt;   [7] proxy_0.4-27                rstudioapi_0.14            </span></span>
-<span><span class="co">#&gt;   [9] listenv_0.8.0               bit64_4.0.5                </span></span>
+<span><span class="co">#&gt;   [9] listenv_0.9.0               bit64_4.0.5                </span></span>
 <span><span class="co">#&gt;  [11] AnnotationDbi_1.58.0        prodlim_2019.11.13         </span></span>
-<span><span class="co">#&gt;  [13] fansi_1.0.3                 lubridate_1.9.0            </span></span>
-<span><span class="co">#&gt;  [15] codetools_0.2-18            splines_4.2.2              </span></span>
-<span><span class="co">#&gt;  [17] cachem_1.0.6                knitr_1.41                 </span></span>
-<span><span class="co">#&gt;  [19] jsonlite_1.8.3              pROC_1.18.0                </span></span>
+<span><span class="co">#&gt;  [13] fansi_1.0.4                 lubridate_1.9.1            </span></span>
+<span><span class="co">#&gt;  [15] codetools_0.2-19            splines_4.2.2              </span></span>
+<span><span class="co">#&gt;  [17] cachem_1.0.6                knitr_1.42                 </span></span>
+<span><span class="co">#&gt;  [19] jsonlite_1.8.4              pROC_1.18.0                </span></span>
 <span><span class="co">#&gt;  [21] Rsamtools_2.12.0            caret_6.0-93               </span></span>
 <span><span class="co">#&gt;  [23] annotate_1.74.0             png_0.1-8                  </span></span>
 <span><span class="co">#&gt;  [25] httr_1.4.4                  BiocManager_1.30.19        </span></span>
-<span><span class="co">#&gt;  [27] compiler_4.2.2              assertthat_0.2.1           </span></span>
-<span><span class="co">#&gt;  [29] Matrix_1.5-3                fastmap_1.1.0              </span></span>
-<span><span class="co">#&gt;  [31] cli_3.4.1                   htmltools_0.5.3            </span></span>
-<span><span class="co">#&gt;  [33] tools_4.2.2                 gtable_0.3.1               </span></span>
-<span><span class="co">#&gt;  [35] glue_1.6.2                  GenomeInfoDbData_1.2.8     </span></span>
-<span><span class="co">#&gt;  [37] reshape2_1.4.4              dplyr_1.0.10               </span></span>
-<span><span class="co">#&gt;  [39] Rcpp_1.0.9                  Biobase_2.56.0             </span></span>
-<span><span class="co">#&gt;  [41] jquerylib_0.1.4             pkgdown_2.0.6              </span></span>
-<span><span class="co">#&gt;  [43] vctrs_0.5.1                 Biostrings_2.64.1          </span></span>
-<span><span class="co">#&gt;  [45] nlme_3.1-160                iterators_1.0.14           </span></span>
-<span><span class="co">#&gt;  [47] timeDate_4021.106           xfun_0.35                  </span></span>
-<span><span class="co">#&gt;  [49] gower_1.0.0                 stringr_1.5.0              </span></span>
-<span><span class="co">#&gt;  [51] proto_1.0.0                 globals_0.16.2             </span></span>
-<span><span class="co">#&gt;  [53] timechange_0.1.1            lifecycle_1.0.3            </span></span>
-<span><span class="co">#&gt;  [55] restfulr_0.0.15             XML_3.99-0.13              </span></span>
-<span><span class="co">#&gt;  [57] future_1.29.0               zlibbioc_1.42.0            </span></span>
-<span><span class="co">#&gt;  [59] MASS_7.3-58.1               scales_1.2.1               </span></span>
-<span><span class="co">#&gt;  [61] ipred_0.9-13                ragg_1.2.4                 </span></span>
-<span><span class="co">#&gt;  [63] MatrixGenerics_1.8.1        parallel_4.2.2             </span></span>
-<span><span class="co">#&gt;  [65] SummarizedExperiment_1.26.1 yaml_2.3.6                 </span></span>
-<span><span class="co">#&gt;  [67] memoise_2.0.1               ggplot2_3.4.0              </span></span>
-<span><span class="co">#&gt;  [69] sass_0.4.4                  rpart_4.1.19               </span></span>
-<span><span class="co">#&gt;  [71] RSQLite_2.2.19              stringi_1.7.8              </span></span>
-<span><span class="co">#&gt;  [73] highr_0.9                   genefilter_1.78.0          </span></span>
-<span><span class="co">#&gt;  [75] BiocIO_1.6.0                desc_1.4.2                 </span></span>
-<span><span class="co">#&gt;  [77] foreach_1.5.2               e1071_1.7-12               </span></span>
+<span><span class="co">#&gt;  [27] compiler_4.2.2              Matrix_1.5-3               </span></span>
+<span><span class="co">#&gt;  [29] fastmap_1.1.0               cli_3.6.0                  </span></span>
+<span><span class="co">#&gt;  [31] htmltools_0.5.4             tools_4.2.2                </span></span>
+<span><span class="co">#&gt;  [33] gtable_0.3.1                glue_1.6.2                 </span></span>
+<span><span class="co">#&gt;  [35] GenomeInfoDbData_1.2.8      reshape2_1.4.4             </span></span>
+<span><span class="co">#&gt;  [37] dplyr_1.1.0                 Rcpp_1.0.10                </span></span>
+<span><span class="co">#&gt;  [39] Biobase_2.56.0              jquerylib_0.1.4            </span></span>
+<span><span class="co">#&gt;  [41] pkgdown_2.0.7               vctrs_0.5.2                </span></span>
+<span><span class="co">#&gt;  [43] Biostrings_2.64.1           nlme_3.1-162               </span></span>
+<span><span class="co">#&gt;  [45] iterators_1.0.14            timeDate_4022.108          </span></span>
+<span><span class="co">#&gt;  [47] xfun_0.37                   gower_1.0.1                </span></span>
+<span><span class="co">#&gt;  [49] stringr_1.5.0               proto_1.0.0                </span></span>
+<span><span class="co">#&gt;  [51] globals_0.16.2              timechange_0.2.0           </span></span>
+<span><span class="co">#&gt;  [53] lifecycle_1.0.3             restfulr_0.0.15            </span></span>
+<span><span class="co">#&gt;  [55] XML_3.99-0.13               future_1.31.0              </span></span>
+<span><span class="co">#&gt;  [57] zlibbioc_1.42.0             MASS_7.3-58.2              </span></span>
+<span><span class="co">#&gt;  [59] scales_1.2.1                ipred_0.9-13               </span></span>
+<span><span class="co">#&gt;  [61] ragg_1.2.5                  MatrixGenerics_1.8.1       </span></span>
+<span><span class="co">#&gt;  [63] parallel_4.2.2              SummarizedExperiment_1.26.1</span></span>
+<span><span class="co">#&gt;  [65] yaml_2.3.7                  memoise_2.0.1              </span></span>
+<span><span class="co">#&gt;  [67] ggplot2_3.4.0               sass_0.4.5                 </span></span>
+<span><span class="co">#&gt;  [69] rpart_4.1.19                RSQLite_2.2.20             </span></span>
+<span><span class="co">#&gt;  [71] stringi_1.7.12              highr_0.10                 </span></span>
+<span><span class="co">#&gt;  [73] genefilter_1.78.0           BiocIO_1.6.0               </span></span>
+<span><span class="co">#&gt;  [75] desc_1.4.2                  randomForest_4.7-1.1       </span></span>
+<span><span class="co">#&gt;  [77] foreach_1.5.2               e1071_1.7-13               </span></span>
 <span><span class="co">#&gt;  [79] hardhat_1.2.0               BiocParallel_1.30.4        </span></span>
-<span><span class="co">#&gt;  [81] lava_1.7.0                  rlang_1.0.6                </span></span>
+<span><span class="co">#&gt;  [81] lava_1.7.1                  rlang_1.0.6                </span></span>
 <span><span class="co">#&gt;  [83] pkgconfig_2.0.3             systemfonts_1.0.4          </span></span>
 <span><span class="co">#&gt;  [85] matrixStats_0.63.0          bitops_1.0-7               </span></span>
-<span><span class="co">#&gt;  [87] evaluate_0.18               lattice_0.20-45            </span></span>
-<span><span class="co">#&gt;  [89] purrr_0.3.5                 GenomicAlignments_1.32.1   </span></span>
-<span><span class="co">#&gt;  [91] recipes_1.0.3               bit_4.0.5                  </span></span>
-<span><span class="co">#&gt;  [93] tidyselect_1.2.0            parallelly_1.32.1          </span></span>
+<span><span class="co">#&gt;  [87] evaluate_0.20               lattice_0.20-45            </span></span>
+<span><span class="co">#&gt;  [89] purrr_1.0.1                 GenomicAlignments_1.32.1   </span></span>
+<span><span class="co">#&gt;  [91] recipes_1.0.4               bit_4.0.5                  </span></span>
+<span><span class="co">#&gt;  [93] tidyselect_1.2.0            parallelly_1.34.0          </span></span>
 <span><span class="co">#&gt;  [95] nls2_0.3-3                  plyr_1.8.8                 </span></span>
-<span><span class="co">#&gt;  [97] magrittr_2.0.3              bookdown_0.30              </span></span>
+<span><span class="co">#&gt;  [97] magrittr_2.0.3              bookdown_0.32              </span></span>
 <span><span class="co">#&gt;  [99] R6_2.5.1                    generics_0.1.3             </span></span>
-<span><span class="co">#&gt; [101] DelayedArray_0.22.0         DBI_1.1.3                  </span></span>
+<span><span class="co">#&gt; [101] DBI_1.1.3                   DelayedArray_0.22.0        </span></span>
 <span><span class="co">#&gt; [103] pillar_1.8.1                withr_2.5.0                </span></span>
-<span><span class="co">#&gt; [105] KEGGREST_1.36.3             survival_3.4-0             </span></span>
-<span><span class="co">#&gt; [107] RCurl_1.98-1.9              nnet_7.3-18                </span></span>
+<span><span class="co">#&gt; [105] KEGGREST_1.36.3             survival_3.5-0             </span></span>
+<span><span class="co">#&gt; [107] RCurl_1.98-1.10             nnet_7.3-18                </span></span>
 <span><span class="co">#&gt; [109] tibble_3.1.8                future.apply_1.10.0        </span></span>
-<span><span class="co">#&gt; [111] crayon_1.5.2                utf8_1.2.2                 </span></span>
-<span><span class="co">#&gt; [113] rmarkdown_2.18              grid_4.2.2                 </span></span>
-<span><span class="co">#&gt; [115] minpack.lm_1.2-2            data.table_1.14.6          </span></span>
+<span><span class="co">#&gt; [111] crayon_1.5.2                utf8_1.2.3                 </span></span>
+<span><span class="co">#&gt; [113] rmarkdown_2.20              grid_4.2.2                 </span></span>
+<span><span class="co">#&gt; [115] minpack.lm_1.2-3            data.table_1.14.6          </span></span>
 <span><span class="co">#&gt; [117] blob_1.2.3                  ModelMetrics_1.2.2.2       </span></span>
-<span><span class="co">#&gt; [119] digest_0.6.30               xtable_1.8-4               </span></span>
+<span><span class="co">#&gt; [119] digest_0.6.31               xtable_1.8-4               </span></span>
 <span><span class="co">#&gt; [121] textshaping_0.3.6           munsell_0.5.0              </span></span>
-<span><span class="co">#&gt; [123] bslib_0.4.1</span></span></code></pre>
+<span><span class="co">#&gt; [123] bslib_0.4.2</span></span></code></pre>
 </div>
   </div>
 
@@ -977,7 +978,7 @@ which this document was compiled running pandoc 2.19.2:</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

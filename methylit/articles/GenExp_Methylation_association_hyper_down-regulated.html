@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
       <h1 data-toc-skip>Association Between Gene Expression and Cytosine
 DNA Methylation at gene-body</h1>
             
-            <h4 data-toc-skip class="date">05 December 2022</h4>
+            <h4 data-toc-skip class="date">08 February 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/GenExp_Methylation_association_hyper_down-regulated.Rmd" class="external-link"><code>vignettes/GenExp_Methylation_association_hyper_down-regulated.Rmd</code></a></small>
       <div class="hidden name"><code>GenExp_Methylation_association_hyper_down-regulated.Rmd</code></div>
@@ -435,20 +435,20 @@ distributions.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Parameters:</span></span>
 <span><span class="co">##       Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## mean  0.280658   0.001606   174.7   &lt;2e-16 ***</span></span>
-<span><span class="co">## sd    0.173889   0.001339   129.8   &lt;2e-16 ***</span></span>
-<span><span class="co">## shape 2.111095   0.019847   106.4   &lt;2e-16 ***</span></span>
-<span><span class="co">## scale 1.386660   0.008021   172.9   &lt;2e-16 ***</span></span>
+<span><span class="co">## mean  0.280687   0.001608   174.6   &lt;2e-16 ***</span></span>
+<span><span class="co">## sd    0.173957   0.001340   129.8   &lt;2e-16 ***</span></span>
+<span><span class="co">## shape 2.112027   0.019876   106.3   &lt;2e-16 ***</span></span>
+<span><span class="co">## scale 1.386786   0.008026   172.8   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Residual standard error: 0.02187 on 1022 degrees of freedom</span></span>
+<span><span class="co">## Residual standard error: 0.02189 on 1022 degrees of freedom</span></span>
 <span><span class="co">## Number of iterations to termination: 13 </span></span>
 <span><span class="co">## Reason for termination: Relative error in the sum of squares is at most `ftol'.</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\n Mixture proportions (phi):"</span>, <span class="va">meth_FIT</span><span class="op">$</span><span class="va">phi</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
-<span><span class="co">##  Mixture proportions (phi): 0.4118238 0.5881762</span></span></code></pre>
+<span><span class="co">##  Mixture proportions (phi): 0.4120519 0.5879481</span></span></code></pre>
 <p>The graphic for histogram and density distribution curves:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, font.lab<span class="op">=</span><span class="fl">2</span>, font<span class="op">=</span><span class="fl">2</span>,font.axis<span class="op">=</span><span class="fl">2</span>,family<span class="op">=</span><span class="st">"serif"</span> , lwd <span class="op">=</span> <span class="fl">1.2</span>, cex <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span></span>
@@ -584,7 +584,7 @@ not rejected.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fgm_cop</span><span class="op">$</span><span class="va">gof</span></span></code></pre></div>
 <pre><code><span><span class="co">##   Chisq.stat   mc_p.value  sample.size    num.sampl </span></span>
-<span><span class="co">## 1.117631e+03 1.818182e-01 1.300000e+04 1.000000e+01</span></span></code></pre>
+<span><span class="co">## 1.117631e+03 2.727273e-01 1.300000e+04 1.000000e+01</span></span></code></pre>
 <p>All the information needed about the fitted FGM copula is found in
 the object <em>fgm_cop$copula</em>, which is a <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1/topics/mvdc-class" class="external-link">mvdc</a>
 object from <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1" class="external-link">copula</a>
@@ -618,17 +618,17 @@ from the data frame: <em>“g$data”</em>:</p>
 <pre><code><span><span class="co">## DataFrame with 500 rows and 2 columns</span></span>
 <span><span class="co">##          emprob      thprob</span></span>
 <span><span class="co">##       &lt;numeric&gt;   &lt;numeric&gt;</span></span>
-<span><span class="co">## 1   0.000859476 0.000838486</span></span>
-<span><span class="co">## 2   0.114811632 0.119596858</span></span>
-<span><span class="co">## 3   0.198682137 0.199610746</span></span>
-<span><span class="co">## 4   0.174616817 0.181781104</span></span>
-<span><span class="co">## 5   0.449863916 0.455994107</span></span>
+<span><span class="co">## 1   0.142458101 0.150222215</span></span>
+<span><span class="co">## 2   0.000931099 0.000935425</span></span>
+<span><span class="co">## 3   0.093754476 0.097422966</span></span>
+<span><span class="co">## 4   0.321587165 0.323190264</span></span>
+<span><span class="co">## 5   0.269159146 0.277339559</span></span>
 <span><span class="co">## ...         ...         ...</span></span>
-<span><span class="co">## 496    0.100774   0.0964349</span></span>
-<span><span class="co">## 497    0.139092   0.1387958</span></span>
-<span><span class="co">## 498    0.193740   0.1872904</span></span>
-<span><span class="co">## 499    0.489042   0.4987606</span></span>
-<span><span class="co">## 500    0.464475   0.4624016</span></span></code></pre>
+<span><span class="co">## 496   0.1306403   0.1298166</span></span>
+<span><span class="co">## 497   0.0471279   0.0452795</span></span>
+<span><span class="co">## 498   0.3629136   0.3697187</span></span>
+<span><span class="co">## 499   0.4021630   0.3984623</span></span>
+<span><span class="co">## 500   0.1027073   0.0980783</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="three-dimensional-copula-density-plot">Three-dimensional copula density plot<a class="anchor" aria-label="anchor" href="#three-dimensional-copula-density-plot"></a>
@@ -780,12 +780,12 @@ auxiliary function</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">cl_summary</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"low"</span>, <span class="st">"middle"</span>, <span class="st">"high"</span><span class="op">)</span></span>
 <span><span class="va">cl_summary</span></span></code></pre></div>
 <pre><code><span><span class="co">##                low    middle      high</span></span>
-<span><span class="co">## Min.    0.08010906 0.9764634  2.346377</span></span>
-<span><span class="co">## 1st Qu. 0.25350885 1.1902080  2.557401</span></span>
-<span><span class="co">## Median  0.39796318 1.4417072  2.850635</span></span>
-<span><span class="co">## Mean    0.44995143 1.5025125  3.188218</span></span>
-<span><span class="co">## 3rd Qu. 0.63007886 1.7738444  3.420480</span></span>
-<span><span class="co">## Max.    0.97620682 2.3446362 20.519587</span></span></code></pre>
+<span><span class="co">## Min.    0.08010906 0.9747216  2.342326</span></span>
+<span><span class="co">## 1st Qu. 0.25324833 1.1864777  2.553813</span></span>
+<span><span class="co">## Median  0.39765342 1.4393783  2.849022</span></span>
+<span><span class="co">## Mean    0.44924279 1.5001513  3.182966</span></span>
+<span><span class="co">## 3rd Qu. 0.62903372 1.7719768  3.410265</span></span>
+<span><span class="co">## Max.    0.97438946 2.3393763 20.519587</span></span></code></pre>
 <p>Cutpoint are now applied:</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">cl_summary</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
@@ -832,9 +832,9 @@ relationship between <span class="math inline">\(|logFC|\)</span> and
 <span><span class="va">m</span></span></code></pre></div>
 <pre><code><span><span class="co">##          </span></span>
 <span><span class="co">##            Low Middle High</span></span>
-<span><span class="co">##   eLow    5815   3890  761</span></span>
-<span><span class="co">##   eMiddle 1997    630  177</span></span>
-<span><span class="co">##   eHigh    355     68   21</span></span></code></pre>
+<span><span class="co">##   eLow    5807   3894  765</span></span>
+<span><span class="co">##   eMiddle 1995    630  179</span></span>
+<span><span class="co">##   eHigh    354     69   21</span></span></code></pre>
 <p>The <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.0/topics/spineplot" class="external-link">spineplot</a>
 of this contingency table (table(x = logfc_level, y = md_level)) help to
 visualize the existent relationship between <span class="math inline">\(|logFC|\)</span> and <span class="math inline">\(MD\)</span>.</p>
@@ -871,7 +871,7 @@ permutation test and asymptotic test.</p>
 <span><span class="co">##  Asymptotic Linear-by-Linear Association Test</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## data:  Var2 (ordered) by Var1 (eLow &lt; eMiddle &lt; eHigh)</span></span>
-<span><span class="co">## Z = -14.655, p-value &lt; 2.2e-16</span></span>
+<span><span class="co">## Z = -14.599, p-value &lt; 2.2e-16</span></span>
 <span><span class="co">## alternative hypothesis: two.sided</span></span></code></pre>
 <p>The permutation LLT test:</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
@@ -880,7 +880,7 @@ permutation test and asymptotic test.</p>
 <span><span class="co">##  Approximative Linear-by-Linear Association Test</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## data:  Var2 (ordered) by Var1 (eLow &lt; eMiddle &lt; eHigh)</span></span>
-<span><span class="co">## Z = -14.655, p-value &lt; 1e-04</span></span>
+<span><span class="co">## Z = -14.599, p-value &lt; 1e-04</span></span>
 <span><span class="co">## alternative hypothesis: less</span></span></code></pre>
 <p>The null hypothesis of no association among the variables in the
 table is rejected. In the current case the p-value &lt; 1e-04 and,
@@ -1034,10 +1034,10 @@ distributions.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Parameters:</span></span>
 <span><span class="co">##       Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## mean  0.285889   0.002124  134.60   &lt;2e-16 ***</span></span>
-<span><span class="co">## sd    0.163948   0.001777   92.27   &lt;2e-16 ***</span></span>
-<span><span class="co">## shape 2.093709   0.029261   71.55   &lt;2e-16 ***</span></span>
-<span><span class="co">## scale 1.360781   0.011846  114.88   &lt;2e-16 ***</span></span>
+<span><span class="co">## mean  0.285896   0.002124  134.59   &lt;2e-16 ***</span></span>
+<span><span class="co">## sd    0.163967   0.001777   92.27   &lt;2e-16 ***</span></span>
+<span><span class="co">## shape 2.094005   0.029271   71.54   &lt;2e-16 ***</span></span>
+<span><span class="co">## scale 1.360818   0.011847  114.87   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -1047,7 +1047,7 @@ distributions.</p>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\n Mixture proportions (phi):"</span>, <span class="va">meth_FIT</span><span class="op">$</span><span class="va">phi</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
-<span><span class="co">##  Mixture proportions (phi): 0.4201527 0.5798473</span></span></code></pre>
+<span><span class="co">##  Mixture proportions (phi): 0.4202242 0.5797758</span></span></code></pre>
 <p>The graphic for histogram and density distribution curves:</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, font.lab<span class="op">=</span><span class="fl">2</span>, font<span class="op">=</span><span class="fl">2</span>,font.axis<span class="op">=</span><span class="fl">2</span>,family<span class="op">=</span><span class="st">"serif"</span> , lwd <span class="op">=</span> <span class="fl">1.2</span>, cex <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span></span>
@@ -1155,7 +1155,7 @@ not rejected.</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fgm_cop</span><span class="op">$</span><span class="va">gof</span></span></code></pre></div>
 <pre><code><span><span class="co">##   Chisq.stat   mc_p.value  sample.size    num.sampl </span></span>
-<span><span class="co">##  924.4173554    0.3636364 5999.0000000   10.0000000</span></span></code></pre>
+<span><span class="co">##  924.4173554    0.2727273 5999.0000000   10.0000000</span></span></code></pre>
 <p>All the information needed about the fitted FGM copula is found in
 the object <em>fgm_cop$copula</em>, which is a <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1/topics/mvdc-class" class="external-link">mvdc</a>
 object from <a href="https://www.rdocumentation.org/packages/copula/versions/0.999-19.1" class="external-link">copula</a>
@@ -1702,11 +1702,11 @@ Balakrishna, C. D. Lai, <em><a href="https://doi.org/10.1007/b101765_3" class="e
 which this document was compiled running pandoc 2.19.2:</p>
 <pre><code><span><span class="co">## R version 4.2.2 Patched (2022-11-10 r83330)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">## Running under: Ubuntu 22.04.1 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 20.04.5 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
-<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0</span></span>
-<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0</span></span>
+<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0</span></span>
+<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## locale:</span></span>
 <span><span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
@@ -1721,42 +1721,42 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">## [8] base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] coin_1.4-2           survival_3.4-0       copula_1.1-1        </span></span>
+<span><span class="co">##  [1] coin_1.4-2           survival_3.5-0       copula_1.1-2        </span></span>
 <span><span class="co">##  [4] plot3D_1.4           usefr_0.1.0          edgeR_3.38.4        </span></span>
 <span><span class="co">##  [7] limma_3.52.4         ggplot2_3.4.0        GenomicRanges_1.48.0</span></span>
 <span><span class="co">## [10] GenomeInfoDb_1.32.4  IRanges_2.30.1       S4Vectors_0.34.0    </span></span>
 <span><span class="co">## [13] BiocGenerics_0.42.0 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] bitops_1.0-7           matrixStats_0.63.0     fs_1.5.2              </span></span>
+<span><span class="co">##  [1] bitops_1.0-7           matrixStats_0.63.0     fs_1.6.1              </span></span>
 <span><span class="co">##  [4] rprojroot_2.0.3        numDeriv_2016.8-1.1    tools_4.2.2           </span></span>
-<span><span class="co">##  [7] bslib_0.4.1            utf8_1.2.2             R6_2.5.1              </span></span>
-<span><span class="co">## [10] DBI_1.1.3              colorspace_2.0-3       withr_2.5.0           </span></span>
-<span><span class="co">## [13] tidyselect_1.2.0       compiler_4.2.2         pspline_1.0-19        </span></span>
-<span><span class="co">## [16] textshaping_0.3.6      cli_3.4.1              sandwich_3.0-2        </span></span>
-<span><span class="co">## [19] desc_1.4.2             sass_0.4.4             scales_1.2.1          </span></span>
-<span><span class="co">## [22] mvtnorm_1.1-3          pkgdown_2.0.6          systemfonts_1.0.4     </span></span>
-<span><span class="co">## [25] stringr_1.5.0          digest_0.6.30          rmarkdown_2.18        </span></span>
-<span><span class="co">## [28] XVector_0.36.0         pkgconfig_2.0.3        htmltools_0.5.3       </span></span>
-<span><span class="co">## [31] highr_0.9              fastmap_1.1.0          stabledist_0.7-1      </span></span>
-<span><span class="co">## [34] ADGofTest_0.3          rlang_1.0.6            rstudioapi_0.14       </span></span>
-<span><span class="co">## [37] jquerylib_0.1.4        generics_0.1.3         zoo_1.8-11            </span></span>
-<span><span class="co">## [40] jsonlite_1.8.3         mixdist_0.5-5          mclust_6.0.0          </span></span>
-<span><span class="co">## [43] BiocParallel_1.30.4    dplyr_1.0.10           RCurl_1.98-1.9        </span></span>
-<span><span class="co">## [46] magrittr_2.0.3         nls2_0.3-3             modeltools_0.2-23     </span></span>
-<span><span class="co">## [49] GenomeInfoDbData_1.2.8 Matrix_1.5-3           Rcpp_1.0.9            </span></span>
-<span><span class="co">## [52] munsell_0.5.0          fansi_1.0.3            proto_1.0.0           </span></span>
-<span><span class="co">## [55] lifecycle_1.0.3        multcomp_1.4-20        stringi_1.7.8         </span></span>
-<span><span class="co">## [58] yaml_2.3.6             MASS_7.3-58.1          zlibbioc_1.42.0       </span></span>
-<span><span class="co">## [61] grid_4.2.2             misc3d_0.9-1           parallel_4.2.2        </span></span>
-<span><span class="co">## [64] lattice_0.20-45        splines_4.2.2          locfit_1.5-9.6        </span></span>
-<span><span class="co">## [67] knitr_1.41             pillar_1.8.1           tcltk_4.2.2           </span></span>
-<span><span class="co">## [70] cubature_2.0.4.5       codetools_0.2-18       glue_1.6.2            </span></span>
-<span><span class="co">## [73] evaluate_0.18          vctrs_0.5.1            gtable_0.3.1          </span></span>
-<span><span class="co">## [76] purrr_0.3.5            assertthat_0.2.1       cachem_1.0.6          </span></span>
-<span><span class="co">## [79] xfun_0.35              libcoin_1.0-9          ragg_1.2.4            </span></span>
-<span><span class="co">## [82] pcaPP_2.0-3            gsl_2.1-7.1            minpack.lm_1.2-2      </span></span>
-<span><span class="co">## [85] tibble_3.1.8           memoise_2.0.1          TH.data_1.1-1</span></span></code></pre>
+<span><span class="co">##  [7] bslib_0.4.2            utf8_1.2.3             R6_2.5.1              </span></span>
+<span><span class="co">## [10] colorspace_2.1-0       withr_2.5.0            tidyselect_1.2.0      </span></span>
+<span><span class="co">## [13] compiler_4.2.2         pspline_1.0-19         textshaping_0.3.6     </span></span>
+<span><span class="co">## [16] cli_3.6.0              desc_1.4.2             sandwich_3.0-2        </span></span>
+<span><span class="co">## [19] sass_0.4.5             scales_1.2.1           mvtnorm_1.1-3         </span></span>
+<span><span class="co">## [22] pkgdown_2.0.7          systemfonts_1.0.4      stringr_1.5.0         </span></span>
+<span><span class="co">## [25] digest_0.6.31          rmarkdown_2.20         XVector_0.36.0        </span></span>
+<span><span class="co">## [28] pkgconfig_2.0.3        htmltools_0.5.4        highr_0.10            </span></span>
+<span><span class="co">## [31] fastmap_1.1.0          stabledist_0.7-1       ADGofTest_0.3         </span></span>
+<span><span class="co">## [34] rlang_1.0.6            rstudioapi_0.14        jquerylib_0.1.4       </span></span>
+<span><span class="co">## [37] generics_0.1.3         zoo_1.8-11             jsonlite_1.8.4        </span></span>
+<span><span class="co">## [40] mixdist_0.5-5          mclust_6.0.0           BiocParallel_1.30.4   </span></span>
+<span><span class="co">## [43] dplyr_1.1.0            RCurl_1.98-1.10        magrittr_2.0.3        </span></span>
+<span><span class="co">## [46] nls2_0.3-3             modeltools_0.2-23      GenomeInfoDbData_1.2.8</span></span>
+<span><span class="co">## [49] Matrix_1.5-3           Rcpp_1.0.10            munsell_0.5.0         </span></span>
+<span><span class="co">## [52] fansi_1.0.4            proto_1.0.0            lifecycle_1.0.3       </span></span>
+<span><span class="co">## [55] stringi_1.7.12         multcomp_1.4-20        yaml_2.3.7            </span></span>
+<span><span class="co">## [58] MASS_7.3-58.2          zlibbioc_1.42.0        grid_4.2.2            </span></span>
+<span><span class="co">## [61] misc3d_0.9-1           parallel_4.2.2         lattice_0.20-45       </span></span>
+<span><span class="co">## [64] splines_4.2.2          locfit_1.5-9.7         knitr_1.42            </span></span>
+<span><span class="co">## [67] pillar_1.8.1           tcltk_4.2.2            cubature_2.0.4.6      </span></span>
+<span><span class="co">## [70] codetools_0.2-19       glue_1.6.2             evaluate_0.20         </span></span>
+<span><span class="co">## [73] vctrs_0.5.2            gtable_0.3.1           purrr_1.0.1           </span></span>
+<span><span class="co">## [76] cachem_1.0.6           xfun_0.37              libcoin_1.0-9         </span></span>
+<span><span class="co">## [79] ragg_1.2.5             pcaPP_2.0-3            gsl_2.1-8             </span></span>
+<span><span class="co">## [82] minpack.lm_1.2-3       tibble_3.1.8           memoise_2.0.1         </span></span>
+<span><span class="co">## [85] TH.data_1.1-1</span></span></code></pre>
 </div>
   </div>
 
@@ -1777,7 +1777,7 @@ which this document was compiled running pandoc 2.19.2:</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

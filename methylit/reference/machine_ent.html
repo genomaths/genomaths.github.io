@@ -3,7 +3,7 @@
 machine (methylation molecular machinery) to the entropy of individual
 methylation system, which is estimated for members of the
 Generalized Gamma (GG) Distribution family. GG density is given as:
-\(exp(-y^\alpha) * \alpha*y^(\alpha*\psi - 1)/(scale*\gamma(\psi))\)
+\(exp(-y^\alpha) * \alpha*y^{\alpha*\psi - 1}/(scale*\gamma(\psi))\)
 (see (Wikipedia))
 A list of the member of the GG distribution family with the corresponding
 parameter settings is provided in Table 1 from reference (1). For example, to
@@ -27,7 +27,7 @@ different in reference (1))."><meta property="og:image" content="https://genomat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -110,7 +110,7 @@ different in reference (1))."><meta property="og:image" content="https://genomat
 machine (methylation molecular machinery) to the entropy of individual
 methylation system, which is estimated for members of the
 Generalized Gamma (GG) Distribution family. GG density is given as:</p>
-<p>\(exp(-y^\alpha) * \alpha*y^(\alpha*\psi - 1)/(scale*\gamma(\psi))\)</p>
+<p>\(exp(-y^\alpha) * \alpha*y^{\alpha*\psi - 1}/(scale*\gamma(\psi))\)</p>
 <p>(see <a href="https://goo.gl/1n4kpW" class="external-link">(Wikipedia)</a>)</p>
 <p>A list of the member of the GG distribution family with the corresponding
 parameter settings is provided in Table 1 from reference (1). For example, to
@@ -122,17 +122,17 @@ different in reference (1)).</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S4 method for missingORNULL</span></span>
-<span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span>, <span class="va">pars</span><span class="op">)</span></span>
+<span><span class="co"># S4 method for missing_OR_NULL</span></span>
+<span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span>, <span class="va">pars</span>, only.mchent <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for cdfMODEL</span></span>
-<span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span><span class="op">)</span></span>
+<span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span>, only.mchent <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for cdfMODELlist</span></span>
-<span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span><span class="op">)</span></span>
+<span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span>, only.mchent <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for ProbDistrList</span></span>
-<span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">machine_ent</span><span class="op">(</span><span class="va">model</span>, R <span class="op">=</span> <span class="fl">8.31446261815324</span>, only.mchent <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -196,7 +196,7 @@ Shannon entropy in bit units, only carrying informational meaning.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

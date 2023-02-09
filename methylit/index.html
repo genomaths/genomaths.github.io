@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@
 <div class="section level2">
 <h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
 </h2>
-<p>Currently, the package is actively used in methylation analyses. Nevertheless, improvements are regularly introduced. Watch this repo or check for updates. THE PACKAGE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.</p>
+<p>Currently, the package is actively used in methylation analyses. Nevertheless, improvements are regularly introduced. Watch this repo or check for updates. THE PACKAGE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. The beta version is frequently updated. We are using the version notation: 0.3.2.x.y, where digit ‘y’ is frequently changed.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -168,12 +168,13 @@
 <p>Install R dependencies:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"caret"</span>, <span class="st">"Epi"</span>, <span class="st">"e1071"</span>, <span class="st">"minpack.lm"</span>, <span class="st">"nls2"</span>,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">"caTools"</span>,  <span class="st">"RCurl"</span>,<span class="st">'GenomicRanges'</span>,<span class="st">'BiocParallel'</span>, <span class="st">'biovizBase'</span>, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">'genefilter'</span>, <span class="st">'data.table'</span>, <span class="st">'dplyr'</span>, <span class="st">'GenomeInfoDb'</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">'genefilter'</span>, <span class="st">'data.table'</span>, <span class="st">'dplyr'</span>, <span class="st">'GenomeInfoDb'</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">'randomForest'</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>))</span></code></pre></div>
 <p>You can install MethylIT from GitHub:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Master stable version (0.3.2.5)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"genomaths/MethylIT"</span>)</span></code></pre></div>
 <p>The Beta (developing) version:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">'genomaths/MethylIT.git'</span>, </span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">'genomaths/MethylIT'</span>, </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ref =</span> <span class="st">"MethylIT_0.3.2_beta"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>   </span></code></pre></div>
 </div>
@@ -293,7 +294,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
