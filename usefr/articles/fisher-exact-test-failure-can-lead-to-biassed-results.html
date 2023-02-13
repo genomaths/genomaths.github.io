@@ -271,18 +271,18 @@ bootstrap’s test of two discrete populations.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/usefr" class="external-link">usefr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/tableBoots.html">tableBoots</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">case1</span>, stat <span class="op">=</span> <span class="st">"hd"</span>, num.permut <span class="op">=</span> <span class="fl">1999</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.0535</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 0.0435</span></span></code></pre>
 <p>The Root-Mean-Square statistic has been also proposed to test
 differences between two discrete probability distributions (<a href="#id_2">2</a>)</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/usefr" class="external-link">usefr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/tableBoots.html">tableBoots</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">case1</span>, stat <span class="op">=</span> <span class="st">"rmst"</span>, num.permut <span class="op">=</span> <span class="fl">1999</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.046</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 0.0375</span></span></code></pre>
 <p>The <span class="math inline">\(\chi^2\)</span> statistic fails</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/genomaths/usefr" class="external-link">usefr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/tableBoots.html">tableBoots</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">case1</span>, stat <span class="op">=</span> <span class="st">"chisq"</span>, num.permut <span class="op">=</span> <span class="fl">1999</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.054</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 0.0525</span></span></code></pre>
 <p>Assuming that expected discrete probability distribution (DPD)
 are:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -333,84 +333,84 @@ given below:</p>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">res</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##       meth.diff FT.p.value HD.p.value   RMST  chisq      chisq.p</span></span>
-<span><span class="co">##  [1,] 0.4166667 0.20948617     0.0760 0.1185 0.1315 0.1684157921</span></span>
-<span><span class="co">##  [2,] 0.3500000 0.28326746     0.1030 0.1085 0.1390 0.1159420290</span></span>
-<span><span class="co">##  [3,] 0.3214286 0.17506841     0.1115 0.1040 0.1100 0.0689655172</span></span>
-<span><span class="co">##  [4,] 0.3055556 0.20467538     0.1245 0.0895 0.1215 0.0509745127</span></span>
-<span><span class="co">##  [5,] 0.2954545 0.13181103     0.1085 0.1085 0.1050 0.0339830085</span></span>
-<span><span class="co">##  [6,] 0.2884615 0.14213458     0.0995 0.0850 0.1095 0.0224887556</span></span>
-<span><span class="co">##  [7,] 0.2833333 0.15672314     0.0900 0.0730 0.0875 0.0174912544</span></span>
-<span><span class="co">##  [8,] 0.2794118 0.10138414     0.0945 0.0805 0.0800 0.0109945027</span></span>
-<span><span class="co">##  [9,] 0.2763158 0.10534027     0.0955 0.0675 0.0675 0.0089955022</span></span>
-<span><span class="co">## [10,] 0.2738095 0.11089814     0.0870 0.0670 0.0750 0.0049975012</span></span>
-<span><span class="co">## [11,] 0.2717391 0.11750154     0.0695 0.0680 0.0695 0.0024987506</span></span>
-<span><span class="co">## [12,] 0.2700000 0.07769381     0.0650 0.0595 0.0660 0.0044977511</span></span>
-<span><span class="co">## [13,] 0.2685185 0.07887317     0.0715 0.0540 0.0660 0.0029985007</span></span>
-<span><span class="co">## [14,] 0.2672414 0.08061039     0.0580 0.0615 0.0610 0.0019990005</span></span>
-<span><span class="co">## [15,] 0.2661290 0.08276810     0.0575 0.0575 0.0575 0.0029985007</span></span>
-<span><span class="co">## [16,] 0.2651515 0.08523730     0.0570 0.0495 0.0675 0.0019990005</span></span>
-<span><span class="co">## [17,] 0.2642857 0.08793188     0.0515 0.0510 0.0635 0.0019990005</span></span>
-<span><span class="co">## [18,] 0.2635135 0.09078398     0.0515 0.0525 0.0555 0.0009995002</span></span>
-<span><span class="co">## [19,] 0.2628205 0.09374027     0.0490 0.0455 0.0485 0.0019990005</span></span>
-<span><span class="co">## [20,] 0.2621951 0.06031279     0.0500 0.0490 0.0480 0.0009995002</span></span>
-<span><span class="co">## [21,] 0.2616279 0.06080833     0.0470 0.0455 0.0510 0.0009995002</span></span>
-<span><span class="co">## [22,] 0.2611111 0.06141565     0.0440 0.0535 0.0495 0.0004997501</span></span>
-<span><span class="co">## [23,] 0.2606383 0.06211375     0.0455 0.0435 0.0425 0.0004997501</span></span>
-<span><span class="co">## [24,] 0.2602041 0.06288506     0.0400 0.0375 0.0460 0.0009995002</span></span>
-<span><span class="co">## [25,] 0.2598039 0.06371480     0.0455 0.0485 0.0455 0.0004997501</span></span>
-<span><span class="co">## [26,] 0.2594340 0.06459058     0.0455 0.0425 0.0435 0.0004997501</span></span>
-<span><span class="co">## [27,] 0.2590909 0.06550200     0.0440 0.0500 0.0465 0.0004997501</span></span>
-<span><span class="co">## [28,] 0.2587719 0.06644033     0.0430 0.0440 0.0450 0.0004997501</span></span>
-<span><span class="co">## [29,] 0.2584746 0.06739822     0.0440 0.0395 0.0505 0.0004997501</span></span>
-<span><span class="co">## [30,] 0.2581967 0.06836952     0.0485 0.0455 0.0485 0.0004997501</span></span>
-<span><span class="co">## [31,] 0.2579365 0.06934906     0.0390 0.0490 0.0455 0.0004997501</span></span>
-<span><span class="co">## [32,] 0.2576923 0.07033254     0.0465 0.0355 0.0480 0.0004997501</span></span>
-<span><span class="co">## [33,] 0.2574627 0.07131633     0.0330 0.0380 0.0440 0.0004997501</span></span>
-<span><span class="co">## [34,] 0.2572464 0.07229742     0.0390 0.0440 0.0400 0.0004997501</span></span>
-<span><span class="co">## [35,] 0.2570423 0.04633836     0.0410 0.0375 0.0480 0.0004997501</span></span>
-<span><span class="co">## [36,] 0.2568493 0.04646593     0.0410 0.0420 0.0385 0.0004997501</span></span>
-<span><span class="co">## [37,] 0.2566667 0.04660925     0.0485 0.0415 0.0335 0.0004997501</span></span>
-<span><span class="co">## [38,] 0.2564935 0.04676622     0.0350 0.0500 0.0390 0.0004997501</span></span>
-<span><span class="co">## [39,] 0.2563291 0.04693498     0.0365 0.0455 0.0440 0.0004997501</span></span>
-<span><span class="co">## [40,] 0.2561728 0.04711391     0.0275 0.0460 0.0370 0.0004997501</span></span>
-<span><span class="co">## [41,] 0.2560241 0.04730155     0.0315 0.0395 0.0350 0.0004997501</span></span>
-<span><span class="co">## [42,] 0.2558824 0.04749662     0.0395 0.0375 0.0410 0.0004997501</span></span>
-<span><span class="co">## [43,] 0.2557471 0.04769797     0.0410 0.0430 0.0375 0.0004997501</span></span>
-<span><span class="co">## [44,] 0.2556180 0.04790460     0.0385 0.0370 0.0340 0.0004997501</span></span>
-<span><span class="co">## [45,] 0.2554945 0.04811561     0.0340 0.0310 0.0345 0.0004997501</span></span>
-<span><span class="co">## [46,] 0.2553763 0.04833021     0.0355 0.0365 0.0410 0.0004997501</span></span>
-<span><span class="co">## [47,] 0.2552632 0.04854768     0.0385 0.0385 0.0325 0.0004997501</span></span>
-<span><span class="co">## [48,] 0.2551546 0.04876741     0.0400 0.0380 0.0335 0.0004997501</span></span>
-<span><span class="co">## [49,] 0.2550505 0.04898884     0.0340 0.0460 0.0380 0.0004997501</span></span>
-<span><span class="co">## [50,] 0.2549505 0.04921147     0.0350 0.0385 0.0415 0.0004997501</span></span>
-<span><span class="co">## [51,] 0.2548544 0.04943486     0.0405 0.0355 0.0440 0.0004997501</span></span>
-<span><span class="co">## [52,] 0.2547619 0.04965863     0.0330 0.0425 0.0375 0.0004997501</span></span>
-<span><span class="co">## [53,] 0.2546729 0.04988242     0.0365 0.0360 0.0305 0.0004997501</span></span>
-<span><span class="co">## [54,] 0.2545872 0.05010595     0.0345 0.0330 0.0375 0.0004997501</span></span>
-<span><span class="co">## [55,] 0.2545045 0.05032893     0.0335 0.0415 0.0390 0.0004997501</span></span>
-<span><span class="co">## [56,] 0.2544248 0.05055114     0.0310 0.0315 0.0315 0.0004997501</span></span>
-<span><span class="co">## [57,] 0.2543478 0.05077235     0.0300 0.0265 0.0420 0.0004997501</span></span>
-<span><span class="co">## [58,] 0.2542735 0.05099239     0.0400 0.0360 0.0310 0.0004997501</span></span>
-<span><span class="co">## [59,] 0.2542017 0.05121109     0.0410 0.0340 0.0310 0.0004997501</span></span>
-<span><span class="co">## [60,] 0.2541322 0.05142831     0.0320 0.0345 0.0320 0.0004997501</span></span>
-<span><span class="co">## [61,] 0.2540650 0.05164393     0.0340 0.0305 0.0320 0.0004997501</span></span>
-<span><span class="co">## [62,] 0.2540000 0.05185784     0.0365 0.0345 0.0375 0.0004997501</span></span>
-<span><span class="co">## [63,] 0.2539370 0.05206995     0.0390 0.0405 0.0340 0.0004997501</span></span>
-<span><span class="co">## [64,] 0.2538760 0.05228018     0.0295 0.0355 0.0305 0.0004997501</span></span>
-<span><span class="co">## [65,] 0.2538168 0.05248845     0.0265 0.0305 0.0390 0.0004997501</span></span>
-<span><span class="co">## [66,] 0.2537594 0.05269472     0.0335 0.0285 0.0385 0.0004997501</span></span>
-<span><span class="co">## [67,] 0.2537037 0.05289893     0.0350 0.0420 0.0410 0.0004997501</span></span>
-<span><span class="co">## [68,] 0.2536496 0.05310105     0.0350 0.0365 0.0385 0.0004997501</span></span>
-<span><span class="co">## [69,] 0.2535971 0.05330104     0.0305 0.0365 0.0335 0.0004997501</span></span>
-<span><span class="co">## [70,] 0.2535461 0.05349888     0.0280 0.0280 0.0370 0.0004997501</span></span>
-<span><span class="co">## [71,] 0.2534965 0.05369454     0.0340 0.0315 0.0290 0.0004997501</span></span>
-<span><span class="co">## [72,] 0.2534483 0.05388802     0.0290 0.0330 0.0360 0.0004997501</span></span>
-<span><span class="co">## [73,] 0.2534014 0.05407930     0.0350 0.0430 0.0375 0.0004997501</span></span>
-<span><span class="co">## [74,] 0.2533557 0.05426839     0.0295 0.0350 0.0320 0.0004997501</span></span>
-<span><span class="co">## [75,] 0.2533113 0.05445527     0.0325 0.0325 0.0305 0.0004997501</span></span>
-<span><span class="co">## [76,] 0.2532680 0.05463995     0.0335 0.0345 0.0325 0.0004997501</span></span>
-<span><span class="co">## [77,] 0.2532258 0.05482244     0.0300 0.0350 0.0220 0.0004997501</span></span>
-<span><span class="co">## [78,] 0.2531847 0.03529458     0.0315 0.0330 0.0300 0.0004997501</span></span></code></pre>
+<span><span class="co">##  [1,] 0.4166667 0.20948617     0.0705 0.1175 0.1280 0.1634182909</span></span>
+<span><span class="co">##  [2,] 0.3500000 0.28326746     0.1165 0.1055 0.1370 0.0919540230</span></span>
+<span><span class="co">##  [3,] 0.3214286 0.17506841     0.1115 0.1010 0.1265 0.0739630185</span></span>
+<span><span class="co">##  [4,] 0.3055556 0.20467538     0.1155 0.0955 0.1090 0.0589705147</span></span>
+<span><span class="co">##  [5,] 0.2954545 0.13181103     0.1090 0.0950 0.1010 0.0394802599</span></span>
+<span><span class="co">##  [6,] 0.2884615 0.14213458     0.1100 0.0880 0.0890 0.0234882559</span></span>
+<span><span class="co">##  [7,] 0.2833333 0.15672314     0.0880 0.0790 0.0885 0.0194902549</span></span>
+<span><span class="co">##  [8,] 0.2794118 0.10138414     0.0940 0.0700 0.0795 0.0134932534</span></span>
+<span><span class="co">##  [9,] 0.2763158 0.10534027     0.0780 0.0615 0.0910 0.0064967516</span></span>
+<span><span class="co">## [10,] 0.2738095 0.11089814     0.0670 0.0575 0.0815 0.0109945027</span></span>
+<span><span class="co">## [11,] 0.2717391 0.11750154     0.0680 0.0695 0.0690 0.0049975012</span></span>
+<span><span class="co">## [12,] 0.2700000 0.07769381     0.0685 0.0660 0.0635 0.0059970015</span></span>
+<span><span class="co">## [13,] 0.2685185 0.07887317     0.0600 0.0590 0.0660 0.0014992504</span></span>
+<span><span class="co">## [14,] 0.2672414 0.08061039     0.0605 0.0585 0.0595 0.0014992504</span></span>
+<span><span class="co">## [15,] 0.2661290 0.08276810     0.0575 0.0580 0.0625 0.0009995002</span></span>
+<span><span class="co">## [16,] 0.2651515 0.08523730     0.0555 0.0545 0.0480 0.0014992504</span></span>
+<span><span class="co">## [17,] 0.2642857 0.08793188     0.0580 0.0570 0.0570 0.0019990005</span></span>
+<span><span class="co">## [18,] 0.2635135 0.09078398     0.0490 0.0565 0.0600 0.0004997501</span></span>
+<span><span class="co">## [19,] 0.2628205 0.09374027     0.0475 0.0445 0.0490 0.0009995002</span></span>
+<span><span class="co">## [20,] 0.2621951 0.06031279     0.0540 0.0540 0.0595 0.0009995002</span></span>
+<span><span class="co">## [21,] 0.2616279 0.06080833     0.0575 0.0500 0.0530 0.0004997501</span></span>
+<span><span class="co">## [22,] 0.2611111 0.06141565     0.0430 0.0510 0.0470 0.0004997501</span></span>
+<span><span class="co">## [23,] 0.2606383 0.06211375     0.0485 0.0470 0.0480 0.0004997501</span></span>
+<span><span class="co">## [24,] 0.2602041 0.06288506     0.0480 0.0415 0.0455 0.0004997501</span></span>
+<span><span class="co">## [25,] 0.2598039 0.06371480     0.0460 0.0520 0.0420 0.0004997501</span></span>
+<span><span class="co">## [26,] 0.2594340 0.06459058     0.0395 0.0485 0.0515 0.0004997501</span></span>
+<span><span class="co">## [27,] 0.2590909 0.06550200     0.0490 0.0495 0.0525 0.0004997501</span></span>
+<span><span class="co">## [28,] 0.2587719 0.06644033     0.0530 0.0415 0.0480 0.0004997501</span></span>
+<span><span class="co">## [29,] 0.2584746 0.06739822     0.0430 0.0445 0.0410 0.0004997501</span></span>
+<span><span class="co">## [30,] 0.2581967 0.06836952     0.0380 0.0395 0.0535 0.0004997501</span></span>
+<span><span class="co">## [31,] 0.2579365 0.06934906     0.0470 0.0435 0.0405 0.0004997501</span></span>
+<span><span class="co">## [32,] 0.2576923 0.07033254     0.0360 0.0440 0.0485 0.0004997501</span></span>
+<span><span class="co">## [33,] 0.2574627 0.07131633     0.0445 0.0445 0.0420 0.0004997501</span></span>
+<span><span class="co">## [34,] 0.2572464 0.07229742     0.0375 0.0445 0.0420 0.0004997501</span></span>
+<span><span class="co">## [35,] 0.2570423 0.04633836     0.0335 0.0440 0.0430 0.0004997501</span></span>
+<span><span class="co">## [36,] 0.2568493 0.04646593     0.0375 0.0355 0.0445 0.0004997501</span></span>
+<span><span class="co">## [37,] 0.2566667 0.04660925     0.0435 0.0390 0.0390 0.0004997501</span></span>
+<span><span class="co">## [38,] 0.2564935 0.04676622     0.0380 0.0360 0.0430 0.0004997501</span></span>
+<span><span class="co">## [39,] 0.2563291 0.04693498     0.0340 0.0415 0.0370 0.0004997501</span></span>
+<span><span class="co">## [40,] 0.2561728 0.04711391     0.0410 0.0415 0.0410 0.0004997501</span></span>
+<span><span class="co">## [41,] 0.2560241 0.04730155     0.0365 0.0400 0.0420 0.0004997501</span></span>
+<span><span class="co">## [42,] 0.2558824 0.04749662     0.0310 0.0440 0.0380 0.0004997501</span></span>
+<span><span class="co">## [43,] 0.2557471 0.04769797     0.0320 0.0320 0.0420 0.0004997501</span></span>
+<span><span class="co">## [44,] 0.2556180 0.04790460     0.0350 0.0385 0.0390 0.0004997501</span></span>
+<span><span class="co">## [45,] 0.2554945 0.04811561     0.0350 0.0295 0.0420 0.0004997501</span></span>
+<span><span class="co">## [46,] 0.2553763 0.04833021     0.0390 0.0310 0.0365 0.0004997501</span></span>
+<span><span class="co">## [47,] 0.2552632 0.04854768     0.0345 0.0395 0.0400 0.0004997501</span></span>
+<span><span class="co">## [48,] 0.2551546 0.04876741     0.0355 0.0325 0.0345 0.0004997501</span></span>
+<span><span class="co">## [49,] 0.2550505 0.04898884     0.0365 0.0375 0.0445 0.0004997501</span></span>
+<span><span class="co">## [50,] 0.2549505 0.04921147     0.0290 0.0385 0.0350 0.0004997501</span></span>
+<span><span class="co">## [51,] 0.2548544 0.04943486     0.0375 0.0395 0.0380 0.0004997501</span></span>
+<span><span class="co">## [52,] 0.2547619 0.04965863     0.0430 0.0365 0.0350 0.0004997501</span></span>
+<span><span class="co">## [53,] 0.2546729 0.04988242     0.0385 0.0420 0.0410 0.0004997501</span></span>
+<span><span class="co">## [54,] 0.2545872 0.05010595     0.0380 0.0345 0.0335 0.0004997501</span></span>
+<span><span class="co">## [55,] 0.2545045 0.05032893     0.0460 0.0435 0.0355 0.0004997501</span></span>
+<span><span class="co">## [56,] 0.2544248 0.05055114     0.0330 0.0360 0.0320 0.0004997501</span></span>
+<span><span class="co">## [57,] 0.2543478 0.05077235     0.0290 0.0380 0.0355 0.0004997501</span></span>
+<span><span class="co">## [58,] 0.2542735 0.05099239     0.0300 0.0370 0.0395 0.0004997501</span></span>
+<span><span class="co">## [59,] 0.2542017 0.05121109     0.0300 0.0375 0.0390 0.0004997501</span></span>
+<span><span class="co">## [60,] 0.2541322 0.05142831     0.0350 0.0295 0.0465 0.0004997501</span></span>
+<span><span class="co">## [61,] 0.2540650 0.05164393     0.0390 0.0335 0.0385 0.0004997501</span></span>
+<span><span class="co">## [62,] 0.2540000 0.05185784     0.0365 0.0315 0.0360 0.0004997501</span></span>
+<span><span class="co">## [63,] 0.2539370 0.05206995     0.0335 0.0370 0.0310 0.0004997501</span></span>
+<span><span class="co">## [64,] 0.2538760 0.05228018     0.0365 0.0335 0.0365 0.0004997501</span></span>
+<span><span class="co">## [65,] 0.2538168 0.05248845     0.0280 0.0380 0.0375 0.0004997501</span></span>
+<span><span class="co">## [66,] 0.2537594 0.05269472     0.0350 0.0345 0.0390 0.0004997501</span></span>
+<span><span class="co">## [67,] 0.2537037 0.05289893     0.0340 0.0355 0.0315 0.0004997501</span></span>
+<span><span class="co">## [68,] 0.2536496 0.05310105     0.0305 0.0280 0.0335 0.0004997501</span></span>
+<span><span class="co">## [69,] 0.2535971 0.05330104     0.0345 0.0310 0.0385 0.0004997501</span></span>
+<span><span class="co">## [70,] 0.2535461 0.05349888     0.0355 0.0300 0.0335 0.0004997501</span></span>
+<span><span class="co">## [71,] 0.2534965 0.05369454     0.0390 0.0335 0.0335 0.0004997501</span></span>
+<span><span class="co">## [72,] 0.2534483 0.05388802     0.0335 0.0310 0.0280 0.0004997501</span></span>
+<span><span class="co">## [73,] 0.2534014 0.05407930     0.0310 0.0300 0.0325 0.0004997501</span></span>
+<span><span class="co">## [74,] 0.2533557 0.05426839     0.0255 0.0285 0.0275 0.0004997501</span></span>
+<span><span class="co">## [75,] 0.2533113 0.05445527     0.0300 0.0395 0.0310 0.0004997501</span></span>
+<span><span class="co">## [76,] 0.2532680 0.05463995     0.0310 0.0350 0.0300 0.0004997501</span></span>
+<span><span class="co">## [77,] 0.2532258 0.05482244     0.0315 0.0285 0.0355 0.0004997501</span></span>
+<span><span class="co">## [78,] 0.2531847 0.03529458     0.0320 0.0360 0.0355 0.0004997501</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
