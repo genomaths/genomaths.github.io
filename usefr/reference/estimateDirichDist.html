@@ -160,41 +160,41 @@ parameter values.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#' ## A random generation numerical vectors with</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="dirichlet.html">rdirichlet</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">1.2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              a1        a2         a3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.20437575 0.5674853 0.22813898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.59144069 0.2481511 0.16040817</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.03738616 0.7977326 0.16488121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.44939746 0.4879794 0.06262318</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.53398078 0.3727120 0.09330724</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.36024726 0.4920264 0.14772637</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             a1        a2         a3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.4168350 0.5197227 0.06344232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.1273661 0.5615770 0.31105695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.2937281 0.5000729 0.20619906</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.1761859 0.5912126 0.23260156</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.6001897 0.3025950 0.09721535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.2455860 0.4635076 0.29090639</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">estimateDirichDist</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $alpha</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.221016 3.238272 1.186494</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.211949 3.462360 1.231335</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $marginals</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $marginals$a1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate  Std.Error  t_value Pr(&gt;|t|) Adj.R.Square       rho R.Cross.val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 2.221016 0.01133571 195.9309   &lt;1e-16    0.9999989 0.9999989    0.999779</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape2 4.818232 0.03163860 152.2897   &lt;1e-16           NA        NA          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             AIC       BIC    n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 -7334.36 -7319.636 1000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape2       NA        NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 2.211949 0.01144309 193.2999   &lt;1e-16    0.9999984 0.9999984   0.9996673</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape2 4.722073 0.03163860 149.2504   &lt;1e-16           NA        NA          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              AIC      BIC    n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 -6935.663 -6920.94 1000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape2        NA       NA   NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $marginals$a2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate  Std.Error  t_value Pr(&gt;|t|) Adj.R.Square       rho R.Cross.val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 3.238272 0.01663807 194.6302   &lt;1e-16    0.9999985 0.9999985   0.9997342</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape2 3.307835 0.03163860 104.5506   &lt;1e-16           NA        NA          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              AIC       BIC    n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 -7163.615 -7148.891 1000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape2        NA        NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate Std.Error  t_value Pr(&gt;|t|) Adj.R.Square       rho R.Cross.val</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 3.462360 0.0165572 209.1151   &lt;1e-16    0.9999983 0.9999983   0.9997052</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape2 3.578023 0.0316386 113.0904   &lt;1e-16           NA        NA          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             AIC       BIC    n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 -7035.97 -7021.247 1000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape2       NA        NA   NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $marginals$a3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Estimate   Std.Error  t_value Pr(&gt;|t|) Adj.R.Square       rho</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 1.186494 0.007451667 159.2253   &lt;1e-16    0.9999991 0.9999991</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape2 5.031401 0.031638600 159.0273   &lt;1e-16           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape1 1.231335 0.007393049 166.5531   &lt;1e-16    0.9999993 0.9999993</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape2 5.262551 0.031638600 166.3332   &lt;1e-16           NA        NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        R.Cross.val       AIC       BIC    n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape1   0.9997418 -7200.144 -7185.421 1000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> shape1   0.9997919 -7374.791 -7360.067 1000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> shape2          NA        NA        NA   NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
