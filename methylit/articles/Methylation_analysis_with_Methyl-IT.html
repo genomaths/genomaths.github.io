@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6.3</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@ Mackenzie’s lab<br><br>
 Department of Biology and Plant Science.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 data-toc-skip class="date">08 February 2023</h4>
+            <h4 data-toc-skip class="date">25 April 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/Methylation_analysis_with_Methyl-IT.Rmd" class="external-link"><code>vignettes/Methylation_analysis_with_Methyl-IT.Rmd</code></a></small>
       <div class="hidden name"><code>Methylation_analysis_with_Methyl-IT.Rmd</code></div>
@@ -693,15 +693,10 @@ correction, bay.TV)</p>
 <span>                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                                        wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>                            n.pc <span class="op">=</span> <span class="fl">4</span> , center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                            div.col <span class="op">=</span> <span class="fl">9</span>, clas.perf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<pre><code><span><span class="co">## Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span></span></code></pre></div>
+<span>                            div.col <span class="op">=</span> <span class="fl">9</span>, clas.perf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 131.5809</span></span></code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint</span><span class="op">$</span><span class="va">testSetPerformance</span></span></code></pre></div>
 <pre><code><span><span class="co">## Confusion Matrix and Statistics</span></span>
 <span><span class="co">## </span></span>
@@ -730,7 +725,7 @@ correction, bay.TV)</p>
 <span><span class="co">##                                      </span></span>
 <span><span class="co">##        'Positive' Class : TT         </span></span>
 <span><span class="co">## </span></span></code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint</span><span class="op">$</span><span class="va">testSetModel.FDR</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
@@ -739,7 +734,7 @@ correction, bay.TV)</p>
 </h4>
 <p>The best classification performance based PS estimated based on FT
 are obtained with the application of <a href="https://is.gd/t8UKvK" class="external-link">Youden index</a> <span class="citation">(10)</span>.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint2</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.tv</span>, </span>
 <span>                            control.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span><span class="op">)</span>, </span>
 <span>                            treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span><span class="op">)</span>,</span>
@@ -752,7 +747,7 @@ are obtained with the application of <a href="https://is.gd/t8UKvK" class="exter
 <span>                            post.cut <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="va">cutpoint2</span><span class="op">$</span><span class="va">cutpoint</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 99.94609</span></span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint2</span><span class="op">$</span><span class="va">testSetPerformance</span></span></code></pre></div>
 <pre><code><span><span class="co">## Confusion Matrix and Statistics</span></span>
 <span><span class="co">## </span></span>
@@ -781,13 +776,13 @@ are obtained with the application of <a href="https://is.gd/t8UKvK" class="exter
 <span><span class="co">##                                          </span></span>
 <span><span class="co">##        'Positive' Class : TT             </span></span>
 <span><span class="co">## </span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint2</span><span class="op">$</span><span class="va">testSetModel.FDR</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0.008695652</span></span></code></pre>
 <p>Addition of information on the probability distribution of the
 methylation signal to potential signal identified with FT will emulate
 the results obtained with the Methyl-IT pipeline.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint3</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.hd</span>, </span>
 <span>                            control.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C1"</span>,<span class="st">"C2"</span>, <span class="st">"C3"</span><span class="op">)</span>, </span>
 <span>                            treatment.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T1"</span>, <span class="st">"T2"</span>, <span class="st">"T3"</span><span class="op">)</span>,</span>
@@ -800,7 +795,7 @@ the results obtained with the Methyl-IT pipeline.</p>
 <span>                            div.col <span class="op">=</span> <span class="fl">9</span>, clas.perf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">cutpoint3</span><span class="op">$</span><span class="va">cutpoint</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 131.5809</span></span></code></pre>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint3</span><span class="op">$</span><span class="va">testSetPerformance</span></span></code></pre></div>
 <pre><code><span><span class="co">## Confusion Matrix and Statistics</span></span>
 <span><span class="co">## </span></span>
@@ -829,7 +824,7 @@ the results obtained with the Methyl-IT pipeline.</p>
 <span><span class="co">##                                      </span></span>
 <span><span class="co">##        'Positive' Class : TT         </span></span>
 <span><span class="co">## </span></span></code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutpoint3</span><span class="op">$</span><span class="va">testSetModel.FDR</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 <p>Therefore, invoking the parsimony principle, we assume that signal
@@ -841,7 +836,7 @@ detection and machine-learning classifiers are sufficient <span class="citation"
 <p>Cytosine sites carrying a methylation signal are designated
 differentially informative methylated positions (DMPs). With high
 probability true DMPs can be selected with Methyl-IT function <a href="https://is.gd/7cVEEd" class="external-link">selectDIMP</a>.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">DMPs</span> <span class="op">=</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">PS</span>, div.col <span class="op">=</span> <span class="fl">9</span>, cutpoint <span class="op">=</span> <span class="va">cutpoint</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="evaluation-of-dmp-classification">Evaluation of DMP classification<a class="anchor" aria-label="anchor" href="#evaluation-of-dmp-classification"></a>
@@ -865,7 +860,7 @@ subsets: training (60%) and testing (40%). A good classification
 performance report would be just the result from a lucky split of the
 set of samples! Hence, what would happen if the random split and further
 analysis are repeated 300 times?</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">class.perf</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">DMPs</span>, control.names <span class="op">=</span> <span class="va">control.nam</span>,</span>
 <span>                            treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>,</span>
 <span>                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, </span>

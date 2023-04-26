@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6.3</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@ Mackenzie’s lab<br><br>
 Department of Biology.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 data-toc-skip class="date">08 February 2023</h4>
+            <h4 data-toc-skip class="date">25 April 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd" class="external-link"><code>vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd</code></a></small>
       <div class="hidden name"><code>Cutpoint_estimation_with_Methyl-IT.Rmd</code></div>
@@ -440,11 +440,8 @@ cutpoint, based on <em>HD</em> (<em>div.col</em> = 9L) or on <span class="math i
 <span>                            treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>,</span>
 <span>                            center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                            clas.perf <span class="op">=</span> <span class="cn">TRUE</span>, prop <span class="op">=</span> <span class="fl">0.6</span>,</span>
-<span>                            div.col <span class="op">=</span> <span class="fl">9L</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cut.g2p</span></span></code></pre></div>
+<span>                            div.col <span class="op">=</span> <span class="fl">9L</span><span class="op">)</span></span>
+<span><span class="va">cut.g2p</span></span></code></pre></div>
 <pre><code><span><span class="co">## Cutpoint estimation with 'Youden Index' </span></span>
 <span><span class="co">## Simple cutpoint estimation </span></span>
 <span><span class="co">## Cutpoint = 114.22 </span></span>
@@ -468,7 +465,7 @@ cutpoint, based on <em>HD</em> (<em>div.col</em> = 9L) or on <span class="math i
 <span><span class="co">## initModelConfMatrix 6      confusionMatrix list</span></span></code></pre>
 <p>As indicated above, the model classifier performance and its
 corresponding false discovery rate can be retrieved as:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetPerformance</span></span></code></pre></div>
 <pre><code><span><span class="co">## Confusion Matrix and Statistics</span></span>
 <span><span class="co">## </span></span>
@@ -497,7 +494,7 @@ corresponding false discovery rate can be retrieved as:</p>
 <span><span class="co">##                                     </span></span>
 <span><span class="co">##        'Positive' Class : TT        </span></span>
 <span><span class="co">## </span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetModel.FDR</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 <p>Here, DMP classification is modeled with PCA+QDA classifier
@@ -515,7 +512,7 @@ previous cutpoint estimation.</p>
 </h4>
 <p>The same analyses for the cutpoint estimation can be performed for 3P
 gamma model</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Cutpoint estimation for the FT approach using the ECDF critical value</span></span>
 <span><span class="va">cut.g3p</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">pDMPs.g3p</span>, simple <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, </span>
@@ -550,7 +547,7 @@ gamma model</p>
 <span><span class="co">## initModelConfMatrix 6      confusionMatrix list</span></span></code></pre>
 <p>As indicated above, the model classifier performance and its
 corresponding false discovery rate can be retrieved as:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g3p</span><span class="op">$</span><span class="va">testSetPerformance</span></span></code></pre></div>
 <pre><code><span><span class="co">## Confusion Matrix and Statistics</span></span>
 <span><span class="co">## </span></span>
@@ -579,7 +576,7 @@ corresponding false discovery rate can be retrieved as:</p>
 <span><span class="co">##                                     </span></span>
 <span><span class="co">##        'Positive' Class : TT        </span></span>
 <span><span class="co">## </span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g3p</span><span class="op">$</span><span class="va">testSetModel.FDR</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 </div>
@@ -589,7 +586,7 @@ corresponding false discovery rate can be retrieved as:</p>
 <p>The model obtained in the previous step can be used for further
 prediction with function <a href="https://genomaths.github.io/methylit/reference/pcaLDA.html">predict</a>.
 For example, we would take a random sample and run:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">randsampl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="va">pDMPs.g3p</span><span class="op">)</span></span>
 <span><span class="va">randsampl</span> <span class="op">&lt;-</span> <span class="va">randsampl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">randsampl</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span><span class="op">]</span></span>
@@ -633,14 +630,14 @@ values in the linear discriminant function LD1. Notice that, for each
 row, the sum of posterior probabilities is equal 1. By default,
 individuals with <em>TT</em> posterior probabilities greater than 0.5
 are predicted to belong to the treatment class. For example:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">classfiction</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"CT"</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">classfiction</span><span class="op">[</span><span class="va">pred</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"TT"</span></span>
 <span><span class="va">classfiction</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "CT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT" "TT"</span></span></code></pre>
 <p>We can be more strict increasing the posterior classification
 probability cutoff</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">classfiction</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"CT"</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">classfiction</span><span class="op">[</span><span class="va">pred</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.7</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"TT"</span></span>
 <span><span class="va">classfiction</span></span></code></pre></div>
@@ -673,7 +670,7 @@ model<a class="anchor" aria-label="anchor" href="#ml-cutpoint-estimation-for-pot
 <p>The ML search for an optimal cutpoint is accomplished in the set of
 potential DMPs, which were identified using a Gamma2P probability
 distribution model as null hypothesis.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g2p</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">pDMPs.g2p</span>, simple <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, bay.TV <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                                        wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
@@ -683,11 +680,8 @@ distribution model as null hypothesis.</p>
 <span>                            treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>, </span>
 <span>                            cut.values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">114</span>, <span class="fl">1</span><span class="op">)</span>, post.cut <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>                            prop <span class="op">=</span> <span class="fl">0.6</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                            n.pc <span class="op">=</span> <span class="fl">4</span>, div.col <span class="op">=</span> <span class="fl">9L</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cut.g2p</span></span></code></pre></div>
+<span>                            n.pc <span class="op">=</span> <span class="fl">4</span>, div.col <span class="op">=</span> <span class="fl">9L</span><span class="op">)</span></span>
+<span><span class="va">cut.g2p</span></span></code></pre></div>
 <pre><code><span><span class="co">## Cutpoint estimation with 'pca.lda' classifier </span></span>
 <span><span class="co">## Cutpoint search performed using model posterior probabilities </span></span>
 <span><span class="co">## </span></span>
@@ -715,7 +709,7 @@ distribution model as null hypothesis.</p>
 <span><span class="co">## optStatVal         1      -none-          numeric  </span></span>
 <span><span class="co">## cutpData           1      -none-          logical</span></span></code></pre>
 <p>Model performance in the test dataset is:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetPerformance</span></span></code></pre></div>
 <pre><code><span><span class="co">## Confusion Matrix and Statistics</span></span>
 <span><span class="co">## </span></span>
@@ -745,7 +739,7 @@ distribution model as null hypothesis.</p>
 <span><span class="co">##        'Positive' Class : TT         </span></span>
 <span><span class="co">## </span></span></code></pre>
 <p>Model performance in in the whole dataset is:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g2p</span><span class="op">$</span><span class="va">modelConfMatrix</span></span></code></pre></div>
 <pre><code><span><span class="co">## Confusion Matrix and Statistics</span></span>
 <span><span class="co">## </span></span>
@@ -775,7 +769,7 @@ distribution model as null hypothesis.</p>
 <span><span class="co">##        'Positive' Class : TT         </span></span>
 <span><span class="co">## </span></span></code></pre>
 <p>The False discovery rate is:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g2p</span><span class="op">$</span><span class="va">testSetModel.FDR</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 <p>The model classifier <em>PCA+LDA</em> has enough discriminatory power
@@ -785,7 +779,7 @@ HD\)</span>.</p>
 <p>The probabilities <span class="math inline">\(P(HD \le
 122.43)\)</span> to observe a cytosine site with <span class="math inline">\(HD \le 112.4247\)</span> on each individual
 is:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">nlms.g2p</span><span class="op">)</span></span>
 <span><span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">nlms.g2p</span>, </span>
 <span>                    <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> </span>
@@ -808,7 +802,7 @@ model<a class="anchor" aria-label="anchor" href="#ml-cutpoint-estimation-for-pot
 </h4>
 <p>Likewise, for the 3-parameter gamma model we can search for an
 optimal cutpoint:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cut.g3p</span> <span class="op">=</span> <span class="fu"><a href="../reference/estimateCutPoint.html">estimateCutPoint</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">pDMPs.g3p</span>, simple <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                                        wprob <span class="op">=</span> <span class="cn">TRUE</span>, pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
@@ -848,7 +842,7 @@ optimal cutpoint:</p>
 <span><span class="co">## optStatVal         1      -none-          numeric  </span></span>
 <span><span class="co">## cutpData           1      -none-          logical</span></span></code></pre>
 <p>DMPs are identified with function <a href="https://is.gd/7cVEEd" class="external-link">selectDIMP</a></p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g2p.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">pDMPs.g2p</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, cutpoint <span class="op">=</span> <span class="va">cut.g2p</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span></span>
 <span><span class="va">g3p.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">pDMPs.g3p</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, cutpoint <span class="op">=</span> <span class="va">cut.g3p</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -858,7 +852,7 @@ optimal cutpoint:</p>
 </h3>
 <p>For comparison purposes DMPs are estimated with Fisher’s exact test
 as well.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ft.</span> <span class="op">=</span> <span class="fu"><a href="../reference/FisherTest.html">FisherTest</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, tv.cut <span class="op">=</span> <span class="fl">0.68</span>, </span>
 <span>                 pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,</span>
 <span>                 pvalCutOff <span class="op">=</span> <span class="fl">0.05</span>, </span>
@@ -878,7 +872,7 @@ settings <em>output = “mc.val”</em> and <em>num.boot</em>.</p>
 <div class="section level4">
 <h4 id="classification-performance-for-dmps-based-on-gamma2p-model">Classification performance for DMPs based on Gamma2P model<a class="anchor" aria-label="anchor" href="#classification-performance-for-dmps-based-on-gamma2p-model"></a>
 </h4>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g2p.class</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">g2p.dmps</span>, control.names <span class="op">=</span> <span class="va">control.nam</span>,</span>
 <span>                            treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>,</span>
 <span>                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -926,7 +920,7 @@ settings <em>output = “mc.val”</em> and <em>num.boot</em>.</p>
 </h4>
 <p>Likewise the evaluation of the DMP classification performance can be
 accomplished for DMPs estimated based on the <span class="math inline">\('Gamma3P'\)</span> model:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g3p.class</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">g3p.dmps</span>, control.names <span class="op">=</span> <span class="va">control.nam</span>,</span>
 <span>                            treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>,</span>
 <span>                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, </span>
@@ -980,7 +974,7 @@ test<a class="anchor" aria-label="anchor" href="#classification-performance-for-
 <p>Classification performance results obtained with Monte Carlos
 sampling for the <span class="math inline">\(Gamma2P\)</span> and <span class="math inline">\(Gamma3P\)</span> models are quite different from
 those obtained with FT:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ft.class</span> <span class="op">=</span> <span class="fu"><a href="../reference/evaluateDIMPclass.html">evaluateDIMPclass</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.dmps</span>, control.names <span class="op">=</span> <span class="va">control.nam</span>,</span>
 <span>                            treatment.names <span class="op">=</span> <span class="va">treatment.nam</span>, </span>
 <span>                            column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>hdiv <span class="op">=</span> <span class="cn">TRUE</span>, TV <span class="op">=</span> <span class="cn">TRUE</span>, </span>
@@ -991,43 +985,43 @@ those obtained with FT:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">ft.class</span><span class="op">$</span><span class="va">mc.val</span></span></code></pre></div>
 <pre><code><span><span class="co">##     Accuracy          Kappa           AccuracyLower    AccuracyUpper   </span></span>
-<span><span class="co">##  Min.   :0.8084   Min.   :-0.001334   Min.   :0.8010   Min.   :0.8156  </span></span>
-<span><span class="co">##  1st Qu.:0.8104   1st Qu.: 0.005460   1st Qu.:0.8030   1st Qu.:0.8177  </span></span>
-<span><span class="co">##  Median :0.8111   Median : 0.007802   Median :0.8037   Median :0.8183  </span></span>
-<span><span class="co">##  Mean   :0.8110   Mean   : 0.007737   Mean   :0.8036   Mean   :0.8182  </span></span>
-<span><span class="co">##  3rd Qu.:0.8115   3rd Qu.: 0.010172   3rd Qu.:0.8041   3rd Qu.:0.8187  </span></span>
-<span><span class="co">##  Max.   :0.8130   Max.   : 0.020023   Max.   :0.8057   Max.   :0.8202  </span></span>
+<span><span class="co">##  Min.   :0.8086   Min.   :-0.003575   Min.   :0.8011   Min.   :0.8158  </span></span>
+<span><span class="co">##  1st Qu.:0.8103   1st Qu.: 0.005048   1st Qu.:0.8030   1st Qu.:0.8176  </span></span>
+<span><span class="co">##  Median :0.8108   Median : 0.007429   Median :0.8034   Median :0.8180  </span></span>
+<span><span class="co">##  Mean   :0.8109   Mean   : 0.007384   Mean   :0.8035   Mean   :0.8181  </span></span>
+<span><span class="co">##  3rd Qu.:0.8114   3rd Qu.: 0.009674   3rd Qu.:0.8040   3rd Qu.:0.8186  </span></span>
+<span><span class="co">##  Max.   :0.8132   Max.   : 0.018501   Max.   :0.8059   Max.   :0.8204  </span></span>
 <span><span class="co">##   AccuracyNull    AccuracyPValue   McnemarPValue  Sensitivity    </span></span>
-<span><span class="co">##  Min.   :0.8188   Min.   :0.9456   Min.   :0     Min.   :0.9836  </span></span>
-<span><span class="co">##  1st Qu.:0.8188   1st Qu.:0.9781   1st Qu.:0     1st Qu.:0.9857  </span></span>
-<span><span class="co">##  Median :0.8188   Median :0.9837   Median :0     Median :0.9864  </span></span>
-<span><span class="co">##  Mean   :0.8188   Mean   :0.9821   Mean   :0     Mean   :0.9863  </span></span>
-<span><span class="co">##  3rd Qu.:0.8188   3rd Qu.:0.9895   3rd Qu.:0     3rd Qu.:0.9869  </span></span>
-<span><span class="co">##  Max.   :0.8188   Max.   :0.9979   Max.   :0     Max.   :0.9889  </span></span>
+<span><span class="co">##  Min.   :0.8188   Min.   :0.9400   Min.   :0     Min.   :0.9835  </span></span>
+<span><span class="co">##  1st Qu.:0.8188   1st Qu.:0.9794   1st Qu.:0     1st Qu.:0.9855  </span></span>
+<span><span class="co">##  Median :0.8188   Median :0.9865   Median :0     Median :0.9861  </span></span>
+<span><span class="co">##  Mean   :0.8188   Mean   :0.9836   Mean   :0     Mean   :0.9862  </span></span>
+<span><span class="co">##  3rd Qu.:0.8188   3rd Qu.:0.9902   3rd Qu.:0     3rd Qu.:0.9868  </span></span>
+<span><span class="co">##  Max.   :0.8188   Max.   :0.9976   Max.   :0     Max.   :0.9895  </span></span>
 <span><span class="co">##   Specificity      Pos Pred Value   Neg Pred Value     Precision     </span></span>
-<span><span class="co">##  Min.   :0.01331   Min.   :0.8187   Min.   :0.1732   Min.   :0.8187  </span></span>
-<span><span class="co">##  1st Qu.:0.01726   1st Qu.:0.8194   1st Qu.:0.2159   1st Qu.:0.8194  </span></span>
-<span><span class="co">##  Median :0.01874   Median :0.8196   Median :0.2327   Median :0.8196  </span></span>
-<span><span class="co">##  Mean   :0.01865   Mean   :0.8196   Mean   :0.2317   Mean   :0.8196  </span></span>
-<span><span class="co">##  3rd Qu.:0.02022   3rd Qu.:0.8198   3rd Qu.:0.2484   3rd Qu.:0.8198  </span></span>
-<span><span class="co">##  Max.   :0.02564   Max.   :0.8208   Max.   :0.3077   Max.   :0.8208  </span></span>
+<span><span class="co">##  Min.   :0.01233   Min.   :0.8185   Min.   :0.1572   Min.   :0.8185  </span></span>
+<span><span class="co">##  1st Qu.:0.01726   1st Qu.:0.8193   1st Qu.:0.2137   1st Qu.:0.8193  </span></span>
+<span><span class="co">##  Median :0.01874   Median :0.8195   Median :0.2289   Median :0.8195  </span></span>
+<span><span class="co">##  Mean   :0.01859   Mean   :0.8195   Mean   :0.2290   Mean   :0.8195  </span></span>
+<span><span class="co">##  3rd Qu.:0.02022   3rd Qu.:0.8198   3rd Qu.:0.2432   3rd Qu.:0.8198  </span></span>
+<span><span class="co">##  Max.   :0.02613   Max.   :0.8206   Max.   :0.2994   Max.   :0.8206  </span></span>
 <span><span class="co">##      Recall             F1           Prevalence     Detection Rate  </span></span>
-<span><span class="co">##  Min.   :0.9836   Min.   :0.8937   Min.   :0.8188   Min.   :0.8054  </span></span>
-<span><span class="co">##  1st Qu.:0.9857   1st Qu.:0.8949   1st Qu.:0.8188   1st Qu.:0.8071  </span></span>
-<span><span class="co">##  Median :0.9864   Median :0.8953   Median :0.8188   Median :0.8077  </span></span>
-<span><span class="co">##  Mean   :0.9863   Mean   :0.8953   Mean   :0.8188   Mean   :0.8076  </span></span>
-<span><span class="co">##  3rd Qu.:0.9869   3rd Qu.:0.8956   3rd Qu.:0.8188   3rd Qu.:0.8081  </span></span>
-<span><span class="co">##  Max.   :0.9889   Max.   :0.8965   Max.   :0.8188   Max.   :0.8097  </span></span>
+<span><span class="co">##  Min.   :0.9835   Min.   :0.8938   Min.   :0.8188   Min.   :0.8053  </span></span>
+<span><span class="co">##  1st Qu.:0.9855   1st Qu.:0.8948   1st Qu.:0.8188   1st Qu.:0.8070  </span></span>
+<span><span class="co">##  Median :0.9861   Median :0.8951   Median :0.8188   Median :0.8075  </span></span>
+<span><span class="co">##  Mean   :0.9862   Mean   :0.8952   Mean   :0.8188   Mean   :0.8075  </span></span>
+<span><span class="co">##  3rd Qu.:0.9868   3rd Qu.:0.8955   3rd Qu.:0.8188   3rd Qu.:0.8080  </span></span>
+<span><span class="co">##  Max.   :0.9895   Max.   :0.8966   Max.   :0.8188   Max.   :0.8103  </span></span>
 <span><span class="co">##  Detection Prevalence Balanced Accuracy</span></span>
-<span><span class="co">##  Min.   :0.9830       Min.   :0.4996   </span></span>
-<span><span class="co">##  1st Qu.:0.9848       1st Qu.:0.5018   </span></span>
-<span><span class="co">##  Median :0.9854       Median :0.5025   </span></span>
-<span><span class="co">##  Mean   :0.9854       Mean   :0.5025   </span></span>
-<span><span class="co">##  3rd Qu.:0.9859       3rd Qu.:0.5033   </span></span>
-<span><span class="co">##  Max.   :0.9878       Max.   :0.5064</span></span></code></pre>
+<span><span class="co">##  Min.   :0.9829       Min.   :0.4989   </span></span>
+<span><span class="co">##  1st Qu.:0.9846       1st Qu.:0.5016   </span></span>
+<span><span class="co">##  Median :0.9853       Median :0.5024   </span></span>
+<span><span class="co">##  Mean   :0.9853       Mean   :0.5024   </span></span>
+<span><span class="co">##  3rd Qu.:0.9859       3rd Qu.:0.5031   </span></span>
+<span><span class="co">##  Max.   :0.9886       Max.   :0.5059</span></span></code></pre>
 <p>A quite different story is found when information on the probability
 distribution of noise (null hypothesis) is added to the classifier:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ft.g2p.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getPotentialDIMP.html">getPotentialDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">ft.</span>, nlms <span class="op">=</span> <span class="va">nlms.g2p</span>,  div.col <span class="op">=</span> <span class="fl">9L</span>, </span>
 <span>                                tv.cut <span class="op">=</span> <span class="fl">0.68</span>, tv.col <span class="op">=</span> <span class="fl">7</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, </span>
 <span>                                dist.name <span class="op">=</span> <span class="st">"Gamma2P"</span><span class="op">)</span></span>
@@ -1077,7 +1071,7 @@ distribution of noise (null hypothesis) is added to the classifier:</p>
 <span><span class="co">##  Max.   :0.7375   Max.   :0.7375       Max.   :1        </span></span>
 <span><span class="co">## </span></span></code></pre>
 <p>Now, we add additional information about the optimal cutpoint</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ft.g2p_cutp.dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span><span class="va">ft.g2p.dmps</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, </span>
 <span>                                cutpoint <span class="op">=</span> <span class="va">cut.g2p</span><span class="op">$</span><span class="va">cutpoint</span><span class="op">)</span></span>
 <span></span>
@@ -1133,19 +1127,14 @@ treatment induced signal.</p>
 <h3 id="graphics-of-dmp-classification-performance">Graphics of DMP classification performance<a class="anchor" aria-label="anchor" href="#graphics-of-dmp-classification-performance"></a>
 </h3>
 <p>DMP count data:</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span>G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
 <span>            G3P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">g3p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
 <span>            FT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
 <span>            FT.G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
 <span>            FT.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.g2p_cutp.dmps</span>, <span class="va">length</span><span class="op">)</span></span>
-<span>    <span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<pre><code><span><span class="co">## Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dt</span></span></code></pre></div>
+<span>    <span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dt</span></span></code></pre></div>
 <pre><code><span><span class="co">##     G2P  G3P   FT FT.G2P FT.SD</span></span>
 <span><span class="co">## C1  255  251 1730   1055   255</span></span>
 <span><span class="co">## C2  306  298 1682   1070   306</span></span>
@@ -1159,7 +1148,7 @@ sites detected with FT in the control samples C1, C2, and C3,
 respectively, carry methylation signals comparable (in magnitude) to
 those signals induced by the treatment.</p>
 <p>Classification performance data:</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FT"</span>, <span class="st">"FT.G2P"</span>, <span class="st">"FT.SD"</span>, <span class="st">"G2P"</span>, <span class="st">"G3P"</span><span class="op">)</span>, </span>
 <span>                <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">ft.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, </span>
 <span>                        FDR <span class="op">=</span> <span class="va">ft.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span>,</span>
@@ -1173,7 +1162,7 @@ those signals induced by the treatment.</p>
 <span>                        FDR <span class="op">=</span> <span class="va">g3p.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span></span>
 <span>                <span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Graphics:</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"#147714FF"</span>, <span class="st">"#3D9F3DFF"</span>, <span class="st">"#66C666FF"</span>,  <span class="st">"#90EE90FF"</span><span class="op">)</span></span>
 <span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">dt</span>, sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">g2p.dmps</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6.3</span>
       </span>
     </div>
 
@@ -141,7 +141,7 @@ Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div>
 </h4>
             
-            <h4 data-toc-skip class="date">08 February 2023</h4>
+            <h4 data-toc-skip class="date">26 April 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/pca_lda_with_methylit.Rmd" class="external-link"><code>vignettes/pca_lda_with_methylit.Rmd</code></a></small>
       <div class="hidden name"><code>pca_lda_with_methylit.Rmd</code></div>
@@ -431,21 +431,21 @@ are not conceived to provide such an information).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gof</span><span class="op">$</span><span class="va">stats</span></span></code></pre></div>
 <pre><code><span><span class="co">##       w2p_AIC w2p_R.Cross.val w3p_AIC w3p_R.Cross.val   g2p_AIC g2p_R.Cross.val</span></span>
-<span><span class="co">## C1  -172642.2       0.9994638     Inf               0 -164820.4       0.9993928</span></span>
-<span><span class="co">## C2  -175595.0       0.9995132     Inf               0 -167532.7       0.9994499</span></span>
-<span><span class="co">## C3  -177238.5       0.9995420     Inf               0 -169774.2       0.9994861</span></span>
-<span><span class="co">## C4  -219212.7       0.9994947     Inf               0 -206296.0       0.9993131</span></span>
-<span><span class="co">## C5  -217448.4       0.9994366     Inf               0 -205264.1       0.9992280</span></span>
-<span><span class="co">## T1  -168080.2       0.9972703     Inf               0 -160888.3       0.9963827</span></span>
+<span><span class="co">## C1  -172642.2       0.9994639     Inf               0 -164820.4       0.9993928</span></span>
+<span><span class="co">## C2  -175595.0       0.9995130     Inf               0 -167532.7       0.9994499</span></span>
+<span><span class="co">## C3  -177238.5       0.9995419     Inf               0 -169774.2       0.9994861</span></span>
+<span><span class="co">## C4  -219212.7       0.9994948     Inf               0 -206296.0       0.9993131</span></span>
+<span><span class="co">## C5  -217448.4       0.9994364     Inf               0 -205264.1       0.9992280</span></span>
+<span><span class="co">## T1  -168080.2       0.9972702     Inf               0 -160888.3       0.9963827</span></span>
 <span><span class="co">## T2  -167285.4       0.9972727     Inf               0 -160748.1       0.9964683</span></span>
-<span><span class="co">## T3  -170302.3       0.9974337     Inf               0 -163998.4       0.9966883</span></span>
-<span><span class="co">## T4  -168551.4       0.9973220     Inf               0 -162169.8       0.9965314</span></span>
-<span><span class="co">## T5  -167122.8       0.9972265     Inf               0 -160694.8       0.9964093</span></span>
-<span><span class="co">## T6  -173245.9       0.9971877     Inf               0 -165656.8       0.9962175</span></span>
-<span><span class="co">## T7  -170905.5       0.9970148     Inf               0 -163342.2       0.9959969</span></span>
-<span><span class="co">## T8  -171372.8       0.9970758     Inf               0 -163649.6       0.9960768</span></span>
+<span><span class="co">## T3  -170302.3       0.9974339     Inf               0 -163998.4       0.9966883</span></span>
+<span><span class="co">## T4  -168551.4       0.9973218     Inf               0 -162169.8       0.9965314</span></span>
+<span><span class="co">## T5  -167122.8       0.9972268     Inf               0 -160694.8       0.9964093</span></span>
+<span><span class="co">## T6  -173245.9       0.9971876     Inf               0 -165656.8       0.9962175</span></span>
+<span><span class="co">## T7  -170905.5       0.9970145     Inf               0 -163342.2       0.9959969</span></span>
+<span><span class="co">## T8  -171372.8       0.9970756     Inf               0 -163649.6       0.9960768</span></span>
 <span><span class="co">## T9  -170097.3       0.9969614     Inf               0 -162250.6       0.9958859</span></span>
-<span><span class="co">## T10 -171267.1       0.9970281     Inf               0 -163857.5       0.9960168</span></span>
+<span><span class="co">## T10 -171267.1       0.9970285     Inf               0 -163857.5       0.9960168</span></span>
 <span><span class="co">##     g3p_AIC g3p_R.Cross.val bestModel</span></span>
 <span><span class="co">## C1      Inf               0       w2p</span></span>
 <span><span class="co">## C2      Inf               0       w2p</span></span>
@@ -510,13 +510,9 @@ control and those from treatment.</p>
 <span>                        scale <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                        n.pc <span class="op">=</span> <span class="fl">4</span>, </span>
 <span>                        div.col <span class="op">=</span> <span class="fl">9L</span>, </span>
-<span>                        stat <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<pre><code><span><span class="co">## Found more than one class "pDMP" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cutp</span></span></code></pre></div>
+<span>                        stat <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cutp</span></span></code></pre></div>
 <pre><code><span><span class="co">## Cutpoint estimation with 'pca.lda' classifier </span></span>
 <span><span class="co">## Cutpoint search performed using model posterior probabilities </span></span>
 <span><span class="co">## </span></span>
@@ -548,7 +544,7 @@ expected from the higher treatment empirical <span class="math inline">\(H_{\alp
 critical value: <span class="math inline">\(H_{cutpoint} &lt; H_{\alpha
 = 0.05}^{TT_{Emp}}\)</span>.</p>
 <p>The model performance in in the test dataset is:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cutp</span><span class="op">$</span><span class="va">testSetPerformance</span></span></code></pre></div>
 <pre><code><span><span class="co">## Confusion Matrix and Statistics</span></span>
 <span><span class="co">## </span></span>
@@ -587,14 +583,10 @@ treatment. The PCA+QDA model classifier can be used any time to
 discriminate control DMPs from those treatment. DMPs are retrieved using
 <a href="https://genomaths.github.io/MethylIT_HTML_Manual/selectDIMP.html" class="external-link">selectDIMP</a>
 function (<code>selectDIMP</code>):</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, cutpoint <span class="op">=</span> <span class="va">cutp</span><span class="op">$</span><span class="va">cutpoint</span>,</span>
 <span>                   tv.cut <span class="op">=</span> <span class="fl">0.34</span>, tv.col <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">dmps</span>,<span class="va">length</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Found more than one class "InfDiv" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
-<pre><code><span><span class="co">## Found more than one class "InfDiv" in cache; using the first, from namespace 'MethylIT'</span></span></code></pre>
-<pre><code><span><span class="co">## Also defined by 'MethylIT.utils'</span></span></code></pre>
 <pre><code><span><span class="co">##   C1   C2   C3   C4   C5   T1   T2   T3   T4   T5   T6   T7   T8   T9  T10 </span></span>
 <span><span class="co">##  704  659  644  789  861 3403 3244 3234 3308 3328 3826 3888 3840 3957 3875</span></span></code></pre>
 <p>Next, to represent individual samples as vectors from the
@@ -603,7 +595,7 @@ function from <a href="https://github.com/genomaths/MethylIT.utils" class="exter
 package. Here, the simulated “chromosome” is split into regions of 450bp
 non-overlapping windows. and the <em>density</em> of Hellinger
 divergences values is taken for each windows.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
 <span><span class="va">DMRs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/getGRegionsStat.html" class="external-link">getGRegionsStat</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, win.size <span class="op">=</span> <span class="fl">350</span>, step.size <span class="op">=</span> <span class="fl">350</span>,</span>
 <span>                        stat <span class="op">=</span> <span class="st">"density"</span>, column <span class="op">=</span> <span class="fl">9L</span>, scaling <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -622,7 +614,7 @@ personal experience of the author working in numerical taxonomy), Ward’s
 agglomeration algorithm performs much better on biological experimental
 datasets than the rest of the available algorithms like UPGMA, UPGMC,
 etc.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dmgm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">DMRs</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">dmgm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ns</span></span>
@@ -634,7 +626,7 @@ etc.</p>
 <div class="section level3">
 <h3 id="dendrogram">Dendrogram<a class="anchor" aria-label="anchor" href="#dendrogram"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colors</span> <span class="op">=</span> <span class="va">sampleNames</span> </span>
 <span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"green4"</span></span>
 <span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"T[6-9]{1}"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"red"</span></span>
@@ -676,7 +668,7 @@ package ‘MASS’. 2) ‘pca’: an object of class ‘prcomp’ from package
 learning approach. So, we must provide a prior classification of the
 individuals, which can be derived, for example, from the HC, or from a
 previous exploratory analysis with PCA.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A prior classification derived from HC</span></span>
 <span><span class="va">grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">hc</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"CT"</span></span>
@@ -706,32 +698,32 @@ returned by function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/p
 In the current case, based on the cumulative proportion of variance, the
 two firsts PCs carried about the 84% of the total sample variance and
 could split the sample into meaningful groups.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca.coord</span> <span class="op">&lt;-</span> <span class="va">ld</span><span class="op">$</span><span class="va">pca</span><span class="op">$</span><span class="va">x</span></span>
 <span><span class="va">pca.coord</span></span></code></pre></div>
 <pre><code><span><span class="co">##            PC1         PC2          PC3</span></span>
-<span><span class="co">## C1   -45.00927    7.884912 -17.39353588</span></span>
-<span><span class="co">## C2   -43.05409    6.015694  -2.75771385</span></span>
-<span><span class="co">## C3   -36.48632   -2.033121  -2.35944370</span></span>
-<span><span class="co">## C4   -44.85556   -7.591736   0.03176889</span></span>
-<span><span class="co">## C5   -45.62115   -0.162804  -7.90475426</span></span>
-<span><span class="co">## T1  -293.61151    8.474484   4.12206109</span></span>
-<span><span class="co">## T2  -253.43665  -30.909978 -43.28911190</span></span>
-<span><span class="co">## T3  -224.13477   10.719154  11.12880291</span></span>
-<span><span class="co">## T4  -232.37265   36.469259  -0.60205009</span></span>
-<span><span class="co">## T5  -224.31342   22.069410  -3.54331693</span></span>
-<span><span class="co">## T6  -290.02667   51.944972  -6.58200024</span></span>
-<span><span class="co">## T7  -286.12184  -19.867377   8.32584719</span></span>
-<span><span class="co">## T8  -259.19317   -6.488206  89.57270641</span></span>
-<span><span class="co">## T9  -270.07011 -101.465917 -12.84137767</span></span>
-<span><span class="co">## T10 -257.04937   35.129342 -41.52432128</span></span></code></pre>
+<span><span class="co">## C1   -45.00927    7.884912  17.39353588</span></span>
+<span><span class="co">## C2   -43.05409    6.015694   2.75771385</span></span>
+<span><span class="co">## C3   -36.48632   -2.033121   2.35944370</span></span>
+<span><span class="co">## C4   -44.85556   -7.591736  -0.03176889</span></span>
+<span><span class="co">## C5   -45.62115   -0.162804   7.90475426</span></span>
+<span><span class="co">## T1  -293.61151    8.474484  -4.12206109</span></span>
+<span><span class="co">## T2  -253.43665  -30.909978  43.28911190</span></span>
+<span><span class="co">## T3  -224.13477   10.719154 -11.12880291</span></span>
+<span><span class="co">## T4  -232.37265   36.469259   0.60205009</span></span>
+<span><span class="co">## T5  -224.31342   22.069410   3.54331693</span></span>
+<span><span class="co">## T6  -290.02667   51.944972   6.58200024</span></span>
+<span><span class="co">## T7  -286.12184  -19.867377  -8.32584719</span></span>
+<span><span class="co">## T8  -259.19317   -6.488206 -89.57270641</span></span>
+<span><span class="co">## T9  -270.07011 -101.465917  12.84137767</span></span>
+<span><span class="co">## T10 -257.04937   35.129342  41.52432128</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="graphic-pc1-vs-pc2">Graphic PC1 vs PC2<a class="anchor" aria-label="anchor" href="#graphic-pc1-vs-pc2"></a>
 </h3>
 <p>Next, the graphic for individual coordinates in the two firsts PCs
 can be easily visualized now:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">pca.coord</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, subgrp <span class="op">=</span> <span class="va">grps</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
@@ -756,10 +748,16 @@ can be easily visualized now:</p>
 <span>  axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>, axis.ticks.length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="st">"mm"</span><span class="op">)</span>,</span>
 <span>  plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="st">"lines"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Warning: The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use the `linewidth` argument instead.</span></span></code></pre>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use the `linewidth` argument instead.</span></span>
+<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
 <pre><code><span><span class="co">## Warning: The `size` argument of `element_rect()` is deprecated as of ggplot2 3.4.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use the `linewidth` argument instead.</span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use the `linewidth` argument instead.</span></span>
+<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span>, colour <span class="op">=</span> <span class="va">grps</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -769,7 +767,10 @@ can be easily visualized now:</p>
 <span>               geom <span class="op">=</span> <span class="st">"polygon"</span>, level <span class="op">=</span> <span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green4"</span>,<span class="st">"blue"</span>,<span class="st">"brown1"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="va">p0</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span></code></pre>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
+<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
 <p><img src="pca_lda_with_methylit_files/figure-html/pcaGraphic-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -780,7 +781,7 @@ discriminant functions, which is based on the three firsts PCs. Notice
 that the number principal components used the LDA step must be lower
 than the number of individuals (<span class="math inline">\(N\)</span>)
 divided by 3: <span class="math inline">\(N/3\)</span>.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind.coord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/predict.html">predict</a></span><span class="op">(</span><span class="va">ld</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"scores"</span><span class="op">)</span></span>
 <span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">ind.coord</span>, subgrp <span class="op">=</span> <span class="va">grps</span><span class="op">)</span></span>
 <span></span>
@@ -843,13 +844,13 @@ the Social Sciences</span></em>, Fifth Edit (Routledge Academic,
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
 which this document was compiled running pandoc 2.19.2:</p>
-<pre><code><span><span class="co">## R version 4.2.2 Patched (2022-11-10 r83330)</span></span>
+<pre><code><span><span class="co">## R version 4.2.3 (2023-03-15)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">## Running under: Ubuntu 20.04.5 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
-<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0</span></span>
-<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0</span></span>
+<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0</span></span>
+<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## locale:</span></span>
 <span><span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
@@ -864,76 +865,76 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">## [8] base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] ape_5.6-2            ggplot2_3.4.0        MethylIT.utils_0.1  </span></span>
-<span><span class="co">##  [4] MethylIT_0.3.2.6     rtracklayer_1.56.1   GenomicRanges_1.48.0</span></span>
-<span><span class="co">##  [7] GenomeInfoDb_1.32.4  IRanges_2.30.1       S4Vectors_0.34.0    </span></span>
-<span><span class="co">## [10] BiocGenerics_0.42.0 </span></span>
+<span><span class="co">##  [1] ape_5.6-2            ggplot2_3.4.1        MethylIT.utils_0.1  </span></span>
+<span><span class="co">##  [4] MethylIT_0.3.2.6.3   rtracklayer_1.58.0   GenomicRanges_1.50.2</span></span>
+<span><span class="co">##  [7] GenomeInfoDb_1.34.9  IRanges_2.32.0       S4Vectors_0.36.1    </span></span>
+<span><span class="co">## [10] BiocGenerics_0.44.0 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##   [1] systemfonts_1.0.4           plyr_1.8.8                 </span></span>
-<span><span class="co">##   [3] splines_4.2.2               BiocParallel_1.30.4        </span></span>
+<span><span class="co">##   [3] splines_4.2.3               BiocParallel_1.32.5        </span></span>
 <span><span class="co">##   [5] listenv_0.9.0               digest_0.6.31              </span></span>
 <span><span class="co">##   [7] foreach_1.5.2               htmltools_0.5.4            </span></span>
 <span><span class="co">##   [9] fansi_1.0.4                 magrittr_2.0.3             </span></span>
 <span><span class="co">##  [11] memoise_2.0.1               recipes_1.0.4              </span></span>
-<span><span class="co">##  [13] globals_0.16.2              Biostrings_2.64.1          </span></span>
-<span><span class="co">##  [15] annotate_1.74.0             gower_1.0.1                </span></span>
+<span><span class="co">##  [13] globals_0.16.2              Biostrings_2.66.0          </span></span>
+<span><span class="co">##  [15] annotate_1.76.0             gower_1.0.1                </span></span>
 <span><span class="co">##  [17] matrixStats_0.63.0          sandwich_3.0-2             </span></span>
 <span><span class="co">##  [19] hardhat_1.2.0               timechange_0.2.0           </span></span>
 <span><span class="co">##  [21] pkgdown_2.0.7               colorspace_2.1-0           </span></span>
-<span><span class="co">##  [23] blob_1.2.3                  textshaping_0.3.6          </span></span>
+<span><span class="co">##  [23] blob_1.2.4                  textshaping_0.3.6          </span></span>
 <span><span class="co">##  [25] xfun_0.37                   dplyr_1.1.0                </span></span>
 <span><span class="co">##  [27] crayon_1.5.2                RCurl_1.98-1.10            </span></span>
-<span><span class="co">##  [29] jsonlite_1.8.4              genefilter_1.78.0          </span></span>
-<span><span class="co">##  [31] survival_3.5-0              zoo_1.8-11                 </span></span>
+<span><span class="co">##  [29] jsonlite_1.8.4              genefilter_1.80.3          </span></span>
+<span><span class="co">##  [31] survival_3.5-5              zoo_1.8-11                 </span></span>
 <span><span class="co">##  [33] iterators_1.0.14            glue_1.6.2                 </span></span>
-<span><span class="co">##  [35] gtable_0.3.1                ipred_0.9-13               </span></span>
-<span><span class="co">##  [37] zlibbioc_1.42.0             XVector_0.36.0             </span></span>
-<span><span class="co">##  [39] DelayedArray_0.22.0         future.apply_1.10.0        </span></span>
+<span><span class="co">##  [35] gtable_0.3.2                ipred_0.9-13               </span></span>
+<span><span class="co">##  [37] zlibbioc_1.44.0             XVector_0.38.0             </span></span>
+<span><span class="co">##  [39] DelayedArray_0.24.0         future.apply_1.10.0        </span></span>
 <span><span class="co">##  [41] scales_1.2.1                DBI_1.1.3                  </span></span>
 <span><span class="co">##  [43] Rcpp_1.0.10                 xtable_1.8-4               </span></span>
 <span><span class="co">##  [45] bit_4.0.5                   proxy_0.4-27               </span></span>
 <span><span class="co">##  [47] Formula_1.2-4               lava_1.7.1                 </span></span>
-<span><span class="co">##  [49] prodlim_2019.11.13          httr_1.4.4                 </span></span>
+<span><span class="co">##  [49] prodlim_2019.11.13          httr_1.4.5                 </span></span>
 <span><span class="co">##  [51] modeltools_0.2-23           farver_2.1.1               </span></span>
 <span><span class="co">##  [53] pkgconfig_2.0.3             XML_3.99-0.13              </span></span>
 <span><span class="co">##  [55] flexmix_2.3-18              nnet_7.3-18                </span></span>
 <span><span class="co">##  [57] sass_0.4.5                  utf8_1.2.3                 </span></span>
 <span><span class="co">##  [59] caret_6.0-93                labeling_0.4.2             </span></span>
-<span><span class="co">##  [61] tidyselect_1.2.0            rlang_1.0.6                </span></span>
-<span><span class="co">##  [63] reshape2_1.4.4              AnnotationDbi_1.58.0       </span></span>
-<span><span class="co">##  [65] munsell_0.5.0               tools_4.2.2                </span></span>
-<span><span class="co">##  [67] cachem_1.0.6                cli_3.6.0                  </span></span>
+<span><span class="co">##  [61] tidyselect_1.2.0            rlang_1.1.0                </span></span>
+<span><span class="co">##  [63] reshape2_1.4.4              AnnotationDbi_1.60.0       </span></span>
+<span><span class="co">##  [65] munsell_0.5.0               tools_4.2.3                </span></span>
+<span><span class="co">##  [67] cachem_1.0.7                cli_3.6.0                  </span></span>
 <span><span class="co">##  [69] generics_0.1.3              RSQLite_2.2.20             </span></span>
 <span><span class="co">##  [71] evaluate_0.20               stringr_1.5.0              </span></span>
-<span><span class="co">##  [73] fastmap_1.1.0               yaml_2.3.7                 </span></span>
+<span><span class="co">##  [73] fastmap_1.1.1               yaml_2.3.7                 </span></span>
 <span><span class="co">##  [75] ragg_1.2.5                  betareg_3.1-4              </span></span>
 <span><span class="co">##  [77] ModelMetrics_1.2.2.2        knitr_1.42                 </span></span>
 <span><span class="co">##  [79] bit64_4.0.5                 fs_1.6.1                   </span></span>
 <span><span class="co">##  [81] purrr_1.0.1                 randomForest_4.7-1.1       </span></span>
-<span><span class="co">##  [83] KEGGREST_1.36.3             future_1.31.0              </span></span>
-<span><span class="co">##  [85] nlme_3.1-162                compiler_4.2.2             </span></span>
+<span><span class="co">##  [83] KEGGREST_1.38.0             future_1.31.0              </span></span>
+<span><span class="co">##  [85] nlme_3.1-162                compiler_4.2.3             </span></span>
 <span><span class="co">##  [87] rstudioapi_0.14             png_0.1-8                  </span></span>
-<span><span class="co">##  [89] e1071_1.7-13                tibble_3.1.8               </span></span>
+<span><span class="co">##  [89] e1071_1.7-13                tibble_3.2.0               </span></span>
 <span><span class="co">##  [91] bslib_0.4.2                 stringi_1.7.12             </span></span>
 <span><span class="co">##  [93] highr_0.10                  desc_1.4.2                 </span></span>
 <span><span class="co">##  [95] lattice_0.20-45             Matrix_1.5-3               </span></span>
-<span><span class="co">##  [97] vctrs_0.5.2                 pillar_1.8.1               </span></span>
+<span><span class="co">##  [97] vctrs_0.6.0                 pillar_1.8.1               </span></span>
 <span><span class="co">##  [99] lifecycle_1.0.3             lmtest_0.9-40              </span></span>
 <span><span class="co">## [101] jquerylib_0.1.4             data.table_1.14.6          </span></span>
 <span><span class="co">## [103] bitops_1.0-7                R6_2.5.1                   </span></span>
-<span><span class="co">## [105] BiocIO_1.6.0                parallelly_1.34.0          </span></span>
+<span><span class="co">## [105] BiocIO_1.8.0                parallelly_1.34.0          </span></span>
 <span><span class="co">## [107] codetools_0.2-19            MASS_7.3-58.2              </span></span>
-<span><span class="co">## [109] SummarizedExperiment_1.26.1 proto_1.0.0                </span></span>
+<span><span class="co">## [109] SummarizedExperiment_1.28.0 proto_1.0.0                </span></span>
 <span><span class="co">## [111] rprojroot_2.0.3             rjson_0.2.21               </span></span>
 <span><span class="co">## [113] minpack.lm_1.2-3            withr_2.5.0                </span></span>
-<span><span class="co">## [115] GenomicAlignments_1.32.1    Rsamtools_2.12.0           </span></span>
-<span><span class="co">## [117] GenomeInfoDbData_1.2.8      parallel_4.2.2             </span></span>
-<span><span class="co">## [119] grid_4.2.2                  rpart_4.1.19               </span></span>
+<span><span class="co">## [115] GenomicAlignments_1.34.0    Rsamtools_2.14.0           </span></span>
+<span><span class="co">## [117] GenomeInfoDbData_1.2.9      parallel_4.2.3             </span></span>
+<span><span class="co">## [119] grid_4.2.3                  rpart_4.1.19               </span></span>
 <span><span class="co">## [121] timeDate_4022.108           class_7.3-21               </span></span>
 <span><span class="co">## [123] rmarkdown_2.20              nls2_0.3-3                 </span></span>
-<span><span class="co">## [125] MatrixGenerics_1.8.1        pROC_1.18.0                </span></span>
-<span><span class="co">## [127] Biobase_2.56.0              lubridate_1.9.1            </span></span>
+<span><span class="co">## [125] MatrixGenerics_1.10.0       pROC_1.18.0                </span></span>
+<span><span class="co">## [127] Biobase_2.58.0              lubridate_1.9.2            </span></span>
 <span><span class="co">## [129] restfulr_0.0.15</span></span></code></pre>
 </div>
   </div>
