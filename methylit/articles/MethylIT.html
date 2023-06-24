@@ -169,20 +169,18 @@ text-indent: 0;
 <p>MethylIT is an R package for methylome analysis based on a
 signal-detection machine learning approach (SD-ML). This approach is
 postulated to provide greater sensitivity for resolving true signal from
-the methylation background within the methylome <span class="citation">(Sanchez and Mackenzie 2016; Sanchez et al.
-2019)</span>. Because the biological signal created within the dynamic
-methylome environment characteristic of plants is not free from
-background noise, the approach, designated Methyl-IT, includes the
-application of signal detection theory <span class="citation">(Greiner,
-Pfeiffer, and Smith 2000; Carter et al. 2016; Harpaz et al. 2013; Kruspe
-et al. 2017)</span>. A basic requirement for the application of signal
-detection is the knowledge of the probability distribution of the
-background noise, which is used as null hypothesis in the detection of
-the methylation signal. This probability distribution is, in general, a
-member of generalized gamma distribution family, and it can be deduced
-on a statistical mechanical/thermodynamics basis from DNA methylation
-induced by thermal fluctuations <span class="citation">(Sanchez and
-Mackenzie 2016)</span>.</p>
+the methylation background within the methylome <span class="citation">(Sanchez and Mackenzie 2016; Sanchez et al. 2019;
+Sanchez and Mackenzie 2023)</span>. Because the biological signal
+created within the dynamic methylome environment characteristic of
+plants is not free from background noise, the approach, designated
+Methyl-IT, includes the application of signal detection theory <span class="citation">(Greiner, Pfeiffer, and Smith 2000; Carter et al. 2016;
+Harpaz et al. 2013; Kruspe et al. 2017)</span>. A basic requirement for
+the application of signal detection is the knowledge of the probability
+distribution of the background noise, which is used as null hypothesis
+in the detection of the methylation signal. This probability
+distribution is, in general, a member of generalized gamma distribution
+family, and it can be deduced on a statistical mechanical/thermodynamics
+basis from DNA methylation induced by thermal fluctuations <span class="citation">(Sanchez and Mackenzie 2023)</span>.</p>
 </div>
 <div class="section level2">
 <h2 id="data-sets">Data sets<a class="anchor" aria-label="anchor" href="#data-sets"></a>
@@ -269,7 +267,7 @@ reference sample. This is the step with the highest consumption of
 computing time.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Sat Jun 24 11:08:50 2023"</span></span>
+<span><span class="co">#&gt; [1] "Sat Jun 24 12:58:01 2023"</span></span>
 <span><span class="va">ptm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ml_samples</span> <span class="op">&lt;-</span> <span class="va">meth_samples</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"W_3_1"</span>,<span class="st">"W_3_2"</span>,<span class="st">"W_3_3"</span>,<span class="st">"W_3_4"</span>,<span class="st">"W_3_5"</span>, </span>
 <span>                             <span class="st">"M_3_1"</span>,<span class="st">"M_3_2"</span>,<span class="st">"M_3_3"</span>,<span class="st">"M_3_4"</span>,<span class="st">"M_3_5"</span><span class="op">)</span><span class="op">]</span></span>
@@ -283,10 +281,10 @@ computing time.</p>
 <span>                            percentile <span class="op">=</span> <span class="fl">0.999</span>,</span>
 <span>                            verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">ptm</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">/</span><span class="fl">60</span> <span class="co"># in min</span></span>
-<span><span class="co">#&gt;   elapsed </span></span>
-<span><span class="co">#&gt; 0.1318333</span></span>
+<span><span class="co">#&gt; elapsed </span></span>
+<span><span class="co">#&gt; 0.12395</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Sat Jun 24 11:08:58 2023"</span></span>
+<span><span class="co">#&gt; [1] "Sat Jun 24 12:58:08 2023"</span></span>
 <span><span class="va">ml_hd</span><span class="op">$</span><span class="va">M_3_1</span></span>
 <span><span class="co">#&gt; GRanges object with 17782 ranges and 9 metadata columns:</span></span>
 <span><span class="co">#&gt;           seqnames    ranges strand |        c1        t1        c2        t2</span></span>
@@ -350,7 +348,7 @@ data is not perfect. So, it is healthy to sees for potential issues.</p>
 user to verify the data quality.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Critical values</span></span>
-<span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">ml_hd</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">ml_hd</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">bay.TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="va">btv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span></span>
@@ -381,11 +379,11 @@ coverage issue could be detected.</p>
 <span>                <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">cov</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">covr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">covr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">q60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span>    <span class="va">q9999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.9999</span><span class="op">)</span></span>
-<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
-<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
+<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
+<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span>    <span class="va">q95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">idx1</span>, <span class="va">idx2</span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -723,7 +721,7 @@ the flexibility of the DNA molecule <span class="citation">(Choy et al.
 <span><span class="va">dmps_at_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_genes</span>, columns <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">"equal"</span>,</span>
 <span>                               verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmps_at_genes</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_genes</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
 <span><span class="va">dmps_at_genes</span></span>
 <span><span class="co">#&gt; GRanges object with 70 ranges and 10 metadata columns:</span></span>
 <span><span class="co">#&gt;        seqnames      ranges strand |     W_3_1     W_3_2     W_3_3     W_3_4</span></span>
@@ -840,6 +838,10 @@ Carmen Cadarso-Suárez, Francisco Gude-Sampedro, and Others. 2014.
 <span>“<span class="nocase">OptimalCutpoints: an R package for selecting
 optimal cutpoints in diagnostic tests</span>.”</span> <em>Journal of
 Statistical Software</em> 61 (8): 1–36. <a href="https://www.jstatsoft.org/article/view/v061i08" class="external-link">https://www.jstatsoft.org/article/view/v061i08</a>.
+</div>
+<div id="ref-Sanchez2023" class="csl-entry">
+Sanchez, Robersy, and Sally A Mackenzie. 2023. <span>“<span class="nocase">On the thermodynamics of DNA methylation
+process</span>.”</span> <em>Scientific Reports</em> 13 (1): 8914. <a href="https://doi.org/10.1038/s41598-023-35166-9" class="external-link">https://doi.org/10.1038/s41598-023-35166-9</a>.
 </div>
 <div id="ref-Sanchez2016" class="csl-entry">
 Sanchez, Robersy, and Sally A. Mackenzie. 2016. <span>“<span class="nocase">Information Thermodynamics of Cytosine DNA
