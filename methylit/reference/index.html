@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -157,9 +157,17 @@ from the control</p></td>
         </td>
         <td><p>Count DMPs at Genomic Regions</p></td>
       </tr><tr><td>
+          <p><code><a href="getGRangesStat.html">getGRangesStat()</a></code> </p>
+        </td>
+        <td><p>Statistic of Genomic Regions</p></td>
+      </tr><tr><td>
           <p><code><a href="dmpClusters.html">dmpClusters()</a></code> </p>
         </td>
         <td><p>DMP clustering</p></td>
+      </tr><tr><td>
+          <p><code><a href="dmrfinder.html">dmrfinder()</a></code> </p>
+        </td>
+        <td><p>Find Differentially Methylated Regions (DMRs)</p></td>
       </tr><tr><td>
           <p><code><a href="glmDataSet.html">glmDataSet()</a></code> </p>
         </td>
@@ -257,6 +265,10 @@ read counts filtered by coverage.</p></td>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
+          <p><code><a href="boltzman_factor.html">boltzman_factor()</a></code> </p>
+        </td>
+        <td><p>Boltzmann's Factors</p></td>
+      </tr><tr><td>
           <p><code><a href="coef.html">coef(<i>&lt;cdfMODEL&gt;</i>)</a></code> <code><a href="coef.html">coef(<i>&lt;cdfMODELlist&gt;</i>)</a></code> <code><a href="coef.html">coef(<i>&lt;ProbDistrList&gt;</i>)</a></code> </p>
         </td>
         <td><p>Extract Model Coefficients</p></td>
@@ -265,6 +277,10 @@ read counts filtered by coverage.</p></td>
         </td>
         <td><p>Fisher's exact test for read counts on GRanges objects</p></td>
       </tr><tr><td>
+          <p><code><a href="GeneUpDownStream.html">GeneUpDownStream()</a></code> </p>
+        </td>
+        <td><p>Get Genes plus Up and Down Stream Regions</p></td>
+      </tr><tr><td>
           <p><code><a href="getGEOSuppFiles.html">getGEOSuppFiles()</a></code> </p>
         </td>
         <td><p>Get Supplemental Files from GEO</p></td>
@@ -272,22 +288,6 @@ read counts filtered by coverage.</p></td>
           <p><code><a href="ggamma.html">dggamma()</a></code> <code><a href="ggamma.html">pggamma()</a></code> <code><a href="ggamma.html">qggamma()</a></code> <code><a href="ggamma.html">rggamma()</a></code> </p>
         </td>
         <td><p>Generalized Gamma distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="pweibull3P.html">pweibull3P()</a></code> </p>
-        </td>
-        <td><p>Weibull distribution with three parameters</p></td>
-      </tr><tr><td>
-          <p><code><a href="weibull3P.html">weibull3P()</a></code> </p>
-        </td>
-        <td><p>Nonlinear fit of Weibull CDF</p></td>
-      </tr><tr><td>
-          <p><code><a href="meth_levels.html">meth_levels()</a></code> </p>
-        </td>
-        <td><p>Compute methylation levels</p></td>
-      </tr><tr><td>
-          <p><code><a href="predict.cdfMODEL.html">predict.cdfMODEL()</a></code> <code><a href="predict.cdfMODEL.html">predict.cdfMODELlist()</a></code> </p>
-        </td>
-        <td><p>Predict function for probability distributions in Methyl-IT</p></td>
       </tr><tr><td>
           <p><code><a href="gibb_entropy.html">gibb_entropy()</a></code> </p>
         </td>
@@ -301,17 +301,33 @@ read counts filtered by coverage.</p></td>
         </td>
         <td><p>Molecular Machine Entropy</p></td>
       </tr><tr><td>
-          <p><code><a href="boltzman_factor.html">boltzman_factor()</a></code> </p>
+          <p><code><a href="meth_levels.html">meth_levels()</a></code> </p>
         </td>
-        <td><p>Boltzmann's Factors</p></td>
+        <td><p>Compute methylation levels</p></td>
+      </tr><tr><td>
+          <p><code><a href="pjob_split.html">pjob_split()</a></code> </p>
+        </td>
+        <td><p>Parallel Job Split</p></td>
       </tr><tr><td>
           <p><code><a href="predict.html">predict()</a></code> </p>
         </td>
         <td><p>Prediction Method of Random Forest for 'pDMP' Objects</p></td>
       </tr><tr><td>
-          <p><code><a href="pjob_split.html">pjob_split()</a></code> </p>
+          <p><code><a href="predict.cdfMODEL.html">predict.cdfMODEL()</a></code> <code><a href="predict.cdfMODEL.html">predict.cdfMODELlist()</a></code> </p>
         </td>
-        <td><p>Parallel Job Split</p></td>
+        <td><p>Predict function for probability distributions in Methyl-IT</p></td>
+      </tr><tr><td>
+          <p><code><a href="pweibull3P.html">pweibull3P()</a></code> </p>
+        </td>
+        <td><p>Weibull distribution with three parameters</p></td>
+      </tr><tr><td>
+          <p><code><a href="slidingGRegions.html">slidingGRegions()</a></code> </p>
+        </td>
+        <td><p>Generates intervals for a GRanges objects</p></td>
+      </tr><tr><td>
+          <p><code><a href="weibull3P.html">weibull3P()</a></code> </p>
+        </td>
+        <td><p>Nonlinear fit of Weibull CDF</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="data">Data <a href="#data" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>

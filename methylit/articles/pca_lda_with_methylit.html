@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -141,7 +141,7 @@ Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div>
 </h4>
             
-            <h4 data-toc-skip class="date">26 April 2023</h4>
+            <h4 data-toc-skip class="date">24 June 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/pca_lda_with_methylit.Rmd" class="external-link"><code>vignettes/pca_lda_with_methylit.Rmd</code></a></small>
       <div class="hidden name"><code>pca_lda_with_methylit.Rmd</code></div>
@@ -431,21 +431,21 @@ are not conceived to provide such an information).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gof</span><span class="op">$</span><span class="va">stats</span></span></code></pre></div>
 <pre><code><span><span class="co">##       w2p_AIC w2p_R.Cross.val w3p_AIC w3p_R.Cross.val   g2p_AIC g2p_R.Cross.val</span></span>
-<span><span class="co">## C1  -172642.2       0.9994639     Inf               0 -164820.4       0.9993928</span></span>
-<span><span class="co">## C2  -175595.0       0.9995130     Inf               0 -167532.7       0.9994499</span></span>
-<span><span class="co">## C3  -177238.5       0.9995419     Inf               0 -169774.2       0.9994861</span></span>
+<span><span class="co">## C1  -172642.2       0.9994640     Inf               0 -164820.4       0.9993928</span></span>
+<span><span class="co">## C2  -175595.0       0.9995131     Inf               0 -167532.7       0.9994499</span></span>
+<span><span class="co">## C3  -177238.5       0.9995420     Inf               0 -169774.2       0.9994861</span></span>
 <span><span class="co">## C4  -219212.7       0.9994948     Inf               0 -206296.0       0.9993131</span></span>
 <span><span class="co">## C5  -217448.4       0.9994364     Inf               0 -205264.1       0.9992280</span></span>
-<span><span class="co">## T1  -168080.2       0.9972702     Inf               0 -160888.3       0.9963827</span></span>
+<span><span class="co">## T1  -168080.2       0.9972701     Inf               0 -160888.3       0.9963827</span></span>
 <span><span class="co">## T2  -167285.4       0.9972727     Inf               0 -160748.1       0.9964683</span></span>
-<span><span class="co">## T3  -170302.3       0.9974339     Inf               0 -163998.4       0.9966883</span></span>
-<span><span class="co">## T4  -168551.4       0.9973218     Inf               0 -162169.8       0.9965314</span></span>
-<span><span class="co">## T5  -167122.8       0.9972268     Inf               0 -160694.8       0.9964093</span></span>
-<span><span class="co">## T6  -173245.9       0.9971876     Inf               0 -165656.8       0.9962175</span></span>
-<span><span class="co">## T7  -170905.5       0.9970145     Inf               0 -163342.2       0.9959969</span></span>
-<span><span class="co">## T8  -171372.8       0.9970756     Inf               0 -163649.6       0.9960768</span></span>
-<span><span class="co">## T9  -170097.3       0.9969614     Inf               0 -162250.6       0.9958859</span></span>
-<span><span class="co">## T10 -171267.1       0.9970285     Inf               0 -163857.5       0.9960168</span></span>
+<span><span class="co">## T3  -170302.3       0.9974340     Inf               0 -163998.4       0.9966883</span></span>
+<span><span class="co">## T4  -168551.4       0.9973219     Inf               0 -162169.8       0.9965314</span></span>
+<span><span class="co">## T5  -167122.8       0.9972266     Inf               0 -160694.8       0.9964093</span></span>
+<span><span class="co">## T6  -173245.9       0.9971878     Inf               0 -165656.8       0.9962175</span></span>
+<span><span class="co">## T7  -170905.5       0.9970146     Inf               0 -163342.2       0.9959969</span></span>
+<span><span class="co">## T8  -171372.8       0.9970757     Inf               0 -163649.6       0.9960768</span></span>
+<span><span class="co">## T9  -170097.3       0.9969613     Inf               0 -162250.6       0.9958859</span></span>
+<span><span class="co">## T10 -171267.1       0.9970284     Inf               0 -163857.5       0.9960168</span></span>
 <span><span class="co">##     g3p_AIC g3p_R.Cross.val bestModel</span></span>
 <span><span class="co">## C1      Inf               0       w2p</span></span>
 <span><span class="co">## C2      Inf               0       w2p</span></span>
@@ -590,14 +590,13 @@ function (<code>selectDIMP</code>):</p>
 <pre><code><span><span class="co">##   C1   C2   C3   C4   C5   T1   T2   T3   T4   T5   T6   T7   T8   T9  T10 </span></span>
 <span><span class="co">##  704  659  644  789  861 3403 3244 3234 3308 3328 3826 3888 3840 3957 3875</span></span></code></pre>
 <p>Next, to represent individual samples as vectors from the
-<em>N</em>-dimensional space, we can use <a href="https://genomaths.github.io/MethylIT_utils_HTML_Manual/getGRegionsStat-methods.html" class="external-link">getGRegionsStat</a>
-function from <a href="https://github.com/genomaths/MethylIT.utils" class="external-link">MethylIT.utils</a> R
-package. Here, the simulated “chromosome” is split into regions of 450bp
+<em>N</em>-dimensional space, we can use <a href="https://genomaths.github.io/methylit/reference/getDMPatRegions.html">getGRangesStat</a>
+. Here, the simulated “chromosome” is split into regions of 350bp
 non-overlapping windows. and the <em>density</em> of Hellinger
 divergences values is taken for each windows.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dmps</span><span class="op">)</span></span>
-<span><span class="va">DMRs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/getGRegionsStat.html" class="external-link">getGRegionsStat</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, win.size <span class="op">=</span> <span class="fl">350</span>, step.size <span class="op">=</span> <span class="fl">350</span>,</span>
+<span><span class="va">DMRs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getGRangesStat.html">getGRangesStat</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps</span>, win.size <span class="op">=</span> <span class="fl">350</span>, step.size <span class="op">=</span> <span class="fl">350</span>,</span>
 <span>                        stat <span class="op">=</span> <span class="st">"density"</span>, column <span class="op">=</span> <span class="fl">9L</span>, scaling <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DMRs</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ns</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="va">DMRs</span>, <span class="st">"GRangesList"</span><span class="op">)</span></span></code></pre></div>
@@ -607,8 +606,8 @@ divergences values is taken for each windows.</p>
 </h2>
 <p>Hierarchical clustering (HC) is an unsupervised machine learning
 approach. HC can provide an initial estimation of the number of possible
-groups and information on their members. However, the effectivity of HC
-will depend on the experimental dataset, the metric used, and the
+groups and information on their members. However, the effectiveness of
+HC will depend on the experimental dataset, the metric used, and the
 agglomeration algorithm applied. For an unknown reason (and based on the
 personal experience of the author working in numerical taxonomy), Ward’s
 agglomeration algorithm performs much better on biological experimental
@@ -644,8 +643,6 @@ etc.</p>
 <span><span class="co">## cuts = c(xleft, ybottom, xright, ytop)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/MethylIT.utils/man/hclust_rect.html" class="external-link">hclust_rect</a></span><span class="op">(</span><span class="va">hc.rsq</span>, k <span class="op">=</span> <span class="fl">2L</span>, border <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green4"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, </span>
 <span>            color <span class="op">=</span> <span class="va">clusters.color</span>, cuts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.56</span>, <span class="fl">1.4</span>, <span class="fl">0.41</span>, <span class="fl">120</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in is.null(color) || length(color) &lt; l: 'length(x) = 2 &gt; 1' in coercion</span></span>
-<span><span class="co">## to 'logical(1)'</span></span></code></pre>
 <p><img src="pca_lda_with_methylit_files/figure-html/dendrogram-1.png" width="700"></p>
 <p>Here, we have use function <a href="https://www.rdocumentation.org/packages/ape/versions/5.3/topics/as.phylo" class="external-link">as.phylo</a>
 from the R package <a href="https://www.rdocumentation.org/packages/ape/versions/5.3" class="external-link">ape</a>
@@ -668,7 +665,7 @@ package ‘MASS’. 2) ‘pca’: an object of class ‘prcomp’ from package
 learning approach. So, we must provide a prior classification of the
 individuals, which can be derived, for example, from the HC, or from a
 previous exploratory analysis with PCA.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A prior classification derived from HC</span></span>
 <span><span class="va">grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">hc</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"CT"</span></span>
@@ -698,7 +695,7 @@ returned by function <a href="https://genomaths.github.io/MethylIT_HTML_Manual/p
 In the current case, based on the cumulative proportion of variance, the
 two firsts PCs carried about the 84% of the total sample variance and
 could split the sample into meaningful groups.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca.coord</span> <span class="op">&lt;-</span> <span class="va">ld</span><span class="op">$</span><span class="va">pca</span><span class="op">$</span><span class="va">x</span></span>
 <span><span class="va">pca.coord</span></span></code></pre></div>
 <pre><code><span><span class="co">##            PC1         PC2          PC3</span></span>
@@ -723,7 +720,7 @@ could split the sample into meaningful groups.</p>
 </h3>
 <p>Next, the graphic for individual coordinates in the two firsts PCs
 can be easily visualized now:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">pca.coord</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, subgrp <span class="op">=</span> <span class="va">grps</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
@@ -757,7 +754,7 @@ can be easily visualized now:</p>
 <span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
 <span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
 <span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span>, colour <span class="op">=</span> <span class="va">grps</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -781,7 +778,7 @@ discriminant functions, which is based on the three firsts PCs. Notice
 that the number principal components used the LDA step must be lower
 than the number of individuals (<span class="math inline">\(N\)</span>)
 divided by 3: <span class="math inline">\(N/3\)</span>.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind.coord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/predict.html">predict</a></span><span class="op">(</span><span class="va">ld</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"scores"</span><span class="op">)</span></span>
 <span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">ind.coord</span>, subgrp <span class="op">=</span> <span class="va">grps</span><span class="op">)</span></span>
 <span></span>
@@ -844,12 +841,12 @@ the Social Sciences</span></em>, Fifth Edit (Routledge Academic,
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
 which this document was compiled running pandoc 2.19.2:</p>
-<pre><code><span><span class="co">## R version 4.2.3 (2023-03-15)</span></span>
+<pre><code><span><span class="co">## R version 4.3.0 (2023-04-21)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
-<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0</span></span>
+<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 </span></span>
 <span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## locale:</span></span>
@@ -860,82 +857,85 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
 <span><span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
 <span><span class="co">## </span></span>
+<span><span class="co">## time zone: America/New_York</span></span>
+<span><span class="co">## tzcode source: system (glibc)</span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">## attached base packages:</span></span>
 <span><span class="co">## [1] stats4    stats     graphics  grDevices utils     datasets  methods  </span></span>
 <span><span class="co">## [8] base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] ape_5.6-2            ggplot2_3.4.1        MethylIT.utils_0.1  </span></span>
-<span><span class="co">##  [4] MethylIT_0.3.2.6.3   rtracklayer_1.58.0   GenomicRanges_1.50.2</span></span>
-<span><span class="co">##  [7] GenomeInfoDb_1.34.9  IRanges_2.32.0       S4Vectors_0.36.1    </span></span>
-<span><span class="co">## [10] BiocGenerics_0.44.0 </span></span>
+<span><span class="co">##  [1] ape_5.7-1            ggplot2_3.4.2        MethylIT.utils_0.1.1</span></span>
+<span><span class="co">##  [4] MethylIT_0.3.2.7     rtracklayer_1.60.0   GenomicRanges_1.52.0</span></span>
+<span><span class="co">##  [7] GenomeInfoDb_1.36.1  IRanges_2.34.1       S4Vectors_0.38.1    </span></span>
+<span><span class="co">## [10] BiocGenerics_0.46.0 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] systemfonts_1.0.4           plyr_1.8.8                 </span></span>
-<span><span class="co">##   [3] splines_4.2.3               BiocParallel_1.32.5        </span></span>
-<span><span class="co">##   [5] listenv_0.9.0               digest_0.6.31              </span></span>
-<span><span class="co">##   [7] foreach_1.5.2               htmltools_0.5.4            </span></span>
-<span><span class="co">##   [9] fansi_1.0.4                 magrittr_2.0.3             </span></span>
-<span><span class="co">##  [11] memoise_2.0.1               recipes_1.0.4              </span></span>
-<span><span class="co">##  [13] globals_0.16.2              Biostrings_2.66.0          </span></span>
-<span><span class="co">##  [15] annotate_1.76.0             gower_1.0.1                </span></span>
-<span><span class="co">##  [17] matrixStats_0.63.0          sandwich_3.0-2             </span></span>
-<span><span class="co">##  [19] hardhat_1.2.0               timechange_0.2.0           </span></span>
-<span><span class="co">##  [21] pkgdown_2.0.7               colorspace_2.1-0           </span></span>
-<span><span class="co">##  [23] blob_1.2.4                  textshaping_0.3.6          </span></span>
-<span><span class="co">##  [25] xfun_0.37                   dplyr_1.1.0                </span></span>
-<span><span class="co">##  [27] crayon_1.5.2                RCurl_1.98-1.10            </span></span>
-<span><span class="co">##  [29] jsonlite_1.8.4              genefilter_1.80.3          </span></span>
-<span><span class="co">##  [31] survival_3.5-5              zoo_1.8-11                 </span></span>
-<span><span class="co">##  [33] iterators_1.0.14            glue_1.6.2                 </span></span>
-<span><span class="co">##  [35] gtable_0.3.2                ipred_0.9-13               </span></span>
-<span><span class="co">##  [37] zlibbioc_1.44.0             XVector_0.38.0             </span></span>
-<span><span class="co">##  [39] DelayedArray_0.24.0         future.apply_1.10.0        </span></span>
-<span><span class="co">##  [41] scales_1.2.1                DBI_1.1.3                  </span></span>
-<span><span class="co">##  [43] Rcpp_1.0.10                 xtable_1.8-4               </span></span>
-<span><span class="co">##  [45] bit_4.0.5                   proxy_0.4-27               </span></span>
-<span><span class="co">##  [47] Formula_1.2-4               lava_1.7.1                 </span></span>
-<span><span class="co">##  [49] prodlim_2019.11.13          httr_1.4.5                 </span></span>
-<span><span class="co">##  [51] modeltools_0.2-23           farver_2.1.1               </span></span>
-<span><span class="co">##  [53] pkgconfig_2.0.3             XML_3.99-0.13              </span></span>
-<span><span class="co">##  [55] flexmix_2.3-18              nnet_7.3-18                </span></span>
-<span><span class="co">##  [57] sass_0.4.5                  utf8_1.2.3                 </span></span>
-<span><span class="co">##  [59] caret_6.0-93                labeling_0.4.2             </span></span>
-<span><span class="co">##  [61] tidyselect_1.2.0            rlang_1.1.0                </span></span>
-<span><span class="co">##  [63] reshape2_1.4.4              AnnotationDbi_1.60.0       </span></span>
-<span><span class="co">##  [65] munsell_0.5.0               tools_4.2.3                </span></span>
-<span><span class="co">##  [67] cachem_1.0.7                cli_3.6.0                  </span></span>
-<span><span class="co">##  [69] generics_0.1.3              RSQLite_2.2.20             </span></span>
-<span><span class="co">##  [71] evaluate_0.20               stringr_1.5.0              </span></span>
-<span><span class="co">##  [73] fastmap_1.1.1               yaml_2.3.7                 </span></span>
-<span><span class="co">##  [75] ragg_1.2.5                  betareg_3.1-4              </span></span>
-<span><span class="co">##  [77] ModelMetrics_1.2.2.2        knitr_1.42                 </span></span>
-<span><span class="co">##  [79] bit64_4.0.5                 fs_1.6.1                   </span></span>
-<span><span class="co">##  [81] purrr_1.0.1                 randomForest_4.7-1.1       </span></span>
-<span><span class="co">##  [83] KEGGREST_1.38.0             future_1.31.0              </span></span>
-<span><span class="co">##  [85] nlme_3.1-162                compiler_4.2.3             </span></span>
-<span><span class="co">##  [87] rstudioapi_0.14             png_0.1-8                  </span></span>
-<span><span class="co">##  [89] e1071_1.7-13                tibble_3.2.0               </span></span>
-<span><span class="co">##  [91] bslib_0.4.2                 stringi_1.7.12             </span></span>
-<span><span class="co">##  [93] highr_0.10                  desc_1.4.2                 </span></span>
-<span><span class="co">##  [95] lattice_0.20-45             Matrix_1.5-3               </span></span>
-<span><span class="co">##  [97] vctrs_0.6.0                 pillar_1.8.1               </span></span>
-<span><span class="co">##  [99] lifecycle_1.0.3             lmtest_0.9-40              </span></span>
-<span><span class="co">## [101] jquerylib_0.1.4             data.table_1.14.6          </span></span>
-<span><span class="co">## [103] bitops_1.0-7                R6_2.5.1                   </span></span>
-<span><span class="co">## [105] BiocIO_1.8.0                parallelly_1.34.0          </span></span>
-<span><span class="co">## [107] codetools_0.2-19            MASS_7.3-58.2              </span></span>
-<span><span class="co">## [109] SummarizedExperiment_1.28.0 proto_1.0.0                </span></span>
-<span><span class="co">## [111] rprojroot_2.0.3             rjson_0.2.21               </span></span>
-<span><span class="co">## [113] minpack.lm_1.2-3            withr_2.5.0                </span></span>
-<span><span class="co">## [115] GenomicAlignments_1.34.0    Rsamtools_2.14.0           </span></span>
-<span><span class="co">## [117] GenomeInfoDbData_1.2.9      parallel_4.2.3             </span></span>
-<span><span class="co">## [119] grid_4.2.3                  rpart_4.1.19               </span></span>
-<span><span class="co">## [121] timeDate_4022.108           class_7.3-21               </span></span>
-<span><span class="co">## [123] rmarkdown_2.20              nls2_0.3-3                 </span></span>
-<span><span class="co">## [125] MatrixGenerics_1.10.0       pROC_1.18.0                </span></span>
-<span><span class="co">## [127] Biobase_2.58.0              lubridate_1.9.2            </span></span>
-<span><span class="co">## [129] restfulr_0.0.15</span></span></code></pre>
+<span><span class="co">##   [1] rstudioapi_0.14             jsonlite_1.8.5             </span></span>
+<span><span class="co">##   [3] magrittr_2.0.3              modeltools_0.2-23          </span></span>
+<span><span class="co">##   [5] farver_2.1.1                rmarkdown_2.22             </span></span>
+<span><span class="co">##   [7] fs_1.6.2                    BiocIO_1.10.0              </span></span>
+<span><span class="co">##   [9] zlibbioc_1.46.0             ragg_1.2.5                 </span></span>
+<span><span class="co">##  [11] vctrs_0.6.3                 memoise_2.0.1              </span></span>
+<span><span class="co">##  [13] Rsamtools_2.16.0            RCurl_1.98-1.12            </span></span>
+<span><span class="co">##  [15] htmltools_0.5.5             S4Arrays_1.0.4             </span></span>
+<span><span class="co">##  [17] Formula_1.2-5               pROC_1.18.2                </span></span>
+<span><span class="co">##  [19] caret_6.0-94                sass_0.4.6                 </span></span>
+<span><span class="co">##  [21] parallelly_1.36.0           bslib_0.5.0                </span></span>
+<span><span class="co">##  [23] desc_1.4.2                  sandwich_3.0-2             </span></span>
+<span><span class="co">##  [25] plyr_1.8.8                  zoo_1.8-12                 </span></span>
+<span><span class="co">##  [27] lubridate_1.9.2             cachem_1.0.8               </span></span>
+<span><span class="co">##  [29] GenomicAlignments_1.36.0    lifecycle_1.0.3            </span></span>
+<span><span class="co">##  [31] minpack.lm_1.2-3            iterators_1.0.14           </span></span>
+<span><span class="co">##  [33] pkgconfig_2.0.3             Matrix_1.5-4.1             </span></span>
+<span><span class="co">##  [35] R6_2.5.1                    fastmap_1.1.1              </span></span>
+<span><span class="co">##  [37] GenomeInfoDbData_1.2.10     MatrixGenerics_1.12.2      </span></span>
+<span><span class="co">##  [39] future_1.32.0               digest_0.6.31              </span></span>
+<span><span class="co">##  [41] colorspace_2.1-0            AnnotationDbi_1.62.1       </span></span>
+<span><span class="co">##  [43] rprojroot_2.0.3             textshaping_0.3.6          </span></span>
+<span><span class="co">##  [45] RSQLite_2.3.1               labeling_0.4.2             </span></span>
+<span><span class="co">##  [47] randomForest_4.7-1.1        fansi_1.0.4                </span></span>
+<span><span class="co">##  [49] timechange_0.2.0            httr_1.4.6                 </span></span>
+<span><span class="co">##  [51] compiler_4.3.0              proxy_0.4-27               </span></span>
+<span><span class="co">##  [53] bit64_4.0.5                 withr_2.5.0                </span></span>
+<span><span class="co">##  [55] BiocParallel_1.34.2         betareg_3.1-4              </span></span>
+<span><span class="co">##  [57] DBI_1.1.3                   highr_0.10                 </span></span>
+<span><span class="co">##  [59] MASS_7.3-60                 lava_1.7.2.1               </span></span>
+<span><span class="co">##  [61] DelayedArray_0.26.3         rjson_0.2.21               </span></span>
+<span><span class="co">##  [63] ModelMetrics_1.2.2.2        tools_4.3.0                </span></span>
+<span><span class="co">##  [65] lmtest_0.9-40               future.apply_1.11.0        </span></span>
+<span><span class="co">##  [67] nnet_7.3-19                 glue_1.6.2                 </span></span>
+<span><span class="co">##  [69] restfulr_0.0.15             nlme_3.1-162               </span></span>
+<span><span class="co">##  [71] grid_4.3.0                  reshape2_1.4.4             </span></span>
+<span><span class="co">##  [73] generics_0.1.3              recipes_1.0.6              </span></span>
+<span><span class="co">##  [75] gtable_0.3.3                class_7.3-22               </span></span>
+<span><span class="co">##  [77] data.table_1.14.8           flexmix_2.3-19             </span></span>
+<span><span class="co">##  [79] utf8_1.2.3                  XVector_0.40.0             </span></span>
+<span><span class="co">##  [81] foreach_1.5.2               pillar_1.9.0               </span></span>
+<span><span class="co">##  [83] stringr_1.5.0               genefilter_1.82.1          </span></span>
+<span><span class="co">##  [85] splines_4.3.0               dplyr_1.1.2                </span></span>
+<span><span class="co">##  [87] lattice_0.21-8              survival_3.5-5             </span></span>
+<span><span class="co">##  [89] bit_4.0.5                   annotate_1.78.0            </span></span>
+<span><span class="co">##  [91] tidyselect_1.2.0            Biostrings_2.68.1          </span></span>
+<span><span class="co">##  [93] knitr_1.43                  SummarizedExperiment_1.30.2</span></span>
+<span><span class="co">##  [95] xfun_0.39                   Biobase_2.60.0             </span></span>
+<span><span class="co">##  [97] hardhat_1.3.0               timeDate_4022.108          </span></span>
+<span><span class="co">##  [99] matrixStats_1.0.0           proto_1.0.0                </span></span>
+<span><span class="co">## [101] stringi_1.7.12              yaml_2.3.7                 </span></span>
+<span><span class="co">## [103] evaluate_0.21               codetools_0.2-19           </span></span>
+<span><span class="co">## [105] tibble_3.2.1                cli_3.6.1                  </span></span>
+<span><span class="co">## [107] rpart_4.1.19                nls2_0.3-3                 </span></span>
+<span><span class="co">## [109] xtable_1.8-4                systemfonts_1.0.4          </span></span>
+<span><span class="co">## [111] munsell_0.5.0               jquerylib_0.1.4            </span></span>
+<span><span class="co">## [113] Rcpp_1.0.10                 globals_0.16.2             </span></span>
+<span><span class="co">## [115] png_0.1-8                   XML_3.99-0.14              </span></span>
+<span><span class="co">## [117] parallel_4.3.0              pkgdown_2.0.7              </span></span>
+<span><span class="co">## [119] gower_1.0.1                 blob_1.2.4                 </span></span>
+<span><span class="co">## [121] bitops_1.0-7                listenv_0.9.0              </span></span>
+<span><span class="co">## [123] ipred_0.9-14                e1071_1.7-13               </span></span>
+<span><span class="co">## [125] scales_1.2.1                prodlim_2023.03.31         </span></span>
+<span><span class="co">## [127] purrr_1.0.1                 crayon_1.5.2               </span></span>
+<span><span class="co">## [129] rlang_1.1.1                 KEGGREST_1.40.0</span></span></code></pre>
 </div>
   </div>
 

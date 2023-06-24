@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@ Mackenzie’s lab<br><br>
 Department of Biology.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 data-toc-skip class="date">25 April 2023</h4>
+            <h4 data-toc-skip class="date">24 June 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd" class="external-link"><code>vignettes/Cutpoint_estimation_with_Methyl-IT.Rmd</code></a></small>
       <div class="hidden name"><code>Cutpoint_estimation_with_Methyl-IT.Rmd</code></div>
@@ -319,7 +319,7 @@ filtering condition.</p>
 empirical critical values for the probability distribution of <span class="math inline">\(H\)</span> and <span class="math inline">\(TV\)</span> can is obtained using
 <em>quantile</em> function from the R package <em>stats</em>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
 <span>    <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span></span>
@@ -985,40 +985,40 @@ those obtained with FT:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">ft.class</span><span class="op">$</span><span class="va">mc.val</span></span></code></pre></div>
 <pre><code><span><span class="co">##     Accuracy          Kappa           AccuracyLower    AccuracyUpper   </span></span>
-<span><span class="co">##  Min.   :0.8086   Min.   :-0.003575   Min.   :0.8011   Min.   :0.8158  </span></span>
-<span><span class="co">##  1st Qu.:0.8103   1st Qu.: 0.005048   1st Qu.:0.8030   1st Qu.:0.8176  </span></span>
-<span><span class="co">##  Median :0.8108   Median : 0.007429   Median :0.8034   Median :0.8180  </span></span>
-<span><span class="co">##  Mean   :0.8109   Mean   : 0.007384   Mean   :0.8035   Mean   :0.8181  </span></span>
-<span><span class="co">##  3rd Qu.:0.8114   3rd Qu.: 0.009674   3rd Qu.:0.8040   3rd Qu.:0.8186  </span></span>
-<span><span class="co">##  Max.   :0.8132   Max.   : 0.018501   Max.   :0.8059   Max.   :0.8204  </span></span>
+<span><span class="co">##  Min.   :0.8086   Min.   :-0.002712   Min.   :0.8011   Min.   :0.8158  </span></span>
+<span><span class="co">##  1st Qu.:0.8103   1st Qu.: 0.004770   1st Qu.:0.8030   1st Qu.:0.8176  </span></span>
+<span><span class="co">##  Median :0.8110   Median : 0.007210   Median :0.8036   Median :0.8182  </span></span>
+<span><span class="co">##  Mean   :0.8109   Mean   : 0.007260   Mean   :0.8036   Mean   :0.8181  </span></span>
+<span><span class="co">##  3rd Qu.:0.8115   3rd Qu.: 0.009902   3rd Qu.:0.8041   3rd Qu.:0.8187  </span></span>
+<span><span class="co">##  Max.   :0.8138   Max.   : 0.017490   Max.   :0.8065   Max.   :0.8210  </span></span>
 <span><span class="co">##   AccuracyNull    AccuracyPValue   McnemarPValue  Sensitivity    </span></span>
-<span><span class="co">##  Min.   :0.8188   Min.   :0.9400   Min.   :0     Min.   :0.9835  </span></span>
-<span><span class="co">##  1st Qu.:0.8188   1st Qu.:0.9794   1st Qu.:0     1st Qu.:0.9855  </span></span>
-<span><span class="co">##  Median :0.8188   Median :0.9865   Median :0     Median :0.9861  </span></span>
-<span><span class="co">##  Mean   :0.8188   Mean   :0.9836   Mean   :0     Mean   :0.9862  </span></span>
-<span><span class="co">##  3rd Qu.:0.8188   3rd Qu.:0.9902   3rd Qu.:0     3rd Qu.:0.9868  </span></span>
-<span><span class="co">##  Max.   :0.8188   Max.   :0.9976   Max.   :0     Max.   :0.9895  </span></span>
+<span><span class="co">##  Min.   :0.8188   Min.   :0.9168   Min.   :0     Min.   :0.9834  </span></span>
+<span><span class="co">##  1st Qu.:0.8188   1st Qu.:0.9781   1st Qu.:0     1st Qu.:0.9857  </span></span>
+<span><span class="co">##  Median :0.8188   Median :0.9847   Median :0     Median :0.9864  </span></span>
+<span><span class="co">##  Mean   :0.8188   Mean   :0.9828   Mean   :0     Mean   :0.9863  </span></span>
+<span><span class="co">##  3rd Qu.:0.8188   3rd Qu.:0.9902   3rd Qu.:0     3rd Qu.:0.9869  </span></span>
+<span><span class="co">##  Max.   :0.8188   Max.   :0.9976   Max.   :0     Max.   :0.9890  </span></span>
 <span><span class="co">##   Specificity      Pos Pred Value   Neg Pred Value     Precision     </span></span>
-<span><span class="co">##  Min.   :0.01233   Min.   :0.8185   Min.   :0.1572   Min.   :0.8185  </span></span>
-<span><span class="co">##  1st Qu.:0.01726   1st Qu.:0.8193   1st Qu.:0.2137   1st Qu.:0.8193  </span></span>
-<span><span class="co">##  Median :0.01874   Median :0.8195   Median :0.2289   Median :0.8195  </span></span>
-<span><span class="co">##  Mean   :0.01859   Mean   :0.8195   Mean   :0.2290   Mean   :0.8195  </span></span>
-<span><span class="co">##  3rd Qu.:0.02022   3rd Qu.:0.8198   3rd Qu.:0.2432   3rd Qu.:0.8198  </span></span>
-<span><span class="co">##  Max.   :0.02613   Max.   :0.8206   Max.   :0.2994   Max.   :0.8206  </span></span>
+<span><span class="co">##  Min.   :0.01233   Min.   :0.8186   Min.   :0.1636   Min.   :0.8186  </span></span>
+<span><span class="co">##  1st Qu.:0.01677   1st Qu.:0.8193   1st Qu.:0.2117   1st Qu.:0.8193  </span></span>
+<span><span class="co">##  Median :0.01824   Median :0.8195   Median :0.2291   Median :0.8195  </span></span>
+<span><span class="co">##  Mean   :0.01838   Mean   :0.8195   Mean   :0.2286   Mean   :0.8195  </span></span>
+<span><span class="co">##  3rd Qu.:0.01972   3rd Qu.:0.8198   3rd Qu.:0.2458   3rd Qu.:0.8198  </span></span>
+<span><span class="co">##  Max.   :0.02465   Max.   :0.8205   Max.   :0.3082   Max.   :0.8205  </span></span>
 <span><span class="co">##      Recall             F1           Prevalence     Detection Rate  </span></span>
-<span><span class="co">##  Min.   :0.9835   Min.   :0.8938   Min.   :0.8188   Min.   :0.8053  </span></span>
-<span><span class="co">##  1st Qu.:0.9855   1st Qu.:0.8948   1st Qu.:0.8188   1st Qu.:0.8070  </span></span>
-<span><span class="co">##  Median :0.9861   Median :0.8951   Median :0.8188   Median :0.8075  </span></span>
-<span><span class="co">##  Mean   :0.9862   Mean   :0.8952   Mean   :0.8188   Mean   :0.8075  </span></span>
-<span><span class="co">##  3rd Qu.:0.9868   3rd Qu.:0.8955   3rd Qu.:0.8188   3rd Qu.:0.8080  </span></span>
-<span><span class="co">##  Max.   :0.9895   Max.   :0.8966   Max.   :0.8188   Max.   :0.8103  </span></span>
+<span><span class="co">##  Min.   :0.9834   Min.   :0.8938   Min.   :0.8188   Min.   :0.8053  </span></span>
+<span><span class="co">##  1st Qu.:0.9857   1st Qu.:0.8949   1st Qu.:0.8188   1st Qu.:0.8071  </span></span>
+<span><span class="co">##  Median :0.9864   Median :0.8952   Median :0.8188   Median :0.8077  </span></span>
+<span><span class="co">##  Mean   :0.9863   Mean   :0.8952   Mean   :0.8188   Mean   :0.8076  </span></span>
+<span><span class="co">##  3rd Qu.:0.9869   3rd Qu.:0.8956   3rd Qu.:0.8188   3rd Qu.:0.8081  </span></span>
+<span><span class="co">##  Max.   :0.9890   Max.   :0.8969   Max.   :0.8188   Max.   :0.8098  </span></span>
 <span><span class="co">##  Detection Prevalence Balanced Accuracy</span></span>
-<span><span class="co">##  Min.   :0.9829       Min.   :0.4989   </span></span>
-<span><span class="co">##  1st Qu.:0.9846       1st Qu.:0.5016   </span></span>
-<span><span class="co">##  Median :0.9853       Median :0.5024   </span></span>
-<span><span class="co">##  Mean   :0.9853       Mean   :0.5024   </span></span>
-<span><span class="co">##  3rd Qu.:0.9859       3rd Qu.:0.5031   </span></span>
-<span><span class="co">##  Max.   :0.9886       Max.   :0.5059</span></span></code></pre>
+<span><span class="co">##  Min.   :0.9828       Min.   :0.4991   </span></span>
+<span><span class="co">##  1st Qu.:0.9849       1st Qu.:0.5015   </span></span>
+<span><span class="co">##  Median :0.9854       Median :0.5023   </span></span>
+<span><span class="co">##  Mean   :0.9854       Mean   :0.5023   </span></span>
+<span><span class="co">##  3rd Qu.:0.9860       3rd Qu.:0.5032   </span></span>
+<span><span class="co">##  Max.   :0.9879       Max.   :0.5056</span></span></code></pre>
 <p>A quite different story is found when information on the probability
 distribution of noise (null hypothesis) is added to the classifier:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
@@ -1128,11 +1128,11 @@ treatment induced signal.</p>
 </h3>
 <p>DMP count data:</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span>G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
-<span>            G3P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">g3p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
-<span>            FT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
-<span>            FT.G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
-<span>            FT.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.g2p_cutp.dmps</span>, <span class="va">length</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">rbind</a></span><span class="op">(</span>G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
+<span>            G3P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">g3p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
+<span>            FT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
+<span>            FT.G2P <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.g2p.dmps</span>, <span class="va">length</span><span class="op">)</span>,</span>
+<span>            FT.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ft.g2p_cutp.dmps</span>, <span class="va">length</span><span class="op">)</span></span>
 <span>    <span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">dt</span></span></code></pre></div>
 <pre><code><span><span class="co">##     G2P  G3P   FT FT.G2P FT.SD</span></span>
@@ -1150,7 +1150,7 @@ those signals induced by the treatment.</p>
 <p>Classification performance data:</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FT"</span>, <span class="st">"FT.G2P"</span>, <span class="st">"FT.SD"</span>, <span class="st">"G2P"</span>, <span class="st">"G3P"</span><span class="op">)</span>, </span>
-<span>                <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">ft.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, </span>
+<span>                <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">ft.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>, </span>
 <span>                        FDR <span class="op">=</span> <span class="va">ft.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span>,</span>
 <span>                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">ft.g2p.class</span><span class="op">$</span><span class="va">boots</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">18</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>                        FDR <span class="op">=</span> <span class="va">ft.g2p.class</span><span class="op">$</span><span class="va">con.mat</span><span class="op">$</span><span class="va">FDR</span><span class="op">)</span>,</span>
@@ -1168,7 +1168,7 @@ those signals induced by the treatment.</p>
 <span></span>
 <span><span class="co">## ------------------------- DMP count graphic ---------------------------------</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, lwd <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">FT</span>, <span class="va">FT.G2P</span>, <span class="va">FT.SD</span>, <span class="va">G2P</span>, <span class="va">G3P</span><span class="op">)</span> <span class="op">~</span> <span class="va">sample</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">FT</span>, <span class="va">FT.G2P</span>, <span class="va">FT.SD</span>, <span class="va">G2P</span>, <span class="va">G3P</span><span class="op">)</span> <span class="op">~</span> <span class="va">sample</span>, </span>
 <span>        panel.first<span class="op">=</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span></span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">dt</span>, beside <span class="op">=</span> <span class="cn">TRUE</span>,  legend.text <span class="op">=</span> <span class="cn">TRUE</span>, las <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">0.05</span>,</span>
@@ -1187,7 +1187,7 @@ those signals induced by the treatment.</p>
 <span><span class="va">labs</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">method</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"serif"</span>, lwd <span class="op">=</span> <span class="fl">0.1</span>, cex <span class="op">=</span> <span class="fl">1</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Accuracy</span>, <span class="va">Sensitivity</span>, <span class="va">Specificity</span>, <span class="va">Pos.Pred.Value</span>, </span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Accuracy</span>, <span class="va">Sensitivity</span>, <span class="va">Specificity</span>, <span class="va">Pos.Pred.Value</span>, </span>
 <span>                    <span class="va">Neg.Pred.Value</span>, <span class="va">Balanced.Accuracy</span>, <span class="va">FDR</span><span class="op">)</span> <span class="op">~</span> <span class="va">method</span>, </span>
 <span>            panel.first <span class="op">=</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1e6</span>, col<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span></span>
 <span>                            <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span>, </span>

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -139,7 +139,7 @@ Pennsylvania State University, University Park, PA 16802<br><br><span class="mat
 Science.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 data-toc-skip class="date">25 April 2023</h4>
+            <h4 data-toc-skip class="date">24 June 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/cancer_example.Rmd" class="external-link"><code>vignettes/cancer_example.Rmd</code></a></small>
       <div class="hidden name"><code>cancer_example.Rmd</code></div>
@@ -482,7 +482,7 @@ are interpreted as pseudo-counts. The information divergence is
 estimated here using the function <a href="https://is.gd/0ViBO9" class="external-link">estimateDivergence</a>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Tue Apr 25 23:57:37 2023"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Sat Jun 24 11:13:05 2023"</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ptm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -496,7 +496,7 @@ estimated here using the function <a href="https://is.gd/0ViBO9" class="external
 <span>                        verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">ptm</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">/</span><span class="fl">60</span>, <span class="st">"minutes."</span>, <span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># in min</span></span></code></pre></div>
-<pre><code><span><span class="co">## 0.742 minutes. Tue Apr 25 23:58:22 2023</span></span></code></pre>
+<pre><code><span><span class="co">## 0.78895 minutes. Sat Jun 24 11:13:52 2023</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">HD</span><span class="op">$</span><span class="va">Breast_cancer</span></span></code></pre></div>
 <pre><code><span><span class="co">## GRanges object with 584538 ranges and 9 metadata columns:</span></span>
@@ -895,9 +895,9 @@ powers for “GGamma3P” and “Gamma3P” are close.</p>
 <code class="sourceCode R"><span><span class="va">gof_1</span><span class="op">$</span><span class="va">stats</span></span></code></pre></div>
 <pre><code><span><span class="co">##                    w2p_AIC w2p_R.Cross.val w3p_AIC w3p_R.Cross.val  g2p_AIC</span></span>
 <span><span class="co">## Breast_normal     -3194788       0.9955368     Inf               0 -3165495</span></span>
-<span><span class="co">## Breast_cancer     -2001256       0.9906861     Inf               0 -2153574</span></span>
+<span><span class="co">## Breast_cancer     -2001256       0.9906862     Inf               0 -2153574</span></span>
 <span><span class="co">## Breast_metastasis -1635630       0.9910272     Inf               0 -1847487</span></span>
-<span><span class="co">## Breast_normal1    -3371455       0.9964338     Inf               0 -3326676</span></span>
+<span><span class="co">## Breast_normal1    -3371455       0.9964339     Inf               0 -3326676</span></span>
 <span><span class="co">##                   g2p_R.Cross.val g3p_AIC g3p_R.Cross.val gg3p_AIC</span></span>
 <span><span class="co">## Breast_normal           0.9945423     Inf               0 -4452069</span></span>
 <span><span class="co">## Breast_cancer           0.9912956     Inf               0 -2813248</span></span>
@@ -1501,23 +1501,23 @@ about is the random split is repeat 300 times?</p>
 <span><span class="co">##  Min.   :0.9918   Min.   :0.9687   Min.   :0.9810   Min.   :0.9973  </span></span>
 <span><span class="co">##  1st Qu.:1.0000   1st Qu.:1.0000   1st Qu.:0.9940   1st Qu.:1.0000  </span></span>
 <span><span class="co">##  Median :1.0000   Median :1.0000   Median :0.9940   Median :1.0000  </span></span>
-<span><span class="co">##  Mean   :0.9997   Mean   :0.9987   Mean   :0.9934   Mean   :0.9999  </span></span>
+<span><span class="co">##  Mean   :0.9998   Mean   :0.9991   Mean   :0.9936   Mean   :0.9999  </span></span>
 <span><span class="co">##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.9940   3rd Qu.:1.0000  </span></span>
 <span><span class="co">##  Max.   :1.0000   Max.   :1.0000   Max.   :0.9940   Max.   :1.0000  </span></span>
 <span><span class="co">##                                                                     </span></span>
 <span><span class="co">##   AccuracyNull    AccuracyPValue      McnemarPValue      Sensitivity</span></span>
 <span><span class="co">##  Min.   :0.8412   Min.   :0.000e+00   Min.   :0.07364   Min.   :1   </span></span>
-<span><span class="co">##  1st Qu.:0.8412   1st Qu.:0.000e+00   1st Qu.:0.24821   1st Qu.:1   </span></span>
+<span><span class="co">##  1st Qu.:0.8412   1st Qu.:0.000e+00   1st Qu.:0.08863   1st Qu.:1   </span></span>
 <span><span class="co">##  Median :0.8412   Median :0.000e+00   Median :0.47950   Median :1   </span></span>
-<span><span class="co">##  Mean   :0.8412   Mean   :1.603e-40   Mean   :0.35878   Mean   :1   </span></span>
+<span><span class="co">##  Mean   :0.8412   Mean   :3.189e-40   Mean   :0.31413   Mean   :1   </span></span>
 <span><span class="co">##  3rd Qu.:0.8412   3rd Qu.:0.000e+00   3rd Qu.:0.47950   3rd Qu.:1   </span></span>
 <span><span class="co">##  Max.   :0.8412   Max.   :2.341e-38   Max.   :0.47950   Max.   :1   </span></span>
-<span><span class="co">##                                       NA's   :277                   </span></span>
+<span><span class="co">##                                       NA's   :286                   </span></span>
 <span><span class="co">##   Specificity     Pos Pred Value   Neg Pred Value   Precision          Recall </span></span>
 <span><span class="co">##  Min.   :0.9485   Min.   :0.9904   Min.   :1      Min.   :0.9904   Min.   :1  </span></span>
 <span><span class="co">##  1st Qu.:1.0000   1st Qu.:1.0000   1st Qu.:1      1st Qu.:1.0000   1st Qu.:1  </span></span>
 <span><span class="co">##  Median :1.0000   Median :1.0000   Median :1      Median :1.0000   Median :1  </span></span>
-<span><span class="co">##  Mean   :0.9979   Mean   :0.9996   Mean   :1      Mean   :0.9996   Mean   :1  </span></span>
+<span><span class="co">##  Mean   :0.9985   Mean   :0.9997   Mean   :1      Mean   :0.9997   Mean   :1  </span></span>
 <span><span class="co">##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1      3rd Qu.:1.0000   3rd Qu.:1  </span></span>
 <span><span class="co">##  Max.   :1.0000   Max.   :1.0000   Max.   :1      Max.   :1.0000   Max.   :1  </span></span>
 <span><span class="co">##                                                                               </span></span>
@@ -1525,7 +1525,7 @@ about is the random split is repeat 300 times?</p>
 <span><span class="co">##  Min.   :0.9952   Min.   :0.8412   Min.   :0.8412   Min.   :0.8412      </span></span>
 <span><span class="co">##  1st Qu.:1.0000   1st Qu.:0.8412   1st Qu.:0.8412   1st Qu.:0.8412      </span></span>
 <span><span class="co">##  Median :1.0000   Median :0.8412   Median :0.8412   Median :0.8412      </span></span>
-<span><span class="co">##  Mean   :0.9998   Mean   :0.8412   Mean   :0.8412   Mean   :0.8416      </span></span>
+<span><span class="co">##  Mean   :0.9999   Mean   :0.8412   Mean   :0.8412   Mean   :0.8415      </span></span>
 <span><span class="co">##  3rd Qu.:1.0000   3rd Qu.:0.8412   3rd Qu.:0.8412   3rd Qu.:0.8412      </span></span>
 <span><span class="co">##  Max.   :1.0000   Max.   :0.8412   Max.   :0.8412   Max.   :0.8494      </span></span>
 <span><span class="co">##                                                                         </span></span>
@@ -1533,7 +1533,7 @@ about is the random split is repeat 300 times?</p>
 <span><span class="co">##  Min.   :0.9742   </span></span>
 <span><span class="co">##  1st Qu.:1.0000   </span></span>
 <span><span class="co">##  Median :1.0000   </span></span>
-<span><span class="co">##  Mean   :0.9990   </span></span>
+<span><span class="co">##  Mean   :0.9992   </span></span>
 <span><span class="co">##  3rd Qu.:1.0000   </span></span>
 <span><span class="co">##  Max.   :1.0000   </span></span>
 <span><span class="co">## </span></span></code></pre>
@@ -1942,12 +1942,12 @@ methylation increases nucleosome compaction and rigidity</span></a>.
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
 which this document was compiled running pandoc 2.19.2:</p>
-<pre><code><span><span class="co">## R version 4.2.3 (2023-03-15)</span></span>
+<pre><code><span><span class="co">## R version 4.3.0 (2023-04-21)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
-<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0</span></span>
+<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 </span></span>
 <span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## locale:</span></span>
@@ -1958,79 +1958,82 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
 <span><span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
 <span><span class="co">## </span></span>
+<span><span class="co">## time zone: America/New_York</span></span>
+<span><span class="co">## tzcode source: system (glibc)</span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">## attached base packages:</span></span>
 <span><span class="co">## [1] grid      stats4    stats     graphics  grDevices utils     datasets </span></span>
 <span><span class="co">## [8] methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
 <span><span class="co">##  [1] VennDiagram_1.7.3    futile.logger_1.4.3  gridExtra_2.3       </span></span>
-<span><span class="co">##  [4] reshape2_1.4.4       ggplot2_3.4.1        BiocParallel_1.32.5 </span></span>
-<span><span class="co">##  [7] MethylIT_0.3.2.6.3   rtracklayer_1.58.0   GenomicRanges_1.50.2</span></span>
-<span><span class="co">## [10] GenomeInfoDb_1.34.9  IRanges_2.32.0       S4Vectors_0.36.1    </span></span>
-<span><span class="co">## [13] BiocGenerics_0.44.0  knitr_1.42          </span></span>
+<span><span class="co">##  [4] reshape2_1.4.4       ggplot2_3.4.2        BiocParallel_1.34.2 </span></span>
+<span><span class="co">##  [7] MethylIT_0.3.2.7     rtracklayer_1.60.0   GenomicRanges_1.52.0</span></span>
+<span><span class="co">## [10] GenomeInfoDb_1.36.1  IRanges_2.34.1       S4Vectors_0.38.1    </span></span>
+<span><span class="co">## [13] BiocGenerics_0.46.0  knitr_1.43          </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] colorspace_2.1-0            rjson_0.2.21               </span></span>
-<span><span class="co">##   [3] class_7.3-21                rprojroot_2.0.3            </span></span>
-<span><span class="co">##   [5] XVector_0.38.0              fs_1.6.1                   </span></span>
-<span><span class="co">##   [7] proxy_0.4-27                rstudioapi_0.14            </span></span>
-<span><span class="co">##   [9] farver_2.1.1                listenv_0.9.0              </span></span>
-<span><span class="co">##  [11] bit64_4.0.5                 AnnotationDbi_1.60.0       </span></span>
-<span><span class="co">##  [13] prodlim_2019.11.13          fansi_1.0.4                </span></span>
-<span><span class="co">##  [15] lubridate_1.9.2             codetools_0.2-19           </span></span>
-<span><span class="co">##  [17] splines_4.2.3               cachem_1.0.7               </span></span>
-<span><span class="co">##  [19] jsonlite_1.8.4              pROC_1.18.0                </span></span>
-<span><span class="co">##  [21] Rsamtools_2.14.0            caret_6.0-93               </span></span>
-<span><span class="co">##  [23] annotate_1.76.0             png_0.1-8                  </span></span>
-<span><span class="co">##  [25] compiler_4.2.3              httr_1.4.5                 </span></span>
-<span><span class="co">##  [27] Matrix_1.5-3                fastmap_1.1.1              </span></span>
-<span><span class="co">##  [29] cli_3.6.0                   formatR_1.14               </span></span>
-<span><span class="co">##  [31] htmltools_0.5.4             tools_4.2.3                </span></span>
-<span><span class="co">##  [33] gtable_0.3.2                glue_1.6.2                 </span></span>
-<span><span class="co">##  [35] GenomeInfoDbData_1.2.9      dplyr_1.1.0                </span></span>
-<span><span class="co">##  [37] Rcpp_1.0.10                 Biobase_2.58.0             </span></span>
-<span><span class="co">##  [39] jquerylib_0.1.4             pkgdown_2.0.7              </span></span>
-<span><span class="co">##  [41] vctrs_0.6.0                 Biostrings_2.66.0          </span></span>
-<span><span class="co">##  [43] nlme_3.1-162                iterators_1.0.14           </span></span>
-<span><span class="co">##  [45] timeDate_4022.108           gower_1.0.1                </span></span>
-<span><span class="co">##  [47] xfun_0.37                   stringr_1.5.0              </span></span>
-<span><span class="co">##  [49] proto_1.0.0                 globals_0.16.2             </span></span>
-<span><span class="co">##  [51] timechange_0.2.0            lifecycle_1.0.3            </span></span>
-<span><span class="co">##  [53] restfulr_0.0.15             XML_3.99-0.13              </span></span>
-<span><span class="co">##  [55] future_1.31.0               zlibbioc_1.44.0            </span></span>
-<span><span class="co">##  [57] MASS_7.3-58.2               scales_1.2.1               </span></span>
-<span><span class="co">##  [59] ipred_0.9-13                ragg_1.2.5                 </span></span>
-<span><span class="co">##  [61] MatrixGenerics_1.10.0       parallel_4.2.3             </span></span>
-<span><span class="co">##  [63] SummarizedExperiment_1.28.0 lambda.r_1.2.4             </span></span>
-<span><span class="co">##  [65] yaml_2.3.7                  memoise_2.0.1              </span></span>
-<span><span class="co">##  [67] sass_0.4.5                  rpart_4.1.19               </span></span>
-<span><span class="co">##  [69] stringi_1.7.12              RSQLite_2.2.20             </span></span>
-<span><span class="co">##  [71] highr_0.10                  genefilter_1.80.3          </span></span>
-<span><span class="co">##  [73] BiocIO_1.8.0                desc_1.4.2                 </span></span>
-<span><span class="co">##  [75] randomForest_4.7-1.1        foreach_1.5.2              </span></span>
-<span><span class="co">##  [77] e1071_1.7-13                hardhat_1.2.0              </span></span>
-<span><span class="co">##  [79] lava_1.7.1                  rlang_1.1.0                </span></span>
-<span><span class="co">##  [81] pkgconfig_2.0.3             systemfonts_1.0.4          </span></span>
-<span><span class="co">##  [83] matrixStats_0.63.0          bitops_1.0-7               </span></span>
-<span><span class="co">##  [85] evaluate_0.20               lattice_0.20-45            </span></span>
-<span><span class="co">##  [87] purrr_1.0.1                 labeling_0.4.2             </span></span>
-<span><span class="co">##  [89] GenomicAlignments_1.34.0    recipes_1.0.4              </span></span>
-<span><span class="co">##  [91] bit_4.0.5                   tidyselect_1.2.0           </span></span>
-<span><span class="co">##  [93] parallelly_1.34.0           nls2_0.3-3                 </span></span>
-<span><span class="co">##  [95] plyr_1.8.8                  magrittr_2.0.3             </span></span>
-<span><span class="co">##  [97] R6_2.5.1                    generics_0.1.3             </span></span>
-<span><span class="co">##  [99] DelayedArray_0.24.0         DBI_1.1.3                  </span></span>
-<span><span class="co">## [101] pillar_1.8.1                withr_2.5.0                </span></span>
-<span><span class="co">## [103] KEGGREST_1.38.0             survival_3.5-5             </span></span>
-<span><span class="co">## [105] RCurl_1.98-1.10             nnet_7.3-18                </span></span>
-<span><span class="co">## [107] tibble_3.2.0                future.apply_1.10.0        </span></span>
-<span><span class="co">## [109] crayon_1.5.2                futile.options_1.0.1       </span></span>
-<span><span class="co">## [111] utf8_1.2.3                  rmarkdown_2.20             </span></span>
-<span><span class="co">## [113] minpack.lm_1.2-3            data.table_1.14.6          </span></span>
-<span><span class="co">## [115] blob_1.2.4                  ModelMetrics_1.2.2.2       </span></span>
-<span><span class="co">## [117] digest_0.6.31               xtable_1.8-4               </span></span>
-<span><span class="co">## [119] textshaping_0.3.6           munsell_0.5.0              </span></span>
-<span><span class="co">## [121] bslib_0.4.2</span></span></code></pre>
+<span><span class="co">##   [1] rstudioapi_0.14             jsonlite_1.8.5             </span></span>
+<span><span class="co">##   [3] magrittr_2.0.3              farver_2.1.1               </span></span>
+<span><span class="co">##   [5] rmarkdown_2.22              fs_1.6.2                   </span></span>
+<span><span class="co">##   [7] BiocIO_1.10.0               zlibbioc_1.46.0            </span></span>
+<span><span class="co">##   [9] ragg_1.2.5                  vctrs_0.6.3                </span></span>
+<span><span class="co">##  [11] memoise_2.0.1               Rsamtools_2.16.0           </span></span>
+<span><span class="co">##  [13] RCurl_1.98-1.12             htmltools_0.5.5            </span></span>
+<span><span class="co">##  [15] S4Arrays_1.0.4              lambda.r_1.2.4             </span></span>
+<span><span class="co">##  [17] pROC_1.18.2                 caret_6.0-94               </span></span>
+<span><span class="co">##  [19] sass_0.4.6                  parallelly_1.36.0          </span></span>
+<span><span class="co">##  [21] bslib_0.5.0                 desc_1.4.2                 </span></span>
+<span><span class="co">##  [23] plyr_1.8.8                  futile.options_1.0.1       </span></span>
+<span><span class="co">##  [25] lubridate_1.9.2             cachem_1.0.8               </span></span>
+<span><span class="co">##  [27] GenomicAlignments_1.36.0    lifecycle_1.0.3            </span></span>
+<span><span class="co">##  [29] minpack.lm_1.2-3            iterators_1.0.14           </span></span>
+<span><span class="co">##  [31] pkgconfig_2.0.3             Matrix_1.5-4.1             </span></span>
+<span><span class="co">##  [33] R6_2.5.1                    fastmap_1.1.1              </span></span>
+<span><span class="co">##  [35] GenomeInfoDbData_1.2.10     MatrixGenerics_1.12.2      </span></span>
+<span><span class="co">##  [37] future_1.32.0               digest_0.6.31              </span></span>
+<span><span class="co">##  [39] colorspace_2.1-0            AnnotationDbi_1.62.1       </span></span>
+<span><span class="co">##  [41] rprojroot_2.0.3             textshaping_0.3.6          </span></span>
+<span><span class="co">##  [43] RSQLite_2.3.1               labeling_0.4.2             </span></span>
+<span><span class="co">##  [45] randomForest_4.7-1.1        fansi_1.0.4                </span></span>
+<span><span class="co">##  [47] timechange_0.2.0            httr_1.4.6                 </span></span>
+<span><span class="co">##  [49] compiler_4.3.0              proxy_0.4-27               </span></span>
+<span><span class="co">##  [51] bit64_4.0.5                 withr_2.5.0                </span></span>
+<span><span class="co">##  [53] DBI_1.1.3                   highr_0.10                 </span></span>
+<span><span class="co">##  [55] MASS_7.3-60                 lava_1.7.2.1               </span></span>
+<span><span class="co">##  [57] DelayedArray_0.26.3         rjson_0.2.21               </span></span>
+<span><span class="co">##  [59] ModelMetrics_1.2.2.2        tools_4.3.0                </span></span>
+<span><span class="co">##  [61] future.apply_1.11.0         nnet_7.3-19                </span></span>
+<span><span class="co">##  [63] glue_1.6.2                  restfulr_0.0.15            </span></span>
+<span><span class="co">##  [65] nlme_3.1-162                generics_0.1.3             </span></span>
+<span><span class="co">##  [67] recipes_1.0.6               gtable_0.3.3               </span></span>
+<span><span class="co">##  [69] class_7.3-22                data.table_1.14.8          </span></span>
+<span><span class="co">##  [71] utf8_1.2.3                  XVector_0.40.0             </span></span>
+<span><span class="co">##  [73] foreach_1.5.2               pillar_1.9.0               </span></span>
+<span><span class="co">##  [75] stringr_1.5.0               genefilter_1.82.1          </span></span>
+<span><span class="co">##  [77] splines_4.3.0               dplyr_1.1.2                </span></span>
+<span><span class="co">##  [79] lattice_0.21-8              survival_3.5-5             </span></span>
+<span><span class="co">##  [81] bit_4.0.5                   annotate_1.78.0            </span></span>
+<span><span class="co">##  [83] tidyselect_1.2.0            Biostrings_2.68.1          </span></span>
+<span><span class="co">##  [85] SummarizedExperiment_1.30.2 xfun_0.39                  </span></span>
+<span><span class="co">##  [87] Biobase_2.60.0              hardhat_1.3.0              </span></span>
+<span><span class="co">##  [89] timeDate_4022.108           matrixStats_1.0.0          </span></span>
+<span><span class="co">##  [91] proto_1.0.0                 stringi_1.7.12             </span></span>
+<span><span class="co">##  [93] yaml_2.3.7                  evaluate_0.21              </span></span>
+<span><span class="co">##  [95] codetools_0.2-19            tibble_3.2.1               </span></span>
+<span><span class="co">##  [97] cli_3.6.1                   rpart_4.1.19               </span></span>
+<span><span class="co">##  [99] nls2_0.3-3                  xtable_1.8-4               </span></span>
+<span><span class="co">## [101] systemfonts_1.0.4           munsell_0.5.0              </span></span>
+<span><span class="co">## [103] jquerylib_0.1.4             Rcpp_1.0.10                </span></span>
+<span><span class="co">## [105] globals_0.16.2              png_0.1-8                  </span></span>
+<span><span class="co">## [107] XML_3.99-0.14               parallel_4.3.0             </span></span>
+<span><span class="co">## [109] pkgdown_2.0.7               gower_1.0.1                </span></span>
+<span><span class="co">## [111] blob_1.2.4                  bitops_1.0-7               </span></span>
+<span><span class="co">## [113] listenv_0.9.0               ipred_0.9-14               </span></span>
+<span><span class="co">## [115] e1071_1.7-13                scales_1.2.1               </span></span>
+<span><span class="co">## [117] prodlim_2023.03.31          purrr_1.0.1                </span></span>
+<span><span class="co">## [119] crayon_1.5.2                rlang_1.1.1                </span></span>
+<span><span class="co">## [121] formatR_1.14                KEGGREST_1.40.0</span></span></code></pre>
 </div>
   </div>
 

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -285,7 +285,7 @@ from <code><a href="https://rdrr.io/pkg/minpack.lm/man/nlsLM.html" class="extern
 <span class="r-in"><span>                mCt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                uCt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">num.samples</span>, mu <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span><span class="va">gr</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/makeGRangesFromDataFrame.html" class="external-link">makeGRangesFromDataFrame</a></span><span class="op">(</span><span class="va">gr</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">meth_levels</span><span class="op">(</span>GR <span class="op">=</span> <span class="va">gr</span>,</span></span>
 <span class="r-in"><span>                columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mC1 <span class="op">=</span> <span class="fl">1</span>, uC1 <span class="op">=</span> <span class="fl">2</span>,</span></span>
