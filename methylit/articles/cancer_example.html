@@ -131,7 +131,9 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Example of Methylome Analysis with MethylIT
 using Cancer Datasets</h1>
-            <h3 data-toc-skip class="subtitle"><h1> ¶ A <a href="https://github.com/genomaths/%20MethylIT" class="external-link">Methyl-IT</a> user
+            <h3 data-toc-skip class="subtitle"><h1>
+<br>
+A <a href="https://github.com/genomaths/%20MethylIT" class="external-link">Methyl-IT</a> user
 guide. A guide for users</h1></h3>
                         <h4 data-toc-skip class="author"><div class="line-block">Robersy Sanchez<span class="math inline">\(^1\)</span><br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br><br>
 Sally Mackenzie<span class="math inline">\(^{1,2}\)</span><br><a href="mailto:sam795@psu.edu" class="email">sam795@psu.edu</a><br><br><span class="math inline">\(^1\)</span>Department of Biology.<br>
@@ -139,7 +141,7 @@ Pennsylvania State University, University Park, PA 16802<br><br><span class="mat
 Science.<br>
 Pennsylvania State University, University Park, PA 16802</div></h4>
             
-            <h4 data-toc-skip class="date">24 June 2023</h4>
+            <h4 data-toc-skip class="date">16 January 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/cancer_example.Rmd" class="external-link"><code>vignettes/cancer_example.Rmd</code></a></small>
       <div class="hidden name"><code>cancer_example.Rmd</code></div>
@@ -482,7 +484,7 @@ are interpreted as pseudo-counts. The information divergence is
 estimated here using the function <a href="https://is.gd/0ViBO9" class="external-link">estimateDivergence</a>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Sat Jun 24 11:13:05 2023"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Tue Jan 16 15:53:06 2024"</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ptm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -496,7 +498,7 @@ estimated here using the function <a href="https://is.gd/0ViBO9" class="external
 <span>                        verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">ptm</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">/</span><span class="fl">60</span>, <span class="st">"minutes."</span>, <span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># in min</span></span></code></pre></div>
-<pre><code><span><span class="co">## 0.78895 minutes. Sat Jun 24 11:13:52 2023</span></span></code></pre>
+<pre><code><span><span class="co">## 0.7843 minutes. Tue Jan 16 15:53:53 2024</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">HD</span><span class="op">$</span><span class="va">Breast_cancer</span></span></code></pre></div>
 <pre><code><span><span class="co">## GRanges object with 584538 ranges and 9 metadata columns:</span></span>
@@ -584,7 +586,7 @@ cores to use for parallel computation can be specified.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hd</span> <span class="op">=</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">normal</span>, <span class="va">normal1</span>, <span class="va">cancer</span>, <span class="va">metastasis</span><span class="op">)</span>,</span>
 <span>                    missing <span class="op">=</span> <span class="cn">NA</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hd</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"normal1"</span>, <span class="st">"cancer"</span>, <span class="st">"metastasis"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hd</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"normal1"</span>, <span class="st">"cancer"</span>, <span class="st">"metastasis"</span><span class="op">)</span></span>
 <span><span class="va">hd</span></span></code></pre></div>
 <pre><code><span><span class="co">## GRanges object with 793551 ranges and 4 metadata columns:</span></span>
 <span><span class="co">##            seqnames    ranges strand |     normal    normal1    cancer</span></span>
@@ -628,9 +630,9 @@ data included in the graphic are:</p>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>normal <span class="op">=</span> <span class="va">hd</span><span class="op">$</span><span class="va">normal</span>, normal1 <span class="op">=</span> <span class="va">hd</span><span class="op">$</span><span class="va">normal1</span>,</span>
 <span>                    cancer <span class="op">=</span> <span class="va">hd</span><span class="op">$</span><span class="va">cancer</span>, metastasis <span class="op">=</span> <span class="va">hd</span><span class="op">$</span><span class="va">metastasis</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html" class="external-link">melt</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Breast.tissue"</span>, <span class="st">"HD"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Breast.tissue"</span>, <span class="st">"HD"</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">HD</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/DataFrame-class.html" class="external-link">DataFrame</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">DataFrame</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## DataFrame with 3174204 rows and 2 columns</span></span>
 <span><span class="co">##           Breast.tissue         HD</span></span>
 <span><span class="co">##                &lt;factor&gt;  &lt;numeric&gt;</span></span>
@@ -666,7 +668,7 @@ data included in the graphic are:</p>
 <span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For visualization purposes HD is limited to the interval 0 to 50</span></span>
-<span><span class="va">dt</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">HD</span> <span class="op">&lt;</span> <span class="fl">50</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">dt</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">HD</span> <span class="op">&lt;</span> <span class="fl">50</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="va">p2</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dt</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Breast.tissue</span>, y <span class="op">=</span> <span class="va">HD</span> , fill <span class="op">=</span> <span class="va">Breast.tissue</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>, <span class="fl">20</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">stat_summary</a></span><span class="op">(</span>fun.data <span class="op">=</span> <span class="va">fun_length</span>, geom <span class="op">=</span> <span class="st">"text"</span>,</span>
@@ -710,16 +712,16 @@ maximum coverage must be 500 or less.</p>
 <span><span class="va">covr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">HD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">cov1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">c1</span> <span class="op">+</span> <span class="va">x</span><span class="op">$</span><span class="va">t1</span></span>
 <span>    <span class="va">cov2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">c2</span> <span class="op">+</span> <span class="va">x</span><span class="op">$</span><span class="va">t2</span></span>
-<span>    <span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">cov1</span>, <span class="va">cov2</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">max</span><span class="op">)</span></span>
+<span>    <span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">cov1</span>, <span class="va">cov2</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">max</span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">cov</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Quantiles</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">covr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">covr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">q60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span>    <span class="va">q9999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.9999</span><span class="op">)</span></span>
-<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
-<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
+<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
+<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span>    <span class="va">q95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">idx1</span>, <span class="va">idx2</span><span class="op">)</span></span>
@@ -744,17 +746,17 @@ Descriptive statistics for methylated reads can be checked as well.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Maximum coverage at each cytosine site</span></span>
 <span><span class="va">methc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">HD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">c1</span>, <span class="va">x</span><span class="op">$</span><span class="va">c2</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">max</span><span class="op">)</span></span>
+<span>    <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">c1</span>, <span class="va">x</span><span class="op">$</span><span class="va">c2</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">max</span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Quantiles</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">methc</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">methc</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">q10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span>    <span class="va">q60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span>    <span class="va">q9999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.9999</span><span class="op">)</span></span>
-<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
-<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
+<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
+<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span>    <span class="va">q95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">idx1</span>, <span class="va">idx2</span><span class="op">)</span></span>
@@ -777,7 +779,7 @@ Descriptive statistics for methylated reads can be checked as well.</p>
 <p>The critical values from empirical cumulative probability
 distributions will be used in the downstream analysis.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">HD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">HD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">bay.TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>tv <span class="op">=</span> <span class="va">tv.95</span>, hd <span class="op">=</span> <span class="va">hd.95</span><span class="op">)</span><span class="op">)</span></span>
@@ -1062,22 +1064,22 @@ single matrix on the metacolumn of the GRanges object.</p>
 <span><span class="co"># The data to be used in the boxplot</span></span>
 <span><span class="va">ps1</span> <span class="op">=</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">PS1</span>, missing <span class="op">=</span> <span class="cn">NA</span>, columns <span class="op">=</span> <span class="fl">9</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                    num.cores <span class="op">=</span> <span class="fl">6L</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">ps1</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"cancer"</span>, <span class="st">"metastasis"</span>, <span class="st">"normal1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">ps1</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"cancer"</span>, <span class="st">"metastasis"</span>, <span class="st">"normal1"</span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>normal <span class="op">=</span> <span class="va">ps1</span><span class="op">$</span><span class="va">normal</span>, normal1 <span class="op">=</span> <span class="va">ps1</span><span class="op">$</span><span class="va">normal1</span>,</span>
 <span>                cancer <span class="op">=</span> <span class="va">ps1</span><span class="op">$</span><span class="va">cancer</span>, metastasis <span class="op">=</span> <span class="va">ps1</span><span class="op">$</span><span class="va">metastasis</span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html" class="external-link">melt</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Breast.tissue"</span>, <span class="st">"HD"</span><span class="op">)</span></span>
-<span><span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">$</span><span class="va">HD</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Breast.tissue"</span>, <span class="st">"HD"</span><span class="op">)</span></span>
+<span><span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">$</span><span class="va">HD</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">&lt;-</span> <span class="va">dat1</span><span class="op">[</span><span class="op">-</span><span class="va">idx</span>, <span class="op">]</span> <span class="co"># To remove missing data</span></span>
 <span></span>
 <span><span class="va">ps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">PS2</span>, missing <span class="op">=</span> <span class="cn">NA</span>, columns <span class="op">=</span> <span class="fl">9</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                    num.cores <span class="op">=</span> <span class="fl">6L</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">ps2</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"cancer"</span>, <span class="st">"metastasis"</span>, <span class="st">"normal1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">ps2</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"cancer"</span>, <span class="st">"metastasis"</span>, <span class="st">"normal1"</span><span class="op">)</span></span>
 <span><span class="va">dat2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>normal <span class="op">=</span> <span class="va">ps2</span><span class="op">$</span><span class="va">normal</span>, normal1 <span class="op">=</span> <span class="va">ps2</span><span class="op">$</span><span class="va">normal1</span>,</span>
 <span>        cancer <span class="op">=</span> <span class="va">ps2</span><span class="op">$</span><span class="va">cancer</span>, metastasis <span class="op">=</span> <span class="va">ps2</span><span class="op">$</span><span class="va">metastasis</span><span class="op">)</span></span>
 <span><span class="va">dat2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html" class="external-link">melt</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Breast.tissue"</span>, <span class="st">"HD"</span><span class="op">)</span></span>
-<span><span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">$</span><span class="va">HD</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Breast.tissue"</span>, <span class="st">"HD"</span><span class="op">)</span></span>
+<span><span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">$</span><span class="va">HD</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">dat2</span> <span class="op">&lt;-</span> <span class="va">dat2</span><span class="op">[</span><span class="op">-</span><span class="va">idx</span>, <span class="op">]</span> <span class="co"># To remove missing data</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">HD</span>, fill <span class="op">=</span> <span class="va">Breast.tissue</span>, colour <span class="op">=</span> <span class="va">Breast.tissue</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1378,17 +1380,17 @@ greater than at the general methylated cytosine background:</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Maximum coverage at each cytosine site</span></span>
 <span><span class="va">methc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">DMPs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>                        <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">c1</span>, <span class="va">x</span><span class="op">$</span><span class="va">c2</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">max</span><span class="op">)</span></span>
+<span>                        <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">c1</span>, <span class="va">x</span><span class="op">$</span><span class="va">c2</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">max</span><span class="op">)</span></span>
 <span>                        <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Quantiles</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">methc</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">methc</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">q10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span>    <span class="va">q60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span>    <span class="va">q9999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.9999</span><span class="op">)</span></span>
-<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
-<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
+<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
+<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span>    <span class="va">q95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">idx1</span>, <span class="va">idx2</span><span class="op">)</span></span>
@@ -1434,7 +1436,7 @@ signal increased.</p>
 <span>                                    <span class="va">DMPs</span><span class="op">$</span><span class="va">Breast_metastasis</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">n23</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu">GenomicRanges</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">DMPs</span><span class="op">$</span><span class="va">Breast_cancer</span>,</span>
 <span>                                    <span class="va">DMPs</span><span class="op">$</span><span class="va">Breast_metastasis</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">n123</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/funprog.html" class="external-link">Reduce</a></span><span class="op">(</span><span class="fu">GenomicRanges</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">intersect</a></span>,</span>
+<span><span class="va">n123</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Reduce</a></span><span class="op">(</span><span class="fu">GenomicRanges</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">intersect</a></span>,</span>
 <span>                    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">DMPs</span><span class="op">$</span><span class="va">Breast_normal</span>, <span class="va">DMPs</span><span class="op">$</span><span class="va">Breast_cancer</span>,</span>
 <span>                        <span class="va">DMPs</span><span class="op">$</span><span class="va">Breast_metastasis</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -1587,8 +1589,8 @@ file containing only the gene annotation:</p>
 <span>                <span class="st">"Homo_sapiens_GRCh38.91_genes.RData"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
 <span><span class="va">genes</span> <span class="op">=</span> <span class="va">genes</span><span class="op">[</span> <span class="va">genes</span><span class="op">$</span><span class="va">biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span>, <span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html" class="external-link">seqlevels</a></span><span class="op">(</span><span class="va">genes</span>, <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"13"</span> <span class="co"># To keep a consistent chromosome annotation</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html" class="external-link">seqlevels</a></span><span class="op">(</span><span class="va">genes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"chr13"</span></span>
+<span><span class="fu">seqlevels</span><span class="op">(</span><span class="va">genes</span>, <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"13"</span> <span class="co"># To keep a consistent chromosome annotation</span></span>
+<span><span class="fu">seqlevels</span><span class="op">(</span><span class="va">genes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"chr13"</span></span>
 <span><span class="va">genes</span></span></code></pre></div>
 <pre><code><span><span class="co">## GRanges object with 323 ranges and 3 metadata columns:</span></span>
 <span><span class="co">##         seqnames              ranges strand |         gene_id        biotype</span></span>
@@ -1657,11 +1659,11 @@ for more than one replicate in the control group).</p>
 <span>                                <span class="va">DMPsBC</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, <span class="va">DMPsBM</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>                            type <span class="op">=</span> <span class="st">"equal"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                            ignore.strand <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">Genes.DMPs</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Breast_normal"</span>, <span class="st">"Breast_normal1"</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span> <span class="fu">mcols</span><span class="op">(</span><span class="va">Genes.DMPs</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Breast_normal"</span>, <span class="st">"Breast_normal1"</span>,</span>
 <span>                                    <span class="st">"Breast_cancer"</span>, <span class="st">"Breast_metastasis"</span><span class="op">)</span></span></code></pre></div>
 <p>Next, the set of mapped genes are annotated</p>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">GeneID</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">subsetByOverlaps</a></span><span class="op">(</span><span class="va">genes</span>, <span class="va">Genes.DMPs</span>, type <span class="op">=</span> <span class="st">"equal"</span>,</span>
+<code class="sourceCode R"><span><span class="va">GeneID</span> <span class="op">=</span> <span class="fu">subsetByOverlaps</span><span class="op">(</span><span class="va">genes</span>, <span class="va">Genes.DMPs</span>, type <span class="op">=</span> <span class="st">"equal"</span>,</span>
 <span>                            ignore.strand <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span> <span class="va">Genes.DMPs</span> <span class="op">)</span> <span class="op">&lt;-</span> <span class="va">GeneID</span><span class="op">$</span><span class="va">gene_id</span></span>
 <span><span class="va">Genes.DMPs</span></span></code></pre></div>
@@ -1738,13 +1740,13 @@ object.</p>
 <p>Here, we adds the gene alias:</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hits</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">findOverlaps</a></span><span class="op">(</span><span class="va">DMGs</span>, <span class="va">genes</span>, type <span class="op">=</span> <span class="st">"equal"</span><span class="op">)</span></span>
-<span><span class="va">DMGs</span> <span class="op">=</span> <span class="va">DMGs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">queryHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">DMGs</span><span class="op">$</span><span class="va">alias</span> <span class="op">&lt;-</span> <span class="va">genes</span><span class="op">$</span><span class="va">Name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<span><span class="va">DMGs</span> <span class="op">=</span> <span class="va">DMGs</span><span class="op">[</span><span class="fu">queryHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">DMGs</span><span class="op">$</span><span class="va">alias</span> <span class="op">&lt;-</span> <span class="va">genes</span><span class="op">$</span><span class="va">Name</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <p><em><strong>BRCA2, a breast cancer associated risk gene, is found
 between the DMG</strong>s</em></p>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># DMGs</span></span>
-<span><span class="va">DMGs</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span> <span class="st">"ENSG00000139618"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DMGs</span><span class="op">)</span> <span class="op">)</span> <span class="op">]</span></span></code></pre></div>
+<span><span class="va">DMGs</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span> <span class="st">"ENSG00000139618"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DMGs</span><span class="op">)</span> <span class="op">)</span> <span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">## GRanges object with 0 ranges and 13 metadata columns:</span></span>
 <span><span class="co">##    seqnames    ranges strand | Breast_normal Breast_normal1 Breast_cancer</span></span>
 <span><span class="co">##       &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; |     &lt;numeric&gt;      &lt;numeric&gt;     &lt;numeric&gt;</span></span>
@@ -1941,10 +1943,10 @@ methylation increases nucleosome compaction and rigidity</span></a>.
 <h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
-which this document was compiled running pandoc 2.19.2:</p>
-<pre><code><span><span class="co">## R version 4.3.0 (2023-04-21)</span></span>
+which this document was compiled running pandoc 3.1.1:</p>
+<pre><code><span><span class="co">## R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 </span></span>
@@ -1967,73 +1969,73 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
 <span><span class="co">##  [1] VennDiagram_1.7.3    futile.logger_1.4.3  gridExtra_2.3       </span></span>
-<span><span class="co">##  [4] reshape2_1.4.4       ggplot2_3.4.2        BiocParallel_1.34.2 </span></span>
-<span><span class="co">##  [7] MethylIT_0.3.2.7     rtracklayer_1.60.0   GenomicRanges_1.52.0</span></span>
-<span><span class="co">## [10] GenomeInfoDb_1.36.1  IRanges_2.34.1       S4Vectors_0.38.1    </span></span>
-<span><span class="co">## [13] BiocGenerics_0.46.0  knitr_1.43          </span></span>
+<span><span class="co">##  [4] reshape2_1.4.4       ggplot2_3.4.4        BiocParallel_1.34.2 </span></span>
+<span><span class="co">##  [7] MethylIT_0.3.2.7     rtracklayer_1.60.1   GenomicRanges_1.52.1</span></span>
+<span><span class="co">## [10] GenomeInfoDb_1.36.4  IRanges_2.34.1       S4Vectors_0.38.2    </span></span>
+<span><span class="co">## [13] BiocGenerics_0.46.0  knitr_1.45          </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] rstudioapi_0.14             jsonlite_1.8.5             </span></span>
+<span><span class="co">##   [1] rstudioapi_0.15.0           jsonlite_1.8.7             </span></span>
 <span><span class="co">##   [3] magrittr_2.0.3              farver_2.1.1               </span></span>
-<span><span class="co">##   [5] rmarkdown_2.22              fs_1.6.2                   </span></span>
+<span><span class="co">##   [5] rmarkdown_2.25              fs_1.6.3                   </span></span>
 <span><span class="co">##   [7] BiocIO_1.10.0               zlibbioc_1.46.0            </span></span>
-<span><span class="co">##   [9] ragg_1.2.5                  vctrs_0.6.3                </span></span>
+<span><span class="co">##   [9] ragg_1.2.6                  vctrs_0.6.5                </span></span>
 <span><span class="co">##  [11] memoise_2.0.1               Rsamtools_2.16.0           </span></span>
-<span><span class="co">##  [13] RCurl_1.98-1.12             htmltools_0.5.5            </span></span>
-<span><span class="co">##  [15] S4Arrays_1.0.4              lambda.r_1.2.4             </span></span>
-<span><span class="co">##  [17] pROC_1.18.2                 caret_6.0-94               </span></span>
-<span><span class="co">##  [19] sass_0.4.6                  parallelly_1.36.0          </span></span>
-<span><span class="co">##  [21] bslib_0.5.0                 desc_1.4.2                 </span></span>
-<span><span class="co">##  [23] plyr_1.8.8                  futile.options_1.0.1       </span></span>
-<span><span class="co">##  [25] lubridate_1.9.2             cachem_1.0.8               </span></span>
-<span><span class="co">##  [27] GenomicAlignments_1.36.0    lifecycle_1.0.3            </span></span>
-<span><span class="co">##  [29] minpack.lm_1.2-3            iterators_1.0.14           </span></span>
-<span><span class="co">##  [31] pkgconfig_2.0.3             Matrix_1.5-4.1             </span></span>
+<span><span class="co">##  [13] RCurl_1.98-1.13             htmltools_0.5.7            </span></span>
+<span><span class="co">##  [15] S4Arrays_1.0.6              lambda.r_1.2.4             </span></span>
+<span><span class="co">##  [17] pROC_1.18.5                 caret_6.0-94               </span></span>
+<span><span class="co">##  [19] sass_0.4.8                  parallelly_1.36.0          </span></span>
+<span><span class="co">##  [21] bslib_0.6.1                 desc_1.4.3                 </span></span>
+<span><span class="co">##  [23] plyr_1.8.9                  futile.options_1.0.1       </span></span>
+<span><span class="co">##  [25] lubridate_1.9.3             cachem_1.0.8               </span></span>
+<span><span class="co">##  [27] GenomicAlignments_1.36.0    lifecycle_1.0.4            </span></span>
+<span><span class="co">##  [29] minpack.lm_1.2-4            iterators_1.0.14           </span></span>
+<span><span class="co">##  [31] pkgconfig_2.0.3             Matrix_1.6-4               </span></span>
 <span><span class="co">##  [33] R6_2.5.1                    fastmap_1.1.1              </span></span>
-<span><span class="co">##  [35] GenomeInfoDbData_1.2.10     MatrixGenerics_1.12.2      </span></span>
-<span><span class="co">##  [37] future_1.32.0               digest_0.6.31              </span></span>
-<span><span class="co">##  [39] colorspace_2.1-0            AnnotationDbi_1.62.1       </span></span>
-<span><span class="co">##  [41] rprojroot_2.0.3             textshaping_0.3.6          </span></span>
-<span><span class="co">##  [43] RSQLite_2.3.1               labeling_0.4.2             </span></span>
-<span><span class="co">##  [45] randomForest_4.7-1.1        fansi_1.0.4                </span></span>
-<span><span class="co">##  [47] timechange_0.2.0            httr_1.4.6                 </span></span>
-<span><span class="co">##  [49] compiler_4.3.0              proxy_0.4-27               </span></span>
-<span><span class="co">##  [51] bit64_4.0.5                 withr_2.5.0                </span></span>
+<span><span class="co">##  [35] GenomeInfoDbData_1.2.10     MatrixGenerics_1.12.3      </span></span>
+<span><span class="co">##  [37] future_1.33.0               digest_0.6.33              </span></span>
+<span><span class="co">##  [39] colorspace_2.1-0            AnnotationDbi_1.62.2       </span></span>
+<span><span class="co">##  [41] textshaping_0.3.7           RSQLite_2.3.3              </span></span>
+<span><span class="co">##  [43] labeling_0.4.3              randomForest_4.7-1.1       </span></span>
+<span><span class="co">##  [45] fansi_1.0.6                 timechange_0.2.0           </span></span>
+<span><span class="co">##  [47] httr_1.4.7                  abind_1.4-5                </span></span>
+<span><span class="co">##  [49] compiler_4.3.2              proxy_0.4-27               </span></span>
+<span><span class="co">##  [51] bit64_4.0.5                 withr_2.5.2                </span></span>
 <span><span class="co">##  [53] DBI_1.1.3                   highr_0.10                 </span></span>
-<span><span class="co">##  [55] MASS_7.3-60                 lava_1.7.2.1               </span></span>
-<span><span class="co">##  [57] DelayedArray_0.26.3         rjson_0.2.21               </span></span>
-<span><span class="co">##  [59] ModelMetrics_1.2.2.2        tools_4.3.0                </span></span>
+<span><span class="co">##  [55] MASS_7.3-60                 lava_1.7.3                 </span></span>
+<span><span class="co">##  [57] DelayedArray_0.26.7         rjson_0.2.21               </span></span>
+<span><span class="co">##  [59] ModelMetrics_1.2.2.2        tools_4.3.2                </span></span>
 <span><span class="co">##  [61] future.apply_1.11.0         nnet_7.3-19                </span></span>
 <span><span class="co">##  [63] glue_1.6.2                  restfulr_0.0.15            </span></span>
-<span><span class="co">##  [65] nlme_3.1-162                generics_0.1.3             </span></span>
-<span><span class="co">##  [67] recipes_1.0.6               gtable_0.3.3               </span></span>
+<span><span class="co">##  [65] nlme_3.1-164                generics_0.1.3             </span></span>
+<span><span class="co">##  [67] recipes_1.0.8               gtable_0.3.4               </span></span>
 <span><span class="co">##  [69] class_7.3-22                data.table_1.14.8          </span></span>
-<span><span class="co">##  [71] utf8_1.2.3                  XVector_0.40.0             </span></span>
+<span><span class="co">##  [71] utf8_1.2.4                  XVector_0.40.0             </span></span>
 <span><span class="co">##  [73] foreach_1.5.2               pillar_1.9.0               </span></span>
-<span><span class="co">##  [75] stringr_1.5.0               genefilter_1.82.1          </span></span>
-<span><span class="co">##  [77] splines_4.3.0               dplyr_1.1.2                </span></span>
-<span><span class="co">##  [79] lattice_0.21-8              survival_3.5-5             </span></span>
+<span><span class="co">##  [75] stringr_1.5.1               genefilter_1.82.1          </span></span>
+<span><span class="co">##  [77] splines_4.3.2               dplyr_1.1.4                </span></span>
+<span><span class="co">##  [79] lattice_0.22-5              survival_3.5-7             </span></span>
 <span><span class="co">##  [81] bit_4.0.5                   annotate_1.78.0            </span></span>
 <span><span class="co">##  [83] tidyselect_1.2.0            Biostrings_2.68.1          </span></span>
-<span><span class="co">##  [85] SummarizedExperiment_1.30.2 xfun_0.39                  </span></span>
+<span><span class="co">##  [85] SummarizedExperiment_1.30.2 xfun_0.41                  </span></span>
 <span><span class="co">##  [87] Biobase_2.60.0              hardhat_1.3.0              </span></span>
-<span><span class="co">##  [89] timeDate_4022.108           matrixStats_1.0.0          </span></span>
-<span><span class="co">##  [91] proto_1.0.0                 stringi_1.7.12             </span></span>
-<span><span class="co">##  [93] yaml_2.3.7                  evaluate_0.21              </span></span>
+<span><span class="co">##  [89] timeDate_4022.108           matrixStats_1.2.0          </span></span>
+<span><span class="co">##  [91] proto_1.0.0                 stringi_1.8.3              </span></span>
+<span><span class="co">##  [93] yaml_2.3.8                  evaluate_0.23              </span></span>
 <span><span class="co">##  [95] codetools_0.2-19            tibble_3.2.1               </span></span>
-<span><span class="co">##  [97] cli_3.6.1                   rpart_4.1.19               </span></span>
+<span><span class="co">##  [97] cli_3.6.2                   rpart_4.1.23               </span></span>
 <span><span class="co">##  [99] nls2_0.3-3                  xtable_1.8-4               </span></span>
-<span><span class="co">## [101] systemfonts_1.0.4           munsell_0.5.0              </span></span>
-<span><span class="co">## [103] jquerylib_0.1.4             Rcpp_1.0.10                </span></span>
+<span><span class="co">## [101] systemfonts_1.0.5           munsell_0.5.0              </span></span>
+<span><span class="co">## [103] jquerylib_0.1.4             Rcpp_1.0.11                </span></span>
 <span><span class="co">## [105] globals_0.16.2              png_0.1-8                  </span></span>
-<span><span class="co">## [107] XML_3.99-0.14               parallel_4.3.0             </span></span>
+<span><span class="co">## [107] XML_3.99-0.16               parallel_4.3.2             </span></span>
 <span><span class="co">## [109] pkgdown_2.0.7               gower_1.0.1                </span></span>
 <span><span class="co">## [111] blob_1.2.4                  bitops_1.0-7               </span></span>
 <span><span class="co">## [113] listenv_0.9.0               ipred_0.9-14               </span></span>
-<span><span class="co">## [115] e1071_1.7-13                scales_1.2.1               </span></span>
-<span><span class="co">## [117] prodlim_2023.03.31          purrr_1.0.1                </span></span>
-<span><span class="co">## [119] crayon_1.5.2                rlang_1.1.1                </span></span>
-<span><span class="co">## [121] formatR_1.14                KEGGREST_1.40.0</span></span></code></pre>
+<span><span class="co">## [115] e1071_1.7-13                scales_1.3.0               </span></span>
+<span><span class="co">## [117] prodlim_2023.08.28          purrr_1.0.2                </span></span>
+<span><span class="co">## [119] crayon_1.5.2                rlang_1.1.2                </span></span>
+<span><span class="co">## [121] formatR_1.14                KEGGREST_1.40.1</span></span></code></pre>
 </div>
   </div>
 

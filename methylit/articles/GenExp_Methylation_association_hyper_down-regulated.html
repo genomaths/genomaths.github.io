@@ -132,7 +132,7 @@
       <h1 data-toc-skip>Association Between Gene Expression and Cytosine
 DNA Methylation at gene-body</h1>
             
-            <h4 data-toc-skip class="date">24 June 2023</h4>
+            <h4 data-toc-skip class="date">15 January 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/GenExp_Methylation_association_hyper_down-regulated.Rmd" class="external-link"><code>vignettes/GenExp_Methylation_association_hyper_down-regulated.Rmd</code></a></small>
       <div class="hidden name"><code>GenExp_Methylation_association_hyper_down-regulated.Rmd</code></div>
@@ -435,10 +435,10 @@ distributions.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Parameters:</span></span>
 <span><span class="co">##       Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## mean  0.280670   0.001607   174.7   &lt;2e-16 ***</span></span>
-<span><span class="co">## sd    0.173917   0.001340   129.8   &lt;2e-16 ***</span></span>
-<span><span class="co">## shape 2.111472   0.019859   106.3   &lt;2e-16 ***</span></span>
-<span><span class="co">## scale 1.386711   0.008023   172.8   &lt;2e-16 ***</span></span>
+<span><span class="co">## mean  0.280665   0.001606   174.7   &lt;2e-16 ***</span></span>
+<span><span class="co">## sd    0.173905   0.001340   129.8   &lt;2e-16 ***</span></span>
+<span><span class="co">## shape 2.111314   0.019854   106.3   &lt;2e-16 ***</span></span>
+<span><span class="co">## scale 1.386690   0.008022   172.9   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -448,7 +448,7 @@ distributions.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\n Mixture proportions (phi):"</span>, <span class="va">meth_FIT</span><span class="op">$</span><span class="va">phi</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
-<span><span class="co">##  Mixture proportions (phi): 0.4119161 0.5880839</span></span></code></pre>
+<span><span class="co">##  Mixture proportions (phi): 0.4118775 0.5881225</span></span></code></pre>
 <p>The graphic for histogram and density distribution curves:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, font.lab<span class="op">=</span><span class="fl">2</span>, font<span class="op">=</span><span class="fl">2</span>,font.axis<span class="op">=</span><span class="fl">2</span>,family<span class="op">=</span><span class="st">"serif"</span> , lwd <span class="op">=</span> <span class="fl">1.2</span>, cex <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span></span>
@@ -596,7 +596,7 @@ about FGM copula is found in:</p>
 <span><span class="co">##  param.: -0.509 </span></span>
 <span><span class="co">## Dimension:  2 </span></span>
 <span><span class="co">## Parameters:</span></span>
-<span><span class="co">##   alpha1.2   = -0.5091997</span></span></code></pre>
+<span><span class="co">##   alpha1.2   = -0.5091995</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="p-p-plot--graphical-diagnostics-of-gof">P-P plot. Graphical Diagnostics of GOF<a class="anchor" aria-label="anchor" href="#p-p-plot--graphical-diagnostics-of-gof"></a>
@@ -618,11 +618,11 @@ from the data frame: <em>“g$data”</em>:</p>
 <pre><code><span><span class="co">## DataFrame with 500 rows and 2 columns</span></span>
 <span><span class="co">##          emprob      thprob</span></span>
 <span><span class="co">##       &lt;numeric&gt;   &lt;numeric&gt;</span></span>
-<span><span class="co">## 1   0.000859476 0.000838486</span></span>
-<span><span class="co">## 2   0.114811632 0.119596858</span></span>
-<span><span class="co">## 3   0.198682137 0.199610746</span></span>
-<span><span class="co">## 4   0.174616817 0.181781104</span></span>
-<span><span class="co">## 5   0.449863916 0.455994107</span></span>
+<span><span class="co">## 1   0.000859476 0.000838487</span></span>
+<span><span class="co">## 2   0.114811632 0.119596864</span></span>
+<span><span class="co">## 3   0.198682137 0.199610747</span></span>
+<span><span class="co">## 4   0.174616817 0.181781110</span></span>
+<span><span class="co">## 5   0.449863916 0.455994109</span></span>
 <span><span class="co">## ...         ...         ...</span></span>
 <span><span class="co">## 496    0.100774   0.0964349</span></span>
 <span><span class="co">## 497    0.139092   0.1387958</span></span>
@@ -1683,10 +1683,10 @@ Balakrishna, C. D. Lai, <em><a href="https://doi.org/10.1007/b101765_3" class="e
 <h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
-which this document was compiled running pandoc 2.19.2:</p>
-<pre><code><span><span class="co">## R version 4.3.0 (2023-04-21)</span></span>
+which this document was compiled running pandoc 3.1.1:</p>
+<pre><code><span><span class="co">## R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 </span></span>
@@ -1708,42 +1708,41 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">## [8] base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] coin_1.4-2           survival_3.5-5       copula_1.1-2        </span></span>
+<span><span class="co">##  [1] coin_1.4-3           survival_3.5-7       copula_1.1-2        </span></span>
 <span><span class="co">##  [4] plot3D_1.4           usefr_0.1.1          edgeR_3.42.4        </span></span>
-<span><span class="co">##  [7] limma_3.56.2         ggplot2_3.4.2        GenomicRanges_1.52.0</span></span>
-<span><span class="co">## [10] GenomeInfoDb_1.36.1  IRanges_2.34.1       S4Vectors_0.38.1    </span></span>
+<span><span class="co">##  [7] limma_3.56.2         ggplot2_3.4.4        GenomicRanges_1.52.1</span></span>
+<span><span class="co">## [10] GenomeInfoDb_1.36.4  IRanges_2.34.1       S4Vectors_0.38.2    </span></span>
 <span><span class="co">## [13] BiocGenerics_0.46.0 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] ADGofTest_0.3           tidyselect_1.2.0        libcoin_1.0-9          </span></span>
-<span><span class="co">##  [4] dplyr_1.1.2             bitops_1.0-7            fastmap_1.1.1          </span></span>
-<span><span class="co">##  [7] RCurl_1.98-1.12         TH.data_1.1-2           digest_0.6.31          </span></span>
-<span><span class="co">## [10] mixdist_0.5-5           lifecycle_1.0.3         magrittr_2.0.3         </span></span>
-<span><span class="co">## [13] compiler_4.3.0          rlang_1.1.1             sass_0.4.6             </span></span>
-<span><span class="co">## [16] tools_4.3.0             utf8_1.2.3              yaml_2.3.7             </span></span>
-<span><span class="co">## [19] knitr_1.43              mclust_6.0.0            multcomp_1.4-25        </span></span>
-<span><span class="co">## [22] BiocParallel_1.34.2     withr_2.5.0             purrr_1.0.1            </span></span>
-<span><span class="co">## [25] numDeriv_2016.8-1.1     desc_1.4.2              grid_4.3.0             </span></span>
-<span><span class="co">## [28] pcaPP_2.0-3             fansi_1.0.4             stabledist_0.7-1       </span></span>
-<span><span class="co">## [31] colorspace_2.1-0        MASS_7.3-60             scales_1.2.1           </span></span>
-<span><span class="co">## [34] cli_3.6.1               mvtnorm_1.2-2           rmarkdown_2.22         </span></span>
-<span><span class="co">## [37] ragg_1.2.5              generics_0.1.3          rstudioapi_0.14        </span></span>
-<span><span class="co">## [40] nls2_0.3-3              cachem_1.0.8            stringr_1.5.0          </span></span>
-<span><span class="co">## [43] zlibbioc_1.46.0         modeltools_0.2-23       splines_4.3.0          </span></span>
-<span><span class="co">## [46] parallel_4.3.0          pspline_1.0-19          XVector_0.40.0         </span></span>
-<span><span class="co">## [49] matrixStats_1.0.0       vctrs_0.6.3             sandwich_3.0-2         </span></span>
-<span><span class="co">## [52] misc3d_0.9-1            Matrix_1.5-4.1          jsonlite_1.8.5         </span></span>
-<span><span class="co">## [55] minpack.lm_1.2-3        systemfonts_1.0.4       locfit_1.5-9.8         </span></span>
+<span><span class="co">##  [1] ADGofTest_0.3           tidyselect_1.2.0        libcoin_1.0-10         </span></span>
+<span><span class="co">##  [4] dplyr_1.1.4             bitops_1.0-7            fastmap_1.1.1          </span></span>
+<span><span class="co">##  [7] RCurl_1.98-1.13         TH.data_1.1-2           digest_0.6.33          </span></span>
+<span><span class="co">## [10] mixdist_0.5-5           lifecycle_1.0.4         magrittr_2.0.3         </span></span>
+<span><span class="co">## [13] compiler_4.3.2          rlang_1.1.2             sass_0.4.8             </span></span>
+<span><span class="co">## [16] tools_4.3.2             utf8_1.2.4              yaml_2.3.8             </span></span>
+<span><span class="co">## [19] knitr_1.45              mclust_6.0.1            multcomp_1.4-25        </span></span>
+<span><span class="co">## [22] BiocParallel_1.34.2     withr_2.5.2             purrr_1.0.2            </span></span>
+<span><span class="co">## [25] numDeriv_2016.8-1.1     desc_1.4.3              grid_4.3.2             </span></span>
+<span><span class="co">## [28] pcaPP_2.0-3             fansi_1.0.6             stabledist_0.7-1       </span></span>
+<span><span class="co">## [31] colorspace_2.1-0        MASS_7.3-60             scales_1.3.0           </span></span>
+<span><span class="co">## [34] cli_3.6.2               mvtnorm_1.2-4           rmarkdown_2.25         </span></span>
+<span><span class="co">## [37] ragg_1.2.6              generics_0.1.3          rstudioapi_0.15.0      </span></span>
+<span><span class="co">## [40] nls2_0.3-3              cachem_1.0.8            stringr_1.5.1          </span></span>
+<span><span class="co">## [43] zlibbioc_1.46.0         modeltools_0.2-23       splines_4.3.2          </span></span>
+<span><span class="co">## [46] parallel_4.3.2          pspline_1.0-19          XVector_0.40.0         </span></span>
+<span><span class="co">## [49] matrixStats_1.2.0       vctrs_0.6.5             sandwich_3.0-2         </span></span>
+<span><span class="co">## [52] misc3d_0.9-1            Matrix_1.6-4            jsonlite_1.8.7         </span></span>
+<span><span class="co">## [55] minpack.lm_1.2-4        systemfonts_1.0.5       locfit_1.5-9.8         </span></span>
 <span><span class="co">## [58] jquerylib_0.1.4         proto_1.0.0             glue_1.6.2             </span></span>
-<span><span class="co">## [61] pkgdown_2.0.7           codetools_0.2-19        stringi_1.7.12         </span></span>
-<span><span class="co">## [64] cubature_2.1.0          gtable_0.3.3            gsl_2.1-8              </span></span>
+<span><span class="co">## [61] pkgdown_2.0.7           codetools_0.2-19        stringi_1.8.3          </span></span>
+<span><span class="co">## [64] cubature_2.1.0          gtable_0.3.4            gsl_2.1-8              </span></span>
 <span><span class="co">## [67] munsell_0.5.0           tibble_3.2.1            pillar_1.9.0           </span></span>
-<span><span class="co">## [70] htmltools_0.5.5         GenomeInfoDbData_1.2.10 R6_2.5.1               </span></span>
-<span><span class="co">## [73] tcltk_4.3.0             textshaping_0.3.6       rprojroot_2.0.3        </span></span>
-<span><span class="co">## [76] evaluate_0.21           lattice_0.21-8          highr_0.10             </span></span>
-<span><span class="co">## [79] memoise_2.0.1           bslib_0.5.0             Rcpp_1.0.10            </span></span>
-<span><span class="co">## [82] xfun_0.39               zoo_1.8-12              fs_1.6.2               </span></span>
-<span><span class="co">## [85] pkgconfig_2.0.3</span></span></code></pre>
+<span><span class="co">## [70] htmltools_0.5.7         GenomeInfoDbData_1.2.10 R6_2.5.1               </span></span>
+<span><span class="co">## [73] tcltk_4.3.2             textshaping_0.3.7       evaluate_0.23          </span></span>
+<span><span class="co">## [76] lattice_0.22-5          highr_0.10              memoise_2.0.1          </span></span>
+<span><span class="co">## [79] bslib_0.6.1             Rcpp_1.0.11             xfun_0.41              </span></span>
+<span><span class="co">## [82] zoo_1.8-12              fs_1.6.3                pkgconfig_2.0.3</span></span></code></pre>
 </div>
   </div>
 

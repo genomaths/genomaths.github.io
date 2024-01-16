@@ -137,7 +137,7 @@ Sanchez</h4>
 Park, PA 16802<br><a class="author_email" href="mailto:#"></a><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a>
       </address>
                   
-            <h4 data-toc-skip class="date">24 June 2023</h4>
+            <h4 data-toc-skip class="date">15 January 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/MethylIT.Rmd" class="external-link"><code>vignettes/MethylIT.Rmd</code></a></small>
       <div class="hidden name"><code>MethylIT.Rmd</code></div>
@@ -235,26 +235,26 @@ individual is estimated with function <a href="https://is.gd/qR79kW" class="exte
 reference samples. Notice that <a href="https://is.gd/qR79kW" class="external-link">poolFromGRlist</a> function only uses
 numerical data. Hence, we must specify the columns carrying the
 read-count data.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"W"</span>, <span class="fu">names</span>(meth_samples))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ref <span class="ot">&lt;-</span> <span class="fu">poolFromGRlist</span>(<span class="at">LR =</span> meth_samples[idx], <span class="at">stat =</span> <span class="st">"mean"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; *** Building a unique GRanges object from the list...</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *** Building coordinates for the new GRanges object ...</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *** Strand information is preserved ...</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==============</span>                                                        <span class="er">|</span>  <span class="dv">20</span>%</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="er">|============================</span>                                          <span class="er">|</span>  <span class="dv">40</span>%</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==========================================</span>                            <span class="er">|</span>  <span class="dv">60</span>%</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="er">|========================================================</span>              <span class="er">|</span>  <span class="dv">80</span>%</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *** Sorting by chromosomes and start positions...</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; *** Building a virtual methylome...</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"W"</span>, <span class="fu">names</span>(meth_samples))</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>ref <span class="ot">&lt;-</span> <span class="fu">poolFromGRlist</span>(<span class="at">LR =</span> meth_samples[idx], <span class="at">stat =</span> <span class="st">"mean"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; *** Building a unique GRanges object from the list...</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt;  *** Building coordinates for the new GRanges object ...</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt;  *** Strand information is preserved ...</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  <span class="er">|==============</span>                                                        <span class="er">|</span>  <span class="dv">20</span>%</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="er">|============================</span>                                          <span class="er">|</span>  <span class="dv">40</span>%</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  <span class="er">|==========================================</span>                            <span class="er">|</span>  <span class="dv">60</span>%</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  <span class="er">|========================================================</span>              <span class="er">|</span>  <span class="dv">80</span>%</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt;  *** Sorting by chromosomes and start positions...</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; *** Building a virtual methylome...</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -267,7 +267,7 @@ reference sample. This is the step with the highest consumption of
 computing time.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Sat Jun 24 12:58:01 2023"</span></span>
+<span><span class="co">#&gt; [1] "Mon Jan 15 13:30:35 2024"</span></span>
 <span><span class="va">ptm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ml_samples</span> <span class="op">&lt;-</span> <span class="va">meth_samples</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"W_3_1"</span>,<span class="st">"W_3_2"</span>,<span class="st">"W_3_3"</span>,<span class="st">"W_3_4"</span>,<span class="st">"W_3_5"</span>, </span>
 <span>                             <span class="st">"M_3_1"</span>,<span class="st">"M_3_2"</span>,<span class="st">"M_3_3"</span>,<span class="st">"M_3_4"</span>,<span class="st">"M_3_5"</span><span class="op">)</span><span class="op">]</span></span>
@@ -281,10 +281,10 @@ computing time.</p>
 <span>                            percentile <span class="op">=</span> <span class="fl">0.999</span>,</span>
 <span>                            verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">ptm</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">/</span><span class="fl">60</span> <span class="co"># in min</span></span>
-<span><span class="co">#&gt; elapsed </span></span>
-<span><span class="co">#&gt; 0.12395</span></span>
+<span><span class="co">#&gt;   elapsed </span></span>
+<span><span class="co">#&gt; 0.1250333</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Sat Jun 24 12:58:08 2023"</span></span>
+<span><span class="co">#&gt; [1] "Mon Jan 15 13:30:43 2024"</span></span>
 <span><span class="va">ml_hd</span><span class="op">$</span><span class="va">M_3_1</span></span>
 <span><span class="co">#&gt; GRanges object with 17782 ranges and 9 metadata columns:</span></span>
 <span><span class="co">#&gt;           seqnames    ranges strand |        c1        t1        c2        t2</span></span>
@@ -348,7 +348,7 @@ data is not perfect. So, it is healthy to sees for potential issues.</p>
 user to verify the data quality.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Critical values</span></span>
-<span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">ml_hd</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">ml_hd</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">bay.TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="va">btv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span></span>
@@ -379,11 +379,11 @@ coverage issue could be detected.</p>
 <span>                <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">cov</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">covr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">covr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">q60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span>    <span class="va">q9999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.9999</span><span class="op">)</span></span>
-<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
-<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
+<span>    <span class="va">idx1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">q60</span><span class="op">)</span></span>
+<span>    <span class="va">idx2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span>    <span class="va">q95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>    <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">idx1</span>, <span class="va">idx2</span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -426,57 +426,57 @@ knowledge of the probability distribution of the background noise.
 Probability distribution, as a Weibull distribution model, can be
 deduced on a statistical mechanical/thermodynamics basis for DNA
 methylation induced by thermal fluctuations <span class="citation">(Sanchez and Mackenzie 2016)</span>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gof <span class="ot">&lt;-</span> <span class="fu">gofReport</span>(<span class="at">HD =</span> ml_hd,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span>),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">column =</span> <span class="dv">9</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">output =</span> <span class="st">"all"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">alt_models =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">num.cores =</span> 4L,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">task =</span> 2L,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==================</span>                                                    <span class="er">|</span>  <span class="dv">25</span>%</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="er">|===================================</span>                                   <span class="er">|</span>  <span class="dv">50</span>%</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="er">|====================================================</span>                  <span class="er">|</span>  <span class="dv">75</span>%</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *** Creating report ...</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>gof<span class="sc">$</span>stats</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          w2p_AIC w2p_R.Cross.val w3p_AIC w3p_R.Cross.val   g2p_AIC</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_1  -92604.45       0.9983322     Inf               0 -107319.5</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_2  -94347.14       0.9985964     Inf               0 -109885.9</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_3  -96466.50       0.9986544     Inf               0 -114703.9</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_4  -96546.57       0.9986205     Inf               0 -114453.7</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_5  -97966.02       0.9985584     Inf               0 -109813.8</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_1 -106137.75       0.9992454     Inf               0 -127842.1</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_2 -108524.59       0.9993022     Inf               0 -132209.9</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_3 -107446.61       0.9993010     Inf               0 -132105.6</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_4 -124063.33       0.9997121     Inf               0 -119186.2</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_5 -114904.63       0.9994728     Inf               0 -129744.3</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       g2p_R.Cross.val g3p_AIC g3p_R.Cross.val bestModel</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_1       0.9992292     Inf               0       g2p</span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_2       0.9993784     Inf               0       g2p</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_3       0.9995170     Inf               0       g2p</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_4       0.9994412     Inf               0       g2p</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; W_3_5       0.9991953     Inf               0       g2p</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_1       0.9997532     Inf               0       g2p</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_2       0.9997937     Inf               0       g2p</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_3       0.9998019     Inf               0       g2p</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_4       0.9995424     Inf               0       w2p</span></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; M_3_5       0.9997344     Inf               0       g2p</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>gof<span class="sc">$</span>bestModel</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       W_3_1       W_3_2       W_3_3       W_3_4       W_3_5       M_3_1 </span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P" </span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       M_3_2       M_3_3       M_3_4       M_3_5 </span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   "Gamma2P"   "Gamma2P" "Weibull2P"   "Gamma2P"</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>gof <span class="ot">&lt;-</span> <span class="fu">gofReport</span>(<span class="at">HD =</span> ml_hd,</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>                <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Weibull2P"</span>, <span class="st">"Weibull3P"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>                        <span class="st">"Gamma2P"</span>, <span class="st">"Gamma3P"</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>                <span class="at">column =</span> <span class="dv">9</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>                <span class="at">output =</span> <span class="st">"all"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>                <span class="at">alt_models =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>                <span class="at">num.cores =</span> 4L,</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>                <span class="at">task =</span> 2L,</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>                <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>)</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>  <span class="er">|==================</span>                                                    <span class="er">|</span>  <span class="dv">25</span>%</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>  <span class="er">|===================================</span>                                   <span class="er">|</span>  <span class="dv">50</span>%</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>  <span class="er">|====================================================</span>                  <span class="er">|</span>  <span class="dv">75</span>%</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt;  *** Creating report ...</span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>gof<span class="sc">$</span>stats</span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt;          w2p_AIC w2p_R.Cross.val w3p_AIC w3p_R.Cross.val   g2p_AIC</span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co">#&gt; W_3_1  -92604.45       0.9983322     Inf               0 -107319.5</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a><span class="co">#&gt; W_3_2  -94347.14       0.9985964     Inf               0 -109885.9</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="co">#&gt; W_3_3  -96466.50       0.9986544     Inf               0 -114703.9</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a><span class="co">#&gt; W_3_4  -96546.57       0.9986205     Inf               0 -114453.7</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a><span class="co">#&gt; W_3_5  -97966.02       0.9985584     Inf               0 -109813.8</span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="co">#&gt; M_3_1 -106137.75       0.9992454     Inf               0 -127842.1</span></span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a><span class="co">#&gt; M_3_2 -108524.59       0.9993022     Inf               0 -132209.9</span></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co">#&gt; M_3_3 -107446.61       0.9993010     Inf               0 -132105.6</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="co">#&gt; M_3_4 -124063.33       0.9997121     Inf               0 -119186.2</span></span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a><span class="co">#&gt; M_3_5 -114904.63       0.9994728     Inf               0 -129744.3</span></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a><span class="co">#&gt;       g2p_R.Cross.val g3p_AIC g3p_R.Cross.val bestModel</span></span>
+<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a><span class="co">#&gt; W_3_1       0.9992292     Inf               0       g2p</span></span>
+<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a><span class="co">#&gt; W_3_2       0.9993784     Inf               0       g2p</span></span>
+<span id="cb8-39"><a href="#cb8-39" tabindex="-1"></a><span class="co">#&gt; W_3_3       0.9995170     Inf               0       g2p</span></span>
+<span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a><span class="co">#&gt; W_3_4       0.9994412     Inf               0       g2p</span></span>
+<span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a><span class="co">#&gt; W_3_5       0.9991953     Inf               0       g2p</span></span>
+<span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a><span class="co">#&gt; M_3_1       0.9997532     Inf               0       g2p</span></span>
+<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a><span class="co">#&gt; M_3_2       0.9997937     Inf               0       g2p</span></span>
+<span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a><span class="co">#&gt; M_3_3       0.9998019     Inf               0       g2p</span></span>
+<span id="cb8-45"><a href="#cb8-45" tabindex="-1"></a><span class="co">#&gt; M_3_4       0.9995424     Inf               0       w2p</span></span>
+<span id="cb8-46"><a href="#cb8-46" tabindex="-1"></a><span class="co">#&gt; M_3_5       0.9997344     Inf               0       g2p</span></span>
+<span id="cb8-47"><a href="#cb8-47" tabindex="-1"></a>gof<span class="sc">$</span>bestModel</span>
+<span id="cb8-48"><a href="#cb8-48" tabindex="-1"></a><span class="co">#&gt;       W_3_1       W_3_2       W_3_3       W_3_4       W_3_5       M_3_1 </span></span>
+<span id="cb8-49"><a href="#cb8-49" tabindex="-1"></a><span class="co">#&gt;   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P"   "Gamma2P" </span></span>
+<span id="cb8-50"><a href="#cb8-50" tabindex="-1"></a><span class="co">#&gt;       M_3_2       M_3_3       M_3_4       M_3_5 </span></span>
+<span id="cb8-51"><a href="#cb8-51" tabindex="-1"></a><span class="co">#&gt;   "Gamma2P"   "Gamma2P" "Weibull2P"   "Gamma2P"</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="histogram-and-probability-density-distribution-plot">Histogram and probability density distribution plot<a class="anchor" aria-label="anchor" href="#histogram-and-probability-density-distribution-plot"></a>
 </h3>
@@ -721,7 +721,7 @@ the flexibility of the DNA molecule <span class="citation">(Choy et al.
 <span><span class="va">dmps_at_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_genes</span>, columns <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>                                ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">"equal"</span>,</span>
 <span>                               verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_genes</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmps_at_genes</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
 <span><span class="va">dmps_at_genes</span></span>
 <span><span class="co">#&gt; GRanges object with 70 ranges and 10 metadata columns:</span></span>
 <span><span class="co">#&gt;        seqnames      ranges strand |     W_3_1     W_3_2     W_3_3     W_3_4</span></span>
@@ -871,10 +871,10 @@ diagnostic tests</span>.”</span> <em>Cancer</em> 3 (1): 32–35. <a href="http
 <h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
-which this document was compiled running pandoc 2.19.2:</p>
-<pre><code><span><span class="co">#&gt; R version 4.3.0 (2023-04-21)</span></span>
+which this document was compiled running pandoc 3.1.1:</p>
+<pre><code><span><span class="co">#&gt; R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: Ubuntu 22.04.2 LTS</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
 <span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 </span></span>
@@ -896,73 +896,73 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">#&gt; [8] base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] MethylIT_0.3.2.7     rtracklayer_1.60.0   GenomicRanges_1.52.0</span></span>
-<span><span class="co">#&gt; [4] GenomeInfoDb_1.36.1  IRanges_2.34.1       S4Vectors_0.38.1    </span></span>
-<span><span class="co">#&gt; [7] BiocGenerics_0.46.0  BiocStyle_2.28.0    </span></span>
+<span><span class="co">#&gt; [1] MethylIT_0.3.2.7     rtracklayer_1.60.1   GenomicRanges_1.52.1</span></span>
+<span><span class="co">#&gt; [4] GenomeInfoDb_1.36.4  IRanges_2.34.1       S4Vectors_0.38.2    </span></span>
+<span><span class="co">#&gt; [7] BiocGenerics_0.46.0  BiocStyle_2.28.1    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;   [1] rstudioapi_0.14             jsonlite_1.8.5             </span></span>
-<span><span class="co">#&gt;   [3] magrittr_2.0.3              rmarkdown_2.22             </span></span>
-<span><span class="co">#&gt;   [5] fs_1.6.2                    BiocIO_1.10.0              </span></span>
-<span><span class="co">#&gt;   [7] zlibbioc_1.46.0             ragg_1.2.5                 </span></span>
-<span><span class="co">#&gt;   [9] vctrs_0.6.3                 memoise_2.0.1              </span></span>
-<span><span class="co">#&gt;  [11] Rsamtools_2.16.0            RCurl_1.98-1.12            </span></span>
-<span><span class="co">#&gt;  [13] htmltools_0.5.5             S4Arrays_1.0.4             </span></span>
-<span><span class="co">#&gt;  [15] pROC_1.18.2                 caret_6.0-94               </span></span>
-<span><span class="co">#&gt;  [17] sass_0.4.6                  parallelly_1.36.0          </span></span>
-<span><span class="co">#&gt;  [19] bslib_0.5.0                 desc_1.4.2                 </span></span>
-<span><span class="co">#&gt;  [21] plyr_1.8.8                  lubridate_1.9.2            </span></span>
+<span><span class="co">#&gt;   [1] rstudioapi_0.15.0           jsonlite_1.8.7             </span></span>
+<span><span class="co">#&gt;   [3] magrittr_2.0.3              rmarkdown_2.25             </span></span>
+<span><span class="co">#&gt;   [5] fs_1.6.3                    BiocIO_1.10.0              </span></span>
+<span><span class="co">#&gt;   [7] zlibbioc_1.46.0             ragg_1.2.6                 </span></span>
+<span><span class="co">#&gt;   [9] vctrs_0.6.5                 memoise_2.0.1              </span></span>
+<span><span class="co">#&gt;  [11] Rsamtools_2.16.0            RCurl_1.98-1.13            </span></span>
+<span><span class="co">#&gt;  [13] htmltools_0.5.7             S4Arrays_1.0.6             </span></span>
+<span><span class="co">#&gt;  [15] pROC_1.18.5                 caret_6.0-94               </span></span>
+<span><span class="co">#&gt;  [17] sass_0.4.8                  parallelly_1.36.0          </span></span>
+<span><span class="co">#&gt;  [19] bslib_0.6.1                 desc_1.4.3                 </span></span>
+<span><span class="co">#&gt;  [21] plyr_1.8.9                  lubridate_1.9.3            </span></span>
 <span><span class="co">#&gt;  [23] cachem_1.0.8                GenomicAlignments_1.36.0   </span></span>
-<span><span class="co">#&gt;  [25] lifecycle_1.0.3             minpack.lm_1.2-3           </span></span>
+<span><span class="co">#&gt;  [25] lifecycle_1.0.4             minpack.lm_1.2-4           </span></span>
 <span><span class="co">#&gt;  [27] iterators_1.0.14            pkgconfig_2.0.3            </span></span>
-<span><span class="co">#&gt;  [29] Matrix_1.5-4.1              R6_2.5.1                   </span></span>
+<span><span class="co">#&gt;  [29] Matrix_1.6-4                R6_2.5.1                   </span></span>
 <span><span class="co">#&gt;  [31] fastmap_1.1.1               GenomeInfoDbData_1.2.10    </span></span>
-<span><span class="co">#&gt;  [33] MatrixGenerics_1.12.2       future_1.32.0              </span></span>
-<span><span class="co">#&gt;  [35] digest_0.6.31               colorspace_2.1-0           </span></span>
-<span><span class="co">#&gt;  [37] AnnotationDbi_1.62.1        rprojroot_2.0.3            </span></span>
-<span><span class="co">#&gt;  [39] textshaping_0.3.6           RSQLite_2.3.1              </span></span>
-<span><span class="co">#&gt;  [41] randomForest_4.7-1.1        fansi_1.0.4                </span></span>
-<span><span class="co">#&gt;  [43] timechange_0.2.0            httr_1.4.6                 </span></span>
-<span><span class="co">#&gt;  [45] compiler_4.3.0              proxy_0.4-27               </span></span>
-<span><span class="co">#&gt;  [47] bit64_4.0.5                 withr_2.5.0                </span></span>
+<span><span class="co">#&gt;  [33] MatrixGenerics_1.12.3       future_1.33.0              </span></span>
+<span><span class="co">#&gt;  [35] digest_0.6.33               colorspace_2.1-0           </span></span>
+<span><span class="co">#&gt;  [37] AnnotationDbi_1.62.2        textshaping_0.3.7          </span></span>
+<span><span class="co">#&gt;  [39] RSQLite_2.3.3               randomForest_4.7-1.1       </span></span>
+<span><span class="co">#&gt;  [41] fansi_1.0.6                 timechange_0.2.0           </span></span>
+<span><span class="co">#&gt;  [43] httr_1.4.7                  abind_1.4-5                </span></span>
+<span><span class="co">#&gt;  [45] compiler_4.3.2              proxy_0.4-27               </span></span>
+<span><span class="co">#&gt;  [47] bit64_4.0.5                 withr_2.5.2                </span></span>
 <span><span class="co">#&gt;  [49] BiocParallel_1.34.2         DBI_1.1.3                  </span></span>
 <span><span class="co">#&gt;  [51] highr_0.10                  MASS_7.3-60                </span></span>
-<span><span class="co">#&gt;  [53] lava_1.7.2.1                DelayedArray_0.26.3        </span></span>
+<span><span class="co">#&gt;  [53] lava_1.7.3                  DelayedArray_0.26.7        </span></span>
 <span><span class="co">#&gt;  [55] rjson_0.2.21                ModelMetrics_1.2.2.2       </span></span>
-<span><span class="co">#&gt;  [57] tools_4.3.0                 future.apply_1.11.0        </span></span>
+<span><span class="co">#&gt;  [57] tools_4.3.2                 future.apply_1.11.0        </span></span>
 <span><span class="co">#&gt;  [59] nnet_7.3-19                 glue_1.6.2                 </span></span>
-<span><span class="co">#&gt;  [61] restfulr_0.0.15             nlme_3.1-162               </span></span>
-<span><span class="co">#&gt;  [63] grid_4.3.0                  reshape2_1.4.4             </span></span>
-<span><span class="co">#&gt;  [65] generics_0.1.3              recipes_1.0.6              </span></span>
-<span><span class="co">#&gt;  [67] gtable_0.3.3                class_7.3-22               </span></span>
-<span><span class="co">#&gt;  [69] data.table_1.14.8           utf8_1.2.3                 </span></span>
+<span><span class="co">#&gt;  [61] restfulr_0.0.15             nlme_3.1-164               </span></span>
+<span><span class="co">#&gt;  [63] grid_4.3.2                  reshape2_1.4.4             </span></span>
+<span><span class="co">#&gt;  [65] generics_0.1.3              recipes_1.0.8              </span></span>
+<span><span class="co">#&gt;  [67] gtable_0.3.4                class_7.3-22               </span></span>
+<span><span class="co">#&gt;  [69] data.table_1.14.8           utf8_1.2.4                 </span></span>
 <span><span class="co">#&gt;  [71] XVector_0.40.0              foreach_1.5.2              </span></span>
-<span><span class="co">#&gt;  [73] pillar_1.9.0                stringr_1.5.0              </span></span>
-<span><span class="co">#&gt;  [75] genefilter_1.82.1           splines_4.3.0              </span></span>
-<span><span class="co">#&gt;  [77] dplyr_1.1.2                 lattice_0.21-8             </span></span>
-<span><span class="co">#&gt;  [79] survival_3.5-5              bit_4.0.5                  </span></span>
+<span><span class="co">#&gt;  [73] pillar_1.9.0                stringr_1.5.1              </span></span>
+<span><span class="co">#&gt;  [75] genefilter_1.82.1           splines_4.3.2              </span></span>
+<span><span class="co">#&gt;  [77] dplyr_1.1.4                 lattice_0.22-5             </span></span>
+<span><span class="co">#&gt;  [79] survival_3.5-7              bit_4.0.5                  </span></span>
 <span><span class="co">#&gt;  [81] annotate_1.78.0             tidyselect_1.2.0           </span></span>
-<span><span class="co">#&gt;  [83] Biostrings_2.68.1           knitr_1.43                 </span></span>
-<span><span class="co">#&gt;  [85] bookdown_0.34               SummarizedExperiment_1.30.2</span></span>
-<span><span class="co">#&gt;  [87] xfun_0.39                   Biobase_2.60.0             </span></span>
+<span><span class="co">#&gt;  [83] Biostrings_2.68.1           knitr_1.45                 </span></span>
+<span><span class="co">#&gt;  [85] bookdown_0.37               SummarizedExperiment_1.30.2</span></span>
+<span><span class="co">#&gt;  [87] xfun_0.41                   Biobase_2.60.0             </span></span>
 <span><span class="co">#&gt;  [89] hardhat_1.3.0               timeDate_4022.108          </span></span>
-<span><span class="co">#&gt;  [91] matrixStats_1.0.0           proto_1.0.0                </span></span>
-<span><span class="co">#&gt;  [93] stringi_1.7.12              yaml_2.3.7                 </span></span>
-<span><span class="co">#&gt;  [95] evaluate_0.21               codetools_0.2-19           </span></span>
-<span><span class="co">#&gt;  [97] tibble_3.2.1                BiocManager_1.30.21        </span></span>
-<span><span class="co">#&gt;  [99] cli_3.6.1                   nls2_0.3-3                 </span></span>
-<span><span class="co">#&gt; [101] rpart_4.1.19                xtable_1.8-4               </span></span>
-<span><span class="co">#&gt; [103] systemfonts_1.0.4           munsell_0.5.0              </span></span>
-<span><span class="co">#&gt; [105] jquerylib_0.1.4             Rcpp_1.0.10                </span></span>
+<span><span class="co">#&gt;  [91] matrixStats_1.2.0           proto_1.0.0                </span></span>
+<span><span class="co">#&gt;  [93] stringi_1.8.3               yaml_2.3.8                 </span></span>
+<span><span class="co">#&gt;  [95] evaluate_0.23               codetools_0.2-19           </span></span>
+<span><span class="co">#&gt;  [97] tibble_3.2.1                BiocManager_1.30.22        </span></span>
+<span><span class="co">#&gt;  [99] cli_3.6.2                   nls2_0.3-3                 </span></span>
+<span><span class="co">#&gt; [101] rpart_4.1.23                xtable_1.8-4               </span></span>
+<span><span class="co">#&gt; [103] systemfonts_1.0.5           munsell_0.5.0              </span></span>
+<span><span class="co">#&gt; [105] jquerylib_0.1.4             Rcpp_1.0.11                </span></span>
 <span><span class="co">#&gt; [107] globals_0.16.2              png_0.1-8                  </span></span>
-<span><span class="co">#&gt; [109] XML_3.99-0.14               parallel_4.3.0             </span></span>
+<span><span class="co">#&gt; [109] XML_3.99-0.16               parallel_4.3.2             </span></span>
 <span><span class="co">#&gt; [111] pkgdown_2.0.7               gower_1.0.1                </span></span>
-<span><span class="co">#&gt; [113] ggplot2_3.4.2               blob_1.2.4                 </span></span>
+<span><span class="co">#&gt; [113] ggplot2_3.4.4               blob_1.2.4                 </span></span>
 <span><span class="co">#&gt; [115] bitops_1.0-7                listenv_0.9.0              </span></span>
 <span><span class="co">#&gt; [117] ipred_0.9-14                e1071_1.7-13               </span></span>
-<span><span class="co">#&gt; [119] scales_1.2.1                prodlim_2023.03.31         </span></span>
-<span><span class="co">#&gt; [121] purrr_1.0.1                 crayon_1.5.2               </span></span>
-<span><span class="co">#&gt; [123] rlang_1.1.1                 KEGGREST_1.40.0</span></span></code></pre>
+<span><span class="co">#&gt; [119] scales_1.3.0                prodlim_2023.08.28         </span></span>
+<span><span class="co">#&gt; [121] purrr_1.0.2                 crayon_1.5.2               </span></span>
+<span><span class="co">#&gt; [123] rlang_1.1.2                 KEGGREST_1.40.1</span></span></code></pre>
 </div>
   </div>
 

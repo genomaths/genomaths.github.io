@@ -445,12 +445,26 @@ correction is only available for the treat group, it is assumed that sample
 <span class="r-in"><span>                    and.min.cov <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>                    min.coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                    ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>                    treat.centroid <span class="op">=</span> <span class="va">y_centroid</span>,</span></span>
+<span class="r-in"><span>                    y.centroid <span class="op">=</span> <span class="va">y_centroid</span>,</span></span>
 <span class="r-in"><span>                    min.percentile <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>                    percentile <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in uniqueGRanges(list(x, y), ignore.strand = ignore.strand, num.cores = num.cores,     tasks = tasks, verbose = verbose, ...):</span> unused argument (treat.centroid = new("GRanges", seqnames = new("Rle", values = 1, lengths = 11, elementMetadata = NULL, metadata = list()), ranges = new("IRanges", start = c(10, 11, 11, 12, 13, 13, 14, 15, 16, 17, 18), width = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), NAMES = NULL, elementType = "ANY", elementMetadata = NULL, metadata = list()), strand = new("Rle", values = c(1, 2, 1, 2, 1, 2, 1), lengths = c(1, 1, 1, 1, 1, 1, 5), elementMetadata = NULL, metadata = list()), seqinfo = new("Seqinfo", seqnames = "chr1", </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>     seqlengths = NA, is_circular = NA, genome = NA), elementMetadata = new("DFrame", rownames = NULL, nrows = 11, elementType = "ANY", elementMetadata = NULL, metadata = list(), listData = list(c(8, 7, 6, 7, 5, 8, 1, 2, 3, 4, 5), 0:10)), elementType = "ANY", metadata = list()))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 11 ranges and 4 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        seqnames    ranges strand |        mC        uC       mC2       uC2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]     chr1        10      + |         2         2         8         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [2]     chr1        11      - |         3        30         7         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [3]     chr1        11      + |         2        20         6         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [4]     chr1        12      - |         5         4         7         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [5]     chr1        13      + |        10         8         5         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [6]     chr1        13      - |         7         0         8         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [7]     chr1        14      + |         9        10         1         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]     chr1        15      + |        11         3         4         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]     chr1        16      + |         4         0         5         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [10]     chr1        17      + |        10         8         6         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [11]     chr1        18      + |         7         1         7         7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 1 sequence from an unspecified genome; no seqlengths</span>
 </code></pre></div>
     </div>
   </div>

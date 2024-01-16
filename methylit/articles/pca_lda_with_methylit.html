@@ -131,7 +131,9 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Principal Components and Linear Discriminant
 Analyses with Methyl-IT</h1>
-            <h3 data-toc-skip class="subtitle"><h1> ¶ A <a href="https://github.com/genomaths/MethylIT" class="external-link">Methyl-IT</a> user
+            <h3 data-toc-skip class="subtitle"><h1>
+<br>
+A <a href="https://github.com/genomaths/MethylIT" class="external-link">Methyl-IT</a> user
 guide</h1></h3>
                         <h4 data-toc-skip class="author">
 <div class="line-block">Robersy Sanchez<br><a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a><br>
@@ -141,7 +143,7 @@ Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div>
 </h4>
             
-            <h4 data-toc-skip class="date">24 June 2023</h4>
+            <h4 data-toc-skip class="date">15 January 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/pca_lda_with_methylit.Rmd" class="external-link"><code>vignettes/pca_lda_with_methylit.Rmd</code></a></small>
       <div class="hidden name"><code>pca_lda_with_methylit.Rmd</code></div>
@@ -372,7 +374,7 @@ processes in the cells.</p>
 empirical critical values for the probability distribution of <span class="math inline">\(H\)</span> and <span class="math inline">\(TV\)</span> can is obtained using
 <em>quantile</em> function from the R package <em>stats</em>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="va">critical.val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="../reference/lapply.html">lapply</a></span><span class="op">(</span><span class="va">divs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
 <span>  <span class="va">hd.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hdiv</span>, <span class="fl">0.95</span><span class="op">)</span></span>
 <span>  <span class="va">tv.95</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">bay.TV</span><span class="op">)</span>, <span class="fl">0.95</span><span class="op">)</span></span>
@@ -586,7 +588,7 @@ function (<code>selectDIMP</code>):</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectDIMP.html">selectDIMP</a></span><span class="op">(</span>LR <span class="op">=</span> <span class="va">divs</span>, div.col <span class="op">=</span> <span class="fl">9L</span>, cutpoint <span class="op">=</span> <span class="va">cutp</span><span class="op">$</span><span class="va">cutpoint</span>,</span>
 <span>                   tv.cut <span class="op">=</span> <span class="fl">0.34</span>, tv.col <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">dmps</span>,<span class="va">length</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">dmps</span>,<span class="va">length</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   C1   C2   C3   C4   C5   T1   T2   T3   T4   T5   T6   T7   T8   T9  T10 </span></span>
 <span><span class="co">##  704  659  644  789  861 3403 3244 3234 3308 3328 3826 3888 3840 3957 3875</span></span></code></pre>
 <p>Next, to represent individual samples as vectors from the
@@ -615,8 +617,8 @@ datasets than the rest of the available algorithms like UPGMA, UPGMC,
 etc.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dmgm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">DMRs</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">dmgm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ns</span></span>
+<span><span class="va">dmgm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ns</span></span>
 <span><span class="va">sampleNames</span> <span class="op">&lt;-</span> <span class="va">ns</span></span>
 <span></span>
 <span><span class="va">hc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span> <span class="va">dmgm</span> <span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, method <span class="op">=</span> <span class="st">'ward.D2'</span><span class="op">)</span></span>
@@ -627,10 +629,10 @@ etc.</p>
 </h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colors</span> <span class="op">=</span> <span class="va">sampleNames</span> </span>
-<span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"green4"</span></span>
-<span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"T[6-9]{1}"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"red"</span></span>
-<span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"T10"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"red"</span></span>
-<span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"T[1-5]"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"blue"</span></span>
+<span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"green4"</span></span>
+<span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"T[6-9]{1}"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"red"</span></span>
+<span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"T10"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"red"</span></span>
+<span><span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"T[1-5]"</span>, <span class="va">colors</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"blue"</span></span>
 <span></span>
 <span><span class="co"># rgb(red, green, blue, alpha, names = NULL, maxColorValue = 1)</span></span>
 <span><span class="va">clusters.color</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.7</span>, <span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.2</span>, <span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
@@ -668,9 +670,9 @@ previous exploratory analysis with PCA.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A prior classification derived from HC</span></span>
 <span><span class="va">grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">hc</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"CT"</span></span>
-<span><span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"T1"</span></span>
-<span><span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="fl">3</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"T2"</span></span>
+<span><span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"CT"</span></span>
+<span><span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"T1"</span></span>
+<span><span class="va">grps</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="fl">3</span>, <span class="va">grps</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"T2"</span></span>
 <span><span class="va">grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">grps</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ld</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pcaLDA.html">pcaLDA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">dmgm</span><span class="op">)</span>, grouping <span class="op">=</span> <span class="va">grps</span>, n.pc <span class="op">=</span> <span class="fl">3</span>, max.pc <span class="op">=</span> <span class="fl">3</span>,</span>
@@ -840,10 +842,10 @@ the Social Sciences</span></em>, Fifth Edit (Routledge Academic,
 <h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
-which this document was compiled running pandoc 2.19.2:</p>
-<pre><code><span><span class="co">## R version 4.3.0 (2023-04-21)</span></span>
+which this document was compiled running pandoc 3.1.1:</p>
+<pre><code><span><span class="co">## R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 </span></span>
@@ -865,77 +867,77 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">## [8] base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] ape_5.7-1            ggplot2_3.4.2        MethylIT.utils_0.1.1</span></span>
-<span><span class="co">##  [4] MethylIT_0.3.2.7     rtracklayer_1.60.0   GenomicRanges_1.52.0</span></span>
-<span><span class="co">##  [7] GenomeInfoDb_1.36.1  IRanges_2.34.1       S4Vectors_0.38.1    </span></span>
+<span><span class="co">##  [1] ape_5.7-1            ggplot2_3.4.4        MethylIT.utils_0.1.1</span></span>
+<span><span class="co">##  [4] MethylIT_0.3.2.7     rtracklayer_1.60.1   GenomicRanges_1.52.1</span></span>
+<span><span class="co">##  [7] GenomeInfoDb_1.36.4  IRanges_2.34.1       S4Vectors_0.38.2    </span></span>
 <span><span class="co">## [10] BiocGenerics_0.46.0 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] rstudioapi_0.14             jsonlite_1.8.5             </span></span>
+<span><span class="co">##   [1] rstudioapi_0.15.0           jsonlite_1.8.7             </span></span>
 <span><span class="co">##   [3] magrittr_2.0.3              modeltools_0.2-23          </span></span>
-<span><span class="co">##   [5] farver_2.1.1                rmarkdown_2.22             </span></span>
-<span><span class="co">##   [7] fs_1.6.2                    BiocIO_1.10.0              </span></span>
-<span><span class="co">##   [9] zlibbioc_1.46.0             ragg_1.2.5                 </span></span>
-<span><span class="co">##  [11] vctrs_0.6.3                 memoise_2.0.1              </span></span>
-<span><span class="co">##  [13] Rsamtools_2.16.0            RCurl_1.98-1.12            </span></span>
-<span><span class="co">##  [15] htmltools_0.5.5             S4Arrays_1.0.4             </span></span>
-<span><span class="co">##  [17] Formula_1.2-5               pROC_1.18.2                </span></span>
-<span><span class="co">##  [19] caret_6.0-94                sass_0.4.6                 </span></span>
-<span><span class="co">##  [21] parallelly_1.36.0           bslib_0.5.0                </span></span>
-<span><span class="co">##  [23] desc_1.4.2                  sandwich_3.0-2             </span></span>
-<span><span class="co">##  [25] plyr_1.8.8                  zoo_1.8-12                 </span></span>
-<span><span class="co">##  [27] lubridate_1.9.2             cachem_1.0.8               </span></span>
-<span><span class="co">##  [29] GenomicAlignments_1.36.0    lifecycle_1.0.3            </span></span>
-<span><span class="co">##  [31] minpack.lm_1.2-3            iterators_1.0.14           </span></span>
-<span><span class="co">##  [33] pkgconfig_2.0.3             Matrix_1.5-4.1             </span></span>
+<span><span class="co">##   [5] farver_2.1.1                rmarkdown_2.25             </span></span>
+<span><span class="co">##   [7] fs_1.6.3                    BiocIO_1.10.0              </span></span>
+<span><span class="co">##   [9] zlibbioc_1.46.0             ragg_1.2.6                 </span></span>
+<span><span class="co">##  [11] vctrs_0.6.5                 memoise_2.0.1              </span></span>
+<span><span class="co">##  [13] Rsamtools_2.16.0            RCurl_1.98-1.13            </span></span>
+<span><span class="co">##  [15] htmltools_0.5.7             S4Arrays_1.0.6             </span></span>
+<span><span class="co">##  [17] Formula_1.2-5               pROC_1.18.5                </span></span>
+<span><span class="co">##  [19] caret_6.0-94                sass_0.4.8                 </span></span>
+<span><span class="co">##  [21] parallelly_1.36.0           bslib_0.6.1                </span></span>
+<span><span class="co">##  [23] desc_1.4.3                  sandwich_3.0-2             </span></span>
+<span><span class="co">##  [25] plyr_1.8.9                  zoo_1.8-12                 </span></span>
+<span><span class="co">##  [27] lubridate_1.9.3             cachem_1.0.8               </span></span>
+<span><span class="co">##  [29] GenomicAlignments_1.36.0    lifecycle_1.0.4            </span></span>
+<span><span class="co">##  [31] minpack.lm_1.2-4            iterators_1.0.14           </span></span>
+<span><span class="co">##  [33] pkgconfig_2.0.3             Matrix_1.6-4               </span></span>
 <span><span class="co">##  [35] R6_2.5.1                    fastmap_1.1.1              </span></span>
-<span><span class="co">##  [37] GenomeInfoDbData_1.2.10     MatrixGenerics_1.12.2      </span></span>
-<span><span class="co">##  [39] future_1.32.0               digest_0.6.31              </span></span>
-<span><span class="co">##  [41] colorspace_2.1-0            AnnotationDbi_1.62.1       </span></span>
-<span><span class="co">##  [43] rprojroot_2.0.3             textshaping_0.3.6          </span></span>
-<span><span class="co">##  [45] RSQLite_2.3.1               labeling_0.4.2             </span></span>
-<span><span class="co">##  [47] randomForest_4.7-1.1        fansi_1.0.4                </span></span>
-<span><span class="co">##  [49] timechange_0.2.0            httr_1.4.6                 </span></span>
-<span><span class="co">##  [51] compiler_4.3.0              proxy_0.4-27               </span></span>
-<span><span class="co">##  [53] bit64_4.0.5                 withr_2.5.0                </span></span>
+<span><span class="co">##  [37] GenomeInfoDbData_1.2.10     MatrixGenerics_1.12.3      </span></span>
+<span><span class="co">##  [39] future_1.33.0               digest_0.6.33              </span></span>
+<span><span class="co">##  [41] colorspace_2.1-0            AnnotationDbi_1.62.2       </span></span>
+<span><span class="co">##  [43] textshaping_0.3.7           RSQLite_2.3.3              </span></span>
+<span><span class="co">##  [45] labeling_0.4.3              randomForest_4.7-1.1       </span></span>
+<span><span class="co">##  [47] fansi_1.0.6                 timechange_0.2.0           </span></span>
+<span><span class="co">##  [49] httr_1.4.7                  abind_1.4-5                </span></span>
+<span><span class="co">##  [51] compiler_4.3.2              proxy_0.4-27               </span></span>
+<span><span class="co">##  [53] bit64_4.0.5                 withr_2.5.2                </span></span>
 <span><span class="co">##  [55] BiocParallel_1.34.2         betareg_3.1-4              </span></span>
 <span><span class="co">##  [57] DBI_1.1.3                   highr_0.10                 </span></span>
-<span><span class="co">##  [59] MASS_7.3-60                 lava_1.7.2.1               </span></span>
-<span><span class="co">##  [61] DelayedArray_0.26.3         rjson_0.2.21               </span></span>
-<span><span class="co">##  [63] ModelMetrics_1.2.2.2        tools_4.3.0                </span></span>
+<span><span class="co">##  [59] MASS_7.3-60                 lava_1.7.3                 </span></span>
+<span><span class="co">##  [61] DelayedArray_0.26.7         rjson_0.2.21               </span></span>
+<span><span class="co">##  [63] ModelMetrics_1.2.2.2        tools_4.3.2                </span></span>
 <span><span class="co">##  [65] lmtest_0.9-40               future.apply_1.11.0        </span></span>
 <span><span class="co">##  [67] nnet_7.3-19                 glue_1.6.2                 </span></span>
-<span><span class="co">##  [69] restfulr_0.0.15             nlme_3.1-162               </span></span>
-<span><span class="co">##  [71] grid_4.3.0                  reshape2_1.4.4             </span></span>
-<span><span class="co">##  [73] generics_0.1.3              recipes_1.0.6              </span></span>
-<span><span class="co">##  [75] gtable_0.3.3                class_7.3-22               </span></span>
+<span><span class="co">##  [69] restfulr_0.0.15             nlme_3.1-164               </span></span>
+<span><span class="co">##  [71] grid_4.3.2                  reshape2_1.4.4             </span></span>
+<span><span class="co">##  [73] generics_0.1.3              recipes_1.0.8              </span></span>
+<span><span class="co">##  [75] gtable_0.3.4                class_7.3-22               </span></span>
 <span><span class="co">##  [77] data.table_1.14.8           flexmix_2.3-19             </span></span>
-<span><span class="co">##  [79] utf8_1.2.3                  XVector_0.40.0             </span></span>
+<span><span class="co">##  [79] utf8_1.2.4                  XVector_0.40.0             </span></span>
 <span><span class="co">##  [81] foreach_1.5.2               pillar_1.9.0               </span></span>
-<span><span class="co">##  [83] stringr_1.5.0               genefilter_1.82.1          </span></span>
-<span><span class="co">##  [85] splines_4.3.0               dplyr_1.1.2                </span></span>
-<span><span class="co">##  [87] lattice_0.21-8              survival_3.5-5             </span></span>
+<span><span class="co">##  [83] stringr_1.5.1               genefilter_1.82.1          </span></span>
+<span><span class="co">##  [85] splines_4.3.2               dplyr_1.1.4                </span></span>
+<span><span class="co">##  [87] lattice_0.22-5              survival_3.5-7             </span></span>
 <span><span class="co">##  [89] bit_4.0.5                   annotate_1.78.0            </span></span>
 <span><span class="co">##  [91] tidyselect_1.2.0            Biostrings_2.68.1          </span></span>
-<span><span class="co">##  [93] knitr_1.43                  SummarizedExperiment_1.30.2</span></span>
-<span><span class="co">##  [95] xfun_0.39                   Biobase_2.60.0             </span></span>
+<span><span class="co">##  [93] knitr_1.45                  SummarizedExperiment_1.30.2</span></span>
+<span><span class="co">##  [95] xfun_0.41                   Biobase_2.60.0             </span></span>
 <span><span class="co">##  [97] hardhat_1.3.0               timeDate_4022.108          </span></span>
-<span><span class="co">##  [99] matrixStats_1.0.0           proto_1.0.0                </span></span>
-<span><span class="co">## [101] stringi_1.7.12              yaml_2.3.7                 </span></span>
-<span><span class="co">## [103] evaluate_0.21               codetools_0.2-19           </span></span>
-<span><span class="co">## [105] tibble_3.2.1                cli_3.6.1                  </span></span>
-<span><span class="co">## [107] rpart_4.1.19                nls2_0.3-3                 </span></span>
-<span><span class="co">## [109] xtable_1.8-4                systemfonts_1.0.4          </span></span>
+<span><span class="co">##  [99] matrixStats_1.2.0           proto_1.0.0                </span></span>
+<span><span class="co">## [101] stringi_1.8.3               yaml_2.3.8                 </span></span>
+<span><span class="co">## [103] evaluate_0.23               codetools_0.2-19           </span></span>
+<span><span class="co">## [105] tibble_3.2.1                cli_3.6.2                  </span></span>
+<span><span class="co">## [107] rpart_4.1.23                nls2_0.3-3                 </span></span>
+<span><span class="co">## [109] xtable_1.8-4                systemfonts_1.0.5          </span></span>
 <span><span class="co">## [111] munsell_0.5.0               jquerylib_0.1.4            </span></span>
-<span><span class="co">## [113] Rcpp_1.0.10                 globals_0.16.2             </span></span>
-<span><span class="co">## [115] png_0.1-8                   XML_3.99-0.14              </span></span>
-<span><span class="co">## [117] parallel_4.3.0              pkgdown_2.0.7              </span></span>
+<span><span class="co">## [113] Rcpp_1.0.11                 globals_0.16.2             </span></span>
+<span><span class="co">## [115] png_0.1-8                   XML_3.99-0.16              </span></span>
+<span><span class="co">## [117] parallel_4.3.2              pkgdown_2.0.7              </span></span>
 <span><span class="co">## [119] gower_1.0.1                 blob_1.2.4                 </span></span>
 <span><span class="co">## [121] bitops_1.0-7                listenv_0.9.0              </span></span>
 <span><span class="co">## [123] ipred_0.9-14                e1071_1.7-13               </span></span>
-<span><span class="co">## [125] scales_1.2.1                prodlim_2023.03.31         </span></span>
-<span><span class="co">## [127] purrr_1.0.1                 crayon_1.5.2               </span></span>
-<span><span class="co">## [129] rlang_1.1.1                 KEGGREST_1.40.0</span></span></code></pre>
+<span><span class="co">## [125] scales_1.3.0                prodlim_2023.08.28         </span></span>
+<span><span class="co">## [127] purrr_1.0.2                 crayon_1.5.2               </span></span>
+<span><span class="co">## [129] rlang_1.1.2                 KEGGREST_1.40.1</span></span></code></pre>
 </div>
   </div>
 

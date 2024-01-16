@@ -153,36 +153,18 @@
 <div class="section level2">
 <h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
 </h2>
-<p>Currently, the package is actively used in methylation analyses. Nevertheless, improvements are regularly introduced. Watch this repo or check for updates. THE PACKAGE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. The beta version is frequently updated. We are using the version notation: 0.3.2.x.y, where digit ‘y’ is frequently changed.</p>
-</div>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>Be sure that both the R and bioconductor packages are up to date. To get the latest version of Bioconductor by starting R and entering the commands:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>)) <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>()</span></code></pre></div>
-<p>Install OS packages:</p>
-<p>CentOS 7</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sudo yum <span class="sc">-</span>y install libcurl<span class="sc">-</span>devel.x86_64 openssl<span class="sc">-</span>devel.x86_64 libxml2<span class="sc">-</span>devel mariadb<span class="sc">-</span>devel.x86_64</span></code></pre></div>
-<p>Ubuntu</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sudo apt install libmysqlclient<span class="sc">-</span>dev libcurl4<span class="sc">-</span>openssl<span class="sc">-</span>dev libssl<span class="sc">-</span>dev libxml2<span class="sc">-</span>dev git build<span class="sc">-</span>essential</span></code></pre></div>
-<p>Install R dependencies:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"caret"</span>, <span class="st">"Epi"</span>, <span class="st">"e1071"</span>, <span class="st">"minpack.lm"</span>, <span class="st">"nls2"</span>,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">"caTools"</span>,  <span class="st">"RCurl"</span>,<span class="st">'GenomicRanges'</span>,<span class="st">'BiocParallel'</span>, <span class="st">'biovizBase'</span>, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">'genefilter'</span>, <span class="st">'data.table'</span>, <span class="st">'dplyr'</span>, <span class="st">'GenomeInfoDb'</span>, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">'randomForest'</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>))</span></code></pre></div>
-<p>You can install MethylIT from GitHub:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Master stable version (0.3.2.7)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"genomaths/MethylIT"</span>)</span></code></pre></div>
-<p>The Beta (developing) version:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">'genomaths/MethylIT'</span>, </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ref =</span> <span class="st">"MethylIT_0.3.2_beta"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>   </span></code></pre></div>
+<p>Currently, the package is actively used in methylation analyses.</p>
 </div>
 <div class="section level2">
 <h2 id="flow-diagram">Flow diagram<a class="anchor" aria-label="anchor" href="#flow-diagram"></a>
 </h2>
 <p><img src="reference/figures/workflow.png" align="center"></p>
+</div>
+<div class="section level2">
+<h2 id="download">Download<a class="anchor" aria-label="anchor" href="#download"></a>
+</h2>
+<p>The available open source version is only for non-commercial use. The software shall be used for non-commercial purposes including teaching, academic and government research, public demonstrations, personal experimentation, and/or the evaluation of the Software, other than in a live operating environment, to determine whether to enter into a commercial license. THE PACKAGE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED (see LICENSE file).</p>
+<p><a href="https://methylit.com" class="external-link">Methyl-IT</a> can be downloaded at: <a href="https://methylit.com" class="external-link uri">https://methylit.com</a></p>
 </div>
 <div class="section level2">
 <h2 id="get-started">Get Started<a class="anchor" aria-label="anchor" href="#get-started"></a>
@@ -239,7 +221,7 @@
 <div class="section level2">
 <h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
 </h2>
-<p>For questions about the MethylIT project, contact <a href="mailto:rus547@psu.edu" class="email">rus547@psu.edu</a></p>
+<p>For questions about the MethylIT project, see <a href="https://methylit.com" class="external-link">contact</a> at: <a href="https://methylit.com" class="external-link uri">https://methylit.com</a></p>
 </div>
 <div class="section level2">
 <h2 id="contributor-code-of-conduct">Contributor Code of Conduct<a class="anchor" aria-label="anchor" href="#contributor-code-of-conduct"></a>
