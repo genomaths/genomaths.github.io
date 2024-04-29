@@ -1,0 +1,16 @@
+pandoc: 3.1.1
+pkgdown: 2.0.9
+pkgdown_sha: ~
+articles:
+  automorphism_and_decision_tree_II: automorphism_and_decision_tree_II.html
+  automorphism_and_decision_tree: automorphism_and_decision_tree.html
+  automorphism_on_msa_brca1: automorphism_on_msa_brca1.html
+  automorphism_on_msa: automorphism_on_msa.html
+  covid_19: covid_19.html
+  GenomAutomorphism: GenomAutomorphism.html
+  Modular_Matrix_Operation_of_Mutational_Events: Modular_Matrix_Operation_of_Mutational_Events.html
+last_built: 2024-04-27T19:22Z
+urls:
+  reference: https://genomaths.github.io/genomautomorphism/reference
+  article: https://genomaths.github.io/genomautomorphism/articles
+
