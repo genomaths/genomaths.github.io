@@ -16,7 +16,7 @@ aut3D(
   chr = 1L,
   strand = "+",
   genetic_code = getGeneticCode("1"),
-  num.cores = detectCores() - 1,
+  num.cores = multicoreWorkers(),
   tasks = 0L,
   verbose = TRUE
 )
@@ -76,7 +76,7 @@ reference (4).
 }
 \examples{
 ## Load a pairwise alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 aln
 
 ## Automorphism on Z5^3

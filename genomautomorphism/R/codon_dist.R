@@ -1,4 +1,4 @@
-## Copyright (C) 2021 Robersy Sanchez <https://genomaths.com/>
+## Copyright (C) 2021-2024 Robersy Sanchez <https://genomaths.com/>
 ## Author: Robersy Sanchez This file is part of the R package
 ## 'GenomAutomorphism'.  'GenomAutomorphism' is a free
 ## software: you can redistribute it and/or modify it under the
@@ -90,11 +90,11 @@
 #' codon_dist(x, y, group = "Z5")
 #' 
 #' ## Load an Automorphism-class object
-#' data(autm, package = "GenomAutomorphism")
+#' data("autm", package = "GenomAutomorphism")
 #' codon_dist(x = head(autm,20), group = "Z4")
 #' 
 #' ## Load a pairwise alignment
-#' data(aln, package = "GenomAutomorphism")
+#' data("aln", package = "GenomAutomorphism")
 #' aln
 #' 
 #' codon_dist(x = aln, group = "Z5")

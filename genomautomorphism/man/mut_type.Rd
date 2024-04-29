@@ -13,16 +13,16 @@ mut_type(x, y)
 A character string of same length of 'x' and 'y'.
 }
 \description{
-Each DNA/RNA base can be classified into three main classes
-according to three criteria (1): number of hydrogen bonds (strong-weak),
-chemical type (purine-pyrimidine), and chemical groups (amino versus keto).
-Each criterion produces a partition of the set of bases: 1) According to the
-number of hydrogen bonds (on DNA/RNA double helix): strong S={C,G} (three
-hydrogen bonds) and weak W={A,U} (two hydrogen bonds). According to the
-chemical type: purines R={A, G} and pyrimidines Y={C,U}. 3). According to
-the presence of amino or keto groups on the base rings: amino M={C,A} and
-keto K={G,U}. So, each mutational event can be classified as according to
-the type of involved in it (2).
+Each DNA/RNA base can be classified into three main classes according to
+three criteria (1): number of hydrogen bonds (strong-weak), chemical type
+(purine-pyrimidine), and chemical groups (amino versus keto). Each criterion
+produces a partition of the set of bases: 1) According to the number of
+hydrogen bonds (on DNA/RNA double helix): strong \eqn{S=(C,G)} (three
+hydrogen bonds) and weak \eqn{W=(A,U)} (two hydrogen bonds). According to
+the chemical type: purines \eqn{R=(A, G)} and pyrimidines \eqn{Y=(C,U)}. 3).
+According to the presence of amino or keto groups on the base rings: amino
+\eqn{M=(C,A)} and keto \eqn{K=(G,U)}. So, each mutational event can be
+classified as according to the type of involved in it (2).
 }
 \examples{
 ## Mutation type 'R'

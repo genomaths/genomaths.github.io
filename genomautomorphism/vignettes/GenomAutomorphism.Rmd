@@ -3,8 +3,8 @@ title: "Get started-with GenomAutomorphism"
 author: 
     - name: Robersy Sanchez
       affiliation: Department of Biology.
-                   Pennsylvania State University, University Park, PA 16802
-      email: rus547@psu.edu
+                Pennsylvania State University, University Park, PA 16802
+      email: genomicmath@gmail.com
 date: "`r format(Sys.time(), '%d %B %Y')`"
 fontsize: 11pt
 fontfamily: "serif"
@@ -31,39 +31,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-<style type="text/css">
-
-.watch-out {
-    max-width: 1820px !important;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #c9feed;
-    font-weight: bold
-    font-size: 100%;
-    padding: 2px;
-}
-
-pre, code {
-    max-width: 1820px !important;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #c9feed;
-    font-weight: bold
-    font-size: 100px;
-    padding: 2px;
-}
-
-code {
-    font-size: 100%;
-    font-family: Consolas,Monaco,"Courier New",monospace;
-    border-radius: 0;
-}
-
-code.r{
-    font-size: 100%;
-}
-</style>
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE,
@@ -77,7 +44,7 @@ options(width = 120)
 ```
 
 
-# Overview
+# `GenomAutomorphism` Overview
 This is a R package to compute the automorphisms between pairwise aligned DNA
 sequences represented as elements from a Genomic Abelian group as described in
 reference ([1](#1)). In a general scenario, whole chromosomes or genomic 
@@ -101,7 +68,45 @@ $p^{\alpha_{i}}_i$.
 For the purpose of estimating the automorphism between two aligned DNA
 sequences, $p^{\alpha_{i}}_i \in \{5, 2^6, 5^3 \}$.
 
-## Automorphisms
+# Installing `GenomAutomorphism`
+
+`GenomAutomorphism` uses several R dependencies, which can be installed 
+as follows:
+
+```{r inst-dep, eval=FALSE}
+if (!requireNamespace("BiocManager")) 
+    install.packages("BiocManager")
+
+BiocManager::install(c("Biostrings", "GenomicRanges", "S4Vectors",
+        "BiocParallel", "GenomeInfoDb", "BiocGenerics", "numbers", "devtools",
+        "doParallel", "data.table", "foreach","parallel"), dependencies = TRUE)
+```
+
+
+`GenomAutomorphism` can be installed as follows:
+
+```{r inst, eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("GenomAutomorphism")
+```
+
+You can install `GenomAutomorphism` package from GitHub as follow
+
+```{r inst-git, eval=FALSE}
+BiocManager::install('genomaths/GenomAutomorphism')
+```
+
+You can install `GenomAutomorphism` 'beta' package with last updating
+(which would differ from Bioconductor version) from GitHub as follow:
+
+```{r inst-git2, eval=FALSE}
+BiocManager::install('genomaths/GenomAutomorphism_beta')
+```
+
+
+# Automorphisms
 
 Herein, automorphisms are considered algebraic descriptions of mutational event
 observed in codon sequences represented on different Abelian groups. In
@@ -122,13 +127,13 @@ Wolfram Player, freely available (for Windows and Linux OS) at,
 
 ## Load the R libraries
 
-```{r lib,warning=FALSE,message=FALSE}
+```{r lib,results="hide",warning=FALSE,message=FALSE}
 library(Biostrings)
 library(GenomAutomorphism)
 ```
 
 
-# Read the alignment _FASTA_  and encode the sequences
+## Read the alignment _FASTA_  and encode the sequences
 
 A pairwise sequence alignment of protein coding regions SARS coronavirus GZ02
 (GenBank: AY390556.1) and Bat SARS-like coronavirus isolate Rs7327 (GenBank:

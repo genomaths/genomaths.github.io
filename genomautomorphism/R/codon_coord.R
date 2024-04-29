@@ -51,7 +51,7 @@
 #' @importFrom methods new
 #' @export
 #' @return A \code{\link{CodonGroup-class}} object.
-#' @seealso \code{\link{base_coord}} and \code{\link{base2int}}.
+#' @seealso [codon_matrix], [base_coord] and [base2int].
 #' @author Robersy Sanchez <https://genomaths.com>
 #' @references
 #' \enumerate{
@@ -67,7 +67,7 @@
 #' }
 #' @examples
 #' ## Load a pairwise alignment
-#' data(aln, package = "GenomAutomorphism")
+#' data("aln", package = "GenomAutomorphism")
 #' aln
 #'
 #' ## DNA base representation in the Abelian group Z5
@@ -98,6 +98,8 @@ setGeneric(
         standardGeneric("codon_coord")
     }
 )
+
+## ====================== BaseGroup method =======================
 
 #' @aliases codon_coord
 #' @rdname codon_coord
@@ -178,6 +180,9 @@ setMethod(
         return(codon)
     }
 )
+
+
+## ================ BaseGrDNAStringSet_OR_NULL method ====================
 
 
 #' @aliases codon_coord

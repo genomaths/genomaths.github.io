@@ -20,7 +20,7 @@ conserved_regions(x, ...)
   x,
   conserved = TRUE,
   output = c("all_pairs", "unique_pairs", "unique"),
-  num.cores = detectCores() - 1,
+  num.cores = multicoreWorkers(),
   tasks = 0L,
   verbose = FALSE
 )
@@ -72,10 +72,10 @@ Returns the Conserved or the Non-conserved Regions from a MSA.
 }
 \examples{
 ## Load dataset
-data(autm, package = "GenomAutomorphism")
+data("autm", package = "GenomAutomorphism")
 conserved_regions(autm[1:3])
 ## Load automorphism found COVID datatset
-data(covid_autm, package = "GenomAutomorphism")
+data("covid_autm", package = "GenomAutomorphism")
 
 ## Conserved regions in the first 100 codons
 conserv <- conserved_regions(covid_autm[1:100], output = "unique")

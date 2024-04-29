@@ -8,11 +8,16 @@
 \code{\link[Biostrings]{DNAStringSet}} class object.
 }
 \usage{
-aln
+data("aln", package = "GenomAutomorphism")
 }
 \description{
 This is a \code{\link[Biostrings]{DNAStringSet}} carrying a small pairwise
 DNA sequence alignment to be used in the examples provided for the
 package functions.
+}
+\examples{
+data("aln", package = "GenomAutomorphism")
+aln
+
 }
 \keyword{datasets}

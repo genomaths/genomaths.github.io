@@ -26,16 +26,20 @@
 #' The contact potential matrix of amino acids is a set of 210 numerical
 #' values, 20 diagonal and 20x19/2 off-diagonal elements, used for sequence
 #' alignments and similarity searches.
-
+#' 
+#' @seealso [aaindex1], [aaindex2], and [get_mutscore].
+#' @author Robersy Sanchez <https://genomaths.com>
+#' @format A list carrying the the description 47 Amino Acid Matrices in 
+#' AAindex ver.9.2 and the text file of matrices imported from
+#' \url{https://www.genome.jp/aaindex/}.
+#' @usage 
+#' data("aaindex3", package = "GenomAutomorphism")
 #' @examples 
 #' ## Load the mutation matrices from database from the packages
-#' data(aaindex3, package = "GenomAutomorphism")
+#' data("aaindex3", package = "GenomAutomorphism")
 #' 
 #' ## Get the available mutation matrices
-#' mat <- aa_mutmat(aaindex = aaindex3, acc_list = TRUE)
+#' mat <- aa_mutmat(aaindex = "aaindex3", acc_list = TRUE)
 #' mat[1:10]
-#' @seealso \code{\link{aaindex3}}, \code{\link{aa_mutmat}}, and
-#' \code{\link{get_mutscore}}.
-#' @author Robersy Sanchez <https://genomaths.com>
-#' @format \code{\link{AutomorphismList}} class object.
+#' 
 "aaindex3"

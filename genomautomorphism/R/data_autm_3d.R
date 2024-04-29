@@ -14,7 +14,7 @@
 
 #' Automorphisms between DNA Sequences from two COVID-19 genomes
 #'
-#' This is a \code{\link{AutomorphismList}} object carrying a list of pairwise
+#' This is a [AutomorphismList] object carrying a list of pairwise
 #' automorphisms between the SARS coronavirus GZ02 (GenBank: AY390556.1:
 #' 265-13398_13398-21485) and Bat SARS-like coronavirus isolate bat-SL-CoVZC45
 #' (GenBank: MG772933.1:265-1345513455-21542), nonstructural_polyprotein. The
@@ -22,5 +22,11 @@
 #' \code{\link{covid_aln}} and the automorphisms were estimated with function
 #' \code{\link{aut3D}}.
 #'
-#' @format \code{\link{AutomorphismList}} class object.
+#' @format [AutomorphismList] class object.
+#' @usage 
+#' data("autm_3d", package = "GenomAutomorphism")
+#' @examples
+#' data("autm_3d", package = "GenomAutomorphism")
+#' autm_3d
+#' 
 "autm_3d"

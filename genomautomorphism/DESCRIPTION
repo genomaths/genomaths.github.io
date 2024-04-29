@@ -1,6 +1,6 @@
 Package: GenomAutomorphism
 Title: Compute the automorphisms between DNA's Abelian group representations
-Version: 1.0.3
+Version: 1.5.1
 Authors@R: 
     person( given = "Robersy",
             family = "Sanchez",
@@ -21,14 +21,15 @@ Description:
             created by the direct sum of homocyclic Abelian group of 
             prime-power order.
 Depends: 
-    R (>= 4.2),
+    R (>= 4.4.0),
 License: Artistic-2.0
 Encoding: UTF-8
 biocViews: 
     MathematicalBiology,
     ComparativeGenomics,
     FunctionalGenomics,
-    MultipleSequenceAlignment
+    MultipleSequenceAlignment,
+    WholeGenome
 Imports:
     Biostrings,
     BiocGenerics,
@@ -36,6 +37,8 @@ Imports:
     GenomeInfoDb,
     GenomicRanges,
     IRanges,
+    matrixStats,
+    XVector,
     dplyr,
     data.table,
     parallel,
@@ -46,7 +49,7 @@ Imports:
     stats,
     numbers,
     utils
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Suggests:
     spelling,
     rmarkdown,

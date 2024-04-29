@@ -20,6 +20,14 @@
 #' (GenBank: MG772933.1:265-1345513455-21542), complete genomes. The alignment
 #' is available at GitHub:
 #' <https://github.com/genomaths/seqalignments/tree/master/COVID-19>
+#' @usage 
+#' data("covid_aln", package = "GenomAutomorphism")
 #'
 #' @format \code{\link[Biostrings]{DNAMultipleAlignment}} class object.
+#' @author Robersy Sanchez <https://genomaths.com>
+#' @seealso  [brca1_aln], [brca1_autm2], [cyc_aln] and [covid_aln].
+#' @examples
+#' data("covid_aln", package = "GenomAutomorphism")
+#' covid_aln
+#' 
 "covid_aln"

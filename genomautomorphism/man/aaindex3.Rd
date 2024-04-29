@@ -5,10 +5,12 @@
 \alias{aaindex3}
 \title{Statistical protein contact potentials matrices from AAindex ver.9.2}
 \format{
-\code{\link{AutomorphismList}} class object.
+A list carrying the the description 47 Amino Acid Matrices in
+AAindex ver.9.2 and the text file of matrices imported from
+\url{https://www.genome.jp/aaindex/}.
 }
 \usage{
-aaindex3
+data("aaindex3", package = "GenomAutomorphism")
 }
 \description{
 A statistical potential (also knowledge-based potential, empirical
@@ -27,15 +29,15 @@ alignments and similarity searches.
 }
 \examples{
 ## Load the mutation matrices from database from the packages
-data(aaindex3, package = "GenomAutomorphism")
+data("aaindex3", package = "GenomAutomorphism")
 
 ## Get the available mutation matrices
-mat <- aa_mutmat(aaindex = aaindex3, acc_list = TRUE)
+mat <- aa_mutmat(aaindex = "aaindex3", acc_list = TRUE)
 mat[1:10]
+
 }
 \seealso{
-\code{\link{aaindex3}}, \code{\link{aa_mutmat}}, and
-\code{\link{get_mutscore}}.
+\link{aaindex1}, \link{aaindex2}, and \link{get_mutscore}.
 }
 \author{
 Robersy Sanchez \url{https://genomaths.com}

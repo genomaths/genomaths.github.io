@@ -22,6 +22,13 @@
 #' 'brca1_aln' data set plus 21 single mutation variants (SMV) from the human
 #' sequence NM_007298 transcript variant 4. The location of each SMV is given
 #' in the heading from each sequence.
-#'
+#' @author Robersy Sanchez <https://genomaths.com>
+#' @seealso [brca1_aln], [brca1_autm2], [cyc_aln], and [covid_autm].
+#' @usage 
+#' data("brca1_aln2", package = "GenomAutomorphism")
 #' @format \code{\link[Biostrings]{DNAMultipleAlignment}} class object.
+#' @examples
+#' data("brca1_aln2", package = "GenomAutomorphism")
+#' brca1_aln2
+#' 
 "brca1_aln2"

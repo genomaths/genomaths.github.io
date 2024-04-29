@@ -4,19 +4,9 @@
 \name{MatrixList-class}
 \alias{MatrixList-class}
 \alias{MatrixList}
-\alias{show,MatrixList-method}
-\alias{show-MatrixList}
 \title{Definition of MatrixList-class}
-\usage{
-\S4method{show}{MatrixList}(object)
-}
-\arguments{
-\item{object}{An object from 'MatrixList' class}
-}
 \value{
 Given the slot values, it defines a MatrixList-class.
-
-Print/show of a MatrixList-class object.
 }
 \description{
 A class denoting a list of matrices.

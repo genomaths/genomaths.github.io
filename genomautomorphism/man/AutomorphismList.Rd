@@ -5,8 +5,8 @@
 \alias{AutomorphismList-class}
 \alias{AutomorphismList}
 \alias{names,AutomorphismList-method}
-\alias{names}
 \alias{names<-,AutomorphismList,ANY-method}
+\alias{'names<-'}
 \alias{as.list,AutomorphismList-method}
 \alias{show,AutomorphismList-method}
 \alias{show-AutomorphismList}
@@ -21,7 +21,10 @@
 \S4method{show}{AutomorphismList}(object)
 }
 \arguments{
-\item{x}{An \code{\link{AutomorphismList}} object.}
+\item{x}{An \code{\link{AutomorphismList-class}} object.}
+
+\item{value}{A character vector naming the elements of the
+\code{\link{AutomorphismList-class}} object 'x'.}
 
 \item{object}{An object from \code{\link{AutomorphismList-class}}.}
 }
@@ -79,14 +82,14 @@ object.
 
 \examples{
 ## Load datasets
-data(autm, brca1_autm)
+data("autm", "brca1_autm")
 
 ## Transforming a list of Automorphisms into an AutomorphismList object
 lista <- list(human = brca1_autm[[1]], gorilla = brca1_autm[[2]])
 as.AutomorphismList(lista)
 
 ## Alternatively we can set
-aut <- as.list(brca1_autm[1:2])
+aut <- as.list(brca1_autm[seq(2)])
 class(aut)
 
 ## And reverse it
@@ -107,14 +110,13 @@ as.AutomorphismList(lista)
 
 ## Transform a AutomorphismList-class object into an Automorphism-class
 ## object 
-unlist(brca1_autm[1:2])
-
+unlist(brca1_autm[seq(2)])
 ## Load a DNA sequence alignment
 data("brca1_autm", package = "GenomAutomorphism")
 names(brca1_autm)
 ## Load a DNA sequence alignment
 data("brca1_autm", package = "GenomAutomorphism")
-x1 <- brca1_autm[1:2]
+x1 <- brca1_autm[seq(2)]
 names(x1)
 
 ## Let's assign a new names
@@ -124,7 +126,7 @@ names(x1)
 data("brca1_autm", package = "GenomAutomorphism")
 
 ## The list of the first three elements
-autm_list <- as.list(brca1_autm[1:3])
+autm_list <- as.list(brca1_autm[seq(3)])
 autm_list
 }
 \seealso{

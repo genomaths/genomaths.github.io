@@ -14,7 +14,7 @@ autZ5(
   end = NA,
   chr = 1L,
   strand = "+",
-  num.cores = detectCores() - 1,
+  num.cores = multicoreWorkers(),
   tasks = 0L,
   verbose = TRUE
 )
@@ -63,7 +63,7 @@ provided in argument \emph{\strong{seq}} or the 'fasta' file
 }
 \examples{
 ## Load a pairwise alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 aln
 
 ## Automorphism on Z5

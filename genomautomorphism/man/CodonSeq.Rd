@@ -8,8 +8,6 @@
 \alias{coordList,CodonSeq-method}
 \alias{seqRanges}
 \alias{seqRanges,CodonSeq-method}
-\alias{show,CodonSeq-method}
-\alias{show-CodonSeq}
 \title{A class definition to store codon coordinates given in the Abelian
 group and the codon sequence.}
 \usage{
@@ -20,13 +18,9 @@ coordList(x)
 seqRanges(x)
 
 \S4method{seqRanges}{CodonSeq}(x)
-
-\S4method{show}{CodonSeq}(object)
 }
 \arguments{
 \item{x}{An object from \code{\link{CodonSeq-class}}.}
-
-\item{object}{An object from 'CodonSeq'.}
 }
 \value{
 Given the slot values define a CodonSeq-class.
@@ -40,7 +34,7 @@ be stored in the slot named 'SeqRanges'.
 }
 \examples{
 ## Load a DNA sequence alignment 
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 
 ## Get base coordinates on 'Z5'
 coord <- get_coord(
@@ -50,7 +44,7 @@ coord <- get_coord(
 )
 coordList(coord)
 ## Load a DNA sequence alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 
 ## Get base coordinates on 'Z5'
 coord <- get_coord(

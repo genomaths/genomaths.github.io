@@ -30,7 +30,7 @@
 #' @export
 #' @examples
 #' ## Load dataset
-#' data(autm, package = "GenomAutomorphism")
+#' data("autm", package = "GenomAutomorphism")
 #' conserved_regions(autm[1:3])
 setGeneric(
     "conserved_regions",
@@ -77,10 +77,11 @@ setMethod("conserved_regions",
 #' evenly as possible over the number of workers (see
 #' \code{\link[BiocParallel]{MulticoreParam}} from BiocParallel package).
 #' @param verbose logic(1). If TRUE, enable progress bar.
+#' @importFrom BiocParallel multicoreWorkers
 #' @export
 #' @examples
 #' ## Load automorphism found COVID datatset
-#' data(covid_autm, package = "GenomAutomorphism")
+#' data("covid_autm", package = "GenomAutomorphism")
 #' 
 #' ## Conserved regions in the first 100 codons
 #' conserv <- conserved_regions(covid_autm[1:100], output = "unique")
@@ -90,7 +91,7 @@ setMethod("conserved_regions",
     function(x,
     conserved = TRUE,
     output = c("all_pairs", "unique_pairs", "unique"),
-    num.cores = detectCores() - 1,
+    num.cores = multicoreWorkers(),
     tasks = 0L,
     verbose = FALSE) {
         output <- match.arg(output)

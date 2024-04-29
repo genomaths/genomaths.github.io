@@ -14,7 +14,7 @@ automorphism_bycoef(x, ...)
   x,
   min.len = 1L,
   mut.type = TRUE,
-  num.cores = detectCores() - 1,
+  num.cores = multicoreWorkers(),
   tasks = 0L,
   verbose = TRUE
 )
@@ -54,9 +54,10 @@ grouped.
 }
 \examples{
 ## Load dataset
-data(autm, package = "GenomAutomorphism")
+data("autm", package = "GenomAutomorphism")
 
 automorphism_bycoef(x = autm[1:2])
+
 }
 \seealso{
 \code{\link{automorphisms}}

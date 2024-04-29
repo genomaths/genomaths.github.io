@@ -119,7 +119,7 @@
 #' }
 #' @examples
 #' ## Load a pairwise alignment
-#' data(aln, package = "GenomAutomorphism")
+#' data("aln", package = "GenomAutomorphism")
 #' aln
 #'
 #' ## Automorphism on "Z5^3"
@@ -157,7 +157,8 @@ setGeneric(
 #' @importFrom foreach foreach %dopar% %:%
 #' @importFrom doParallel registerDoParallel
 #' @importFrom stats setNames
-#' @importFrom parallel detectCores makeCluster stopCluster
+#' @importFrom parallel makeCluster stopCluster
+#' @importFrom BiocParallel multicoreWorkers
 #' @importFrom BiocGenerics width
 #' @import Biostrings
 #' @import S4Vectors
@@ -174,7 +175,7 @@ setMethod(
     end = NA,
     chr = 1L,
     strand = "+",
-    num.cores = detectCores() - 1,
+    num.cores = multicoreWorkers(),
     tasks = 0L,
     verbose = TRUE) {
         if (is.null(seqs) && is.null(filepath)) {

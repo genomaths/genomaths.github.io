@@ -19,7 +19,7 @@ automorphisms(seqs = NULL, filepath = NULL, group = "Z4", ...)
   end = NA,
   chr = 1L,
   strand = "+",
-  num.cores = detectCores() - 1,
+  num.cores = multicoreWorkers(),
   tasks = 0L,
   verbose = TRUE
 )
@@ -132,7 +132,7 @@ requested regions.
 
 \examples{
 ## Load a pairwise alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 aln
 
 ## Automorphism on "Z5^3"

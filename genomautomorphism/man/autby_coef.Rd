@@ -5,16 +5,25 @@
 \alias{autby_coef}
 \title{Automorphisms between DNA Primate BRCA1 Genes Grouped by Coefficients}
 \format{
-\code{\link{AutomorphismByCoefList}} class object.
+\link{AutomorphismByCoefList} class object.
 }
 \usage{
-autby_coef
+data("autby_coef", package = "GenomAutomorphism")
 }
 \description{
-This is a \code{\link{AutomorphismList}} object carrying a list of pairwise
+This is a \link{AutomorphismList} object carrying a list of pairwise
 automorphisms between the DNA sequences from the MSA of primate somatic
 cytochrome C grouped by automorphism's coefficients. The grouping derives
-from the dataset \code{\link{brca1_autm}} after applying function
-\code{\link{automorphism_bycoef}}.
+from the dataset \link{brca1_autm} after applying function
+\link{automorphism_bycoef}.
+}
+\examples{
+## Load the data set
+data("autby_coef", package = "GenomAutomorphism")
+autby_coef
+
+## Mutation type found in the data
+unique(autby_coef$human_1.human_2$mut_type)
+
 }
 \keyword{datasets}

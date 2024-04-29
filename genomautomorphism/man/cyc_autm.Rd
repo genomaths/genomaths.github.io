@@ -8,7 +8,7 @@
 \code{\link{AutomorphismList}} class object.
 }
 \usage{
-cyc_autm
+data("cyc_autm", package = "GenomAutomorphism")
 }
 \description{
 This is a \code{\link{AutomorphismList}} object carrying a list of pairwise
@@ -17,5 +17,16 @@ automorphisms between the DNA sequences from the MSA of
 examples provided for the package functions. The automorphisms were
 estimated from the \code{\link{cyc_aln}} MSA with function
 \code{\link{autZ64}}.
+}
+\examples{
+data("cyc_autm", package = "GenomAutomorphism")
+cyc_autm
+
+}
+\seealso{
+\link{brca1_autm}, \link{brca1_autm2}, \link{covid_autm}, and \link{covid_aln}.
+}
+\author{
+Robersy Sanchez \url{https://genomaths.com}
 }
 \keyword{datasets}

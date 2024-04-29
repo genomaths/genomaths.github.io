@@ -15,7 +15,7 @@ autZ64(
   chr = 1L,
   strand = "+",
   genetic_code = getGeneticCode("1"),
-  num.cores = detectCores() - 1,
+  num.cores = multicoreWorkers(),
   tasks = 0L,
   verbose = TRUE
 )
@@ -70,7 +70,7 @@ from the set of integers modulo 64.
 }
 \examples{
 ## Load a pairwise alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 aln
 
 ## Automorphism on Z64

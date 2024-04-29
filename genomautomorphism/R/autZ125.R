@@ -52,7 +52,7 @@
 #' @return An object \code{\link{Automorphism-class}} with four columns
 #' on its metacolumn named: \emph{seq1}, \emph{seq2}, \emph{autm}, and
 #' \emph{cube}.
-#' @importFrom BiocParallel MulticoreParam bplapply SnowParam
+#' @importFrom BiocParallel MulticoreParam bplapply SnowParam multicoreWorkers
 #' @importFrom methods new
 #' @import Biostrings
 #' @export
@@ -74,7 +74,7 @@
 #' }
 #' @examples
 #' ## Load a pairwise alignment
-#' data(aln, package = "GenomAutomorphism")
+#' data("aln", package = "GenomAutomorphism")
 #' aln
 #'
 #' ## Automorphism on Z125
@@ -90,7 +90,7 @@ autZ125 <- function(seq = NULL,
     chr = 1L,
     strand = "+",
     genetic_code = getGeneticCode("1"),
-    num.cores = detectCores() - 1,
+    num.cores = multicoreWorkers() - 1,
     tasks = 0L,
     verbose = TRUE) {
     if (is.null(filepath) && is.null(seq)) {

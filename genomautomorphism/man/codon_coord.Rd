@@ -77,7 +77,7 @@ Notice that the coordinates can be 3D or just one-dimension ("Z64" or
 }
 \examples{
 ## Load a pairwise alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 aln
 
 ## DNA base representation in the Abelian group Z5
@@ -117,7 +117,7 @@ Comput. Chem. 79 (2018) 527-560.
 \seealso{
 \href{https://github.com/genomaths/GenomeAlgebra_SymmetricGroup}{Symmetric Group of the Genetic-Code Cubes.}
 
-\code{\link{base_coord}} and \code{\link{base2int}}.
+\link{codon_matrix}, \link{base_coord} and \link{base2int}.
 }
 \author{
 Robersy Sanchez \url{https://genomaths.com}

@@ -11,7 +11,7 @@ codon_dist_matrix(
   cube = c("ACGT", "AGCT", "TCGA", "TGCA", "CATG", "GTAC", "CTAG", "GATC", "ACTG",
     "ATCG", "GTCA", "GCTA", "CAGT", "TAGC", "TGAC", "CGAT", "AGTC", "ATGC", "CGTA",
     "CTGA", "GACT", "GCAT", "TACG", "TCAG"),
-  output = c("list", "vector"),
+  output = c("list", "vector", "dist"),
   num.cores = 1L
 )
 }
@@ -49,7 +49,7 @@ weighted Manhattan distance between codons estimated with function
 \details{
 By construction, a distance matrix is a symmetric matrix. Hence,
 the knowledge of lower triangular matrix is enough for its application to
-any dowstream analysis.
+any downstream analysis.
 }
 \examples{
 ## The distance matrix for codons for the Invertebrate Mitochondrial,
@@ -58,7 +58,7 @@ any dowstream analysis.
 ## distance between codons given in the coordinate name. 
 x <- codon_dist_matrix(genetic_code = "5", cube = "TGCA", group = "Z5",
                     output = "vector")
-x[61:63]
+x[seq(61, 63)]
 
 }
 \seealso{

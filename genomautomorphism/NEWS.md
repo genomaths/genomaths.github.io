@@ -1,5 +1,8 @@
-# GenomAutomorphism 1.0.3
-* Add new functions to work with modular matrix operations
+# GenomAutomorphism 1.5.1
+
+* Introducing new functions for DNA and aminoacid sequence representations
+  with physicochemical properties of DNA and aminoacids, which would be 
+  useful for further downstream statistical analysis in R.
 
 # GenomAutomorphism 1.0.2
 

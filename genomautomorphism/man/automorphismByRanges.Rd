@@ -13,7 +13,7 @@ automorphismByRanges(x, ...)
 \S4method{automorphismByRanges}{AutomorphismList}(
   x,
   min.len = 0L,
-  num.cores = detectCores() - 1,
+  num.cores = multicoreWorkers(),
   tasks = 0L,
   verbose = TRUE
 )
@@ -53,7 +53,7 @@ can be grouped by ranges which inherits from
 }
 \examples{
 ## Load dataset
-data(autm, package = "GenomAutomorphism")
+data("autm", package = "GenomAutomorphism")
 
 automorphismByRanges(x = autm[c(1, 4)])
 

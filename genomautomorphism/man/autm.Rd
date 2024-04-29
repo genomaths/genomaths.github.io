@@ -5,19 +5,19 @@
 \alias{autm}
 \title{Automorphisms between DNA Sequences from two COVID-19 genomes}
 \format{
-\code{\link{AutomorphismList}} class object.
+\link{AutomorphismList} class object.
 }
 \usage{
-autm
+data("autm", package = "GenomAutomorphism")
 }
 \description{
-This is a \code{\link{AutomorphismList}} object carrying a list of pairwise
+This is a \link{AutomorphismList} object carrying a list of pairwise
 automorphisms between the SARS coronavirus GZ02 (GenBank: AY390556.1:
 265-13398_13398-21485) and Bat SARS-like coronavirus isolate bat-SL-CoVZC45
 (GenBank: MG772933.1:265-1345513455-21542), nonstructural_polyprotein. The
 pairwise DNA sequence alignment is available in the dataset named
-\code{\link{covid_aln}} and the automorphisms were estimated with function
-\code{\link{autZ64}}.
+\link{covid_aln} and the automorphisms were estimated with function
+\link{autZ64}.
 }
 \details{
 The alignment of these DNA sequences is available at:
@@ -26,7 +26,8 @@ the fasta file
 'AY390556.1_265-13398_13398-21485_RNA-POL_SARS_COVI_GZ02.fas'
 }
 \examples{
-data(autm, package = "GenomAutomorphism")
+data("autm", package = "GenomAutomorphism")
 autm
+
 }
 \keyword{datasets}

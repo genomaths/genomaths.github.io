@@ -32,9 +32,10 @@
 #' @seealso \code{\link{automorphisms}}
 #' @examples
 #' ## Load dataset
-#' data(autm, package = "GenomAutomorphism")
+#' data("autm", package = "GenomAutomorphism")
 #'
 #' automorphism_bycoef(x = autm[1:2])
+#' 
 setGeneric(
     "automorphism_bycoef",
     function(x,
@@ -163,8 +164,7 @@ setMethod(
 #' \code{\link[BiocParallel]{MulticoreParam}} from BiocParallel package).
 #' @param verbose logic(1). If TRUE, enable progress bar.
 #' @import GenomicRanges
-#' @importFrom parallel detectCores
-#' @importFrom BiocParallel MulticoreParam bplapply SnowParam
+#' @importFrom BiocParallel MulticoreParam bplapply SnowParam multicoreWorkers
 #' @importFrom data.table data.table
 #' @export
 setMethod(
@@ -172,7 +172,7 @@ setMethod(
     function(x,
     min.len = 1L,
     mut.type = TRUE,
-    num.cores = detectCores() - 1,
+    num.cores = multicoreWorkers(),
     tasks = 0L,
     verbose = TRUE) {
         gr <- try(x@SeqRanges, silent = TRUE)

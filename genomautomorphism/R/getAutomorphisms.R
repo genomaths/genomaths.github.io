@@ -27,7 +27,7 @@
 #' @export
 #' @examples
 #' ## Load a dataset
-#' data(autm, package = "GenomAutomorphism")
+#' data("autm", package = "GenomAutomorphism")
 #' aut <- mcols(autm)
 #' aut ## This a DataFrame object
 #'

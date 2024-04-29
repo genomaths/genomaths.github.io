@@ -42,7 +42,7 @@ object into an object from the same class but now inheriting from a
 }
 \examples{
 ## Load a dataset
-data(autm, package = "GenomAutomorphism")
+data("autm", package = "GenomAutomorphism")
 aut <- mcols(autm)
 aut ## This a DataFrame object
 

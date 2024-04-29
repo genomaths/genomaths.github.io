@@ -116,11 +116,11 @@ codon_dist(x, y, group = "Z4")
 codon_dist(x, y, group = "Z5")
 
 ## Load an Automorphism-class object
-data(autm, package = "GenomAutomorphism")
+data("autm", package = "GenomAutomorphism")
 codon_dist(x = head(autm,20), group = "Z4")
 
 ## Load a pairwise alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 aln
 
 codon_dist(x = aln, group = "Z5")

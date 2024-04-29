@@ -14,10 +14,18 @@
 
 #' Automorphisms between DNA Sequences from Primate BRCA1 Genes
 #'
-#' This is a \code{\link{AutomorphismList}} object carrying a list of pairwise
+#' This is a [AutomorphismList] object carrying a list of pairwise
 #' automorphisms between the DNA sequences from the MSA of primate BRCA1
 #' DNA repair gene. The automorphisms were estimated from the
-#' \code{\link{brca1_aln}} MSA with function \code{\link{autZ64}}.
+#' [brca1_aln] MSA with function [autZ64].
+#' @usage 
+#' data("brca1_autm", package = "GenomAutomorphism")
 #'
-#' @format \code{\link{AutomorphismList}} class object.
+#' @format [AutomorphismList] class object.
+#' @author Robersy Sanchez <https://genomaths.com>
+#' @seealso [brca1_autm2], [brca1_aln], [brca1_aln2], and [covid_autm].
+#' @examples
+#' data("brca1_autm", package = "GenomAutomorphism")
+#' brca1_autm
+#' 
 "brca1_autm"

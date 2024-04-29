@@ -69,7 +69,7 @@ setGeneric(
         else {
             if (length(n) == 1) {
                 res <- mapply(function(x,y) modl(x, y, n, no.sol = no.sol),
-                              a, b, USE.NAMES = FALSE)
+                            a, b, USE.NAMES = FALSE)
             }
             else
                 res <- mapply(function(x, y, z) {

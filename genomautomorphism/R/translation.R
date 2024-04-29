@@ -132,7 +132,7 @@ transl <- function(
     
     if (any((nchar(x) %% 3) != 0))
         stop("*** The number of characters in argument 'x' ,
-                    must multiple of 3")
+                    must be multiple of 3")
     
     x <- toupper(x)
     x <- gsub("U", "T", x)

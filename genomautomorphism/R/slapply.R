@@ -34,7 +34,8 @@
 #' @export
 #' @examples
 #' ## Create a list
-#' x <- list(a = 1:10, beta = exp(-3:3), logic = c(TRUE, FALSE, FALSE, TRUE))
+#' x <- list(a = seq(10), beta = exp(seq(-3, 3)), 
+#'           logic = c(TRUE, FALSE, FALSE, TRUE))
 #' class(x) <- "nice"
 #'
 #' ## To compute the list mean for each list element using 'base::lapply'

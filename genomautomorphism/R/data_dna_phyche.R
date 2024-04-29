@@ -1,0 +1,106 @@
+## Copyright (C) 2021-2024 Robersy Sanchez <https://genomaths.com/>
+## Author: Robersy Sanchez This file is part of the R package
+## 'GenomAutomorphism'.  'GenomAutomorphism' is a free
+## software: you can redistribute it and/or modify it under the
+## terms of the GNU General Public License as published by the Free
+## Software Foundation, either version 3 of the License, or (at
+## your option) any later version.  This program is distributed in
+## the hope that it will be useful, but WITHOUT ANY WARRANTY;
+## without even the implied warranty of MERCHANTABILITY or FITNESS
+## FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+## more details.  You should have received a copy of the GNU
+## General Public License along with this program; if not, see
+## <http://www.gnu.org/licenses/>.
+
+#' Some Physicochemical Properties of DNA bases
+#' 
+#' This data set carries some relevant physicochemical properties of the 
+#' DNA bases. Available properties are:
+#' \describe{
+#'   \item{"proton_affinity: "}{It is an indicatio of the thermodynamic 
+#'    gradient between a molecule and the anionic form of that molecule upon
+#'    removal of a proton from it
+#'    (\href{https://en.wikipedia.org/wiki/Proton_affinity}{Wikipedia}). The
+#'    proton affinity values, given in kJ/mol, were taken from reference (1),
+#'    also available in Wolfram Alpha at https://www.wolframalpha.com/ and in
+#'    the cell phone App 'Wolfram Alpha'.. Reference (2) provides several
+#'    measurements accomplished by several computational and experimental
+#'    approaches.
+#'   }       
+#'   \item{"partition_coef: "}{1-octanol/water partition coefficients, logP. 
+#'   In the physical sciences, a partition coefficient (P) or distribution 
+#'   coefficient (D) is the ratio of concentrations of a compound in a mixture
+#'   of two immiscible solvents at equilibrium (3). The partition coefficient 
+#'   measures how hydrophilic ("water-loving") or hydrophobic ("water-fearing")
+#'   a chemical substance is. Partition coefficients are useful in estimating 
+#'   the distribution of drugs within the body. Hydrophobic drugs with high 
+#'   octanol-water partition coefficients are mainly distributed to hydrophobic
+#'   areas such as lipid bilayers of cells. Conversely, hydrophilic drugs 
+#'   (low octanol/water partition coefficients) are found primarily in aqueous
+#'   regions such as blood serum. The partition coefficient values included
+#'   here were taken from reference (1), also available in Wolfram Alpha at
+#'   https://www.wolframalpha.com/  and in the cell phone App 'Wolfram Alpha'.
+#'   }  
+#'   \item{"dipole_moment: "}{Dipole-dipole, dipole-induced-dipole and London 
+#'   force interactions among the bases in the helix are large, and make the 
+#'   free energy of the helix depend on the base composition and sequence. The
+#'   dipole moment values were taken from reference (4). The dipole moment of 
+#'   DNA bases refers to the measure of polarity in the chemical bonds between
+#'   atoms within the nucleobases. Dipole moments arise due to differences in 
+#'   electronegativity between the bonded atoms. In DNA bases, these dipole 
+#'   moments can influence the orientation of the bases when interacting with
+#'   other molecules or surfaces, such as graphene/h-BN interfaces. The concept
+#'   of dipole moments has been applied to analyze the electric moments of 
+#'   RNA-binding proteins, which can help identify DNA-binding proteins and 
+#'   provide insights into their mechanisms and prediction.
+#'   }
+#'   \item{"tautomerization_energy: "}{The term “tautomerism” is usually 
+#'   defined as structural isomerism with a low barrier to interconversion
+#'   between the isomers, for example, the enol/imino forms for cytosine and
+#'   guanine. Tautomerization is a process where the chemical structure of a
+#'   molecule, such as DNA bases, undergoes a rearrangement of its atoms. This
+#'   rearrangement results in the formation of different isomers, called
+#'   tautomers, which can exist in solution or in a cell. The DNA bases can
+#'   undergo tautomeric shifts, which can potentially contribute to mutagenic
+#'   mispairings during DNA replication. The energy required for
+#'   tautomerization of DNA bases is known as tautomerization energy. These
+#'   values were taken from reference (2) and the value for each base
+#'   corresponds to the average of the values estimated from different
+#'   measurement approaches.
+#'   }
+#' }
+#' @references 
+#' 1. Wolfram Research (2007), ChemicalData, Wolfram Language function, 
+#' https://reference.wolfram.com/language/ref/ChemicalData.html (updated 2016).
+#' 2. Moser A, Range K, York DM. Accurate proton affinity and gas-phase 
+#' basicity values for molecules important in biocatalysis. J Phys Chem B. 
+#' 2010;114: 13911–13921. doi:10.1021/jp107450n.
+#' 3. Leo A, Hansch C, Elkins D. Partition coefficients and their uses. Chem
+#' Rev. 1971;71: 525–616. doi:10.1021/cr60274a001.
+#' 4. Vovusha H, Amorim RG, Scheicher RH, Sanyal B. Controlling the orientation
+#' of nucleobases by dipole moment interaction with graphene/h-BN interfaces. 
+#' RSC Adv. Royal Society of Chemistry; 2018;8: 6527–6531. 
+#' doi:10.1039/c7ra11664k.
+#' @usage 
+#' data("dna_phyche", package = "GenomAutomorphism")
+#' 
+#' @format A data frame object.
+#' @examples
+#' data("dna_phyche", package = "GenomAutomorphism")
+#' dna_phyche
+#' 
+#' ## Select DNA base tautomerization energy
+#' te <- as.list(dna_phyche$tautomerization_energy)
+#' names(te) <- rownames(dna_phyche)
+#' 
+#' ## Let's create DNAStringSet-class object
+#' base <- DNAStringSet(x = c( seq1 ='ACGTGATCAAGT',
+#'                             seq2 = 'GTGTGATCCAGT'))
+#' 
+#' dna_phychem(seqs = base, phychem = te,
+#'             index_name = "Tautomerization-Energy")
+#' 
+"dna_phyche"
+
+
+

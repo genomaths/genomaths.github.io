@@ -24,16 +24,21 @@
 #' matrix, also called a mutation matrix, is a set of 210 numerical values, 20
 #' diagonal and 20x19/2 off-diagonal elements, used for sequence alignments 
 #' and similarity searches.
-
-#' @examples 
-#' ## Load the mutation matrices from database from the packages
-#' data(aaindex2, package = "GenomAutomorphism")
 #' 
-#' ## Get the available mutation matrices
-#' mat <- aa_mutmat(aaindex = aaindex2, acc_list = TRUE)
-#' mat[1:10]
 #' @seealso \code{\link{aaindex2}} and \code{\link{aa_mutmat}}, and
 #' \code{\link{get_mutscore}}.
 #' @author Robersy Sanchez <https://genomaths.com>
-#' @format \code{\link{AutomorphismList}} class object.
+#' @format A list carrying the description of 94 Amino Acid Matrices in 
+#' AAindex ver.9.2 and the text file of matrices imported from
+#' \url{https://www.genome.jp/aaindex/}.
+#' @usage 
+#' data("aaindex2", package = "GenomAutomorphism")
+#' @examples 
+#' ## Load the mutation matrices from database from the packages
+#' data("aaindex2", package = "GenomAutomorphism")
+#' 
+#' ## Get the available matrices
+#' mat <- aa_mutmat(aaindex = "aaindex2", acc_list = TRUE)
+#' mat[1:10]
+#' 
 "aaindex2"

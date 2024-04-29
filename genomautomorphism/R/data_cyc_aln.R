@@ -18,6 +18,13 @@
 #' [Primate Somatic Cytochrome C](https://bit.ly/3kdEAzs) to be used in the
 #' examples provided for the package functions. The original file can be
 #' downloaded from GitHub at: <https://bit.ly/3kdEAzs>
-#'
-#' @format \code{\link[Biostrings]{DNAMultipleAlignment}} class object.
+#' @author Robersy Sanchez <https://genomaths.com>
+#' @seealso  [brca1_aln], [brca1_aln2], [covid_aln], and [covid_aln].
+#' @usage 
+#' data("cyc_aln", package = "GenomAutomorphism")
+#' @format [DNAMultipleAlignment] class object.
+#' @examples
+#' data("cyc_aln", package = "GenomAutomorphism")
+#' cyc_aln
+#' 
 "cyc_aln"

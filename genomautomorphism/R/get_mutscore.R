@@ -1,4 +1,4 @@
-## Copyright (C) 2022 Robersy Sanchez <https://genomaths.com/>
+## Copyright (C) 2022-2024 Robersy Sanchez <https://genomaths.com/>
 ## Author: Robersy Sanchez This file is part of the R package
 ## 'GenomAutomorphism'.  'GenomAutomorphism' is a free
 ## software: you can redistribute it and/or modify it under the
@@ -12,16 +12,25 @@
 ## General Public License along with this program; if not, see
 ## <http://www.gnu.org/licenses/>.
 
+## ======================== Mutation Score ==========================
+
 #' @rdname get_mutscore
-#' @title Get Mutation Score from an AAindex Matrix
+#' @title Get Mutation Score from an AAindex or a Mutation/Distance Matrix
 #' @description This function is applied to get the mutation or contact 
 #' potential scores representing the similarity/distance between amino acids
-#' corresponding to substitution mutations. The score are retrieve from a
+#' corresponding to substitution mutations. The scores are retrieved from a
 #' mutation matrix or a statistical protein contact potentials matrix from
 #' \href{https://www.genome.jp/aaindex/}{AAindex} (ver.9.2).
+#' 
+#' Alternatively, the mutation scores can be estimated based on an user 
+#' mutation matrix, for example, see [aminoacid_dist] and [codon_dist_matrix].
+#' 
 #' @param aa1,aa2 A simple character representing an amino acids or a 
 #' character string of letter from the amino acid alphabet or base-triplets
-#' from the DNA/RNA alphabet.
+#' from the DNA/RNA alphabet. If \strong{\emph{aa1}} is an object from any
+#' of the classes: [BaseSeq], \code{\link[Biostrings]{DNAStringSet}}, or
+#' \code{\link[Biostrings]{DNAMultipleAlignment}}, then argument 
+#' \strong{\emph{aa2}} is not required.
 #' @param acc Accession id for a specified mutation or contact potential 
 #' matrix.
 #' @param aaindex Database where the requested accession id is locate. The 
@@ -41,36 +50,44 @@
 #' 
 #' @details If a score matrix is provided by the user, then it must be a
 #' symmetric matrix 20x20.
-#' @seealso \code{\link{aa_mutmat}}, \code{\link{aaindex2}} and 
-#' \code{\link{aaindex3}}
+#' @seealso [aa_mutmat], [aaindex2] and [aaindex3].
 #' @author Robersy Sanchez <https://genomaths.com>
 #' @export
-#' @return A single numeric score or a numerical vector.
-#' @examples 
-#' ## Load the mutation matrices from database from the packages
-#' data("aaindex2", package = "GenomAutomorphism" )
+#' @return A single numeric score or a numerical vector, or if
+#' \strong{\emph{aa1}} is an object from any of the classes: [BaseSeq],
+#' \code{\link[Biostrings]{DNAStringSet}}, or
+#' \code{\link[Biostrings]{DNAMultipleAlignment}}, then depending on the 
+#' user selection the returned object will be:
 #' 
+#' 1. A lower diagonal numerical vector of the sequence pairwise scores.
+#' 2. A \code{\link[stats]{dist}}-class object.
+#' 3. A whole score matrix.
+#' 
+#' @examples 
 #' ## A single amino acids substitution mutation
-#' get_mutscore("A", "C", acc = "MIYS930101", aaindex = aaindex2)
+#' get_mutscore("A", "C", acc = "MIYS930101", aaindex = "aaindex2")
 #' 
 #' ## A tri-peptide mutation
 #' get_mutscore(aa1 = "ACG", aa2 = "ATG", acc = "MIYS930101",
-#'             aaindex = aaindex2, alphabet = "AA")
+#'             aaindex = "aaindex2", alphabet = "AA")
 #' 
 #' ## A single base-triple mutation, i.e., a single amino acid substitution 
 #' ## mutation
 #' get_mutscore(aa1 = "ACG", aa2 = "CTA", acc = "MIYS930101",
-#'             aaindex = aaindex2, alphabet = "DNA")
+#'             aaindex = "aaindex2", alphabet = "DNA")
 #' 
 #' ## Peptides can be also written as:
 #' get_mutscore(aa1 = c("A","C","G"), aa2 = c("C","T","A"), 
-#'             acc = "MIYS930101", aaindex = aaindex2, alphabet = "AA")
+#'             acc = "MIYS930101", aaindex = "aaindex2", alphabet = "AA")
 
 setGeneric("get_mutscore",
     function(
         aa1, 
         aa2, 
         ...) standardGeneric("get_mutscore"))
+
+
+## =============== Characters =====================
 
 #' @aliases get_mutscore
 #' @rdname get_mutscore
@@ -137,7 +154,7 @@ setMethod("get_mutscore", signature(aa1 = "character", aa2 = "character"),
                         " matrix must be provides")
                 if (is.null(aaindex))
                     stop("The name of amino acid index database",
-                        " matrix must be provides")
+                        " matrix must be provided")
                 mutmat <- aa_mutmat(acc = acc, aaindex = aaindex)
                 return(mutmat[ match(aa1, aa), match(aa2, aa) ])
             }
@@ -211,3 +228,196 @@ setMethod("get_mutscore", signature(aa1 = "character", aa2 = "character"),
         }
     }
 )
+
+## =============== BaseSeq =====================
+
+#' @aliases get_mutscore
+#' @rdname get_mutscore
+#' @importFrom doParallel registerDoParallel
+#' @importFrom parallel makeCluster 
+#' @param stat Statistic that will be used to summarize the scores of the 
+#' DNA sequences provided. Only if \strong{\emph{aa1}} is an object from any of
+#' the classes: [BaseSeq], \code{\link[Biostrings]{DNAStringSet}}, or
+#' \code{\link[Biostrings]{DNAMultipleAlignment}}.
+#' @param numcores An integer to setup the number of parallel workers via 
+#' \code{\link[parallel]{makeCluster}}.
+#' @param num.cores,tasks Parameters for parallel computation using package
+#' \code{\link[BiocParallel]{BiocParallel-package}}: the number of cores to
+#' use, i.e. at most how many child processes will be run simultaneously (see
+#' \code{\link[BiocParallel]{bplapply}} and the number of tasks per job (only
+#' for Linux OS).
+#' @param output Optional. Class of the returned object. Only if 
+#' \strong{\emph{aa1}} is an object from any of the classes: [BaseSeq],
+#' \code{\link[Biostrings]{DNAStringSet}}, or
+#' \code{\link[Biostrings]{DNAMultipleAlignment}}.
+#' @param na.rm a logical evaluating to TRUE or FALSE indicating whether NA 
+#' values should be stripped before the computation proceeds.
+#' @param verbose Optional. Only if num.cores > 1. If TRUE, prints the 
+#' function log to stdout.
+#' @importFrom BiocParallel MulticoreParam bplapply SnowParam
+#' @importFrom stats as.dist
+#' @import foreach
+#' @export
+setMethod("get_mutscore", signature(aa1 = "BaseSeq", aa2 = "missing"),
+    function(
+            aa1, 
+            aa2,
+            acc = NULL,
+            aaindex = NULL,
+            mutmat = NULL,
+            alphabet = c("AA", "DNA"),
+            stat = mean,
+            numcores = 1L,
+            num.cores = 1L,
+            tasks = 0L,
+            output = c("dist", "matrix", "vector"),
+            na.rm = TRUE,
+            verbose = TRUE,
+            ...) {
+        
+        alphabet <- match.arg(alphabet)
+        output <- match.arg(output)
+        
+        x <- mcols(aa1)
+        n <- ncol(x)
+        aaindex2 <- NULL
+        data("aaindex2", package = "GenomAutomorphism",
+            envir = environment())
+        
+        if (numcores > 1) {
+            ## ---------------- Setting parallel computation ------------ ##
+            if (Sys.info()["sysname"] == "Linux") 
+                cl <- makeCluster(num.cores, type = "FORK")
+            else
+                cl <- makeCluster(num.cores, type = "SOCK")
+            
+            registerDoParallel(cl)
+            ## ---------------------------------------------------------- ##
+        
+            k <- j <- NULL
+            y <- foreach(k = seq(n - 1), .combine = "c")  %:% 
+                    foreach(j = seq((k + 1), n), .combine = "c") %dopar% {
+                        sum(get_mutscore(
+                                    aa1 = paste(x[, k], collapse = ""), 
+                                    aa2 = paste(x[, j], collapse = ""),
+                                    acc = acc, 
+                                    aaindex = aaindex2, 
+                                    mutmat = mutmat,
+                                    alphabet = alphabet))
+                    }
+            stopCluster(cl)
+        }
+        else {
+            y <- foreach(k = seq(n - 1), .combine = "c")  %:% 
+                    foreach(j = seq((k + 1), n), .combine = "c") %do% {
+                        stat(get_mutscore(
+                                    aa1 = paste(x[, k], collapse = ""), 
+                                    aa2 = paste(x[, j], collapse = ""),
+                                    acc = acc, 
+                                    aaindex = aaindex2,
+                                    mutmat = mutmat,
+                                    alphabet = alphabet, 
+                                    num.cores = num.cores,
+                                    tasks = tasks,
+                                    verbose = verbose),
+                            na.rm = na.rm)
+                    }
+        }
+        
+        if (output == "dist" || output == "matrix") {
+            m <- matrix(0, nrow = n, ncol = n)
+            m[ lower.tri(m, diag = FALSE) ] <- y
+        }
+        
+        if (output == "dist")
+            m <- as.dist(m)
+        else
+            m <- y
+        
+        return(m)
+    }
+)
+
+
+## =============== DNAStringSet =====================
+
+#' @aliases get_mutscore
+#' @rdname get_mutscore
+#' @export
+setMethod("get_mutscore", signature(aa1 = "DNAStringSet", aa2 = "missing"),
+    function(
+        aa1, 
+        aa2,
+        acc = NULL,
+        aaindex = NULL,
+        mutmat = NULL,
+        alphabet = c("AA", "DNA"),
+        stat = mean,
+        num.cores = 1L,
+        tasks = 0L,
+        verbose = TRUE,
+        output = c("dist", "matrix", "vector"),
+        na.rm = TRUE,
+        ...) {
+        
+        aa1 <- seq2granges(aa1)
+        get_mutscore(
+            aa1 = aa1, 
+            acc = acc,
+            aaindex = aaindex,
+            mutmat = mutmat,
+            alphabet = alphabet,
+            stat = stat,
+            num.cores = num.cores,
+            tasks = tasks,
+            verbose = FALSE,
+            output = output,
+            na.rm = na.rm,
+            ...
+        )
+    }
+)
+
+## =============== DNAMultipleAlignment =====================
+
+#' @aliases get_mutscore
+#' @rdname get_mutscore
+#' @export
+setMethod("get_mutscore", signature(aa1 = "DNAMultipleAlignment", 
+                                    aa2 = "missing"),
+    function(
+        aa1, 
+        aa2,
+        acc = NULL,
+        aaindex = NULL,
+        mutmat = NULL,
+        alphabet = c("AA", "DNA"),
+        stat = mean,
+        num.cores = 1L,
+        tasks = 0L,
+        verbose = TRUE,
+        output = c("dist", "matrix", "vector"),
+        na.rm = TRUE,
+        ...) {
+        
+        aa1 <- aa1@unmasked
+        get_mutscore(
+            aa1 = aa1, 
+            acc = acc,
+            aaindex = aaindex,
+            mutmat = mutmat,
+            alphabet = alphabet,
+            stat = stat,
+            num.cores = num.cores,
+            tasks = tasks,
+            verbose = FALSE,
+            output = output,
+            na.rm = na.rm,
+            ...
+        )
+    }
+)
+
+
+
+

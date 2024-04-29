@@ -38,7 +38,7 @@
 #' base2codon(x = seq)
 #'
 #' ## Load a DNAStringSet. A matrix of codons is returned
-#' data(aln, package = "GenomAutomorphism")
+#' data("aln", package = "GenomAutomorphism")
 #' base2codon(x = aln)
 #'
 #' @aliases base2codon

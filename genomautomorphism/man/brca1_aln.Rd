@@ -8,12 +8,20 @@
 \code{\link[Biostrings]{DNAMultipleAlignment}} class object.
 }
 \usage{
-brca1_aln
+data("brca1_aln", package = "GenomAutomorphism")
 }
 \description{
 This is a \code{\link[Biostrings]{DNAMultipleAlignment}} carrying a MSA of
 \href{https://bit.ly/3DimROD}{BRCA1 DNA repair genes} to be used in the
 examples provided for the package functions. The original file can be
 downloaded from GitHub at: \url{https://bit.ly/3DimROD}
+}
+\examples{
+data("brca1_aln", package = "GenomAutomorphism")
+brca1_aln
+
+}
+\seealso{
+\link{brca1_aln2}, \link{brca1_autm}, and \link{covid_aln}.
 }
 \keyword{datasets}

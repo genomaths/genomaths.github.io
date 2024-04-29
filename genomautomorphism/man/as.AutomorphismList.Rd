@@ -33,7 +33,7 @@ objects.
 data("brca1_autm", package = "GenomAutomorphism")
 
 ## Let's transforming into a list of Automorphisms-class objects
-x1 <- as.list(brca1_autm[1:2])
+x1 <- as.list(brca1_autm[seq(2)])
 
 ## Now, object 'x1' is transformed into a AutomorphismList-class object
 as.AutomorphismList(x1)

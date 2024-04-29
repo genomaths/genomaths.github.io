@@ -5,15 +5,26 @@
 \alias{brca1_autm}
 \title{Automorphisms between DNA Sequences from Primate BRCA1 Genes}
 \format{
-\code{\link{AutomorphismList}} class object.
+\link{AutomorphismList} class object.
 }
 \usage{
-brca1_autm
+data("brca1_autm", package = "GenomAutomorphism")
 }
 \description{
-This is a \code{\link{AutomorphismList}} object carrying a list of pairwise
+This is a \link{AutomorphismList} object carrying a list of pairwise
 automorphisms between the DNA sequences from the MSA of primate BRCA1
 DNA repair gene. The automorphisms were estimated from the
-\code{\link{brca1_aln}} MSA with function \code{\link{autZ64}}.
+\link{brca1_aln} MSA with function \link{autZ64}.
+}
+\examples{
+data("brca1_autm", package = "GenomAutomorphism")
+brca1_autm
+
+}
+\seealso{
+\link{brca1_autm2}, \link{brca1_aln}, \link{brca1_aln2}, and \link{covid_autm}.
+}
+\author{
+Robersy Sanchez \url{https://genomaths.com}
 }
 \keyword{datasets}

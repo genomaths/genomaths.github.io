@@ -1,6 +1,5 @@
 #' @rdname GenomAutomorphism
 #' @name GenomAutomorphism
-#' @docType package
 #' @title GenomAutomorphism: An R package to compute the automorphisms between
 #' DNA sequences represented as elements from an Abelian group.
 #' @description This is a R package to compute the automorphisms between
@@ -12,6 +11,8 @@
 #' the representation of multiple sequence alignments (MSA) of length \eqn{N}
 #' as a finite Abelian group created by the direct sum of homocyclic Abelian
 #' group of \emph{prime-power order}.
+#' @keywords internal 
+"_PACKAGE"
 #' @references
 #' \enumerate{
 #' \item Robersy Sanchez, Jesus Barreto (2021) Genomic Abelian Finite

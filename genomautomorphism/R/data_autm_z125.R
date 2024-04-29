@@ -1,4 +1,4 @@
-## Copyright (C) 2021 Robersy Sanchez <https://genomaths.com/>
+## Copyright (C) 2021-2024 Robersy Sanchez <https://genomaths.com/>
 ## Author: Robersy Sanchez This file is part of the R package
 ## 'GenomAutomorphism'.  'GenomAutomorphism' is a free
 ## software: you can redistribute it and/or modify it under the
@@ -14,13 +14,19 @@
 
 #' Automorphisms between DNA Sequences from two COVID-19 genomes
 #'
-#' This is a \code{\link{AutomorphismList}} object carrying a list of pairwise
+#' This is a [AutomorphismList] object carrying a list of pairwise
 #' automorphisms between the SARS coronavirus GZ02 (GenBank: AY390556.1:
 #' 265-13398_13398-21485) and Bat SARS-like coronavirus isolate bat-SL-CoVZC45
 #' (GenBank: MG772933.1:265-1345513455-21542), nonstructural_polyprotein. The
 #' pairwise DNA sequence alignment is available in the dataset named
-#' \code{\link{covid_aln}} and the automorphisms were estimated with function
-#' \code{\link{autZ125}}.
+#' [covid_aln] and the automorphisms were estimated with function
+#' [autZ125].
 #'
-#' @format \code{\link{AutomorphismList}} class object.
+#' @format [AutomorphismList] class object.
+#' @usage 
+#' data("autm_z125", package = "GenomAutomorphism")
+#' @examples
+#' data("autm_z125", package = "GenomAutomorphism")
+#' autm_z125
+#' 
 "autm_z125"

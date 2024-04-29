@@ -14,11 +14,21 @@
 
 #' Automorphisms between DNA Primate BRCA1 Genes Grouped by Coefficients
 #'
-#' This is a \code{\link{AutomorphismList}} object carrying a list of pairwise
+#' This is a [AutomorphismList] object carrying a list of pairwise
 #' automorphisms between the DNA sequences from the MSA of primate somatic
 #' cytochrome C grouped by automorphism's coefficients. The grouping derives
-#' from the dataset \code{\link{brca1_autm}} after applying function
-#' \code{\link{automorphism_bycoef}}.
+#' from the dataset [brca1_autm] after applying function
+#' [automorphism_bycoef].
 #'
-#' @format \code{\link{AutomorphismByCoefList}} class object.
+#' @format [AutomorphismByCoefList] class object.
+#' @usage 
+#' data("autby_coef", package = "GenomAutomorphism")
+#' @examples
+#' ## Load the data set
+#' data("autby_coef", package = "GenomAutomorphism")
+#' autby_coef
+#' 
+#' ## Mutation type found in the data
+#' unique(autby_coef$human_1.human_2$mut_type)
+#' 
 "autby_coef"

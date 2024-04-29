@@ -18,6 +18,13 @@
 #' [BRCA1 DNA repair genes](https://bit.ly/3DimROD) to be used in the
 #' examples provided for the package functions. The original file can be
 #' downloaded from GitHub at: <https://bit.ly/3DimROD>
+#' @usage 
+#' data("brca1_aln", package = "GenomAutomorphism")
 #'
 #' @format \code{\link[Biostrings]{DNAMultipleAlignment}} class object.
+#' @seealso [brca1_aln2], [brca1_autm], and [covid_aln].
+#' @examples
+#' data("brca1_aln", package = "GenomAutomorphism")
+#' brca1_aln
+#' 
 "brca1_aln"

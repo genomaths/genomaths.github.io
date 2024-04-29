@@ -8,7 +8,7 @@
 \code{\link[Biostrings]{DNAMultipleAlignment}} class object.
 }
 \usage{
-brca1_aln2
+data("brca1_aln2", package = "GenomAutomorphism")
 }
 \description{
 This is a \code{\link[Biostrings]{DNAMultipleAlignment}} carrying a MSA of
@@ -19,5 +19,16 @@ downloaded from GitHub at: \url{https://bit.ly/3DimROD}. This data set has
 'brca1_aln' data set plus 21 single mutation variants (SMV) from the human
 sequence NM_007298 transcript variant 4. The location of each SMV is given
 in the heading from each sequence.
+}
+\examples{
+data("brca1_aln2", package = "GenomAutomorphism")
+brca1_aln2
+
+}
+\seealso{
+\link{brca1_aln}, \link{brca1_autm2}, \link{cyc_aln}, and \link{covid_autm}.
+}
+\author{
+Robersy Sanchez \url{https://genomaths.com}
 }
 \keyword{datasets}

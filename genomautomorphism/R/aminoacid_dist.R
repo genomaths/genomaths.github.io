@@ -63,7 +63,7 @@
 #' @references
 #' \enumerate{
 #'  \item Sanchez R. Evolutionary Analysis of DNA-Protein-Coding Regions Based
-#'  on a Genetic Code Cube Metric. Curr Top Med Chem. 2014;14: 407–417. 
+#'  on a Genetic Code Cube Metric. Curr. Top. Med. Chem. 2014;14: 407–417. 
 #'  \url{https://doi.org/10.2174/1568026613666131204110022}.
 #'  \item M. V Jose, E.R. Morgado, R. Sanchez, T. Govezensky, The 24 possible
 #'  algebraic representations of the standard genetic code in six or in three
@@ -98,6 +98,9 @@ setGeneric(
     }
 )
 
+## =============== Characters =====================
+
+
 #' @rdname aminoacid_dist
 #' @aliases aminoacid_dist
 #' @import S4Vectors
@@ -126,7 +129,7 @@ setMethod(
         stat <- match.arg(stat)
         
         if (genetic_code == "1" && group == "Z4") {
-            data(cdm_z64, package = "GenomAutomorphism", 
+            data("cdm_z64", package = "GenomAutomorphism", 
                 envir = environment(), overwrite = TRUE)
             cdm <- cdm_z64[[ cube ]]
         }
@@ -252,6 +255,8 @@ setMethod(
     }
 )
 
+## =============== DNAStringSet =====================
+
 #' @rdname aminoacid_dist
 #' @aliases aminoacid_dist
 #' @import S4Vectors
@@ -288,6 +293,9 @@ setMethod(
 )
 
 
+## =============== AAStringSet =====================
+
+
 #' @rdname aminoacid_dist
 #' @aliases aminoacid_dist
 #' @import S4Vectors
@@ -321,6 +329,9 @@ setMethod(
         return(aa1)
     }
 )
+
+
+## =============== CodonGroup_OR_Automorphisms =====================
 
 #' @rdname aminoacid_dist
 #' @aliases aminoacid_dist

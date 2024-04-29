@@ -5,10 +5,12 @@
 \alias{aaindex2}
 \title{List of 94 Amino Acid Matrices from AAindex}
 \format{
-\code{\link{AutomorphismList}} class object.
+A list carrying the description of 94 Amino Acid Matrices in
+AAindex ver.9.2 and the text file of matrices imported from
+\url{https://www.genome.jp/aaindex/}.
 }
 \usage{
-aaindex2
+data("aaindex2", package = "GenomAutomorphism")
 }
 \description{
 The aminoacid similarity matrices from Amino Acid Index Database
@@ -25,11 +27,12 @@ and similarity searches.
 }
 \examples{
 ## Load the mutation matrices from database from the packages
-data(aaindex2, package = "GenomAutomorphism")
+data("aaindex2", package = "GenomAutomorphism")
 
-## Get the available mutation matrices
-mat <- aa_mutmat(aaindex = aaindex2, acc_list = TRUE)
+## Get the available matrices
+mat <- aa_mutmat(aaindex = "aaindex2", acc_list = TRUE)
 mat[1:10]
+
 }
 \seealso{
 \code{\link{aaindex2}} and \code{\link{aa_mutmat}}, and

@@ -140,7 +140,7 @@ aminoacid_dist(aa1 = aa, group = "Z5", cube = "TCGA")
 \references{
 \enumerate{
 \item Sanchez R. Evolutionary Analysis of DNA-Protein-Coding Regions Based
-on a Genetic Code Cube Metric. Curr Top Med Chem. 2014;14: 407–417.
+on a Genetic Code Cube Metric. Curr. Top. Med. Chem. 2014;14: 407–417.
 \url{https://doi.org/10.2174/1568026613666131204110022}.
 \item M. V Jose, E.R. Morgado, R. Sanchez, T. Govezensky, The 24 possible
 algebraic representations of the standard genetic code in six or in three

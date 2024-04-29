@@ -31,7 +31,7 @@
 #' @export
 #' @examples
 #' ## Load dataset
-#' data(autm, package = "GenomAutomorphism")
+#' data("autm", package = "GenomAutomorphism")
 #'
 #' automorphismByRanges(x = autm[c(1, 4)])
 #'
@@ -110,15 +110,14 @@ setMethod(
 #' @param verbose logic(1). If TRUE, enable progress bar.
 #' @import GenomicRanges
 #' @import S4Vectors
-#' @importFrom parallel detectCores
-#' @importFrom BiocParallel MulticoreParam bplapply SnowParam
+#' @importFrom BiocParallel MulticoreParam bplapply SnowParam multicoreWorkers
 #' @importFrom data.table data.table
 #' @export
 setMethod(
     "automorphismByRanges", signature(x = "AutomorphismList"),
     function(x,
     min.len = 0L,
-    num.cores = detectCores() - 1,
+    num.cores = multicoreWorkers(),
     tasks = 0L,
     verbose = TRUE) {
         gr <- try(x@SeqRanges, silent = TRUE)

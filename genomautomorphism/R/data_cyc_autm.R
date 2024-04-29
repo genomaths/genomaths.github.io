@@ -20,6 +20,17 @@
 #' examples provided for the package functions. The automorphisms were
 #' estimated from the \code{\link{cyc_aln}} MSA with function
 #' \code{\link{autZ64}}.
-#'
+#' @usage 
+#' data("cyc_autm", package = "GenomAutomorphism")
+#' 
+#' @author Robersy Sanchez <https://genomaths.com>
+#' 
+#' @seealso  [brca1_autm], [brca1_autm2], [covid_autm], and [covid_aln].
+#' 
 #' @format \code{\link{AutomorphismList}} class object.
+#' 
+#' @examples
+#' data("cyc_autm", package = "GenomAutomorphism")
+#' cyc_autm
+#' 
 "cyc_autm"

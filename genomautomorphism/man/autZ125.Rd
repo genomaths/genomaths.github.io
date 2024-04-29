@@ -15,7 +15,7 @@ autZ125(
   chr = 1L,
   strand = "+",
   genetic_code = getGeneticCode("1"),
-  num.cores = detectCores() - 1,
+  num.cores = multicoreWorkers() - 1,
   tasks = 0L,
   verbose = TRUE
 )
@@ -72,7 +72,7 @@ integers modulo 64. As noticed in reference (1)
 }
 \examples{
 ## Load a pairwise alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 aln
 
 ## Automorphism on Z125

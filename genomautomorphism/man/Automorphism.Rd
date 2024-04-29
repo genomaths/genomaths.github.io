@@ -28,8 +28,8 @@ However, the transformation starting from a \code{\link[base]{data.frame}}
 or a \code{\link[S4Vectors]{DataFrame-class}} object \eqn{"x"} requires for
 the creation of an additional \code{\link[GenomicRanges]{GRanges-class}}
 object, which by default will have the argument seqnames = "1", strand =
-"+", start/end = 1:nrow(x), length = nrow(x). These details must be keep in
-mind to prevent fundamental errors in the downstream analyses.
+"+", start/end = seq(row(x)), length = nrow(x). These details must be keep
+in mind to prevent fundamental errors in the downstream analyses.
 }
 \section{Automorphism-class methods}{
 

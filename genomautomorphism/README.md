@@ -5,7 +5,7 @@
 Robersy Sanchez  
 Department of Biology. Eberly College of Science.  
 Pennsylvania State University, University Park, PA 16802  
-<rus547@psu.edu>  
+<genomicmath@gmail.com>  
 [ORCID:
 orcid.org/0000-0002-5246-1453](https://orcid.org/0000-0002-5246-1453)
 
@@ -36,7 +36,7 @@ For the purpose of automorphism between two aligned DNA sequences,
 
 ## Status
 
-This application is currently available in Bioconductor (version 3.16) 
+This application is currently available in Bioconductor (version 3.18) 
 <https://doi.org/doi:10.18129/B9.bioc.GenomAutomorphism>.
 Watch this repo or check for updates.
 

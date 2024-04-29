@@ -36,7 +36,7 @@ generated with functions: \code{\link{base_coord}} and
 
 \item{...}{Not in use.}
 
-\item{output}{See \href{@return}{Value} section.}
+\item{output}{See 'Value' section.}
 
 \item{base_seq}{Logical. Whether to return the base or codon coordinates on
 the selected Abelian group. If codon coordinates are requested, then the
@@ -90,7 +90,7 @@ to preserve the base/codon sequence information.
 }
 \examples{
 ## Load a pairwise alignment
-data(aln, package = "GenomAutomorphism")
+data("aln", package = "GenomAutomorphism")
 aln
 
 ## DNA base representation in the Abelian group Z5

@@ -4,7 +4,7 @@
 \alias{base_repl}
 \title{Replace bases with integers}
 \usage{
-base_repl(base, cube, group)
+base_repl(base, cube, group, phychem)
 }
 \value{
 A numerical vector.

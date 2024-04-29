@@ -1,6 +1,6 @@
 # ========================================================================= #
 #
-# ======== Script used to generate the datasets used in the examples ====== #
+# ======== Script used to generate the datasets used in the examples ====== 
 #
 # ========================================================================= #
 library(GenomAutomorphism)
@@ -15,6 +15,8 @@ aln <- c(
 aln <- DNAStringSet(aln)
 
 usethis::use_data(aln)
+
+### ===================== Cytochrome C ======================
 
 URL <- paste0(
     "https://github.com/genomaths/seqalignments/raw/master/CYCS/",
@@ -45,6 +47,7 @@ cyc_autm <- automorphisms(
 
 usethis::use_data(cyc_autm, overwrite = TRUE)
 
+### ===================== Primates BRCA1 ======================
 
 URL <- paste0(
     "https://github.com/genomaths/seqalignments/raw/master/BRCA1/",
@@ -78,11 +81,12 @@ autby_coef
 usethis::use_data(autby_coef, overwrite = TRUE, compress = "xz")
 
 
-nams <- c(paste0("human_1.", 0:21),"human_2","gorilla_1","gorilla_2","gorilla_3",
-          "chimpanzee_1","chimpanzee_2","chimpanzee_3","chimpanzee_4",
-          "bonobos_1","bonobos_2","bonobos_3","bonobos_4","silvery_gibbon_1",
-          "silvery_gibbon_1","silvery_gibbon_3","golden_monkey_1",
-          "golden_monkey_2","gelada_baboon","bolivian_monkey")
+nams <- c(paste0("human_1.", 0:21),"human_2","gorilla_1","gorilla_2",
+        "gorilla_3", "chimpanzee_1","chimpanzee_2","chimpanzee_3",
+        "chimpanzee_4", "bonobos_1","bonobos_2","bonobos_3","bonobos_4",
+        "silvery_gibbon_1", "silvery_gibbon_1","silvery_gibbon_3",
+        "golden_monkey_1", "golden_monkey_2","gelada_baboon",
+        "bolivian_monkey")
 
 URL <- paste0("https://github.com/genomaths/seqalignments/raw/master/BRCA1/",
               "brca1_primates_dna_repair_41_sequences.fasta")
@@ -98,6 +102,7 @@ brca1_autm2 <- automorphisms(
 )
 usethis::use_data(brca1_autm2, brca1_aln2, overwrite = TRUE, compress = "xz")
 
+### ===================== COVID-19 ======================
 
 
 URL <- paste0(
@@ -158,8 +163,101 @@ autm_3d <- automorphisms(
 autm_3d
 usethis::use_data(autm_3d, overwrite = TRUE)
 
+## ============================================================== ###
+## ======================== AAindex ======================= 
+## ============================================================== ###
 
-## Codon distance matrices for the standard genetic code on Z4
+aaindex1 <- readLines(
+    "https://www.genome.jp/ftp/db/community/aaindex/aaindex1")
+aaindex1_acc <- readLines(
+    "https://www.genome.jp/aaindex/AAindex/list_of_indices")
+
+aaindex1 <- list(acc_num = aaindex1_acc, aaindex = aaindex1)
+usethis::use_data(aaindex1, overwrite = TRUE, compress = "xz")
+
+
+aaindex2 <- readLines(
+    "https://www.genome.jp/ftp/db/community/aaindex/aaindex2")
+aaindex2_acc <- readLines(
+    "https://www.genome.jp/aaindex/AAindex/list_of_matrices")
+
+aaindex2 <- list(acc_num = aaindex2_acc, aaindex = aaindex2)
+
+aaindex3 <- readLines(
+    "https://www.genome.jp/ftp/db/community/aaindex/aaindex3")
+aaindex3_acc <- readLines(
+    "https://www.genome.jp/aaindex/AAindex/list_of_potentials")
+
+aaindex3 <- list(acc_num = aaindex3_acc, aaindex = aaindex3)
+
+usethis::use_data(aaindex2, aaindex3, overwrite = TRUE, compress = "xz")
+
+## ============================================================== ###
+## ======================== DNA Base PhyChe ======================= 
+## ============================================================== ###
+
+dna_phyche <- data.frame(
+    proton_affinity = c(942.8, 949.9, 959.5, 880.9), 
+    partition_coef = c(-0.3, -1.1, -0.9, -0.7),
+    dipole_moment = c(2.51, 5.58, 6.65, 4.37),
+    tautomerization_energy = c(12.68, 2.47, 0.76, 12.26),
+    row.names = c("A", "C", "G", "T"))
+
+usethis::use_data(dna_phyche, overwrite = TRUE, compress = "xz")
+
+
+## ============================================================== ###
+## ================= Codon Distance Matrix ============ 
+## ============================================================== ###
+
+library(foreach)
+library(GenomAutomorphism)
+library(Biostrings)
+
+library(doParallel)
+library(parallel)
+
+
+gc <- getGeneticCode(id_or_name2 = "1", full.search = FALSE, 
+                as.data.frame = FALSE)
+nms <- names(gc)
+
+## ------------ Setting up parallel computation ------------ #
+
+num.cores <- 20
+cl <- makeCluster(num.cores, type = "FORK")
+registerDoParallel(cl)
+
+start.time <- Sys.time()
+distm <- foreach(k = seq_len(63)) %dopar% {
+    d <- as.vector(outer(nms[k], nms[seq((k + 1), 64, 1)], FUN = codon_dist))
+    names(d) <- nms[seq((k + 1), 64, 1)]
+    d
+}
+end.time <- Sys.time()
+end.time - start.time
+stopCluster(cl)
+
+names(distm) <- nms[ seq(63)]
+distm <- unlist(distm)
+
+aa1 <- "L"
+aa2 <- "F"
+
+a1 <- grep(aa1, gc)
+a2 <- grep(aa2, gc)
+
+cd1.cd2 <- c(as.vector(outer(nms[a1], nms[a2], FUN = paste, sep = ".")),
+             as.vector(outer(nms[a2], nms[a1], FUN = paste, sep = ".")))
+
+mean(distm[ na.omit(match(cd1.cd2, names(distm))) ])
+
+
+
+## ============================================================== ###
+## ===== Codon Distance Matrices Z4 ==== 
+## ============================================================== ###
+
 cube = c("ACGT", "AGCT", "TCGA", "TGCA", "CATG", 
          "GTAC", "CTAG", "GATC", "ACTG", "ATCG", 
          "GTCA", "GCTA", "CAGT", "TAGC", "TGAC", 
