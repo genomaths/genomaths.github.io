@@ -20,7 +20,7 @@ of GRanges objects"><meta property="og:image" content="https://genomaths.github.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -191,10 +191,10 @@ counts of methylated and unmethylated cytosines, respectively.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/makeGRangesFromDataFrame.html" class="external-link">makeGRangesFromDataFrame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, strand <span class="op">=</span> <span class="st">'*'</span>,</span></span>
 <span class="r-in"><span>mC <span class="op">=</span> <span class="fl">1</span>, uC <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/makeGRangesFromDataFrame.html" class="external-link">makeGRangesFromDataFrame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>chr <span class="op">=</span> <span class="st">'chr1'</span>, start <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, end <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">15</span>,</span></span>
 <span class="r-in"><span>strand <span class="op">=</span> <span class="st">'*'</span>, mC <span class="op">=</span> <span class="fl">1</span>, uC <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, keep.extra.columns <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>

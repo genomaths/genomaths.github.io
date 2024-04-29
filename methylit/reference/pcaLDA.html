@@ -22,7 +22,7 @@ Predict using a PCA-LDA model built with function 'pcaLDA'"><meta property="og:i
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -160,8 +160,8 @@ package 'prcomp'.</p></dd>
 
 
 <dt>columns</dt>
-<dd><p>Optional. Only used if 'data' belong to the "pDMP" or "InfDiv"
-class. Default is 9L.</p></dd>
+<dd><p>Optional. Only used if 'data' belong to the "pDMP" or
+"InfDiv" class. Default is 9L.</p></dd>
 
 
 <dt>...</dt>
@@ -201,10 +201,10 @@ with two objects:</p><ol><li><p>'lda': an object of class <code><a href="https:/
     <div id="details">
     <h2>Details</h2>
     <p>The principal components (PCs) are obtained using the function
-'prcomp' from R package 'stats', while the LDA is performed using the
-'lda' function from R package 'MASS'. The current application only uses
-basic functionalities of mentioned functions. As shown in the example,
-pcaLDA' function can be used in general classification problems.</p>
+'prcomp' from R package 'stats', while the LDA is performed using the 'lda'
+function from R package 'MASS'. The current application only uses basic
+functionalities of mentioned functions. As shown in the example, pcaLDA'
+function can be used in general classification problems.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -230,7 +230,7 @@ pcaLDA' function can be used in general classification problems.</p>
 <span class="r-in"><span><span class="co">## ==== The confusion matrix</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>TRUE.class <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>PRED.class <span class="op">=</span> <span class="va">newdata.prediction</span><span class="op">$</span><span class="va">class</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             PRED.class</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> TRUE.class   setosa versicolor virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   setosa         12          0         0</span>

@@ -29,7 +29,7 @@ and \(delta = 1\) (notice that parameter are named different in reference
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -133,6 +133,7 @@ and \(delta = 1\) (notice that parameter are named different in reference
 <span>  T.abs <span class="op">=</span> <span class="fl">310.15</span>,</span>
 <span>  <span class="va">pars</span>,</span>
 <span>  log.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  kj <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  terms <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -142,6 +143,7 @@ and \(delta = 1\) (notice that parameter are named different in reference
 <span>  R <span class="op">=</span> <span class="fl">8.31446261815324</span>,</span>
 <span>  T.abs <span class="op">=</span> <span class="fl">310.15</span>,</span>
 <span>  log.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  kj <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  terms <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -151,6 +153,7 @@ and \(delta = 1\) (notice that parameter are named different in reference
 <span>  R <span class="op">=</span> <span class="fl">8.31446261815324</span>,</span>
 <span>  T.abs <span class="op">=</span> <span class="fl">310.15</span>,</span>
 <span>  log.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  kj <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  terms <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -160,6 +163,7 @@ and \(delta = 1\) (notice that parameter are named different in reference
 <span>  R <span class="op">=</span> <span class="fl">8.31446261815324</span>,</span>
 <span>  T.abs <span class="op">=</span> <span class="fl">310.15</span>,</span>
 <span>  log.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  kj <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  terms <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -193,6 +197,10 @@ values in the given in order: <strong><em>alpha, scale</em></strong>, and
 <dt>log.base</dt>
 <dd><p>A positive number. The same as in function
 <code><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></code>.</p></dd>
+
+
+<dt>kj</dt>
+<dd><p>Logical. Whether to return the result in KJ * mol^-1.</p></dd>
 
 
 <dt>terms</dt>
@@ -231,7 +239,7 @@ of information theory.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Loading the probability distribution models</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">gof</span>, <span class="st">"MethylIT"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘MethylIT’ not found</span>
-<span class="r-in"><span><span class="co">## Gibb entropy at 310.15 K (Kelvin) in J * mol^-1</span></span></span>
+<span class="r-in"><span><span class="co">## Helmholtz free energy at 310.15 K (Kelvin) in J * mol^-1</span></span></span>
 <span class="r-in"><span><span class="fu">helmholtz_free_energy</span> <span class="op">(</span><span class="va">gof</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        C1        C2        C3        T1        T2        T3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -10162.67 -10103.27 -10131.46 -11493.86 -11523.32 -11641.73 </span>

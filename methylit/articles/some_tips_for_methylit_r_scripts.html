@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -136,7 +136,7 @@ Department of Biology and Plant Science.<br>
 Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div></h4>
             
-            <h4 data-toc-skip class="date">08 February 2023</h4>
+            <h4 data-toc-skip class="date">15 January 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/some_tips_for_methylit_r_scripts.Rmd" class="external-link"><code>vignettes/some_tips_for_methylit_r_scripts.Rmd</code></a></small>
       <div class="hidden name"><code>some_tips_for_methylit_r_scripts.Rmd</code></div>
@@ -235,17 +235,17 @@ each cytosine site carries the information of its corresponding
 methylation context: CG, CHG, or CHH. Users familiar with Linux OS can
 easily check which is the number of each required column by using Linux
 command line ‘head’ function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> BS-10.CX_report.txt</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       1       +       0       0       CHH     CCC</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       2       +       0       0       CHH     CCT</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       3       +       0       0       CHH     CTA</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       8       +       0       0       CHH     CCC</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       9       +       0       0       CHH     CCT</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       10      +       0       0       CHH     CTA</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       15      +       0       0       CHH     CCC</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       16      +       0       0       CHH     CCT</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       17      +       0       0       CHH     CTA</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       22      +       0       0       CHH     CCC</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">head</span> BS-10.CX_report.txt</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">1</span>       1       +       0       0       CHH     CCC</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ex">1</span>       2       +       0       0       CHH     CCT</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="ex">1</span>       3       +       0       0       CHH     CTA</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="ex">1</span>       8       +       0       0       CHH     CCC</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="ex">1</span>       9       +       0       0       CHH     CCT</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="ex">1</span>       10      +       0       0       CHH     CTA</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="ex">1</span>       15      +       0       0       CHH     CCC</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="ex">1</span>       16      +       0       0       CHH     CCT</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="ex">1</span>       17      +       0       0       CHH     CTA</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="ex">1</span>       22      +       0       0       CHH     CCC</span></code></pre></div>
 <p>Plants methylome contains chloroplast and mitochondrial chromosomes,
 which are not included in methylome analysis. In the current case, we
 can exclude these chromosomes by setting:</p>
@@ -312,11 +312,11 @@ used:</p>
 <span><span class="va">AG</span> <span class="op">=</span> <span class="fu">import</span><span class="op">(</span><span class="st">"~/data/TAIR10_gff3/Arabidopsis_thaliana.TAIR10.46.gtf.gz"</span><span class="op">)</span></span>
 <span><span class="va">gene</span> <span class="op">=</span> <span class="va">AG</span><span class="op">[</span> <span class="va">AG</span><span class="op">$</span><span class="va">type</span> <span class="op">==</span> <span class="st">"gene"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="st">"gene_id"</span>, <span class="st">"gene_biotype"</span>, <span class="st">"gene_name"</span> <span class="op">)</span> <span class="op">]</span></span>
 <span><span class="va">gene</span> <span class="op">=</span> <span class="va">gene</span><span class="op">[</span> <span class="va">gene</span><span class="op">$</span><span class="va">gene_biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gene_id"</span>, <span class="st">"gene_name"</span><span class="op">)</span> <span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html" class="external-link">seqlevels</a></span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span></span>
+<span><span class="fu">seqlevels</span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span></span>
 <span><span class="va">gene</span> <span class="op">=</span> <span class="fu"><a href="../reference/sortBySeqnameAndStart.html">sortBySeqnameAndStart</a></span><span class="op">(</span><span class="va">gene</span><span class="op">)</span></span></code></pre></div>
 <p>In fact, the critical step in the above code is:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html" class="external-link">seqlevels</a></span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">seqlevels</span><span class="op">(</span><span class="va">gene</span>, pruning.mode <span class="op">=</span> <span class="st">"coarse"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="general-suggestions">General suggestions<a class="anchor" aria-label="anchor" href="#general-suggestions"></a>

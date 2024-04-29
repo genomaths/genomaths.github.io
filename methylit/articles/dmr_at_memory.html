@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MethylIT</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.7</span>
       </span>
     </div>
 
@@ -138,7 +138,7 @@ Department of Biology and Plant Science.<br>
 Pennsylvania State University, University Park, PA 16802<br>
 Maintainer: Robersy Sanchez</div></h4>
             
-            <h4 data-toc-skip class="date">08 February 2023</h4>
+            <h4 data-toc-skip class="date">15 January 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/genomaths/MethylIT/blob/HEAD/vignettes/dmr_at_memory.Rmd" class="external-link"><code>vignettes/dmr_at_memory.Rmd</code></a></small>
       <div class="hidden name"><code>dmr_at_memory.Rmd</code></div>
@@ -301,8 +301,8 @@ evolutionary pressure, probably, particular for each species.</p>
 <span></span>
 <span><span class="co">## To add the corresponding gene names to introns</span></span>
 <span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">findOverlaps</a></span><span class="op">(</span><span class="va">introns</span>, <span class="va">genes</span>, type <span class="op">=</span> <span class="st">"within"</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">introns</span> <span class="op">&lt;-</span> <span class="va">introns</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">queryHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">introns</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">genes</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">introns</span> <span class="op">&lt;-</span> <span class="va">introns</span><span class="op">[</span><span class="fu">queryHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu">mcols</span><span class="op">(</span><span class="va">introns</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">mcols</span><span class="op">(</span><span class="va">genes</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="cluster-of-dmps">Cluster of DMPs<a class="anchor" aria-label="anchor" href="#cluster-of-dmps"></a>
 </h3>
@@ -434,7 +434,7 @@ parameters.</p>
 <span><span class="va">dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_clust_50_100</span>, columns <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
 <span>                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmps_at_clust_50_100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_clust_50_100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
 <span></span>
 <span><span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MM"</span>, <span class="st">"MM"</span>,<span class="st">"MM"</span>,<span class="st">"MM"</span>, <span class="st">"MM"</span>, </span>
 <span>                                           <span class="st">"NM"</span>,<span class="st">"NM"</span>,<span class="st">"NM"</span>,<span class="st">"NM"</span><span class="op">)</span>,</span>
@@ -497,7 +497,7 @@ parameters.</p>
 <span><span class="va">.dmps_at_clust_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">.dmps_at_clust_50_100</span>, columns <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
 <span>                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">.dmps_at_clust_50_100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">.dmps_at_clust_50_100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
 <span></span>
 <span><span class="co">## Build a RangedGlmDataSet object</span></span>
 <span><span class="va">.ds_50_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">.dmps_at_clust_50_100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
@@ -510,7 +510,7 @@ parameters.</p>
 <span><span class="va">dmps_at_clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at_clust.50.100</span>, columns <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
 <span>                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmps_at_clust.50.100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at_clust.50.100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
 <span></span>
 <span><span class="co">## Build a RangedGlmDataSet object</span></span>
 <span><span class="va">ds.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at_clust.50.100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
@@ -523,7 +523,7 @@ parameters.</p>
 <span><span class="va">dmps_at.clust.50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniqueGRanges.html">uniqueGRanges</a></span><span class="op">(</span><span class="va">dmps_at.clust.50.100</span>, columns <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>                                      ignore.strand <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">'equal'</span>,</span>
 <span>                                      verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">dmps_at.clust.50.100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">dmps_at.clust.50.100</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nams</span></span>
 <span></span>
 <span><span class="co">## Build a RangedGlmDataSet object</span></span>
 <span><span class="va">ds_50.100</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmDataSet.html">glmDataSet</a></span><span class="op">(</span>GR <span class="op">=</span> <span class="va">dmps_at.clust.50.100</span>, colData <span class="op">=</span> <span class="va">colData</span><span class="op">)</span></span></code></pre></div>
@@ -557,8 +557,8 @@ genes, we might want to use lower densities, e.g., CountPerBp =
 <code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs_fixed.int</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## DMR associated genes </span></span>
-<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
-<span><span class="va">GENES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
+<span><span class="va">GENES</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">## GRanges object with 975 ranges and 4 metadata columns:</span></span>
 <span><span class="co">##         seqnames            ranges strand |     gene_id     type   gene_biotype</span></span>
 <span><span class="co">##            &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;    &lt;character&gt;</span></span>
@@ -605,8 +605,8 @@ genes, we might want to use lower densities, e.g., CountPerBp =
 <code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">.dmrs_relaxed</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## DMR associated genes </span></span>
-<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
-<span><span class="va">GENES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
+<span><span class="va">GENES</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">## GRanges object with 1215 ranges and 4 metadata columns:</span></span>
 <span><span class="co">##          seqnames            ranges strand |     gene_id     type</span></span>
 <span><span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span></span>
@@ -653,8 +653,8 @@ genes, we might want to use lower densities, e.g., CountPerBp =
 <code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs.fixed.int</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## DMR associated genes </span></span>
-<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
-<span><span class="va">GENES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
+<span><span class="va">GENES</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">## GRanges object with 1151 ranges and 4 metadata columns:</span></span>
 <span><span class="co">##          seqnames            ranges strand |     gene_id     type</span></span>
 <span><span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span></span>
@@ -701,9 +701,9 @@ genes, we might want to use lower densities, e.g., CountPerBp =
 <code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/nearest-methods.html" class="external-link">distanceToNearest</a></span><span class="op">(</span><span class="va">dmrs.relaxed</span>, <span class="va">GENES</span>, ignore.strand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## DMR associated genes </span></span>
-<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
-<span><span class="va">GENES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Hits-class.html" class="external-link">subjectHits</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## GRanges object with 1213 ranges and 4 metadata columns:</span></span>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">hits</span><span class="op">[</span><span class="fu">mcols</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">1000</span><span class="op">]</span></span>
+<span><span class="va">GENES</span><span class="op">[</span><span class="fu">subjectHits</span><span class="op">(</span><span class="va">hits</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 1214 ranges and 4 metadata columns:</span></span>
 <span><span class="co">##          seqnames            ranges strand |     gene_id     type</span></span>
 <span><span class="co">##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;factor&gt;</span></span>
 <span><span class="co">##      [1]        1       43087-43295      - |   AT1G04003     gene</span></span>
@@ -712,11 +712,11 @@ genes, we might want to use lower densities, e.g., CountPerBp =
 <span><span class="co">##      [4]        1     428650-430720      - |   AT1G02220     gene</span></span>
 <span><span class="co">##      [5]        1   1194187-1196889      + |   AT1G04425     gene</span></span>
 <span><span class="co">##      ...      ...               ...    ... .         ...      ...</span></span>
-<span><span class="co">##   [1209]        5 25934568-25935612      + |   AT5G64890     gene</span></span>
-<span><span class="co">##   [1210]        5 25967824-25968638      + |   AT5G65005     gene</span></span>
-<span><span class="co">##   [1211]        5 26068112-26069652      + |   AT5G65230     gene</span></span>
-<span><span class="co">##   [1212]        5 26161624-26169191      - |   AT5G65460     gene</span></span>
-<span><span class="co">##   [1213]        5 26411796-26414609      - |   AT5G66050     gene</span></span>
+<span><span class="co">##   [1210]        5 25934568-25935612      + |   AT5G64890     gene</span></span>
+<span><span class="co">##   [1211]        5 25967824-25968638      + |   AT5G65005     gene</span></span>
+<span><span class="co">##   [1212]        5 26068112-26069652      + |   AT5G65230     gene</span></span>
+<span><span class="co">##   [1213]        5 26161624-26169191      - |   AT5G65460     gene</span></span>
+<span><span class="co">##   [1214]        5 26411796-26414609      - |   AT5G66050     gene</span></span>
 <span><span class="co">##            gene_biotype   gene_name</span></span>
 <span><span class="co">##             &lt;character&gt; &lt;character&gt;</span></span>
 <span><span class="co">##      [1]         lncRNA        &lt;NA&gt;</span></span>
@@ -725,11 +725,11 @@ genes, we might want to use lower densities, e.g., CountPerBp =
 <span><span class="co">##      [4] protein_coding      NAC003</span></span>
 <span><span class="co">##      [5]          ncRNA        &lt;NA&gt;</span></span>
 <span><span class="co">##      ...            ...         ...</span></span>
-<span><span class="co">##   [1209] protein_coding        PEP2</span></span>
-<span><span class="co">##   [1210] protein_coding        &lt;NA&gt;</span></span>
-<span><span class="co">##   [1211] protein_coding     AtMYB53</span></span>
-<span><span class="co">##   [1212] protein_coding        KCA2</span></span>
-<span><span class="co">##   [1213] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##   [1210] protein_coding        PEP2</span></span>
+<span><span class="co">##   [1211] protein_coding        &lt;NA&gt;</span></span>
+<span><span class="co">##   [1212] protein_coding     AtMYB53</span></span>
+<span><span class="co">##   [1213] protein_coding        KCA2</span></span>
+<span><span class="co">##   [1214] protein_coding        &lt;NA&gt;</span></span>
 <span><span class="co">##   -------</span></span>
 <span><span class="co">##   seqinfo: 5 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 </div>
@@ -798,17 +798,17 @@ to), exons and introns.</p>
 <span><span class="co">##   [149]        18        27         0         0         0         0   3.11795</span></span>
 <span><span class="co">##         scaled.deviance      pvalue          model    adj.pval CT.SignalDensity</span></span>
 <span><span class="co">##               &lt;numeric&gt;   &lt;numeric&gt;    &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span></span>
-<span><span class="co">##     [1]         86.0023 1.79726e-20 Neg.Binomial.W 1.16431e-19      0.000000000</span></span>
-<span><span class="co">##     [2]         82.0589 1.32088e-19   Neg.Binomial 7.28928e-19      0.000000000</span></span>
-<span><span class="co">##     [3]         17.4978 2.87643e-05   Neg.Binomial 3.82668e-05      0.000847458</span></span>
-<span><span class="co">##     [4]         62.9823 2.08578e-15   Neg.Binomial 8.39948e-15      0.001429933</span></span>
-<span><span class="co">##     [5]         23.1115 1.52876e-06   Neg.Binomial 2.44930e-06      0.002187749</span></span>
+<span><span class="co">##     [1]         86.6123 1.32022e-20 Neg.Binomial.W 7.86853e-20      0.000000000</span></span>
+<span><span class="co">##     [2]        184.0775 6.24017e-42   Neg.Binomial 2.32446e-40      0.000000000</span></span>
+<span><span class="co">##     [3]         17.4978 2.87643e-05   Neg.Binomial 3.86115e-05      0.000847458</span></span>
+<span><span class="co">##     [4]         62.9822 2.08580e-15   Neg.Binomial 8.39957e-15      0.001429933</span></span>
+<span><span class="co">##     [5]         23.1115 1.52876e-06   Neg.Binomial 2.42325e-06      0.002187749</span></span>
 <span><span class="co">##     ...             ...         ...            ...         ...              ...</span></span>
 <span><span class="co">##   [145]        42.93430 5.66094e-11   Neg.Binomial 1.36045e-10      0.000550055</span></span>
 <span><span class="co">##   [146]         9.76251 1.78107e-03   Neg.Binomial 1.90920e-03      0.001782531</span></span>
 <span><span class="co">##   [147]        41.38165 1.25228e-10   Neg.Binomial 2.87060e-10      0.003323486</span></span>
-<span><span class="co">##   [148]        45.37607 1.62609e-11   Neg.Binomial 4.25066e-11      0.001675807</span></span>
-<span><span class="co">##   [149]       104.45852 1.60519e-24   Neg.Binomial 1.40690e-23      0.000000000</span></span>
+<span><span class="co">##   [148]        45.37607 1.62609e-11   Neg.Binomial 4.32657e-11      0.001675807</span></span>
+<span><span class="co">##   [149]       104.45853 1.60518e-24   Neg.Binomial 1.13892e-23      0.000000000</span></span>
 <span><span class="co">##         TT.SignalDensity SignalDensityVariation</span></span>
 <span><span class="co">##                &lt;numeric&gt;              &lt;numeric&gt;</span></span>
 <span><span class="co">##     [1]        0.0151822             0.01518219</span></span>
@@ -869,7 +869,7 @@ to), exons and introns.</p>
 <span><span class="co">##   [2]        25.21553 5.12678e-07   Neg.Binomial 8.54464e-07      0.001481481</span></span>
 <span><span class="co">##   [3]        14.20990 1.63508e-04   Neg.Binomial 2.04385e-04      0.005797101</span></span>
 <span><span class="co">##   [4]         6.92139 8.51706e-03   Neg.Binomial 8.51706e-03      0.000693481</span></span>
-<span><span class="co">##   [5]        47.03580 6.97017e-12   Neg.Binomial 1.74254e-11      0.001084128</span></span>
+<span><span class="co">##   [5]        38.99278 4.25375e-10   Neg.Binomial 1.06344e-09      0.001084128</span></span>
 <span><span class="co">##       TT.SignalDensity SignalDensityVariation</span></span>
 <span><span class="co">##              &lt;numeric&gt;              &lt;numeric&gt;</span></span>
 <span><span class="co">##   [1]        0.0144966             0.01449664</span></span>
@@ -936,17 +936,17 @@ the whole gene-body.</p>
 <span><span class="co">##   [646]         4        10         2         0         0         0   1.79176</span></span>
 <span><span class="co">##         scaled.deviance      pvalue        model    adj.pval CT.SignalDensity</span></span>
 <span><span class="co">##               &lt;numeric&gt;   &lt;numeric&gt;  &lt;character&gt;   &lt;numeric&gt;        &lt;numeric&gt;</span></span>
-<span><span class="co">##     [1]        16.07033 6.10329e-05 Neg.Binomial 7.74602e-05       0.00396825</span></span>
-<span><span class="co">##     [2]        25.55214 4.30588e-07 Neg.Binomial 7.90227e-07       0.00399202</span></span>
+<span><span class="co">##     [1]        16.07033 6.10329e-05 Neg.Binomial 7.76127e-05       0.00396825</span></span>
+<span><span class="co">##     [2]        25.55214 4.30588e-07 Neg.Binomial 7.81348e-07       0.00399202</span></span>
 <span><span class="co">##     [3]         4.41686 3.55854e-02 Neg.Binomial 3.55854e-02       0.00454545</span></span>
-<span><span class="co">##     [4]        24.79981 6.36036e-07 Neg.Binomial 1.13190e-06       0.00100000</span></span>
-<span><span class="co">##     [5]       111.81693 3.91875e-26 Neg.Binomial 7.67126e-25       0.00417064</span></span>
+<span><span class="co">##     [4]        24.79981 6.36036e-07 Neg.Binomial 1.11956e-06       0.00100000</span></span>
+<span><span class="co">##     [5]       111.81692 3.91877e-26 Neg.Binomial 7.67128e-25       0.00417064</span></span>
 <span><span class="co">##     ...             ...         ...          ...         ...              ...</span></span>
-<span><span class="co">##   [642]         48.4620 3.36757e-12 Neg.Binomial 1.32649e-11      0.006646972</span></span>
-<span><span class="co">##   [643]         63.4528 1.64254e-15 Neg.Binomial 9.30770e-15      0.000813273</span></span>
-<span><span class="co">##   [644]         42.8798 5.82085e-11 Neg.Binomial 1.91850e-10      0.001739290</span></span>
-<span><span class="co">##   [645]         18.3625 1.82615e-05 Neg.Binomial 2.59273e-05      0.006372549</span></span>
-<span><span class="co">##   [646]         20.6233 5.59125e-06 Neg.Binomial 8.66174e-06      0.001275510</span></span>
+<span><span class="co">##   [642]         48.4620 3.36757e-12 Neg.Binomial 1.36821e-11      0.006646972</span></span>
+<span><span class="co">##   [643]         63.4528 1.64254e-15 Neg.Binomial 9.55926e-15      0.000813273</span></span>
+<span><span class="co">##   [644]         42.8798 5.82085e-11 Neg.Binomial 1.94833e-10      0.001739290</span></span>
+<span><span class="co">##   [645]         18.3625 1.82615e-05 Neg.Binomial 2.58138e-05      0.006372549</span></span>
+<span><span class="co">##   [646]         20.6233 5.59125e-06 Neg.Binomial 8.62040e-06      0.001275510</span></span>
 <span><span class="co">##         TT.SignalDensity SignalDensityVariation</span></span>
 <span><span class="co">##                &lt;numeric&gt;              &lt;numeric&gt;</span></span>
 <span><span class="co">##     [1]        0.0121693             0.00820106</span></span>
@@ -967,6 +967,81 @@ a sort continuous regions simultaneously covering portions of exon and
 introns. In particular, this is true for genes experiencing alternative
 splicing, where some regions inside introns works as exons as well.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="dmr-finder-function">DMR finder function<a class="anchor" aria-label="anchor" href="#dmr-finder-function"></a>
+</h2>
+<p>Following MethylIT pipeline, DMRs can be identified in control and in
+treatment groups. The concept of DMR is subjective in some extend. That
+is, while MethylIT pipeline identify cytosine positions with high
+probability to be differential methylated in the treatment group with
+respect to the control group, it will correspond to the user to define
+whether to say, e.g., a region 100 bp long carrying 3 DMPs is a DMR.
+There is not theoretical ground to decide whether such a DMR would be
+biologically relevant or not for given species. Only the experimentation
+or further downstream analyses including, for example, the network
+enrichment analysis of DMR-associated genes would gives us an
+answer.</p>
+<p>Herein, we propose third function to search for DMRs: <a href="https://genomaths.github.io/methylit/reference/dmrfinder.html">dmrfinder</a></p>
+<p>Let’s search for hypo-methylated DMRs with at least 20 DMPs on 200
+bp. The graphics of samples 1 to 9 on chromosome “1” are returned.</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hyp_dmrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dmrfinder.html">dmrfinder</a></span><span class="op">(</span></span>
+<span>    obj <span class="op">=</span> <span class="va">dmps</span>,</span>
+<span>    hypo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    min.signal <span class="op">=</span> <span class="fl">10L</span>,</span>
+<span>    win.size <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>    step.size <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>    stat <span class="op">=</span> <span class="st">"count"</span>,</span>
+<span>    tv.colum <span class="op">=</span> <span class="fl">8L</span>,</span>
+<span>    naming <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    plots <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    num.plot <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="dmr_at_memory_files/figure-html/dmr3-1.png" width="1728"></p>
+<p>The hyper-DMRs on chromosome “1”</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hyp_dmrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dmrfinder.html">dmrfinder</a></span><span class="op">(</span></span>
+<span>    obj <span class="op">=</span> <span class="va">dmps</span>,</span>
+<span>    hyper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    min.signal <span class="op">=</span> <span class="fl">10L</span>,</span>
+<span>    win.size <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>    step.size <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>    stat <span class="op">=</span> <span class="st">"count"</span>,</span>
+<span>    tv.colum <span class="op">=</span> <span class="fl">8L</span>,</span>
+<span>    naming <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    plots <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    num.plot <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="dmr_at_memory_files/figure-html/dmr2-1.png" width="1728"></p>
+<p>The hypo-DMRs on chromosome “2”</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hyp_dmrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dmrfinder.html">dmrfinder</a></span><span class="op">(</span></span>
+<span>    obj <span class="op">=</span> <span class="va">dmps</span>,</span>
+<span>    hyper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    min.signal <span class="op">=</span> <span class="fl">10L</span>,</span>
+<span>    win.size <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>    step.size <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>    stat <span class="op">=</span> <span class="st">"count"</span>,</span>
+<span>    tv.colum <span class="op">=</span> <span class="fl">8L</span>,</span>
+<span>    naming <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    plots <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    plot.chr <span class="op">=</span> <span class="st">"2"</span>,</span>
+<span>    num.plot <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="dmr_at_memory_files/figure-html/dmr4-1.png" width="1728"></p>
+<p>Observe that the same DMR can be present both groups. control and
+treatment, where some DMPs can share and some not, or simply the DMR can
+be mostly hypo-methylated in control group and mostly hyper-methylated
+in the treatment group.</p>
+<p>It is the user responsibility to evaluate whether a DMR is specific
+for one of groups. That is, a further downstream analysis must identify
+the DMRs that carry discriminatory power to distinguish control
+individuals from the treatment group, which can be done, e.g., applying
+a machine learning approach.</p>
 </div>
 <div class="section level2">
 <h2 id="references-">References.<a class="anchor" aria-label="anchor" href="#references-"></a>
@@ -1081,14 +1156,14 @@ stability</span></a>. <em>Nature Communications</em> <strong>7</strong>,
 <h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on
-which this document was compiled running pandoc 2.19.2:</p>
-<pre><code><span><span class="co">## R version 4.2.2 Patched (2022-11-10 r83330)</span></span>
+which this document was compiled running pandoc 3.1.1:</p>
+<pre><code><span><span class="co">## R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">## Running under: Ubuntu 20.04.5 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
-<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0</span></span>
-<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0</span></span>
+<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 </span></span>
+<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## locale:</span></span>
 <span><span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
@@ -1098,78 +1173,82 @@ which this document was compiled running pandoc 2.19.2:</p>
 <span><span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
 <span><span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
 <span><span class="co">## </span></span>
+<span><span class="co">## time zone: America/New_York</span></span>
+<span><span class="co">## tzcode source: system (glibc)</span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">## attached base packages:</span></span>
 <span><span class="co">## [1] grid      stats4    stats     graphics  grDevices utils     datasets </span></span>
 <span><span class="co">## [8] methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] gridExtra_2.3        ggplot2_3.4.0        MethylIT.utils_0.1  </span></span>
-<span><span class="co">##  [4] MethylIT_0.3.2.6     rtracklayer_1.56.1   GenomicRanges_1.48.0</span></span>
-<span><span class="co">##  [7] GenomeInfoDb_1.32.4  IRanges_2.30.1       S4Vectors_0.34.0    </span></span>
-<span><span class="co">## [10] BiocGenerics_0.42.0  knitr_1.42          </span></span>
+<span><span class="co">##  [1] gridExtra_2.3        ggplot2_3.4.4        MethylIT.utils_0.1.1</span></span>
+<span><span class="co">##  [4] MethylIT_0.3.2.7     rtracklayer_1.60.1   GenomicRanges_1.52.1</span></span>
+<span><span class="co">##  [7] GenomeInfoDb_1.36.4  IRanges_2.34.1       S4Vectors_0.38.2    </span></span>
+<span><span class="co">## [10] BiocGenerics_0.46.0  knitr_1.45          </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] colorspace_2.1-0            rjson_0.2.21               </span></span>
-<span><span class="co">##   [3] modeltools_0.2-23           class_7.3-21               </span></span>
-<span><span class="co">##   [5] rprojroot_2.0.3             XVector_0.36.0             </span></span>
-<span><span class="co">##   [7] fs_1.6.1                    rstudioapi_0.14            </span></span>
-<span><span class="co">##   [9] listenv_0.9.0               flexmix_2.3-18             </span></span>
-<span><span class="co">##  [11] bit64_4.0.5                 AnnotationDbi_1.58.0       </span></span>
-<span><span class="co">##  [13] prodlim_2019.11.13          fansi_1.0.4                </span></span>
-<span><span class="co">##  [15] lubridate_1.9.1             codetools_0.2-19           </span></span>
-<span><span class="co">##  [17] splines_4.2.2               cachem_1.0.6               </span></span>
-<span><span class="co">##  [19] Formula_1.2-4               jsonlite_1.8.4             </span></span>
-<span><span class="co">##  [21] pROC_1.18.0                 Rsamtools_2.12.0           </span></span>
-<span><span class="co">##  [23] caret_6.0-93                annotate_1.74.0            </span></span>
-<span><span class="co">##  [25] png_0.1-8                   compiler_4.2.2             </span></span>
-<span><span class="co">##  [27] httr_1.4.4                  Matrix_1.5-3               </span></span>
-<span><span class="co">##  [29] fastmap_1.1.0               cli_3.6.0                  </span></span>
-<span><span class="co">##  [31] htmltools_0.5.4             tools_4.2.2                </span></span>
-<span><span class="co">##  [33] gtable_0.3.1                glue_1.6.2                 </span></span>
-<span><span class="co">##  [35] GenomeInfoDbData_1.2.8      reshape2_1.4.4             </span></span>
-<span><span class="co">##  [37] dplyr_1.1.0                 Rcpp_1.0.10                </span></span>
-<span><span class="co">##  [39] Biobase_2.56.0              jquerylib_0.1.4            </span></span>
-<span><span class="co">##  [41] pkgdown_2.0.7               vctrs_0.5.2                </span></span>
-<span><span class="co">##  [43] Biostrings_2.64.1           nlme_3.1-162               </span></span>
-<span><span class="co">##  [45] betareg_3.1-4               iterators_1.0.14           </span></span>
-<span><span class="co">##  [47] lmtest_0.9-40               timeDate_4022.108          </span></span>
-<span><span class="co">##  [49] gower_1.0.1                 xfun_0.37                  </span></span>
-<span><span class="co">##  [51] stringr_1.5.0               proto_1.0.0                </span></span>
-<span><span class="co">##  [53] globals_0.16.2              timechange_0.2.0           </span></span>
-<span><span class="co">##  [55] lifecycle_1.0.3             restfulr_0.0.15            </span></span>
-<span><span class="co">##  [57] XML_3.99-0.13               future_1.31.0              </span></span>
-<span><span class="co">##  [59] zoo_1.8-11                  zlibbioc_1.42.0            </span></span>
-<span><span class="co">##  [61] MASS_7.3-58.2               scales_1.2.1               </span></span>
-<span><span class="co">##  [63] ipred_0.9-13                ragg_1.2.5                 </span></span>
-<span><span class="co">##  [65] MatrixGenerics_1.8.1        sandwich_3.0-2             </span></span>
-<span><span class="co">##  [67] parallel_4.2.2              SummarizedExperiment_1.26.1</span></span>
-<span><span class="co">##  [69] yaml_2.3.7                  memoise_2.0.1              </span></span>
-<span><span class="co">##  [71] sass_0.4.5                  rpart_4.1.19               </span></span>
-<span><span class="co">##  [73] stringi_1.7.12              RSQLite_2.2.20             </span></span>
-<span><span class="co">##  [75] genefilter_1.78.0           BiocIO_1.6.0               </span></span>
-<span><span class="co">##  [77] desc_1.4.2                  randomForest_4.7-1.1       </span></span>
-<span><span class="co">##  [79] foreach_1.5.2               hardhat_1.2.0              </span></span>
-<span><span class="co">##  [81] BiocParallel_1.30.4         lava_1.7.1                 </span></span>
-<span><span class="co">##  [83] rlang_1.0.6                 pkgconfig_2.0.3            </span></span>
-<span><span class="co">##  [85] systemfonts_1.0.4           matrixStats_0.63.0         </span></span>
-<span><span class="co">##  [87] bitops_1.0-7                evaluate_0.20              </span></span>
-<span><span class="co">##  [89] lattice_0.20-45             purrr_1.0.1                </span></span>
-<span><span class="co">##  [91] GenomicAlignments_1.32.1    recipes_1.0.4              </span></span>
-<span><span class="co">##  [93] bit_4.0.5                   tidyselect_1.2.0           </span></span>
-<span><span class="co">##  [95] parallelly_1.34.0           nls2_0.3-3                 </span></span>
-<span><span class="co">##  [97] plyr_1.8.8                  magrittr_2.0.3             </span></span>
-<span><span class="co">##  [99] R6_2.5.1                    generics_0.1.3             </span></span>
-<span><span class="co">## [101] DelayedArray_0.22.0         DBI_1.1.3                  </span></span>
-<span><span class="co">## [103] pillar_1.8.1                withr_2.5.0                </span></span>
-<span><span class="co">## [105] KEGGREST_1.36.3             survival_3.5-0             </span></span>
-<span><span class="co">## [107] RCurl_1.98-1.10             nnet_7.3-18                </span></span>
-<span><span class="co">## [109] tibble_3.1.8                future.apply_1.10.0        </span></span>
-<span><span class="co">## [111] crayon_1.5.2                utf8_1.2.3                 </span></span>
-<span><span class="co">## [113] rmarkdown_2.20              minpack.lm_1.2-3           </span></span>
-<span><span class="co">## [115] data.table_1.14.6           blob_1.2.3                 </span></span>
-<span><span class="co">## [117] ModelMetrics_1.2.2.2        digest_0.6.31              </span></span>
-<span><span class="co">## [119] xtable_1.8-4                textshaping_0.3.6          </span></span>
-<span><span class="co">## [121] munsell_0.5.0               bslib_0.4.2</span></span></code></pre>
+<span><span class="co">##   [1] rstudioapi_0.15.0           jsonlite_1.8.7             </span></span>
+<span><span class="co">##   [3] magrittr_2.0.3              modeltools_0.2-23          </span></span>
+<span><span class="co">##   [5] rmarkdown_2.25              fs_1.6.3                   </span></span>
+<span><span class="co">##   [7] BiocIO_1.10.0               zlibbioc_1.46.0            </span></span>
+<span><span class="co">##   [9] ragg_1.2.6                  vctrs_0.6.5                </span></span>
+<span><span class="co">##  [11] memoise_2.0.1               Rsamtools_2.16.0           </span></span>
+<span><span class="co">##  [13] RCurl_1.98-1.13             htmltools_0.5.7            </span></span>
+<span><span class="co">##  [15] S4Arrays_1.0.6              Formula_1.2-5              </span></span>
+<span><span class="co">##  [17] pROC_1.18.5                 caret_6.0-94               </span></span>
+<span><span class="co">##  [19] sass_0.4.8                  parallelly_1.36.0          </span></span>
+<span><span class="co">##  [21] bslib_0.6.1                 desc_1.4.3                 </span></span>
+<span><span class="co">##  [23] sandwich_3.0-2              plyr_1.8.9                 </span></span>
+<span><span class="co">##  [25] zoo_1.8-12                  lubridate_1.9.3            </span></span>
+<span><span class="co">##  [27] cachem_1.0.8                GenomicAlignments_1.36.0   </span></span>
+<span><span class="co">##  [29] lifecycle_1.0.4             minpack.lm_1.2-4           </span></span>
+<span><span class="co">##  [31] iterators_1.0.14            pkgconfig_2.0.3            </span></span>
+<span><span class="co">##  [33] Matrix_1.6-4                R6_2.5.1                   </span></span>
+<span><span class="co">##  [35] fastmap_1.1.1               GenomeInfoDbData_1.2.10    </span></span>
+<span><span class="co">##  [37] MatrixGenerics_1.12.3       future_1.33.0              </span></span>
+<span><span class="co">##  [39] digest_0.6.33               colorspace_2.1-0           </span></span>
+<span><span class="co">##  [41] AnnotationDbi_1.62.2        textshaping_0.3.7          </span></span>
+<span><span class="co">##  [43] RSQLite_2.3.3               randomForest_4.7-1.1       </span></span>
+<span><span class="co">##  [45] fansi_1.0.6                 timechange_0.2.0           </span></span>
+<span><span class="co">##  [47] httr_1.4.7                  abind_1.4-5                </span></span>
+<span><span class="co">##  [49] compiler_4.3.2              bit64_4.0.5                </span></span>
+<span><span class="co">##  [51] withr_2.5.2                 BiocParallel_1.34.2        </span></span>
+<span><span class="co">##  [53] betareg_3.1-4               DBI_1.1.3                  </span></span>
+<span><span class="co">##  [55] highr_0.10                  MASS_7.3-60                </span></span>
+<span><span class="co">##  [57] lava_1.7.3                  DelayedArray_0.26.7        </span></span>
+<span><span class="co">##  [59] rjson_0.2.21                ModelMetrics_1.2.2.2       </span></span>
+<span><span class="co">##  [61] tools_4.3.2                 lmtest_0.9-40              </span></span>
+<span><span class="co">##  [63] future.apply_1.11.0         nnet_7.3-19                </span></span>
+<span><span class="co">##  [65] glue_1.6.2                  restfulr_0.0.15            </span></span>
+<span><span class="co">##  [67] nlme_3.1-164                reshape2_1.4.4             </span></span>
+<span><span class="co">##  [69] generics_0.1.3              recipes_1.0.8              </span></span>
+<span><span class="co">##  [71] gtable_0.3.4                class_7.3-22               </span></span>
+<span><span class="co">##  [73] data.table_1.14.8           flexmix_2.3-19             </span></span>
+<span><span class="co">##  [75] utf8_1.2.4                  XVector_0.40.0             </span></span>
+<span><span class="co">##  [77] foreach_1.5.2               pillar_1.9.0               </span></span>
+<span><span class="co">##  [79] stringr_1.5.1               genefilter_1.82.1          </span></span>
+<span><span class="co">##  [81] splines_4.3.2               dplyr_1.1.4                </span></span>
+<span><span class="co">##  [83] lattice_0.22-5              survival_3.5-7             </span></span>
+<span><span class="co">##  [85] bit_4.0.5                   annotate_1.78.0            </span></span>
+<span><span class="co">##  [87] tidyselect_1.2.0            Biostrings_2.68.1          </span></span>
+<span><span class="co">##  [89] SummarizedExperiment_1.30.2 xfun_0.41                  </span></span>
+<span><span class="co">##  [91] Biobase_2.60.0              hardhat_1.3.0              </span></span>
+<span><span class="co">##  [93] timeDate_4022.108           matrixStats_1.2.0          </span></span>
+<span><span class="co">##  [95] proto_1.0.0                 stringi_1.8.3              </span></span>
+<span><span class="co">##  [97] yaml_2.3.8                  evaluate_0.23              </span></span>
+<span><span class="co">##  [99] codetools_0.2-19            tibble_3.2.1               </span></span>
+<span><span class="co">## [101] cli_3.6.2                   rpart_4.1.23               </span></span>
+<span><span class="co">## [103] nls2_0.3-3                  xtable_1.8-4               </span></span>
+<span><span class="co">## [105] systemfonts_1.0.5           munsell_0.5.0              </span></span>
+<span><span class="co">## [107] jquerylib_0.1.4             Rcpp_1.0.11                </span></span>
+<span><span class="co">## [109] globals_0.16.2              png_0.1-8                  </span></span>
+<span><span class="co">## [111] XML_3.99-0.16               parallel_4.3.2             </span></span>
+<span><span class="co">## [113] pkgdown_2.0.7               gower_1.0.1                </span></span>
+<span><span class="co">## [115] blob_1.2.4                  bitops_1.0-7               </span></span>
+<span><span class="co">## [117] listenv_0.9.0               ipred_0.9-14               </span></span>
+<span><span class="co">## [119] scales_1.3.0                prodlim_2023.08.28         </span></span>
+<span><span class="co">## [121] purrr_1.0.2                 crayon_1.5.2               </span></span>
+<span><span class="co">## [123] rlang_1.1.2                 KEGGREST_1.40.1</span></span></code></pre>
 </div>
   </div>
 

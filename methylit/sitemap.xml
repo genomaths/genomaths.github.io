@@ -61,6 +61,9 @@
     <loc>https://genomaths.github.io/methylit/reference/FisherTest.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit/reference/GeneUpDownStream.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit/reference/HD.html</loc>
   </url>
   <url>
@@ -92,6 +95,9 @@
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit/reference/dmps.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit/reference/dmrfinder.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit/reference/ds.html</loc>
@@ -157,6 +163,9 @@
     <loc>https://genomaths.github.io/methylit/reference/getGEOSuppFiles.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit/reference/getGRangesStat.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit/reference/getPotentialDIMP.html</loc>
   </url>
   <url>
@@ -179,6 +188,9 @@
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit/reference/gunzip.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit/reference/hdiv.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit/reference/helmholtz_free_energy.html</loc>
@@ -226,6 +238,9 @@
     <loc>https://genomaths.github.io/methylit/reference/pcalogit_perf.html</loc>
   </url>
   <url>
+    <loc>https://genomaths.github.io/methylit/reference/pjob_split.html</loc>
+  </url>
+  <url>
     <loc>https://genomaths.github.io/methylit/reference/poolFromGRlist.html</loc>
   </url>
   <url>
@@ -269,6 +284,9 @@
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit/reference/simpleCutPoint.html</loc>
+  </url>
+  <url>
+    <loc>https://genomaths.github.io/methylit/reference/slidingGRegions.html</loc>
   </url>
   <url>
     <loc>https://genomaths.github.io/methylit/reference/sortBySeqnameAndStart.html</loc>
